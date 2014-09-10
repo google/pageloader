@@ -5,4 +5,4 @@ pubspec.lock
 .buildlog
 *.o
 *.so
-
+*~
