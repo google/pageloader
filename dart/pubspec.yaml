@@ -1,0 +1,13 @@
+name: pageloader
+author: Marc Fisher II
+version: 1.0.0
+description: Supports the creation of page objects that can be shared between in-browser tests and WebDriver tests.
+environment:
+  sdk: '>=1.5.3 <2.0.0'
+dependencies:
+  sync_webdriver:
+    path: ../dart-sync-webdriver
+dev_dependencies:
+  path: '>=1.2.2 <2.0.0'
+  unittest: '>=0.11.0+3 <0.12.0'
+

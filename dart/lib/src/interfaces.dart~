@@ -1,0 +1,90 @@
+library pageloader.interfaces;
+
+import 'package:matcher/matcher.dart';
+
+import 'dart:collection';
+
+abstract class PageLoader {
+  PageLoaderElement get globalContext;
+
+  Object getInstance(Type type, [dynamic context]);
+
+  /// Waits for [condition] to be evaluated successful and return a value other
+  /// than [null].
+  waitForValue(condition(), {Duration timeout, Duration interval});
+
+  /// Waits for [condition] to be evaluated successful and return a value
+  /// that matches [matcher].
+  waitFor(condition(), Matcher matcher, {Duration timeout, Duration interval});
+}
+
+abstract class PageLoaderElement {
+  PageLoaderElement get shadowRoot;
+  @deprecated
+  String get text;
+  String get innerText;
+  String get visibleText;
+  String get name;
+  PageLoaderAttributes get attributes;
+  PageLoaderAttributes get computedStyle;
+  PageLoaderAttributes get style;
+  bool get displayed;
+  List<String> get classes;
+
+  List<PageLoaderElement> getElementsByCss(String selector);
+
+  void clear();
+  void click();
+  void type(String keys);
+}
+
+abstract class PageLoaderAttributes {
+  String operator [](String name);
+}
+
+abstract class Finder {
+  List<PageLoaderElement> findElements(PageLoaderElement context);
+}
+
+/// Enum of options that can be returned by [HasFilterFinderOptions.options].
+class FilterFinderOption {
+  final String option;
+
+  const FilterFinderOption._(this.option);
+
+  /// Disable the default implicit display filtering for a field.
+  static const FilterFinderOption DISABLE_IMPLICIT_DISPLAY_FILTERING =
+      const FilterFinderOption._('DISABLE_IMPLICIT_DISPLAY_FILTERING');
+}
+
+abstract class HasFilterFinderOptions {
+  const HasFilterFinderOptions();
+
+  List<FilterFinderOption> get options;
+}
+
+abstract class Filter {
+  const Filter();
+
+  List<PageLoaderElement> filter(List<PageLoaderElement> elements);
+}
+
+abstract class ElementFilter implements Filter {
+  const ElementFilter();
+
+  @override
+  List<PageLoaderElement> filter(List<PageLoaderElement> elements) =>
+      new UnmodifiableListView<PageLoaderElement>(
+          elements.where(keep).toList(growable: false));
+
+  bool keep(PageLoaderElement element);
+}
+
+class PageLoaderException {
+  final String message;
+
+  const PageLoaderException(this.message);
+
+  @override
+  String toString() => 'PageLoaderException: $message';
+}
