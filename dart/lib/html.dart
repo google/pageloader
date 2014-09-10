@@ -40,8 +40,6 @@ const Duration _DEFAULT_INTERVAL = const Duration(milliseconds: 1);
 class HtmlPageLoader extends BasePageLoader {
   HtmlPageLoaderElement _globalContext;
 
-  final Duration defaultInterval;
-
   @override
   HtmlPageLoaderElement get globalContext => _globalContext;
 
@@ -296,17 +294,20 @@ class _ElementAttributes extends PageLoaderAttributes {
       }
       // 4
       if (lcName == 'selected') {
-        if (_node is CheckboxInputElement || _node is RadioButtonInputElement) {
-          return _node.checked ? 'true' : null;
+        if (_node is CheckboxInputElement) {
+          return (_node as CheckboxInputElement).checked ? 'true' : null;
+        }
+        if (_node is RadioButtonInputElement) {
+          return (_node as RadioButtonInputElement).checked ? 'true' : null;
         }
       }
       // 5
       if (_node is AnchorElement && name == 'href') {
-        return _node.href;
+        return (_node as AnchorElement).href;
       }
       // 5
       if (_node is ImageElement && name == 'src') {
-        return _node.src;
+        return (_node as ImageElement).src;
       }
       // 6
       if (name == 'class') {
