@@ -16,16 +16,12 @@ library pageloader.test.webdriver;
 
 import 'pageloader_test.dart' as plt;
 
-import 'package:dart.testing/google3_test_util.dart';
-import 'package:dart.testing/google3_vm_config.dart';
-import 'package:testing.selenium.dart/builder.dart';
-
 import 'package:pageloader/webdriver.dart';
 import 'package:path/path.dart' as path;
+import 'package:unittest/compact_vm_config.dart';
 import 'package:unittest/unittest.dart';
 import 'package:sync_webdriver/sync_webdriver.dart' hide Platform;
 
-import 'dart:async' show Future;
 import 'dart:io';
 
 /**
@@ -33,15 +29,15 @@ import 'dart:io';
  * as they are slow and they have external dependencies.
  */
 void main() {
-  useGoogle3VMConfiguration();
+  useCompactVMConfiguration();
 
   WebDriver driver;
 
-  setUp(() => freshDriver.then((d) {
-    driver = d;
+  setUp(() {
+    driver = freshDriver;
     driver.url = testPagePath;
     plt.loader = new WebDriverPageLoader(driver);
-  }));
+  });
 
   plt.runTests();
 
@@ -51,30 +47,12 @@ void main() {
   });
 }
 
-String get testPagePath {
-  if(_testPagePath == null) {
-    _testPagePath = _getTestPagePath();
-  }
-  return _testPagePath;
-}
-
-String _getTestPagePath() {
-  var testPagePath = path.join(
-      runfilesDir, 'google3', 'third_party', 'dart',
-      'pageloader', 'test', 'test_page.html');
-  testPagePath = path.absolute(testPagePath);
-  if(!FileSystemEntity.isFileSync(testPagePath)) {
-    throw new Exception('Could not find the test file at "$testPagePath".'
-        ' Make sure you are running tests from the root of the project.');
-  }
-  return path.toUri(testPagePath).toString();
-}
-
-String _testPagePath;
+String get testPagePath =>
+    path.toUri(path.absolute('test_page.html')).toString();
 
 WebDriver _driver;
 
-Future<WebDriver> get freshDriver {
+WebDriver get freshDriver {
   if (_driver != null) {
     try {
       Window firstWindow = null;
@@ -94,9 +72,9 @@ Future<WebDriver> get freshDriver {
     }
   }
   if (_driver == null) {
-    return buildSyncWebDriver().then((d) => _driver = d);
+    _driver = new WebDriver(desired: Capabilities.chrome);
   }
-  return new Future.value(_driver);
+  return _driver;
 }
 
 void closeDriver() {

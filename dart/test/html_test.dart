@@ -17,15 +17,14 @@ library pageloader.test.html;
 import 'page_objects.dart';
 import 'pageloader_test.dart' as plt;
 
-import 'package:dart.testing/google3_html_config.dart';
-
 import 'package:pageloader/html.dart';
+import 'package:unittest/html_enhanced_config.dart';
 import 'package:unittest/unittest.dart';
 
 import 'dart:html' as html;
 
 void main() {
-  useGoogle3HtmlConfiguration();
+  useHtmlEnhancedConfiguration();
 
   setUp(() {
     var body = html.document.getElementsByTagName('body').first;
