@@ -58,7 +58,7 @@ class _IOClock implements Clock {
   const _IOClock();
 
   @override
-  final sleep = io.sleep;
+  void sleep(Duration d) => io.sleep(d);
   @override
   DateTime get now => new DateTime.now();
 }
