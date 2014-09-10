@@ -93,8 +93,8 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   bool operator ==(Object other) =>
       other != null &&
       other.runtimeType == runtimeType &&
-      other.context == context &&
-      other.loader == loader;
+      (other as WebDriverPageLoaderElement).context == context &&
+      (other as WebDriverPageLoaderElement).loader == loader;
 
   @override
   String toString() => '$runtimeType<${context.toString()}>';
