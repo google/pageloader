@@ -289,8 +289,8 @@ class Union implements Finder, HasFilterFinderOptions {
 }
 
 /// Return the elements located by a series of finders and filters running in
-// sequence. For example, @ByChained(finderA, finderB, filterX) will find all
-// elements that match B inside an element that matches A and then filter by X.
+/// sequence. For example, @ByChained(finderA, finderB, filterX) will find all
+/// elements that match B inside an element that matches A and then filter by X.
 class Chain implements Finder {
   final List _annotations;
 

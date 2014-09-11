@@ -242,8 +242,8 @@ void runTests() {
     expect(page.outerDivsText, anyElement(contains('outer div 1')));
     expect(page.outerDivsText, anyElement(contains('outer div 2')));
     expect(page.innerDivsText, orderedEquals(['inner div 1', 'inner div 2']));
-    expect(page.innerDivSpecial.text, 'inner div 2');
-    expect(page.innerShadow.text, contains('some'));
+    expect(page.innerDivSpecial.visibleText, 'inner div 2');
+    expect(page.innerShadow.visibleText, contains('some'));
   });
 
   test('WithInnerText in shadow dom', () {
@@ -300,7 +300,8 @@ void runTests() {
   });
 
   test('optional with functions', () {
-    var page = loader.getInstance(PageForOptionalFunctionTest);
+    PageForOptionalFunctionTest page =
+        loader.getInstance(PageForOptionalFunctionTest);
 
     expect(page.shouldBeNull(), isNull);
     expect(page.shouldBeNonNull(), isNotNull);

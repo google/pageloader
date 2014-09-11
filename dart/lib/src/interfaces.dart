@@ -34,8 +34,6 @@ abstract class PageLoader {
 
 abstract class PageLoaderElement {
   PageLoaderElement get shadowRoot;
-  @deprecated
-  String get text;
   String get innerText;
   String get visibleText;
   String get name;

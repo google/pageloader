@@ -301,8 +301,8 @@ class PageForChainTest {
     const InShadowDom(const ById('inner'))])
   PageLoaderElement innerShadow;
 
-  Iterable<String> get outerDivsText => outerDivs.map((e) => e.text);
-  Iterable<String> get innerDivsText => innerDivs.map((e) => e.text);
+  Iterable<String> get outerDivsText => outerDivs.map((e) => e.visibleText);
+  Iterable<String> get innerDivsText => innerDivs.map((e) => e.visibleText);
 }
 
 class PageForShadowDomWithInnerTextTest {

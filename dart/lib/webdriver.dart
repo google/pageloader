@@ -98,10 +98,6 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   String toString() => '$runtimeType<${context.toString()}>';
-
-  @override
-  @deprecated
-  String get text => visibleText;
 }
 
 class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
