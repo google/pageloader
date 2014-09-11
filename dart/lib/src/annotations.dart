@@ -216,19 +216,6 @@ class WithClass extends ElementFilter {
   String toString() => '@WithClass($name)';
 }
 
-/// Keeps only [PageLoaderElement]s with the given text.
-@deprecated
-class WithText extends ElementFilter {
-  final String text;
-
-  const WithText(this.text);
-
-  @override
-  bool keep(PageLoaderElement element) => element.text.contains(text);
-
-  String toString() => '@WithText($text)';
-}
-
 /// Keeps only [PageLoaderElement]s with the given inner text.
 class WithInnerText extends ElementFilter {
   final String text;
