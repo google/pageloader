@@ -18,18 +18,16 @@ import 'pageloader_test.dart' as plt;
 
 import 'package:pageloader/webdriver.dart';
 import 'package:path/path.dart' as path;
-import 'package:unittest/compact_vm_config.dart';
 import 'package:unittest/unittest.dart';
+import 'package:unittest/vm_config.dart';
 import 'package:sync_webdriver/sync_webdriver.dart' hide Platform;
-
-import 'dart:io';
 
 /**
  * These tests are not expected to be run as part of normal automated testing,
  * as they are slow and they have external dependencies.
  */
 void main() {
-  useCompactVMConfiguration();
+  useVMConfiguration();
 
   WebDriver driver;
 

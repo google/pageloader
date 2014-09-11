@@ -70,7 +70,6 @@ class HtmlPageLoader extends BasePageLoader {
     return getInstanceInternal(type, context);
   }
 
-  @override
   void sync() => clock.sleep(_DEFAULT_INTERVAL);
 }
 
@@ -90,10 +89,6 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   HtmlPageLoaderElement._(this._loader);
-
-  @override
-  @deprecated
-  String get text => innerText;
 
   @override
   String get innerText => node.text.trim();
