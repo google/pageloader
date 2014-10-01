@@ -65,6 +65,7 @@ class _IOClock implements Clock {
 
 abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   wd.SearchContext get context;
+  @override
   final WebDriverPageLoader loader;
 
   factory WebDriverPageLoaderElement(
