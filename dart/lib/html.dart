@@ -74,7 +74,9 @@ class HtmlPageLoader extends BasePageLoader {
 }
 
 abstract class HtmlPageLoaderElement implements PageLoaderElement {
-  final HtmlPageLoader _loader;
+  @override
+  final HtmlPageLoader loader;
+
   dynamic get node;
 
   factory HtmlPageLoaderElement(Node node, HtmlPageLoader loader) {
@@ -88,7 +90,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
     return null;
   }
 
-  HtmlPageLoaderElement._(this._loader);
+  HtmlPageLoaderElement._(this.loader);
 
   @override
   String get innerText => node.text.trim();
@@ -102,7 +104,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
       _fromNodeList(node.querySelectorAll(selector));
 
   List<HtmlPageLoaderElement> _fromNodeList(List<Node> nodes) =>
-      nodes.map((e) => new HtmlPageLoaderElement(e, _loader)).toList();
+      nodes.map((e) => new HtmlPageLoaderElement(e, loader)).toList();
 
   @override
   int get hashCode => node.hashCode;
@@ -112,7 +114,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
       other != null &&
       other.runtimeType == runtimeType &&
       other.node == node &&
-      other._loader == _loader;
+      other.loader == loader;
 
   @override
   String toString() => '$runtimeType<${node.toString()}>';
@@ -133,7 +135,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   PageLoaderElement get shadowRoot =>
-      new HtmlPageLoaderElement(node.shadowRoot, _loader);
+      new HtmlPageLoaderElement(node.shadowRoot, loader);
   @override
   String get name => node.tagName.toLowerCase();
   // TODO(DrMarcII): implement this to recurse up the tree to see if displayed
@@ -150,7 +152,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
     } else {
       node.click();
     }
-    _loader.sync();
+    loader.sync();
   }
 
   void _clickOptionElement() {
@@ -184,7 +186,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
     (node as InputElement).value = '';
     node.dispatchEvent(new TextEvent('textInput', data: value));
     node.blur();
-    _loader.sync();
+    loader.sync();
   }
 }
 
