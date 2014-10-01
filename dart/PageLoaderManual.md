@@ -9,7 +9,7 @@ PageLoader provides a mechanism for creating structured page objects easily usin
  - PageLoader allows the user to create custom annotations for finding elements.
  - PageLoader allows multiple annotations to be combined on a field.
  - PageLoader supports Collections and arrays of elements.
- - PageLoader recursively construct and loads fields that are not of type PageLoaderElement.
+ - PageLoader recursively constructs and loads fields that are not of type PageLoaderElement.
  - By default, PageLoader will only find elements in the page that are visible.
 
 These features combine to allow creation of structured page objects with relative ease.
@@ -72,9 +72,9 @@ Which can then be used:
 
 A single field on a page object can have multiple find-by annotations. These annotations are broken down into two categories: Finders and Filters. The basic find procedure works as follows:
 
- - An initial set of candidate elements, elements, is identified by using the Finder annotation on the element (every PageLoaded field must have exactly one Finder annotation).
- - If the field is not annotated with a @WithState annotation, then any elements that are currently not visible are removed from elements.
- - The list elements is then passed to each of the Filters, which remove additional unwanted elements.
+ - An initial list of candidate elements, _elements_, is identified by using the Finder annotation on the element (every PageLoaded field must have exactly one Finder annotation).
+ - If the field is not annotated with a @WithState annotation, then any elements that are currently not visible are removed from _elements_.
+ - The list, _elements_, is then passed to each of the Filters, which remove additional unwanted elements.
 
 **Optional Fields**
 

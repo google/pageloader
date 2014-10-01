@@ -33,7 +33,7 @@ abstract class PageLoader {
 }
 
 abstract class PageLoaderElement {
-  // PageLoader get loader;
+  PageLoader get loader;
   
   PageLoaderElement get shadowRoot;
   String get innerText;
