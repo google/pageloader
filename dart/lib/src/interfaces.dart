@@ -35,8 +35,13 @@ abstract class PageLoader {
 }
 
 abstract class PageLoaderMouse {
+  /// Press [button] on the mouse at its current location.
   void down(int button);
+  
+  /// Release [button] on the mouse at its current location.
   void up(int button);
+  
+  /// Move the mouse to a location relative to [element].
   void moveTo(PageLoaderElement element, int xOffset, int yOffset);
 }
 
