@@ -33,12 +33,13 @@ class WebDriverPageLoader extends BasePageLoader {
   final bool useShadowRoot;
   @override
   final _WebDriverMouse mouse;
-  
-  WebDriverPageLoader(
-      wd.SearchContext globalContext,
-      {this.useShadowRoot: true}) : super(const _IOClock()), this.mouse = new _WebDriverMouse(globalContext.driver) {
+
+  WebDriverPageLoader(wd.SearchContext globalContext, {this.useShadowRoot:
+      true})
+      : super(const _IOClock()),
+        this.mouse = new _WebDriverMouse(globalContext.driver) {
     this._globalContext = new WebDriverPageLoaderElement(globalContext, this);
-    
+
   }
 
   @override
@@ -58,11 +59,11 @@ class WebDriverPageLoader extends BasePageLoader {
 }
 
 class _WebDriverMouse implements PageLoaderMouse {
-  
+
   final wd.WebDriver driver;
-  
+
   _WebDriverMouse(this.driver);
- 
+
   @override
   void down(int button) {
     driver.mouse.down(button);
@@ -70,7 +71,10 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   @override
   void moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset) {
-    driver.mouse.moveTo(element: element.context, xOffset: xOffset, yOffset: yOffset);
+    driver.mouse.moveTo(
+        element: element.context,
+        xOffset: xOffset,
+        yOffset: yOffset);
   }
 
   @override
@@ -93,8 +97,8 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   final WebDriverPageLoader loader;
 
-  factory WebDriverPageLoaderElement(
-      wd.SearchContext context, WebDriverPageLoader loader) {
+  factory WebDriverPageLoaderElement(wd.SearchContext context,
+      WebDriverPageLoader loader) {
     if (context is wd.WebDriver) {
       return new _WebDriverPageLoaderElement(context, loader);
     } else if (context is wd.WebElement) {
@@ -118,9 +122,9 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   bool operator ==(Object other) =>
       other != null &&
-      other.runtimeType == runtimeType &&
-      (other as WebDriverPageLoaderElement).context == context &&
-      (other as WebDriverPageLoaderElement).loader == loader;
+          other.runtimeType == runtimeType &&
+          (other as WebDriverPageLoaderElement).context == context &&
+          (other as WebDriverPageLoaderElement).loader == loader;
 
   @override
   String toString() => '$runtimeType<${context.toString()}>';
@@ -133,12 +137,12 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   final PageLoaderAttributes style;
 
   _WebElementPageLoaderElement(wd.WebElement _context,
-                               WebDriverPageLoader loader)
+      WebDriverPageLoader loader)
       : super._(loader),
-      this.context = _context,
-      this.attributes = new _ElementAttributes(_context),
-      this.computedStyle = new _ElementComputedStyle(_context),
-      this.style = new _ElementStyle(_context);
+        this.context = _context,
+        this.attributes = new _ElementAttributes(_context),
+        this.computedStyle = new _ElementComputedStyle(_context),
+        this.style = new _ElementStyle(_context);
 
   @override
   WebDriverPageLoaderElement get shadowRoot {
@@ -153,8 +157,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   String get name => context.name;
 
   @override
-  String get innerText => context.driver
-      .execute('return arguments[0].textContent;', [ context ]).trim();
+  String get innerText =>
+      context.driver.execute('return arguments[0].textContent;', [context]).trim();
 
   @override
   String get visibleText => context.text;
@@ -183,8 +187,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
   final wd.WebDriver context;
 
-  _WebDriverPageLoaderElement(this.context, WebDriverPageLoader loader):
-      super._(loader);
+  _WebDriverPageLoaderElement(this.context, WebDriverPageLoader loader)
+      : super._(loader);
 
   @override
   String get name => '__document__';
@@ -217,8 +221,8 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
 class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   final wd.WebElement context;
 
-  _ShadowRootPageLoaderElement(this.context, WebDriverPageLoader loader) :
-      super._(loader) {
+  _ShadowRootPageLoaderElement(this.context, WebDriverPageLoader loader)
+      : super._(loader) {
     if (!_execute(' != null')) {
       throw new PageLoaderException('$context does not have a ShadowRoot');
     }
@@ -242,7 +246,8 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
 
   dynamic _execute(String script) {
     return context.driver.execute(
-        'return arguments[0].shadowRoot$script;', [ context ]);
+        'return arguments[0].shadowRoot$script;',
+        [context]);
   }
 
   // Overrides to make Analyzer happy.
@@ -279,9 +284,10 @@ class _ElementComputedStyle extends PageLoaderAttributes {
   _ElementComputedStyle(this._node);
 
   @override
-  String operator [](String name) => _node.driver.execute(
-      'return window.getComputedStyle(arguments[0]).${_cssPropName(name)}',
-      [_node]);
+  String operator [](String name) =>
+      _node.driver.execute(
+          'return window.getComputedStyle(arguments[0]).${_cssPropName(name)}',
+          [_node]);
 }
 
 class _ElementStyle extends PageLoaderAttributes {
@@ -290,11 +296,15 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  String operator [](String name) => _node.driver.execute(
-      'return arguments[0].style.${_cssPropName(name)}', [_node]);
+  String operator [](String name) =>
+      _node.driver.execute(
+          'return arguments[0].style.${_cssPropName(name)}',
+          [_node]);
 }
 
 /// Convert hyphenated-properties to camelCase.
-String _cssPropName(String name) => name.splitMapJoin(new RegExp(r'-(\w)'),
-    onMatch: (m) => m.group(1).toUpperCase(),
-    onNonMatch: (m) => m);
+String _cssPropName(String name) =>
+    name.splitMapJoin(
+        new RegExp(r'-(\w)'),
+        onMatch: (m) => m.group(1).toUpperCase(),
+        onNonMatch: (m) => m);

@@ -35,8 +35,8 @@ const _DEFAULT_INTERVAL = const Duration(milliseconds: 100);
 abstract class BasePageLoader implements PageLoader {
   final Clock clock;
 
-  BasePageLoader([Clock clock]) :
-      this.clock = clock == null ? new FakeClock() : clock;
+  BasePageLoader([Clock clock])
+      : this.clock = clock == null ? new FakeClock() : clock;
 
   /**
    * Creates a new instance of [type] and binds annotated fields to
@@ -53,17 +53,13 @@ abstract class BasePageLoader implements PageLoader {
       new _ClassInfo(type).getInstance(context, this);
 
   @override
-  waitForValue(
-      condition(), {
-      Duration timeout: _DEFAULT_WAIT,
-      Duration interval: _DEFAULT_INTERVAL}) =>
-    waitFor(condition, isNotNull, timeout: timeout, interval: interval);
+  waitForValue(condition(), {Duration timeout: _DEFAULT_WAIT, Duration interval:
+      _DEFAULT_INTERVAL}) =>
+      waitFor(condition, isNotNull, timeout: timeout, interval: interval);
 
   @override
-  waitFor(
-      condition(),
-      Matcher matcher,
-      {Duration timeout: _DEFAULT_WAIT, Duration interval: _DEFAULT_INTERVAL}) {
+  waitFor(condition(), Matcher matcher, {Duration timeout: _DEFAULT_WAIT,
+      Duration interval: _DEFAULT_INTERVAL}) {
     var endTime = clock.now.add(timeout);
     while (true) {
       try {
@@ -82,8 +78,8 @@ abstract class BasePageLoader implements PageLoader {
 
 class _ClassInfo {
 
-  static final Map<ClassMirror, _ClassInfo> _classInfoCache =
-      <ClassMirror, _ClassInfo>{};
+  static final Map<ClassMirror, _ClassInfo> _classInfoCache = <ClassMirror,
+      _ClassInfo>{};
 
   final ClassMirror _class;
   final List<_FieldInfo> _fields;
@@ -91,35 +87,37 @@ class _ClassInfo {
   final List<Filter> _filters;
   final bool _finderIsOptional;
 
-  factory _ClassInfo(ClassMirror type) =>
-    _classInfoCache.putIfAbsent(type, () {
-      Finder finder = null;
-      List<Filter> filters = <Filter>[];
-      bool finderIsOptional = false;
-      for (InstanceMirror metadatum in type.metadata) {
-        if (!metadatum.hasReflectee) {
-          continue;
-        }
-        var datum = metadatum.reflectee;
-        if (datum is Finder) {
-          if (finder != null) {
-            throw new PageLoaderException('Multiple finders found on $type');
-          }
-          finder = datum;
-        } else if (datum is Filter) {
-          filters.add(datum);
-        } else if (datum == Optional) {
-          finderIsOptional = true;
-        }
+  factory _ClassInfo(ClassMirror type) => _classInfoCache.putIfAbsent(type, () {
+    Finder finder = null;
+    List<Filter> filters = <Filter>[];
+    bool finderIsOptional = false;
+    for (InstanceMirror metadatum in type.metadata) {
+      if (!metadatum.hasReflectee) {
+        continue;
       }
+      var datum = metadatum.reflectee;
+      if (datum is Finder) {
+        if (finder != null) {
+          throw new PageLoaderException('Multiple finders found on $type');
+        }
+        finder = datum;
+      } else if (datum is Filter) {
+        filters.add(datum);
+      } else if (datum == Optional) {
+        finderIsOptional = true;
+      }
+    }
 
-      return new _ClassInfo._(
-          type, _fieldInfos(type), finder, filters, finderIsOptional);
-    });
+    return new _ClassInfo._(
+        type,
+        _fieldInfos(type),
+        finder,
+        filters,
+        finderIsOptional);
+  });
 
-  _ClassInfo._(
-      this._class, this._fields, this._finder,
-      this._filters, this._finderIsOptional);
+  _ClassInfo._(this._class, this._fields, this._finder, this._filters,
+      this._finderIsOptional);
 
   static Iterable<_FieldInfo> _fieldInfos(ClassMirror type) {
     var infos = <_FieldInfo>[];
@@ -151,8 +149,8 @@ class _ClassInfo {
           if (current.mixin != null) {
             typesToProcess.addLast(current.mixin);
             if (!_printedWarning) {
-              print('Warning: this test may not behave properly'
-                  ' when compiled to JS');
+              print(
+                  'Warning: this test may not behave properly' ' when compiled to JS');
               _printedWarning = true;
             }
           }
@@ -189,7 +187,8 @@ class _ClassInfo {
     InstanceMirror page;
 
     for (DeclarationMirror constructor in _class.declarations.values) {
-      if (constructor is MethodMirror && constructor.isConstructor &&
+      if (constructor is MethodMirror &&
+          constructor.isConstructor &&
           constructor.parameters.isEmpty) {
         page = _class.newInstance(constructor.constructorName, []);
         break;
@@ -222,13 +221,17 @@ abstract class _FieldInfo {
       // do nothing
     }
 
-    if (field is VariableMirror && !field.isFinal &&
-        !field.isStatic && !isConst) {
+    if (field is VariableMirror &&
+        !field.isFinal &&
+        !field.isStatic &&
+        !isConst) {
       type = field.type;
       name = field.simpleName;
       // TODO(DrMarcII): Support private setters when they work again
-    } else if (field is MethodMirror && field.isSetter &&
-        !field.isStatic && !field.isPrivate) {
+    } else if (field is MethodMirror &&
+        field.isSetter &&
+        !field.isStatic &&
+        !field.isPrivate) {
       type = field.parameters.first.type;
       // HACK to get correct symbol name for operating with setField.
       name = field.simpleName.toString();
@@ -244,8 +247,7 @@ abstract class _FieldInfo {
     }
 
     var isFunction = false;
-    if (type.simpleName == const Symbol('Function')
-        || type is TypedefMirror) {
+    if (type.simpleName == const Symbol('Function') || type is TypedefMirror) {
       isFunction = true;
       if (type is TypedefMirror) {
         type = (type as TypedefMirror).referent.returnType;
@@ -292,16 +294,13 @@ abstract class _FieldInfo {
       }
 
       if (datum is HasFilterFinderOptions &&
-          datum.options.contains(
-              FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING)) {
+          datum.options.contains(FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING)) {
         implicitDisplayFiltering = false;
       }
     }
     if (type != null && type.simpleName == const Symbol('List')) {
       isList = true;
-      type = type.typeArguments.isNotEmpty
-          ? type.typeArguments.single
-          : null;
+      type = type.typeArguments.isNotEmpty ? type.typeArguments.single : null;
     }
     if (type == null || type.simpleName == const Symbol('dynamic')) {
       type = reflectClass(PageLoaderElement);
@@ -312,9 +311,9 @@ abstract class _FieldInfo {
     }
 
     if (finder != null) {
-      var fieldInfo = isList
-          ? new _FinderListFieldInfo(name, finder, filters, type)
-          : new _FinderSingleFieldInfo(name, finder, filters, type, isOptional);
+      var fieldInfo = isList ?
+          new _FinderListFieldInfo(name, finder, filters, type) :
+          new _FinderSingleFieldInfo(name, finder, filters, type, isOptional);
       if (isFunction) {
         fieldInfo = new _FinderFunctionFieldInfo(fieldInfo);
       }
@@ -324,9 +323,7 @@ abstract class _FieldInfo {
     }
   }
 
-  void setField(
-      InstanceMirror instance,
-      PageLoaderElement context,
+  void setField(InstanceMirror instance, PageLoaderElement context,
       BasePageLoader loader);
 }
 
@@ -339,9 +336,8 @@ abstract class _FinderFieldInfo implements _FieldInfo {
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader);
 
   @override
-  void setField(InstanceMirror instance,
-                PageLoaderElement context,
-                BasePageLoader loader) {
+  void setField(InstanceMirror instance, PageLoaderElement context,
+      BasePageLoader loader) {
     try {
       instance.setField(_fieldName, calculateFieldValue(context, loader));
     } catch (e) {
@@ -358,12 +354,9 @@ class _FinderSingleFieldInfo extends _FinderFieldInfo {
   final ClassMirror _instanceType;
   final bool _isOptional;
 
-  _FinderSingleFieldInfo(
-      Symbol fieldName,
-      this._finder,
-      this._filters,
-      this._instanceType,
-      this._isOptional) : super(fieldName);
+  _FinderSingleFieldInfo(Symbol fieldName, this._finder, this._filters,
+      this._instanceType, this._isOptional)
+      : super(fieldName);
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
@@ -382,18 +375,16 @@ class _FinderListFieldInfo extends _FinderFieldInfo {
   final List<Filter> _filters;
   final ClassMirror _instanceType;
 
-  _FinderListFieldInfo(
-      Symbol fieldName,
-      this._finder,
-      this._filters,
-      this._instanceType) : super(fieldName);
+  _FinderListFieldInfo(Symbol fieldName, this._finder, this._filters,
+      this._instanceType)
+      : super(fieldName);
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
     List elements = _getElements(context, _finder, _filters);
     if (_instanceType.simpleName != const Symbol('PageLoaderElement')) {
-      elements = elements.map((element) =>
-          loader._getInstance(_instanceType, element)).toList();
+      elements = elements.map(
+          (element) => loader._getInstance(_instanceType, element)).toList();
     }
     return elements;
   }
@@ -417,11 +408,12 @@ class _InjectedPageLoaderFieldInfo extends _FinderFieldInfo {
   _InjectedPageLoaderFieldInfo(Symbol fieldName) : super(fieldName);
 
   @override
-  calculateFieldValue(PageLoaderElement context, BasePageLoader loader) => loader;
+  calculateFieldValue(PageLoaderElement context, BasePageLoader loader) =>
+      loader;
 }
 
-List<PageLoaderElement> _getElements(
-    PageLoaderElement context, Finder finder, List<Filter> filters) {
+List<PageLoaderElement> _getElements(PageLoaderElement context, Finder finder,
+    List<Filter> filters) {
   List<PageLoaderElement> elements = finder.findElements(context);
   for (var filter in filters) {
     elements = filter.filter(elements);
@@ -429,8 +421,8 @@ List<PageLoaderElement> _getElements(
   return new UnmodifiableListView(elements);
 }
 
-PageLoaderElement _getElement(
-    PageLoaderElement context, Finder finder, List<Filter> filters, bool optional) {
+PageLoaderElement _getElement(PageLoaderElement context, Finder finder,
+    List<Filter> filters, bool optional) {
   List<PageLoaderElement> elements = _getElements(context, finder, filters);
   if (elements.isEmpty) {
     if (!optional) {
@@ -440,8 +432,9 @@ PageLoaderElement _getElement(
     return null;
   }
   if (elements.length > 1) {
-    throw new PageLoaderException('Found ${elements.length} elements for '
-        'finder: $finder and filters: $filters');
+    throw new PageLoaderException(
+        'Found ${elements.length} elements for '
+            'finder: $finder and filters: $filters');
   }
   return elements.first;
 }

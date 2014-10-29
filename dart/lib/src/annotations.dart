@@ -75,9 +75,9 @@ class InShadowDom implements Finder {
   const InShadowDom([this.finder]);
 
   @override
-  List<PageLoaderElement> findElements(PageLoaderElement context)  {
+  List<PageLoaderElement> findElements(PageLoaderElement context) {
     if (finder == null) {
-      return new UnmodifiableListView<PageLoaderElement>([ context.shadowRoot ]);
+      return new UnmodifiableListView<PageLoaderElement>([context.shadowRoot]);
     } else {
       return finder.findElements(context.shadowRoot);
     }
@@ -118,7 +118,7 @@ class WithState extends ElementFilter implements HasFilterFinderOptions {
 
   @override
   List<FilterFinderOption> get options =>
-      const [ FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING ];
+      const [FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING];
 
   @override
   bool keep(PageLoaderElement element) {
@@ -166,12 +166,12 @@ class _Root implements Finder, HasFilterFinderOptions {
 
   @override
   List<PageLoaderElement> findElements(PageLoaderElement context) {
-    return new UnmodifiableListView<PageLoaderElement>([ context ]);
+    return new UnmodifiableListView<PageLoaderElement>([context]);
   }
 
   @override
   List<FilterFinderOption> get options =>
-      const [ FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING ];
+      const [FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING];
 
   @override
   String toString() => '@Root';
@@ -249,7 +249,7 @@ class Union implements Finder, HasFilterFinderOptions {
   final List<Finder> _finders;
   final bool _displayedFiltering;
 
-  const Union(this._finders, [ this._displayedFiltering = true ]);
+  const Union(this._finders, [this._displayedFiltering = true]);
 
   @override
   List<PageLoaderElement> findElements(PageLoaderElement context) {
@@ -267,7 +267,7 @@ class Union implements Finder, HasFilterFinderOptions {
     if (_displayedFiltering) {
       return const [];
     } else {
-      return const [ FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING ];
+      return const [FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING];
     }
   }
 
@@ -305,4 +305,3 @@ class Chain implements Finder {
   @override
   String toString() => '@Chain($_annotations)';
 }
-

@@ -27,8 +27,8 @@ class FakeClock implements Clock {
 
   DateTime _now;
 
-  FakeClock([DateTime start]) :
-      this._now = start == null ? DEFAULT_START_TIME : start ;
+  FakeClock([DateTime start])
+      : this._now = start == null ? DEFAULT_START_TIME : start;
 
   @override
   void sleep(Duration interval) {

@@ -22,7 +22,7 @@ abstract class PageLoader {
   PageLoaderElement get globalContext;
 
   Object getInstance(Type type, [dynamic context]);
-  
+
   PageLoaderMouse get mouse;
 
   /// Waits for [condition] to be evaluated successful and return a value other
@@ -37,17 +37,17 @@ abstract class PageLoader {
 abstract class PageLoaderMouse {
   /// Press [button] on the mouse at its current location.
   void down(int button);
-  
+
   /// Release [button] on the mouse at its current location.
   void up(int button);
-  
+
   /// Move the mouse to a location relative to [element].
   void moveTo(PageLoaderElement element, int xOffset, int yOffset);
 }
 
 abstract class PageLoaderElement {
   PageLoader get loader;
-  
+
   PageLoaderElement get shadowRoot;
   String get innerText;
   String get visibleText;
