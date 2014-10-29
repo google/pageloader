@@ -374,3 +374,8 @@ class PageForOptionalFunctionTest {
   @ById('button-1') @Optional @Returns(PageLoaderElement)
   var shouldBeNonNull;
 }
+
+class PageForMouseTest {
+  @ById('mouse')
+  PageLoaderElement element;
+}

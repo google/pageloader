@@ -31,11 +31,14 @@ import 'package:sync_webdriver/sync_webdriver.dart' as wd;
 class WebDriverPageLoader extends BasePageLoader {
   WebDriverPageLoaderElement _globalContext;
   final bool useShadowRoot;
-
+  @override
+  final _WebDriverMouse mouse;
+  
   WebDriverPageLoader(
       wd.SearchContext globalContext,
-      {this.useShadowRoot: true}) : super(const _IOClock()) {
+      {this.useShadowRoot: true}) : super(const _IOClock()), this.mouse = new _WebDriverMouse(globalContext.driver) {
     this._globalContext = new WebDriverPageLoaderElement(globalContext, this);
+    
   }
 
   @override
@@ -51,6 +54,28 @@ class WebDriverPageLoader extends BasePageLoader {
       }
     }
     return getInstanceInternal(type, context);
+  }
+}
+
+class _WebDriverMouse implements PageLoaderMouse {
+  
+  final wd.WebDriver driver;
+  
+  _WebDriverMouse(this.driver);
+ 
+  @override
+  void down(int button) {
+    driver.mouse.down(button);
+  }
+
+  @override
+  void moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset) {
+    driver.mouse.moveTo(element: element.context, xOffset: xOffset, yOffset: yOffset);
+  }
+
+  @override
+  void up(int button) {
+    driver.mouse.up(button);
   }
 }
 
