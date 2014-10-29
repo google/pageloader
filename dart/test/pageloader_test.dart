@@ -306,6 +306,19 @@ void runTests() {
     expect(page.shouldBeNull(), isNull);
     expect(page.shouldBeNonNull(), isNotNull);
   });
+  
+  test('mouse', () {
+    PageForMouseTest page = loader.getInstance(PageForMouseTest);
+    
+    loader.mouse.moveTo(page.element, 2, 2);
+    expect(page.element.visibleText, contains('MouseMove'));
+    loader.mouse.down(0);
+    expect(page.element.visibleText, contains('MouseDown'));
+    loader.mouse
+        ..moveTo(page.element, 10, 10)
+        ..up(0);
+    expect(page.element.visibleText, contains('MouseUp'));
+  });
 
   group('waitFor()', () {
     test('that returns a string', () {

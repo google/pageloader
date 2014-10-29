@@ -45,6 +45,7 @@ void main() {
         </table>
         <div id='div' style='display: none; background-color: red;'>
           some not displayed text</div>
+        <div id='mouse'>area for mouse events</div>
         <input type='text' id='text' />
         <input type='text' readonly id='readonly' disabled />
         <input type='checkbox' class='with-class-test class1 class2' />
@@ -78,30 +79,48 @@ void main() {
 
     var templateHtml = '<button id="inner">some <content></content></button>';
 
-    var div = new html.DivElement();
+    var div = body.querySelectorAll('div[id=testdocument]');
+    if (div.length == 1) {
+      div = div[0];
+    } else {
+      div = new html.DivElement();
+      div.id = 'testdocument';
+      body.append(div);
+    }
     div.setInnerHtml(bodyHtml, validator: new NoOpNodeValidator());
-
-    body.append(div);
 
     html.document.getElementsByTagName('a-custom-tag').forEach((element) {
       var shadow = element.createShadowRoot();
       shadow.setInnerHtml(templateHtml, validator: new NoOpNodeValidator());
     });
+    var displayedDiv = html.document.getElementById('mouse');
+    displayedDiv.onMouseDown.listen((evt) {
+      displayedDiv.text = displayedDiv.text + " MouseDown: ${evt.client.x}, ${evt.client.y}";
+    });
+    displayedDiv.onMouseUp.listen((evt) {
+      displayedDiv.text = displayedDiv.text + " MouseUp: ${evt.client.x}, ${evt.client.y}";
+    });
+    displayedDiv.onMouseMove.listen((evt) {
+      displayedDiv.text = displayedDiv.text + " MouseMove: ${evt.client.x}, ${evt.client.y}";
+    });
+    
     plt.loader = new HtmlPageLoader(div);
 
   });
 
-  test('value on text', () {
-    var page = plt.loader.getInstance(PageForAttributesTests);
-    var handlerCalled = false;
-    var node = (page.text as HtmlPageLoaderElement).node as html.InputElement;
-    node.onInput.listen((event) {
-      handlerCalled = true;
+  group('html specific tests', () {
+    test('value on text', () {
+      var page = plt.loader.getInstance(PageForAttributesTests);
+      var handlerCalled = false;
+      var node = (page.text as HtmlPageLoaderElement).node as html.InputElement;
+      node.onInput.listen((event) {
+        handlerCalled = true;
+      });
+      expect(page.text.attributes['value'], '');
+      page.text.type('some text');
+      expect(page.text.attributes['value'], 'some text');
+      expect(handlerCalled, isTrue);
     });
-    expect(page.text.attributes['value'], '');
-    page.text.type('some text');
-    expect(page.text.attributes['value'], 'some text');
-    expect(handlerCalled, isTrue);
   });
 
   plt.runTests();

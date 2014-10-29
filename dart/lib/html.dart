@@ -42,6 +42,11 @@ class HtmlPageLoader extends BasePageLoader {
 
   @override
   HtmlPageLoaderElement get globalContext => _globalContext;
+  
+  _HtmlMouse _mouse;
+  
+  @override
+  _HtmlMouse get mouse => _mouse;
 
   factory HtmlPageLoader(Node globalContext, [SyncActionFn syncActionFn]) {
     var clock;
@@ -56,6 +61,7 @@ class HtmlPageLoader extends BasePageLoader {
   HtmlPageLoader._(Node globalContext, Clock clock)
       : super(clock) {
     this._globalContext = new HtmlPageLoaderElement(globalContext, this);
+    this._mouse = new _HtmlMouse(this);
   }
 
   @override
@@ -71,6 +77,47 @@ class HtmlPageLoader extends BasePageLoader {
   }
 
   void sync() => clock.sleep(_DEFAULT_INTERVAL);
+}
+
+class _HtmlMouse implements PageLoaderMouse {
+  
+  final HtmlPageLoader loader;
+  
+  int clientX = 0;
+  int clientY = 0;
+  
+  _HtmlMouse(this.loader);
+  
+  @override
+  void down(int button) {
+    currentElement.dispatchEvent(createEvent('mousedown', button));
+    loader.sync();
+  }
+
+  @override
+  void moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset) {
+    clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
+    clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
+    currentElement.dispatchEvent(createEvent('mousemove'));
+    loader.sync();
+  }
+
+  @override
+  void up(int button) {
+    currentElement.dispatchEvent(createEvent('mouseup', button));
+    loader.sync();
+  }
+  
+  int get pageX => window.pageXOffset + clientX;
+  int get pageY => window.pageYOffset + clientY;
+  int get _borderWidth => (window.outerWidth - window.innerWidth) ~/ 2;
+  int get screenX => window.screenLeft - _borderWidth;
+  int get screenY => window.screenTop - window.outerHeight + window.innerHeight + _borderWidth;
+  
+  MouseEvent createEvent(String type, [int button = 0]) => 
+      new MouseEvent(type, button: button, clientX: clientX, clientY: clientY, screenX: screenX, screenY: screenY);
+  
+  Element get currentElement => document.elementFromPoint(pageX, pageY);
 }
 
 abstract class HtmlPageLoaderElement implements PageLoaderElement {
@@ -166,7 +213,8 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
     if (node is InputElement) {
       _setInputValue(node, (node as InputElement).value + keys);
     } else {
-      super.type(keys);
+      throw new PageLoaderException(
+          'HtmlPageLoader type method only supports InputElements');
     }
   }
 

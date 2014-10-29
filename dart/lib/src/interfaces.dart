@@ -22,6 +22,8 @@ abstract class PageLoader {
   PageLoaderElement get globalContext;
 
   Object getInstance(Type type, [dynamic context]);
+  
+  PageLoaderMouse get mouse;
 
   /// Waits for [condition] to be evaluated successful and return a value other
   /// than [null].
@@ -30,6 +32,12 @@ abstract class PageLoader {
   /// Waits for [condition] to be evaluated successful and return a value
   /// that matches [matcher].
   waitFor(condition(), Matcher matcher, {Duration timeout, Duration interval});
+}
+
+abstract class PageLoaderMouse {
+  void down(int button);
+  void up(int button);
+  void moveTo(PageLoaderElement element, int xOffset, int yOffset);
 }
 
 abstract class PageLoaderElement {
