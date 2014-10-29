@@ -25,7 +25,7 @@ class PageForSimpleTest {
 
 class SubclassPage extends PageForSimpleTest {}
 
-@Union(const [ Root, const ByTagName('table')]) @IsTag('table')
+@Union(const [Root, const ByTagName('table')]) @IsTag('table')
 class Table {
   @Root
   PageLoaderElement root;
@@ -148,8 +148,8 @@ class PageForAmbiguousTest {
   PageLoaderElement element;
 }
 
-class PageForMixinTest extends PageForSimpleTest
-    with PageForDisplayedFilteringTest {}
+class PageForMixinTest extends PageForSimpleTest with
+    PageForDisplayedFilteringTest {}
 
 class PageForPrivateConstructorTest extends PageForSimpleTest {
   PageForPrivateConstructorTest._();
@@ -176,11 +176,13 @@ class PageForStaticFieldsTest extends PageForSimpleTest {
   static PageLoaderElement dontSet;
 }
 
-class PageForStaticSettersTest extends PageForSimpleTest{
+class PageForStaticSettersTest extends PageForSimpleTest {
   static var _dontSet;
 
   @ByTagName("table")
-  static set dontSet(PageLoaderElement el) { _dontSet = el; }
+  static set dontSet(PageLoaderElement el) {
+    _dontSet = el;
+  }
 
   static get dontSet => _dontSet;
 }
@@ -284,21 +286,21 @@ class PageForChainTest {
   @ByClass('outer-div')
   List<PageLoaderElement> outerDivs;
 
-  @Chain(const [
-    const ByClass('outer-div'),
-    const ByClass('inner-div')])
+  @Chain(const [const ByClass('outer-div'), const ByClass('inner-div')])
   List<PageLoaderElement> innerDivs;
 
-  @Chain(const [
-    const ByClass('outer-div'),
-    const ByClass('inner-div'),
-    const WithClass('special')])
+  @Chain(
+      const [
+          const ByClass('outer-div'),
+          const ByClass('inner-div'),
+          const WithClass('special')])
   PageLoaderElement innerDivSpecial;
 
-  @Chain(const [
-    const ByClass('outer-div'),
-    const ByTagName('a-custom-tag'),
-    const InShadowDom(const ById('inner'))])
+  @Chain(
+      const [
+          const ByClass('outer-div'),
+          const ByTagName('a-custom-tag'),
+          const InShadowDom(const ById('inner'))])
   PageLoaderElement innerShadow;
 
   Iterable<String> get outerDivsText => outerDivs.map((e) => e.visibleText);

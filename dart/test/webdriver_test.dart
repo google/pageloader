@@ -78,6 +78,6 @@ WebDriver get freshDriver {
 void closeDriver() {
   try {
     _driver.quit();
-  } catch (e) { }
+  } catch (e) {}
   _driver = null;
 }

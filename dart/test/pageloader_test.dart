@@ -98,8 +98,7 @@ void runTests() {
   });
 
   test('no matching class element', () {
-    expect(() => loader.getInstance(PageForNoMatchingClassElementTest),
-        throws);
+    expect(() => loader.getInstance(PageForNoMatchingClassElementTest), throws);
   });
 
   test('no matching but nullable element', () {
@@ -109,12 +108,14 @@ void runTests() {
   });
 
   test('multiple matching element', () {
-    expect(() => loader.getInstance(PageForMultipleMatchingElementTest),
+    expect(
+        () => loader.getInstance(PageForMultipleMatchingElementTest),
         throws);
   });
 
   test('multiple matching element', () {
-    expect(() => loader.getInstance(PageForMultipleMatchingClassElementTest),
+    expect(
+        () => loader.getInstance(PageForMultipleMatchingClassElementTest),
         throws);
   });
 
@@ -139,7 +140,8 @@ void runTests() {
   test('WithClass', () {
     var page = loader.getInstance(PageForWithClassTest);
     expect(page.element.attributes['type'], 'checkbox');
-    expect(page.element.classes,
+    expect(
+        page.element.classes,
         unorderedEquals(['with-class-test', 'class1', 'class2']));
   });
 
@@ -275,7 +277,9 @@ void runTests() {
   test('classes', () {
     PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
 
-    expect(page.table.root.classes, orderedEquals(['class1', 'class2', 'class3']));
+    expect(
+        page.table.root.classes,
+        orderedEquals(['class1', 'class2', 'class3']));
     expect(page.table.rows.first.cells.first.classes, hasLength(0));
   });
 
@@ -306,10 +310,10 @@ void runTests() {
     expect(page.shouldBeNull(), isNull);
     expect(page.shouldBeNonNull(), isNotNull);
   });
-  
+
   test('mouse', () {
     PageForMouseTest page = loader.getInstance(PageForMouseTest);
-    
+
     loader.mouse.moveTo(page.element, 2, 2);
     expect(page.element.visibleText, contains('MouseMove'));
     loader.mouse.down(0);
@@ -323,38 +327,32 @@ void runTests() {
   group('waitFor()', () {
     test('that returns a string', () {
       var count = 0;
-      var result = loader.waitFor(
-          () {
-            if (count == 2) return 'webdriver - Google Search';
-            count++;
-            return count;
-          },
-          equals('webdriver - Google Search'));
+      var result = loader.waitFor(() {
+        if (count == 2) return 'webdriver - Google Search';
+        count++;
+        return count;
+      }, equals('webdriver - Google Search'));
 
       expect(result, equals('webdriver - Google Search'));
     });
 
     test('that returns null', () {
       var count = 0;
-      var result = loader.waitFor(
-          () {
-            if (count == 2) return null;
-            count++;
-            return count;
-          },
-          isNull);
+      var result = loader.waitFor(() {
+        if (count == 2) return null;
+        count++;
+        return count;
+      }, isNull);
       expect(result, isNull);
     });
 
     test('that returns false', () {
       var count = 0;
-      var result = loader.waitFor(
-          () {
-            if (count == 2) return false;
-            count++;
-            return count;
-          },
-          isFalse);
+      var result = loader.waitFor(() {
+        if (count == 2) return false;
+        count++;
+        return count;
+      }, isFalse);
       expect(result, isFalse);
     });
   });
@@ -362,27 +360,25 @@ void runTests() {
   group('waitForValue()', () {
     test('that returns a string', () {
       var count = 0;
-      var result = loader.waitForValue(
-          () {
-            if (count == 2) return 'Google';
-            count++;
-            return null;
-          });
+      var result = loader.waitForValue(() {
+        if (count == 2) return 'Google';
+        count++;
+        return null;
+      });
       expect(result, equals('Google'));
     });
 
     test('that returns false', () {
       var count = 0;
-      var result = loader.waitForValue(
-          () {
-            expect(count, lessThanOrEqualTo(2));
-            if (count == 2) {
-              count++;
-              return false;
-            }
-            count++;
-            return null;
-          });
+      var result = loader.waitForValue(() {
+        expect(count, lessThanOrEqualTo(2));
+        if (count == 2) {
+          count++;
+          return false;
+        }
+        count++;
+        return null;
+      });
       expect(result, isFalse);
     });
   });
@@ -390,37 +386,40 @@ void runTests() {
   group('attributes', () {
 
     test('style', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       // According to the spec, red below should be returned as an
       // RGBA value.
-      expect(page.divWithStyle.attributes['style'],
+      expect(
+          page.divWithStyle.attributes['style'],
           'display: none; background-color: red;');
-      expect(page.divWithStyle.attributes['STYLE'],
+      expect(
+          page.divWithStyle.attributes['STYLE'],
           'display: none; background-color: red;');
-      expect(page.divWithStyle.attributes['StYlE'],
+      expect(
+          page.divWithStyle.attributes['StYlE'],
           'display: none; background-color: red;');
     });
 
     test('checked', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.checkbox.attributes['checked'], isNull);
       page.checkbox.click();
       expect(page.checkbox.attributes['checked'], 'true');
     });
 
     test('disabled', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.readOnly.attributes['disabled'], 'true');
       expect(page.text.attributes['disabled'], isNull);
     });
 
     test('not a property', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.table.attributes['non-standard'], 'a non standard attr');
     });
 
     test('option values', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       // The expects below are according to the WebDriver spec, but currently
       // fail
       // expect(page.option1.attributes['value'], 'option 1');
@@ -436,7 +435,7 @@ void runTests() {
     });
 
     test('selected on checkbox', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.checkbox.attributes['selected'], isNull);
       expect(page.checkbox.attributes['SeLeCtEd'], isNull);
       page.checkbox.click();
@@ -445,7 +444,7 @@ void runTests() {
     });
 
     test('selected on radio', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.radio.attributes['selected'], isNull);
       expect(page.radio.attributes['SeLeCtEd'], isNull);
       page.radio.click();
@@ -455,23 +454,23 @@ void runTests() {
 
     // returning null for both WebDriver and HTML, not sure why
     skip_test('href on a', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.radio.attributes['href'], endsWith('/test.html'));
     });
 
     test('src on img', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.img.attributes['src'], endsWith('/test.png'));
     });
 
     test('class/className', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.table.attributes['class'], 'class1 class2 class3');
       expect(page.table.attributes['className'], 'class1 class2 class3');
     });
 
     test('readonly/readOnly', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.readOnly.attributes['readonly'], 'true');
       expect(page.readOnly.attributes['readOnly'], 'true');
       expect(page.text.attributes['readonly'], isNull);
@@ -479,7 +478,7 @@ void runTests() {
     });
 
     test('value on text', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.text.attributes['value'], '');
       page.text.type('some text');
       expect(page.text.attributes['value'], 'some text');
@@ -489,7 +488,7 @@ void runTests() {
   group('typing', () {
 
     test('typing should append', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.text.attributes['value'], '');
       page.text.type('some text');
       expect(page.text.attributes['value'], 'some text');
@@ -498,7 +497,7 @@ void runTests() {
     });
 
     test('value after clear', () {
-      var  page = loader.getInstance(PageForAttributesTests);
+      var page = loader.getInstance(PageForAttributesTests);
       expect(page.text.attributes['value'], '');
       page.text.type('some text');
       expect(page.text.attributes['value'], 'some text');

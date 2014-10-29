@@ -42,9 +42,9 @@ class HtmlPageLoader extends BasePageLoader {
 
   @override
   HtmlPageLoaderElement get globalContext => _globalContext;
-  
+
   _HtmlMouse _mouse;
-  
+
   @override
   _HtmlMouse get mouse => _mouse;
 
@@ -80,14 +80,14 @@ class HtmlPageLoader extends BasePageLoader {
 }
 
 class _HtmlMouse implements PageLoaderMouse {
-  
+
   final HtmlPageLoader loader;
-  
+
   int clientX = 0;
   int clientY = 0;
-  
+
   _HtmlMouse(this.loader);
-  
+
   @override
   void down(int button) {
     currentElement.dispatchEvent(createEvent('mousedown', button));
@@ -107,16 +107,24 @@ class _HtmlMouse implements PageLoaderMouse {
     currentElement.dispatchEvent(createEvent('mouseup', button));
     loader.sync();
   }
-  
+
   int get pageX => window.pageXOffset + clientX;
   int get pageY => window.pageYOffset + clientY;
   int get _borderWidth => (window.outerWidth - window.innerWidth) ~/ 2;
-  int get screenX => window.screenLeft - _borderWidth;
-  int get screenY => window.screenTop - window.outerHeight + window.innerHeight + _borderWidth;
-  
-  MouseEvent createEvent(String type, [int button = 0]) => 
-      new MouseEvent(type, button: button, clientX: clientX, clientY: clientY, screenX: screenX, screenY: screenY);
-  
+  int get screenX => window.screenLeft + _borderWidth + clientX;
+  int get screenY =>
+      window.screenTop + window.outerHeight - window.innerHeight - _borderWidth +
+          clientY;
+
+  MouseEvent createEvent(String type, [int button = 0]) =>
+      new MouseEvent(
+          type,
+          button: button,
+          clientX: clientX,
+          clientY: clientY,
+          screenX: screenX,
+          screenY: screenY);
+
   Element get currentElement => document.elementFromPoint(pageX, pageY);
 }
 
@@ -159,9 +167,9 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   bool operator ==(other) =>
       other != null &&
-      other.runtimeType == runtimeType &&
-      other.node == node &&
-      other.loader == loader;
+          other.runtimeType == runtimeType &&
+          other.node == node &&
+          other.loader == loader;
 
   @override
   String toString() => '$runtimeType<${node.toString()}>';
@@ -175,10 +183,10 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   _ElementPageLoaderElement(Element _node, HtmlPageLoader loader)
       : super._(loader),
-      this.node = _node,
-      this.attributes = new _ElementAttributes(_node),
-      this.computedStyle = new _ElementComputedStyle(_node),
-      this.style = new _ElementStyle(_node);
+        this.node = _node,
+        this.attributes = new _ElementAttributes(_node),
+        this.computedStyle = new _ElementComputedStyle(_node),
+        this.style = new _ElementStyle(_node);
 
   @override
   PageLoaderElement get shadowRoot =>
@@ -241,7 +249,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
   final ShadowRoot node;
 
-  _ShadowRootPageLoaderElement(this.node, PageLoader loader): super._(loader);
+  _ShadowRootPageLoaderElement(this.node, PageLoader loader) : super._(loader);
 
   @override
   String get name => '__shadow_root__';
@@ -270,7 +278,7 @@ class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
 class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   final Document node;
 
-  _DocumentPageLoaderElement(this.node, PageLoader loader): super._(loader);
+  _DocumentPageLoaderElement(this.node, PageLoader loader) : super._(loader);
 
   @override
   String get name => '__document__';
@@ -298,22 +306,57 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
 
 class _ElementAttributes extends PageLoaderAttributes {
   static const _BOOLEAN_ATTRIBUTES = const [
-      'async', 'autofocus', 'autoplay', 'checked', 'compact', 'complete',
-      'controls', 'declare', 'defaultchecked', 'defaultselected', 'defer',
-      'disabled', 'draggable', 'ended', 'formnovalidate', 'hidden',
-      'indeterminate', 'iscontenteditable', 'ismap', 'itemscope', 'loop',
-      'multiple', 'muted', 'nohref', 'noresize', 'noshade', 'novalidate',
-      'nowrap', 'open', 'paused', 'pubdate', 'readonly', 'required',
-      'reversed', 'scoped', 'seamless', 'seeking', 'selected', 'spellcheck',
-      'truespeed', 'willvalidate'
-    ];
+      'async',
+      'autofocus',
+      'autoplay',
+      'checked',
+      'compact',
+      'complete',
+      'controls',
+      'declare',
+      'defaultchecked',
+      'defaultselected',
+      'defer',
+      'disabled',
+      'draggable',
+      'ended',
+      'formnovalidate',
+      'hidden',
+      'indeterminate',
+      'iscontenteditable',
+      'ismap',
+      'itemscope',
+      'loop',
+      'multiple',
+      'muted',
+      'nohref',
+      'noresize',
+      'noshade',
+      'novalidate',
+      'nowrap',
+      'open',
+      'paused',
+      'pubdate',
+      'readonly',
+      'required',
+      'reversed',
+      'scoped',
+      'seamless',
+      'seeking',
+      'selected',
+      'spellcheck',
+      'truespeed',
+      'willvalidate'];
 
   final Element _node;
 
   _ElementAttributes(this._node);
 
   /// Based on algorithm from:
-  /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
+
+
+
+      /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
   @override
   String operator [](String name) {
     var result;
@@ -398,8 +441,7 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  String operator [](String name) =>
-      _node.style.getPropertyValue(name);
+  String operator [](String name) => _node.style.getPropertyValue(name);
 }
 
 String _elementText(n) {
