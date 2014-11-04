@@ -89,22 +89,23 @@ class _HtmlMouse implements PageLoaderMouse {
   _HtmlMouse(this.loader);
 
   @override
-  void down(int button) {
-    currentElement.dispatchEvent(createEvent('mousedown', button));
+  void down(int button, {_ElementPageLoaderElement eventTarget}) {
+    dispatchEvent('mousedown', eventTarget, button);
     loader.sync();
   }
 
   @override
-  void moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset) {
+  void moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset,
+      {_ElementPageLoaderElement eventTarget}) {
     clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
     clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
-    currentElement.dispatchEvent(createEvent('mousemove'));
+    dispatchEvent('mousemove', eventTarget);
     loader.sync();
   }
 
   @override
-  void up(int button) {
-    currentElement.dispatchEvent(createEvent('mouseup', button));
+  void up(int button, {_ElementPageLoaderElement eventTarget}) {
+    dispatchEvent('mouseup', eventTarget);
     loader.sync();
   }
 
@@ -112,20 +113,33 @@ class _HtmlMouse implements PageLoaderMouse {
   int get pageY => window.pageYOffset + clientY;
   int get _borderWidth => (window.outerWidth - window.innerWidth) ~/ 2;
   int get screenX => window.screenLeft + _borderWidth + clientX;
-  int get screenY =>
-      window.screenTop + window.outerHeight - window.innerHeight - _borderWidth +
-          clientY;
+  int get screenY => window.screenTop + window.outerHeight -
+      window.innerHeight - _borderWidth + clientY;
 
-  MouseEvent createEvent(String type, [int button = 0]) =>
-      new MouseEvent(
-          type,
-          button: button,
-          clientX: clientX,
-          clientY: clientY,
-          screenX: screenX,
-          screenY: screenY);
+  void dispatchEvent(String type, _ElementPageLoaderElement eventTarget,
+      [int button = 0]) {
+    var event = new MouseEvent(
+        type,
+        button: button,
+        clientX: clientX,
+        clientY: clientY,
+        screenX: screenX,
+        screenY: screenY);
 
-  Element get currentElement => document.elementFromPoint(pageX, pageY);
+    if (eventTarget != null) {
+      eventTarget.node.dispatchEvent(event);
+    } else {
+      currentElement.dispatchEvent(event);
+    }
+  }
+
+  Element get currentElement {
+    var element = document.elementFromPoint(pageX, pageY);
+    if (element == null) {
+      element = document.body;
+    }
+    return element;
+  }
 }
 
 abstract class HtmlPageLoaderElement implements PageLoaderElement {
@@ -353,10 +367,7 @@ class _ElementAttributes extends PageLoaderAttributes {
   _ElementAttributes(this._node);
 
   /// Based on algorithm from:
-
-
-
-      /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
+  /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
   @override
   String operator [](String name) {
     var result;

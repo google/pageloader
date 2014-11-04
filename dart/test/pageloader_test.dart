@@ -41,287 +41,294 @@ void runTests() {
     verifyRows(table.rows);
   }
 
-  test('simple', () {
-    PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
-    verifyTable(page.table);
-    expect(page.loader, loader);
-  });
+  group('core tests', () {
+    test('simple', () {
+      PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
+      verifyTable(page.table);
+      expect(page.loader, loader);
+    });
 
-  test('class annotations', () {
-    Table table = loader.getInstance(Table);
-    verifyTable(table);
-  });
+    test('class annotations', () {
+      Table table = loader.getInstance(Table);
+      verifyTable(table);
+    });
 
-  test('class annotation on nested field', () {
-    PageForClassAnnotationTest page =
-        loader.getInstance(PageForClassAnnotationTest);
-    verifyTable(page.table);
-  });
+    test('class annotation on nested field', () {
+      PageForClassAnnotationTest page =
+          loader.getInstance(PageForClassAnnotationTest);
+      verifyTable(page.table);
+    });
 
-  test('sub-class', () {
-    SubclassPage page = loader.getInstance(SubclassPage);
-    verifyTable(page.table);
-  });
+    test('sub-class', () {
+      SubclassPage page = loader.getInstance(SubclassPage);
+      verifyTable(page.table);
+    });
 
-  test('displayed filtering', () {
-    PageForDisplayedFilteringTest page =
-        loader.getInstance(PageForDisplayedFilteringTest);
+    test('displayed filtering', () {
+      PageForDisplayedFilteringTest page =
+          loader.getInstance(PageForDisplayedFilteringTest);
 
-    expect(page.shouldHaveOneElement, hasLength(1));
-    expect(page.shouldBeEmpty, isEmpty);
-    expect(page.shouldAlsoBeEmpty, isEmpty);
-  });
+      expect(page.shouldHaveOneElement, hasLength(1));
+      expect(page.shouldBeEmpty, isEmpty);
+      expect(page.shouldAlsoBeEmpty, isEmpty);
+    });
 
-  test('setters', () {
-    PageForSettersTest page = loader.getInstance(PageForSettersTest);
-    expect(page.shouldHaveOneElement, hasLength(1));
-    expect(page.loader, loader);
+    test('setters', () {
+      PageForSettersTest page = loader.getInstance(PageForSettersTest);
+      expect(page.shouldHaveOneElement, hasLength(1));
+      expect(page.loader, loader);
 
-  });
+    });
 
-  test('skip finals', () {
-    PageForSkipFinalTest page = loader.getInstance(PageForSkipFinalTest);
-    expect(page.shouldHaveOneElement, hasLength(1));
-    expect(page.shouldBeNull, isNull);
-    expect(page.loader, isNull);
-  });
+    test('skip finals', () {
+      PageForSkipFinalTest page = loader.getInstance(PageForSkipFinalTest);
+      expect(page.shouldHaveOneElement, hasLength(1));
+      expect(page.shouldBeNull, isNull);
+      expect(page.loader, isNull);
+    });
 
-  test('skip fields without finders', () {
-    PageForSkipFieldsWithoutFinderTest page =
-        loader.getInstance(PageForSkipFieldsWithoutFinderTest);
-    expect(page.shouldHaveOneElement, hasLength(1));
-    expect(page.shouldBeNull, isNull);
-  });
+    test('skip fields without finders', () {
+      PageForSkipFieldsWithoutFinderTest page =
+          loader.getInstance(PageForSkipFieldsWithoutFinderTest);
+      expect(page.shouldHaveOneElement, hasLength(1));
+      expect(page.shouldBeNull, isNull);
+    });
 
-  test('no matching element', () {
-    expect(() => loader.getInstance(PageForNoMatchingElementTest), throws);
-  });
+    test('no matching element', () {
+      expect(() => loader.getInstance(PageForNoMatchingElementTest), throws);
+    });
 
-  test('no matching class element', () {
-    expect(() => loader.getInstance(PageForNoMatchingClassElementTest), throws);
-  });
+    test('no matching class element', () {
+      expect(
+          () => loader.getInstance(PageForNoMatchingClassElementTest),
+          throws);
+    });
 
-  test('no matching but nullable element', () {
-    PageForNullableElementTest page =
-        loader.getInstance(PageForNullableElementTest);
-    expect(page.doesntExist, isNull);
-  });
+    test('no matching but nullable element', () {
+      PageForNullableElementTest page =
+          loader.getInstance(PageForNullableElementTest);
+      expect(page.doesntExist, isNull);
+    });
 
-  test('multiple matching element', () {
-    expect(
-        () => loader.getInstance(PageForMultipleMatchingElementTest),
-        throws);
-  });
+    test('multiple matching element', () {
+      expect(
+          () => loader.getInstance(PageForMultipleMatchingElementTest),
+          throws);
+    });
 
-  test('multiple matching element', () {
-    expect(
-        () => loader.getInstance(PageForMultipleMatchingClassElementTest),
-        throws);
-  });
+    test('multiple matching element', () {
+      expect(
+          () => loader.getInstance(PageForMultipleMatchingClassElementTest),
+          throws);
+    });
 
-  test('multiple finders', () {
-    expect(() => loader.getInstance(PageForMultipleFinderTest), throws);
-  });
+    test('multiple finders', () {
+      expect(() => loader.getInstance(PageForMultipleFinderTest), throws);
+    });
 
-  test('multiple class finders', () {
-    expect(() => loader.getInstance(PageForMultipleClassFinderTest), throws);
-  });
+    test('multiple class finders', () {
+      expect(() => loader.getInstance(PageForMultipleClassFinderTest), throws);
+    });
 
-  test('invalid constructor', () {
-    expect(() => loader.getInstance(PageForInvalidConstructorTest), throws);
-  });
+    test('invalid constructor', () {
+      expect(() => loader.getInstance(PageForInvalidConstructorTest), throws);
+    });
 
-  test('WithAttribute', () {
-    PageForWithAttributeTest page =
-        loader.getInstance(PageForWithAttributeTest);
-    expect(page.element.attributes['type'], 'checkbox');
-  });
+    test('WithAttribute', () {
+      PageForWithAttributeTest page =
+          loader.getInstance(PageForWithAttributeTest);
+      expect(page.element.attributes['type'], 'checkbox');
+    });
 
-  test('WithClass', () {
-    var page = loader.getInstance(PageForWithClassTest);
-    expect(page.element.attributes['type'], 'checkbox');
-    expect(
-        page.element.classes,
-        unorderedEquals(['with-class-test', 'class1', 'class2']));
-  });
+    test('WithClass', () {
+      var page = loader.getInstance(PageForWithClassTest);
+      expect(page.element.attributes['type'], 'checkbox');
+      expect(
+          page.element.classes,
+          unorderedEquals(['with-class-test', 'class1', 'class2']));
+    });
 
-  test('ambiguous element test', () {
-    expect(() => loader.getInstance(PageForAmbiguousTest), throws);
-  });
+    test('ambiguous element test', () {
+      expect(() => loader.getInstance(PageForAmbiguousTest), throws);
+    });
 
-  test('mixin', () {
-    PageForMixinTest page = loader.getInstance(PageForMixinTest);
-    verifyTable(page.table);
-    expect(page.shouldHaveOneElement, hasLength(1));
-    expect(page.shouldBeEmpty, isEmpty);
-    expect(page.shouldAlsoBeEmpty, isEmpty);
-  });
+    test('mixin', () {
+      PageForMixinTest page = loader.getInstance(PageForMixinTest);
+      verifyTable(page.table);
+      expect(page.shouldHaveOneElement, hasLength(1));
+      expect(page.shouldBeEmpty, isEmpty);
+      expect(page.shouldAlsoBeEmpty, isEmpty);
+    });
 
-  test('private constructor', () {
-    PageForPrivateConstructorTest page =
-        loader.getInstance(PageForPrivateConstructorTest);
+    test('private constructor', () {
+      PageForPrivateConstructorTest page =
+          loader.getInstance(PageForPrivateConstructorTest);
 
-    verifyTable(page.table);
-  });
+      verifyTable(page.table);
+    });
 
-  test('private fields', () {
-    PageForPrivateFieldsTest page =
-        loader.getInstance(PageForPrivateFieldsTest);
-    verifyTable(page.table);
-  });
+    test('private fields', () {
+      PageForPrivateFieldsTest page =
+          loader.getInstance(PageForPrivateFieldsTest);
+      verifyTable(page.table);
+    });
 
-  // TODO(DrMarcII) Change if private setters get fixed.
-  test('private setters', () {
-    PageForPrivateSettersTest page =
-        loader.getInstance(PageForPrivateSettersTest);
-    expect(page.table, isNull);
-//  verifyTable(page.table)
-  });
+    // TODO(DrMarcII) Change if private setters get fixed.
+    test('private setters', () {
+      PageForPrivateSettersTest page =
+          loader.getInstance(PageForPrivateSettersTest);
+      expect(page.table, isNull);
+      //  verifyTable(page.table)
+    });
 
-  test('static field', () {
-    PageForStaticFieldsTest page = loader.getInstance(PageForStaticFieldsTest);
-    verifyTable(page.table);
-    expect(PageForStaticFieldsTest.dontSet, isNull);
-  });
+    test('static field', () {
+      PageForStaticFieldsTest page =
+          loader.getInstance(PageForStaticFieldsTest);
+      verifyTable(page.table);
+      expect(PageForStaticFieldsTest.dontSet, isNull);
+    });
 
-  test('static setter', () {
-    PageForStaticSettersTest page =
-        loader.getInstance(PageForStaticSettersTest);
-    verifyTable(page.table);
-    expect(PageForStaticFieldsTest.dontSet, isNull);
-  });
+    test('static setter', () {
+      PageForStaticSettersTest page =
+          loader.getInstance(PageForStaticSettersTest);
+      verifyTable(page.table);
+      expect(PageForStaticFieldsTest.dontSet, isNull);
+    });
 
-  test('function field', () {
-    PageForFunctionTest page = loader.getInstance(PageForFunctionTest);
-    // Functions
-    expect(page.noReturnsFn().visibleText, contains('r1c1'));
-    expect(page.noTypeFn().visibleText, contains('r1c1'));
-    expect(page.pageLoaderElementFn().visibleText, contains('r1c1'));
-    verifyTable(page.tableFn());
-    // Functions + Lists
-    expect(page.noTypesFn(), hasLength(2));
-    expect(page.returnsGenericListFn(), hasLength(2));
-    expect(page.pageLoaderElementsFn(), hasLength(2));
-    verifyRows(page.rowsFn());
-    // TypeDefs
-    expect(page.noTypeDef().visibleText, contains('r1c1'));
-    expect(page.plElementTypeDef().visibleText, contains('r1c1'));
-    // dart2js does not preserve Typedef information for Function
-    // typed fields.
-    if (reflect(page).getField(#tableTypeDef).type is TypedefMirror) {
-      verifyTable(page.tableTypeDef());
-      // TypeDefs + Lists
-      expect(page.noListTypeDef(), hasLength(2));
-      expect(page.plElementsTypeDef(), hasLength(2));
-      verifyRows(page.rowsTypeDef());
-    }
-  });
+    test('function field', () {
+      PageForFunctionTest page = loader.getInstance(PageForFunctionTest);
+      // Functions
+      expect(page.noReturnsFn().visibleText, contains('r1c1'));
+      expect(page.noTypeFn().visibleText, contains('r1c1'));
+      expect(page.pageLoaderElementFn().visibleText, contains('r1c1'));
+      verifyTable(page.tableFn());
+      // Functions + Lists
+      expect(page.noTypesFn(), hasLength(2));
+      expect(page.returnsGenericListFn(), hasLength(2));
+      expect(page.pageLoaderElementsFn(), hasLength(2));
+      verifyRows(page.rowsFn());
+      // TypeDefs
+      expect(page.noTypeDef().visibleText, contains('r1c1'));
+      expect(page.plElementTypeDef().visibleText, contains('r1c1'));
+      // dart2js does not preserve Typedef information for Function
+      // typed fields.
+      if (reflect(page).getField(#tableTypeDef).type is TypedefMirror) {
+        verifyTable(page.tableTypeDef());
+        // TypeDefs + Lists
+        expect(page.noListTypeDef(), hasLength(2));
+        expect(page.plElementsTypeDef(), hasLength(2));
+        verifyRows(page.rowsTypeDef());
+      }
+    });
 
-  test('shadow dom', () {
-    PageForShadowDomTest page = loader.getInstance(PageForShadowDomTest);
+    test('shadow dom', () {
+      PageForShadowDomTest page = loader.getInstance(PageForShadowDomTest);
 
-    expect(page.button1.button.visibleText, contains('button 1'));
-    expect(page.button1.button.visibleText, contains('some'));
-    expect(page.button2.button.visibleText, contains('button 2'));
-    expect(page.button2.button.visibleText, contains('some'));
-    expect(page.shouldBeEmpty, isEmpty);
-  });
+      expect(page.button1.button.visibleText, contains('button 1'));
+      expect(page.button1.button.visibleText, contains('some'));
+      expect(page.button2.button.visibleText, contains('button 2'));
+      expect(page.button2.button.visibleText, contains('some'));
+      expect(page.shouldBeEmpty, isEmpty);
+    });
 
 
-  test('WithVisibleText in shadow dom', () {
-    PageForShadowDomWithVisibleTextTest page =
-        loader.getInstance(PageForShadowDomWithVisibleTextTest);
+    test('WithVisibleText in shadow dom', () {
+      PageForShadowDomWithVisibleTextTest page =
+          loader.getInstance(PageForShadowDomWithVisibleTextTest);
 
-    expect(page.button1.visibleText, contains('button 1'));
-    expect(page.button1.visibleText, contains('some'));
-    expect(page.button1.innerText, contains('button 1'));
-    expect(page.button1.innerText, isNot(contains('some')));
-  });
+      expect(page.button1.visibleText, contains('button 1'));
+      expect(page.button1.visibleText, contains('some'));
+      expect(page.button1.innerText, contains('button 1'));
+      expect(page.button1.innerText, isNot(contains('some')));
+    });
 
-  test('chain', () {
-    PageForChainTest page = loader.getInstance(PageForChainTest);
+    test('chain', () {
+      PageForChainTest page = loader.getInstance(PageForChainTest);
 
-    expect(page.outerDivsText, anyElement(contains('outer div 1')));
-    expect(page.outerDivsText, anyElement(contains('outer div 2')));
-    expect(page.innerDivsText, orderedEquals(['inner div 1', 'inner div 2']));
-    expect(page.innerDivSpecial.visibleText, 'inner div 2');
-    expect(page.innerShadow.visibleText, contains('some'));
-  });
+      expect(page.outerDivsText, anyElement(contains('outer div 1')));
+      expect(page.outerDivsText, anyElement(contains('outer div 2')));
+      expect(page.innerDivsText, orderedEquals(['inner div 1', 'inner div 2']));
+      expect(page.innerDivSpecial.visibleText, 'inner div 2');
+      expect(page.innerShadow.visibleText, contains('some'));
+    });
 
-  test('WithInnerText in shadow dom', () {
-    PageForShadowDomWithInnerTextTest page =
-        loader.getInstance(PageForShadowDomWithInnerTextTest);
+    test('WithInnerText in shadow dom', () {
+      PageForShadowDomWithInnerTextTest page =
+          loader.getInstance(PageForShadowDomWithInnerTextTest);
 
-    expect(page.shouldBeEmpty, isEmpty);
-    expect(page.button1.visibleText, contains('button 1'));
-    expect(page.button1.visibleText, contains('some'));
-    expect(page.button1.innerText, contains('button 1'));
-    expect(page.button1.innerText, isNot(contains('some')));
-  });
+      expect(page.shouldBeEmpty, isEmpty);
+      expect(page.button1.visibleText, contains('button 1'));
+      expect(page.button1.visibleText, contains('some'));
+      expect(page.button1.innerText, contains('button 1'));
+      expect(page.button1.innerText, isNot(contains('some')));
+    });
 
-  test('text methods on shadow root', () {
-    PageForTextOnShadowRootTest page =
-        loader.getInstance(PageForTextOnShadowRootTest);
+    test('text methods on shadow root', () {
+      PageForTextOnShadowRootTest page =
+          loader.getInstance(PageForTextOnShadowRootTest);
 
-    expect(page.buttons, hasLength(3));
-    expect(page.buttons[1].shadowRoot.visibleText, contains('button 1'));
-    expect(page.buttons[1].shadowRoot.visibleText, contains('some'));
-    expect(page.buttons[2].shadowRoot.visibleText, contains('button 2'));
-    expect(page.buttons[2].shadowRoot.visibleText, contains('some'));
-    expect(page.buttons[1].shadowRoot.innerText, isNot(contains('button 1')));
-    expect(page.buttons[1].shadowRoot.innerText, contains('some'));
-    expect(page.buttons[2].shadowRoot.innerText, isNot(contains('button 2')));
-    expect(page.buttons[2].shadowRoot.innerText, contains('some'));
-  });
+      expect(page.buttons, hasLength(3));
+      expect(page.buttons[1].shadowRoot.visibleText, contains('button 1'));
+      expect(page.buttons[1].shadowRoot.visibleText, contains('some'));
+      expect(page.buttons[2].shadowRoot.visibleText, contains('button 2'));
+      expect(page.buttons[2].shadowRoot.visibleText, contains('some'));
+      expect(page.buttons[1].shadowRoot.innerText, isNot(contains('button 1')));
+      expect(page.buttons[1].shadowRoot.innerText, contains('some'));
+      expect(page.buttons[2].shadowRoot.innerText, isNot(contains('button 2')));
+      expect(page.buttons[2].shadowRoot.innerText, contains('some'));
+    });
 
-  test('classes', () {
-    PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
+    test('classes', () {
+      PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
 
-    expect(
-        page.table.root.classes,
-        orderedEquals(['class1', 'class2', 'class3']));
-    expect(page.table.rows.first.cells.first.classes, hasLength(0));
-  });
+      expect(
+          page.table.root.classes,
+          orderedEquals(['class1', 'class2', 'class3']));
+      expect(page.table.rows.first.cells.first.classes, hasLength(0));
+    });
 
-  test('style', () {
-    PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
+    test('style', () {
+      PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
 
-    expect(page.table.root.style['color'], 'rgb(128, 0, 128)');
-    expect(page.table.root.style['backgroundColor'], '');
-  });
+      expect(page.table.root.style['color'], 'rgb(128, 0, 128)');
+      expect(page.table.root.style['backgroundColor'], '');
+    });
 
-  test('computedStyle', () {
-    PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
+    test('computedStyle', () {
+      PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
 
-    expect(page.table.root.computedStyle['color'], 'rgb(128, 0, 128)');
-    expect(page.table.root.computedStyle['background-color'], 'rgb(0, 255, 0)');
-  });
+      expect(page.table.root.computedStyle['color'], 'rgb(128, 0, 128)');
+      expect(
+          page.table.root.computedStyle['background-color'],
+          'rgb(0, 255, 0)');
+    });
 
-  test('equals/hashCode', () {
-    PageForEqualityTest page = loader.getInstance(PageForEqualityTest);
+    test('equals/hashCode', () {
+      PageForEqualityTest page = loader.getInstance(PageForEqualityTest);
 
-    expect(page.buttons, hasLength(3));
-  });
+      expect(page.buttons, hasLength(3));
+    });
 
-  test('optional with functions', () {
-    PageForOptionalFunctionTest page =
-        loader.getInstance(PageForOptionalFunctionTest);
+    test('optional with functions', () {
+      PageForOptionalFunctionTest page =
+          loader.getInstance(PageForOptionalFunctionTest);
 
-    expect(page.shouldBeNull(), isNull);
-    expect(page.shouldBeNonNull(), isNotNull);
-  });
+      expect(page.shouldBeNull(), isNull);
+      expect(page.shouldBeNonNull(), isNotNull);
+    });
 
-  test('mouse', () {
-    PageForMouseTest page = loader.getInstance(PageForMouseTest);
+    test('mouse', () {
+      PageForMouseTest page = loader.getInstance(PageForMouseTest);
 
-    loader.mouse.moveTo(page.element, 2, 2);
-    expect(page.element.visibleText, contains('MouseMove'));
-    loader.mouse.down(0);
-    expect(page.element.visibleText, contains('MouseDown'));
-    loader.mouse
-        ..moveTo(page.element, 10, 10)
-        ..up(0);
-    expect(page.element.visibleText, contains('MouseUp'));
+      loader.mouse.moveTo(page.element, 2, 2);
+      expect(page.element.visibleText, contains('MouseMove'));
+      loader.mouse.down(0);
+      expect(page.element.visibleText, contains('MouseDown'));
+      loader.mouse
+          ..moveTo(page.element, 10, 10)
+          ..up(0);
+      expect(page.element.visibleText, contains('MouseUp'));
+    });
   });
 
   group('waitFor()', () {

@@ -149,8 +149,8 @@ class _ClassInfo {
           if (current.mixin != null) {
             typesToProcess.addLast(current.mixin);
             if (!_printedWarning) {
-              print(
-                  'Warning: this test may not behave properly' ' when compiled to JS');
+              print('Warning: this test may not behave properly'
+                  ' when compiled to JS');
               _printedWarning = true;
             }
           }
@@ -294,7 +294,8 @@ abstract class _FieldInfo {
       }
 
       if (datum is HasFilterFinderOptions &&
-          datum.options.contains(FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING)) {
+          datum.options.contains(
+              FilterFinderOption.DISABLE_IMPLICIT_DISPLAY_FILTERING)) {
         implicitDisplayFiltering = false;
       }
     }

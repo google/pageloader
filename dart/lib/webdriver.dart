@@ -157,8 +157,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   String get name => context.name;
 
   @override
-  String get innerText =>
-      context.driver.execute('return arguments[0].textContent;', [context]).trim();
+  String get innerText => context.driver.execute(
+      'return arguments[0].textContent;', [context]).trim();
 
   @override
   String get visibleText => context.text;
