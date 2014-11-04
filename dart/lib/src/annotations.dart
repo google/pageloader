@@ -156,8 +156,8 @@ class _Optional {
 }
 
 /**
- * Matches the root [PageLoaderElement] being used for constructing the current page
- * object.
+ * Matches the root [PageLoaderElement] being used for constructing the current
+ * page object.
  */
 const Root = const _Root();
 
@@ -177,7 +177,8 @@ class _Root implements Finder, HasFilterFinderOptions {
   String toString() => '@Root';
 }
 
-/// Keeps only [PageLoaderElement]s that have the given attribute with the given value.
+/// Keeps only [PageLoaderElement]s that have the given attribute with the
+/// given value.
 class WithAttribute extends ElementFilter {
 
   final String name;
