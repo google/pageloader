@@ -218,6 +218,12 @@ class PageForFunctionTest {
   @Returns(Table)
   Function tableFn;
 
+  @ByTagName('table')
+  Lazy<PageLoaderElement> lazyElement;
+
+  @ByTagName('table')
+  Lazy<Table> lazyTable;
+
   // Functions + Lists
 
   @ByCss('table tr')
@@ -235,6 +241,12 @@ class PageForFunctionTest {
   @ByCss('table tr')
   @ReturnsList(Row)
   Function rowsFn;
+
+  @ByCss('table tr')
+  Lazy<List<PageLoaderElement>> lazyRowElements;
+
+  @ByCss('table tr')
+  Lazy<List<Row>> lazyRows;
 
   // TypeDefs
 
