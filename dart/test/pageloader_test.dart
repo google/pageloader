@@ -201,12 +201,16 @@ void runTests() {
       expect(page.noReturnsFn().visibleText, contains('r1c1'));
       expect(page.noTypeFn().visibleText, contains('r1c1'));
       expect(page.pageLoaderElementFn().visibleText, contains('r1c1'));
+      expect(page.lazyElement().visibleText, contains('r1c1'));
       verifyTable(page.tableFn());
+      verifyTable(page.lazyTable());
       // Functions + Lists
       expect(page.noTypesFn(), hasLength(2));
       expect(page.returnsGenericListFn(), hasLength(2));
       expect(page.pageLoaderElementsFn(), hasLength(2));
+      expect(page.lazyRowElements(), hasLength(2));
       verifyRows(page.rowsFn());
+      verifyRows(page.lazyRows());
       // TypeDefs
       expect(page.noTypeDef().visibleText, contains('r1c1'));
       expect(page.plElementTypeDef().visibleText, contains('r1c1'));
