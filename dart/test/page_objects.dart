@@ -219,7 +219,7 @@ class PageForFunctionTest {
   Function tableFn;
 
   @ByTagName('table')
-  Lazy<PageLoaderElement> lazyElement;
+  Lazy lazyElement;
 
   @ByTagName('table')
   Lazy<Table> lazyTable;
@@ -243,7 +243,7 @@ class PageForFunctionTest {
   Function rowsFn;
 
   @ByCss('table tr')
-  Lazy<List<PageLoaderElement>> lazyRowElements;
+  Lazy<List> lazyRowElements;
 
   @ByCss('table tr')
   Lazy<List<Row>> lazyRows;
