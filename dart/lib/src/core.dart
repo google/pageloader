@@ -257,11 +257,6 @@ abstract class _FieldInfo {
     } else if (type is TypedefMirror) {
       isFunction = true;
       type = (type as TypedefMirror).referent.returnType;
-      if (!_printedWarning) {
-        print(
-            'Warning: this test may not behave properly when compiled to JS');
-        _printedWarning = true;
-      }
     } else if (type.simpleName == const Symbol('Function')) {
       isFunction = true;
       type = null;
