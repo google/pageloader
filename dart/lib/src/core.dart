@@ -247,18 +247,24 @@ abstract class _FieldInfo {
     }
 
     var isFunction = false;
-    if (type.simpleName == const Symbol('Function') || type is TypedefMirror) {
+    if (type.simpleName == const Symbol('Lazy')) {
       isFunction = true;
-      if (type is TypedefMirror) {
-        type = (type as TypedefMirror).referent.returnType;
-        if (!_printedWarning) {
-          print(
-              'Warning: this test may not behave properly when compiled to JS');
-          _printedWarning = true;
-        }
+      if (type.typeArguments.isNotEmpty) {
+        type =  type.typeArguments.single;
       } else {
         type = null;
       }
+    } else if (type is TypedefMirror) {
+      isFunction = true;
+      type = (type as TypedefMirror).referent.returnType;
+      if (!_printedWarning) {
+        print(
+            'Warning: this test may not behave properly when compiled to JS');
+        _printedWarning = true;
+      }
+    } else if (type.simpleName == const Symbol('Function')) {
+      isFunction = true;
+      type = null;
     }
 
     var isList = false;
@@ -401,7 +407,7 @@ class _FinderFunctionFieldInfo extends _FinderFieldInfo {
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
-    return () => _impl.calculateFieldValue(context, loader);
+    return new Lazy(() => _impl.calculateFieldValue(context, loader));
   }
 }
 

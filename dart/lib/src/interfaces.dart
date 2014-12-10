@@ -18,7 +18,14 @@ import 'package:matcher/matcher.dart';
 
 import 'dart:collection';
 
-typedef T Lazy<T>();
+class Lazy<T> implements Function {
+
+  final Function _load;
+
+  Lazy(this._load);
+
+  T call() => _load();
+}
 
 abstract class PageLoader {
   PageLoaderElement get globalContext;
