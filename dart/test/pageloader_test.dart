@@ -20,8 +20,6 @@ import 'package:matcher/matcher.dart';
 import 'package:pageloader/objects.dart';
 import 'package:unittest/unittest.dart';
 
-import 'dart:mirrors';
-
 PageLoader loader;
 
 void runTests() {
