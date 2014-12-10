@@ -214,15 +214,11 @@ void runTests() {
       // TypeDefs
       expect(page.noTypeDef().visibleText, contains('r1c1'));
       expect(page.plElementTypeDef().visibleText, contains('r1c1'));
-      // dart2js does not preserve Typedef information for Function
-      // typed fields.
-      if (reflect(page).getField(#tableTypeDef).type is TypedefMirror) {
-        verifyTable(page.tableTypeDef());
-        // TypeDefs + Lists
-        expect(page.noListTypeDef(), hasLength(2));
-        expect(page.plElementsTypeDef(), hasLength(2));
-        verifyRows(page.rowsTypeDef());
-      }
+      verifyTable(page.tableTypeDef());
+      // TypeDefs + Lists
+      expect(page.noListTypeDef(), hasLength(2));
+      expect(page.plElementsTypeDef(), hasLength(2));
+      verifyRows(page.rowsTypeDef());
     });
 
     test('shadow dom', () {
