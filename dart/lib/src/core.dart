@@ -76,6 +76,16 @@ abstract class BasePageLoader implements PageLoader {
   }
 }
 
+typedef T _LazyFunction<T>();
+
+class _Lazy<T> implements Lazy<T> {
+  final _LazyFunction _call;
+
+  _Lazy(this._call);
+
+  T call() => _call();
+}
+
 class _ClassInfo {
 
   static final Map<ClassMirror, _ClassInfo> _classInfoCache = <ClassMirror,
@@ -398,7 +408,7 @@ class _FinderFunctionFieldInfo extends _FinderFieldInfo {
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
-    return new Lazy(() => _impl.calculateFieldValue(context, loader));
+    return new _Lazy(() => _impl.calculateFieldValue(context, loader));
   }
 }
 
