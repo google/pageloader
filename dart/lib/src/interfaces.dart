@@ -21,11 +21,11 @@ import 'dart:collection';
 typedef T _LazyFunction<T>();
 
 class Lazy<T> {
-  final _LazyFunction<T> call;
+  final _LazyFunction<T> _call;
 
-  Lazy(this.call);
+  Lazy(this._call);
 
-  //T call() => _call();
+  T call() => _call();
 }
 
 abstract class PageLoader {
