@@ -18,13 +18,14 @@ import 'package:matcher/matcher.dart';
 
 import 'dart:collection';
 
-class Lazy<T> implements Function {
+typedef T _LazyFunction<T>();
 
-  final Function _load;
+class Lazy<T> {
+  final _LazyFunction<T> call;
 
-  Lazy(this._load);
+  Lazy(this.call);
 
-  T call() => _load();
+  //T call() => _call();
 }
 
 abstract class PageLoader {
