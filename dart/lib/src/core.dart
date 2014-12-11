@@ -76,6 +76,16 @@ abstract class BasePageLoader implements PageLoader {
   }
 }
 
+typedef T _LazyFunction<T>();
+
+class _Lazy<T> implements Lazy<T> {
+  final _LazyFunction _call;
+
+  _Lazy(this._call);
+
+  T call() => _call();
+}
+
 class _ClassInfo {
 
   static final Map<ClassMirror, _ClassInfo> _classInfoCache = <ClassMirror,
@@ -242,22 +252,18 @@ abstract class _FieldInfo {
     }
 
     // Inject PageLoader fields
-    if (type.simpleName == const Symbol('PageLoader')) {
+    if (type.simpleName == #PageLoader) {
       return new _InjectedPageLoaderFieldInfo(name);
     }
 
     var isFunction = false;
-    if (type.simpleName == const Symbol('Lazy')) {
+    if (type.simpleName == #Lazy) {
       isFunction = true;
-      if (type.typeArguments.isNotEmpty) {
-        type =  type.typeArguments.single;
-      } else {
-        type = null;
-      }
+      type = type.typeArguments.isNotEmpty ? type.typeArguments.single : null;
     } else if (type is TypedefMirror) {
       isFunction = true;
       type = (type as TypedefMirror).referent.returnType;
-    } else if (type.simpleName == const Symbol('Function')) {
+    } else if (type.simpleName == #Function) {
       isFunction = true;
       type = null;
     }
@@ -281,7 +287,7 @@ abstract class _FieldInfo {
       } else if (datum is Filter) {
         filters.add(datum);
       } else if (datum is Returns) {
-        if (type != null && type.simpleName != const Symbol('dynamic')) {
+        if (type != null && type.simpleName != #dynamic) {
           throw new PageLoaderException(
               'Field type is not compatible with Returns');
         }
@@ -300,11 +306,11 @@ abstract class _FieldInfo {
         implicitDisplayFiltering = false;
       }
     }
-    if (type != null && type.simpleName == const Symbol('List')) {
+    if (type != null && type.simpleName == #List) {
       isList = true;
       type = type.typeArguments.isNotEmpty ? type.typeArguments.single : null;
     }
-    if (type == null || type.simpleName == const Symbol('dynamic')) {
+    if (type == null || type.simpleName == #dynamic) {
       type = reflectClass(PageLoaderElement);
     }
 
@@ -363,7 +369,7 @@ class _FinderSingleFieldInfo extends _FinderFieldInfo {
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
     var element = _getElement(context, _finder, _filters, _isOptional);
-    if (_instanceType.simpleName != const Symbol('PageLoaderElement') &&
+    if (_instanceType.simpleName != #PageLoaderElement &&
         element != null) {
       element = loader._getInstance(_instanceType, element);
     }
@@ -384,7 +390,7 @@ class _FinderListFieldInfo extends _FinderFieldInfo {
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
     List elements = _getElements(context, _finder, _filters);
-    if (_instanceType.simpleName != const Symbol('PageLoaderElement')) {
+    if (_instanceType.simpleName != #PageLoaderElement) {
       elements = elements.map(
           (element) => loader._getInstance(_instanceType, element)).toList();
     }
@@ -402,7 +408,7 @@ class _FinderFunctionFieldInfo extends _FinderFieldInfo {
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
-    return new Lazy(() => _impl.calculateFieldValue(context, loader));
+    return new _Lazy(() => _impl.calculateFieldValue(context, loader));
   }
 }
 
