@@ -193,9 +193,12 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
     loader.sync();
   }
 
+  // This doesn't work in Dartium due to:
+  // https://code.google.com/p/dart/issues/detail?id=13902
   void _fireKeyPressEvents(Element element, String keys) {
     for (int charCode in keys.codeUnits) {
-      element.dispatchEvent(new KeyEvent('keypress', charCode: charCode).wrapped);
+      element.dispatchEvent(
+          new KeyEvent('keypress', charCode: charCode).wrapped);
     }
   }
 }
