@@ -187,6 +187,17 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
   @override
   String toString() => '$runtimeType<${node.toString()}>';
+
+  void type(String keys) {
+    _fireKeyPressEvents(node, keys);
+    loader.sync();
+  }
+
+  void _fireKeyPressEvents(Element element, String keys) {
+    for (int charCode in keys.codeUnits) {
+      element.dispatchEvent(new KeyEvent('keypress', charCode: charCode).wrapped);
+    }
+  }
 }
 
 class _ElementPageLoaderElement extends HtmlPageLoaderElement {
@@ -233,30 +244,27 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   @override
   void type(String keys) {
     if (node is InputElement) {
-      _setInputValue(node, (node as InputElement).value + keys);
+      node.focus();
+      _fireKeyPressEvents(node, keys);
+      var value = (node as InputElement).value + keys;
+      (node as InputElement).value = '';
+      node.dispatchEvent(new TextEvent('textInput', data: value));
+      node.blur();
     } else {
-      throw new PageLoaderException(
-          'HtmlPageLoader type method only supports InputElements');
+      document.body.focus();
+      _fireKeyPressEvents(node, keys);
     }
+    loader.sync();
   }
 
   @override
   void clear() {
     if (node is InputElement) {
-      _setInputValue(node, '');
+      (node as InputElement).value = '';
+      node.dispatchEvent(new TextEvent('textInput', data: ''));
     } else {
       super.clear();
     }
-  }
-
-  void _setInputValue(InputElement element, String value) {
-    node.focus();
-    bool attributeSet = node.attributes.containsKey('value');
-    node.setAttribute('value', value);
-    (node as InputElement).value = '';
-    node.dispatchEvent(new TextEvent('textInput', data: value));
-    node.blur();
-    loader.sync();
   }
 }
 
@@ -281,8 +289,6 @@ class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
   PageLoaderAttributes get computedStyle => super.computedStyle;
   @override
   PageLoaderAttributes get style => super.style;
-  @override
-  void type(String keys) => super.type(keys);
   @override
   PageLoaderAttributes get attributes => super.attributes;
   @override
@@ -315,7 +321,11 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   @override
   PageLoaderAttributes get style => super.style;
   @override
-  void type(String keys) => super.type(keys);
+  void type(String keys) {
+    document.body.focus();
+    _fireKeyPressEvents(document.body, keys);
+    loader.sync();
+  }
 }
 
 class _ElementAttributes extends PageLoaderAttributes {
