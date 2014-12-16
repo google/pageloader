@@ -1,5 +1,5 @@
 name: pageloader
-version: 1.2.2+1
+version: 1.2.3
 author: Marc Fisher II
 description: Supports the creation of page objects that can be shared between in-browser tests and WebDriver tests.
 environment:

@@ -127,6 +127,14 @@ void main() {
       expect(page.text.attributes['value'], 'some text');
       expect(handlerCalled, isTrue);
     });
+
+    test('keypress events', () {
+      var data = 'my data';
+      var list = [];
+      html.document.body.onKeyPress.listen((evt) => list.add(evt.charCode));
+      plt.loader.globalContext.type(data);
+      expect(new String.fromCharCodes(list), equals(data));
+    });
   });
 
   plt.runTests();
