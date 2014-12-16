@@ -246,17 +246,14 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   void type(String keys) {
+    node.focus();
+    _fireKeyPressEvents(node, keys);
     if (node is InputElement) {
-      node.focus();
-      _fireKeyPressEvents(node, keys);
       var value = (node as InputElement).value + keys;
       (node as InputElement).value = '';
       node.dispatchEvent(new TextEvent('textInput', data: value));
-      node.blur();
-    } else {
-      document.body.focus();
-      _fireKeyPressEvents(node, keys);
     }
+    node.blur();
     loader.sync();
   }
 
@@ -325,8 +322,11 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   PageLoaderAttributes get style => super.style;
   @override
   void type(String keys) {
+    // TODO(DrMarcII) consider whether this should be sent to
+    // document.activeElement to more closely match WebDriver behavior.
     document.body.focus();
     _fireKeyPressEvents(document.body, keys);
+    document.body.blur();
     loader.sync();
   }
 }
