@@ -65,8 +65,12 @@ class _WebDriverMouse implements PageLoaderMouse {
   _WebDriverMouse(this.driver);
 
   @override
-  void down(int button) {
-    driver.mouse.down(button);
+  void down(int button, {_WebElementPageLoaderElement eventTarget}) {
+    if (eventTarget == null) {
+      driver.mouse.down(button);
+    } else {
+      _fireEvent(eventTarget, 'mousedown', button);
+    }
   }
 
   @override
@@ -78,8 +82,19 @@ class _WebDriverMouse implements PageLoaderMouse {
   }
 
   @override
-  void up(int button) {
-    driver.mouse.up(button);
+  void up(int button, {_WebElementPageLoaderElement eventTarget}) {
+    if (eventTarget == null) {
+      driver.mouse.up(button);
+    } else {
+      _fireEvent(eventTarget, 'mousedown', button);
+    }
+  }
+
+  void _fireEvent(_WebElementPageLoaderElement eventTarget, String type,
+      int button) {
+    driver.execute(
+        "arguments[0].dispatchEvent(new MouseEvent(arguments[1], {'button' : arguments[2]}));",
+        [eventTarget.context, type, button]);
   }
 }
 
@@ -157,8 +172,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   String get name => context.name;
 
   @override
-  String get innerText => context.driver.execute(
-      'return arguments[0].textContent;', [context]).trim();
+  String get innerText =>
+      context.driver.execute('return arguments[0].textContent;', [context]).trim();
 
   @override
   String get visibleText => context.text;

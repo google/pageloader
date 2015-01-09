@@ -39,11 +39,17 @@ abstract class PageLoader {
 }
 
 abstract class PageLoaderMouse {
-  /// Press [button] on the mouse at its current location.
-  void down(int button);
+  /// Press [button] on the mouse at its current location. If [eventTarget} is
+  /// specified, PageLoader will attempt to fire the corresponding mouse events
+  /// on that target, otherwise it will fire the events on the target that is
+  /// under the current mouse location.
+  void down(int button, {PageLoaderElement eventTarget});
 
-  /// Release [button] on the mouse at its current location.
-  void up(int button);
+  /// Release [button] on the mouse at its current location. If [eventTarget} is
+  /// specified, PageLoader will attempt to fire the corresponding mouse events
+  /// on that target, otherwise it will fire the events on the target that is
+  /// under the current mouse location.
+  void up(int button, {PageLoaderElement eventTarget});
 
   /// Move the mouse to a location relative to [element].
   void moveTo(PageLoaderElement element, int xOffset, int yOffset);
