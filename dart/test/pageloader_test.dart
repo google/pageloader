@@ -327,6 +327,19 @@ void runTests() {
           ..up(0);
       expect(page.element.visibleText, contains('MouseUp'));
     });
+
+    test('mouse with event target', () {
+      PageForMouseTest page = loader.getInstance(PageForMouseTest);
+
+      // make sure mouse is not on element;
+      loader.mouse.moveTo(page.element, -10, -10);
+      loader.mouse.down(0, eventTarget: page.element);
+      expect(page.element.visibleText, contains('MouseDown'));
+      loader.mouse
+          ..moveTo(page.element, 200, 200)
+          ..up(0, eventTarget: page.element);
+      expect(page.element.visibleText, contains('MouseUp'));
+    });
   });
 
   group('waitFor()', () {
