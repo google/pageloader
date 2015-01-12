@@ -306,3 +306,18 @@ class Chain implements Finder {
   @override
   String toString() => '@Chain($_annotations)';
 }
+
+/// Evaluates the nested annotation from the global context for the PageLoader
+/// instance being used.
+class Global implements Finder {
+  final Finder annotation;
+
+  const Global(this.annotation);
+
+  @override
+  List<PageLoaderElement> findElements(PageLoaderElement context) =>
+    annotation.findElements(context.loader.globalContext);
+
+  @override
+  String toString() => '@Global($annotation)';
+}

@@ -86,7 +86,7 @@ class _WebDriverMouse implements PageLoaderMouse {
     if (eventTarget == null) {
       driver.mouse.up(button);
     } else {
-      _fireEvent(eventTarget, 'mousedown', button);
+      _fireEvent(eventTarget, 'mouseup', button);
     }
   }
 
