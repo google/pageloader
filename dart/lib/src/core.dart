@@ -53,13 +53,13 @@ abstract class BasePageLoader implements PageLoader {
       new _ClassInfo(type).getInstance(context, this);
 
   @override
-  waitForValue(condition(), {Duration timeout: _DEFAULT_WAIT, Duration interval:
-      _DEFAULT_INTERVAL}) =>
+  waitForValue(condition(), {Duration timeout: _DEFAULT_WAIT,
+      Duration interval: _DEFAULT_INTERVAL}) =>
       waitFor(condition, isNotNull, timeout: timeout, interval: interval);
 
   @override
-  waitFor(condition(), Matcher matcher, {Duration timeout: _DEFAULT_WAIT,
-      Duration interval: _DEFAULT_INTERVAL}) {
+  waitFor(condition(), Matcher matcher,
+      {Duration timeout: _DEFAULT_WAIT, Duration interval: _DEFAULT_INTERVAL}) {
     var endTime = clock.now.add(timeout);
     while (true) {
       try {
@@ -87,9 +87,8 @@ class _Lazy<T> implements Lazy<T> {
 }
 
 class _ClassInfo {
-
-  static final Map<ClassMirror, _ClassInfo> _classInfoCache = <ClassMirror,
-      _ClassInfo>{};
+  static final Map<ClassMirror, _ClassInfo> _classInfoCache =
+      <ClassMirror, _ClassInfo>{};
 
   final ClassMirror _class;
   final List<_FieldInfo> _fields;
@@ -119,11 +118,7 @@ class _ClassInfo {
     }
 
     return new _ClassInfo._(
-        type,
-        _fieldInfos(type),
-        finder,
-        filters,
-        finderIsOptional);
+        type, _fieldInfos(type), finder, filters, finderIsOptional);
   });
 
   _ClassInfo._(this._class, this._fields, this._finder, this._filters,
@@ -213,7 +208,6 @@ class _ClassInfo {
 }
 
 abstract class _FieldInfo {
-
   factory _FieldInfo(DeclarationMirror field) {
     var finder;
     var filters = new List<Filter>();
@@ -336,7 +330,6 @@ abstract class _FieldInfo {
 }
 
 abstract class _FinderFieldInfo implements _FieldInfo {
-
   final Symbol _fieldName;
 
   _FinderFieldInfo(this._fieldName);
@@ -356,21 +349,18 @@ abstract class _FinderFieldInfo implements _FieldInfo {
 }
 
 class _FinderSingleFieldInfo extends _FinderFieldInfo {
-
   final Finder _finder;
   final List<Filter> _filters;
   final ClassMirror _instanceType;
   final bool _isOptional;
 
   _FinderSingleFieldInfo(Symbol fieldName, this._finder, this._filters,
-      this._instanceType, this._isOptional)
-      : super(fieldName);
+      this._instanceType, this._isOptional) : super(fieldName);
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
     var element = _getElement(context, _finder, _filters, _isOptional);
-    if (_instanceType.simpleName != #PageLoaderElement &&
-        element != null) {
+    if (_instanceType.simpleName != #PageLoaderElement && element != null) {
       element = loader._getInstance(_instanceType, element);
     }
     return element;
@@ -378,28 +368,27 @@ class _FinderSingleFieldInfo extends _FinderFieldInfo {
 }
 
 class _FinderListFieldInfo extends _FinderFieldInfo {
-
   final Finder _finder;
   final List<Filter> _filters;
   final ClassMirror _instanceType;
 
-  _FinderListFieldInfo(Symbol fieldName, this._finder, this._filters,
-      this._instanceType)
+  _FinderListFieldInfo(
+      Symbol fieldName, this._finder, this._filters, this._instanceType)
       : super(fieldName);
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {
     List elements = _getElements(context, _finder, _filters);
     if (_instanceType.simpleName != #PageLoaderElement) {
-      elements = elements.map(
-          (element) => loader._getInstance(_instanceType, element)).toList();
+      elements = elements
+          .map((element) => loader._getInstance(_instanceType, element))
+          .toList();
     }
     return elements;
   }
 }
 
 class _FinderFunctionFieldInfo extends _FinderFieldInfo {
-
   _FinderFieldInfo _impl;
 
   _FinderFunctionFieldInfo(_FinderFieldInfo impl) : super(impl._fieldName) {
@@ -420,8 +409,8 @@ class _InjectedPageLoaderFieldInfo extends _FinderFieldInfo {
       loader;
 }
 
-List<PageLoaderElement> _getElements(PageLoaderElement context, Finder finder,
-    List<Filter> filters) {
+List<PageLoaderElement> _getElements(
+    PageLoaderElement context, Finder finder, List<Filter> filters) {
   List<PageLoaderElement> elements = finder.findElements(context);
   for (var filter in filters) {
     elements = filter.filter(elements);
@@ -440,9 +429,8 @@ PageLoaderElement _getElement(PageLoaderElement context, Finder finder,
     return null;
   }
   if (elements.length > 1) {
-    throw new PageLoaderException(
-        'Found ${elements.length} elements for '
-            'finder: $finder and filters: $filters');
+    throw new PageLoaderException('Found ${elements.length} elements for '
+        'finder: $finder and filters: $filters');
   }
   return elements.first;
 }

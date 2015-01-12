@@ -97,21 +97,20 @@ void main() {
     displayedDiv.onMouseDown.listen((evt) {
       displayedDiv.text = displayedDiv.text +
           " MouseDown: ${evt.client.x}, ${evt.client.y}; "
-              "${evt.screen.x}, ${evt.screen.y}";
+          "${evt.screen.x}, ${evt.screen.y}";
     });
     displayedDiv.onMouseUp.listen((evt) {
       displayedDiv.text = displayedDiv.text +
           " MouseUp: ${evt.client.x}, ${evt.client.y}; "
-              "${evt.screen.x}, ${evt.screen.y}";
+          "${evt.screen.x}, ${evt.screen.y}";
     });
     displayedDiv.onMouseMove.listen((evt) {
       displayedDiv.text = displayedDiv.text +
           " MouseMove: ${evt.client.x}, ${evt.client.y}; "
-              "${evt.screen.x}, ${evt.screen.y}";
+          "${evt.screen.x}, ${evt.screen.y}";
     });
 
     plt.loader = new HtmlPageLoader(div);
-
   });
 
   group('html specific tests', () {
@@ -141,8 +140,7 @@ void main() {
 }
 
 class NoOpNodeValidator implements html.NodeValidator {
-  bool allowsAttribute(html.Element element, String attributeName,
-      String value) =>
-      true;
+  bool allowsAttribute(
+      html.Element element, String attributeName, String value) => true;
   bool allowsElement(html.Element element) => true;
 }

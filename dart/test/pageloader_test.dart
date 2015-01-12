@@ -23,7 +23,6 @@ import 'package:unittest/unittest.dart';
 PageLoader loader;
 
 void runTests() {
-
   verifyRows(List<Row> rows) {
     expect(rows, hasLength(2));
     expect(rows.first.cells, hasLength(2));
@@ -75,7 +74,6 @@ void runTests() {
       PageForSettersTest page = loader.getInstance(PageForSettersTest);
       expect(page.shouldHaveOneElement, hasLength(1));
       expect(page.loader, loader);
-
     });
 
     test('skip finals', () {
@@ -98,8 +96,7 @@ void runTests() {
 
     test('no matching class element', () {
       expect(
-          () => loader.getInstance(PageForNoMatchingClassElementTest),
-          throws);
+          () => loader.getInstance(PageForNoMatchingClassElementTest), throws);
     });
 
     test('no matching but nullable element', () {
@@ -110,13 +107,11 @@ void runTests() {
 
     test('multiple matching element', () {
       expect(
-          () => loader.getInstance(PageForMultipleMatchingElementTest),
-          throws);
+          () => loader.getInstance(PageForMultipleMatchingElementTest), throws);
     });
 
     test('multiple matching element', () {
-      expect(
-          () => loader.getInstance(PageForMultipleMatchingClassElementTest),
+      expect(() => loader.getInstance(PageForMultipleMatchingClassElementTest),
           throws);
     });
 
@@ -141,8 +136,7 @@ void runTests() {
     test('WithClass', () {
       var page = loader.getInstance(PageForWithClassTest);
       expect(page.element.attributes['type'], 'checkbox');
-      expect(
-          page.element.classes,
+      expect(page.element.classes,
           unorderedEquals(['with-class-test', 'class1', 'class2']));
     });
 
@@ -229,7 +223,6 @@ void runTests() {
       expect(page.shouldBeEmpty, isEmpty);
     });
 
-
     test('WithVisibleText in shadow dom', () {
       PageForShadowDomWithVisibleTextTest page =
           loader.getInstance(PageForShadowDomWithVisibleTextTest);
@@ -279,8 +272,7 @@ void runTests() {
     test('classes', () {
       PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
 
-      expect(
-          page.table.root.classes,
+      expect(page.table.root.classes,
           orderedEquals(['class1', 'class2', 'class3']));
       expect(page.table.rows.first.cells.first.classes, hasLength(0));
     });
@@ -297,8 +289,7 @@ void runTests() {
 
       expect(page.table.root.computedStyle['color'], 'rgb(128, 0, 128)');
       expect(
-          page.table.root.computedStyle['background-color'],
-          'rgb(0, 255, 0)');
+          page.table.root.computedStyle['background-color'], 'rgb(0, 255, 0)');
     });
 
     test('equals/hashCode', () {
@@ -323,8 +314,8 @@ void runTests() {
       loader.mouse.down(0);
       loader.waitFor(() => page.element.visibleText, contains('MouseDown'));
       loader.mouse
-          ..moveTo(page.element, 10, 10)
-          ..up(0);
+        ..moveTo(page.element, 10, 10)
+        ..up(0);
       loader.waitFor(() => page.element.visibleText, contains('MouseUp'));
     });
 
@@ -336,8 +327,8 @@ void runTests() {
       loader.mouse.down(0, eventTarget: page.element);
       loader.waitFor(() => page.element.visibleText, contains('MouseDown'));
       loader.mouse
-          ..moveTo(page.element, 200, 200)
-          ..up(0, eventTarget: page.element);
+        ..moveTo(page.element, 200, 200)
+        ..up(0, eventTarget: page.element);
       loader.waitFor(() => page.element.visibleText, contains('MouseUp'));
     });
 
@@ -407,19 +398,15 @@ void runTests() {
   });
 
   group('attributes', () {
-
     test('style', () {
       var page = loader.getInstance(PageForAttributesTests);
       // According to the spec, red below should be returned as an
       // RGBA value.
-      expect(
-          page.divWithStyle.attributes['style'],
+      expect(page.divWithStyle.attributes['style'],
           'display: none; background-color: red;');
-      expect(
-          page.divWithStyle.attributes['STYLE'],
+      expect(page.divWithStyle.attributes['STYLE'],
           'display: none; background-color: red;');
-      expect(
-          page.divWithStyle.attributes['StYlE'],
+      expect(page.divWithStyle.attributes['StYlE'],
           'display: none; background-color: red;');
     });
 
@@ -509,7 +496,6 @@ void runTests() {
   });
 
   group('typing', () {
-
     test('typing should append', () {
       var page = loader.getInstance(PageForAttributesTests);
       expect(page.text.attributes['value'], '');
