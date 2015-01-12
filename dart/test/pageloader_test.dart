@@ -462,10 +462,9 @@ void runTests() {
       expect(page.radio.attributes['SeLeCtEd'], 'true');
     });
 
-    // returning null for both WebDriver and HTML, not sure why
-    skip_test('href on a', () {
+    test('href on a', () {
       var page = loader.getInstance(PageForAttributesTests);
-      expect(page.radio.attributes['href'], endsWith('/test.html'));
+      expect(page.anchor.attributes['href'], endsWith('/test.html'));
     });
 
     test('src on img', () {
