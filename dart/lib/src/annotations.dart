@@ -96,13 +96,11 @@ class Returns {
 }
 
 class ReturnsList extends Returns {
-
   const ReturnsList(Type type) : super(type);
 }
 
 /// Filters element based on visibility.
 class WithState extends ElementFilter implements HasFilterFinderOptions {
-
   final bool _displayed;
 
   const WithState._(this._displayed);
@@ -180,7 +178,6 @@ class _Root implements Finder, HasFilterFinderOptions {
 /// Keeps only [PageLoaderElement]s that have the given attribute with the
 /// given value.
 class WithAttribute extends ElementFilter {
-
   final String name;
   final String value;
 
@@ -194,7 +191,6 @@ class WithAttribute extends ElementFilter {
 
 /// Keeps only [PageLoaderElement]s that correspond to the given tag.
 class IsTag extends ElementFilter {
-
   final String tagName;
 
   const IsTag(this.tagName);
@@ -316,7 +312,7 @@ class Global implements Finder {
 
   @override
   List<PageLoaderElement> findElements(PageLoaderElement context) =>
-    annotation.findElements(context.loader.globalContext);
+      annotation.findElements(context.loader.globalContext);
 
   @override
   String toString() => '@Global($annotation)';
