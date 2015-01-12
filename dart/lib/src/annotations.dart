@@ -306,3 +306,16 @@ class Chain implements Finder {
   @override
   String toString() => '@Chain($_annotations)';
 }
+
+class Global implements Finder {
+  final Finder annotation;
+
+  const Global(this.annotation);
+
+  @override
+  List<PageLoaderElement> findElements(PageLoaderElement context) =>
+    annotation.findElements(context.loader.globalContext);
+
+  @override
+  String toString() => '@Global($annotation)';
+}

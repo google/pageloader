@@ -319,13 +319,13 @@ void runTests() {
       PageForMouseTest page = loader.getInstance(PageForMouseTest);
 
       loader.mouse.moveTo(page.element, 2, 2);
-      expect(page.element.visibleText, contains('MouseMove'));
+      loader.waitFor(() => page.element.visibleText, contains('MouseMove'));
       loader.mouse.down(0);
-      expect(page.element.visibleText, contains('MouseDown'));
+      loader.waitFor(() => page.element.visibleText, contains('MouseDown'));
       loader.mouse
           ..moveTo(page.element, 10, 10)
           ..up(0);
-      expect(page.element.visibleText, contains('MouseUp'));
+      loader.waitFor(() => page.element.visibleText, contains('MouseUp'));
     });
 
     test('mouse with event target', () {
@@ -334,11 +334,16 @@ void runTests() {
       // make sure mouse is not on element;
       loader.mouse.moveTo(page.element, -10, -10);
       loader.mouse.down(0, eventTarget: page.element);
-      expect(page.element.visibleText, contains('MouseDown'));
+      loader.waitFor(() => page.element.visibleText, contains('MouseDown'));
       loader.mouse
           ..moveTo(page.element, 200, 200)
           ..up(0, eventTarget: page.element);
-      expect(page.element.visibleText, contains('MouseUp'));
+      loader.waitFor(() => page.element.visibleText, contains('MouseUp'));
+    });
+
+    test('@Global', () {
+      PageForGlobalTest page = loader.getInstance(PageForGlobalTest);
+      expect(page.nested.table, equals(page.table));
     });
   });
 

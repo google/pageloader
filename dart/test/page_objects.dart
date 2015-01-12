@@ -393,3 +393,17 @@ class PageForMouseTest {
   @ById('mouse')
   PageLoaderElement element;
 }
+
+class PageForGlobalTest {
+
+  @ByTagName('table')
+  PageLoaderElement table;
+
+  @ByCss('input[value=radio1]')
+  NestedPageForGlobalTest nested;
+}
+
+class NestedPageForGlobalTest {
+  @Global(const ByTagName('table'))
+  PageLoaderElement table;
+}
