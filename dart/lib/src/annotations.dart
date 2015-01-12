@@ -307,6 +307,8 @@ class Chain implements Finder {
   String toString() => '@Chain($_annotations)';
 }
 
+/// Evaluates the nested annotation from the global context for the PageLoader
+/// instance being used.
 class Global implements Finder {
   final Finder annotation;
 
