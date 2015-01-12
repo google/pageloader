@@ -58,8 +58,7 @@ class HtmlPageLoader extends BasePageLoader {
     return new HtmlPageLoader._(globalContext, clock);
   }
 
-  HtmlPageLoader._(Node globalContext, Clock clock)
-      : super(clock) {
+  HtmlPageLoader._(Node globalContext, Clock clock) : super(clock) {
     this._globalContext = new HtmlPageLoaderElement(globalContext, this);
     this._mouse = new _HtmlMouse(this);
   }
@@ -80,7 +79,6 @@ class HtmlPageLoader extends BasePageLoader {
 }
 
 class _HtmlMouse implements PageLoaderMouse {
-
   final HtmlPageLoader loader;
 
   int clientX = 0;
@@ -114,12 +112,13 @@ class _HtmlMouse implements PageLoaderMouse {
   int get _borderWidth => (window.outerWidth - window.innerWidth) ~/ 2;
   int get screenX => window.screenLeft + _borderWidth + clientX;
   int get screenY => window.screenTop + window.outerHeight -
-      window.innerHeight - _borderWidth + clientY;
+          window.innerHeight -
+          _borderWidth +
+      clientY;
 
   void dispatchEvent(String type, _ElementPageLoaderElement eventTarget,
       [int button = 0]) {
-    var event = new MouseEvent(
-        type,
+    var event = new MouseEvent(type,
         button: button,
         clientX: clientX,
         clientY: clientY,
@@ -179,11 +178,10 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   int get hashCode => node.hashCode;
 
   @override
-  bool operator ==(other) =>
-      other != null &&
-          other.runtimeType == runtimeType &&
-          other.node == node &&
-          other.loader == loader;
+  bool operator ==(other) => other != null &&
+      other.runtimeType == runtimeType &&
+      other.node == node &&
+      other.loader == loader;
 
   @override
   String toString() => '$runtimeType<${node.toString()}>';
@@ -197,8 +195,8 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   // https://code.google.com/p/dart/issues/detail?id=13902
   void _fireKeyPressEvents(Element element, String keys) {
     for (int charCode in keys.codeUnits) {
-      element.dispatchEvent(
-          new KeyEvent('keypress', charCode: charCode).wrapped);
+      element
+          .dispatchEvent(new KeyEvent('keypress', charCode: charCode).wrapped);
     }
   }
 }
@@ -333,47 +331,48 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
 
 class _ElementAttributes extends PageLoaderAttributes {
   static const _BOOLEAN_ATTRIBUTES = const [
-      'async',
-      'autofocus',
-      'autoplay',
-      'checked',
-      'compact',
-      'complete',
-      'controls',
-      'declare',
-      'defaultchecked',
-      'defaultselected',
-      'defer',
-      'disabled',
-      'draggable',
-      'ended',
-      'formnovalidate',
-      'hidden',
-      'indeterminate',
-      'iscontenteditable',
-      'ismap',
-      'itemscope',
-      'loop',
-      'multiple',
-      'muted',
-      'nohref',
-      'noresize',
-      'noshade',
-      'novalidate',
-      'nowrap',
-      'open',
-      'paused',
-      'pubdate',
-      'readonly',
-      'required',
-      'reversed',
-      'scoped',
-      'seamless',
-      'seeking',
-      'selected',
-      'spellcheck',
-      'truespeed',
-      'willvalidate'];
+    'async',
+    'autofocus',
+    'autoplay',
+    'checked',
+    'compact',
+    'complete',
+    'controls',
+    'declare',
+    'defaultchecked',
+    'defaultselected',
+    'defer',
+    'disabled',
+    'draggable',
+    'ended',
+    'formnovalidate',
+    'hidden',
+    'indeterminate',
+    'iscontenteditable',
+    'ismap',
+    'itemscope',
+    'loop',
+    'multiple',
+    'muted',
+    'nohref',
+    'noresize',
+    'noshade',
+    'novalidate',
+    'nowrap',
+    'open',
+    'paused',
+    'pubdate',
+    'readonly',
+    'required',
+    'reversed',
+    'scoped',
+    'seamless',
+    'seeking',
+    'selected',
+    'spellcheck',
+    'truespeed',
+    'willvalidate'
+  ];
 
   final Element _node;
 
@@ -434,7 +433,7 @@ class _ElementAttributes extends PageLoaderAttributes {
     try {
       //  7.1
       result = reflect(_node).getField(new Symbol(name)).reflectee;
-    } catch (e) { /* 7.2 - 7.3 ignore and default to attribute value or null*/ }
+    } catch (e) {/* 7.2 - 7.3 ignore and default to attribute value or null*/}
 
     if (result is bool) {
       return result ? 'true' : null;

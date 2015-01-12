@@ -25,7 +25,8 @@ class PageForSimpleTest {
 
 class SubclassPage extends PageForSimpleTest {}
 
-@Union(const [Root, const ByTagName('table')]) @IsTag('table')
+@Union(const [Root, const ByTagName('table')])
+@IsTag('table')
 class Table {
   @Root
   PageLoaderElement root;
@@ -45,13 +46,15 @@ class PageForClassAnnotationTest {
 }
 
 class PageForDisplayedFilteringTest {
-  @ById('div') @WithState.present()
+  @ById('div')
+  @WithState.present()
   List<PageLoaderElement> shouldHaveOneElement;
 
   @ById('div')
   List<PageLoaderElement> shouldBeEmpty;
 
-  @ById('div') @WithState.visible()
+  @ById('div')
+  @WithState.visible()
   List shouldAlsoBeEmpty;
 }
 
@@ -65,7 +68,8 @@ class PageForSettersTest {
 
   PageLoader get loader => _loader;
 
-  @ById('div') @WithState.present()
+  @ById('div')
+  @WithState.present()
   set shouldHaveOneElement(List<PageLoaderElement> elements) {
     _shouldHaveOneElement = elements;
   }
@@ -74,18 +78,20 @@ class PageForSettersTest {
 }
 
 class PageForSkipFinalTest {
-
-  @ById('div') @WithState.present()
+  @ById('div')
+  @WithState.present()
   List<PageLoaderElement> shouldHaveOneElement;
 
-  @ById('div') @WithState.present()
+  @ById('div')
+  @WithState.present()
   final List<PageLoaderElement> shouldBeNull = null;
 
   final PageLoader loader = null;
 }
 
 class PageForSkipFieldsWithoutFinderTest {
-  @ById('div') @WithState.present()
+  @ById('div')
+  @WithState.present()
   List<PageLoaderElement> shouldHaveOneElement;
 
   @WithState.present()
@@ -121,11 +127,13 @@ class PageForMultipleMatchingClassElementTest {
 }
 
 class PageForMultipleFinderTest {
-  @ById('non-existent id') @ByTagName('a-name')
+  @ById('non-existent id')
+  @ByTagName('a-name')
   PageLoaderElement multipleFinder;
 }
 
-@ById('non-existent id') @ByTagName('a-name')
+@ById('non-existent id')
+@ByTagName('a-name')
 class PageForMultipleClassFinderTest {
   @Root
   PageLoaderElement multipleFinder;
@@ -134,12 +142,14 @@ class PageForMultipleClassFinderTest {
 class PageForInvalidConstructorTest {
   PageForInvalidConstructorTest(String someArg);
 
-  @ById('div') @WithState.present()
+  @ById('div')
+  @WithState.present()
   List<PageLoaderElement> shouldHaveOneElement;
 }
 
 class PageForWithAttributeTest {
-  @ByTagName('input') @WithAttribute('type', 'checkbox')
+  @ByTagName('input')
+  @WithAttribute('type', 'checkbox')
   PageLoaderElement element;
 }
 
@@ -148,15 +158,14 @@ class PageForAmbiguousTest {
   PageLoaderElement element;
 }
 
-class PageForMixinTest extends PageForSimpleTest with
-    PageForDisplayedFilteringTest {}
+class PageForMixinTest extends PageForSimpleTest
+    with PageForDisplayedFilteringTest {}
 
 class PageForPrivateConstructorTest extends PageForSimpleTest {
   PageForPrivateConstructorTest._();
 }
 
 class PageForPrivateFieldsTest {
-
   @ByTagName('table')
   Table _privateTable;
 
@@ -164,7 +173,6 @@ class PageForPrivateFieldsTest {
 }
 
 class PageForPrivateSettersTest {
-
   Table table;
 
   @ByTagName('table')
@@ -290,7 +298,8 @@ class PageForShadowDomTest {
 
 class PageForShadowDomWithVisibleTextTest {
   @ByTagName('a-custom-tag')
-  @WithVisibleText('some') @WithVisibleText('button 1')
+  @WithVisibleText('some')
+  @WithVisibleText('button 1')
   PageLoaderElement button1;
 }
 
@@ -301,18 +310,18 @@ class PageForChainTest {
   @Chain(const [const ByClass('outer-div'), const ByClass('inner-div')])
   List<PageLoaderElement> innerDivs;
 
-  @Chain(
-      const [
-          const ByClass('outer-div'),
-          const ByClass('inner-div'),
-          const WithClass('special')])
+  @Chain(const [
+    const ByClass('outer-div'),
+    const ByClass('inner-div'),
+    const WithClass('special')
+  ])
   PageLoaderElement innerDivSpecial;
 
-  @Chain(
-      const [
-          const ByClass('outer-div'),
-          const ByTagName('a-custom-tag'),
-          const InShadowDom(const ById('inner'))])
+  @Chain(const [
+    const ByClass('outer-div'),
+    const ByTagName('a-custom-tag'),
+    const InShadowDom(const ById('inner'))
+  ])
   PageLoaderElement innerShadow;
 
   Iterable<String> get outerDivsText => outerDivs.map((e) => e.visibleText);
@@ -321,7 +330,8 @@ class PageForChainTest {
 
 class PageForShadowDomWithInnerTextTest {
   @ByTagName('a-custom-tag')
-  @WithInnerText('some') @WithInnerText('button 1')
+  @WithInnerText('some')
+  @WithInnerText('button 1')
   List<PageLoaderElement> shouldBeEmpty;
 
   @ByTagName('a-custom-tag')
@@ -335,7 +345,8 @@ class PageForTextOnShadowRootTest {
 }
 
 class PageForAttributesTests {
-  @ById('div') @WithState.present()
+  @ById('div')
+  @WithState.present()
   PageLoaderElement divWithStyle;
 
   @ByCss('input[type=checkbox]')
@@ -375,17 +386,20 @@ class PageForEqualityTest {
 }
 
 class PageForWithClassTest {
-
-  @ByTagName('input') @WithClass('with-class-test')
+  @ByTagName('input')
+  @WithClass('with-class-test')
   PageLoaderElement element;
 }
 
 class PageForOptionalFunctionTest {
-
-  @ByTagName('non-existant') @Optional @Returns(PageLoaderElement)
+  @ByTagName('non-existant')
+  @Optional
+  @Returns(PageLoaderElement)
   var shouldBeNull;
 
-  @ById('button-1') @Optional @Returns(PageLoaderElement)
+  @ById('button-1')
+  @Optional
+  @Returns(PageLoaderElement)
   var shouldBeNonNull;
 }
 
@@ -395,7 +409,6 @@ class PageForMouseTest {
 }
 
 class PageForGlobalTest {
-
   @ByTagName('table')
   PageLoaderElement table;
 
