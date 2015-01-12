@@ -12,10 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * PageLoader HTML provides the necessary bindings to support using PageLoader
- * Objects in tests that run within the browser.
- */
+/// PageLoader HTML provides the necessary bindings to support using PageLoader
+/// Objects in tests that run within the browser.
 library pageloader.html;
 
 import 'clock.dart';
@@ -27,12 +25,10 @@ import 'dart:collection';
 import 'dart:html';
 import 'dart:mirrors' hide Comment;
 
-/**
- * A function that will be executed after [click] and [type] and during
- * [waitFor] and [waitForValue] to allow events to
- * be processed. For example if using Angular's async test wrapper this should
- * be function that calls scope.apply() and clockTick.
- */
+/// A function that will be executed after [click] and [type] and during
+/// [waitFor] and [waitForValue] to allow events to be processed. For example
+/// if using Angular's async test wrapper this should be function that calls
+/// scope.apply() and clockTick.
 typedef void SyncActionFn(Duration interval);
 
 const Duration _DEFAULT_INTERVAL = const Duration(milliseconds: 1);

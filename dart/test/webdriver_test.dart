@@ -22,10 +22,8 @@ import 'package:unittest/unittest.dart';
 import 'package:unittest/vm_config.dart';
 import 'package:sync_webdriver/sync_webdriver.dart' hide Platform;
 
-/**
- * These tests are not expected to be run as part of normal automated testing,
- * as they are slow and they have external dependencies.
- */
+/// These tests are not expected to be run as part of normal automated testing,
+/// as they are slow and they have external dependencies.
 void main() {
   useVMConfiguration();
 

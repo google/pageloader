@@ -139,11 +139,9 @@ class WithState extends ElementFilter implements HasFilterFinderOptions {
   }
 }
 
-/**
- * Normally if an element is not found, an exception is thrown.  This makes
- * it difficult to test for the absence of something in the DOM.  To allow an
- * element to be absent from the DOM, annotate it with this.
- */
+/// Normally if an element is not found, an exception is thrown.  This makes
+///  it difficult to test for the absence of something in the DOM.  To allow an
+///  element to be absent from the DOM, annotate it with this.
 const Optional = const _Optional();
 
 class _Optional {
@@ -153,10 +151,8 @@ class _Optional {
   String toString() => '@Optional';
 }
 
-/**
- * Matches the root [PageLoaderElement] being used for constructing the current
- * page object.
- */
+/// Matches the root [PageLoaderElement] being used for constructing the
+/// current page object.
 const Root = const _Root();
 
 class _Root implements Finder, HasFilterFinderOptions {

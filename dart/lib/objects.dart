@@ -12,10 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * PageLoader Objects provides the core interface and annotation definitions
- * that should be used within PageLoader Objects.
- */
+/// PageLoader Objects provides the core interface and annotation definitions
+/// that should be used within PageLoader Objects.
 library pageloader.objects;
 
 export 'src/annotations.dart';

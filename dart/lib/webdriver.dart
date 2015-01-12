@@ -12,10 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * PageLoader WebDriver provides the necessary bindings to support using
- * PageLoader in WebDriver-based tests.
- */
+/// PageLoader WebDriver provides the necessary bindings to support using
+/// PageLoader in WebDriver-based tests.
 library pageloader.webdriver;
 
 import 'clock.dart';
@@ -88,9 +86,8 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   void _fireEvent(
       _WebElementPageLoaderElement eventTarget, String type, int button) {
-    driver.execute(
-        "arguments[0].dispatchEvent(new MouseEvent(arguments[1], {'button' : arguments[2]}));",
-        [eventTarget.context, type, button]);
+    driver.execute("arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
+        "{'button' : arguments[2]}));", [eventTarget.context, type, button]);
   }
 }
 

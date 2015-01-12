@@ -28,20 +28,16 @@ bool _printedWarning = false;
 const _DEFAULT_WAIT = const Duration(seconds: 4);
 const _DEFAULT_INTERVAL = const Duration(milliseconds: 100);
 
-/**
- * Mechanism for specifying hierarchical page objects using annotations on
- * fields in simple Dart objects.
- */
+/// Mechanism for specifying hierarchical page objects using annotations on
+/// fields in simple Dart objects.
 abstract class BasePageLoader implements PageLoader {
   final Clock clock;
 
   BasePageLoader([Clock clock])
       : this.clock = clock == null ? new FakeClock() : clock;
 
-  /**
-   * Creates a new instance of [type] and binds annotated fields to
-   * corresponding [PageLoaderElement]s.
-   */
+  /// Creates a new instance of [type] and binds annotated fields to
+  /// corresponding [PageLoaderElement]s.
   getInstanceInternal(Type type, [PageLoaderElement context]) {
     if (context == null) {
       context = globalContext;
