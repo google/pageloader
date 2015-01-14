@@ -77,29 +77,36 @@ class HtmlPageLoader extends BasePageLoader {
 class _HtmlMouse implements PageLoaderMouse {
   final HtmlPageLoader loader;
 
+  _ElementPageLoaderElement _eventTarget;
   int clientX = 0;
   int clientY = 0;
 
   _HtmlMouse(this.loader);
 
   @override
-  void down(int button, {_ElementPageLoaderElement eventTarget}) {
-    dispatchEvent('mousedown', eventTarget, button);
+  void down(int button) {
+    if (_eventTarget == null) {
+      throw new StateError('Use moveTo before sending a mouse button event.');
+    }
+    dispatchEvent('mousedown', _eventTarget, button);
     loader.sync();
   }
 
   @override
-  void moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset,
-      {_ElementPageLoaderElement eventTarget}) {
+  void moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset) {
     clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
     clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
-    dispatchEvent('mousemove', eventTarget);
+    _eventTarget = element;
+    dispatchEvent('mousemove', _eventTarget);
     loader.sync();
   }
 
   @override
-  void up(int button, {_ElementPageLoaderElement eventTarget}) {
-    dispatchEvent('mouseup', eventTarget);
+  void up(int button) {
+    if (_eventTarget == null) {
+      throw new StateError('Use moveTo before sending a mouse button event.');
+    }
+    dispatchEvent('mouseup', _eventTarget);
     loader.sync();
   }
 
