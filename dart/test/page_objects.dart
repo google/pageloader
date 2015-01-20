@@ -25,8 +25,7 @@ class PageForSimpleTest {
 
 class SubclassPage extends PageForSimpleTest {}
 
-@Union(const [Root, const ByTagName('table')])
-@IsTag('table')
+@EnsureTag('table')
 class Table {
   @Root
   PageLoaderElement root;
