@@ -82,7 +82,7 @@ class EnsureTag implements Finder {
     if (context.name == this.tagName) {
       elements.add(context);
     }
-    elements.addAll(context.getElementsByCss(this.tagName);
+    elements.addAll(context.getElementsByCss(this.tagName));
     return new UnmodifiableListView<PageLoaderElement>(elements);
   }
 
