@@ -36,7 +36,7 @@ class Table {
 }
 
 @EnsureTag('table')
-class TableForEnsureTab {
+class TableForEnsureTag {
   @Root
   PageLoaderElement root;
 
