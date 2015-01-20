@@ -50,6 +50,11 @@ void runTests() {
       verifyTable(table);
     });
 
+    test('EnsureTag annotation', () {
+      TableForEnsureTag table = loader.getInstance(TableForEnsureTag);
+      verifyTable(table);
+    });
+
     test('class annotation on nested field', () {
       PageForClassAnnotationTest page =
           loader.getInstance(PageForClassAnnotationTest);
