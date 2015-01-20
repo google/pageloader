@@ -69,6 +69,27 @@ class ByClass implements Finder {
   String toString() => '@ByClass("$className")';
 }
 
+/// Finds elements with the given tag name. Unlike [ByTagName],
+/// this will also find the current Root if it is the given tag.
+class EnsureTag implements Finder {
+  final String tagName;
+
+  const EnsureTag(this.tagName);
+
+  @override
+  List<PageLoaderElement> findElements(PageLoaderElement context) {
+    List<PageLoaderElement> elements = [];
+    if (context.name == this.tagName) {
+      elements.add(context);
+    }
+    elements.addAll(context.getElementsByCss(this.tagName));
+    return new UnmodifiableListView<PageLoaderElement>(elements);
+  }
+
+  @override
+  String toString() => '@EnsureTag("$tagName")';
+}
+
 class InShadowDom implements Finder {
   final Finder finder;
 

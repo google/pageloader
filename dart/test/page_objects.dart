@@ -35,6 +35,15 @@ class Table {
   List<Row> rows;
 }
 
+@EnsureTag('table')
+class TableForEnsureTag {
+  @Root
+  PageLoaderElement root;
+
+  @ByTagName('tr')
+  List<Row> rows;
+}
+
 class Row {
   @ByTagName('td')
   List<PageLoaderElement> cells;
