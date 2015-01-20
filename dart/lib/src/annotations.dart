@@ -78,10 +78,12 @@ class EnsureTag implements Finder {
 
   @override
   List<PageLoaderElement> findElements(PageLoaderElement context) {
-    Union union = new Union([Root, new ByTagName(this.tagName)]);
-    List<PageLoaderElement> elements = union.findElements(context);
-    IsTag isTagName = new IsTag(this.tagName);
-    return isTagName.filter(elements);
+    List<PageLoaderElement> elements = [];
+    if (context.name == this.tagName) {
+      elements.add(context);
+    }
+    elements.addAll(context.getElementsByCss(this.tagName);
+    return new UnmodifiableListView<PageLoaderElement>(elements);
   }
 
   @override
