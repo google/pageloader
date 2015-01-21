@@ -52,7 +52,12 @@ void runTests() {
 
     test('EnsureTag annotation', () {
       TableForEnsureTag table = loader.getInstance(TableForEnsureTag);
-      verifyTable(table);
+      expect(table.root.name, 'table');
+      verifyRows(table.rows);
+
+      table = loader.getInstance(TableForEnsureTag, table.root);
+      expect(table.root.name, 'table');
+      verifyRows(table.rows);
     });
 
     test('class annotation on nested field', () {
