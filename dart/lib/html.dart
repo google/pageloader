@@ -27,7 +27,7 @@ import 'dart:mirrors' hide Comment;
 
 /// A function that will be executed after [click] and [type] and during
 /// [waitFor] and [waitForValue] to allow events to be processed. For example
-/// if using Angular's async test wrapper this should be function that calls
+/// if using Angular's async test wrapper this should be a function that calls
 /// scope.apply() and clockTick.
 typedef void SyncActionFn(Duration interval);
 
@@ -242,9 +242,11 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   void type(String keys) {
     node.focus();
     _fireKeyPressEvents(node, keys);
-    if (node is InputElement) {
-      var value = (node as InputElement).value + keys;
-      (node as InputElement).value = '';
+    if (node is InputElement || node is TextAreaElement) {
+      // suppress warning by hiding field
+      var node = this.node;
+      var value = node.value + keys;
+      node.value = '';
       node.dispatchEvent(new TextEvent('textInput', data: value));
     }
     node.blur();
