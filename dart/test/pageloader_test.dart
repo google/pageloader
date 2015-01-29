@@ -350,8 +350,12 @@ void runTests() {
     test('Type into textarea', () {
       PageForTextAreaTypingText page =
           loader.getInstance(PageForTextAreaTypingText);
-      page.textArea.type('some string');
+      page.textArea.type('some');
+      expect(page.textArea.attributes['value'], 'some');
+      page.textArea.type(' string');
       expect(page.textArea.attributes['value'], 'some string');
+      page.textArea.clear();
+      expect(page.textArea.attributes['value'], '');
     });
   });
 

@@ -255,8 +255,9 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   void clear() {
-    if (node is InputElement) {
-      (node as InputElement).value = '';
+    if (node is InputElement || node is TextAreaElement) {
+      var node = this.node;
+      node.value = '';
       node.dispatchEvent(new TextEvent('textInput', data: ''));
     } else {
       super.clear();
