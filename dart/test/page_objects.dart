@@ -429,3 +429,8 @@ class NestedPageForGlobalTest {
   @Global(const ByTagName('table'))
   PageLoaderElement table;
 }
+
+class PageForTextAreaTypingText {
+  @ById('textarea')
+  PageLoaderElement textArea;
+}

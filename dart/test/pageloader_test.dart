@@ -346,6 +346,17 @@ void runTests() {
       PageForGlobalTest page = loader.getInstance(PageForGlobalTest);
       expect(page.nested.table, equals(page.table));
     });
+
+    test('Type into textarea', () {
+      PageForTextAreaTypingText page =
+          loader.getInstance(PageForTextAreaTypingText);
+      page.textArea.type('some');
+      expect(page.textArea.attributes['value'], 'some');
+      page.textArea.type(' string');
+      expect(page.textArea.attributes['value'], 'some string');
+      page.textArea.clear();
+      expect(page.textArea.attributes['value'], '');
+    });
   });
 
   group('waitFor()', () {
