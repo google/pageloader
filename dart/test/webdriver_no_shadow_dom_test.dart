@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-library pageloader.test.webdriver;
+library pageloader.test.webdriver_no_shadow_dom;
 
 import 'pageloader_test.dart' as plt;
 
@@ -32,7 +32,7 @@ void main() {
   setUp(() {
     driver = freshDriver;
     driver.url = testPagePath;
-    plt.loader = new WebDriverPageLoader(driver);
+    plt.loader = new WebDriverPageLoader(driver, useShadowDom: false);
   });
 
   plt.runTests();
@@ -43,8 +43,9 @@ void main() {
   });
 }
 
-String get testPagePath =>
-    path.toUri(path.absolute('webdriver_test_page.html')).toString();
+String get testPagePath => path
+    .toUri(path.absolute('webdriver_no_shadow_dom_test_page.html'))
+    .toString();
 
 WebDriver _driver;
 

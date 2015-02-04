@@ -230,7 +230,9 @@ void runTests() {
       expect(page.button1.button.visibleText, contains('some'));
       expect(page.button2.button.visibleText, contains('button 2'));
       expect(page.button2.button.visibleText, contains('some'));
-      expect(page.shouldBeEmpty, isEmpty);
+      if (loader.useShadowDom) {
+        expect(page.shouldBeEmpty, hasLength(0));
+      }
     });
 
     test('WithVisibleText in shadow dom', () {
@@ -239,8 +241,6 @@ void runTests() {
 
       expect(page.button1.visibleText, contains('button 1'));
       expect(page.button1.visibleText, contains('some'));
-      expect(page.button1.innerText, contains('button 1'));
-      expect(page.button1.innerText, isNot(contains('some')));
     });
 
     test('chain', () {
@@ -254,6 +254,11 @@ void runTests() {
     });
 
     test('WithInnerText in shadow dom', () {
+      if (!loader.useShadowDom) {
+        // if shadow dom is disabled, then visibleText and innerText are
+        // identical
+        return;
+      }
       PageForShadowDomWithInnerTextTest page =
           loader.getInstance(PageForShadowDomWithInnerTextTest);
 
@@ -273,9 +278,19 @@ void runTests() {
       expect(page.buttons[1].shadowRoot.visibleText, contains('some'));
       expect(page.buttons[2].shadowRoot.visibleText, contains('button 2'));
       expect(page.buttons[2].shadowRoot.visibleText, contains('some'));
-      expect(page.buttons[1].shadowRoot.innerText, isNot(contains('button 1')));
+      if (loader.useShadowDom) {
+        expect(
+            page.buttons[1].shadowRoot.innerText, isNot(contains('button 1')));
+      } else {
+        expect(page.buttons[1].shadowRoot.innerText, contains('button 1'));
+      }
       expect(page.buttons[1].shadowRoot.innerText, contains('some'));
-      expect(page.buttons[2].shadowRoot.innerText, isNot(contains('button 2')));
+      if (loader.useShadowDom) {
+        expect(
+            page.buttons[2].shadowRoot.innerText, isNot(contains('button 2')));
+      } else {
+        expect(page.buttons[2].shadowRoot.innerText, contains('button 2'));
+      }
       expect(page.buttons[2].shadowRoot.innerText, contains('some'));
     });
 

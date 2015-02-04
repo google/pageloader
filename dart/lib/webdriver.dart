@@ -28,13 +28,11 @@ import 'package:sync_webdriver/sync_webdriver.dart' as wd;
 
 class WebDriverPageLoader extends BasePageLoader {
   WebDriverPageLoaderElement _globalContext;
-  final bool useShadowRoot;
   @override
   final _WebDriverMouse mouse;
 
-  WebDriverPageLoader(wd.SearchContext globalContext,
-      {this.useShadowRoot: true})
-      : super(const _IOClock()),
+  WebDriverPageLoader(wd.SearchContext globalContext, {useShadowDom: true})
+      : super(clock: const _IOClock(), useShadowDom: useShadowDom),
         this.mouse = new _WebDriverMouse(globalContext.driver) {
     this._globalContext = new WebDriverPageLoaderElement(globalContext, this);
   }
@@ -153,7 +151,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   WebDriverPageLoaderElement get shadowRoot {
-    if (loader.useShadowRoot) {
+    if (loader.useShadowDom) {
       return new _ShadowRootPageLoaderElement(context, loader);
     } else {
       return this;
@@ -231,6 +229,7 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
 
   _ShadowRootPageLoaderElement(this.context, WebDriverPageLoader loader)
       : super._(loader) {
+    assert(loader.useShadowDom);
     if (!_execute(' != null')) {
       throw new PageLoaderException('$context does not have a ShadowRoot');
     }

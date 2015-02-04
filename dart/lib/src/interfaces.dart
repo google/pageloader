@@ -23,6 +23,7 @@ abstract class Lazy<T> {
 }
 
 abstract class PageLoader {
+  bool get useShadowDom;
   PageLoaderElement get globalContext;
 
   Object getInstance(Type type, [dynamic context]);
