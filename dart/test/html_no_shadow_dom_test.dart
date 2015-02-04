@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-library pageloader.test.html;
+library pageloader.test.html_no_shadow_dom;
 
 import 'page_objects.dart';
 import 'pageloader_test.dart' as plt;
