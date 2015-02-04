@@ -32,8 +32,9 @@ const _DEFAULT_INTERVAL = const Duration(milliseconds: 100);
 /// fields in simple Dart objects.
 abstract class BasePageLoader implements PageLoader {
   final Clock clock;
+  final bool useShadowDom;
 
-  BasePageLoader([Clock clock])
+  BasePageLoader({Clock clock, this.useShadowDom: true})
       : this.clock = clock == null ? new FakeClock() : clock;
 
   /// Creates a new instance of [type] and binds annotated fields to
@@ -50,7 +51,7 @@ abstract class BasePageLoader implements PageLoader {
 
   @override
   waitForValue(condition(), {Duration timeout: _DEFAULT_WAIT,
-      Duration interval: _DEFAULT_INTERVAL}) =>
+          Duration interval: _DEFAULT_INTERVAL}) =>
       waitFor(condition, isNotNull, timeout: timeout, interval: interval);
 
   @override
@@ -351,7 +352,8 @@ class _FinderSingleFieldInfo extends _FinderFieldInfo {
   final bool _isOptional;
 
   _FinderSingleFieldInfo(Symbol fieldName, this._finder, this._filters,
-      this._instanceType, this._isOptional) : super(fieldName);
+      this._instanceType, this._isOptional)
+      : super(fieldName);
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader) {

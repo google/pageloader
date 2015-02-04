@@ -44,17 +44,19 @@ class HtmlPageLoader extends BasePageLoader {
   @override
   _HtmlMouse get mouse => _mouse;
 
-  factory HtmlPageLoader(Node globalContext, [SyncActionFn syncActionFn]) {
+  factory HtmlPageLoader(Node globalContext,
+      {SyncActionFn syncActionFn, bool useShadowDom: true}) {
     var clock;
 
     if (syncActionFn != null) {
       clock = new _SyncActionClock(syncActionFn);
     }
 
-    return new HtmlPageLoader._(globalContext, clock);
+    return new HtmlPageLoader._(globalContext, clock, useShadowDom);
   }
 
-  HtmlPageLoader._(Node globalContext, Clock clock) : super(clock) {
+  HtmlPageLoader._(Node globalContext, Clock clock, bool useShadowDom)
+      : super(clock: clock, useShadowDom: useShadowDom) {
     this._globalContext = new HtmlPageLoaderElement(globalContext, this);
     this._mouse = new _HtmlMouse(this);
   }
@@ -107,9 +109,10 @@ class _HtmlMouse implements PageLoaderMouse {
   int get pageY => window.pageYOffset + clientY;
   int get _borderWidth => (window.outerWidth - window.innerWidth) ~/ 2;
   int get screenX => window.screenLeft + _borderWidth + clientX;
-  int get screenY => window.screenTop + window.outerHeight -
-          window.innerHeight -
-          _borderWidth +
+  int get screenY => window.screenTop +
+      window.outerHeight -
+      window.innerHeight -
+      _borderWidth +
       clientY;
 
   void dispatchEvent(String type, _ElementPageLoaderElement eventTarget,
@@ -149,7 +152,12 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
     } else if (node is Document) {
       return new _DocumentPageLoaderElement(node, loader);
     } else if (node is ShadowRoot) {
-      return new _ShadowRootPageLoaderElement(node, loader);
+      if (loader.useShadowDom) {
+        return new _ShadowRootPageLoaderElement(node, loader);
+      } else {
+        throw new PageLoaderException(
+            'Cannot create element for ShadowRoot when useShadowDom is false');
+      }
     }
     return null;
   }
@@ -211,8 +219,9 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
         this.style = new _ElementStyle(_node);
 
   @override
-  PageLoaderElement get shadowRoot =>
-      new HtmlPageLoaderElement(node.shadowRoot, loader);
+  PageLoaderElement get shadowRoot => loader.useShadowDom
+      ? new HtmlPageLoaderElement(node.shadowRoot, loader)
+      : this;
   @override
   String get name => node.tagName.toLowerCase();
   // TODO(DrMarcII): implement this to recurse up the tree to see if displayed
@@ -268,7 +277,9 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
   final ShadowRoot node;
 
-  _ShadowRootPageLoaderElement(this.node, PageLoader loader) : super._(loader);
+  _ShadowRootPageLoaderElement(this.node, PageLoader loader) : super._(loader) {
+    assert(loader.useShadowDom);
+  }
 
   @override
   String get name => '__shadow_root__';
