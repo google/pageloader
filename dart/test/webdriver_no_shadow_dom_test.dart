@@ -21,62 +21,59 @@ import 'package:path/path.dart' as path;
 import 'package:unittest/unittest.dart';
 import 'package:unittest/vm_config.dart';
 import 'package:sync_webdriver/sync_webdriver.dart' hide Platform;
+import 'dart:io';
 
-/// These tests are not expected to be run as part of normal automated testing,
-/// as they are slow and they have external dependencies.
 void main() {
   useVMConfiguration();
 
   WebDriver driver;
 
   setUp(() {
-    driver = freshDriver;
-    driver.url = testPagePath;
+    driver = _createTestDriver();
+    driver.url = _testPagePath;
     plt.loader = new WebDriverPageLoader(driver, useShadowDom: false);
   });
 
-  plt.runTests();
-
-  // This test needs to be last to properly close the browser.
-  test('one-time teardown', () {
-    closeDriver();
+  tearDown(() {
+    driver.quit();
+    plt.loader = null;
   });
+
+  plt.runTests();
 }
 
-String get testPagePath => path
-    .toUri(path.absolute('webdriver_no_shadow_dom_test_page.html'))
-    .toString();
-
-WebDriver _driver;
-
-WebDriver get freshDriver {
-  if (_driver != null) {
-    try {
-      Window firstWindow = null;
-
-      for (Window window in _driver.windows) {
-        if (firstWindow == null) {
-          firstWindow = window;
-        } else {
-          _driver.switchTo.window(window);
-          _driver.close();
-        }
-      }
-      _driver.switchTo.window(firstWindow);
-      _driver.url = 'about:';
-    } catch (e) {
-      closeDriver();
-    }
+String get _testPagePath {
+  var testPagePath =
+      path.join('test', 'webdriver_no_shadow_dom_test_page.html');
+  testPagePath = path.absolute(testPagePath);
+  if (!FileSystemEntity.isFileSync(testPagePath)) {
+    throw new Exception('Could not find the test file at "$testPagePath".'
+        ' Make sure you are running tests from the root of the project.');
   }
-  if (_driver == null) {
-    _driver = new WebDriver(desired: Capabilities.chrome);
-  }
-  return _driver;
+  return path.toUri(testPagePath).toString();
 }
 
-void closeDriver() {
-  try {
-    _driver.quit();
-  } catch (e) {}
-  _driver = null;
+WebDriver _createTestDriver({Map additionalCapabilities}) {
+  Map capabilities = Capabilities.chrome;
+  Map env = Platform.environment;
+
+  Map chromeOptions = {};
+
+  if (env['CHROMEDRIVER_BINARY'] != null) {
+    chromeOptions['binary'] = env['CHROMEDRIVER_BINARY'];
+  }
+
+  if (env['CHROMEDRIVER_ARGS'] != null) {
+    chromeOptions['args'] = env['CHROMEDRIVER_ARGS'].split(' ');
+  }
+
+  if (chromeOptions.isNotEmpty) {
+    capabilities['chromeOptions'] = chromeOptions;
+  }
+
+  if (additionalCapabilities != null) {
+    capabilities.addAll(additionalCapabilities);
+  }
+
+  return new WebDriver(desired: capabilities);
 }
