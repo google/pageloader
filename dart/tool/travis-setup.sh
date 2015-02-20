@@ -20,4 +20,4 @@ set -e
 cd dart
 
 pub get
-dart/packages/sync_socket/../tool/build.sh
+packages/sync_socket/../tool/build.sh
