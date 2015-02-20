@@ -16,6 +16,6 @@ before_script:
   - wget http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
   - sudo mv chromedriver /usr/bin/
-  - ./dart/packages/sync_socket/../tool/build.sh
+  - ./dart/tool/travis-setup.sh
 
 script: ./dart/tool/travis.sh
