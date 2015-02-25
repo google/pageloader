@@ -498,6 +498,7 @@ String _normalize(String string) {
     if (char.contains(_nonBreaking)) {
       if (addWS) {
         buffer.write(' ');
+        addWS = false;
       }
       if (char == '\xa0') {
         buffer.write(' ');

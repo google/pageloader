@@ -373,7 +373,7 @@ void runTests() {
       expect(page.textArea.attributes['value'], '');
     });
 
-    solo_test('nbsp in text', () {
+    test('nbsp in text', () {
       PageForNbspTest page = loader.getInstance(PageForNbspTest);
       expect(page.span.visibleText, '   ');
       expect(page.span.innerText, '');
