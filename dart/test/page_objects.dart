@@ -434,3 +434,8 @@ class PageForTextAreaTypingText {
   @ById('textarea')
   PageLoaderElement textArea;
 }
+
+class PageForNbspTest {
+  @ById('nbsp')
+  PageLoaderElement span;
+}
