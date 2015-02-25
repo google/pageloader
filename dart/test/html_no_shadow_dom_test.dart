@@ -76,7 +76,8 @@ void main() {
         </a-custom-tag>
         <a-custom-tag id="button-2">
           <button id="inner">some button 2</button>
-        </a-custom-tag>''';
+        </a-custom-tag>
+        <p id="nbsp">   &nbsp; &nbsp;   </p>''';
 
     var div = body.querySelectorAll('div[id=testdocument]');
     if (div.length == 1) {

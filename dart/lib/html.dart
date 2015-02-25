@@ -169,7 +169,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
   // TODO(DrMarcII) consider normalizing string
   @override
-  String get visibleText => _elementText(node).trim();
+  String get visibleText => _normalize(_elementText(node));
 
   @override
   List<HtmlPageLoaderElement> getElementsByCss(String selector) =>
@@ -485,6 +485,32 @@ String _elementText(n) {
   if (hasShadowRoot(n)) return _elementText(n.shadowRoot.nodes);
   if (n.nodes == null || n.nodes.isEmpty) return n.text;
   return _elementText(n.nodes);
+}
+
+final _nonBreaking = new RegExp(r'^[\S\xa0]$');
+
+String _normalize(String string) {
+  var skipWS = true;
+  var addWS = false;
+  var buffer = new StringBuffer();
+  for (int i = 0; i < string.length; i++) {
+    var char = string[i];
+    if (char.contains(_nonBreaking)) {
+      if (addWS) {
+        buffer.write(' ');
+      }
+      if (char == '\xa0') {
+        buffer.write(' ');
+      } else {
+        buffer.write(char);
+      }
+      skipWS = false;
+    } else if (!skipWS) {
+      addWS = true;
+      skipWS = true;
+    }
+  }
+  return buffer.toString();
 }
 
 class _SyncActionClock extends FakeClock {

@@ -76,7 +76,8 @@ void main() {
         </a-custom-tag>
         <a-custom-tag id="button-2">
           button 2
-        </a-custom-tag>''';
+        </a-custom-tag>
+        <p id="nbsp"> &nbsp; &nbsp; </p>''';
 
     var templateHtml = '<button id="inner">some <content></content></button>';
 
