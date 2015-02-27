@@ -1,5 +1,5 @@
 name: pageloader
-version: 1.3.2
+version: 1.4.0
 author: Google Inc.
 description: >
   Supports the creation of page objects that can be shared between in-browser tests
@@ -9,7 +9,7 @@ environment:
   sdk: '>=1.8.0 <2.0.0'
 dependencies:
   matcher: '^0.11.4+1'
-  sync_webdriver: '^1.1.4'
+  sync_webdriver: '^1.1.4+1'
 dev_dependencies:
   browser: '^0.10.0+2'
   path: '^1.3.3'
