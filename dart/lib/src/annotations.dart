@@ -90,21 +90,52 @@ class EnsureTag implements Finder {
 }
 
 class InShadowDom implements Finder {
-  final Finder finder;
+  final Finder of;
+  final Finder find;
 
-  const InShadowDom([this.finder]);
+  /// Traverses into the shadow dom of the elements found by [of] (or of the
+  /// current scope if [of] not provided), and then finds elements using [find]
+  /// if provided.
+  const InShadowDom({this.of, this.find});
 
   @override
   List<PageLoaderElement> findElements(PageLoaderElement context) {
-    if (finder == null) {
-      return new UnmodifiableListView<PageLoaderElement>([context.shadowRoot]);
+    Iterable<PageLoaderElement> candidates;
+    if (of != null) {
+      candidates = of.findElements(context);
     } else {
-      return finder.findElements(context.shadowRoot);
+      candidates = [context];
     }
+    candidates = candidates.map((candidate) => candidate.shadowRoot);
+    if (find != null) {
+      var newCandidates = new Set();
+      for (var candidate in candidates) {
+        newCandidates.addAll(find.findElements(candidate));
+      }
+      candidates = newCandidates;
+    }
+    return new UnmodifiableListView<PageLoaderElement>(candidates);
   }
 
   @override
-  String toString() => '@InShadowDom(${finder == null ? '' : finder})';
+  String toString() {
+    var buffer = new StringBuffer('@InShadowDom(');
+    bool commaNeeded = false;
+    if (of != null) {
+      buffer
+        ..write('of: ')
+        ..write(of);
+      commaNeeded = true;
+    }
+    if (find != null) {
+      if (commaNeeded) buffer.write(', ');
+      buffer
+        ..write('find: ')
+        ..write(find);
+    }
+    buffer.write(')');
+    return buffer.toString();
+  }
 }
 
 class Returns {

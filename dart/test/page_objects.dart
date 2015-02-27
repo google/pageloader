@@ -328,7 +328,7 @@ class PageForChainTest {
   @Chain(const [
     const ByClass('outer-div'),
     const ByTagName('a-custom-tag'),
-    const InShadowDom(const ById('inner'))
+    const InShadowDom(find: const ById('inner'))
   ])
   PageLoaderElement innerShadow;
 

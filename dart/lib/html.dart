@@ -15,6 +15,7 @@
 /// Objects in tests that run within the browser.
 library pageloader.html;
 
+import 'dart:async' show Future;
 import 'dart:collection';
 import 'dart:html';
 import 'dart:mirrors' hide Comment;
