@@ -120,6 +120,15 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
   List<WebDriverPageLoaderElement> _fromContextList(contexts) =>
       contexts.map((e) => new WebDriverPageLoaderElement(e, loader)).toList();
+  
+  @override
+  WebDriverPageLoaderElement get shadowRoot {
+    if (loader.useShadowDom) {
+      return new _ShadowRootPageLoaderElement(context, loader);
+    } else {
+      return this;
+    }
+  }
 
   @override
   int get hashCode => context.hashCode;
@@ -147,15 +156,6 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
         this.attributes = new _ElementAttributes(_context),
         this.computedStyle = new _ElementComputedStyle(_context),
         this.style = new _ElementStyle(_context);
-
-  @override
-  WebDriverPageLoaderElement get shadowRoot {
-    if (loader.useShadowDom) {
-      return new _ShadowRootPageLoaderElement(context, loader);
-    } else {
-      return this;
-    }
-  }
 
   @override
   String get name => context.name;
@@ -214,8 +214,6 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   bool get displayed => true;
   @override
-  PageLoaderElement get shadowRoot => super.shadowRoot;
-  @override
   PageLoaderAttributes get style => super.style;
   @override
   String get innerText => super.innerText;
@@ -266,8 +264,6 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   void click() => super.click();
   @override
   PageLoaderAttributes get computedStyle => super.computedStyle;
-  @override
-  PageLoaderElement get shadowRoot => super.shadowRoot;
   @override
   PageLoaderAttributes get style => super.style;
   @override
