@@ -18,13 +18,13 @@ import 'dart:io';
 import 'package:pageloader/async/webdriver.dart' show WebDriverPageLoader;
 import 'package:path/path.dart' as path;
 import 'package:unittest/unittest.dart';
-import 'package:unittest/compact_vm_config.dart' show useCompactVMConfiguration;
+import 'package:unittest/vm_config.dart' show useVMConfiguration;
 import 'package:webdriver/io.dart' show Capabilities, WebDriver, createDriver;
 
 import 'pageloader_test.dart' as plt;
 
 void main() {
-  useCompactVMConfiguration();
+  useVMConfiguration();
 
   WebDriver driver;
 
