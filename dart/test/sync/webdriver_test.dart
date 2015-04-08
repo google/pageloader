@@ -10,11 +10,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-library pageloader.test.webdriver_no_shadow_dom;
+library pageloader.test.webdriver;
 
 import 'dart:io';
 
-import 'package:pageloader/webdriver.dart' show WebDriverPageLoader;
+import 'package:pageloader/sync/webdriver.dart' show WebDriverPageLoader;
 import 'package:path/path.dart' as path;
 import 'package:unittest/unittest.dart';
 import 'package:unittest/vm_config.dart' show useVMConfiguration;
@@ -31,7 +31,7 @@ void main() {
   setUp(() {
     driver = _createTestDriver();
     driver.url = _testPagePath;
-    plt.loader = new WebDriverPageLoader(driver, useShadowDom: false);
+    plt.loader = new WebDriverPageLoader(driver);
   });
 
   tearDown(() {
@@ -43,8 +43,7 @@ void main() {
 }
 
 String get _testPagePath {
-  var testPagePath =
-      path.join('test', 'webdriver_no_shadow_dom_test_page.html');
+  var testPagePath = path.join('test', 'data', 'webdriver_test_page.html');
   testPagePath = path.absolute(testPagePath);
   if (!FileSystemEntity.isFileSync(testPagePath)) {
     throw new Exception('Could not find the test file at "$testPagePath".'

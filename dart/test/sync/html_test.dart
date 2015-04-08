@@ -14,7 +14,7 @@ library pageloader.test.html;
 
 import 'dart:html' as html;
 
-import 'package:pageloader/html.dart';
+import 'package:pageloader/sync/html.dart';
 import 'package:unittest/html_enhanced_config.dart'
     show useHtmlEnhancedConfiguration;
 import 'package:unittest/unittest.dart';

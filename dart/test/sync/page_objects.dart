@@ -13,7 +13,7 @@
 
 library pageloader.test.page_objects;
 
-import 'package:pageloader/objects.dart';
+import 'package:pageloader/sync/objects.dart';
 
 class PageForSimpleTest {
   PageLoader loader;
