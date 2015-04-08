@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.core;
+library pageloader.async.core;
 
 import 'dart:async';
 import 'dart:collection';
@@ -128,9 +128,9 @@ class _ClassInfo {
         }
 
         try {
-          if (current.mixin != null) {
+          if (current.mixin != null && current.mixin != current) {
             typesToProcess.addLast(current.mixin);
-            print('Warning: mixin used by ${current.simpleName}'
+            print('Warning: mixin ${current.mixin.simpleName} used by ${current.simpleName}'
                 ' is not supported when compiled to JS.');
           }
         } catch (e) {}

@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.test.page_objects;
+library pageloader.sync.test.page_objects;
 
 import 'package:pageloader/sync/objects.dart';
 

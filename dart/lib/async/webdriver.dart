@@ -13,7 +13,7 @@
 
 /// PageLoader WebDriver provides the necessary bindings to support using
 /// PageLoader in WebDriver-based tests.
-library pageloader.webdriver;
+library pageloader.async.webdriver;
 
 import 'dart:async';
 

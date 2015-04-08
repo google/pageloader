@@ -10,7 +10,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-library pageloader.test.webdriver_no_shadow_dom;
+library pageloader.sync.test.webdriver_no_shadow_dom;
 
 import 'dart:io';
 

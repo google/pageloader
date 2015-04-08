@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.test;
+library pageloader.async.test;
 
 import 'package:matcher/matcher.dart';
 import 'package:pageloader/async/objects.dart';

@@ -13,7 +13,7 @@
 
 /// PageLoader HTML provides the necessary bindings to support using PageLoader
 /// Objects in tests that run within the browser.
-library pageloader.html;
+library pageloader.async.html;
 
 import 'dart:async';
 import 'dart:collection';

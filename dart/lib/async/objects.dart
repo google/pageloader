@@ -13,7 +13,7 @@
 
 /// PageLoader Objects provides the core interface and annotation definitions
 /// that should be used within PageLoader Objects.
-library pageloader.objects;
+library pageloader.async.objects;
 
 export 'src/annotations.dart';
 export 'src/interfaces.dart';
