@@ -97,7 +97,8 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
       wd.SearchContext context, WebDriverPageLoader loader) {
     if (context is wd.WebDriver) {
       return new _WebDriverPageLoaderElement(context, loader);
-    } else if (context is wd.WebElement) {
+    }
+    if (context is wd.WebElement) {
       return new _WebElementPageLoaderElement(context, loader);
     }
     throw new PageLoaderException(
@@ -171,10 +172,13 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   Future<WebDriverPageLoaderElement> get shadowRoot async {
     if (loader.useShadowDom) {
-      return new _ShadowRootPageLoaderElement(context, loader);
-    } else {
-      return this;
+      if ((await context.driver.execute(
+          'arguments[0].shadowRoot != null', [context]))) {
+        return new _ShadowRootPageLoaderElement(context, loader);
+      }
+      throw new PageLoaderException('$this does not have a shadowRoot');
     }
+    return this;
   }
 
   @override
