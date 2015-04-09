@@ -130,7 +130,8 @@ class _ClassInfo {
         try {
           if (current.mixin != null && current.mixin != current) {
             typesToProcess.addLast(current.mixin);
-            print('Warning: mixin ${current.mixin.simpleName} used by ${current.simpleName}'
+            print(
+                'Warning: mixin ${current.mixin.simpleName} used by ${current.simpleName}'
                 ' is not supported when compiled to JS.');
           }
         } catch (e) {}

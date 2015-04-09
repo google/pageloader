@@ -16,7 +16,6 @@
 library pageloader.async.html;
 
 import 'dart:async';
-import 'dart:collection';
 import 'dart:html';
 import 'dart:mirrors' hide Comment;
 
