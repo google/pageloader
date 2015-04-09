@@ -13,14 +13,12 @@
 
 /// PageLoader WebDriver provides the necessary bindings to support using
 /// PageLoader in WebDriver-based tests.
-library pageloader.webdriver;
+library pageloader.async.webdriver;
 
-import 'dart:collection';
-import 'dart:io' as io;
+import 'dart:async';
 
-import 'package:sync_webdriver/sync_webdriver.dart' as wd;
+import 'package:webdriver/core.dart' as wd;
 
-import 'clock.dart';
 import 'src/core.dart';
 import 'src/interfaces.dart';
 export 'src/interfaces.dart';
@@ -31,7 +29,7 @@ class WebDriverPageLoader extends BasePageLoader {
   final _WebDriverMouse mouse;
 
   WebDriverPageLoader(wd.SearchContext globalContext, {useShadowDom: true})
-      : super(clock: const _IOClock(), useShadowDom: useShadowDom),
+      : super(useShadowDom: useShadowDom),
         this.mouse = new _WebDriverMouse(globalContext.driver) {
     this._globalContext = new WebDriverPageLoaderElement(globalContext, this);
   }
@@ -40,7 +38,7 @@ class WebDriverPageLoader extends BasePageLoader {
   WebDriverPageLoaderElement get globalContext => _globalContext;
 
   @override
-  Object getInstance(Type type, [dynamic context]) {
+  Future getInstance(Type type, [dynamic context]) async {
     if (context != null) {
       if (context is wd.SearchContext) {
         context = new WebDriverPageLoaderElement(context, this);
@@ -58,43 +56,36 @@ class _WebDriverMouse implements PageLoaderMouse {
   _WebDriverMouse(this.driver);
 
   @override
-  void down(int button, {_WebElementPageLoaderElement eventTarget}) {
+  Future down(int button, {_WebElementPageLoaderElement eventTarget}) async {
     if (eventTarget == null) {
-      driver.mouse.down(button);
+      await driver.mouse.down(button);
     } else {
-      _fireEvent(eventTarget, 'mousedown', button);
+      await _fireEvent(eventTarget, 'mousedown', button);
     }
   }
 
   @override
-  void moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset) {
-    driver.mouse.moveTo(
+  Future moveTo(
+      _WebElementPageLoaderElement element, int xOffset, int yOffset) async {
+    await driver.mouse.moveTo(
         element: element.context, xOffset: xOffset, yOffset: yOffset);
   }
 
   @override
-  void up(int button, {_WebElementPageLoaderElement eventTarget}) {
+  Future up(int button, {_WebElementPageLoaderElement eventTarget}) async {
     if (eventTarget == null) {
-      driver.mouse.up(button);
+      await driver.mouse.up(button);
     } else {
-      _fireEvent(eventTarget, 'mouseup', button);
+      await _fireEvent(eventTarget, 'mouseup', button);
     }
   }
 
-  void _fireEvent(
-      _WebElementPageLoaderElement eventTarget, String type, int button) {
-    driver.execute("arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
+  Future _fireEvent(
+      _WebElementPageLoaderElement eventTarget, String type, int button) async {
+    await driver.execute(
+        "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
         "{'button' : arguments[2]}));", [eventTarget.context, type, button]);
   }
-}
-
-class _IOClock implements Clock {
-  const _IOClock();
-
-  @override
-  void sleep(Duration d) => io.sleep(d);
-  @override
-  DateTime get now => new DateTime.now();
 }
 
 abstract class WebDriverPageLoaderElement implements PageLoaderElement {
@@ -109,17 +100,18 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
     } else if (context is wd.WebElement) {
       return new _WebElementPageLoaderElement(context, loader);
     }
-    return null;
+    throw new PageLoaderException(
+        'Unable to create PageLoaderElement for $context');
   }
 
   WebDriverPageLoaderElement._(this.loader);
 
   @override
-  List<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
-      _fromContextList(context.findElements(new wd.By.cssSelector(selector)));
+  Stream<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
+      _fromContextStream(context.findElements(new wd.By.cssSelector(selector)));
 
-  List<WebDriverPageLoaderElement> _fromContextList(contexts) =>
-      contexts.map((e) => new WebDriverPageLoaderElement(e, loader)).toList();
+  Stream<WebDriverPageLoaderElement> _fromContextStream(Stream contexts) =>
+      contexts.map((e) => new WebDriverPageLoaderElement(e, loader));
 
   @override
   int get hashCode => context.hashCode;
@@ -132,6 +124,34 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   String toString() => '$runtimeType<${context.toString()}>';
+
+  @override
+  PageLoaderAttributes get attributes => new _EmptyAttributes();
+
+  @override
+  Stream<String> get classes async* {}
+
+  @override
+  Future clear() async =>
+      throw new PageLoaderException('$runtimeType.clear() is unsupported');
+
+  @override
+  Future click() async =>
+      throw new PageLoaderException('$runtimeType.click() is unsupported');
+
+  @override
+  Future type(String keys) async =>
+      throw new PageLoaderException('$runtimeType.type() is unsupported');
+
+  @override
+  PageLoaderAttributes get computedStyle => new _EmptyAttributes();
+
+  @override
+  Future<PageLoaderElement> get shadowRoot =>
+      throw new PageLoaderException('$runtimeType.shadowRoot() is unsupported');
+
+  @override
+  PageLoaderAttributes get style => new _EmptyAttributes();
 }
 
 class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
@@ -149,7 +169,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
         this.style = new _ElementStyle(_context);
 
   @override
-  WebDriverPageLoaderElement get shadowRoot {
+  Future<WebDriverPageLoaderElement> get shadowRoot async {
     if (loader.useShadowDom) {
       return new _ShadowRootPageLoaderElement(context, loader);
     } else {
@@ -158,35 +178,32 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   }
 
   @override
-  String get name => context.name;
+  Future<String> get name => context.name;
 
   @override
-  String get innerText => context.driver
-      .execute('return arguments[0].textContent;', [context])
-      .trim();
+  Future<String> get innerText async => (await context.driver.execute(
+      'return arguments[0].textContent;', [context])).trim();
 
   @override
-  String get visibleText => context.text;
+  Future<String> get visibleText => context.text;
 
   @override
-  bool get displayed => context.displayed;
+  Future<bool> get displayed => context.displayed;
 
   @override
-  List<String> get classes {
-    String classAttr = attributes['class'];
-    if (classAttr == null || classAttr == '') {
-      return const [];
-    } else {
-      return new UnmodifiableListView(classAttr.split(' '));
+  Stream<String> get classes async* {
+    String classAttr = await attributes['class'];
+    if (classAttr != null && classAttr != '') {
+      yield* new Stream.fromIterable(classAttr.split(' '));
     }
   }
 
   @override
-  void clear() => context.clear();
+  Future clear() => context.clear();
   @override
-  void click() => context.click();
+  Future click() => context.click();
   @override
-  void type(String keys) => context.sendKeys(keys);
+  Future type(String keys) => context.sendKeys(keys);
 }
 
 class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
@@ -196,31 +213,22 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
       : super._(loader);
 
   @override
-  String get name => '__document__';
+  Future<String> get name async => '__document__';
   @override
-  void type(String keys) => context.keyboard.sendKeys(keys);
+  Future type(String keys) => context.keyboard.sendKeys(keys);
+  @override
+  Future<bool> get displayed async => true;
 
-  // Overrides to make Analyzer happy.
   @override
-  PageLoaderAttributes get attributes => super.attributes;
+  Future<String> get innerText async =>
+      (await context.execute('return arguments[0].textContent;', [await _root]))
+          .trim();
+
   @override
-  List<String> get classes => super.classes;
-  @override
-  void clear() => super.clear();
-  @override
-  void click() => super.click();
-  @override
-  PageLoaderAttributes get computedStyle => super.computedStyle;
-  @override
-  bool get displayed => true;
-  @override
-  PageLoaderElement get shadowRoot => super.shadowRoot;
-  @override
-  PageLoaderAttributes get style => super.style;
-  @override
-  String get innerText => super.innerText;
-  @override
-  String get visibleText => super.visibleText;
+  Future<String> get visibleText async => (await _root).text;
+
+  Future<wd.WebElement> get _root =>
+      context.findElement(const wd.By.cssSelector(':root'));
 }
 
 class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
@@ -229,49 +237,30 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   _ShadowRootPageLoaderElement(this.context, WebDriverPageLoader loader)
       : super._(loader) {
     assert(loader.useShadowDom);
-    if (!_execute(' != null')) {
-      throw new PageLoaderException('$context does not have a ShadowRoot');
-    }
   }
 
   @override
-  String get name => '__shadow_root__';
+  Future<String> get name async => '__shadow_root__';
 
   @override
-  String get visibleText => context.text;
+  Future<String> get visibleText => context.text;
 
   @override
-  String get innerText => _execute('.textContent').trim();
+  Future<String> get innerText async => (await _execute('.textContent')).trim();
 
   @override
-  bool get displayed => context.displayed;
+  Future<bool> get displayed => context.displayed;
 
   @override
-  List<PageLoaderElement> getElementsByCss(String selector) =>
-      _fromContextList(_execute('.querySelectorAll("$selector")'));
+  Stream<PageLoaderElement> getElementsByCss(String selector) async* {
+    yield* _fromContextStream(new Stream.fromIterable(
+        await _execute('.querySelectorAll("$selector")')));
+  }
 
-  dynamic _execute(String script) {
+  Future _execute(String script) {
     return context.driver.execute(
         'return arguments[0].shadowRoot$script;', [context]);
   }
-
-  // Overrides to make Analyzer happy.
-  @override
-  PageLoaderAttributes get attributes => super.attributes;
-  @override
-  List<String> get classes => super.classes;
-  @override
-  void clear() => super.clear();
-  @override
-  void click() => super.click();
-  @override
-  PageLoaderAttributes get computedStyle => super.computedStyle;
-  @override
-  PageLoaderElement get shadowRoot => super.shadowRoot;
-  @override
-  PageLoaderAttributes get style => super.style;
-  @override
-  void type(String keys) => super.type(keys);
 }
 
 class _ElementAttributes extends PageLoaderAttributes {
@@ -280,7 +269,7 @@ class _ElementAttributes extends PageLoaderAttributes {
   _ElementAttributes(this._node);
 
   @override
-  String operator [](String name) => _node.attributes[name];
+  Future<String> operator [](String name) => _node.attributes[name];
 }
 
 class _ElementComputedStyle extends PageLoaderAttributes {
@@ -289,10 +278,9 @@ class _ElementComputedStyle extends PageLoaderAttributes {
   _ElementComputedStyle(this._node);
 
   @override
-  String operator [](String name) => _node.driver.execute(
-      'return window.getComputedStyle(arguments[0]).${_cssPropName(name)}', [
-    _node
-  ]);
+  Future<String> operator [](String name) => _node.driver.execute(
+      'return window.getComputedStyle(arguments[0]).${_cssPropName(name)}',
+      [_node]);
 }
 
 class _ElementStyle extends PageLoaderAttributes {
@@ -301,10 +289,15 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  String operator [](String name) => _node.driver.execute(
+  Future<String> operator [](String name) => _node.driver.execute(
       'return arguments[0].style.${_cssPropName(name)}', [_node]);
 }
 
 /// Convert hyphenated-properties to camelCase.
 String _cssPropName(String name) => name.splitMapJoin(new RegExp(r'-(\w)'),
     onMatch: (m) => m.group(1).toUpperCase(), onNonMatch: (m) => m);
+
+class _EmptyAttributes extends PageLoaderAttributes {
+  @override
+  Future<String> operator [](String name) async => null;
+}

@@ -13,9 +13,8 @@
 
 /// PageLoader HTML provides the necessary bindings to support using PageLoader
 /// Objects in tests that run within the browser.
-library pageloader.html;
+library pageloader.sync.html;
 
-import 'dart:async' show Future;
 import 'dart:collection';
 import 'dart:html';
 import 'dart:mirrors' hide Comment;
@@ -159,7 +158,8 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
             'Cannot create element for ShadowRoot when useShadowDom is false');
       }
     }
-    return null;
+    throw new PageLoaderException(
+        'Unable to create PageLoaderElement for $node');
   }
 
   HtmlPageLoaderElement._(this.loader);

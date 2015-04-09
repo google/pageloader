@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.core;
+library pageloader.sync.core;
 
 import 'dart:collection';
 import 'dart:mirrors';

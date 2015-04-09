@@ -10,16 +10,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-library pageloader.test.webdriver_no_shadow_dom;
+library pageloader.async.test.webdriver;
 
+import 'dart:async';
 import 'dart:io';
 
-import 'package:pageloader/webdriver.dart' show WebDriverPageLoader;
+import 'package:pageloader/async/webdriver.dart' show WebDriverPageLoader;
 import 'package:path/path.dart' as path;
 import 'package:unittest/unittest.dart';
 import 'package:unittest/vm_config.dart' show useVMConfiguration;
-import 'package:sync_webdriver/sync_webdriver.dart'
-    show Capabilities, WebDriver;
+import 'package:webdriver/io.dart' show Capabilities, WebDriver, createDriver;
 
 import 'pageloader_test.dart' as plt;
 
@@ -28,14 +28,14 @@ void main() {
 
   WebDriver driver;
 
-  setUp(() {
-    driver = _createTestDriver();
-    driver.url = _testPagePath;
-    plt.loader = new WebDriverPageLoader(driver, useShadowDom: false);
+  setUp(() async {
+    driver = await _createTestDriver();
+    await driver.navigate.to(_testPagePath);
+    plt.loader = new WebDriverPageLoader(driver);
   });
 
-  tearDown(() {
-    driver.quit();
+  tearDown(() async {
+    await driver.quit();
     plt.loader = null;
   });
 
@@ -43,8 +43,7 @@ void main() {
 }
 
 String get _testPagePath {
-  var testPagePath =
-      path.join('test', 'webdriver_no_shadow_dom_test_page.html');
+  var testPagePath = path.join('test', 'data', 'webdriver_test_page.html');
   testPagePath = path.absolute(testPagePath);
   if (!FileSystemEntity.isFileSync(testPagePath)) {
     throw new Exception('Could not find the test file at "$testPagePath".'
@@ -53,7 +52,7 @@ String get _testPagePath {
   return path.toUri(testPagePath).toString();
 }
 
-WebDriver _createTestDriver() {
+Future<WebDriver> _createTestDriver() {
   Map capabilities = Capabilities.chrome;
   Map env = Platform.environment;
 
@@ -71,5 +70,5 @@ WebDriver _createTestDriver() {
     capabilities['chromeOptions'] = chromeOptions;
   }
 
-  return new WebDriver(desired: capabilities);
+  return createDriver(desired: capabilities);
 }

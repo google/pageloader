@@ -11,31 +11,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.interfaces;
+library pageloader.async.interfaces;
 
-import 'dart:collection';
-
-import 'package:matcher/matcher.dart';
+import 'dart:async';
 
 abstract class Lazy<T> {
-  T call();
+  Future<T> call();
 }
 
 abstract class PageLoader {
   bool get useShadowDom;
   PageLoaderElement get globalContext;
 
-  Object getInstance(Type type, [dynamic context]);
+  Future<Object> getInstance(Type type, [dynamic context]);
 
   PageLoaderMouse get mouse;
-
-  /// Waits for [condition] to be evaluated successful and return a value other
-  /// than [null].
-  waitForValue(condition(), {Duration timeout, Duration interval});
-
-  /// Waits for [condition] to be evaluated successful and return a value
-  /// that matches [matcher].
-  waitFor(condition(), Matcher matcher, {Duration timeout, Duration interval});
 }
 
 abstract class PageLoaderMouse {
@@ -43,78 +33,65 @@ abstract class PageLoaderMouse {
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  void down(int button, {PageLoaderElement eventTarget});
+  Future down(int button, {PageLoaderElement eventTarget});
 
   /// Release [button] on the mouse at its current location. If [eventTarget] is
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  void up(int button, {PageLoaderElement eventTarget});
+  Future up(int button, {PageLoaderElement eventTarget});
 
   /// Move the mouse to a location relative to [element].
-  void moveTo(PageLoaderElement element, int xOffset, int yOffset);
+  Future moveTo(PageLoaderElement element, int xOffset, int yOffset);
 }
 
 abstract class PageLoaderElement {
   PageLoader get loader;
 
-  PageLoaderElement get shadowRoot;
-  String get innerText;
-  String get visibleText;
-  String get name;
+  Future<PageLoaderElement> get shadowRoot;
+  Future<String> get innerText;
+  Future<String> get visibleText;
+  Future<String> get name;
   PageLoaderAttributes get attributes;
   PageLoaderAttributes get computedStyle;
   PageLoaderAttributes get style;
-  bool get displayed;
-  List<String> get classes;
+  Future<bool> get displayed;
+  Stream<String> get classes;
 
-  List<PageLoaderElement> getElementsByCss(String selector);
+  Stream<PageLoaderElement> getElementsByCss(String selector);
 
-  void clear();
-  void click();
-  void type(String keys);
+  Future clear();
+  Future click();
+  Future type(String keys);
 }
 
 abstract class PageLoaderAttributes {
-  String operator [](String name);
+  Future<String> operator [](String name);
 }
 
 abstract class Finder {
-  List<PageLoaderElement> findElements(PageLoaderElement context);
-}
-
-/// Enum of options that can be returned by [HasFilterFinderOptions.options].
-class FilterFinderOption {
-  final String option;
-
-  const FilterFinderOption._(this.option);
-
-  /// Disable the default implicit display filtering for a field.
-  static const FilterFinderOption DISABLE_IMPLICIT_DISPLAY_FILTERING =
-      const FilterFinderOption._('DISABLE_IMPLICIT_DISPLAY_FILTERING');
-}
-
-abstract class HasFilterFinderOptions {
-  const HasFilterFinderOptions();
-
-  List<FilterFinderOption> get options;
+  Stream<PageLoaderElement> findElements(PageLoaderElement context);
 }
 
 abstract class Filter {
   const Filter();
 
-  List<PageLoaderElement> filter(List<PageLoaderElement> elements);
+  Stream<PageLoaderElement> filter(Stream<PageLoaderElement> elements);
 }
 
 abstract class ElementFilter implements Filter {
   const ElementFilter();
 
   @override
-  List<PageLoaderElement> filter(List<PageLoaderElement> elements) =>
-      new UnmodifiableListView<PageLoaderElement>(
-          elements.where(keep).toList(growable: false));
+  Stream<PageLoaderElement> filter(Stream<PageLoaderElement> elements) async* {
+    await for (PageLoaderElement el in elements) {
+      if (await keep(el)) {
+        yield el;
+      }
+    }
+  }
 
-  bool keep(PageLoaderElement element);
+  Future<bool> keep(PageLoaderElement element);
 }
 
 class PageLoaderException {

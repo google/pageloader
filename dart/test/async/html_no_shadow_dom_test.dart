@@ -10,11 +10,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-library pageloader.test.html_no_shadow_dom;
+library pageloader.async.test.html_no_shadow_dom;
 
+import 'dart:async';
 import 'dart:html' as html;
 
-import 'package:pageloader/html.dart';
+import 'package:pageloader/async/html.dart';
 import 'package:unittest/html_enhanced_config.dart'
     show useHtmlEnhancedConfiguration;
 import 'package:unittest/unittest.dart';
@@ -105,28 +106,28 @@ void main() {
           "${evt.screen.x}, ${evt.screen.y}";
     });
 
-    plt.loader = new HtmlPageLoader(div, useShadowDom: false);
+    plt.loader = new HtmlPageLoader(div, syncFn, useShadowDom: false);
   });
 
   group('html specific tests', () {
-    test('value on text', () {
-      var page = plt.loader.getInstance(PageForAttributesTests);
-      var handlerCalled = false;
+    test('value on text', () async {
+      var page = await plt.loader.getInstance(PageForAttributesTests);
+      var handlerCalled = new Completer<bool>();
       var node = (page.text as HtmlPageLoaderElement).node as html.InputElement;
       node.onInput.listen((event) {
-        handlerCalled = true;
+        handlerCalled.complete(true);
       });
-      expect(page.text.attributes['value'], '');
-      page.text.type('some text');
-      expect(page.text.attributes['value'], 'some text');
-      expect(handlerCalled, isTrue);
+      expect(await page.text.attributes['value'], '');
+      await page.text.type('some text');
+      expect(await page.text.attributes['value'], 'some text');
+      expect(await handlerCalled.future, isTrue);
     });
 
-    test('keypress events', () {
+    test('keypress events', () async {
       var data = 'my data';
       var list = [];
       html.document.body.onKeyPress.listen((evt) => list.add(evt.charCode));
-      plt.loader.globalContext.type(data);
+      await plt.loader.globalContext.type(data);
       expect(new String.fromCharCodes(list), equals(data));
     });
   });
@@ -138,4 +139,8 @@ class NoOpNodeValidator implements html.NodeValidator {
   bool allowsAttribute(
       html.Element element, String attributeName, String value) => true;
   bool allowsElement(html.Element element) => true;
+}
+
+Future syncFn() async {
+  await new Future.delayed(new Duration(milliseconds: 200));
 }

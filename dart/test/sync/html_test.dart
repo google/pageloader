@@ -10,11 +10,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-library pageloader.test.html;
+library pageloader.sync.test.html;
 
 import 'dart:html' as html;
 
-import 'package:pageloader/html.dart';
+import 'package:pageloader/sync/html.dart';
 import 'package:unittest/html_enhanced_config.dart'
     show useHtmlEnhancedConfiguration;
 import 'package:unittest/unittest.dart';

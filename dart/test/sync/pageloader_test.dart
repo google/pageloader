@@ -11,10 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.test;
+library pageloader.sync.test;
 
 import 'package:matcher/matcher.dart';
-import 'package:pageloader/objects.dart';
+import 'package:pageloader/sync/objects.dart';
 import 'package:unittest/unittest.dart';
 
 import 'page_objects.dart';
