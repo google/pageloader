@@ -91,6 +91,10 @@ class _ClassInfo {
             '${type.simpleName} has Filter annotations but no Finder annotation');
       }
     }
+    if (finder == root && filters.isEmpty) {
+      throw new PageLoaderException(
+          'Useless @root annotation of ${type.simpleName}');
+    }
 
     return new _ClassInfo._(
         type, _fieldInfos(type), finder, filters, displayCheck);
