@@ -219,9 +219,16 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
         this.style = new _ElementStyle(_node);
 
   @override
-  PageLoaderElement get shadowRoot => loader.useShadowDom
-      ? new HtmlPageLoaderElement(node.shadowRoot, loader)
-      : this;
+  PageLoaderElement get shadowRoot {
+    if (!loader.useShadowDom) {
+      return this;
+    }
+    if (node.shadowRoot != null) {
+      return new HtmlPageLoaderElement(node.shadowRoot, loader);
+    }
+    return null;
+  }
+
   @override
   String get name => node.tagName.toLowerCase();
   // TODO(DrMarcII): implement this to recurse up the tree to see if displayed
