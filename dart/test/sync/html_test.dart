@@ -57,9 +57,3 @@ void main() {
 
   plt.runTests();
 }
-
-class NoOpNodeValidator implements html.NodeValidator {
-  bool allowsAttribute(
-      html.Element element, String attributeName, String value) => true;
-  bool allowsElement(html.Element element) => true;
-}
