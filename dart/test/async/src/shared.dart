@@ -11,9 +11,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.async.test.page_objects;
+library pageloader.async.test.shared;
 
+import 'package:matcher/matcher.dart';
 import 'package:pageloader/async/objects.dart';
+
+PageLoader loader;
 
 class PageForSimpleTest {
   @inject
@@ -23,8 +26,7 @@ class PageForSimpleTest {
   Table table;
 }
 
-@All(const [root, const ByTagName('table')])
-@IsTag('table')
+@EnsureTag('table')
 class Table {
   @root
   PageLoaderElement table;
@@ -36,4 +38,19 @@ class Table {
 class Row {
   @ByTagName('td')
   List<PageLoaderElement> cells;
+}
+
+verifyRows(List<Row> rows) async {
+  expect(rows, hasLength(2));
+  expect(rows.first.cells, hasLength(2));
+  expect(rows[1].cells, hasLength(2));
+  expect(await rows.first.cells.first.visibleText, 'r1c1');
+  expect(await rows.first.cells[1].visibleText, 'r1c2');
+  expect(await rows[1].cells.first.visibleText, 'r2c1');
+  expect(await rows[1].cells[1].visibleText, 'r2c2');
+}
+
+verifyTable(Table table) async {
+  expect(await table.table.name, equalsIgnoringCase('TABLE'));
+  await verifyRows(table.rows);
 }

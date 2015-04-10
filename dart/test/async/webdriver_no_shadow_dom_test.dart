@@ -22,6 +22,7 @@ import 'package:unittest/vm_config.dart' show useVMConfiguration;
 import 'package:webdriver/io.dart' show Capabilities, WebDriver, createDriver;
 
 import 'pageloader_test.dart' as plt;
+import 'src/shared.dart' as shared;
 
 void main() {
   useVMConfiguration();
@@ -31,12 +32,12 @@ void main() {
   setUp(() async {
     driver = await _createTestDriver();
     await driver.navigate.to(_testPagePath);
-    plt.loader = new WebDriverPageLoader(driver, useShadowDom: false);
+    shared.loader = new WebDriverPageLoader(driver, useShadowDom: false);
   });
 
   tearDown(() async {
     await driver.quit();
-    plt.loader = null;
+    shared.loader = null;
   });
 
   plt.runTests();
