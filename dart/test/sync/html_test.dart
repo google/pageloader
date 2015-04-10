@@ -19,6 +19,7 @@ import 'package:unittest/html_enhanced_config.dart'
     show useHtmlEnhancedConfiguration;
 import 'package:unittest/unittest.dart';
 
+import '../data/html_setup.dart' as html_setup;
 import 'page_objects.dart';
 import 'pageloader_test.dart' as plt;
 
@@ -26,90 +27,7 @@ void main() {
   useHtmlEnhancedConfiguration();
 
   setUp(() {
-    var body = html.document.getElementsByTagName('body').first;
-    const bodyHtml = '''
-        <style>
-          .class1 { background-color: #00FF00; }
-        </style>
-        <table id='table1' non-standard='a non standard attr'
-            class='class1 class2 class3' style='color: #800080;'>
-          <tr>
-            <td>r1c1</td>
-            <td>r1c2</td>
-          </tr>
-          <tr>
-            <td>r2c1</td>
-            <td>r2c2</td>
-          </tr>
-        </table>
-        <div id='div' style='display: none; background-color: red;'>
-          some not displayed text</div>
-        <div id='mouse'>area for mouse events</div>
-        <input type='text' id='text' />
-        <input type='text' readonly id='readonly' disabled />
-        <input type='checkbox' class='with-class-test class1 class2' />
-        <input type='radio' name='radio' value='radio1' />
-        <input type='radio' name='radio' value='radio2' />
-        <a href="test.html" id="anchor">test</a>
-        <img src="test.png">
-        <select id='select1'>
-          <option id='option1' value='value 1'>option 1</option>
-          <option id='option2' value='value 2'>option 2</option>
-        </select>
-        <textarea id='textarea'></textarea>
-        <div class="outer-div">
-          outer div 1
-          <a-custom-tag></a-custom-tag>
-        </div>
-        <div class="outer-div">
-          outer div 2
-          <div class="inner-div">
-            inner div 1
-          </div>
-          <div class="inner-div special">
-            inner div 2
-          </div>
-        </div>
-        <a-custom-tag id="button-1">
-          button 1
-        </a-custom-tag>
-        <a-custom-tag id="button-2">
-          button 2
-        </a-custom-tag>
-        <p id="nbsp"> &nbsp; &nbsp; </p>''';
-
-    var templateHtml = '<button id="inner">some <content></content></button>';
-
-    var div = body.querySelectorAll('div[id=testdocument]');
-    if (div.length == 1) {
-      div = div[0];
-    } else {
-      div = new html.DivElement();
-      div.id = 'testdocument';
-      body.append(div);
-    }
-    div.setInnerHtml(bodyHtml, validator: new NoOpNodeValidator());
-
-    html.document.getElementsByTagName('a-custom-tag').forEach((element) {
-      var shadow = element.createShadowRoot();
-      shadow.setInnerHtml(templateHtml, validator: new NoOpNodeValidator());
-    });
-    var displayedDiv = html.document.getElementById('mouse');
-    displayedDiv.onMouseDown.listen((evt) {
-      displayedDiv.text = displayedDiv.text +
-          " MouseDown: ${evt.client.x}, ${evt.client.y}; "
-          "${evt.screen.x}, ${evt.screen.y}";
-    });
-    displayedDiv.onMouseUp.listen((evt) {
-      displayedDiv.text = displayedDiv.text +
-          " MouseUp: ${evt.client.x}, ${evt.client.y}; "
-          "${evt.screen.x}, ${evt.screen.y}";
-    });
-    displayedDiv.onMouseMove.listen((evt) {
-      displayedDiv.text = displayedDiv.text +
-          " MouseMove: ${evt.client.x}, ${evt.client.y}; "
-          "${evt.screen.x}, ${evt.screen.y}";
-    });
+    var div = html_setup.setUp();
 
     plt.loader = new HtmlPageLoader(div);
   });

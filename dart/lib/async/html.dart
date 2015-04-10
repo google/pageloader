@@ -130,15 +130,16 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   factory HtmlPageLoaderElement(Node node, HtmlPageLoader loader) {
     if (node is Element) {
       return new _ElementPageLoaderElement(node, loader);
-    } else if (node is Document) {
+    }
+    if (node is Document) {
       return new _DocumentPageLoaderElement(node, loader);
-    } else if (node is ShadowRoot) {
+    }
+    if (node is ShadowRoot) {
       if (loader.useShadowDom) {
         return new _ShadowRootPageLoaderElement(node, loader);
-      } else {
-        throw new PageLoaderException(
-            'Cannot create element for ShadowRoot when useShadowDom is false');
       }
+      throw new PageLoaderException(
+          'Cannot create element for ShadowRoot when useShadowDom is false');
     }
     throw new PageLoaderException(
         'Unable to create PageLoaderElement for $node');
@@ -208,7 +209,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<PageLoaderElement> get shadowRoot =>
-      throw new PageLoaderException('$runtimeType.shadowRoot() is unsupported');
+      throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
 
   @override
   PageLoaderAttributes get style => new _EmptyAttributes();
@@ -230,10 +231,12 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   @override
   Future<PageLoaderElement> get shadowRoot async {
     if (loader.useShadowDom) {
-      return new HtmlPageLoaderElement(node.shadowRoot, loader);
-    } else {
-      return this;
+      if (node.shadowRoot != null) {
+        return new HtmlPageLoaderElement(node.shadowRoot, loader);
+      }
+      throw new PageLoaderException('$this does not have a shadowRoot');
     }
+    return this;
   }
 
   @override
@@ -283,7 +286,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
       node.value = '';
       node.dispatchEvent(new TextEvent('textInput', data: ''));
     } else {
-      super.clear();
+      throw new PageLoaderException('$this does not support clear.');
     }
     await loader.sync();
   }

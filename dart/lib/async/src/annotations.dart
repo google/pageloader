@@ -30,6 +30,8 @@ class _Optional {
   String toString() => '@optional';
 }
 
+/// Used to annotate PageLoader-type fields that should have the instance of PageLoader
+/// injected.
 const inject = const _Inject();
 class _Inject {
   const _Inject();
@@ -38,7 +40,7 @@ class _Inject {
   String toString() => '@inject';
 }
 
-/// By default PageLoader ensure that all elements are displayed.
+/// By default PageLoader ensures that all elements are displayed.
 /// Adding @disableDisplayedCheck to an annotated field or class will disable this check from this
 /// point onwards.
 const disableDisplayedCheck = const _DisableDisplayedCheck();
