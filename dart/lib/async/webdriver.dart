@@ -173,7 +173,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   Future<WebDriverPageLoaderElement> get shadowRoot async {
     if (loader.useShadowDom) {
       if ((await context.driver.execute(
-          'arguments[0].shadowRoot != null', [context]))) {
+          'return arguments[0].shadowRoot != null', [context]))) {
         return new _ShadowRootPageLoaderElement(context, loader);
       }
       throw new PageLoaderException('$this does not have a shadowRoot');
