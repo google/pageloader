@@ -1,5 +1,5 @@
 name: pageloader
-version: 2.0.0-pre.2
+version: 2.0.0-pre.3
 author: Google, Inc.
 description: >
   Supports the creation of page objects that can be shared between in-browser tests
