@@ -13,7 +13,7 @@
 
 library pageloader.async.test.shared;
 
-import 'package:matcher/matcher.dart';
+import 'package:test/test.dart';
 import 'package:pageloader/async/objects.dart';
 
 PageLoader loader;

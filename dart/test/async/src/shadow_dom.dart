@@ -13,9 +13,8 @@
 
 library pageloader.async.test.shadow_dom;
 
-import 'package:matcher/matcher.dart';
 import 'package:pageloader/async/objects.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'shared.dart';
 
 void runTests() {
@@ -31,7 +30,7 @@ void runTests() {
       if (loader.useShadowDom) {
         expect(page.shouldBeEmpty, hasLength(0));
       }
-    });
+    }, testOn: 'browser');
 
     test('WithVisibleText in shadow dom', () async {
       PageForShadowDomWithVisibleTextTest page =
@@ -39,7 +38,7 @@ void runTests() {
 
       expect(await page.button1.visibleText, contains('button 1'));
       expect(await page.button1.visibleText, contains('some'));
-    });
+    }, testOn: 'browser');
 
     test('WithInnerText in shadow dom', () async {
       if (!loader.useShadowDom) {
@@ -55,7 +54,7 @@ void runTests() {
       expect(await page.button1.visibleText, contains('some'));
       expect(await page.button1.innerText, contains('button 1'));
       expect(await page.button1.innerText, isNot(contains('some')));
-    });
+    }, testOn: 'browser');
 
     test('text methods on shadow root', () async {
       PageForTextOnShadowRootTest page =
@@ -88,7 +87,7 @@ void runTests() {
       }
       expect(
           await (await page.buttons[2].shadowRoot).innerText, contains('some'));
-    });
+    }, testOn: 'browser');
   });
 }
 

@@ -13,9 +13,8 @@
 
 library pageloader.async.test.mouse;
 
-import 'package:matcher/matcher.dart';
 import 'package:pageloader/async/objects.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'package:webdriver/async_helpers.dart';
 import 'shared.dart';
 
@@ -34,7 +33,7 @@ void runTests() {
       await loader.mouse.up(0);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseUp'));
-    });
+    }, testOn: 'vm');
 
     test('mouse with event target', () async {
       PageForMouseTest page = await loader.getInstance(PageForMouseTest);

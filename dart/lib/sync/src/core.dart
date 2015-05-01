@@ -56,6 +56,31 @@ abstract class BasePageLoader implements PageLoader {
   @override
   waitFor(condition(), Matcher matcher,
       {Duration timeout: _DEFAULT_WAIT, Duration interval: _DEFAULT_INTERVAL}) {
+    expect(value, matcher) {
+      if (matcher is! Matcher) {
+        matcher = equals(matcher);
+      }
+
+      var matchState = {};
+      if (matcher.matches(value, matchState)) {
+        return;
+      }
+      var desc = new StringDescription()
+        ..add('Expected: ')
+        ..addDescriptionOf(matcher)
+        ..add('\n')
+        ..add('  Actual: ')
+        ..addDescriptionOf(value)
+        ..add('\n');
+
+      var mismatchDescription = new StringDescription();
+      matcher.describeMismatch(value, mismatchDescription, matchState, true);
+      if (mismatchDescription.length > 0) {
+        desc.add('   Which: ${mismatchDescription}\n');
+      }
+      throw new Exception(desc.toString());
+    }
+
     var endTime = clock.now.add(timeout);
     while (true) {
       try {

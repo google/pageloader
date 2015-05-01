@@ -14,9 +14,8 @@
 library pageloader.async.test.annotation;
 
 import 'dart:async';
-import 'package:matcher/matcher.dart';
 import 'package:pageloader/async/objects.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'shared.dart';
 
 void runTests() {
@@ -55,7 +54,7 @@ void runTests() {
           orderedEquals(['inner div 1', 'inner div 2']));
       expect(await page.innerDivSpecial.visibleText, 'inner div 2');
       expect(await page.innerShadow.visibleText, contains('some'));
-    });
+    }, testOn: 'browser');
 
     test('@Global', () async {
       PageForGlobalTest page = await loader.getInstance(PageForGlobalTest);
