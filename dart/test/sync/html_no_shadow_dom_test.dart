@@ -10,22 +10,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+@TestOn('browser')
 library pageloader.sync.test.html_no_shadow_dom;
 
 import 'dart:html' as html;
 
 import 'package:pageloader/sync/html.dart';
-import 'package:unittest/html_enhanced_config.dart'
-    show useHtmlEnhancedConfiguration;
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 import '../data/html_no_shadow_dom_setup.dart' as html_setup;
 import 'page_objects.dart';
 import 'pageloader_test.dart' as plt;
 
 void main() {
-  useHtmlEnhancedConfiguration();
-
   setUp(() {
     var div = html_setup.setUp();
 

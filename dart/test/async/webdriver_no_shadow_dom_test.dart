@@ -10,6 +10,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+@TestOn('vm')
 library pageloader.async.test.webdriver;
 
 import 'dart:async';
@@ -17,16 +19,13 @@ import 'dart:io';
 
 import 'package:pageloader/async/webdriver.dart' show WebDriverPageLoader;
 import 'package:path/path.dart' as path;
-import 'package:unittest/unittest.dart';
-import 'package:unittest/vm_config.dart' show useVMConfiguration;
+import 'package:test/test.dart';
 import 'package:webdriver/io.dart' show Capabilities, WebDriver, createDriver;
 
-import 'pageloader_test.dart' as plt;
+import 'src/common.dart' as plt;
 import 'src/shared.dart' as shared;
 
 void main() {
-  useVMConfiguration();
-
   WebDriver driver;
 
   setUp(() async {

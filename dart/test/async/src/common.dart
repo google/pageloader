@@ -13,16 +13,16 @@
 
 library pageloader.async.test;
 
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
-import 'src/annotation_test.dart' as annotation;
-import 'src/attribute_test.dart' as attribute;
-import 'src/basic_test.dart' as basic;
-import 'src/display_filtering_test.dart' as display_filtering;
-import 'src/error_test.dart' as error;
-import 'src/mouse_test.dart' as mouse;
-import 'src/shadow_dom_test.dart' as shadow_dom;
-import 'src/typing_test.dart' as typing;
+import 'annotations.dart' as annotation;
+import 'attributes.dart' as attribute;
+import 'basic.dart' as basic;
+import 'display_filtering.dart' as display_filtering;
+import 'errors.dart' as error;
+import 'mouse.dart' as mouse;
+import 'shadow_dom.dart' as shadow_dom;
+import 'typing.dart' as typing;
 
 void runTests() {
   group('core PageLoader', () {

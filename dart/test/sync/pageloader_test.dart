@@ -11,11 +11,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@TestOn('vm && browser') // disable these tests with impossible constraint
 library pageloader.sync.test;
 
 import 'package:matcher/matcher.dart';
 import 'package:pageloader/sync/objects.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 import 'page_objects.dart';
 
@@ -232,7 +233,7 @@ void runTests() {
       if (loader.useShadowDom) {
         expect(page.shouldBeEmpty, hasLength(0));
       }
-    });
+    }, testOn: 'browser');
 
     test('WithVisibleText in shadow dom', () {
       PageForShadowDomWithVisibleTextTest page =
@@ -240,7 +241,7 @@ void runTests() {
 
       expect(page.button1.visibleText, contains('button 1'));
       expect(page.button1.visibleText, contains('some'));
-    });
+    }, testOn: 'browser');
 
     test('chain', () {
       PageForChainTest page = loader.getInstance(PageForChainTest);
@@ -266,7 +267,7 @@ void runTests() {
       expect(page.button1.visibleText, contains('some'));
       expect(page.button1.innerText, contains('button 1'));
       expect(page.button1.innerText, isNot(contains('some')));
-    });
+    }, testOn: 'browser');
 
     test('text methods on shadow root', () {
       PageForTextOnShadowRootTest page =
@@ -291,7 +292,7 @@ void runTests() {
         expect(page.buttons[2].shadowRoot.innerText, contains('button 2'));
       }
       expect(page.buttons[2].shadowRoot.innerText, contains('some'));
-    });
+    }, testOn: 'browser');
 
     test('classes', () {
       PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
@@ -341,7 +342,7 @@ void runTests() {
         ..moveTo(page.element, 10, 10)
         ..up(0);
       loader.waitFor(() => page.element.visibleText, contains('MouseUp'));
-    });
+    }, testOn: 'vm');
 
     test('mouse with event target', () {
       PageForMouseTest page = loader.getInstance(PageForMouseTest);

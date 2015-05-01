@@ -10,22 +10,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+@TestOn('vm')
 library pageloader.sync.test.webdriver_no_shadow_dom;
 
 import 'dart:io';
 
 import 'package:pageloader/sync/webdriver.dart' show WebDriverPageLoader;
 import 'package:path/path.dart' as path;
-import 'package:unittest/unittest.dart';
-import 'package:unittest/vm_config.dart' show useVMConfiguration;
+import 'package:test/test.dart';
 import 'package:sync_webdriver/sync_webdriver.dart'
     show Capabilities, WebDriver;
 
 import 'pageloader_test.dart' as plt;
 
 void main() {
-  useVMConfiguration();
-
   WebDriver driver;
 
   setUp(() {

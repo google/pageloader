@@ -15,10 +15,9 @@ library pageloader.async.test.html;
 import 'dart:async';
 import 'dart:html' as html;
 
-import 'package:matcher/matcher.dart';
 import 'package:pageloader/async/html.dart';
 import 'package:pageloader/async/objects.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'shared.dart';
 
 void runTests() {

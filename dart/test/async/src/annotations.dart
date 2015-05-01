@@ -14,9 +14,8 @@
 library pageloader.async.test.annotation;
 
 import 'dart:async';
-import 'package:matcher/matcher.dart';
 import 'package:pageloader/async/objects.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'shared.dart';
 
 void runTests() {
