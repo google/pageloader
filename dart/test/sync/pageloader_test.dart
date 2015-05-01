@@ -251,7 +251,7 @@ void runTests() {
       expect(page.innerDivsText, orderedEquals(['inner div 1', 'inner div 2']));
       expect(page.innerDivSpecial.visibleText, 'inner div 2');
       expect(page.innerShadow.visibleText, contains('some'));
-    });
+    }, testOn: 'browser');
 
     test('WithInnerText in shadow dom', () {
       if (!loader.useShadowDom) {

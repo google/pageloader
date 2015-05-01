@@ -54,7 +54,7 @@ void runTests() {
           orderedEquals(['inner div 1', 'inner div 2']));
       expect(await page.innerDivSpecial.visibleText, 'inner div 2');
       expect(await page.innerShadow.visibleText, contains('some'));
-    });
+    }, testOn: 'browser');
 
     test('@Global', () async {
       PageForGlobalTest page = await loader.getInstance(PageForGlobalTest);
