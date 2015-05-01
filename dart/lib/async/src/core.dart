@@ -294,13 +294,13 @@ abstract class _FieldInfo {
 
   Future setField(InstanceMirror instance, PageLoaderElement context,
       BasePageLoader loader, bool displayCheck) async {
-    //try {
-    instance.setField(
-        _fieldName, await calculateFieldValue(context, loader, displayCheck));
-    //} catch (e) {
-    //  throw new PageLoaderException(
-    //      'Unable to load field $_fieldName caused by\n$e');
-    //}
+    try {
+      instance.setField(
+          _fieldName, await calculateFieldValue(context, loader, displayCheck));
+    } catch (e) {
+      throw new PageLoaderException(
+          'Unable to load field $_fieldName caused by\n$e');
+    }
   }
 
   Future calculateFieldValue(

@@ -31,7 +31,7 @@ void main() {
 
   setUp(() async {
     driver = await _createTestDriver();
-    await driver.navigate.to(_testPagePath);
+    await driver.get(_testPagePath);
     shared.loader = new WebDriverPageLoader(driver);
   });
 
