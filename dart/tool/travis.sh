@@ -37,12 +37,7 @@ dartanalyzer --fatal-warnings \
   test/async/webdriver_no_shadow_dom_test.dart \
   test/async/webdriver_test.dart
 
+# Start chromedriver.
+chromedriver --port=4444 --url-base=wd/hub &
 
-if [ "$TRAVIS" ]; then
-  # Start chromedriver.
-  chromedriver --port=4444 --url-base=wd/hub &
-
-  dart test/sync/webdriver_no_shadow_dom_test.dart
-
-  dart test/async/webdriver_no_shadow_dom_test.dart
-fi
+pub run test -r expanded -p vm
