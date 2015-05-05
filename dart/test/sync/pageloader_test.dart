@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@Skip() // disable these tests with impossible constraint
+@Skip()
 library pageloader.sync.test;
 
 import 'package:matcher/matcher.dart';
