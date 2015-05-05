@@ -20,24 +20,12 @@ set -e
 cd dart
 
 # Verify that the libraries are error free.
-dartanalyzer --fatal-warnings \
-  lib/sync/clock.dart \
-  lib/sync/html.dart \
-  lib/sync/objects.dart \
-  lib/sync/webdriver.dart \
-  test/sync/html_no_shadow_dom_test.dart \
-  test/sync/html_test.dart \
-  test/sync/webdriver_no_shadow_dom_test.dart \
-  test/sync/webdriver_test.dart \
-  lib/async/html.dart \
-  lib/async/objects.dart \
-  lib/async/webdriver.dart \
-  test/async/html_no_shadow_dom_test.dart \
-  test/async/html_test.dart \
-  test/async/webdriver_no_shadow_dom_test.dart \
-  test/async/webdriver_test.dart
+grep -Rl --include "*.dart" --exclude-dir="packages" '^library .*;$' lib/ test/ | \
+    xargs dartanalyzer --fatal-warnings
 
 # Start chromedriver.
 chromedriver --port=4444 --url-base=wd/hub &
 
+# Run tests.
+# TODO(DrMarcII) add in-browser tests.
 pub run test -r expanded -p vm

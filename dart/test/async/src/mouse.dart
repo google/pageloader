@@ -15,7 +15,7 @@ library pageloader.async.test.mouse;
 
 import 'package:pageloader/async/objects.dart';
 import 'package:test/test.dart';
-import 'package:webdriver/async_helpers.dart';
+import 'package:webdriver/support/async.dart';
 import 'shared.dart';
 
 void runTests() {
