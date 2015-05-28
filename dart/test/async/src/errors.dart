@@ -114,6 +114,11 @@ class PageForPrivateSettersTest {
 
   @ByTagName('table')
   set _table(Table t) => table = t;
+
+  // added to make analyzer happy
+  void setTable(Table t) {
+    _table = t;
+  }
 }
 
 class PageForMultipleFinderTest {

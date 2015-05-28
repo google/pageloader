@@ -43,16 +43,17 @@ abstract class PageLoaderMouse {
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  void down(int button, {PageLoaderElement eventTarget});
+  void down(int button, {PageLoaderElement eventTarget, bool sync: true});
 
   /// Release [button] on the mouse at its current location. If [eventTarget] is
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  void up(int button, {PageLoaderElement eventTarget});
+  void up(int button, {PageLoaderElement eventTarget, bool sync: true});
 
   /// Move the mouse to a location relative to [element].
-  void moveTo(PageLoaderElement element, int xOffset, int yOffset);
+  void moveTo(PageLoaderElement element, int xOffset, int yOffset,
+      {PageLoaderElement eventTarget, bool sync: true});
 }
 
 abstract class PageLoaderElement {
@@ -70,9 +71,9 @@ abstract class PageLoaderElement {
 
   List<PageLoaderElement> getElementsByCss(String selector);
 
-  void clear();
-  void click();
-  void type(String keys);
+  void clear({bool sync: true});
+  void click({bool sync: true});
+  void type(String keys, {bool sync: true});
 }
 
 abstract class PageLoaderAttributes {
