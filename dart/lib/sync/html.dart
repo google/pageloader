@@ -72,7 +72,11 @@ class HtmlPageLoader extends BasePageLoader {
     return getInstanceInternal(type, context);
   }
 
-  void sync() => clock.sleep(_DEFAULT_INTERVAL);
+  void sync([bool enableSync = true]) {
+    if (enableSync) {
+      clock.sleep(_DEFAULT_INTERVAL);
+    }
+  }
 }
 
 class _HtmlMouse implements PageLoaderMouse {
@@ -84,24 +88,26 @@ class _HtmlMouse implements PageLoaderMouse {
   _HtmlMouse(this.loader);
 
   @override
-  void down(int button, {_ElementPageLoaderElement eventTarget}) {
+  void down(int button,
+      {_ElementPageLoaderElement eventTarget, bool sync: true}) {
     dispatchEvent('mousedown', eventTarget, button);
-    loader.sync();
+    loader.sync(sync);
   }
 
   @override
   void moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset,
-      {_ElementPageLoaderElement eventTarget}) {
+      {_ElementPageLoaderElement eventTarget, bool sync: true}) {
     clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
     clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
     dispatchEvent('mousemove', eventTarget);
-    loader.sync();
+    loader.sync(sync);
   }
 
   @override
-  void up(int button, {_ElementPageLoaderElement eventTarget}) {
+  void up(int button,
+      {_ElementPageLoaderElement eventTarget, bool sync: true}) {
     dispatchEvent('mouseup', eventTarget);
-    loader.sync();
+    loader.sync(sync);
   }
 
   int get pageX => window.pageXOffset + clientX;
@@ -190,9 +196,9 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   String toString() => '$runtimeType<${node.toString()}>';
 
-  void type(String keys) {
+  void type(String keys, {bool sync: true}) {
     _fireKeyPressEvents(node, keys);
-    loader.sync();
+    loader.sync(sync);
   }
 
   // This doesn't work in Dartium due to:
@@ -239,13 +245,13 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   List<String> get classes => new UnmodifiableListView(node.classes);
 
   @override
-  void click() {
+  void click({bool sync: true}) {
     if (node is OptionElement) {
       _clickOptionElement();
     } else {
       node.click();
     }
-    loader.sync();
+    loader.sync(sync);
   }
 
   void _clickOptionElement() {
@@ -255,7 +261,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   }
 
   @override
-  void type(String keys) {
+  void type(String keys, {bool sync: true}) {
     node.focus();
     _fireKeyPressEvents(node, keys);
     if (node is InputElement || node is TextAreaElement) {
@@ -266,18 +272,19 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
       node.dispatchEvent(new TextEvent('textInput', data: value));
     }
     node.blur();
-    loader.sync();
+    loader.sync(sync);
   }
 
   @override
-  void clear() {
+  void clear({bool sync: true}) {
     if (node is InputElement || node is TextAreaElement) {
       var node = this.node;
       node.value = '';
       node.dispatchEvent(new TextEvent('textInput', data: ''));
     } else {
-      super.clear();
+      super.clear(sync: sync);
     }
+    loader.sync(sync);
   }
 }
 
@@ -297,9 +304,9 @@ class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
   @override
   List<String> get classes => super.classes;
   @override
-  void clear() => super.clear();
+  void clear({bool sync: true}) => super.clear(sync: sync);
   @override
-  void click() => super.click();
+  void click({bool sync: true}) => super.click(sync: sync);
   @override
   PageLoaderAttributes get computedStyle => super.computedStyle;
   @override
@@ -326,9 +333,9 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   @override
   List<String> get classes => super.classes;
   @override
-  void clear() => super.clear();
+  void clear({bool sync: true}) => super.clear(sync: sync);
   @override
-  void click() => super.click();
+  void click({bool sync: true}) => super.click(sync: sync);
   @override
   PageLoaderAttributes get computedStyle => super.computedStyle;
   @override
@@ -336,13 +343,13 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   @override
   PageLoaderAttributes get style => super.style;
   @override
-  void type(String keys) {
+  void type(String keys, {bool sync: true}) {
     // TODO(DrMarcII) consider whether this should be sent to
     // document.activeElement to more closely match WebDriver behavior.
     document.body.focus();
     _fireKeyPressEvents(document.body, keys);
     document.body.blur();
-    loader.sync();
+    loader.sync(sync);
   }
 }
 

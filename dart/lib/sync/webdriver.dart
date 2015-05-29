@@ -58,7 +58,8 @@ class _WebDriverMouse implements PageLoaderMouse {
   _WebDriverMouse(this.driver);
 
   @override
-  void down(int button, {_WebElementPageLoaderElement eventTarget}) {
+  void down(int button,
+      {_WebElementPageLoaderElement eventTarget, bool sync: true}) {
     if (eventTarget == null) {
       driver.mouse.down(button);
     } else {
@@ -67,13 +68,19 @@ class _WebDriverMouse implements PageLoaderMouse {
   }
 
   @override
-  void moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset) {
+  void moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset,
+      {_WebElementPageLoaderElement eventTarget, bool sync: true}) {
+    if (eventTarget != null) {
+      throw new ArgumentError(
+          'eventTarget not supported on WebDriverPageLoader.mouse.moveTo');
+    }
     driver.mouse.moveTo(
         element: element.context, xOffset: xOffset, yOffset: yOffset);
   }
 
   @override
-  void up(int button, {_WebElementPageLoaderElement eventTarget}) {
+  void up(int button,
+      {_WebElementPageLoaderElement eventTarget, bool sync: true}) {
     if (eventTarget == null) {
       driver.mouse.up(button);
     } else {
@@ -183,11 +190,11 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   }
 
   @override
-  void clear() => context.clear();
+  void clear({bool sync: true}) => context.clear();
   @override
-  void click() => context.click();
+  void click({bool sync: true}) => context.click();
   @override
-  void type(String keys) => context.sendKeys(keys);
+  void type(String keys, {bool sync: true}) => context.sendKeys(keys);
 }
 
 class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
@@ -199,7 +206,7 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   String get name => '__document__';
   @override
-  void type(String keys) => context.keyboard.sendKeys(keys);
+  void type(String keys, {bool sync: true}) => context.keyboard.sendKeys(keys);
 
   // Overrides to make Analyzer happy.
   @override
@@ -207,9 +214,9 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   List<String> get classes => super.classes;
   @override
-  void clear() => super.clear();
+  void clear({bool sync: true}) => super.clear(sync: sync);
   @override
-  void click() => super.click();
+  void click({bool sync: true}) => super.click(sync: sync);
   @override
   PageLoaderAttributes get computedStyle => super.computedStyle;
   @override
@@ -262,9 +269,9 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   List<String> get classes => super.classes;
   @override
-  void clear() => super.clear();
+  void clear({bool sync: true}) => super.clear(sync: sync);
   @override
-  void click() => super.click();
+  void click({bool sync: true}) => super.click(sync: sync);
   @override
   PageLoaderAttributes get computedStyle => super.computedStyle;
   @override
@@ -272,7 +279,7 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   PageLoaderAttributes get style => super.style;
   @override
-  void type(String keys) => super.type(keys);
+  void type(String keys, {bool sync: true}) => super.type(keys, sync: sync);
 }
 
 class _ElementAttributes extends PageLoaderAttributes {
