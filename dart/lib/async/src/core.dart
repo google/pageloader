@@ -17,8 +17,30 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:mirrors';
 
+import 'package:stack_trace/stack_trace.dart' as st;
+
 import 'annotations.dart';
 import 'interfaces.dart';
+
+bool _foldPredicate(st.Frame frame) => frame.isCore ||
+    frame.library.contains('package:test/') ||
+    frame.library.contains('package:pageloader/') ||
+    frame.library.contains('package:unit_test/') ||
+    frame.library.contains('package:stack_trace/');
+
+Future capture(callback()) {
+  var completer = new Completer();
+  () async {
+    try {
+      var value = await callback();
+      completer.complete(value);
+    } catch (e, s) {
+      var chain = new st.Chain.forTrace(s).foldFrames(_foldPredicate);
+      completer.completeError(e, chain);
+    }
+  }();
+  return completer.future;
+}
 
 /// Mechanism for specifying hierarchical page objects using annotations on
 /// fields in simple Dart objects.
@@ -38,7 +60,8 @@ abstract class BasePageLoader implements PageLoader {
 
   Future _getInstance(
           ClassMirror type, PageLoaderElement context, bool displayCheck) =>
-      new _ClassInfo(type).getInstance(context, this, displayCheck);
+      capture(
+          () => new _ClassInfo(type).getInstance(context, this, displayCheck));
 }
 
 typedef Future<T> _LazyFunction<T>();

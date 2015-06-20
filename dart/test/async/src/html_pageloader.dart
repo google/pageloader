@@ -41,8 +41,8 @@ void runTests() {
       html.document.body.onKeyPress.listen((evt) => list.add(evt.charCode));
       await loader.globalContext.type(data);
       expect(new String.fromCharCodes(list), equals(data));
-    }, onPlatform: {'dartium': new Skip('Key events do not work on dartium')});
-  });
+    }, onPlatform: {'!js': new Skip('Key events do not work on dartium')});
+  }, onPlatform: {'!browser': new Skip('In-browser specific tests')});
 }
 
 class PageForTypingTests {
