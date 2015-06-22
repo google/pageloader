@@ -25,6 +25,10 @@ export 'src/interfaces.dart';
 
 typedef Future SyncActionFn();
 
+/// execute [fn] as a separate microtask and return a [Future] that completes
+// normally when that [Future] completes (normally or with an error).
+Future _microtask(fn()) => new Future.microtask(fn).whenComplete(() {});
+
 class HtmlPageLoader extends BasePageLoader {
   HtmlPageLoaderElement _globalContext;
 
@@ -67,7 +71,7 @@ class _HtmlMouse implements PageLoaderMouse {
 
   @override
   Future down(int button, {_ElementPageLoaderElement eventTarget}) async {
-    dispatchEvent('mousedown', eventTarget, button);
+    await dispatchEvent('mousedown', eventTarget, button);
     await loader.sync();
   }
 
@@ -76,13 +80,13 @@ class _HtmlMouse implements PageLoaderMouse {
       {_ElementPageLoaderElement eventTarget}) async {
     clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
     clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
-    dispatchEvent('mousemove', eventTarget);
+    await dispatchEvent('mousemove', eventTarget);
     await loader.sync();
   }
 
   @override
   Future up(int button, {_ElementPageLoaderElement eventTarget}) async {
-    dispatchEvent('mouseup', eventTarget);
+    await dispatchEvent('mouseup', eventTarget);
     await loader.sync();
   }
 
@@ -96,8 +100,8 @@ class _HtmlMouse implements PageLoaderMouse {
       _borderWidth +
       clientY;
 
-  void dispatchEvent(String type, _ElementPageLoaderElement eventTarget,
-      [int button = 0]) {
+  Future dispatchEvent(String type, _ElementPageLoaderElement eventTarget,
+      [int button = 0]) async {
     var event = new MouseEvent(type,
         button: button,
         clientX: clientX,
@@ -106,9 +110,9 @@ class _HtmlMouse implements PageLoaderMouse {
         screenY: screenY);
 
     if (eventTarget != null) {
-      eventTarget.node.dispatchEvent(event);
+      await _microtask(() => eventTarget.node.dispatchEvent(event));
     } else {
-      currentElement.dispatchEvent(event);
+      await _microtask(() => currentElement.dispatchEvent(event));
     }
   }
 
@@ -177,16 +181,16 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   String toString() => '$runtimeType<$node>';
 
   Future type(String keys) async {
-    _fireKeyPressEvents(node, keys);
+    await _fireKeyPressEvents(node, keys);
     await loader.sync();
   }
 
   // This doesn't work in Dartium due to:
   // https://code.google.com/p/dart/issues/detail?id=13902
-  void _fireKeyPressEvents(Element element, String keys) {
+  Future _fireKeyPressEvents(Element element, String keys) async {
     for (int charCode in keys.codeUnits) {
-      element
-          .dispatchEvent(new KeyEvent('keypress', charCode: charCode).wrapped);
+      await _microtask(() => element
+          .dispatchEvent(new KeyEvent('keypress', charCode: charCode).wrapped));
     }
   }
 
@@ -249,33 +253,34 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   Stream<String> get classes => new Stream.fromIterable(node.classes);
 
   @override
-  Future click() async {
+  Future click() => capture(() async {
     if (node is OptionElement) {
-      _clickOptionElement();
+      await _clickOptionElement();
     } else {
-      node.click();
+      await _microtask(node.click);
     }
     await loader.sync();
-  }
+  });
 
-  void _clickOptionElement() {
+  Future _clickOptionElement() async {
     OptionElement option = node as OptionElement;
     option.selected = true;
-    option.dispatchEvent(new Event('change'));
+    await _microtask(() => option.dispatchEvent(new Event('change')));
   }
 
   @override
   Future type(String keys) async {
     node.focus();
-    _fireKeyPressEvents(node, keys);
+    await _fireKeyPressEvents(node, keys);
     if (node is InputElement || node is TextAreaElement) {
       // suppress warning by hiding field
       var node = this.node;
       var value = node.value + keys;
       node.value = '';
-      node.dispatchEvent(new TextEvent('textInput', data: value));
+      await _microtask(
+          () => node.dispatchEvent(new TextEvent('textInput', data: value)));
     }
-    node.blur();
+    await _microtask(() => node.blur());
     await loader.sync();
   }
 
@@ -284,7 +289,8 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
     if (node is InputElement || node is TextAreaElement) {
       var node = this.node;
       node.value = '';
-      node.dispatchEvent(new TextEvent('textInput', data: ''));
+      await _microtask(
+          () => node.dispatchEvent(new TextEvent('textInput', data: '')));
     } else {
       throw new PageLoaderException('$this does not support clear.');
     }

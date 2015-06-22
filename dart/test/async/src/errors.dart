@@ -17,7 +17,7 @@ import 'package:pageloader/async/objects.dart';
 import 'package:test/test.dart';
 import 'shared.dart';
 
-void runTests() {
+runTests() {
   group('error tests', () {
     test('exception on finals', () {
       expect(loader.getInstance(PageForExceptionOnFinalsTest), throws);
@@ -68,6 +68,23 @@ void runTests() {
       expect(loader.getInstance(PageForStaticSettersTest), throws);
     });
   });
+
+  group('check exception stack traces', () async {
+    test('ensure stack trace from getInstance includes test', () async {
+      try {
+        await loader.getInstance(PageForNoMatchingElementTest);
+        fail('expected exception');
+      } on PageLoaderException catch (e, s) {
+        expect(s.toString(), contains('errors.dart'));
+        expect(s.toString(), contains('runTests'));
+      }
+    }, onPlatform: {'js': new Skip('stack traces are not accurate in js')});
+  });
+}
+
+class PageForBadClickTest {
+  @ByTagName('button')
+  PageLoaderElement button;
 }
 
 class PageForExceptionOnFinalsTest {
