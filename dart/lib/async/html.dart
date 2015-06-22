@@ -25,6 +25,8 @@ export 'src/interfaces.dart';
 
 typedef Future SyncActionFn();
 
+/// execute [fn] as a separate microtask and return a [Future] that completes
+// normally when that [Future] completes (normally or with an error).
 Future _microtask(fn()) => new Future.microtask(fn).whenComplete(() {});
 
 class HtmlPageLoader extends BasePageLoader {
