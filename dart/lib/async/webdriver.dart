@@ -24,13 +24,17 @@ import 'src/interfaces.dart';
 export 'src/interfaces.dart';
 
 class WebDriverPageLoader extends BasePageLoader {
+  final wd.WebDriver driver;
   WebDriverPageLoaderElement _globalContext;
+  var _mouse;
   @override
-  final _WebDriverMouse mouse;
+  _WebDriverMouse get mouse => _mouse;
 
-  WebDriverPageLoader(wd.SearchContext globalContext, {useShadowDom: true})
-      : super(useShadowDom: useShadowDom),
-        this.mouse = new _WebDriverMouse(globalContext.driver) {
+  WebDriverPageLoader(wd.SearchContext globalContext, {bool useShadowDom: true,
+      SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
+      : this.driver = globalContext.driver,
+        super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
+    this._mouse = new _WebDriverMouse(this);
     this._globalContext = new WebDriverPageLoaderElement(globalContext, this);
   }
 
@@ -51,41 +55,42 @@ class WebDriverPageLoader extends BasePageLoader {
 }
 
 class _WebDriverMouse implements PageLoaderMouse {
-  final wd.WebDriver driver;
+  final WebDriverPageLoader loader;
+  wd.WebDriver get driver => loader.driver;
 
-  _WebDriverMouse(this.driver);
+  _WebDriverMouse(this.loader);
 
   @override
-  Future down(int button, {_WebElementPageLoaderElement eventTarget}) async {
+  Future down(int button,
+      {_WebElementPageLoaderElement eventTarget, bool sync: true}) => loader
+      .executeSynced(() {
     if (eventTarget == null) {
-      await driver.mouse.down(button);
+      return driver.mouse.down(button);
     } else {
-      await _fireEvent(eventTarget, 'mousedown', button);
+      return _fireEvent(eventTarget, 'mousedown', button);
     }
-  }
+  }, sync);
 
   @override
-  Future moveTo(
-      _WebElementPageLoaderElement element, int xOffset, int yOffset) async {
-    await driver.mouse.moveTo(
-        element: element.context, xOffset: xOffset, yOffset: yOffset);
-  }
+  Future moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset,
+      {bool sync: true}) => loader.executeSynced(() => driver.mouse.moveTo(
+          element: element.context, xOffset: xOffset, yOffset: yOffset), sync);
 
   @override
-  Future up(int button, {_WebElementPageLoaderElement eventTarget}) async {
+  Future up(int button,
+      {_WebElementPageLoaderElement eventTarget, bool sync: true}) => loader
+      .executeSynced(() {
     if (eventTarget == null) {
-      await driver.mouse.up(button);
+      return driver.mouse.up(button);
     } else {
-      await _fireEvent(eventTarget, 'mouseup', button);
+      return _fireEvent(eventTarget, 'mouseup', button);
     }
-  }
+  }, sync);
 
   Future _fireEvent(
-      _WebElementPageLoaderElement eventTarget, String type, int button) async {
-    await driver.execute(
-        "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
-        "{'button' : arguments[2]}));", [eventTarget.context, type, button]);
-  }
+          _WebElementPageLoaderElement eventTarget, String type, int button) =>
+      driver.execute("arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
+          "{'button' : arguments[2]}));", [eventTarget.context, type, button]);
 }
 
 abstract class WebDriverPageLoaderElement implements PageLoaderElement {
@@ -133,15 +138,15 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   Stream<String> get classes async* {}
 
   @override
-  Future clear() async =>
+  Future clear({bool sync: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
   @override
-  Future click() async =>
+  Future click({bool sync: true}) async =>
       throw new PageLoaderException('$runtimeType.click() is unsupported');
 
   @override
-  Future type(String keys) async =>
+  Future type(String keys, {bool sync: true}) async =>
       throw new PageLoaderException('$runtimeType.type() is unsupported');
 
   @override
@@ -203,11 +208,13 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   }
 
   @override
-  Future clear() => context.clear();
+  Future clear({bool sync: true}) => loader.executeSynced(context.clear, sync);
+
   @override
-  Future click() => context.click();
+  Future click({bool sync: true}) => loader.executeSynced(context.click, sync);
   @override
-  Future type(String keys) => context.sendKeys(keys);
+  Future type(String keys, {bool sync: true}) =>
+      loader.executeSynced(() => context.sendKeys(keys), sync);
 }
 
 class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
@@ -219,7 +226,8 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   Future<String> get name async => '__document__';
   @override
-  Future type(String keys) => context.keyboard.sendKeys(keys);
+  Future type(String keys, {bool sync: true}) =>
+      loader.executeSynced(() => context.keyboard.sendKeys(keys), sync);
   @override
   Future<bool> get displayed async => true;
 
