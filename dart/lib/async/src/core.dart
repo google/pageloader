@@ -42,12 +42,17 @@ Future capture(callback()) {
   return completer.future;
 }
 
+Future noOpExecuteSyncedFn(Future fn()) => fn();
+
 /// Mechanism for specifying hierarchical page objects using annotations on
 /// fields in simple Dart objects.
 abstract class BasePageLoader implements PageLoader {
   final bool useShadowDom;
+  final SyncedExecutionFn executeSyncedFn;
+  int i = 0;
 
-  BasePageLoader({this.useShadowDom: true});
+  BasePageLoader(
+      {this.useShadowDom: true, this.executeSyncedFn: noOpExecuteSyncedFn});
 
   /// Creates a new instance of [type] and binds annotated fields to
   /// corresponding [PageLoaderElement]s.
@@ -62,6 +67,14 @@ abstract class BasePageLoader implements PageLoader {
           ClassMirror type, PageLoaderElement context, bool displayCheck) =>
       capture(
           () => new _ClassInfo(type).getInstance(context, this, displayCheck));
+
+  Future executeSynced(Future fn(), bool sync) {
+    if (sync) {
+      return executeSyncedFn(fn);
+    } else {
+      return fn();
+    }
+  }
 }
 
 typedef Future<T> _LazyFunction<T>();

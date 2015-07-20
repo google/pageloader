@@ -15,6 +15,8 @@ library pageloader.async.interfaces;
 
 import 'dart:async';
 
+typedef Future<T> SyncedExecutionFn<T>(Future<T> fn());
+
 abstract class Lazy<T> {
   Future<T> call();
 }
@@ -33,16 +35,17 @@ abstract class PageLoaderMouse {
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  Future down(int button, {PageLoaderElement eventTarget});
+  Future down(int button, {PageLoaderElement eventTarget, bool sync: true});
 
   /// Release [button] on the mouse at its current location. If [eventTarget] is
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  Future up(int button, {PageLoaderElement eventTarget});
+  Future up(int button, {PageLoaderElement eventTarget, bool sync: true});
 
   /// Move the mouse to a location relative to [element].
-  Future moveTo(PageLoaderElement element, int xOffset, int yOffset);
+  Future moveTo(PageLoaderElement element, int xOffset, int yOffset,
+      {bool sync: true});
 }
 
 abstract class PageLoaderElement {
@@ -60,9 +63,9 @@ abstract class PageLoaderElement {
 
   Stream<PageLoaderElement> getElementsByCss(String selector);
 
-  Future clear();
-  Future click();
-  Future type(String keys);
+  Future clear({bool sync: true});
+  Future click({bool sync: true});
+  Future type(String keys, {bool sync: true});
 }
 
 abstract class PageLoaderAttributes {

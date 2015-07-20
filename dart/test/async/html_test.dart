@@ -27,13 +27,15 @@ import 'src/shared.dart' as shared;
 void main() {
   setUp(() {
     var div = html_setup.setUp();
-    shared.loader = new HtmlPageLoader(div, syncFn);
+    shared.loader = new HtmlPageLoader(div, executeSyncedFn: syncFn);
   });
 
   plt.runTests();
   html_test.runTests();
 }
 
-Future syncFn() async {
+syncFn(fn) async {
+  var value = await fn();
   await new Future.delayed(new Duration(milliseconds: 200));
+  return value;
 }

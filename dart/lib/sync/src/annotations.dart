@@ -122,16 +122,12 @@ class InShadowDom implements Finder {
     var buffer = new StringBuffer('@InShadowDom(');
     bool commaNeeded = false;
     if (of != null) {
-      buffer
-        ..write('of: ')
-        ..write(of);
+      buffer..write('of: ')..write(of);
       commaNeeded = true;
     }
     if (find != null) {
       if (commaNeeded) buffer.write(', ');
-      buffer
-        ..write('find: ')
-        ..write(find);
+      buffer..write('find: ')..write(find);
     }
     buffer.write(')');
     return buffer.toString();

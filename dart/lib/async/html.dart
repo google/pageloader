@@ -23,8 +23,6 @@ import 'src/core.dart';
 import 'src/interfaces.dart';
 export 'src/interfaces.dart';
 
-typedef Future SyncActionFn();
-
 /// execute [fn] as a separate microtask and return a [Future] that completes
 // normally when that [Future] completes (normally or with an error).
 Future _microtask(fn()) => new Future.microtask(fn).whenComplete(() {});
@@ -40,10 +38,9 @@ class HtmlPageLoader extends BasePageLoader {
   @override
   _HtmlMouse get mouse => _mouse;
 
-  final SyncActionFn sync;
-
-  HtmlPageLoader(Node globalContext, this.sync, {bool useShadowDom: true})
-      : super(useShadowDom: useShadowDom) {
+  HtmlPageLoader(Node globalContext, {bool useShadowDom: true,
+      SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
+      : super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
     this._globalContext = new HtmlPageLoaderElement(globalContext, this);
     this._mouse = new _HtmlMouse(this);
   }
@@ -70,25 +67,24 @@ class _HtmlMouse implements PageLoaderMouse {
   _HtmlMouse(this.loader);
 
   @override
-  Future down(int button, {_ElementPageLoaderElement eventTarget}) async {
-    await dispatchEvent('mousedown', eventTarget, button);
-    await loader.sync();
-  }
+  Future down(int button,
+      {_ElementPageLoaderElement eventTarget, bool sync: true}) => loader
+      .executeSynced(
+          () => dispatchEvent('mousedown', eventTarget, button), sync);
 
   @override
   Future moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset,
-      {_ElementPageLoaderElement eventTarget}) async {
+      {_ElementPageLoaderElement eventTarget, bool sync: true}) => loader
+      .executeSynced(() {
     clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
     clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
-    await dispatchEvent('mousemove', eventTarget);
-    await loader.sync();
-  }
+    return dispatchEvent('mousemove', eventTarget);
+  }, sync);
 
   @override
-  Future up(int button, {_ElementPageLoaderElement eventTarget}) async {
-    await dispatchEvent('mouseup', eventTarget);
-    await loader.sync();
-  }
+  Future up(int button,
+          {_ElementPageLoaderElement eventTarget, bool sync: true}) =>
+      loader.executeSynced(() => dispatchEvent('mouseup', eventTarget), sync);
 
   int get pageX => window.pageXOffset + clientX;
   int get pageY => window.pageYOffset + clientY;
@@ -180,10 +176,8 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   String toString() => '$runtimeType<$node>';
 
-  Future type(String keys) async {
-    await _fireKeyPressEvents(node, keys);
-    await loader.sync();
-  }
+  Future type(String keys, {bool sync: true}) =>
+      loader.executeSynced(() => _fireKeyPressEvents(node, keys), sync);
 
   // This doesn't work in Dartium due to:
   // https://code.google.com/p/dart/issues/detail?id=13902
@@ -201,11 +195,11 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   Stream<String> get classes async* {}
 
   @override
-  Future clear() async =>
+  Future clear({bool sync: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
   @override
-  Future click() async =>
+  Future click({bool sync: true}) async =>
       throw new PageLoaderException('$runtimeType.click() is unsupported');
 
   @override
@@ -253,23 +247,22 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   Stream<String> get classes => new Stream.fromIterable(node.classes);
 
   @override
-  Future click() => capture(() async {
+  Future click({bool sync: true}) => loader.executeSynced(() {
     if (node is OptionElement) {
-      await _clickOptionElement();
+      return _clickOptionElement();
     } else {
-      await _microtask(node.click);
+      return _microtask(node.click);
     }
-    await loader.sync();
-  });
+  }, sync);
 
-  Future _clickOptionElement() async {
+  Future _clickOptionElement() {
     OptionElement option = node as OptionElement;
     option.selected = true;
-    await _microtask(() => option.dispatchEvent(new Event('change')));
+    return _microtask(() => option.dispatchEvent(new Event('change')));
   }
 
   @override
-  Future type(String keys) async {
+  Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
     node.focus();
     await _fireKeyPressEvents(node, keys);
     if (node is InputElement || node is TextAreaElement) {
@@ -280,22 +273,22 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
       await _microtask(
           () => node.dispatchEvent(new TextEvent('textInput', data: value)));
     }
-    await _microtask(() => node.blur());
-    await loader.sync();
-  }
+    return _microtask(() => node.blur());
+  }, sync);
 
   @override
-  Future clear() async {
+  Future clear({bool sync: true}) => loader.executeSynced(() async {
     if (node is InputElement || node is TextAreaElement) {
       var node = this.node;
+      node.focus();
       node.value = '';
       await _microtask(
           () => node.dispatchEvent(new TextEvent('textInput', data: '')));
+      return _microtask(() => node.blur());
     } else {
       throw new PageLoaderException('$this does not support clear.');
     }
-    await loader.sync();
-  }
+  }, sync);
 }
 
 class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
@@ -322,14 +315,13 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   Future<bool> get displayed async => true;
 
   @override
-  Future type(String keys) async {
+  Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
     // TODO(DrMarcII) consider whether this should be sent to
     // document.activeElement to more closely match WebDriver behavior.
     document.body.focus();
-    _fireKeyPressEvents(document.body, keys);
-    document.body.blur();
-    await loader.sync();
-  }
+    await _fireKeyPressEvents(document.body, keys);
+    return _microtask(() => document.body.blur());
+  }, sync);
 }
 
 class _ElementAttributes extends PageLoaderAttributes {
