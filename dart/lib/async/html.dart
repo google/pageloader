@@ -301,11 +301,11 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future blur({bool sync: true}) =>
-      loader.executeSynced(() => _microtask(() => node.blur()), true);
+      loader.executeSynced(() => _microtask(node.blur), true);
 
   @override
   Future focus({bool sync: true}) =>
-      loader.executeSynced(() => _microtask(() => node.focus()), true);
+      loader.executeSynced(() => _microtask(node.focus), true);
 }
 
 class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {

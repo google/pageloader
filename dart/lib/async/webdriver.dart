@@ -223,16 +223,15 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future clear({bool sync: true}) => loader.executeSynced(() async {
-    await focus(sync: false);
-    await context.clear();
-    return blur(sync: false);
-  }, sync);
+        await focus(sync: false);
+        await context.clear();
+        return blur(sync: false);
+      }, sync);
 
   @override
   Future click({bool sync: true}) => loader.executeSynced(context.click, sync);
   @override
-  Future type(String keys, {bool sync: true}) =>
-      loader.executeSynced(() async {
+  Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
         await focus(sync: false);
         await context.sendKeys(keys);
         return blur(sync: false);
