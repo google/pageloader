@@ -43,18 +43,21 @@ void runTests() {
           unorderedEquals(['with-class-test', 'class1', 'class2']));
     });
 
-    test('chain', () async {
-      PageForChainTest page = await loader.getInstance(PageForChainTest);
+    test(
+        'chain',
+        () async {
+          PageForChainTest page = await loader.getInstance(PageForChainTest);
 
-      expect(await page.outerDivsText.toList(),
-          anyElement(contains('outer div 1')));
-      expect(await page.outerDivsText.toList(),
-          anyElement(contains('outer div 2')));
-      expect(await page.innerDivsText.toList(),
-          orderedEquals(['inner div 1', 'inner div 2']));
-      expect(await page.innerDivSpecial.visibleText, 'inner div 2');
-      expect(await page.innerShadow.visibleText, contains('some'));
-    }, testOn: 'browser');
+          expect(await page.outerDivsText.toList(),
+              anyElement(contains('outer div 1')));
+          expect(await page.outerDivsText.toList(),
+              anyElement(contains('outer div 2')));
+          expect(await page.innerDivsText.toList(),
+              orderedEquals(['inner div 1', 'inner div 2']));
+          expect(await page.innerDivSpecial.visibleText, 'inner div 2');
+          expect(await page.innerShadow.visibleText, contains('some'));
+        },
+        testOn: 'browser');
 
     test('@Global', () async {
       PageForGlobalTest page = await loader.getInstance(PageForGlobalTest);

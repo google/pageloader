@@ -100,41 +100,41 @@ class _ClassInfo {
   final bool _displayCheck;
 
   factory _ClassInfo(ClassMirror type) => _classInfoCache.putIfAbsent(type, () {
-    Finder finder = null;
-    List<Filter> filters = <Filter>[];
-    bool displayCheck = true;
-    for (InstanceMirror metadatum in type.metadata) {
-      if (!metadatum.hasReflectee) {
-        continue;
-      }
-      var datum = metadatum.reflectee;
-      if (datum is Finder) {
-        if (finder != null) {
-          throw new PageLoaderException(
-              '${type.simpleName} has more than one finder');
+        Finder finder = null;
+        List<Filter> filters = <Filter>[];
+        bool displayCheck = true;
+        for (InstanceMirror metadatum in type.metadata) {
+          if (!metadatum.hasReflectee) {
+            continue;
+          }
+          var datum = metadatum.reflectee;
+          if (datum is Finder) {
+            if (finder != null) {
+              throw new PageLoaderException(
+                  '${type.simpleName} has more than one finder');
+            }
+            finder = datum;
+          } else if (datum is Filter) {
+            filters.add(datum);
+          } else if (datum == disableDisplayedCheck) {
+            displayCheck = false;
+          }
         }
-        finder = datum;
-      } else if (datum is Filter) {
-        filters.add(datum);
-      } else if (datum == disableDisplayedCheck) {
-        displayCheck = false;
-      }
-    }
 
-    if (finder == null) {
-      if (filters.isNotEmpty) {
-        throw new PageLoaderException(
-            '${type.simpleName} has Filter annotations but no Finder annotation');
-      }
-    }
-    if (finder == root && filters.isEmpty) {
-      throw new PageLoaderException(
-          'Useless @root annotation of ${type.simpleName}');
-    }
+        if (finder == null) {
+          if (filters.isNotEmpty) {
+            throw new PageLoaderException(
+                '${type.simpleName} has Filter annotations but no Finder annotation');
+          }
+        }
+        if (finder == root && filters.isEmpty) {
+          throw new PageLoaderException(
+              'Useless @root annotation of ${type.simpleName}');
+        }
 
-    return new _ClassInfo._(
-        type, _fieldInfos(type), finder, filters, displayCheck);
-  });
+        return new _ClassInfo._(
+            type, _fieldInfos(type), finder, filters, displayCheck);
+      });
 
   _ClassInfo._(this._class, this._fields, this._finder, this._filters,
       this._displayCheck);
@@ -417,7 +417,8 @@ class _InjectedPageLoaderFieldInfo extends _FieldInfo {
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
-      bool displayCheck) => loader;
+          bool displayCheck) =>
+      loader;
 }
 
 Stream _getElements(PageLoaderElement context, Finder finder,

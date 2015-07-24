@@ -66,6 +66,8 @@ abstract class PageLoaderElement {
   Future clear({bool sync: true});
   Future click({bool sync: true});
   Future type(String keys, {bool sync: true});
+  Future focus({bool sync: true});
+  Future blur({bool sync: true});
 }
 
 abstract class PageLoaderAttributes {

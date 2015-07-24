@@ -16,7 +16,8 @@ library pageloader.sync.core;
 import 'dart:collection';
 import 'dart:mirrors';
 
-import 'package:matcher/matcher.dart';
+import 'package:matcher/matcher.dart' as m;
+import 'package:unittest/unittest.dart' as ut;
 
 import '../clock.dart';
 import 'annotations.dart';
@@ -49,23 +50,20 @@ abstract class BasePageLoader implements PageLoader {
       new _ClassInfo(type).getInstance(context, this);
 
   @override
-  waitForValue(condition(), {Duration timeout: _DEFAULT_WAIT,
+  waitForValue(condition(),
+          {Duration timeout: _DEFAULT_WAIT,
           Duration interval: _DEFAULT_INTERVAL}) =>
-      waitFor(condition, isNotNull, timeout: timeout, interval: interval);
+      waitFor(condition, m.isNotNull, timeout: timeout, interval: interval);
 
   @override
-  waitFor(condition(), Matcher matcher,
+  waitFor(condition(), matcher,
       {Duration timeout: _DEFAULT_WAIT, Duration interval: _DEFAULT_INTERVAL}) {
-    expect(value, matcher) {
-      if (matcher is! Matcher) {
-        matcher = equals(matcher);
-      }
-
+    _matcherExpect(value, m.Matcher matcher) {
       var matchState = {};
       if (matcher.matches(value, matchState)) {
         return;
       }
-      var desc = new StringDescription()
+      var desc = new m.StringDescription()
         ..add('Expected: ')
         ..addDescriptionOf(matcher)
         ..add('\n')
@@ -73,7 +71,7 @@ abstract class BasePageLoader implements PageLoader {
         ..addDescriptionOf(value)
         ..add('\n');
 
-      var mismatchDescription = new StringDescription();
+      var mismatchDescription = new m.StringDescription();
       matcher.describeMismatch(value, mismatchDescription, matchState, true);
       if (mismatchDescription.length > 0) {
         desc.add('   Which: ${mismatchDescription}\n');
@@ -81,11 +79,19 @@ abstract class BasePageLoader implements PageLoader {
       throw new Exception(desc.toString());
     }
 
+    if (matcher != null && matcher is! ut.Matcher && matcher is! m.Matcher) {
+      matcher = m.equals(matcher);
+    }
+
     var endTime = clock.now.add(timeout);
     while (true) {
       try {
         var val = condition();
-        expect(val, matcher);
+        if (matcher is m.Matcher) {
+          _matcherExpect(val, matcher);
+        } else if (matcher is ut.Matcher) {
+          ut.expect(val, matcher);
+        }
         return val;
       } catch (e) {
         if (clock.now.isAfter(endTime)) {
@@ -118,29 +124,29 @@ class _ClassInfo {
   final bool _finderIsOptional;
 
   factory _ClassInfo(ClassMirror type) => _classInfoCache.putIfAbsent(type, () {
-    Finder finder = null;
-    List<Filter> filters = <Filter>[];
-    bool finderIsOptional = false;
-    for (InstanceMirror metadatum in type.metadata) {
-      if (!metadatum.hasReflectee) {
-        continue;
-      }
-      var datum = metadatum.reflectee;
-      if (datum is Finder) {
-        if (finder != null) {
-          throw new PageLoaderException('Multiple finders found on $type');
+        Finder finder = null;
+        List<Filter> filters = <Filter>[];
+        bool finderIsOptional = false;
+        for (InstanceMirror metadatum in type.metadata) {
+          if (!metadatum.hasReflectee) {
+            continue;
+          }
+          var datum = metadatum.reflectee;
+          if (datum is Finder) {
+            if (finder != null) {
+              throw new PageLoaderException('Multiple finders found on $type');
+            }
+            finder = datum;
+          } else if (datum is Filter) {
+            filters.add(datum);
+          } else if (datum == Optional) {
+            finderIsOptional = true;
+          }
         }
-        finder = datum;
-      } else if (datum is Filter) {
-        filters.add(datum);
-      } else if (datum == Optional) {
-        finderIsOptional = true;
-      }
-    }
 
-    return new _ClassInfo._(
-        type, _fieldInfos(type), finder, filters, finderIsOptional);
-  });
+        return new _ClassInfo._(
+            type, _fieldInfos(type), finder, filters, finderIsOptional);
+      });
 
   _ClassInfo._(this._class, this._fields, this._finder, this._filters,
       this._finderIsOptional);
