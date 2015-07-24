@@ -30,7 +30,8 @@ class WebDriverPageLoader extends BasePageLoader {
   @override
   _WebDriverMouse get mouse => _mouse;
 
-  WebDriverPageLoader(wd.SearchContext globalContext, {bool useShadowDom: true,
+  WebDriverPageLoader(wd.SearchContext globalContext,
+      {bool useShadowDom: true,
       SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
       : this.driver = globalContext.driver,
         super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
@@ -62,35 +63,40 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   @override
   Future down(int button,
-      {_WebElementPageLoaderElement eventTarget, bool sync: true}) => loader
-      .executeSynced(() {
-    if (eventTarget == null) {
-      return driver.mouse.down(button);
-    } else {
-      return _fireEvent(eventTarget, 'mousedown', button);
-    }
-  }, sync);
+          {_WebElementPageLoaderElement eventTarget, bool sync: true}) =>
+      loader.executeSynced(() {
+        if (eventTarget == null) {
+          return driver.mouse.down(button);
+        } else {
+          return _fireEvent(eventTarget, 'mousedown', button);
+        }
+      }, sync);
 
   @override
   Future moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset,
-      {bool sync: true}) => loader.executeSynced(() => driver.mouse.moveTo(
-          element: element.context, xOffset: xOffset, yOffset: yOffset), sync);
+          {bool sync: true}) =>
+      loader.executeSynced(
+          () => driver.mouse.moveTo(
+              element: element.context, xOffset: xOffset, yOffset: yOffset),
+          sync);
 
   @override
   Future up(int button,
-      {_WebElementPageLoaderElement eventTarget, bool sync: true}) => loader
-      .executeSynced(() {
-    if (eventTarget == null) {
-      return driver.mouse.up(button);
-    } else {
-      return _fireEvent(eventTarget, 'mouseup', button);
-    }
-  }, sync);
+          {_WebElementPageLoaderElement eventTarget, bool sync: true}) =>
+      loader.executeSynced(() {
+        if (eventTarget == null) {
+          return driver.mouse.up(button);
+        } else {
+          return _fireEvent(eventTarget, 'mouseup', button);
+        }
+      }, sync);
 
   Future _fireEvent(
           _WebElementPageLoaderElement eventTarget, String type, int button) =>
-      driver.execute("arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
-          "{'button' : arguments[2]}));", [eventTarget.context, type, button]);
+      driver.execute(
+          "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
+          "{'button' : arguments[2]}));",
+          [eventTarget.context, type, button]);
 }
 
 abstract class WebDriverPageLoaderElement implements PageLoaderElement {
@@ -153,11 +159,19 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   PageLoaderAttributes get computedStyle => new _EmptyAttributes();
 
   @override
-  Future<PageLoaderElement> get shadowRoot =>
-      throw new PageLoaderException('$runtimeType.shadowRoot() is unsupported');
+  Future<PageLoaderElement> get shadowRoot async =>
+      throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
 
   @override
   PageLoaderAttributes get style => new _EmptyAttributes();
+
+  @override
+  Future blur({bool sync: true}) async =>
+      throw new PageLoaderException('$runtimeType.blur() is unsupported');
+
+  @override
+  Future focus({bool sync: true}) async =>
+      throw new PageLoaderException('$runtimeType.focus() is unsupported');
 }
 
 class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
@@ -177,8 +191,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   Future<WebDriverPageLoaderElement> get shadowRoot async {
     if (loader.useShadowDom) {
-      if ((await context.driver.execute(
-          'return arguments[0].shadowRoot != null', [context]))) {
+      if ((await context.driver
+          .execute('return arguments[0].shadowRoot != null;', [context]))) {
         return new _ShadowRootPageLoaderElement(context, loader);
       }
       throw new PageLoaderException('$this does not have a shadowRoot');
@@ -190,8 +204,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   Future<String> get name => context.name;
 
   @override
-  Future<String> get innerText async => (await context.driver.execute(
-      'return arguments[0].textContent;', [context])).trim();
+  Future<String> get innerText async => (await context.driver
+      .execute('return arguments[0].textContent;', [context])).trim();
 
   @override
   Future<String> get visibleText => context.text;
@@ -208,13 +222,28 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   }
 
   @override
-  Future clear({bool sync: true}) => loader.executeSynced(context.clear, sync);
+  Future clear({bool sync: true}) => loader.executeSynced(() async {
+        await focus(sync: false);
+        await context.clear();
+        return blur(sync: false);
+      }, sync);
 
   @override
   Future click({bool sync: true}) => loader.executeSynced(context.click, sync);
   @override
-  Future type(String keys, {bool sync: true}) =>
-      loader.executeSynced(() => context.sendKeys(keys), sync);
+  Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
+        await focus(sync: false);
+        await context.sendKeys(keys);
+        return blur(sync: false);
+      }, sync);
+
+  @override
+  Future blur({bool sync: true}) => loader.executeSynced(
+      () => context.driver.execute('arguments[0].blur();', [context]), sync);
+
+  @override
+  Future focus({bool sync: true}) => loader.executeSynced(
+      () => context.driver.execute('arguments[0].focus();', [context]), sync);
 }
 
 class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
@@ -270,8 +299,8 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   }
 
   Future _execute(String script) {
-    return context.driver.execute(
-        'return arguments[0].shadowRoot$script;', [context]);
+    return context.driver
+        .execute('return arguments[0].shadowRoot$script;', [context]);
   }
 }
 
@@ -291,7 +320,7 @@ class _ElementComputedStyle extends PageLoaderAttributes {
 
   @override
   Future<String> operator [](String name) => _node.driver.execute(
-      'return window.getComputedStyle(arguments[0]).${_cssPropName(name)}',
+      'return window.getComputedStyle(arguments[0]).${_cssPropName(name)};',
       [_node]);
 }
 
@@ -301,8 +330,8 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  Future<String> operator [](String name) => _node.driver.execute(
-      'return arguments[0].style.${_cssPropName(name)}', [_node]);
+  Future<String> operator [](String name) => _node.driver
+      .execute('return arguments[0].style.${_cssPropName(name)};', [_node]);
 }
 
 /// Convert hyphenated-properties to camelCase.

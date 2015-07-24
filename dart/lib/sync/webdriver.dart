@@ -74,8 +74,8 @@ class _WebDriverMouse implements PageLoaderMouse {
       throw new ArgumentError(
           'eventTarget not supported on WebDriverPageLoader.mouse.moveTo');
     }
-    driver.mouse.moveTo(
-        element: element.context, xOffset: xOffset, yOffset: yOffset);
+    driver.mouse
+        .moveTo(element: element.context, xOffset: xOffset, yOffset: yOffset);
   }
 
   @override
@@ -90,8 +90,10 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   void _fireEvent(
       _WebElementPageLoaderElement eventTarget, String type, int button) {
-    driver.execute("arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
-        "{'button' : arguments[2]}));", [eventTarget.context, type, button]);
+    driver.execute(
+        "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
+        "{'button' : arguments[2]}));",
+        [eventTarget.context, type, button]);
   }
 }
 
@@ -170,8 +172,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   String get innerText => context.driver
-      .execute('return arguments[0].textContent;', [context])
-      .trim();
+      .execute('return arguments[0].textContent;', [context]).trim();
 
   @override
   String get visibleText => context.text;
@@ -259,8 +260,8 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
       _fromContextList(_execute('.querySelectorAll("$selector")'));
 
   dynamic _execute(String script) {
-    return context.driver.execute(
-        'return arguments[0].shadowRoot$script;', [context]);
+    return context.driver
+        .execute('return arguments[0].shadowRoot$script;', [context]);
   }
 
   // Overrides to make Analyzer happy.
@@ -308,8 +309,8 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  String operator [](String name) => _node.driver.execute(
-      'return arguments[0].style.${_cssPropName(name)}', [_node]);
+  String operator [](String name) => _node.driver
+      .execute('return arguments[0].style.${_cssPropName(name)}', [_node]);
 }
 
 /// Convert hyphenated-properties to camelCase.

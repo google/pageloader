@@ -221,7 +221,6 @@ typedef List<PageLoaderElement> PageLoaderElementsFn();
 typedef List<Row> RowsFn();
 
 class PageForFunctionTest {
-
   // Functions
 
   @ByTagName('table')

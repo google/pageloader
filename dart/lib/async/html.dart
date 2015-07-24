@@ -38,7 +38,8 @@ class HtmlPageLoader extends BasePageLoader {
   @override
   _HtmlMouse get mouse => _mouse;
 
-  HtmlPageLoader(Node globalContext, {bool useShadowDom: true,
+  HtmlPageLoader(Node globalContext,
+      {bool useShadowDom: true,
       SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
       : super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
     this._globalContext = new HtmlPageLoaderElement(globalContext, this);
@@ -68,18 +69,18 @@ class _HtmlMouse implements PageLoaderMouse {
 
   @override
   Future down(int button,
-      {_ElementPageLoaderElement eventTarget, bool sync: true}) => loader
-      .executeSynced(
+          {_ElementPageLoaderElement eventTarget, bool sync: true}) =>
+      loader.executeSynced(
           () => dispatchEvent('mousedown', eventTarget, button), sync);
 
   @override
   Future moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset,
-      {_ElementPageLoaderElement eventTarget, bool sync: true}) => loader
-      .executeSynced(() {
-    clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
-    clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
-    return dispatchEvent('mousemove', eventTarget);
-  }, sync);
+          {_ElementPageLoaderElement eventTarget, bool sync: true}) =>
+      loader.executeSynced(() {
+        clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
+        clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
+        return dispatchEvent('mousemove', eventTarget);
+      }, sync);
 
   @override
   Future up(int button,
@@ -206,11 +207,19 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   PageLoaderAttributes get computedStyle => new _EmptyAttributes();
 
   @override
-  Future<PageLoaderElement> get shadowRoot =>
+  Future<PageLoaderElement> get shadowRoot async =>
       throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
 
   @override
   PageLoaderAttributes get style => new _EmptyAttributes();
+
+  @override
+  Future blur({bool sync: true}) async =>
+      throw new PageLoaderException('$runtimeType.blur() is unsupported');
+
+  @override
+  Future focus({bool sync: true}) async =>
+      throw new PageLoaderException('$runtimeType.focus() is unsupported');
 }
 
 class _ElementPageLoaderElement extends HtmlPageLoaderElement {
@@ -248,12 +257,12 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future click({bool sync: true}) => loader.executeSynced(() {
-    if (node is OptionElement) {
-      return _clickOptionElement();
-    } else {
-      return _microtask(node.click);
-    }
-  }, sync);
+        if (node is OptionElement) {
+          return _clickOptionElement();
+        } else {
+          return _microtask(node.click);
+        }
+      }, sync);
 
   Future _clickOptionElement() {
     OptionElement option = node as OptionElement;
@@ -263,32 +272,40 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
-    node.focus();
-    await _fireKeyPressEvents(node, keys);
-    if (node is InputElement || node is TextAreaElement) {
-      // suppress warning by hiding field
-      var node = this.node;
-      var value = node.value + keys;
-      node.value = '';
-      await _microtask(
-          () => node.dispatchEvent(new TextEvent('textInput', data: value)));
-    }
-    return _microtask(() => node.blur());
-  }, sync);
+        await focus(sync: false);
+        await _fireKeyPressEvents(node, keys);
+        if (node is InputElement || node is TextAreaElement) {
+          // suppress warning by hiding field
+          var node = this.node;
+          var value = node.value + keys;
+          node.value = '';
+          await _microtask(() =>
+              node.dispatchEvent(new TextEvent('textInput', data: value)));
+        }
+        return blur(sync: false);
+      }, sync);
 
   @override
   Future clear({bool sync: true}) => loader.executeSynced(() async {
-    if (node is InputElement || node is TextAreaElement) {
-      var node = this.node;
-      node.focus();
-      node.value = '';
-      await _microtask(
-          () => node.dispatchEvent(new TextEvent('textInput', data: '')));
-      return _microtask(() => node.blur());
-    } else {
-      throw new PageLoaderException('$this does not support clear.');
-    }
-  }, sync);
+        if (node is InputElement || node is TextAreaElement) {
+          var node = this.node;
+          await focus(sync: false);
+          node.value = '';
+          await _microtask(
+              () => node.dispatchEvent(new TextEvent('textInput', data: '')));
+          return blur(sync: false);
+        } else {
+          throw new PageLoaderException('$this does not support clear.');
+        }
+      }, sync);
+
+  @override
+  Future blur({bool sync: true}) =>
+      loader.executeSynced(() => _microtask(node.blur), true);
+
+  @override
+  Future focus({bool sync: true}) =>
+      loader.executeSynced(() => _microtask(node.focus), true);
 }
 
 class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
@@ -316,12 +333,12 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
-    // TODO(DrMarcII) consider whether this should be sent to
-    // document.activeElement to more closely match WebDriver behavior.
-    document.body.focus();
-    await _fireKeyPressEvents(document.body, keys);
-    return _microtask(() => document.body.blur());
-  }, sync);
+        // TODO(DrMarcII) consider whether this should be sent to
+        // document.activeElement to more closely match WebDriver behavior.
+        await _microtask(() => document.body.focus());
+        await _fireKeyPressEvents(document.body, keys);
+        return _microtask(() => document.body.blur());
+      }, sync);
 }
 
 class _ElementAttributes extends PageLoaderAttributes {

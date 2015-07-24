@@ -23,6 +23,7 @@ import 'interfaces.dart';
 /// it difficult to test for the absence of something in the DOM.  To allow an
 /// element to be absent from the DOM, annotate it with this.
 const optional = const _Optional();
+
 class _Optional {
   const _Optional();
 
@@ -33,6 +34,7 @@ class _Optional {
 /// Used to annotate PageLoader-type fields that should have the instance of PageLoader
 /// injected.
 const inject = const _Inject();
+
 class _Inject {
   const _Inject();
 
@@ -44,6 +46,7 @@ class _Inject {
 /// Adding @disableDisplayedCheck to an annotated field or class will disable this check from this
 /// point onwards.
 const disableDisplayedCheck = const _DisableDisplayedCheck();
+
 class _DisableDisplayedCheck {
   const _DisableDisplayedCheck();
 
@@ -146,6 +149,7 @@ class InShadowDom implements Finder {
 /// Matches the root [PageLoaderElement] being used for constructing the
 /// current page object.
 const root = const _Root();
+
 class _Root implements Finder {
   const _Root();
 

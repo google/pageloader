@@ -50,7 +50,9 @@ void main() {
       html.document.body.onKeyPress.listen((evt) => list.add(evt.charCode));
       plt.loader.globalContext.type(data);
       expect(new String.fromCharCodes(list), equals(data));
-    }, onPlatform: {'dartium': new Skip('Key events do not work on dartium')});
+    }, onPlatform: {
+      'dartium': new Skip('Key events do not work on dartium')
+    });
   });
 
   plt.runTests();
