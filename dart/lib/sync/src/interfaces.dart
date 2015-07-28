@@ -15,8 +15,6 @@ library pageloader.sync.interfaces;
 
 import 'dart:collection';
 
-import 'package:matcher/matcher.dart';
-
 abstract class Lazy<T> {
   T call();
 }
@@ -35,7 +33,7 @@ abstract class PageLoader {
 
   /// Waits for [condition] to be evaluated successful and return a value
   /// that matches [matcher].
-  waitFor(condition(), Matcher matcher, {Duration timeout, Duration interval});
+  waitFor(condition(), matcher, {Duration timeout, Duration interval});
 }
 
 abstract class PageLoaderMouse {
