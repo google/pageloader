@@ -18,6 +18,7 @@ library pageloader.async.html;
 import 'dart:async';
 import 'dart:html';
 import 'dart:mirrors' hide Comment;
+import 'dart:svg';
 
 import 'src/core.dart';
 import 'src/interfaces.dart';
@@ -38,8 +39,7 @@ class HtmlPageLoader extends BasePageLoader {
   @override
   _HtmlMouse get mouse => _mouse;
 
-  HtmlPageLoader(Node globalContext,
-      {bool useShadowDom: true,
+  HtmlPageLoader(Node globalContext, {bool useShadowDom: true,
       SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
       : super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
     this._globalContext = new HtmlPageLoaderElement(globalContext, this);
@@ -69,18 +69,18 @@ class _HtmlMouse implements PageLoaderMouse {
 
   @override
   Future down(int button,
-          {_ElementPageLoaderElement eventTarget, bool sync: true}) =>
-      loader.executeSynced(
+      {_ElementPageLoaderElement eventTarget, bool sync: true}) => loader
+      .executeSynced(
           () => dispatchEvent('mousedown', eventTarget, button), sync);
 
   @override
   Future moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset,
-          {_ElementPageLoaderElement eventTarget, bool sync: true}) =>
-      loader.executeSynced(() {
-        clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
-        clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
-        return dispatchEvent('mousemove', eventTarget);
-      }, sync);
+      {_ElementPageLoaderElement eventTarget, bool sync: true}) => loader
+      .executeSynced(() {
+    clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
+    clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
+    return dispatchEvent('mousemove', eventTarget);
+  }, sync);
 
   @override
   Future up(int button,
@@ -257,12 +257,15 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future click({bool sync: true}) => loader.executeSynced(() {
-        if (node is OptionElement) {
-          return _clickOptionElement();
-        } else {
-          return _microtask(node.click);
-        }
-      }, sync);
+    if (node is OptionElement) {
+      return _clickOptionElement();
+    } else if (node is SvgElement) {
+      return _microtask(
+          () => node.dispatchEvent(new Event.eventType('MouseEvent', 'click')));
+    } else {
+      return _microtask(node.click);
+    }
+  }, sync);
 
   Future _clickOptionElement() {
     OptionElement option = node as OptionElement;
@@ -272,32 +275,32 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
-        await focus(sync: false);
-        await _fireKeyPressEvents(node, keys);
-        if (node is InputElement || node is TextAreaElement) {
-          // suppress warning by hiding field
-          var node = this.node;
-          var value = node.value + keys;
-          node.value = '';
-          await _microtask(() =>
-              node.dispatchEvent(new TextEvent('textInput', data: value)));
-        }
-        return blur(sync: false);
-      }, sync);
+    await focus(sync: false);
+    await _fireKeyPressEvents(node, keys);
+    if (node is InputElement || node is TextAreaElement) {
+      // suppress warning by hiding field
+      var node = this.node;
+      var value = node.value + keys;
+      node.value = '';
+      await _microtask(
+          () => node.dispatchEvent(new TextEvent('textInput', data: value)));
+    }
+    return blur(sync: false);
+  }, sync);
 
   @override
   Future clear({bool sync: true}) => loader.executeSynced(() async {
-        if (node is InputElement || node is TextAreaElement) {
-          var node = this.node;
-          await focus(sync: false);
-          node.value = '';
-          await _microtask(
-              () => node.dispatchEvent(new TextEvent('textInput', data: '')));
-          return blur(sync: false);
-        } else {
-          throw new PageLoaderException('$this does not support clear.');
-        }
-      }, sync);
+    if (node is InputElement || node is TextAreaElement) {
+      var node = this.node;
+      await focus(sync: false);
+      node.value = '';
+      await _microtask(
+          () => node.dispatchEvent(new TextEvent('textInput', data: '')));
+      return blur(sync: false);
+    } else {
+      throw new PageLoaderException('$this does not support clear.');
+    }
+  }, sync);
 
   @override
   Future blur({bool sync: true}) =>
@@ -333,12 +336,12 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
-        // TODO(DrMarcII) consider whether this should be sent to
-        // document.activeElement to more closely match WebDriver behavior.
-        await _microtask(() => document.body.focus());
-        await _fireKeyPressEvents(document.body, keys);
-        return _microtask(() => document.body.blur());
-      }, sync);
+    // TODO(DrMarcII) consider whether this should be sent to
+    // document.activeElement to more closely match WebDriver behavior.
+    await _microtask(() => document.body.focus());
+    await _fireKeyPressEvents(document.body, keys);
+    return _microtask(() => document.body.blur());
+  }, sync);
 }
 
 class _ElementAttributes extends PageLoaderAttributes {
