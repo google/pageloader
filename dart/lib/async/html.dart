@@ -281,10 +281,9 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
         if (node is InputElement || node is TextAreaElement) {
           // suppress warning by hiding field
           var node = this.node;
-          var value = node.value + keys;
-          node.value = '';
-          await _microtask(() =>
-              node.dispatchEvent(new TextEvent('textInput', data: value)));
+          node.value += keys;
+          await _microtask(() => node.dispatchEvent(new TextEvent('input')));
+          await _microtask(() => node.dispatchEvent(new TextEvent('change')));
         }
         return blur(sync: false);
       }, sync);
@@ -295,8 +294,8 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
           var node = this.node;
           await focus(sync: false);
           node.value = '';
-          await _microtask(
-              () => node.dispatchEvent(new TextEvent('textInput', data: '')));
+          await _microtask(() => node.dispatchEvent(new TextEvent('input')));
+          await _microtask(() => node.dispatchEvent(new TextEvent('change')));
           return blur(sync: false);
         } else {
           throw new PageLoaderException('$this does not support clear.');
