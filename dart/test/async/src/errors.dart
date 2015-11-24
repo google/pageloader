@@ -69,7 +69,7 @@ runTests() {
     });
   });
 
-  group('check exception stack traces', () async {
+  group('check exception stack traces', () {
     test('ensure stack trace from getInstance includes test', () async {
       try {
         await loader.getInstance(PageForNoMatchingElementTest);
