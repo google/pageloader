@@ -63,9 +63,9 @@ abstract class PageLoaderElement {
 
   Stream<PageLoaderElement> getElementsByCss(String selector);
 
-  Future clear({bool sync: true});
+  Future clear({bool sync: true, bool blurAfter: true});
   Future click({bool sync: true});
-  Future type(String keys, {bool sync: true});
+  Future type(String keys, {bool sync: true, bool blurAfter: true});
   Future focus({bool sync: true});
   Future blur({bool sync: true});
 }

@@ -22,6 +22,7 @@ import 'dart:svg' show SvgElement;
 
 import 'src/core.dart';
 import 'src/interfaces.dart';
+
 export 'src/interfaces.dart';
 
 /// execute [fn] as a separate microtask and return a [Future] that completes
@@ -178,7 +179,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   String toString() => '$runtimeType<$node>';
 
-  Future type(String keys, {bool sync: true}) =>
+  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
       loader.executeSynced(() => _fireKeyPressEvents(node, keys), sync);
 
   // This doesn't work in Dartium due to:
@@ -197,7 +198,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   Stream<String> get classes async* {}
 
   @override
-  Future clear({bool sync: true}) async =>
+  Future clear({bool sync: true, bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
   @override
@@ -275,7 +276,8 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   }
 
   @override
-  Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
+  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
+      loader.executeSynced(() async {
         await focus(sync: false);
         await _fireKeyPressEvents(node, keys);
         if (node is InputElement || node is TextAreaElement) {
@@ -285,18 +287,19 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
           await _microtask(() => node.dispatchEvent(new TextEvent('input')));
           await _microtask(() => node.dispatchEvent(new TextEvent('change')));
         }
-        return blur(sync: false);
+        if (blurAfter) await blur(sync: false);
       }, sync);
 
   @override
-  Future clear({bool sync: true}) => loader.executeSynced(() async {
+  Future clear({bool sync: true, bool blurAfter: true}) =>
+      loader.executeSynced(() async {
         if (node is InputElement || node is TextAreaElement) {
           var node = this.node;
           await focus(sync: false);
           node.value = '';
           await _microtask(() => node.dispatchEvent(new TextEvent('input')));
           await _microtask(() => node.dispatchEvent(new TextEvent('change')));
-          return blur(sync: false);
+          if (blurAfter) await blur(sync: false);
         } else {
           throw new PageLoaderException('$this does not support clear.');
         }
@@ -335,12 +338,13 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   Future<bool> get displayed async => true;
 
   @override
-  Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
+  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
+      loader.executeSynced(() async {
         // TODO(DrMarcII) consider whether this should be sent to
         // document.activeElement to more closely match WebDriver behavior.
         await _microtask(() => document.body.focus());
         await _fireKeyPressEvents(document.body, keys);
-        return _microtask(() => document.body.blur());
+        if (blurAfter) await _microtask(() => document.body.blur());
       }, sync);
 }
 
