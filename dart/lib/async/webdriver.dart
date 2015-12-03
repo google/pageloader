@@ -21,6 +21,7 @@ import 'package:webdriver/core.dart' as wd;
 
 import 'src/core.dart';
 import 'src/interfaces.dart';
+
 export 'src/interfaces.dart';
 
 class WebDriverPageLoader extends BasePageLoader {
@@ -144,7 +145,7 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   Stream<String> get classes async* {}
 
   @override
-  Future clear({bool sync: true}) async =>
+  Future clear({bool sync: true, bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
   @override
@@ -152,7 +153,7 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
       throw new PageLoaderException('$runtimeType.click() is unsupported');
 
   @override
-  Future type(String keys, {bool sync: true}) async =>
+  Future type(String keys, {bool sync: true, bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.type() is unsupported');
 
   @override
@@ -222,19 +223,21 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   }
 
   @override
-  Future clear({bool sync: true}) => loader.executeSynced(() async {
+  Future clear({bool sync: true, bool blurAfter: true}) =>
+      loader.executeSynced(() async {
         await focus(sync: false);
         await context.clear();
-        return blur(sync: false);
+        if (blurAfter) await blur(sync: false);
       }, sync);
 
   @override
   Future click({bool sync: true}) => loader.executeSynced(context.click, sync);
   @override
-  Future type(String keys, {bool sync: true}) => loader.executeSynced(() async {
+  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
+      loader.executeSynced(() async {
         await focus(sync: false);
         await context.sendKeys(keys);
-        return blur(sync: false);
+        if (blurAfter) await blur(sync: false);
       }, sync);
 
   @override
@@ -255,7 +258,7 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   Future<String> get name async => '__document__';
   @override
-  Future type(String keys, {bool sync: true}) =>
+  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
       loader.executeSynced(() => context.keyboard.sendKeys(keys), sync);
   @override
   Future<bool> get displayed async => true;
