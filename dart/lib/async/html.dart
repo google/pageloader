@@ -17,6 +17,7 @@ library pageloader.async.html;
 
 import 'dart:async';
 import 'dart:html';
+import 'dart:math';
 import 'dart:mirrors' hide Comment;
 import 'dart:svg' show SvgElement;
 
@@ -198,6 +199,14 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   Stream<String> get classes async* {}
 
   @override
+  Future<Rectangle> getBoundingClientRect() => throw new PageLoaderException(
+      '$runtimeType.getBoundingClientRect() is unsupported');
+
+  @override
+  Future<Rectangle> get offset =>
+      throw new PageLoaderException('$runtimeType.offset is unsupported');
+
+  @override
   Future clear({bool sync: true, bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
@@ -256,6 +265,13 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Stream<String> get classes => new Stream.fromIterable(node.classes);
+
+  @override
+  Future<Rectangle> getBoundingClientRect() async =>
+      node.getBoundingClientRect();
+
+  @override
+  Future<Rectangle> get offset async => node.offset;
 
   @override
   Future click({bool sync: true}) => loader.executeSynced(() {

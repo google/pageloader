@@ -14,6 +14,7 @@
 library pageloader.async.interfaces;
 
 import 'dart:async';
+import 'dart:math';
 
 typedef Future<T> SyncedExecutionFn<T>(Future<T> fn());
 
@@ -60,6 +61,9 @@ abstract class PageLoaderElement {
   PageLoaderAttributes get style;
   Future<bool> get displayed;
   Stream<String> get classes;
+
+  Future<Rectangle> get offset;
+  Future<Rectangle> getBoundingClientRect();
 
   Stream<PageLoaderElement> getElementsByCss(String selector);
 
