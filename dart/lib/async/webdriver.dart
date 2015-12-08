@@ -16,6 +16,7 @@
 library pageloader.async.webdriver;
 
 import 'dart:async';
+import 'dart:math';
 
 import 'package:webdriver/core.dart' as wd;
 
@@ -145,6 +146,14 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   Stream<String> get classes async* {}
 
   @override
+  Future<Rectangle> getBoundingClientRect() => throw new PageLoaderException(
+      '$runtimeType.getBoundingClientRect() is unsupported');
+
+  @override
+  Future<Rectangle> get offset =>
+      throw new PageLoaderException('$runtimeType.offset is unsupported');
+
+  @override
   Future clear({bool sync: true, bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
@@ -220,6 +229,28 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
     if (classAttr != null && classAttr != '') {
       yield* new Stream.fromIterable(classAttr.split(' '));
     }
+  }
+
+  @override
+  Future<Rectangle> getBoundingClientRect() async {
+    var rect = await context.driver
+        .execute('return arguments[0].getBoundingClientRect();', [context]);
+    return new Rectangle(
+        rect['left'], rect['top'], rect['width'], rect['height']);
+  }
+
+  @override
+  Future<Rectangle> get offset async {
+    var rect = await context.driver.execute(
+        '''return {
+          left: arguments[0].offsetLeft,
+          top: arguments[0].offsetTop,
+          width: arguments[0].offsetWidth,
+          height: arguments[0].offsetHeight
+        }''',
+        [context]);
+    return new Rectangle(
+        rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
   @override
