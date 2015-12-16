@@ -49,7 +49,6 @@ Future noOpExecuteSyncedFn(Future fn()) => fn();
 abstract class BasePageLoader implements PageLoader {
   final bool useShadowDom;
   final SyncedExecutionFn executeSyncedFn;
-  int i = 0;
 
   BasePageLoader(
       {this.useShadowDom: true, this.executeSyncedFn: noOpExecuteSyncedFn});
