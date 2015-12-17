@@ -25,7 +25,7 @@ import 'interfaces.dart';
 bool _foldPredicate(st.Frame frame) => frame.isCore ||
     frame.library.contains('package:test/') ||
     frame.library.contains('package:pageloader/') ||
-    frame.library.contains('package:unit_test/') ||
+    frame.library.contains('package:unittest/') ||
     frame.library.contains('package:stack_trace/');
 
 Future capture(callback()) {
