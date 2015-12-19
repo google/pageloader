@@ -48,6 +48,10 @@ runTests() {
       expect(loader.getInstance(PageForMultipleClassFinderTest), throws);
     });
 
+    test('filter without finder', () {
+      expect(loader.getInstance(PageForFilterWithoutFinderTest), throws);
+    });
+
     test('invalid constructor', () {
       expect(loader.getInstance(PageForInvalidConstructorTest), throws);
     });
@@ -144,6 +148,11 @@ class PageForMultipleFinderTest {
   @ById('non-existent id')
   @ByTagName('a-name')
   PageLoaderElement multipleFinder;
+}
+
+class PageForFilterWithoutFinderTest {
+  @IsTag('a-name')
+  PageLoaderElement filterWithoutFinder;
 }
 
 class PageForInvalidConstructorTest {
