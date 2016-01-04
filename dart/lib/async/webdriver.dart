@@ -154,7 +154,10 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
       throw new PageLoaderException('$runtimeType.offset is unsupported');
 
   @override
-  Future clear({bool sync: true, bool blurAfter: true}) async =>
+  Future clear(
+          {bool sync: true,
+          bool focusBefore: true,
+          bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
   @override
@@ -162,7 +165,10 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
       throw new PageLoaderException('$runtimeType.click() is unsupported');
 
   @override
-  Future type(String keys, {bool sync: true, bool blurAfter: true}) async =>
+  Future type(String keys,
+          {bool sync: true,
+          bool focusBefore: true,
+          bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.type() is unsupported');
 
   @override
@@ -254,19 +260,22 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   }
 
   @override
-  Future clear({bool sync: true, bool blurAfter: true}) =>
+  Future clear(
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
-        await focus(sync: false);
+        if (focusBefore) await focus(sync: false);
         await context.clear();
         if (blurAfter) await blur(sync: false);
       }, sync);
 
   @override
   Future click({bool sync: true}) => loader.executeSynced(context.click, sync);
+
   @override
-  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
+  Future type(String keys,
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
-        await focus(sync: false);
+        if (focusBefore) await focus(sync: false);
         await context.sendKeys(keys);
         if (blurAfter) await blur(sync: false);
       }, sync);
@@ -288,9 +297,12 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future<String> get name async => '__document__';
+
   @override
-  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
+  Future type(String keys,
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() => context.keyboard.sendKeys(keys), sync);
+
   @override
   Future<bool> get displayed async => true;
 

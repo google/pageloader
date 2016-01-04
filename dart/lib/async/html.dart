@@ -180,7 +180,8 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   String toString() => '$runtimeType<$node>';
 
-  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
+  Future type(String keys,
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() => _fireKeyPressEvents(node, keys), sync);
 
   // This doesn't work in Dartium due to:
@@ -207,7 +208,10 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
       throw new PageLoaderException('$runtimeType.offset is unsupported');
 
   @override
-  Future clear({bool sync: true, bool blurAfter: true}) async =>
+  Future clear(
+          {bool sync: true,
+          bool focusBefore: true,
+          bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
   @override
@@ -292,9 +296,10 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   }
 
   @override
-  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
+  Future type(String keys,
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
-        await focus(sync: false);
+        if (focusBefore) await focus(sync: false);
         await _fireKeyPressEvents(node, keys);
         if (node is InputElement || node is TextAreaElement) {
           // suppress warning by hiding field
@@ -307,11 +312,12 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
       }, sync);
 
   @override
-  Future clear({bool sync: true, bool blurAfter: true}) =>
+  Future clear(
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (node is InputElement || node is TextAreaElement) {
           var node = this.node;
-          await focus(sync: false);
+          if (focusBefore) await focus(sync: false);
           node.value = '';
           await _microtask(() => node.dispatchEvent(new TextEvent('input')));
           await _microtask(() => node.dispatchEvent(new TextEvent('change')));
@@ -354,11 +360,12 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   Future<bool> get displayed async => true;
 
   @override
-  Future type(String keys, {bool sync: true, bool blurAfter: true}) =>
+  Future type(String keys,
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         // TODO(DrMarcII) consider whether this should be sent to
         // document.activeElement to more closely match WebDriver behavior.
-        await _microtask(() => document.body.focus());
+        if (focusBefore) await _microtask(() => document.body.focus());
         await _fireKeyPressEvents(document.body, keys);
         if (blurAfter) await _microtask(() => document.body.blur());
       }, sync);
