@@ -281,15 +281,22 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   Future<Rectangle> get offset async => node.offset;
 
   @override
-  Future click({bool sync: true}) => loader.executeSynced(() {
+  Future click({bool sync: true}) => loader.executeSynced(() async {
         if (node is OptionElement) {
           return _clickOptionElement();
-        } else if (node is SvgElement) {
+        }
+
+        await _microtask(() =>
+            node.dispatchEvent(new Event.eventType('MouseEvent', 'mousedown')));
+        await _microtask(() =>
+            node.dispatchEvent(new Event.eventType('MouseEvent', 'mouseup')));
+
+        if (node is SvgElement) {
           return _microtask(() =>
               node.dispatchEvent(new Event.eventType('MouseEvent', 'click')));
-        } else {
-          return _microtask(node.click);
-        }
+        } 
+
+        return _microtask(node.click);
       }, sync);
 
   Future _clickOptionElement() {
