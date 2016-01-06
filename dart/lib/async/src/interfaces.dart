@@ -61,6 +61,7 @@ abstract class PageLoaderElement {
   PageLoaderAttributes get style;
   Future<bool> get displayed;
   Stream<String> get classes;
+  Future<bool> get isFocused;
 
   Future<Rectangle> get offset;
   Future<Rectangle> getBoundingClientRect();

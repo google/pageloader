@@ -143,6 +143,14 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   PageLoaderAttributes get attributes => new _EmptyAttributes();
 
   @override
+  Future<bool> get isFocused async {
+    if (context is wd.WebElement) {
+      return (await context.driver.activeElement) == context;
+    }
+    throw new PageLoaderException('$runtimeType.isFocused is unsupported');
+  }
+
+  @override
   Stream<String> get classes async* {}
 
   @override

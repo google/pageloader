@@ -85,6 +85,18 @@ void runTests() {
       await verifyRows(await page.lazyRows());
     });
 
+    test('has focus', () async {
+      PageForFocusTest page = await loader.getInstance(PageForFocusTest);
+
+      expect(await page.textfield.isFocused, false);
+
+      await page.textfield.focus();
+      expect(await page.textfield.isFocused, true);
+
+      await page.textfield.blur();
+      expect(await page.textfield.isFocused, false);
+    });
+
     test('classes', () async {
       PageForSimpleTest page = await loader.getInstance(PageForSimpleTest);
 
@@ -231,4 +243,9 @@ class PageForLazyTest {
 class PageForNbspTest {
   @ById('nbsp')
   PageLoaderElement span;
+}
+
+class PageForFocusTest {
+  @ById('text')
+  PageLoaderElement textfield;
 }
