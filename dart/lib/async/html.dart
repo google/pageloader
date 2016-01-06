@@ -197,6 +197,9 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   PageLoaderAttributes get attributes => new _EmptyAttributes();
 
   @override
+  Future<bool> get isFocused async => document.activeElement == node;
+
+  @override
   Stream<String> get classes async* {}
 
   @override
