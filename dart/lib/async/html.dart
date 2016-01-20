@@ -71,7 +71,7 @@ class _HtmlMouse implements PageLoaderMouse {
   _HtmlMouse(this.loader);
 
   @override
-  Future down(int button,
+  Future down(MouseButton button,
           {_ElementPageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(
           () => dispatchEvent('mousedown', eventTarget, button), sync);
@@ -86,7 +86,7 @@ class _HtmlMouse implements PageLoaderMouse {
       }, sync);
 
   @override
-  Future up(int button,
+  Future up(MouseButton button,
           {_ElementPageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() => dispatchEvent('mouseup', eventTarget), sync);
 
@@ -101,9 +101,9 @@ class _HtmlMouse implements PageLoaderMouse {
       clientY;
 
   Future dispatchEvent(String type, _ElementPageLoaderElement eventTarget,
-      [int button = 0]) async {
+      [MouseButton button = MouseButton.primary]) async {
     var event = new MouseEvent(type,
-        button: button,
+        button: button.value,
         clientX: clientX,
         clientY: clientY,
         screenX: screenX,
