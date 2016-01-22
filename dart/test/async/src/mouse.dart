@@ -28,11 +28,11 @@ void runTests() {
           await loader.mouse.moveTo(page.element, 2, 2);
           await waitFor(() => page.element.visibleText,
               matcher: contains('MouseMove'));
-          await loader.mouse.down(0);
+          await loader.mouse.down(MouseButton.primary);
           await waitFor(() => page.element.visibleText,
               matcher: contains('MouseDown'));
           await loader.mouse.moveTo(page.element, 10, 10);
-          await loader.mouse.up(0);
+          await loader.mouse.up(MouseButton.primary);
           await waitFor(() => page.element.visibleText,
               matcher: contains('MouseUp'));
         },
@@ -43,11 +43,11 @@ void runTests() {
 
       // make sure mouse is not on element;
       await loader.mouse.moveTo(page.element, -10, -10);
-      await loader.mouse.down(0, eventTarget: page.element);
+      await loader.mouse.down(MouseButton.primary, eventTarget: page.element);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseDown'));
       await loader.mouse.moveTo(page.element, 200, 200);
-      await loader.mouse..up(0, eventTarget: page.element);
+      await loader.mouse..up(MouseButton.primary, eventTarget: page.element);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseUp'));
     });

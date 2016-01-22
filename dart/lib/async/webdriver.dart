@@ -64,7 +64,7 @@ class _WebDriverMouse implements PageLoaderMouse {
   _WebDriverMouse(this.loader);
 
   @override
-  Future down(int button,
+  Future down(MouseButton button,
           {_WebElementPageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
         if (eventTarget == null) {
@@ -83,7 +83,7 @@ class _WebDriverMouse implements PageLoaderMouse {
           sync);
 
   @override
-  Future up(int button,
+  Future up(MouseButton button,
           {_WebElementPageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
         if (eventTarget == null) {
@@ -93,12 +93,12 @@ class _WebDriverMouse implements PageLoaderMouse {
         }
       }, sync);
 
-  Future _fireEvent(
-          _WebElementPageLoaderElement eventTarget, String type, int button) =>
+  Future _fireEvent(_WebElementPageLoaderElement eventTarget, String type,
+          MouseButton button) =>
       driver.execute(
           "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
           "{'button' : arguments[2]}));",
-          [eventTarget.context, type, button]);
+          [eventTarget.context, type, button.value]);
 }
 
 abstract class WebDriverPageLoaderElement implements PageLoaderElement {

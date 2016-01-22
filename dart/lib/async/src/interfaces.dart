@@ -15,6 +15,9 @@ library pageloader.async.interfaces;
 
 import 'dart:async';
 import 'dart:math';
+import 'package:webdriver/core.dart' show MouseButton;
+
+export 'package:webdriver/core.dart' show MouseButton;
 
 typedef Future<T> SyncedExecutionFn<T>(Future<T> fn());
 
@@ -36,13 +39,13 @@ abstract class PageLoaderMouse {
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  Future down(int button, {PageLoaderElement eventTarget, bool sync: true});
+  Future down(MouseButton button, {PageLoaderElement eventTarget, bool sync: true});
 
   /// Release [button] on the mouse at its current location. If [eventTarget] is
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  Future up(int button, {PageLoaderElement eventTarget, bool sync: true});
+  Future up(MouseButton button, {PageLoaderElement eventTarget, bool sync: true});
 
   /// Move the mouse to a location relative to [element].
   Future moveTo(PageLoaderElement element, int xOffset, int yOffset,
