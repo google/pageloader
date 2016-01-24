@@ -69,18 +69,20 @@ class _WebDriverMouse implements PageLoaderMouse {
       loader.executeSynced(() {
         if (eventTarget == null) {
           return driver.mouse.down(button);
-        } else {
-          return _fireEvent(eventTarget, 'mousedown', button);
         }
+        return _fireEvent(eventTarget, 'mousedown', button);
       }, sync);
 
   @override
   Future moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset,
-          {bool sync: true}) =>
-      loader.executeSynced(
-          () => driver.mouse.moveTo(
-              element: element.context, xOffset: xOffset, yOffset: yOffset),
-          sync);
+          {_WebElementPageLoaderElement eventTarget, bool sync: true}) =>
+      loader.executeSynced(() {
+        if (eventTarget == null) {
+          return driver.mouse.moveTo(
+              element: element.context, xOffset: xOffset, yOffset: yOffset);
+        }
+        return _fireEvent(eventTarget, 'mousemove');
+      }, sync);
 
   @override
   Future up(MouseButton button,
@@ -88,17 +90,16 @@ class _WebDriverMouse implements PageLoaderMouse {
       loader.executeSynced(() {
         if (eventTarget == null) {
           return driver.mouse.up(button);
-        } else {
-          return _fireEvent(eventTarget, 'mouseup', button);
         }
+        return _fireEvent(eventTarget, 'mouseup', button);
       }, sync);
 
   Future _fireEvent(_WebElementPageLoaderElement eventTarget, String type,
-          MouseButton button) =>
+          [MouseButton button]) =>
       driver.execute(
           "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
           "{'button' : arguments[2]}));",
-          [eventTarget.context, type, button.value]);
+          [eventTarget.context, type, button?.value]);
 }
 
 abstract class WebDriverPageLoaderElement implements PageLoaderElement {
