@@ -2,7 +2,6 @@ PageLoader
 ==========
 
 [![Build Status](https://travis-ci.org/google/pageloader.svg?branch=master)](https://travis-ci.org/google/pageloader)
-[![pub package](https://img.shields.io/pub/v/pageloader.svg)](https://pub.dartlang.org/packages/pageloader)
 
 A framework for creating page objects for in-browser tests or
 WebDriver tests.
@@ -11,10 +10,16 @@ PageLoader for Dart comes in two flavours: async and sync.
 
 Async PageLoader for Dart
 -------------------------
+
+[![pub package](https://img.shields.io/pub/v/pageloader.svg)](https://pub.dartlang.org/packages/pageloader)
+
 Async PageLoader for Dart is the **recommended** version going forward. It is designed to work with [webdriver.dart](https://github.com/google/webdriver.dart). 
 
 Sync PageLoader for Dart
 ------------------------
+
+[![pub package](https://img.shields.io/pub/v/sync_pageloader.svg)](https://pub.dartlang.org/packages/sync_pageloader)
+
 The sync version is **deprecated** and will eventually be **removed** from this repository.
 Consider switching to the async version.
 
