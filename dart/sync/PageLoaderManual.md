@@ -21,8 +21,8 @@ Basic Usage
 -----------
 
 ```dart
-import 'package:pageloader/objects.dart';
-import 'package:pageloader/webdriver.dart';
+import 'package:sync_pageloader/objects.dart';
+import 'package:sync_pageloader/webdriver.dart';
 import 'package:sync_webdriver/webdriver.dart';
 class Page {
   @ById('element1')
