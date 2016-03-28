@@ -444,8 +444,11 @@ Future<PageLoaderElement> _getElement(PageLoaderElement context, Finder finder,
   var elements =
       await _getElements(context, finder, filters, displayCheck).toList();
 
-  if (!required && elements.isEmpty) {
-    return null;
+  if (elements.isEmpty) {
+    if (!required) {
+      return null;  
+    }
+    throw new StateError('No element for finder: $finder');
   }
   return elements.single;
 }
