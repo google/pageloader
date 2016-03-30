@@ -14,30 +14,17 @@
 @TestOn('browser')
 library pageloader.test.html_no_shadow_dom;
 
-import 'dart:async';
-
 import 'package:pageloader/html.dart';
-
 import 'package:test/test.dart';
 
 import 'data/html_no_shadow_dom_setup.dart' as html_setup;
-import 'src/common.dart' as plt;
-import 'src/html_pageloader.dart' as html_test;
-import 'src/shared.dart' as shared;
+import 'setup/html_test_setup.dart' show runTests, syncFn;
 
 void main() {
-  setUp(() {
-    var div = html_setup.setUp();
-    shared.loader =
-        new HtmlPageLoader(div, executeSyncedFn: syncFn, useShadowDom: false);
-  });
-
-  plt.runTests();
-  html_test.runTests();
+  runTests(pageloaderFactory);
 }
 
-syncFn(fn) async {
-  var value = await fn();
-  await new Future.delayed(new Duration(milliseconds: 200));
-  return value;
+PageLoader pageloaderFactory() {
+  var div = html_setup.setUp();
+  return new HtmlPageLoader(div, executeSyncedFn: syncFn, useShadowDom: false);
 }
