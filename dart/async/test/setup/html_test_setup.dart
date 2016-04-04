@@ -11,18 +11,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@TestOn('vm')
-library pageloader.test.webdriver_no_shadow_dom;
+library pageloader.test.html_test_setup;
 
-import 'package:pageloader/webdriver.dart';
+import 'dart:async';
+
 import 'package:test/test.dart';
-import 'package:webdriver/io.dart' show WebDriver;
 
-import 'setup/webdriver_test_setup.dart' show runTests;
+import '../src/common.dart' as plt;
+import '../src/html_pageloader.dart' as html_test;
+import '../src/shared.dart' as shared;
 
-void main() {
-  runTests(pageLoaderFactory, 'webdriver_test_page.html');
+void runTests(pageLoaderFactory) {
+  setUp(() {
+    shared.loader = pageLoaderFactory();
+  });
+
+  plt.runTests();
+  html_test.runTests();
 }
 
-PageLoader pageLoaderFactory(WebDriver driver) =>
-    new WebDriverPageLoader(driver);
+syncFn(fn) async {
+  var value = await fn();
+  await new Future.delayed(new Duration(milliseconds: 200));
+  return value;
+}
