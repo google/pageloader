@@ -132,7 +132,8 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   int get hashCode => context.hashCode;
 
   @override
-  bool operator ==(Object other) => other != null &&
+  bool operator ==(Object other) =>
+      other != null &&
       other.runtimeType == runtimeType &&
       (other as WebDriverPageLoaderElement).context == context &&
       (other as WebDriverPageLoaderElement).loader == loader;
@@ -230,7 +231,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future<String> get innerText async => (await context.driver
-      .execute('return arguments[0].textContent;', [context])).trim();
+          .execute('return arguments[0].textContent;', [context]))
+      .trim();
 
   @override
   Future<String> get visibleText => context.text;
