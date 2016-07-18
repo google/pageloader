@@ -22,7 +22,8 @@ import 'package:stack_trace/stack_trace.dart' as st;
 import 'annotations.dart';
 import 'interfaces.dart';
 
-bool _foldPredicate(st.Frame frame) => frame.isCore ||
+bool _foldPredicate(st.Frame frame) =>
+    frame.isCore ||
     frame.library.contains('package:test/') ||
     frame.library.contains('package:pageloader/') ||
     frame.library.contains('package:unittest/') ||
@@ -387,8 +388,8 @@ class _ListFieldInfo extends _FieldInfo {
     }
     var result = [];
 
-    await for (var el
-        in _getElements(context, _finder, _filters, displayCheck)) {
+    for (var el in await _getElements(context, _finder, _filters, displayCheck)
+        .toList()) {
       result.add(await loader._getInstance(_instanceType, el, displayCheck));
     }
 
@@ -431,7 +432,7 @@ Stream _getElements(PageLoaderElement context, Finder finder,
   if (!displayCheck) {
     yield* elements;
   } else {
-    await for (var el in elements) {
+    for (var el in await elements.toList()) {
       if (await el.displayed) {
         yield el;
       }
@@ -446,7 +447,7 @@ Future<PageLoaderElement> _getElement(PageLoaderElement context, Finder finder,
 
   if (elements.isEmpty) {
     if (!required) {
-      return null;  
+      return null;
     }
     throw new StateError('No element for finder: $finder');
   }

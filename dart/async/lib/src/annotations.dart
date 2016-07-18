@@ -137,7 +137,8 @@ class InShadowDom implements Finder {
 
   @override
   Stream<PageLoaderElement> findElements(PageLoaderElement context) async* {
-    await for (var el in of.findElements(context).map((e) => e.shadowRoot)) {
+    for (var el
+        in await of.findElements(context).map((e) => e.shadowRoot).toList()) {
       yield* find.findElements(await el);
     }
   }
@@ -201,7 +202,7 @@ class Chain implements Finder {
         elements = annotation.filter(elements);
       } else if (annotation is Finder) {
         elements = (els) async* {
-          await for (var el in els) {
+          for (var el in await els.toList()) {
             yield* annotation.findElements(el);
           }
         }(elements);

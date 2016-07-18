@@ -103,7 +103,7 @@ abstract class ElementFilter implements Filter {
 
   @override
   Stream<PageLoaderElement> filter(Stream<PageLoaderElement> elements) async* {
-    await for (PageLoaderElement el in elements) {
+    for (PageLoaderElement el in await elements.toList()) {
       if (await keep(el)) {
         yield el;
       }
