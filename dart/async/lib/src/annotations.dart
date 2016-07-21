@@ -194,8 +194,9 @@ class All implements Finder {
 }
 
 /// Return the elements located by a series of finders and filters running in
-/// sequence. For example, @Chain(finderA, finderB, filterX) will find all
-/// elements that match B inside an element that matches A and then filter by X.
+/// sequence. For example, @Chain(const [finderA, finderB, filterX]) will find
+/// all elements that match B inside an element that matches A and then filter
+/// by X.
 /// Note: this does not de-dup elements.
 class Chain implements Finder {
   final List _annotations;
