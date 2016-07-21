@@ -95,6 +95,17 @@ class ByCss implements Finder {
   String toString() => '@ByCss("$_locator")';
 }
 
+/// Finds the first matching element, if there is one.
+///
+/// Useful to match the root of some component defined recursively.
+class FirstByCss extends ByCss {
+  const FirstByCss(String locator) : super(locator);
+
+  @override
+  Stream<PageLoaderElement> findElements(PageLoaderElement context) =>
+      super.findElements(context).take(1);
+}
+
 class ByClass implements Finder {
   final String _class;
 
@@ -183,7 +194,7 @@ class All implements Finder {
 }
 
 /// Return the elements located by a series of finders and filters running in
-/// sequence. For example, @ByChained(finderA, finderB, filterX) will find all
+/// sequence. For example, @Chain(finderA, finderB, filterX) will find all
 /// elements that match B inside an element that matches A and then filter by X.
 /// Note: this does not de-dup elements.
 class Chain implements Finder {
