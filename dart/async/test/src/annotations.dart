@@ -31,7 +31,7 @@ void runTests() {
     });
 
     test('FirstByCss', () async {
-      PageForWithAttributeTest page =
+      PageForFirstByCssTest page =
           await loader.getInstance(PageForFirstByCssTest);
       expect(await page.element.visibleText, 'r1c1');
     });
