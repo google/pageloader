@@ -30,6 +30,12 @@ void runTests() {
       await verifyRows(table.rows);
     });
 
+    test('FirstByCss', () async {
+      PageForFirstByCssTest page =
+          await loader.getInstance(PageForFirstByCssTest);
+      expect(await page.element.visibleText, 'r1c1');
+    });
+
     test('WithAttribute', () async {
       PageForWithAttributeTest page =
           await loader.getInstance(PageForWithAttributeTest);
@@ -44,7 +50,7 @@ void runTests() {
     });
 
     test(
-        'chain',
+        'Chain',
         () async {
           PageForChainTest page = await loader.getInstance(PageForChainTest);
 
@@ -73,6 +79,12 @@ class TableForEnsureTag {
 
   @ByTagName('tr')
   List<Row> rows;
+}
+
+@FirstByCss('td')
+class PageForFirstByCssTest {
+  @root
+  PageLoaderElement element;
 }
 
 class PageForWithAttributeTest {
