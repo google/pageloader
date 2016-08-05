@@ -65,7 +65,7 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   @override
   Future down(MouseButton button,
-          {_WebElementPageLoaderElement eventTarget, bool sync: true}) =>
+          {PageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
         if (eventTarget == null) {
           return driver.mouse.down(button);
@@ -74,10 +74,10 @@ class _WebDriverMouse implements PageLoaderMouse {
       }, sync);
 
   @override
-  Future moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset,
-          {_WebElementPageLoaderElement eventTarget, bool sync: true}) =>
+  Future moveTo(PageLoaderElement element, int xOffset, int yOffset,
+          {PageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
-        if (eventTarget == null) {
+        if (eventTarget == null && element is _WebElementPageLoaderElement) {
           return driver.mouse.moveTo(
               element: element.context, xOffset: xOffset, yOffset: yOffset);
         }
@@ -86,7 +86,7 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   @override
   Future up(MouseButton button,
-          {_WebElementPageLoaderElement eventTarget, bool sync: true}) =>
+          {PageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
         if (eventTarget == null) {
           return driver.mouse.up(button);
@@ -94,12 +94,16 @@ class _WebDriverMouse implements PageLoaderMouse {
         return _fireEvent(eventTarget, 'mouseup', button);
       }, sync);
 
-  Future _fireEvent(_WebElementPageLoaderElement eventTarget, String type,
+  Future _fireEvent(PageLoaderElement eventTarget, String type,
           [MouseButton button]) =>
       driver.execute(
           "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
           "{'button' : arguments[2]}));",
-          [eventTarget.context, type, button?.value]);
+          [
+            (eventTarget as _WebElementPageLoaderElement).context,
+            type,
+            button?.value
+          ]);
 }
 
 abstract class WebDriverPageLoaderElement implements PageLoaderElement {
