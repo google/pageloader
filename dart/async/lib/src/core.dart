@@ -377,7 +377,7 @@ class _ListFieldInfo extends _FieldInfo {
       : super._(fieldName);
 
   @override
-  Future calculateFieldValue(PageLoaderElement context,
+  Future<List> calculateFieldValue(PageLoaderElement context,
       BasePageLoader loader, bool displayCheck) async {
     if (!_displayCheck) {
       displayCheck = false;
@@ -405,7 +405,7 @@ class _LazyFieldInfo extends _FieldInfo {
         super._(impl._fieldName);
 
   @override
-  Future calculateFieldValue(
+  calculateFieldValue(
       PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
     return new _Lazy(
         () => _impl.calculateFieldValue(context, loader, displayCheck));
@@ -416,8 +416,8 @@ class _InjectedPageLoaderFieldInfo extends _FieldInfo {
   _InjectedPageLoaderFieldInfo(Symbol fieldName) : super._(fieldName);
 
   @override
-  Future calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
-          bool displayCheck) => new Future.value(loader);
+  calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
+          bool displayCheck) => loader;
 }
 
 Stream _getElements(PageLoaderElement context, Finder finder,
