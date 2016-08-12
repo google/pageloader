@@ -351,8 +351,8 @@ class _BasicFieldInfo extends _ListFieldInfo {
       : super(fieldName, finder, filters, instanceType, displayCheck);
 
   @override
-  Future<List> calculateFieldValue(PageLoaderElement context,
-      BasePageLoader loader, bool displayCheck) async {
+  Future calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
+      bool displayCheck) async {
     if (!_displayCheck) {
       displayCheck = false;
     }
@@ -362,7 +362,7 @@ class _BasicFieldInfo extends _ListFieldInfo {
     if (element != null && _instanceType.simpleName != #PageLoaderElement) {
       return loader._getInstance(_instanceType, element, displayCheck);
     }
-    return [element];
+    return element;
   }
 }
 
@@ -377,7 +377,7 @@ class _ListFieldInfo extends _FieldInfo {
       : super._(fieldName);
 
   @override
-  Future<List> calculateFieldValue(PageLoaderElement context,
+  Future calculateFieldValue(PageLoaderElement context,
       BasePageLoader loader, bool displayCheck) async {
     if (!_displayCheck) {
       displayCheck = false;
@@ -408,7 +408,7 @@ class _LazyFieldInfo extends _FieldInfo {
   Future calculateFieldValue(
       PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
     return new _Lazy(
-        () => _impl.calculateFieldValue(context, loader, displayCheck)).call();
+        () => _impl.calculateFieldValue(context, loader, displayCheck));
   }
 }
 
