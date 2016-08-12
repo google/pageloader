@@ -417,7 +417,8 @@ class _InjectedPageLoaderFieldInfo extends _FieldInfo {
 
   @override
   calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
-          bool displayCheck) => loader;
+          bool displayCheck) =>
+      loader;
 }
 
 Stream _getElements(PageLoaderElement context, Finder finder,
