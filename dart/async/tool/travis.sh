@@ -28,7 +28,7 @@ chromedriver --port=4444 --url-base=wd/hub &
 PID=$!
 
 # Run tests.
-pub run test -r expanded -p vm,content-shell
+pub run test -r expanded -p vm,content-shell -j 1
 
 # Exit chromedriver
 kill $PID
