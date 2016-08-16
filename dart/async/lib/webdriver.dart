@@ -212,11 +212,13 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   _WebElementPageLoaderElement(
       wd.WebElement _context, WebDriverPageLoader loader)
-      : super._(loader),
+      :
         this.context = _context,
         this.attributes = new _ElementAttributes(_context),
         this.computedStyle = new _ElementComputedStyle(_context),
-        this.style = new _ElementStyle(_context);
+        this.style = new _ElementStyle(_context),
+      super._(loader)
+        ;
 
   @override
   Future<WebDriverPageLoaderElement> get shadowRoot async {
@@ -354,7 +356,7 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   Future<bool> get displayed => context.displayed;
 
   @override
-  Stream<PageLoaderElement> getElementsByCss(String selector) async* {
+  Stream<WebDriverPageLoaderElement> getElementsByCss(String selector) async* {
     yield* _fromContextStream(new Stream.fromIterable(
         await _execute('.querySelectorAll("$selector")')));
   }
