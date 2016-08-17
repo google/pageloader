@@ -252,11 +252,11 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   final PageLoaderAttributes style;
 
   _ElementPageLoaderElement(Element _node, HtmlPageLoader loader)
-      : super._(loader),
-        this.node = _node,
+      : this.node = _node,
         this.attributes = new _ElementAttributes(_node),
         this.computedStyle = new _ElementComputedStyle(_node),
-        this.style = new _ElementStyle(_node);
+        this.style = new _ElementStyle(_node),
+        super._(loader);
 
   @override
   Future<PageLoaderElement> get shadowRoot async {
@@ -318,7 +318,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
         await _fireKeyPressEvents(node, keys);
         if (node is InputElement || node is TextAreaElement) {
           // suppress warning by hiding field
-          var node = this.node;
+          dynamic node = this.node;
           node.value += keys;
           await _microtask(() => node.dispatchEvent(new TextEvent('input')));
           await _microtask(() => node.dispatchEvent(new TextEvent('change')));
@@ -331,7 +331,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (node is InputElement || node is TextAreaElement) {
-          var node = this.node;
+          dynamic node = this.node;
           if (focusBefore) await focus(sync: false);
           node.value = '';
           await _microtask(() => node.dispatchEvent(new TextEvent('input')));
