@@ -258,8 +258,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   Future<Rectangle> getBoundingClientRect() async {
     var rect = await context.driver
         .execute('return arguments[0].getBoundingClientRect();', [context]);
-    return new Rectangle(
-        rect['left'], rect['top'], rect['width'], rect['height']);
+    return new Rectangle<num>(rect['left'] as num, rect['top'] as num,
+        rect['width'] as num, rect['height'] as num);
   }
 
   @override
@@ -272,8 +272,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
           height: arguments[0].offsetHeight
         }''',
         [context]);
-    return new Rectangle(
-        rect['left'], rect['top'], rect['width'], rect['height']);
+    return new Rectangle<num>(rect['left'] as num, rect['top'] as num,
+        rect['width'] as num, rect['height'] as num);
   }
 
   @override
