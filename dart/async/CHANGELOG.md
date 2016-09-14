@@ -1,3 +1,8 @@
+## v2.2.2
+
+* strong mode fixes
+* added changelog
+
 ## v2.2.1
 
 * Fix more strong mode errors.
