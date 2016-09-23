@@ -56,17 +56,18 @@ abstract class BasePageLoader implements PageLoader {
 
   /// Creates a new instance of [type] and binds annotated fields to
   /// corresponding [PageLoaderElement]s.
-  Future getInstanceInternal(Type type, [PageLoaderElement context]) {
+  Future/*<T>*/ getInstanceInternal/*<T>*/(Type type,
+      [PageLoaderElement context]) {
     if (context == null) {
       context = globalContext;
     }
     return _getInstance(reflectClass(type), context, true);
   }
 
-  Future _getInstance(
+  Future/*<T>*/ _getInstance/*<T>*/(
           ClassMirror type, PageLoaderElement context, bool displayCheck) =>
-      capture(
-          () => new _ClassInfo(type).getInstance(context, this, displayCheck));
+      capture(() =>
+          new _ClassInfo/*<T>*/(type).getInstance(context, this, displayCheck));
 
   Future executeSynced(Future fn(), bool sync) {
     if (sync) {
@@ -88,7 +89,7 @@ class _Lazy<T> implements Lazy<T> {
   Future<T> call() => _call();
 }
 
-class _ClassInfo {
+class _ClassInfo<T> {
   static final Map<ClassMirror, _ClassInfo> _classInfoCache =
       <ClassMirror, _ClassInfo>{};
 
@@ -132,7 +133,7 @@ class _ClassInfo {
               'Useless @root annotation of ${type.simpleName}');
         }
 
-        return new _ClassInfo._(
+        return new _ClassInfo<T>._(
             type, _fieldInfos(type), finder, filters, displayCheck);
       });
 
@@ -181,7 +182,7 @@ class _ClassInfo {
     return allTypes;
   }
 
-  Future getInstance(PageLoaderElement context, BasePageLoader loader,
+  Future<T> getInstance(PageLoaderElement context, BasePageLoader loader,
       bool displayCheck) async {
     if (!_displayCheck) {
       displayCheck = false;
@@ -195,7 +196,7 @@ class _ClassInfo {
     for (var fieldInfo in _fields) {
       await fieldInfo.setField(page, context, loader, displayCheck);
     }
-    return page.reflectee;
+    return page.reflectee as T;
   }
 
   InstanceMirror _reflectedInstance() {
@@ -377,8 +378,8 @@ class _ListFieldInfo extends _FieldInfo {
       : super._(fieldName);
 
   @override
-  Future calculateFieldValue(PageLoaderElement context,
-      BasePageLoader loader, bool displayCheck) async {
+  Future calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
+      bool displayCheck) async {
     if (!_displayCheck) {
       displayCheck = false;
     }
@@ -417,7 +418,8 @@ class _InjectedPageLoaderFieldInfo extends _FieldInfo {
 
   @override
   Future calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
-          bool displayCheck) => new Future.value(loader);
+          bool displayCheck) =>
+      new Future.value(loader);
 }
 
 Stream _getElements(PageLoaderElement context, Finder finder,

@@ -50,7 +50,7 @@ class HtmlPageLoader extends BasePageLoader {
   }
 
   @override
-  Future getInstance(Type type, [dynamic context]) async {
+  Future/*<T>*/ getInstance/*<T>*/(Type type, [dynamic context]) async {
     if (context != null) {
       if (context is Node) {
         context = new HtmlPageLoaderElement(context, this);
