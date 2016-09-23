@@ -45,7 +45,7 @@ class WebDriverPageLoader extends BasePageLoader {
   WebDriverPageLoaderElement get globalContext => _globalContext;
 
   @override
-  Future getInstance(Type type, [dynamic context]) async {
+  Future/*<T>*/ getInstance/*<T>*/(Type type, [dynamic context]) async {
     if (context != null) {
       if (context is wd.SearchContext) {
         context = new WebDriverPageLoaderElement(context, this);
@@ -212,13 +212,11 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   _WebElementPageLoaderElement(
       wd.WebElement _context, WebDriverPageLoader loader)
-      :
-        this.context = _context,
+      : this.context = _context,
         this.attributes = new _ElementAttributes(_context),
         this.computedStyle = new _ElementComputedStyle(_context),
         this.style = new _ElementStyle(_context),
-      super._(loader)
-        ;
+        super._(loader);
 
   @override
   Future<WebDriverPageLoaderElement> get shadowRoot async {
@@ -256,7 +254,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future<Rectangle> getBoundingClientRect() async {
-    var rect = await context.driver
+    Map<String, num> rect = await context.driver
         .execute('return arguments[0].getBoundingClientRect();', [context]);
     return new Rectangle<num>(rect['left'] as num, rect['top'] as num,
         rect['width'] as num, rect['height'] as num);
@@ -264,7 +262,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future<Rectangle> get offset async {
-    var rect = await context.driver.execute(
+    Map<String, num> rect = await context.driver.execute(
         '''return {
           left: arguments[0].offsetLeft,
           top: arguments[0].offsetTop,
