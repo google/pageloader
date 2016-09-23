@@ -256,8 +256,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   Future<Rectangle> getBoundingClientRect() async {
     Map<String, num> rect = await context.driver
         .execute('return arguments[0].getBoundingClientRect();', [context]);
-    return new Rectangle<num>(rect['left'] as num, rect['top'] as num,
-        rect['width'] as num, rect['height'] as num);
+    return new Rectangle<num>(rect['left'], rect['top'],
+        rect['width'], rect['height']);
   }
 
   @override
@@ -270,8 +270,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
           height: arguments[0].offsetHeight
         }''',
         [context]);
-    return new Rectangle<num>(rect['left'] as num, rect['top'] as num,
-        rect['width'] as num, rect['height'] as num);
+    return new Rectangle<num>(rect['left'], rect['top'],
+        rect['width'], rect['height']);
   }
 
   @override
