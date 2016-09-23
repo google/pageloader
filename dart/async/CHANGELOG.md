@@ -1,3 +1,7 @@
+## v2.2.3
+* remove unnecessary casts
+* Make getInstance a generic method
+
 ## v2.2.2
 
 * strong mode fixes
