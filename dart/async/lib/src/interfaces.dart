@@ -57,30 +57,83 @@ abstract class PageLoaderMouse {
       {PageLoaderElement eventTarget, bool sync: true});
 }
 
+/// Base class for anything in the DOM that users can interact with via
+/// pageloader (e.g. HTML Nodes, the document itself, etc).
 abstract class PageLoaderElement {
+  /// The [PageLoader] instance associated with this element.
   PageLoader get loader;
 
+  /// The shadow root hosted by this element.
   Future<PageLoaderElement> get shadowRoot;
+
+  /// The text content of this element.
+  ///
+  /// This should return the value of `<element>.innerText` (see
+  /// https://developer.mozilla.org/en-US/docs/Web/API/Node/innerText), but
+  /// behaviour may vary for the different pageloader implementations.
   Future<String> get innerText;
+
+  /// Visible text within this element.
+  ///
+  /// This should return the value of webdriver's getText() call (see
+  /// http://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebElement.html#getText--),
+  /// but behaviour may vary for the different pageloader implementations.
   Future<String> get visibleText;
+
+  /// The tag name of the node represented by this element.
   Future<String> get name;
+
+  /// Attributes associated with this element.
   PageLoaderAttributes get attributes;
+
+  /// CSS properties of this element after applying the active stylesheets and
+  /// resolving any basic computation, such as converting a percentage into an
+  /// absolute length.
   PageLoaderAttributes get computedStyle;
+
+  /// This element's inline style attributes.
   PageLoaderAttributes get style;
+
+  /// Whether this element is displayed.
   Future<bool> get displayed;
+
+  /// CSS classes associated with this element.
   Stream<String> get classes;
+
+  /// Whether this element is focused.
   Future<bool> get isFocused;
 
+  /// The offset of this element relative to its parent.
   Future<Rectangle> get offset;
+
+  /// The smallest bounding rectangle that encompasses this element's padding,
+  /// scrollbar, and border.
   Future<Rectangle> getBoundingClientRect();
 
+  /// Returns the elements within this element that match the given CSS
+  /// selector.
   Stream<PageLoaderElement> getElementsByCss(String selector);
 
+  /// Clears the text of this element, if possible (e.g. for text fields).
+  ///
+  /// [focusBefore] indicates whether to focus this element before clearing.
+  /// [blurAfter] indicates whether to blur this element after clearing.
   Future clear({bool sync: true, bool focusBefore: true, bool blurAfter: true});
+
+  /// Clicks on the element.
   Future click({bool sync: true});
+
+  /// Types [keys] into this element, if possible (e.g. for an input element).
+  ///
+  /// [focusBefore] indicates whether to focus this element before typing.
+  /// [blurAfter] indicates whether to blur this element after typing.
   Future type(String keys,
       {bool sync: true, bool focusBefore: true, bool blurAfter: true});
+
+  /// Focuses the element.
   Future focus({bool sync: true});
+
+  /// Blurs the element (= lose focus).
   Future blur({bool sync: true});
 }
 
