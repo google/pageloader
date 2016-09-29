@@ -68,7 +68,7 @@ abstract class PageLoaderElement {
 
   /// The text content of this element.
   ///
-  /// This should return the value of <element>.innerText (see
+  /// This should return the value of `<element>.innerText` (see
   /// https://developer.mozilla.org/en-US/docs/Web/API/Node/innerText), but
   /// behaviour may vary for the different pageloader implementations.
   Future<String> get innerText;
