@@ -187,7 +187,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
   Future type(String keys,
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
-      loader.executeSynced(() => _fireKeyPressEvents(node, keys.codeUnits.length), sync);
+      loader.executeSynced(() => _fireKeyPressEvents(node, keys.length), sync);
 
   // KeyEvent doesn't work in Dartium due to:
   // https://code.google.com/p/dart/issues/detail?id=13902
@@ -317,7 +317,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (focusBefore) await focus(sync: false);
-        await _fireKeyPressEvents(node, keys.codeUnits.length);
+        await _fireKeyPressEvents(node, keys.length);
         if (node is InputElement || node is TextAreaElement) {
           // suppress warning by hiding field
           dynamic node = this.node;
@@ -383,7 +383,7 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
         // TODO(DrMarcII) consider whether this should be sent to
         // document.activeElement to more closely match WebDriver behavior.
         if (focusBefore) await _microtask(() => document.body.focus());
-        await _fireKeyPressEvents(document.body, keys.codeUnits.length);
+        await _fireKeyPressEvents(document.body, keys.length);
         if (blurAfter) await _microtask(() => document.body.blur());
       }, sync);
 }
