@@ -26,8 +26,6 @@ before_script:
   - unzip chromedriver_linux64.zip
   - export PATH=$PATH:$PWD
   - ./dart/async/tool/travis-setup.sh
-  - ./dart/sync/tool/travis-setup.sh
 
 script: 
   - ./dart/async/tool/travis.sh
-  - ./dart/sync/tool/travis.sh
