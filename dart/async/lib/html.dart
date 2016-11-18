@@ -187,14 +187,16 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
   Future type(String keys,
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
-      loader.executeSynced(() => _fireKeyPressEvents(node, keys), sync);
+      loader.executeSynced(() => _fireKeyPressEvents(node, keys.codeUnits.length), sync);
 
-  // This doesn't work in Dartium due to:
+  // KeyEvent doesn't work in Dartium due to:
   // https://code.google.com/p/dart/issues/detail?id=13902
-  Future _fireKeyPressEvents(Element element, String keys) async {
-    for (int charCode in keys.codeUnits) {
+  // There is no reliable way to set the actual key values, so we just fire a number of
+  // key presses instead.
+  Future _fireKeyPressEvents(Element element, int numKeys) async {
+    for (int i = 0; i < numKeys; ++i) {
       await _microtask(() => element
-          .dispatchEvent(new KeyEvent('keypress', charCode: charCode).wrapped));
+          .dispatchEvent(new KeyboardEvent('keypress')));
     }
   }
 
@@ -315,7 +317,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (focusBefore) await focus(sync: false);
-        await _fireKeyPressEvents(node, keys);
+        await _fireKeyPressEvents(node, keys.codeUnits.length);
         if (node is InputElement || node is TextAreaElement) {
           // suppress warning by hiding field
           dynamic node = this.node;
@@ -381,7 +383,7 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
         // TODO(DrMarcII) consider whether this should be sent to
         // document.activeElement to more closely match WebDriver behavior.
         if (focusBefore) await _microtask(() => document.body.focus());
-        await _fireKeyPressEvents(document.body, keys);
+        await _fireKeyPressEvents(document.body, keys.codeUnits.length);
         if (blurAfter) await _microtask(() => document.body.blur());
       }, sync);
 }
