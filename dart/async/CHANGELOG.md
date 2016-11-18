@@ -1,3 +1,7 @@
+## v2.2.4
+* Remove broken KeyEvent use
+* Added docs to PageLoaderElement
+
 ## v2.2.3
 * remove unnecessary casts
 * Make getInstance a generic method
