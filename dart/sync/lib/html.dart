@@ -197,16 +197,18 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   String toString() => '$runtimeType<${node.toString()}>';
 
   void type(String keys, {bool sync: true}) {
-    _fireKeyPressEvents(node, keys);
+    _fireKeyPressEvents(node, keys.codeUnits.length);
     loader.sync(sync);
   }
 
-  // This doesn't work in Dartium due to:
+  // KeyEvent doesn't work in Dartium due to:
   // https://code.google.com/p/dart/issues/detail?id=13902
-  void _fireKeyPressEvents(Element element, String keys) {
-    for (int charCode in keys.codeUnits) {
+  // There is no reliable way to set the actual key values, so we just fire a number of
+  // key presses instead.
+  void _fireKeyPressEvents(Element element, int numKeys) {
+    for (int i = 0; i < numKeys; ++i) {
       element
-          .dispatchEvent(new KeyEvent('keypress', charCode: charCode).wrapped);
+          .dispatchEvent(new KeyboardEvent('keypress'));
     }
   }
 }
@@ -263,7 +265,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   @override
   void type(String keys, {bool sync: true}) {
     node.focus();
-    _fireKeyPressEvents(node, keys);
+    _fireKeyPressEvents(node, keys.codeUnits.length);
     if (node is InputElement || node is TextAreaElement) {
       // suppress warning by hiding field
       var node = this.node;
@@ -347,7 +349,7 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
     // TODO(DrMarcII) consider whether this should be sent to
     // document.activeElement to more closely match WebDriver behavior.
     document.body.focus();
-    _fireKeyPressEvents(document.body, keys);
+    _fireKeyPressEvents(document.body, keys.codeUnits.length);
     document.body.blur();
     loader.sync(sync);
   }
