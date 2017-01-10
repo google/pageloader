@@ -8,4 +8,4 @@ pubspec.lock
 *.so
 *~
 .pub/
-
+bazel-*

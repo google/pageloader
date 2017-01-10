@@ -20,7 +20,8 @@ import 'dart:mirrors' show currentMirrorSystem;
 
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
-import 'package:webdriver/io.dart' show Capabilities, WebDriver, createDriver;
+import 'package:webdriver/io.dart' show WebDriver;
+import "package:webtest/webtest.dart" as webtest;
 
 import '../src/common.dart' as plt;
 import '../src/shared.dart' as shared;
@@ -58,23 +59,4 @@ String _testPagePath(String testPage) {
   return path.toUri(testPagePath).toString();
 }
 
-Future<WebDriver> _createTestDriver() {
-  Map capabilities = Capabilities.chrome;
-  Map env = Platform.environment;
-
-  Map chromeOptions = {};
-
-  if (env['CHROMEDRIVER_BINARY'] != null) {
-    chromeOptions['binary'] = env['CHROMEDRIVER_BINARY'];
-  }
-
-  if (env['CHROMEDRIVER_ARGS'] != null) {
-    chromeOptions['args'] = env['CHROMEDRIVER_ARGS'].split(' ');
-  }
-
-  if (chromeOptions.isNotEmpty) {
-    capabilities['chromeOptions'] = chromeOptions;
-  }
-
-  return createDriver(desired: capabilities);
-}
+Future<WebDriver> _createTestDriver() => webtest.newWebDriverSession();
