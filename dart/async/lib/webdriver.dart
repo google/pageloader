@@ -146,7 +146,11 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   String toString() => '$runtimeType<${context.toString()}>';
 
   @override
+  @deprecated
   PageLoaderAttributes get attributes => new _EmptyAttributes();
+
+  @override
+  PageLoaderAttributes get seleniumAttributes => new _EmptyAttributes();
 
   @override
   Future<bool> get isFocused async {
@@ -206,14 +210,14 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
 class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   final wd.WebElement context;
-  final PageLoaderAttributes attributes;
+  final PageLoaderAttributes seleniumAttributes;
   final PageLoaderAttributes computedStyle;
   final PageLoaderAttributes style;
 
   _WebElementPageLoaderElement(
       wd.WebElement _context, WebDriverPageLoader loader)
       : this.context = _context,
-        this.attributes = new _ElementAttributes(_context),
+        this.seleniumAttributes = new _ElementSeleniumAttributes(_context),
         this.computedStyle = new _ElementComputedStyle(_context),
         this.style = new _ElementStyle(_context),
         super._(loader);
@@ -232,6 +236,10 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future<String> get name => context.name;
+
+  @override
+  @deprecated
+  PageLoaderAttributes get attributes => seleniumAttributes;
 
   @override
   Future<String> get innerText async => (await context.driver
@@ -365,10 +373,10 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   }
 }
 
-class _ElementAttributes extends PageLoaderAttributes {
+class _ElementSeleniumAttributes extends PageLoaderAttributes {
   final wd.WebElement _node;
 
-  _ElementAttributes(this._node);
+  _ElementSeleniumAttributes(this._node);
 
   @override
   Future<String> operator [](String name) => _node.attributes[name];

@@ -201,7 +201,11 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   @override
+  @deprecated
   PageLoaderAttributes get attributes => new _EmptyAttributes();
+
+  @override
+  PageLoaderAttributes get seleniumAttributes => new _EmptyAttributes();
 
   @override
   Future<bool> get isFocused async => document.activeElement == node;
@@ -249,13 +253,13 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
 class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   final Element node;
-  final PageLoaderAttributes attributes;
+  final PageLoaderAttributes seleniumAttributes;
   final PageLoaderAttributes computedStyle;
   final PageLoaderAttributes style;
 
   _ElementPageLoaderElement(Element _node, HtmlPageLoader loader)
       : this.node = _node,
-        this.attributes = new _ElementAttributes(_node),
+        this.seleniumAttributes = new _ElementSeleniumAttributes(_node),
         this.computedStyle = new _ElementComputedStyle(_node),
         this.style = new _ElementStyle(_node),
         super._(loader);
@@ -270,6 +274,10 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
     }
     return this;
   }
+
+  @deprecated
+  @override
+  PageLoaderAttributes get attributes => seleniumAttributes;
 
   @override
   Future<String> get name async => node.tagName.toLowerCase();
@@ -388,7 +396,7 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
       }, sync);
 }
 
-class _ElementAttributes extends PageLoaderAttributes {
+class _ElementSeleniumAttributes extends PageLoaderAttributes {
   static const _BOOLEAN_ATTRIBUTES = const [
     'async',
     'autofocus',
@@ -435,7 +443,7 @@ class _ElementAttributes extends PageLoaderAttributes {
 
   final Element _node;
 
-  _ElementAttributes(this._node);
+  _ElementSeleniumAttributes(this._node);
 
   /// Based on algorithm from:
   /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
