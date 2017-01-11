@@ -36,15 +36,15 @@ void runTests() {
       expect(await page.element.visibleText, 'r1c1');
     });
 
-    test('WithAttribute', () async {
-      PageForWithAttributeTest page =
-          await loader.getInstance(PageForWithAttributeTest);
-      expect(await page.element.attributes['type'], 'checkbox');
+    test('WithSeleniumAttribute', () async {
+      PageForWithSeleniumAttributeTest page =
+          await loader.getInstance(PageForWithSeleniumAttributeTest);
+      expect(await page.element.seleniumAttributes['type'], 'checkbox');
     });
 
     test('WithClass', () async {
       var page = await loader.getInstance(PageForWithClassTest);
-      expect(await page.element.attributes['type'], 'checkbox');
+      expect(await page.element.seleniumAttributes['type'], 'checkbox');
       expect(await page.element.classes.toList(),
           unorderedEquals(['with-class-test', 'class1', 'class2']));
     });
@@ -87,9 +87,9 @@ class PageForFirstByCssTest {
   PageLoaderElement element;
 }
 
-class PageForWithAttributeTest {
+class PageForWithSeleniumAttributeTest {
   @ByTagName('input')
-  @WithAttribute('type', 'checkbox')
+  @WithSeleniumAttribute('type', 'checkbox')
   PageLoaderElement element;
 }
 

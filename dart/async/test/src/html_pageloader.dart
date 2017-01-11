@@ -29,9 +29,9 @@ void runTests() {
       node.onInput.listen((event) {
         handlerCalled.complete(true);
       });
-      expect(await page.text.attributes['value'], '');
+      expect(await page.text.seleniumAttributes['value'], '');
       await page.text.type('some text');
-      expect(await page.text.attributes['value'], 'some text');
+      expect(await page.text.seleniumAttributes['value'], 'some text');
       expect(await handlerCalled.future, isTrue);
     });
 
