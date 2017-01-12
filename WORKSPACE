@@ -14,11 +14,12 @@
 
 workspace(name = "com_github_google_pageloader")
 
+# TODO(DrMarcII) Update when https://github.com/dart-lang/rules_dart/pull/69 is merged.
 http_archive(
     name = "io_bazel_rules_dart",
-    sha256 = "e75d14c603e09031d1185df62f4fa10cc1d6fbcb0d9d7e624eb9c0c70cf3afd3",
-    strip_prefix = "rules_dart-a7c1b24897da18d5e0ccd094ff1bad252f8b8dfc",
-    url = "https://github.com/DrMarcII/rules_dart/archive/a7c1b24897da18d5e0ccd094ff1bad252f8b8dfc.tar.gz",
+    sha256 = "c5a60e0d977e595bd24e60ce569c2d1f7edea2379f9eaa6a471700d0971ec16c",
+    strip_prefix = "rules_dart-b8ab2c9001eab9955711a3c46775cb8445ae308b",
+    url = "https://github.com/DrMarcII/rules_dart/archive/b8ab2c9001eab9955711a3c46775cb8445ae308b.tar.gz",
 )
 
 load("@io_bazel_rules_dart//dart/build_rules:repositories.bzl", "dart_repositories")
@@ -27,9 +28,9 @@ dart_repositories()
 
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "0c0ec7b9c7935883cbfb2df48fbf524e857859a5c05ae1b24d5442956e6bb5e8",
-    strip_prefix = "rules_go-0.2.0",
-    url = "https://github.com/bazelbuild/rules_go/archive/0.2.0.tar.gz",
+    sha256 = "890e055a9956daa85287ed309e8efaa9d5336b2bc5a71ad3676c220c99015a9d",
+    strip_prefix = "rules_go-0.3.2",
+    url = "https://github.com/bazelbuild/rules_go/archive/0.3.2.tar.gz",
 )
 
 load("@io_bazel_rules_go//go:def.bzl", "go_repositories")
@@ -38,9 +39,9 @@ go_repositories()
 
 http_archive(
     name = "io_bazel_rules_webtesting",
-    sha256 = "1c0d36f71e265dd7541ced44cbf68c293f5b76ac78cff215a2c76dcce22b4d00",
-    strip_prefix = "rules_webtesting-f27ab1ce1bf42b3ef0fb4ca15b19507e27c28df9",
-    url = "https://github.com/bazelbuild/rules_webtesting/archive/f27ab1ce1bf42b3ef0fb4ca15b19507e27c28df9.tar.gz",
+    sha256 = "898c0565afe493706ca87c39528a5084ddfeef88ffb7878d0ca117cb4d9ec802",
+    strip_prefix = "rules_webtesting-0.1.2",
+    url = "https://github.com/bazelbuild/rules_webtesting/archive/0.1.2.tar.gz",
 )
 
 load("@io_bazel_rules_webtesting//web:repositories.bzl", "web_test_repositories")
@@ -49,9 +50,9 @@ web_test_repositories()
 
 http_archive(
     name = "com_github_google_webdriver_dart",
-    sha256 = "f22598116700a6d3506f200ce5449437d804b91d0c1a805f2c39c29a88051432",
-    strip_prefix = "webdriver.dart-0bd8c4674cda1b0e959098955274769d881ce5fd",
-    url = "https://github.com/DrMarcII/webdriver.dart/archive/0bd8c4674cda1b0e959098955274769d881ce5fd.tar.gz",
+    sha256 = "675aa61528e86136386939faa8b0a626c8a58db01917f438e4d8b7b24d5b3f5c",
+    strip_prefix = "webdriver.dart-1.2.2",
+    url = "https://github.com/google/webdriver.dart/archive/v1.2.2.tar.gz",
 )
 
 load("@com_github_google_webdriver_dart//:repositories.bzl", "webdriver_dart_repositories")

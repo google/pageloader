@@ -22,6 +22,7 @@ load("@io_bazel_rules_webtesting//web:dart.bzl", "dart_web_test_suite")
 dart_library(
     name = "pageloader",
     srcs = glob(["lib/**"]),
+    enable_ddc = False,
     license_files = ["//:LICENSE"],
     pub_pkg_name = "pageloader",
     visibility = ["//visibility:public"],
@@ -65,6 +66,7 @@ dart_library(
         exclude = ["test/**/html*"],
     ),
     data = glob(["test/data/*.html"]),
+    enable_ddc = False,
     deps = [
         ":pageloader",
         "@com_github_google_webdriver_dart//:webdriver",
