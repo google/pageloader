@@ -14,12 +14,11 @@
 
 workspace(name = "com_github_google_pageloader")
 
-# TODO(DrMarcII) Update when https://github.com/dart-lang/rules_dart/pull/69 is merged.
 http_archive(
     name = "io_bazel_rules_dart",
-    sha256 = "c5a60e0d977e595bd24e60ce569c2d1f7edea2379f9eaa6a471700d0971ec16c",
-    strip_prefix = "rules_dart-b8ab2c9001eab9955711a3c46775cb8445ae308b",
-    url = "https://github.com/DrMarcII/rules_dart/archive/b8ab2c9001eab9955711a3c46775cb8445ae308b.tar.gz",
+    sha256 = "45abe3e3fb908f7792bc747b380aa5fdf8f9e66a4f86623ed68acbe1042b1e7e",
+    strip_prefix = "rules_dart-11bca9e70b42470a909782e6369194af38898551",
+    url = "https://github.com/dart-lang/rules_dart/archive/11bca9e70b42470a909782e6369194af38898551.tar.gz",
 )
 
 load("@io_bazel_rules_dart//dart/build_rules:repositories.bzl", "dart_repositories")
@@ -39,9 +38,9 @@ go_repositories()
 
 http_archive(
     name = "io_bazel_rules_webtesting",
-    sha256 = "898c0565afe493706ca87c39528a5084ddfeef88ffb7878d0ca117cb4d9ec802",
-    strip_prefix = "rules_webtesting-0.1.2",
-    url = "https://github.com/bazelbuild/rules_webtesting/archive/0.1.2.tar.gz",
+    sha256 = "ff0def632de4f8713494c87528f4a621b819d464da6334a8d96f8be0eec8798a",
+    strip_prefix = "rules_webtesting-6d2398e3ad1f210ae1cf70ae6c50ea7621857d16",
+    url = "https://github.com/bazelbuild/rules_webtesting/archive/6d2398e3ad1f210ae1cf70ae6c50ea7621857d16.tar.gz",
 )
 
 load("@io_bazel_rules_webtesting//web:repositories.bzl", "web_test_repositories")
@@ -50,9 +49,9 @@ web_test_repositories()
 
 http_archive(
     name = "com_github_google_webdriver_dart",
-    sha256 = "675aa61528e86136386939faa8b0a626c8a58db01917f438e4d8b7b24d5b3f5c",
-    strip_prefix = "webdriver.dart-1.2.2",
-    url = "https://github.com/google/webdriver.dart/archive/v1.2.2.tar.gz",
+    sha256 = "c593ffdccf5da84f6091e78392b6d08b8068574720c29a105057db22af760d29",
+    strip_prefix = "webdriver.dart-dc5c129ce550c58fca0d498e51c38edf7e378255",
+    url = "https://github.com/google/webdriver.dart/archive/dc5c129ce550c58fca0d498e51c38edf7e378255.tar.gz",
 )
 
 load("@com_github_google_webdriver_dart//:repositories.bzl", "webdriver_dart_repositories")
