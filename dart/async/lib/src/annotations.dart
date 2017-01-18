@@ -261,7 +261,7 @@ class IsDisplayed extends ElementFilter {
 
 /// Keeps only [PageLoaderElement]s that have the given attribute with the
 /// given value.
-/// 
+///
 /// Deprecated: use WithSeleniumAttribute instead.
 @deprecated
 class WithAttribute extends ElementFilter {
@@ -279,7 +279,7 @@ class WithAttribute extends ElementFilter {
 
 /// Keeps only [PageLoaderElement]s that have the given attribute with the
 /// given value.
-/// 
+///
 /// Note: this is primarily inteaded for transition to separate WithAttribute
 /// WithProperty Filters that differentiate between attributes/properties.
 class WithSeleniumAttribute extends ElementFilter {
