@@ -201,10 +201,6 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  @deprecated
-  PageLoaderAttributes get attributes => new _EmptyAttributes();
-
-  @override
   PageLoaderAttributes get seleniumAttributes => new _EmptyAttributes();
 
   @override
@@ -274,10 +270,6 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
     }
     return this;
   }
-
-  @deprecated
-  @override
-  PageLoaderAttributes get attributes => seleniumAttributes;
 
   @override
   Future<String> get name async => node.tagName.toLowerCase();

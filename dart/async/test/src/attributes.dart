@@ -23,11 +23,11 @@ void runTests() {
       var page = await loader.getInstance(PageForAttributesTests);
       // According to the spec, red below should be returned as an
       // RGBA value.
-      expect(await page.divWithStyle.attributes['style'],
+      expect(await page.divWithStyle.seleniumAttributes['style'],
           'display: none; background-color: red;');
-      expect(await page.divWithStyle.attributes['STYLE'],
+      expect(await page.divWithStyle.seleniumAttributes['STYLE'],
           'display: none; background-color: red;');
-      expect(await page.divWithStyle.attributes['StYlE'],
+      expect(await page.divWithStyle.seleniumAttributes['StYlE'],
           'display: none; background-color: red;');
     });
 

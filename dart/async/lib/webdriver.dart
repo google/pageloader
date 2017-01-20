@@ -146,10 +146,6 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   String toString() => '$runtimeType<${context.toString()}>';
 
   @override
-  @deprecated
-  PageLoaderAttributes get attributes => new _EmptyAttributes();
-
-  @override
   PageLoaderAttributes get seleniumAttributes => new _EmptyAttributes();
 
   @override
@@ -236,10 +232,6 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future<String> get name => context.name;
-
-  @override
-  @deprecated
-  PageLoaderAttributes get attributes => seleniumAttributes;
 
   @override
   Future<String> get innerText async => (await context.driver
