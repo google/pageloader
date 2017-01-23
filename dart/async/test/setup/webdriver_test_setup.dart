@@ -21,7 +21,7 @@ import 'dart:mirrors' show currentMirrorSystem;
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 import 'package:webdriver/io.dart' show WebDriver;
-import "package:webtest/webtest.dart" as webtest;
+import 'package:webtest/webtest.dart' as webtest;
 
 import '../src/common.dart' as plt;
 import '../src/shared.dart' as shared;

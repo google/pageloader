@@ -254,7 +254,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Stream<String> get classes async* {
-    String classAttr = await attributes['class'];
+    String classAttr = await seleniumAttributes['class'];
     if (classAttr != null && classAttr != '') {
       yield* new Stream.fromIterable(classAttr.split(' '));
     }
