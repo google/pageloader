@@ -262,24 +262,6 @@ class IsDisplayed extends ElementFilter {
 /// Keeps only [PageLoaderElement]s that have the given attribute with the
 /// given value.
 ///
-/// Deprecated: use WithSeleniumAttribute instead.
-@deprecated
-class WithAttribute extends ElementFilter {
-  final String _attribute;
-  final String _value;
-
-  const WithAttribute(this._attribute, this._value);
-
-  @override
-  Future<bool> keep(PageLoaderElement element) async =>
-      (await element.seleniumAttributes[_attribute]) == _value;
-
-  String toString() => '@WithAttribute($_attribute, $_value)';
-}
-
-/// Keeps only [PageLoaderElement]s that have the given attribute with the
-/// given value.
-///
 /// Note: this is primarily inteaded for transition to separate WithAttribute
 /// WithProperty Filters that differentiate between attributes/properties.
 class WithSeleniumAttribute extends ElementFilter {

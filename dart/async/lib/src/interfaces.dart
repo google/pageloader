@@ -83,12 +83,6 @@ abstract class PageLoaderElement {
   /// The tag name of the node represented by this element.
   Future<String> get name;
 
-  /// Attributes associated with this element.
-  ///
-  /// Deprecated: Use seleniumAttributes
-  @deprecated
-  PageLoaderAttributes get attributes;
-
   /// Attributes/properties associated with this element. This corresponds to the Selenium
   /// WebDriver's get attribute endpoint.
   ///
