@@ -42,6 +42,18 @@ void runTests() {
       expect(await page.element.seleniumAttributes['type'], 'checkbox');
     });
 
+    test('WithAttribute', () async {
+      PageForWithAttributeTest page =
+          await loader.getInstance(PageForWithAttributeTest);
+      expect(await page.element.attributes['type'], 'checkbox');
+    });
+
+    test('WithProperty', () async {
+      PageForWithPropertyTest page =
+          await loader.getInstance(PageForWithPropertyTest);
+      expect(await page.element.properties['type'], 'checkbox');
+    });
+
     test('WithClass', () async {
       var page = await loader.getInstance(PageForWithClassTest);
       expect(await page.element.seleniumAttributes['type'], 'checkbox');
@@ -49,21 +61,18 @@ void runTests() {
           unorderedEquals(['with-class-test', 'class1', 'class2']));
     });
 
-    test(
-        'Chain',
-        () async {
-          PageForChainTest page = await loader.getInstance(PageForChainTest);
+    test('Chain', () async {
+      PageForChainTest page = await loader.getInstance(PageForChainTest);
 
-          expect(await page.outerDivsText.toList(),
-              anyElement(contains('outer div 1')));
-          expect(await page.outerDivsText.toList(),
-              anyElement(contains('outer div 2')));
-          expect(await page.innerDivsText.toList(),
-              orderedEquals(['inner div 1', 'inner div 2']));
-          expect(await page.innerDivSpecial.visibleText, 'inner div 2');
-          expect(await page.innerShadow.visibleText, contains('some'));
-        },
-        testOn: 'browser');
+      expect(await page.outerDivsText.toList(),
+          anyElement(contains('outer div 1')));
+      expect(await page.outerDivsText.toList(),
+          anyElement(contains('outer div 2')));
+      expect(await page.innerDivsText.toList(),
+          orderedEquals(['inner div 1', 'inner div 2']));
+      expect(await page.innerDivSpecial.visibleText, 'inner div 2');
+      expect(await page.innerShadow.visibleText, contains('some'));
+    }, testOn: 'browser');
 
     test('@Global', () async {
       PageForGlobalTest page = await loader.getInstance(PageForGlobalTest);
@@ -90,6 +99,18 @@ class PageForFirstByCssTest {
 class PageForWithSeleniumAttributeTest {
   @ByTagName('input')
   @WithSeleniumAttribute('type', 'checkbox')
+  PageLoaderElement element;
+}
+
+class PageForWithAttributeTest {
+  @ByTagName('input')
+  @WithAttribute('type', 'checkbox')
+  PageLoaderElement element;
+}
+
+class PageForWithPropertyTest {
+  @ByTagName('input')
+  @WithProperty('type', 'checkbox')
   PageLoaderElement element;
 }
 

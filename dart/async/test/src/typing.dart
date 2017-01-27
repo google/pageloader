@@ -36,7 +36,8 @@ void runTests() {
       await page.text.type('some text');
       expect(await page.text.seleniumAttributes['value'], 'some text');
       await page.text.type(' and more text');
-      expect(await page.text.seleniumAttributes['value'], 'some text and more text');
+      expect(await page.text.seleniumAttributes['value'],
+          'some text and more text');
     });
 
     test('value after clear', () async {

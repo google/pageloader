@@ -15,23 +15,27 @@ library pageloader.test;
 
 import 'package:test/test.dart';
 
-import 'annotations.dart' as annotation;
-import 'attributes.dart' as attribute;
+import 'annotations.dart' as annotations;
+import 'attributes.dart' as attributes;
 import 'basic.dart' as basic;
 import 'display_filtering.dart' as display_filtering;
-import 'errors.dart' as error;
+import 'errors.dart' as errors;
 import 'mouse.dart' as mouse;
+import 'properties.dart' as properties;
+import 'selenium_attributes.dart' as selenium_attributes;
 import 'shadow_dom.dart' as shadow_dom;
 import 'typing.dart' as typing;
 
 void runTests() {
   group('core PageLoader', () {
-    annotation.runTests();
-    attribute.runTests();
+    annotations.runTests();
+    attributes.runTests();
     basic.runTests();
     display_filtering.runTests();
-    error.runTests();
+    errors.runTests();
     mouse.runTests();
+    properties.runTests();
+    selenium_attributes.runTests();
     shadow_dom.runTests();
     typing.runTests();
   });

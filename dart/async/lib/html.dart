@@ -135,6 +135,16 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
   dynamic get node;
 
+  @override
+  final PageLoaderAttributes attributes;
+
+  @override
+  final PageLoaderAttributes properties;
+
+  @override
+  @deprecated
+  final PageLoaderAttributes seleniumAttributes;
+
   factory HtmlPageLoaderElement(Node node, HtmlPageLoader loader) {
     if (node is Element) {
       return new _ElementPageLoaderElement(node, loader);
@@ -153,7 +163,10 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
         'Unable to create PageLoaderElement for $node');
   }
 
-  HtmlPageLoaderElement._(this.loader);
+  HtmlPageLoaderElement._(this.loader,
+      {this.attributes: const _EmptyAttributes(),
+      this.properties: const _EmptyAttributes(),
+      this.seleniumAttributes: const _EmptyAttributes()});
 
   @override
   Future<String> get innerText async => node.text.trim();
@@ -195,13 +208,10 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   // key presses instead.
   Future _fireKeyPressEvents(Element element, int numKeys) async {
     for (int i = 0; i < numKeys; ++i) {
-      await _microtask(() => element
-          .dispatchEvent(new KeyboardEvent('keypress')));
+      await _microtask(
+          () => element.dispatchEvent(new KeyboardEvent('keypress')));
     }
   }
-
-  @override
-  PageLoaderAttributes get seleniumAttributes => new _EmptyAttributes();
 
   @override
   Future<bool> get isFocused async => document.activeElement == node;
@@ -229,14 +239,14 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
       throw new PageLoaderException('$runtimeType.click() is unsupported');
 
   @override
-  PageLoaderAttributes get computedStyle => new _EmptyAttributes();
+  PageLoaderAttributes get computedStyle => const _EmptyAttributes();
 
   @override
   Future<PageLoaderElement> get shadowRoot async =>
       throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
 
   @override
-  PageLoaderAttributes get style => new _EmptyAttributes();
+  PageLoaderAttributes get style => const _EmptyAttributes();
 
   @override
   Future blur({bool sync: true}) async =>
@@ -249,16 +259,17 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
 class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   final Element node;
-  final PageLoaderAttributes seleniumAttributes;
   final PageLoaderAttributes computedStyle;
   final PageLoaderAttributes style;
 
   _ElementPageLoaderElement(Element _node, HtmlPageLoader loader)
       : this.node = _node,
-        this.seleniumAttributes = new _ElementSeleniumAttributes(_node),
         this.computedStyle = new _ElementComputedStyle(_node),
         this.style = new _ElementStyle(_node),
-        super._(loader);
+        super._(loader,
+            attributes: new _ElementAttributes(_node),
+            properties: new _NodeProperties(_node),
+            seleniumAttributes: new _ElementSeleniumAttributes(_node));
 
   @override
   Future<PageLoaderElement> get shadowRoot async {
@@ -356,7 +367,9 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
 class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
   final ShadowRoot node;
 
-  _ShadowRootPageLoaderElement(this.node, PageLoader loader) : super._(loader) {
+  _ShadowRootPageLoaderElement(ShadowRoot _node, PageLoader loader)
+      : this.node = _node,
+        super._(loader, properties: new _NodeProperties(_node)) {
     assert(loader.useShadowDom);
   }
 
@@ -369,7 +382,9 @@ class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
 class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
   final Document node;
 
-  _DocumentPageLoaderElement(this.node, PageLoader loader) : super._(loader);
+  _DocumentPageLoaderElement(Document _node, PageLoader loader)
+      : this.node = _node,
+        super._(loader, properties: new _NodeProperties(_node));
 
   @override
   Future<String> get name async => '__document__';
@@ -388,6 +403,33 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
       }, sync);
 }
 
+class _NodeProperties extends PageLoaderAttributes {
+  final Node _node;
+
+  _NodeProperties(this._node);
+
+  @override
+  Future<String> operator [](String name) async {
+    try {
+      return reflect(_node).getField(new Symbol(name)).reflectee?.toString();
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+class _ElementAttributes extends PageLoaderAttributes {
+  final Element _node;
+
+  _ElementAttributes(this._node);
+
+  /// Based on algorithm from:
+  /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
+  @override
+  Future<String> operator [](String name) async => _node.attributes[name];
+}
+
+@deprecated
 class _ElementSeleniumAttributes extends PageLoaderAttributes {
   static const _BOOLEAN_ATTRIBUTES = const [
     'async',
@@ -527,7 +569,9 @@ class _ElementStyle extends PageLoaderAttributes {
       _node.style.getPropertyValue(name);
 }
 
-class _EmptyAttributes extends PageLoaderAttributes {
+class _EmptyAttributes implements PageLoaderAttributes {
+  const _EmptyAttributes();
+
   @override
   Future<String> operator [](String name) async => null;
 }
