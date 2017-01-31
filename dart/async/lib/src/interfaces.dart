@@ -91,7 +91,7 @@ abstract class PageLoaderElement {
   PageLoaderAttributes get properties;
 
   /// Attributes associated with this element.
-  PageLoaderAttribute get attributes;
+  PageLoaderAttributes get attributes;
 
   /// Attributes/properties associated with this element. This corresponds to the Selenium
   /// WebDriver's get attribute endpoint.
