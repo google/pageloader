@@ -82,9 +82,7 @@ runTests() {
         expect(s.toString(), contains('errors.dart'));
         expect(s.toString(), contains('runTests'));
       }
-    }, onPlatform: {
-      'js': new Skip('stack traces are not accurate in js')
-    });
+    }, onPlatform: {'js': new Skip('stack traces are not accurate in js')});
   });
 }
 

@@ -111,6 +111,16 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   final WebDriverPageLoader loader;
 
+  @override
+  final PageLoaderAttributes attributes;
+
+  @override
+  final PageLoaderAttributes properties;
+
+  @override
+  @deprecated
+  final PageLoaderAttributes seleniumAttributes;
+
   factory WebDriverPageLoaderElement(
       wd.SearchContext context, WebDriverPageLoader loader) {
     if (context is wd.WebDriver) {
@@ -123,7 +133,10 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
         'Unable to create PageLoaderElement for $context');
   }
 
-  WebDriverPageLoaderElement._(this.loader);
+  WebDriverPageLoaderElement._(this.loader,
+      {this.attributes: const _EmptyAttributes(),
+      this.properties: const _EmptyAttributes(),
+      this.seleniumAttributes: const _EmptyAttributes()});
 
   @override
   Stream<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
@@ -144,9 +157,6 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   String toString() => '$runtimeType<${context.toString()}>';
-
-  @override
-  PageLoaderAttributes get seleniumAttributes => new _EmptyAttributes();
 
   @override
   Future<bool> get isFocused async {
@@ -186,14 +196,14 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
       throw new PageLoaderException('$runtimeType.type() is unsupported');
 
   @override
-  PageLoaderAttributes get computedStyle => new _EmptyAttributes();
+  PageLoaderAttributes get computedStyle => const _EmptyAttributes();
 
   @override
   Future<PageLoaderElement> get shadowRoot async =>
       throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
 
   @override
-  PageLoaderAttributes get style => new _EmptyAttributes();
+  PageLoaderAttributes get style => const _EmptyAttributes();
 
   @override
   Future blur({bool sync: true}) async =>
@@ -206,17 +216,18 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
 class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   final wd.WebElement context;
-  final PageLoaderAttributes seleniumAttributes;
   final PageLoaderAttributes computedStyle;
   final PageLoaderAttributes style;
 
   _WebElementPageLoaderElement(
-      wd.WebElement _context, WebDriverPageLoader loader)
-      : this.context = _context,
-        this.seleniumAttributes = new _ElementSeleniumAttributes(_context),
-        this.computedStyle = new _ElementComputedStyle(_context),
-        this.style = new _ElementStyle(_context),
-        super._(loader);
+      wd.WebElement context, WebDriverPageLoader loader)
+      : this.context = context,
+        this.computedStyle = new _ElementComputedStyle(context),
+        this.style = new _ElementStyle(context),
+        super._(loader,
+            attributes: new _ElementAttributes(context),
+            properties: new _ElementProperties(context),
+            seleniumAttributes: new _ElementSeleniumAttributes(context));
 
   @override
   Future<WebDriverPageLoaderElement> get shadowRoot async {
@@ -256,8 +267,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   Future<Rectangle> getBoundingClientRect() async {
     Map<String, num> rect = await context.driver
         .execute('return arguments[0].getBoundingClientRect();', [context]);
-    return new Rectangle<num>(rect['left'], rect['top'],
-        rect['width'], rect['height']);
+    return new Rectangle<num>(
+        rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
   @override
@@ -270,8 +281,8 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
           height: arguments[0].offsetHeight
         }''',
         [context]);
-    return new Rectangle<num>(rect['left'], rect['top'],
-        rect['width'], rect['height']);
+    return new Rectangle<num>(
+        rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
   @override
@@ -307,8 +318,9 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
   final wd.WebDriver context;
 
-  _WebDriverPageLoaderElement(this.context, WebDriverPageLoader loader)
-      : super._(loader);
+  _WebDriverPageLoaderElement(wd.WebDriver context, WebDriverPageLoader loader)
+      : this.context = context,
+        super._(loader, properties: new _DocumentProperties(context));
 
   @override
   Future<String> get name async => '__document__';
@@ -336,8 +348,10 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
 class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   final wd.WebElement context;
 
-  _ShadowRootPageLoaderElement(this.context, WebDriverPageLoader loader)
-      : super._(loader) {
+  _ShadowRootPageLoaderElement(
+      wd.WebElement context, WebDriverPageLoader loader)
+      : this.context = context,
+        super._(loader, properties: new _ShadowRootProperties(context)) {
     assert(loader.useShadowDom);
   }
 
@@ -365,6 +379,7 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   }
 }
 
+@deprecated
 class _ElementSeleniumAttributes extends PageLoaderAttributes {
   final wd.WebElement _node;
 
@@ -374,15 +389,45 @@ class _ElementSeleniumAttributes extends PageLoaderAttributes {
   Future<String> operator [](String name) => _node.attributes[name];
 }
 
+class _ElementAttributes extends PageLoaderAttributes {
+  final wd.WebElement _node;
+
+  _ElementAttributes(this._node);
+
+  @override
+  Future<String> operator [](String name) async => (await _node.driver.execute(
+          """
+var attr = arguments[0].attributes["$name"];
+if(attr) {
+  return attr.value;
+}
+return null;
+""",
+          [_node]))
+      ?.toString();
+}
+
+class _ElementProperties extends PageLoaderAttributes {
+  final wd.WebElement _node;
+
+  _ElementProperties(this._node);
+
+  @override
+  Future<String> operator [](String name) async =>
+      (await _node.driver.execute('return arguments[0]["$name"];', [_node]))
+          ?.toString();
+}
+
 class _ElementComputedStyle extends PageLoaderAttributes {
   final wd.WebElement _node;
 
   _ElementComputedStyle(this._node);
 
   @override
-  Future<String> operator [](String name) => _node.driver.execute(
-      'return window.getComputedStyle(arguments[0]).${_cssPropName(name)};',
-      [_node]);
+  Future<String> operator [](String name) async => (await _node.driver.execute(
+          'return window.getComputedStyle(arguments[0]).${_cssPropName(name)};',
+          [_node]))
+      ?.toString();
 }
 
 class _ElementStyle extends PageLoaderAttributes {
@@ -391,15 +436,39 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  Future<String> operator [](String name) => _node.driver
-      .execute('return arguments[0].style.${_cssPropName(name)};', [_node]);
+  Future<String> operator [](String name) async => (await _node.driver
+          .execute('return arguments[0].style.${_cssPropName(name)};', [_node]))
+      ?.toString();
 }
 
 /// Convert hyphenated-properties to camelCase.
 String _cssPropName(String name) => name.splitMapJoin(new RegExp(r'-(\w)'),
     onMatch: (m) => m.group(1).toUpperCase(), onNonMatch: (m) => m);
 
-class _EmptyAttributes extends PageLoaderAttributes {
+class _EmptyAttributes implements PageLoaderAttributes {
+  const _EmptyAttributes();
+
   @override
   Future<String> operator [](String name) async => null;
+}
+
+class _DocumentProperties extends PageLoaderAttributes {
+  final wd.WebDriver _driver;
+
+  _DocumentProperties(this._driver);
+
+  @override
+  Future<String> operator [](String name) async =>
+      (await _driver.execute('return document["$name"];'))?.toString();
+}
+
+class _ShadowRootProperties extends PageLoaderAttributes {
+  final wd.WebElement _node;
+
+  _ShadowRootProperties(this._node);
+
+  @override
+  Future<String> operator [](String name) async => (await _node.driver
+          .execute('return arguments[0].shadowRoot.["$name"];', [_node]))
+      ?.toString();
 }

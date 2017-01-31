@@ -20,23 +20,20 @@ import 'shared.dart';
 
 void runTests() {
   group('mouse tests', () {
-    test(
-        'mouse',
-        () async {
-          PageForMouseTest page = await loader.getInstance(PageForMouseTest);
+    test('mouse', () async {
+      PageForMouseTest page = await loader.getInstance(PageForMouseTest);
 
-          await loader.mouse.moveTo(page.element, 2, 2);
-          await waitFor(() => page.element.visibleText,
-              matcher: contains('MouseMove'));
-          await loader.mouse.down(MouseButton.primary);
-          await waitFor(() => page.element.visibleText,
-              matcher: contains('MouseDown'));
-          await loader.mouse.moveTo(page.element, 10, 10);
-          await loader.mouse.up(MouseButton.primary);
-          await waitFor(() => page.element.visibleText,
-              matcher: contains('MouseUp'));
-        },
-        testOn: 'vm');
+      await loader.mouse.moveTo(page.element, 2, 2);
+      await waitFor(() => page.element.visibleText,
+          matcher: contains('MouseMove'));
+      await loader.mouse.down(MouseButton.primary);
+      await waitFor(() => page.element.visibleText,
+          matcher: contains('MouseDown'));
+      await loader.mouse.moveTo(page.element, 10, 10);
+      await loader.mouse.up(MouseButton.primary);
+      await waitFor(() => page.element.visibleText,
+          matcher: contains('MouseUp'));
+    }, testOn: 'vm');
 
     test('mouse with event target', () async {
       PageForMouseTest page = await loader.getInstance(PageForMouseTest);

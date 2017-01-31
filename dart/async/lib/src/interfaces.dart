@@ -83,11 +83,22 @@ abstract class PageLoaderElement {
   /// The tag name of the node represented by this element.
   Future<String> get name;
 
+  /// Properties associated with this element.
+  ///
+  /// Warning: the set of properties available may differ slightly between
+  /// HTML-backed PageLoader (which uses Dart properties) and WebDriver-backed
+  /// PageLoader (which uses JS properties).
+  PageLoaderAttributes get properties;
+
+  /// Attributes associated with this element.
+  PageLoaderAttribute get attributes;
+
   /// Attributes/properties associated with this element. This corresponds to the Selenium
   /// WebDriver's get attribute endpoint.
   ///
   /// Note: this intended primarily for transition to new attributes/properties implementations
   /// that will accurately distinguish between attributes and properties.
+  @deprecated
   PageLoaderAttributes get seleniumAttributes;
 
   /// CSS properties of this element after applying the active stylesheets and
