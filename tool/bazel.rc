@@ -1,0 +1,2 @@
+# Default to using an existing X Display if one exists.
+test --test_env=DISPLAY

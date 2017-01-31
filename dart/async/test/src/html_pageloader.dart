@@ -37,7 +37,7 @@ void runTests() {
 
     test('keypress events', () async {
       var data = 'my data';
-      var list = [];
+      var list = <int>[];
       html.document.body.onKeyPress.listen((evt) => list.add(evt.charCode));
       await loader.globalContext.type(data);
       expect(new String.fromCharCodes(list), equals(data));
