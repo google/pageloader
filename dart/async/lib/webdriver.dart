@@ -115,11 +115,17 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   final PageLoaderAttributes attributes;
 
   @override
+  final PageLoaderAttributes computedStyle;
+
+  @override
   final PageLoaderAttributes properties;
 
   @override
   @deprecated
   final PageLoaderAttributes seleniumAttributes;
+
+  @override
+  final PageLoaderAttributes style;
 
   factory WebDriverPageLoaderElement(
       wd.SearchContext context, WebDriverPageLoader loader) {
@@ -135,8 +141,10 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
   WebDriverPageLoaderElement._(this.loader,
       {this.attributes: const _EmptyAttributes(),
+      this.computedStyle: const _EmptyAttributes(),
       this.properties: const _EmptyAttributes(),
-      this.seleniumAttributes: const _EmptyAttributes()});
+      this.seleniumAttributes: const _EmptyAttributes(),
+      this.style: const _EmptyAttributes()});
 
   @override
   Stream<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
@@ -196,14 +204,8 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
       throw new PageLoaderException('$runtimeType.type() is unsupported');
 
   @override
-  PageLoaderAttributes get computedStyle => const _EmptyAttributes();
-
-  @override
   Future<PageLoaderElement> get shadowRoot async =>
       throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
-
-  @override
-  PageLoaderAttributes get style => const _EmptyAttributes();
 
   @override
   Future blur({bool sync: true}) async =>
@@ -216,18 +218,16 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
 class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   final wd.WebElement context;
-  final PageLoaderAttributes computedStyle;
-  final PageLoaderAttributes style;
 
   _WebElementPageLoaderElement(
       wd.WebElement context, WebDriverPageLoader loader)
       : this.context = context,
-        this.computedStyle = new _ElementComputedStyle(context),
-        this.style = new _ElementStyle(context),
         super._(loader,
             attributes: new _ElementAttributes(context),
+            computedStyle: new _ElementComputedStyle(context),
             properties: new _ElementProperties(context),
-            seleniumAttributes: new _ElementSeleniumAttributes(context));
+            seleniumAttributes: new _ElementSeleniumAttributes(context),
+            style: new _ElementStyle(context));
 
   @override
   Future<WebDriverPageLoaderElement> get shadowRoot async {
@@ -459,7 +459,8 @@ class _DocumentProperties extends PageLoaderAttributes {
 
   @override
   Future<String> operator [](String name) async =>
-      (await _driver.execute('return document["$name"];'))?.toString();
+      (await _driver.execute('return document["$name"];', const []))
+          ?.toString();
 }
 
 class _ShadowRootProperties extends PageLoaderAttributes {

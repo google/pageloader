@@ -23,30 +23,29 @@ void runTests() {
       PageForTextAreaTypingText page =
           await loader.getInstance(PageForTextAreaTypingText);
       await page.textArea.type('some');
-      expect(await page.textArea.seleniumAttributes['value'], 'some');
+      expect(await page.textArea.properties['value'], 'some');
       await page.textArea.type(' string');
-      expect(await page.textArea.seleniumAttributes['value'], 'some string');
+      expect(await page.textArea.properties['value'], 'some string');
       await page.textArea.clear();
-      expect(await page.textArea.seleniumAttributes['value'], '');
+      expect(await page.textArea.properties['value'], '');
     });
 
     test('typing should append', () async {
       PageForTypingTests page = await loader.getInstance(PageForTypingTests);
-      expect(await page.text.seleniumAttributes['value'], '');
+      expect(await page.text.properties['value'], '');
       await page.text.type('some text');
-      expect(await page.text.seleniumAttributes['value'], 'some text');
+      expect(await page.text.properties['value'], 'some text');
       await page.text.type(' and more text');
-      expect(await page.text.seleniumAttributes['value'],
-          'some text and more text');
+      expect(await page.text.properties['value'], 'some text and more text');
     });
 
     test('value after clear', () async {
       PageForTypingTests page = await loader.getInstance(PageForTypingTests);
-      expect(await page.text.seleniumAttributes['value'], '');
+      expect(await page.text.properties['value'], '');
       await page.text.type('some text');
-      expect(await page.text.seleniumAttributes['value'], 'some text');
+      expect(await page.text.properties['value'], 'some text');
       await page.text.clear();
-      expect(await page.text.seleniumAttributes['value'], '');
+      expect(await page.text.properties['value'], '');
     });
   });
 }

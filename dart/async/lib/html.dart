@@ -139,11 +139,17 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   final PageLoaderAttributes attributes;
 
   @override
+  final PageLoaderAttributes computedStyle;
+
+  @override
   final PageLoaderAttributes properties;
 
   @override
   @deprecated
   final PageLoaderAttributes seleniumAttributes;
+
+  @override
+  final PageLoaderAttributes style;
 
   factory HtmlPageLoaderElement(Node node, HtmlPageLoader loader) {
     if (node is Element) {
@@ -165,8 +171,10 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
   HtmlPageLoaderElement._(this.loader,
       {this.attributes: const _EmptyAttributes(),
+      this.computedStyle: const _EmptyAttributes(),
       this.properties: const _EmptyAttributes(),
-      this.seleniumAttributes: const _EmptyAttributes()});
+      this.seleniumAttributes: const _EmptyAttributes(),
+      this.style: const _EmptyAttributes()});
 
   @override
   Future<String> get innerText async => node.text.trim();
@@ -239,14 +247,8 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
       throw new PageLoaderException('$runtimeType.click() is unsupported');
 
   @override
-  PageLoaderAttributes get computedStyle => const _EmptyAttributes();
-
-  @override
   Future<PageLoaderElement> get shadowRoot async =>
       throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
-
-  @override
-  PageLoaderAttributes get style => const _EmptyAttributes();
 
   @override
   Future blur({bool sync: true}) async =>
@@ -259,17 +261,15 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
 
 class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   final Element node;
-  final PageLoaderAttributes computedStyle;
-  final PageLoaderAttributes style;
 
-  _ElementPageLoaderElement(Element _node, HtmlPageLoader loader)
-      : this.node = _node,
-        this.computedStyle = new _ElementComputedStyle(_node),
-        this.style = new _ElementStyle(_node),
+  _ElementPageLoaderElement(Element node, HtmlPageLoader loader)
+      : this.node = node,
         super._(loader,
-            attributes: new _ElementAttributes(_node),
-            properties: new _NodeProperties(_node),
-            seleniumAttributes: new _ElementSeleniumAttributes(_node));
+            attributes: new _ElementAttributes(node),
+            computedStyle: new _ElementComputedStyle(node),
+            properties: new _NodeProperties(node),
+            seleniumAttributes: new _ElementSeleniumAttributes(node),
+            style: new _ElementStyle(node));
 
   @override
   Future<PageLoaderElement> get shadowRoot async {
