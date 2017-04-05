@@ -1,3 +1,14 @@
+## v2.2.6
+* Fix static analysis warnings for Dart and DDC 1.23.
+* Remove PageLoaderElement.attributes, and class WithAttribute.
+* Add properties and attributes fields to PageLoaderElement.
+* Deprecate PageLoaderElement.seleniumAttributes.
+
+## v2.2.5
+* Bump minimum SDK version to 1.21.0.
+* Pageloader now builds and tests with Bazel.
+* Add new seleniumAttributes getter to PageLoaderElement.
+
 ## v2.2.4
 * Remove broken KeyEvent use
 * Added docs to PageLoaderElement
