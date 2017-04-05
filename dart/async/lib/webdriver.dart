@@ -45,7 +45,7 @@ class WebDriverPageLoader extends BasePageLoader {
   WebDriverPageLoaderElement get globalContext => _globalContext;
 
   @override
-  Future/*<T>*/ getInstance/*<T>*/(Type type, [dynamic context]) async {
+  Future<T> getInstance<T>(Type type, [dynamic context]) async {
     if (context != null) {
       if (context is wd.SearchContext) {
         context = new WebDriverPageLoaderElement(context, this);
