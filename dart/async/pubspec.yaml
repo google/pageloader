@@ -1,5 +1,5 @@
 name: pageloader
-version: 2.2.5
+version: 2.2.6
 author: Marc Fisher II <fisherii@google.com>
 description: >
   Supports the creation of page objects that can be shared between in-browser tests
