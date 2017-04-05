@@ -56,18 +56,17 @@ abstract class BasePageLoader implements PageLoader {
 
   /// Creates a new instance of [type] and binds annotated fields to
   /// corresponding [PageLoaderElement]s.
-  Future/*<T>*/ getInstanceInternal/*<T>*/(Type type,
-      [PageLoaderElement context]) {
+  Future<T> getInstanceInternal<T>(Type type, [PageLoaderElement context]) {
     if (context == null) {
       context = globalContext;
     }
     return _getInstance(reflectClass(type), context, true);
   }
 
-  Future/*<T>*/ _getInstance/*<T>*/(
+  Future<T> _getInstance<T>(
           ClassMirror type, PageLoaderElement context, bool displayCheck) =>
       capture(() =>
-          new _ClassInfo/*<T>*/(type).getInstance(context, this, displayCheck));
+          new _ClassInfo<T>(type).getInstance(context, this, displayCheck));
 
   Future executeSynced(Future fn(), bool sync) {
     if (sync) {
@@ -90,8 +89,8 @@ class _Lazy<T> implements Lazy<T> {
 }
 
 class _ClassInfo<T> {
-  static final Map<ClassMirror, _ClassInfo> _classInfoCache =
-      <ClassMirror, _ClassInfo>{};
+  static final Map<Type, Map<ClassMirror, _ClassInfo>> _classInfoCache =
+      <Type, Map<ClassMirror, _ClassInfo>>{};
 
   final ClassMirror _class;
   final Iterable<_FieldInfo> _fields;
@@ -100,42 +99,45 @@ class _ClassInfo<T> {
   final Iterable<Filter> _filters;
   final bool _displayCheck;
 
-  factory _ClassInfo(ClassMirror type) => _classInfoCache.putIfAbsent(type, () {
-        Finder finder = null;
-        List<Filter> filters = <Filter>[];
-        bool displayCheck = true;
-        for (InstanceMirror metadatum in type.metadata) {
-          if (!metadatum.hasReflectee) {
-            continue;
-          }
-          var datum = metadatum.reflectee;
-          if (datum is Finder) {
-            if (finder != null) {
-              throw new PageLoaderException(
-                  '${type.simpleName} has more than one finder');
-            }
-            finder = datum;
-          } else if (datum is Filter) {
-            filters.add(datum);
-          } else if (datum == disableDisplayedCheck) {
-            displayCheck = false;
-          }
+  factory _ClassInfo(ClassMirror type) {
+    _classInfoCache.putIfAbsent(T, () => <ClassMirror, _ClassInfo<T>>{});
+    return _classInfoCache[T].putIfAbsent(type, () {
+      Finder finder = null;
+      List<Filter> filters = <Filter>[];
+      bool displayCheck = true;
+      for (InstanceMirror metadatum in type.metadata) {
+        if (!metadatum.hasReflectee) {
+          continue;
         }
-
-        if (finder == null) {
-          if (filters.isNotEmpty) {
+        var datum = metadatum.reflectee;
+        if (datum is Finder) {
+          if (finder != null) {
             throw new PageLoaderException(
-                '${type.simpleName} has Filter annotations but no Finder annotation');
+                '${type.simpleName} has more than one finder');
           }
+          finder = datum;
+        } else if (datum is Filter) {
+          filters.add(datum);
+        } else if (datum == disableDisplayedCheck) {
+          displayCheck = false;
         }
-        if (finder == root && filters.isEmpty) {
-          throw new PageLoaderException(
-              'Useless @root annotation of ${type.simpleName}');
-        }
+      }
 
-        return new _ClassInfo<T>._(
-            type, _fieldInfos(type), finder, filters, displayCheck);
-      });
+      if (finder == null) {
+        if (filters.isNotEmpty) {
+          throw new PageLoaderException(
+              '${type.simpleName} has Filter annotations but no Finder annotation');
+        }
+      }
+      if (finder == root && filters.isEmpty) {
+        throw new PageLoaderException(
+            'Useless @root annotation of ${type.simpleName}');
+      }
+
+      return new _ClassInfo<T>._(
+          type, _fieldInfos(type), finder, filters, displayCheck);
+    });
+  }
 
   _ClassInfo._(this._class, this._fields, this._finder, this._filters,
       this._displayCheck);

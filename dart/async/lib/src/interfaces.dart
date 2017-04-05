@@ -29,7 +29,7 @@ abstract class PageLoader {
   bool get useShadowDom;
   PageLoaderElement get globalContext;
 
-  Future/*<T>*/ getInstance/*<T>*/(Type type, [dynamic context]);
+  Future<T> getInstance<T>(Type type, [dynamic context]);
 
   PageLoaderMouse get mouse;
 }
