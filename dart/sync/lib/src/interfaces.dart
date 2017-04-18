@@ -23,7 +23,7 @@ abstract class PageLoader {
   bool get useShadowDom;
   PageLoaderElement get globalContext;
 
-  Object getInstance(Type type, [dynamic context]);
+  dynamic getInstance(Type type, [dynamic context]);
 
   PageLoaderMouse get mouse;
 
