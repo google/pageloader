@@ -15,7 +15,7 @@ library pageloader.test.data.html_no_shadow_dom_setup;
 import 'dart:html' as html;
 
 html.Element setUp() {
-  var body = html.document.getElementsByTagName('body').first;
+  var body = html.document.querySelectorAll('body').first;
   const bodyHtml = '''
       <style>
         .class1 { background-color: #00FF00; }
@@ -67,9 +67,10 @@ html.Element setUp() {
       </a-custom-tag>
       <p id="nbsp">   &nbsp; &nbsp;   </p>''';
 
-  var div = body.querySelectorAll('div[id=testdocument]');
-  if (div.length == 1) {
-    div = div[0];
+  var divs = body.querySelectorAll('div[id=testdocument]');
+  html.Element div;
+  if (divs.length == 1) {
+    div = divs[0];
   } else {
     div = new html.DivElement();
     div.id = 'testdocument';

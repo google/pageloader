@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2015 Google Inc. All Rights Reserved.
+# Copyright 2013 Google Inc. All Rights Reserved.
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,17 @@
 # Fast fail the script on failures.
 set -e
 
-cd dart/sync
+cd dart/async
 
-pub get
+# Verify that the libraries are error free.
+dartanalyzer .
 
-packages/sync_socket/../tool/build.sh
+# Start chromedriver.
+chromedriver --port=4444 --url-base=wd/hub &
+PID=$!
+
+# Run tests.
+pub run test -r expanded -p vm,content-shell -j 1
+
+# Exit chromedriver
+kill $PID

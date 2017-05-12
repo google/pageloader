@@ -15,7 +15,7 @@ library pageloader.test.data.html;
 import 'dart:html' as html;
 
 html.Element setUp() {
-  var body = html.document.getElementsByTagName('body').first;
+  var body = html.document.querySelectorAll('body').first;
   const bodyHtml = '''
       <style>
         .class1 { background-color: #00FF00; }
@@ -69,9 +69,10 @@ html.Element setUp() {
 
   var templateHtml = '<button id="inner">some <content></content></button>';
 
-  var div = body.querySelectorAll('div[id=testdocument]');
-  if (div.length == 1) {
-    div = div[0];
+  var divs = body.querySelectorAll('div[id=testdocument]');
+  html.Element div;
+  if (divs.length == 1) {
+    div = divs[0];
   } else {
     div = new html.DivElement();
     div.id = 'testdocument';
@@ -79,7 +80,7 @@ html.Element setUp() {
   }
   div.setInnerHtml(bodyHtml, validator: new NoOpNodeValidator());
 
-  html.document.getElementsByTagName('a-custom-tag').forEach((element) {
+  html.document.querySelectorAll('a-custom-tag').forEach((element) {
     var shadow = element.createShadowRoot();
     shadow.setInnerHtml(templateHtml, validator: new NoOpNodeValidator());
   });
