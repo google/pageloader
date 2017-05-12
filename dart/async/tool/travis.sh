@@ -14,13 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Fast fail the script on failures.
-set -e
-
 cd dart/async
 
-# Verify that the libraries are error free.
+STATUS=0
+
+# Analyze package.
 dartanalyzer .
+ANALYSIS_STATUS=$?
+if [[ $ANALYSIS_STATUS -ne 0 ]]; then
+  STATUS=$ANALYSIS_STATUS
+fi
 
 # Start chromedriver.
 chromedriver --port=4444 --url-base=wd/hub &
@@ -28,6 +31,12 @@ PID=$!
 
 # Run tests.
 pub run test -r expanded -p vm,content-shell -j 1
+TEST_STATUS=$?
+if [[ $TEST_STATUS -ne 0 ]]; then
+  STATUS=$TEST_STATUS
+fi
 
-# Exit chromedriver
+# Exit chromedriver.
 kill $PID
+
+exit $STATUS
