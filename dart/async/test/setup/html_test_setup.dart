@@ -30,7 +30,7 @@ void runTests(pageLoaderFactory) {
   html_test.runTests();
 }
 
-syncFn(fn) async {
+Future syncFn(Future fn()) async {
   var value = await fn();
   await new Future.delayed(new Duration(milliseconds: 200));
   return value;
