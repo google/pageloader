@@ -21,8 +21,14 @@ export 'package:webdriver/core.dart' show MouseButton;
 
 typedef Future<T> SyncedExecutionFn<T>(Future<T> fn());
 
-abstract class Lazy<T> {
-  Future<T> call();
+typedef Future<T> _LazyFunction<T>();
+
+class Lazy<T> {
+  final _LazyFunction<T> _call;
+
+  Lazy(this._call);
+
+  Future<T> call() => _call();
 }
 
 abstract class PageLoader {

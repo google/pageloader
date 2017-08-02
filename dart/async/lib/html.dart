@@ -401,7 +401,7 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
         await _fireKeyPressEvents(document.body, keys.length);
         if (blurAfter) await _microtask(() => document.body.blur());
       }, sync);
-  
+
   @override
   Future click({bool sync: true}) async =>
       new _ElementPageLoaderElement(node.documentElement, loader).click();
