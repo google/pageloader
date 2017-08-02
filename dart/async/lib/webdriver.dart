@@ -45,7 +45,14 @@ class WebDriverPageLoader extends BasePageLoader {
   WebDriverPageLoaderElement get globalContext => _globalContext;
 
   @override
-  Future<T> getInstance<T>(Type type, [dynamic context]) async {
+  Future<T> getInstance<T>(Type type, [dynamic context]) async =>
+      getInstanceInternal(type, _getContext(context));
+
+  @override
+  T getInstanceSync<T>(Type type, [dynamic context]) =>
+      getInstanceInternalSync(type, _getContext(context));
+
+  WebDriverPageLoaderElement _getContext(dynamic context) {
     if (context != null) {
       if (context is wd.SearchContext) {
         context = new WebDriverPageLoaderElement(context, this);
@@ -53,7 +60,7 @@ class WebDriverPageLoader extends BasePageLoader {
         throw new PageLoaderException('Invalid context: $context');
       }
     }
-    return getInstanceInternal(type, context);
+    return null;
   }
 }
 
@@ -286,6 +293,9 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
   }
 
   @override
+  bool get displayedSync => throw 'Not yet supported';
+
+  @override
   Future clear(
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
@@ -341,6 +351,9 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
   @override
   Future<String> get visibleText async => (await _root).text;
 
+  @override
+  bool get displayedSync => throw 'Not yet supported';
+
   Future<wd.WebElement> get _root =>
       context.findElement(const wd.By.cssSelector(':root'));
 }
@@ -372,6 +385,9 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
     yield* _fromContextStream(new Stream.fromIterable(
         await _execute('.querySelectorAll("$selector")')));
   }
+
+  @override
+  bool get displayedSync => throw 'Not yet supported';
 
   Future _execute(String script) {
     return context.driver

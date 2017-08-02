@@ -31,6 +31,8 @@ abstract class PageLoader {
 
   Future<T> getInstance<T>(Type type, [dynamic context]);
 
+  T getInstanceSync<T>(Type type, [dynamic context]);
+
   PageLoaderMouse get mouse;
 }
 
@@ -129,6 +131,10 @@ abstract class PageLoaderElement {
   /// selector.
   Stream<PageLoaderElement> getElementsByCss(String selector);
 
+  /// Sync versions of the the above getters. Enables synchronous loading.
+
+  bool get displayedSync;
+
   /// Clears the text of this element, if possible (e.g. for text fields).
   ///
   /// [focusBefore] indicates whether to focus this element before clearing.
@@ -158,12 +164,16 @@ abstract class PageLoaderAttributes {
 
 abstract class Finder {
   Stream<PageLoaderElement> findElements(PageLoaderElement context);
+
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context);
 }
 
 abstract class Filter {
   const Filter();
 
   Stream<PageLoaderElement> filter(Stream<PageLoaderElement> elements);
+
+  List<PageLoaderElement> filterSync(List<PageLoaderElement> elements);
 }
 
 abstract class ElementFilter implements Filter {
@@ -178,7 +188,13 @@ abstract class ElementFilter implements Filter {
     }
   }
 
+  @override
+  List<PageLoaderElement> filterSync(List<PageLoaderElement> elements) =>
+      elements.where((el) => keepSync(el)).toList();
+
   Future<bool> keep(PageLoaderElement element);
+
+  bool keepSync(PageLoaderElement element);
 }
 
 class PageLoaderException {

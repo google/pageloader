@@ -50,7 +50,14 @@ class HtmlPageLoader extends BasePageLoader {
   }
 
   @override
-  Future<T> getInstance<T>(Type type, [dynamic context]) async {
+  Future<T> getInstance<T>(Type type, [dynamic context]) async =>
+      getInstanceInternal(type, _getContext(context));
+
+  @override
+  T getInstanceSync<T>(Type type, [dynamic context]) =>
+      getInstanceInternalSync(type, _getContext(context));
+
+  dynamic _getContext(dynamic context) {
     if (context != null) {
       if (context is Node) {
         context = new HtmlPageLoaderElement(context, this);
@@ -58,7 +65,7 @@ class HtmlPageLoader extends BasePageLoader {
         throw new PageLoaderException('Invalid context: $context');
       }
     }
-    return getInstanceInternal(type, context);
+    return null;
   }
 }
 
@@ -286,7 +293,10 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   Future<String> get name async => node.tagName.toLowerCase();
   // TODO(DrMarcII): implement this to recurse up the tree to see if displayed
   @override
-  Future<bool> get displayed async => node.getComputedStyle().display != 'none';
+  Future<bool> get displayed async => displayedSync;
+
+  @override
+  bool get displayedSync => node.getComputedStyle().display != 'none';
 
   @override
   Stream<String> get classes => new Stream.fromIterable(node.classes);
@@ -375,8 +385,12 @@ class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future<String> get name async => '__shadow_root__';
+
   @override
-  Future<bool> get displayed async => true;
+  Future<bool> get displayed async => displayedSync;
+
+  @override
+  bool get displayedSync => true;
 }
 
 class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
@@ -388,8 +402,12 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
 
   @override
   Future<String> get name async => '__document__';
+
   @override
-  Future<bool> get displayed async => true;
+  Future<bool> get displayed async => displayedSync;
+
+  @override
+  bool get displayedSync => true;
 
   @override
   Future type(String keys,
@@ -401,7 +419,7 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
         await _fireKeyPressEvents(document.body, keys.length);
         if (blurAfter) await _microtask(() => document.body.blur());
       }, sync);
-  
+
   @override
   Future click({bool sync: true}) async =>
       new _ElementPageLoaderElement(node.documentElement, loader).click();

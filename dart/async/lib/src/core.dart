@@ -56,17 +56,28 @@ abstract class BasePageLoader implements PageLoader {
 
   /// Creates a new instance of [type] and binds annotated fields to
   /// corresponding [PageLoaderElement]s.
-  Future<T> getInstanceInternal<T>(Type type, [PageLoaderElement context]) {
+  Future<T> getInstanceInternal<T>(Type type, [PageLoaderElement context]) =>
+      _getInstance(reflectClass(type), _getContext(context), true);
+
+  /// Synchronous version of [getInstanceInternal].
+  T getInstanceInternalSync<T>(Type type, [PageLoaderElement context]) =>
+      _getInstanceSync(reflectClass(type), _getContext(context), true);
+
+  PageLoaderElement _getContext(PageLoaderElement context) {
     if (context == null) {
-      context = globalContext;
+      return globalContext;
     }
-    return _getInstance(reflectClass(type), context, true);
+    return context;
   }
 
   Future<T> _getInstance<T>(
           ClassMirror type, PageLoaderElement context, bool displayCheck) =>
       capture(() =>
           new _ClassInfo<T>(type).getInstance(context, this, displayCheck));
+
+  T _getInstanceSync<T>(
+          ClassMirror type, PageLoaderElement context, bool displayCheck) =>
+      new _ClassInfo<T>(type).getInstanceSync(context, this, displayCheck);
 
   Future executeSynced(Future fn(), bool sync) {
     if (sync) {
@@ -197,6 +208,22 @@ class _ClassInfo<T> {
 
     for (var fieldInfo in _fields) {
       await fieldInfo.setField(page, context, loader, displayCheck);
+    }
+    return page.reflectee as T;
+  }
+
+  T getInstanceSync(
+      PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
+    if (!_displayCheck) {
+      displayCheck = false;
+    }
+    if (_finder != null) {
+      context = _getElementSync(context, _finder, _filters, displayCheck, true);
+    }
+    InstanceMirror page = _reflectedInstance();
+
+    for (var fieldInfo in _fields) {
+      fieldInfo.setFieldSync(page, context, loader, displayCheck);
     }
     return page.reflectee as T;
   }
@@ -342,7 +369,21 @@ abstract class _FieldInfo {
     }
   }
 
+  void setFieldSync(InstanceMirror instance, PageLoaderElement context,
+      BasePageLoader loader, bool displayCheck) {
+    try {
+      instance.setField(
+          _fieldName, calculateFieldValueSync(context, loader, displayCheck));
+    } catch (e) {
+      throw new PageLoaderException(
+          'Unable to load field $_fieldName caused by\n$e');
+    }
+  }
+
   Future calculateFieldValue(
+      PageLoaderElement context, BasePageLoader loader, bool displayCheck);
+
+  dynamic calculateFieldValueSync(
       PageLoaderElement context, BasePageLoader loader, bool displayCheck);
 }
 
@@ -364,6 +405,21 @@ class _BasicFieldInfo extends _ListFieldInfo {
 
     if (element != null && _instanceType.simpleName != #PageLoaderElement) {
       return loader._getInstance(_instanceType, element, displayCheck);
+    }
+    return element;
+  }
+
+  @override
+  dynamic calculateFieldValueSync(
+      PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
+    if (!_displayCheck) {
+      displayCheck = false;
+    }
+    var element =
+        _getElementSync(context, _finder, _filters, displayCheck, _required);
+
+    if (element != null && _instanceType.simpleName != #PageLoaderElement) {
+      return loader._getInstanceSync(_instanceType, element, displayCheck);
     }
     return element;
   }
@@ -398,6 +454,27 @@ class _ListFieldInfo extends _FieldInfo {
 
     return new UnmodifiableListView(result);
   }
+
+  @override
+  dynamic calculateFieldValueSync(
+      PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
+    if (!_displayCheck) {
+      displayCheck = false;
+    }
+
+    if (_instanceType.simpleName == #PageLoaderElement) {
+      return _getElementsSync(context, _finder, _filters, displayCheck)
+          .toList();
+    }
+    var result = [];
+
+    for (var el in _getElementsSync(context, _finder, _filters, displayCheck)
+        .toList()) {
+      result.add(loader._getInstanceSync(_instanceType, el, displayCheck));
+    }
+
+    return new UnmodifiableListView(result);
+  }
 }
 
 class _LazyFieldInfo extends _FieldInfo {
@@ -413,6 +490,13 @@ class _LazyFieldInfo extends _FieldInfo {
     return new Future.value(new _Lazy(
         () => _impl.calculateFieldValue(context, loader, displayCheck)));
   }
+
+  @override
+  dynamic calculateFieldValueSync(
+      PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
+    return new _Lazy(
+        () => _impl.calculateFieldValueSync(context, loader, displayCheck));
+  }
 }
 
 class _InjectedPageLoaderFieldInfo extends _FieldInfo {
@@ -422,6 +506,11 @@ class _InjectedPageLoaderFieldInfo extends _FieldInfo {
   Future calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
           bool displayCheck) =>
       new Future.value(loader);
+
+  @override
+  dynamic calculateFieldValueSync(PageLoaderElement context,
+          BasePageLoader loader, bool displayCheck) =>
+      loader;
 }
 
 Stream _getElements(PageLoaderElement context, Finder finder,
@@ -443,10 +532,39 @@ Stream _getElements(PageLoaderElement context, Finder finder,
   }
 }
 
+List<PageLoaderElement> _getElementsSync(PageLoaderElement context,
+    Finder finder, List<Filter> filters, bool displayCheck) {
+  var elements = finder.findElementsSync(context);
+
+  for (var filter in filters) {
+    elements = filter.filterSync(elements);
+  }
+
+  if (!displayCheck) {
+    return elements;
+  } else {
+    return elements.where((el) => el.displayedSync).toList();
+  }
+}
+
 Future<PageLoaderElement> _getElement(PageLoaderElement context, Finder finder,
     List<Filter> filters, bool displayCheck, bool required) async {
   var elements =
       await _getElements(context, finder, filters, displayCheck).toList();
+
+  if (elements.isEmpty) {
+    if (!required) {
+      return null;
+    }
+    throw new StateError('No element for finder: $finder');
+  }
+  return elements.single;
+}
+
+PageLoaderElement _getElementSync(PageLoaderElement context, Finder finder,
+    List<Filter> filters, bool displayCheck, bool required) {
+  var elements =
+      _getElementsSync(context, finder, filters, displayCheck).toList();
 
   if (elements.isEmpty) {
     if (!required) {

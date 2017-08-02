@@ -66,6 +66,10 @@ class ById implements Finder {
       context.getElementsByCss('#$_id');
 
   @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
+
+  @override
   String toString() => '@ById("$_id")';
 }
 
@@ -79,6 +83,10 @@ class ByTagName implements Finder {
       context.getElementsByCss(_name);
 
   @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
+
+  @override
   String toString() => '@ByTagName("$_name")';
 }
 
@@ -90,6 +98,10 @@ class ByCss implements Finder {
   @override
   Stream<PageLoaderElement> findElements(PageLoaderElement context) =>
       context.getElementsByCss(_locator);
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
 
   @override
   String toString() => '@ByCss("$_locator")';
@@ -115,6 +127,10 @@ class ByClass implements Finder {
   Stream<PageLoaderElement> findElements(PageLoaderElement context) =>
       context.getElementsByCss('.$_class');
 
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
+
   String toString() => '@ByClass("$_class")';
 }
 
@@ -132,6 +148,10 @@ class EnsureTag implements Finder {
     }
     yield* context.getElementsByCss(this._name);
   }
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
 
   @override
   String toString() => '@EnsureTag("$_name")';
@@ -155,6 +175,10 @@ class InShadowDom implements Finder {
   }
 
   @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
+
+  @override
   String toString() => '@InShadowDom(of: $of, find: $find)';
 }
 
@@ -169,6 +193,10 @@ class _Root implements Finder {
   Stream<PageLoaderElement> findElements(PageLoaderElement context) async* {
     yield context;
   }
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
 
   @override
   String toString() => '@root';
@@ -188,6 +216,10 @@ class All implements Finder {
       yield* finder.findElements(context);
     }
   }
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
 
   @override
   String toString() => '@All($_finders)';
@@ -225,6 +257,10 @@ class Chain implements Finder {
   }
 
   @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
+
+  @override
   String toString() => '@Chain($_annotations)';
 }
 
@@ -238,6 +274,10 @@ class Global implements Finder {
   @override
   Stream<PageLoaderElement> findElements(PageLoaderElement context) =>
       _finder.findElements(context.loader.globalContext);
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      throw 'findElementsSync not implemented for this Finder';
 
   @override
   String toString() => '@Global($_finder)';
@@ -256,6 +296,10 @@ class IsDisplayed extends ElementFilter {
       (await element.displayed) == _displayed;
 
   @override
+  bool keepSync(PageLoaderElement element) =>
+      throw 'keepSync not implemented for this filter';
+
+  @override
   String toString() => '@IsDisplayed($_displayed)';
 }
 
@@ -271,6 +315,10 @@ class WithAttribute extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.attributes[_attribute]) == _value;
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      throw 'keepSync not implemented for this filter';
+
   String toString() => '@WithAttribute($_attribute, $_value)';
 }
 
@@ -285,6 +333,10 @@ class WithProperty extends ElementFilter {
   @override
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.properties[_property]) == _value;
+
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      throw 'keepSync not implemented for this filter';
 
   String toString() => '@WithProperty($_property, $_value)';
 }
@@ -304,6 +356,10 @@ class WithSeleniumAttribute extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.seleniumAttributes[_attribute]) == _value;
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      throw 'keepSync not implemented for this filter';
+
   String toString() => '@WithSeleniumAttribute($_attribute, $_value)';
 }
 
@@ -316,6 +372,10 @@ class IsTag extends ElementFilter {
   @override
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.name) == _name;
+
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      throw 'keepSync not implemented for this filter';
 
   String toString() => '@IsTag("$_name")';
 }
@@ -330,6 +390,10 @@ class WithClass extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       await element.classes.contains(_class);
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      throw 'keepSync not implemented for this filter';
+
   String toString() => '@WithClass($_class)';
 }
 
@@ -343,6 +407,10 @@ class WithInnerText extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.innerText).contains(_text);
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      throw 'keepSync not implemented for this filter';
+
   String toString() => '@WithInnerText($_text)';
 }
 
@@ -355,6 +423,10 @@ class WithVisibleText extends ElementFilter {
   @override
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.visibleText).contains(_text);
+
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      throw 'keepSync not implemented for this filter';
 
   String toString() => '@WithVisibleText($_text)';
 }
