@@ -44,7 +44,8 @@ void runTests() {
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseDown'));
       await loader.mouse.moveTo(page.element, 200, 200);
-      await loader.mouse..up(MouseButton.primary, eventTarget: page.element);
+      await loader.mouse
+        ..up(MouseButton.primary, eventTarget: page.element);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseUp'));
     });

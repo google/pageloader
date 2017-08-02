@@ -24,14 +24,14 @@ import 'interfaces.dart';
 
 bool _foldPredicate(st.Frame frame) =>
     frame.isCore ||
-        frame.library.contains('package:test/') ||
-        frame.library.contains('package:pageloader/') ||
-        frame.library.contains('package:unittest/') ||
-        frame.library.contains('package:stack_trace/');
+    frame.library.contains('package:test/') ||
+    frame.library.contains('package:pageloader/') ||
+    frame.library.contains('package:unittest/') ||
+    frame.library.contains('package:stack_trace/');
 
 Future capture(callback()) {
   var completer = new Completer();
-      () async {
+  () async {
     try {
       var value = await callback();
       completer.complete(value);
@@ -64,7 +64,7 @@ abstract class BasePageLoader implements PageLoader {
   }
 
   Future<T> _getInstance<T>(
-      ClassMirror type, PageLoaderElement context, bool displayCheck) =>
+          ClassMirror type, PageLoaderElement context, bool displayCheck) =>
       capture(() =>
           new _ClassInfo<T>(type).getInstance(context, this, displayCheck));
 
@@ -79,7 +79,7 @@ abstract class BasePageLoader implements PageLoader {
 
 class _ClassInfo<T> {
   static final Map<Type, Map<ClassMirror, _ClassInfo>> _classInfoCache =
-  <Type, Map<ClassMirror, _ClassInfo>>{};
+      <Type, Map<ClassMirror, _ClassInfo>>{};
 
   final ClassMirror _class;
   final Iterable<_FieldInfo> _fields;
@@ -164,7 +164,7 @@ class _ClassInfo<T> {
             typesToProcess.addLast(current.mixin);
             print(
                 'Warning: mixin ${current.mixin.simpleName} used by ${current.simpleName}'
-                    ' is not supported when compiled to JS.');
+                ' is not supported when compiled to JS.');
           }
         } catch (e) {}
       }
@@ -180,7 +180,7 @@ class _ClassInfo<T> {
     }
     if (_finder != null) {
       context =
-      await _getElement(context, _finder, _filters, displayCheck, true);
+          await _getElement(context, _finder, _filters, displayCheck, true);
     }
     InstanceMirror page = _reflectedInstance();
 
@@ -349,7 +349,7 @@ class _BasicFieldInfo extends _ListFieldInfo {
       displayCheck = false;
     }
     var element =
-    await _getElement(context, _finder, _filters, displayCheck, _required);
+        await _getElement(context, _finder, _filters, displayCheck, _required);
 
     if (element != null && _instanceType.simpleName != #PageLoaderElement) {
       return loader._getInstance(_instanceType, element, displayCheck);
@@ -406,7 +406,7 @@ class _LazyFieldInfo extends _FieldInfo {
   Future calculateFieldValue(
       PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
     return new Future.value(_createLazyInstance(
-            () => _impl.calculateFieldValue(context, loader, displayCheck)));
+        () => _impl.calculateFieldValue(context, loader, displayCheck)));
   }
 }
 
@@ -415,7 +415,7 @@ class _InjectedPageLoaderFieldInfo extends _FieldInfo {
 
   @override
   Future calculateFieldValue(PageLoaderElement context, BasePageLoader loader,
-      bool displayCheck) =>
+          bool displayCheck) =>
       new Future.value(loader);
 }
 
@@ -441,7 +441,7 @@ Stream _getElements(PageLoaderElement context, Finder finder,
 Future<PageLoaderElement> _getElement(PageLoaderElement context, Finder finder,
     List<Filter> filters, bool displayCheck, bool required) async {
   var elements =
-  await _getElements(context, finder, filters, displayCheck).toList();
+      await _getElements(context, finder, filters, displayCheck).toList();
 
   if (elements.isEmpty) {
     if (!required) {
