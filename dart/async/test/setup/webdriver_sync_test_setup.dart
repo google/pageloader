@@ -19,7 +19,8 @@ import 'dart:mirrors' show currentMirrorSystem;
 
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
-import 'package:webdriver/sync_io.dart' show Capabilities, WebDriver, createDriver;
+import 'package:webdriver/sync_io.dart'
+    show Capabilities, WebDriver, createDriver;
 
 import '../src/common_sync.dart' as plt;
 import '../src/shared.dart' as shared;
