@@ -135,7 +135,9 @@ abstract class PageLoaderElement {
   /// selector.
   Stream<PageLoaderElement> getElementsByCss(String selector);
 
-  /// These sync attributes are defined to allow sync loading to exist.
+  /// These sync attributes are defined to allow sync loading to exist. Sync
+  /// loading exists to allow a smoother migration to PageLoader3. They can
+  /// only be used internally during loading and as part of filters and finders.
   PageLoaderElement get shadowRootSync;
 
   String get innerTextSync;
