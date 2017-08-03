@@ -40,7 +40,7 @@ class WebDriverPageLoader extends BasePageLoader {
 
   WebDriverPageLoader(async_wd.SearchContext globalContext,
       {bool useShadowDom: true,
-      SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
+        SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
       : this.syncDriver = _fromAsyncDriver(globalContext.driver),
         super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
     this._mouse = new _WebDriverMouse(this);
@@ -49,12 +49,12 @@ class WebDriverPageLoader extends BasePageLoader {
 
   WebDriverPageLoader.sync(sync_wd.SearchContext globalContext,
       {bool useShadowDom: true,
-      SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
+        SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
       : this.syncDriver = globalContext.driver,
         super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
     this._mouse = new _WebDriverMouse(this);
     this._globalContext =
-        new WebDriverPageLoaderElement.sync(globalContext, this);
+    new WebDriverPageLoaderElement.sync(globalContext, this);
   }
 
   @override
@@ -81,7 +81,7 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   @override
   Future down(MouseButton button,
-          {PageLoaderElement eventTarget, bool sync: true}) =>
+      {PageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
         if (eventTarget == null) {
           return driver.mouse.down(button);
@@ -91,7 +91,7 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   @override
   Future moveTo(PageLoaderElement element, int xOffset, int yOffset,
-          {PageLoaderElement eventTarget, bool sync: true}) =>
+      {PageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
         if (eventTarget == null && element is _WebElementPageLoaderElement) {
           return driver.mouse.moveTo(
@@ -102,7 +102,7 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   @override
   Future up(MouseButton button,
-          {PageLoaderElement eventTarget, bool sync: true}) =>
+      {PageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
         if (eventTarget == null) {
           return driver.mouse.up(button);
@@ -111,10 +111,10 @@ class _WebDriverMouse implements PageLoaderMouse {
       }, sync);
 
   Future _fireEvent(PageLoaderElement eventTarget, String type,
-          [MouseButton button]) =>
+      [MouseButton button]) =>
       driver.execute(
           "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
-          "{'button' : arguments[2]}));",
+              "{'button' : arguments[2]}));",
           [
             (eventTarget as _WebElementPageLoaderElement).context,
             type,
@@ -167,7 +167,7 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   }
 
   factory WebDriverPageLoaderElement.sync(
-          sync_wd.SearchContext context, WebDriverPageLoader loader) {
+      sync_wd.SearchContext context, WebDriverPageLoader loader) {
     if (context is sync_wd.WebDriver) {
       return new _WebDriverPageLoaderElement.sync(context, loader);
     }
@@ -180,10 +180,10 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
   WebDriverPageLoaderElement._(this.loader,
       {this.attributes: const _EmptyAttributes(),
-      this.computedStyle: const _EmptyAttributes(),
-      this.properties: const _EmptyAttributes(),
-      this.seleniumAttributes: const _EmptyAttributes(),
-      this.style: const _EmptyAttributes()});
+        this.computedStyle: const _EmptyAttributes(),
+        this.properties: const _EmptyAttributes(),
+        this.seleniumAttributes: const _EmptyAttributes(),
+        this.style: const _EmptyAttributes()});
 
   @override
   Stream<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
@@ -206,9 +206,9 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   bool operator ==(Object other) =>
       other != null &&
-      other.runtimeType == runtimeType &&
-      (other as WebDriverPageLoaderElement).context == context &&
-      (other as WebDriverPageLoaderElement).loader == loader;
+          other.runtimeType == runtimeType &&
+          (other as WebDriverPageLoaderElement).context == context &&
+          (other as WebDriverPageLoaderElement).loader == loader;
 
   @override
   String toString() => '$runtimeType<${context.toString()}>';
@@ -253,9 +253,9 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   Future clear(
-          {bool sync: true,
-          bool focusBefore: true,
-          bool blurAfter: true}) async =>
+      {bool sync: true,
+        bool focusBefore: true,
+        bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
   @override
@@ -264,9 +264,9 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   Future type(String keys,
-          {bool sync: true,
-          bool focusBefore: true,
-          bool blurAfter: true}) async =>
+      {bool sync: true,
+        bool focusBefore: true,
+        bool blurAfter: true}) async =>
       throw new PageLoaderException('$runtimeType.type() is unsupported');
 
   @override
@@ -295,22 +295,22 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
       : this.context = context,
         this.syncContext = null,
         super._(loader,
-            attributes: new _ElementAttributes(context),
-            computedStyle: new _ElementComputedStyle(context),
-            properties: new _ElementProperties(context),
-            seleniumAttributes: new _ElementSeleniumAttributes(context),
-            style: new _ElementStyle(context));
+          attributes: new _ElementAttributes(context),
+          computedStyle: new _ElementComputedStyle(context),
+          properties: new _ElementProperties(context),
+          seleniumAttributes: new _ElementSeleniumAttributes(context),
+          style: new _ElementStyle(context));
 
   _WebElementPageLoaderElement.sync(
       sync_wd.WebElement context, WebDriverPageLoader loader)
       : this.context = null,
         this.syncContext = context,
         super._(loader,
-            attributes: new _ElementAttributes.sync(context),
-            computedStyle: new _ElementComputedStyle.sync(context),
-            properties: new _ElementProperties.sync(context),
-            seleniumAttributes: new _ElementSeleniumAttributes.sync(context),
-            style: new _ElementStyle.sync(context));
+          attributes: new _ElementAttributes.sync(context),
+          computedStyle: new _ElementComputedStyle.sync(context),
+          properties: new _ElementProperties.sync(context),
+          seleniumAttributes: new _ElementSeleniumAttributes.sync(context),
+          style: new _ElementStyle.sync(context));
 
   @override
   Future<WebDriverPageLoaderElement> get shadowRoot async {
@@ -344,12 +344,12 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future<String> get innerText async => (await context.driver
-          .execute('return arguments[0].textContent;', [context]))
+      .execute('return arguments[0].textContent;', [context]))
       .trim();
 
   @override
   String get innerTextSync => (syncContext.driver
-          .execute('return arguments[0].textContent;', [syncContext]))
+      .execute('return arguments[0].textContent;', [syncContext]))
       .trim();
 
   @override
@@ -427,7 +427,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future clear(
-          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
+      {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (focusBefore) await focus(sync: false);
         await context.clear();
@@ -439,7 +439,7 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future type(String keys,
-          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
+      {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (focusBefore) await focus(sync: false);
         await context.sendKeys(keys);
@@ -448,11 +448,11 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future blur({bool sync: true}) => loader.executeSynced(
-      () => context.driver.execute('arguments[0].blur();', [context]), sync);
+          () => context.driver.execute('arguments[0].blur();', [context]), sync);
 
   @override
   Future focus({bool sync: true}) => loader.executeSynced(
-      () => context.driver.execute('arguments[0].focus();', [context]), sync);
+          () => context.driver.execute('arguments[0].focus();', [context]), sync);
 }
 
 class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
@@ -479,7 +479,7 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   Future type(String keys,
-          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
+      {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() => context.keyboard.sendKeys(keys), sync);
 
   @override
@@ -595,26 +595,26 @@ class _ElementAttributes extends PageLoaderAttributes {
 
   @override
   Future<String> operator [](String name) async => (await _node.driver.execute(
-          """
+      """
 var attr = arguments[0].attributes["$name"];
 if(attr) {
   return attr.value;
 }
 return null;
 """,
-          [_node]))
+      [_node]))
       ?.toString();
 
   @override
   String getAttribute(String name) => (_nodeSync.driver.execute(
-          """
+      """
 var attr = arguments[0].attributes["$name"];
 if(attr) {
   return attr.value;
 }
 return null;
 """,
-          [_nodeSync]))
+      [_nodeSync]))
       ?.toString();
 }
 
@@ -645,14 +645,14 @@ class _ElementComputedStyle extends PageLoaderAttributes {
 
   @override
   Future<String> operator [](String name) async => (await _node.driver.execute(
-          'return window.getComputedStyle(arguments[0]).${_cssPropName(name)};',
-          [_node]))
+      'return window.getComputedStyle(arguments[0]).${_cssPropName(name)};',
+      [_node]))
       ?.toString();
 
   @override
   String getAttribute(String name) => (_nodeSync.driver.execute(
-          'return window.getComputedStyle(arguments[0]).${_cssPropName(name)};',
-          [_nodeSync]))
+      'return window.getComputedStyle(arguments[0]).${_cssPropName(name)};',
+      [_nodeSync]))
       ?.toString();
 }
 
@@ -665,12 +665,12 @@ class _ElementStyle extends PageLoaderAttributes {
 
   @override
   Future<String> operator [](String name) async => (await _node.driver
-          .execute('return arguments[0].style.${_cssPropName(name)};', [_node]))
+      .execute('return arguments[0].style.${_cssPropName(name)};', [_node]))
       ?.toString();
 
   @override
   String getAttribute(String name) => (_nodeSync.driver.execute(
-          'return arguments[0].style.${_cssPropName(name)};', [_nodeSync]))
+      'return arguments[0].style.${_cssPropName(name)};', [_nodeSync]))
       ?.toString();
 }
 
@@ -714,11 +714,11 @@ class _ShadowRootProperties extends PageLoaderAttributes {
 
   @override
   Future<String> operator [](String name) async => (await _node.driver
-          .execute('return arguments[0].shadowRoot.["$name"];', [_node]))
+      .execute('return arguments[0].shadowRoot.["$name"];', [_node]))
       ?.toString();
 
   @override
   String getAttribute(String name) => (_nodeSync.driver
-          .execute('return arguments[0].shadowRoot.["$name"];', [_nodeSync]))
+      .execute('return arguments[0].shadowRoot.["$name"];', [_nodeSync]))
       ?.toString();
 }
