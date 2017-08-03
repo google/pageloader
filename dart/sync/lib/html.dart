@@ -114,7 +114,8 @@ class _HtmlMouse implements PageLoaderMouse {
   int get pageY => window.pageYOffset + clientY;
   int get _borderWidth => (window.outerWidth - window.innerWidth) ~/ 2;
   int get screenX => window.screenLeft + _borderWidth + clientX;
-  int get screenY => window.screenTop +
+  int get screenY =>
+      window.screenTop +
       window.outerHeight -
       window.innerHeight -
       _borderWidth +
@@ -188,7 +189,8 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   int get hashCode => node.hashCode;
 
   @override
-  bool operator ==(other) => other != null &&
+  bool operator ==(other) =>
+      other != null &&
       other.runtimeType == runtimeType &&
       other.node == node &&
       other.loader == loader;

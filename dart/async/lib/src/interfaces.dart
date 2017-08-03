@@ -135,6 +135,27 @@ abstract class PageLoaderElement {
   /// selector.
   Stream<PageLoaderElement> getElementsByCss(String selector);
 
+  /// These sync attributes are defined to allow loading to exist.
+  PageLoaderElement get shadowRootSync;
+
+  String get innerTextSync;
+
+  String get visibleTextSync;
+
+  String get nameSync;
+
+  bool get displayedSync;
+
+  List<String> get classesSync;
+
+  bool get isFocusedSync;
+
+  Rectangle get offsetSync;
+
+  Rectangle getBoundingClientRectSync();
+
+  List<PageLoaderElement> getElementsByCssSync(String selector);
+
   /// Clears the text of this element, if possible (e.g. for text fields).
   ///
   /// [focusBefore] indicates whether to focus this element before clearing.
@@ -160,6 +181,8 @@ abstract class PageLoaderElement {
 
 abstract class PageLoaderAttributes {
   Future<String> operator [](String name);
+
+  String getAttribute(String name);
 }
 
 abstract class Finder {
