@@ -170,8 +170,8 @@ class _WebElementPageLoaderElementSync
   @override
   WebDriverPageLoaderElement get shadowRootSync {
     if (loader.useShadowDom) {
-      if ((_syncContext.driver
-          .execute('return arguments[0].shadowRoot != null;', [_syncContext]))) {
+      if ((_syncContext.driver.execute(
+          'return arguments[0].shadowRoot != null;', [_syncContext]))) {
         return new _ShadowRootPageLoaderElementSync(_syncContext, loader);
       }
       throw new PageLoaderException('$this does not have a shadowRoot');
@@ -222,8 +222,8 @@ class _WebElementPageLoaderElementSync
 
   @override
   Rectangle getBoundingClientRectSync() {
-    Map<String, num> rect = _syncContext.driver
-        .execute('return arguments[0].getBoundingClientRect();', [_syncContext]);
+    Map<String, num> rect = _syncContext.driver.execute(
+        'return arguments[0].getBoundingClientRect();', [_syncContext]);
     return new Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
