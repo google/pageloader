@@ -167,8 +167,16 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   }
 
   factory WebDriverPageLoaderElement.sync(
-          sync_wd.SearchContext context, WebDriverPageLoader loader) =>
-      new _WebElementPageLoaderElement.sync(context, loader);
+          sync_wd.SearchContext context, WebDriverPageLoader loader) {
+    if (context is sync_wd.WebDriver) {
+      return new _WebDriverPageLoaderElement.sync(context, loader);
+    }
+    if (context is sync_wd.WebElement) {
+      return new _WebElementPageLoaderElement.sync(context, loader);
+    }
+    throw new PageLoaderException(
+        'Unable to create PageLoaderElement for $context');
+  }
 
   WebDriverPageLoaderElement._(this.loader,
       {this.attributes: const _EmptyAttributes(),
@@ -487,7 +495,7 @@ class _WebDriverPageLoaderElement extends WebDriverPageLoaderElement {
 
   @override
   String get innerTextSync =>
-      (syncContext.execute('return arguments[0].textContent;', [_root])).trim();
+      (syncContext.execute('return arguments[0].textContent;', [_rootSync])).trim();
 
   @override
   Future<String> get visibleText async => (await _root).text;
