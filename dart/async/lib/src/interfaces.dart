@@ -184,6 +184,7 @@ abstract class PageLoaderElement {
 abstract class PageLoaderAttributes {
   Future<String> operator [](String name);
 
+  /// Synchronously gets an attribute. Only usable from finders and filters.
   String getAttribute(String name);
 }
 
