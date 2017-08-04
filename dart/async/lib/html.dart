@@ -184,15 +184,26 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
       this.style: const _EmptyAttributes()});
 
   @override
-  Future<String> get innerText async => node.text.trim();
+  Future<String> get innerText async => innerTextSync;
+
+  @override
+  String get innerTextSync => node.text.trim();
 
   // TODO(DrMarcII) consider normalizing string
   @override
-  Future<String> get visibleText async => _normalize(_elementText(node));
+  Future<String> get visibleText async => visibleTextSync;
+
+  String get visibleTextSync => _normalize(_elementText(node));
 
   @override
   Stream<HtmlPageLoaderElement> getElementsByCss(String selector) =>
       _fromNodeList(node.querySelectorAll(selector));
+
+  @override
+  List<HtmlPageLoaderElement> getElementsByCssSync(String selector) => node
+      .querySelectorAll(selector)
+      .map((n) => new HtmlPageLoaderElement(node, loader))
+      .toList();
 
   Stream<HtmlPageLoaderElement> _fromNodeList(List<Node> nodes) async* {
     for (var node in nodes) {
@@ -229,18 +240,32 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  Future<bool> get isFocused async => document.activeElement == node;
+  Future<bool> get isFocused async => isFocusedSync;
+
+  @override
+  bool get isFocusedSync => document.activeElement == node;
 
   @override
   Stream<String> get classes async* {}
+
+  @override
+  List<String> get classesSync => [];
 
   @override
   Future<Rectangle> getBoundingClientRect() => throw new PageLoaderException(
       '$runtimeType.getBoundingClientRect() is unsupported');
 
   @override
-  Future<Rectangle> get offset =>
+  Rectangle getBoundingClientRectSync() => throw new PageLoaderException(
+      '$runtimeType.getBoundingClientRectSync() is unsupported');
+
+  @override
+  Future<Rectangle> get offset async =>
       throw new PageLoaderException('$runtimeType.offset is unsupported');
+
+  @override
+  Rectangle get offsetSync =>
+      throw new PageLoaderException('$runtimeType.offsetSync is unsupported');
 
   @override
   Future clear(
@@ -256,6 +281,10 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   Future<PageLoaderElement> get shadowRoot async =>
       throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
+
+  @override
+  PageLoaderElement get shadowRootSync => throw new PageLoaderException(
+      '$runtimeType.shadowRootSync is unsupported');
 
   @override
   Future blur({bool sync: true}) async =>
@@ -290,8 +319,22 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   }
 
   @override
-  Future<String> get name async => node.tagName.toLowerCase();
-  // TODO(DrMarcII): implement this to recurse up the tree to see if displayed
+  PageLoaderElement get shadowRootSync {
+    if (loader.useShadowDom) {
+      if (node.shadowRoot != null) {
+        return new HtmlPageLoaderElement(node.shadowRoot, loader);
+      }
+      throw new PageLoaderException('$this does not have a shadowRoot');
+    }
+    return this;
+  }
+
+  @override
+  Future<String> get name async => name;
+
+  @override
+  String get nameSync => node.tagName.toLowerCase();
+
   @override
   Future<bool> get displayed async => displayedSync;
 
@@ -302,11 +345,20 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   Stream<String> get classes => new Stream.fromIterable(node.classes);
 
   @override
-  Future<Rectangle> getBoundingClientRect() async =>
-      node.getBoundingClientRect();
+  List<String> get classesSync => node.classes.toList();
 
   @override
-  Future<Rectangle> get offset async => node.offset;
+  Future<Rectangle> getBoundingClientRect() async =>
+      getBoundingClientRectSync();
+
+  @override
+  Rectangle getBoundingClientRectSync() => node.getBoundingClientRect();
+
+  @override
+  Future<Rectangle> get offset async => offsetSync;
+
+  @override
+  Rectangle get offsetSync => node.offset;
 
   @override
   Future click({bool sync: true}) => loader.executeSynced(() async {
@@ -384,7 +436,10 @@ class _ShadowRootPageLoaderElement extends HtmlPageLoaderElement {
   }
 
   @override
-  Future<String> get name async => '__shadow_root__';
+  Future<String> get name async => nameSync;
+
+  @override
+  String get nameSync => '__shadow_root__';
 
   @override
   Future<bool> get displayed async => displayedSync;
@@ -401,7 +456,10 @@ class _DocumentPageLoaderElement extends HtmlPageLoaderElement {
         super._(loader, properties: new _NodeProperties(_node));
 
   @override
-  Future<String> get name async => '__document__';
+  Future<String> get name async => nameSync;
+
+  @override
+  String get nameSync => '__document__';
 
   @override
   Future<bool> get displayed async => displayedSync;
@@ -431,7 +489,9 @@ class _NodeProperties extends PageLoaderAttributes {
   _NodeProperties(this._node);
 
   @override
-  Future<String> operator [](String name) async {
+  Future<String> operator [](String name) async => getAttribute(name);
+
+  String getAttribute(String name) {
     try {
       return reflect(_node).getField(new Symbol(name)).reflectee?.toString();
     } catch (e) {
@@ -448,7 +508,10 @@ class _ElementAttributes extends PageLoaderAttributes {
   /// Based on algorithm from:
   /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
   @override
-  Future<String> operator [](String name) async => _node.attributes[name];
+  Future<String> operator [](String name) async => getAttribute(name);
+
+  @override
+  String getAttribute(String name) => _node.attributes[name];
 }
 
 @deprecated
@@ -504,7 +567,10 @@ class _ElementSeleniumAttributes extends PageLoaderAttributes {
   /// Based on algorithm from:
   /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
   @override
-  Future<String> operator [](String name) async {
+  Future<String> operator [](String name) async => getAttribute(name);
+
+  @override
+  String getAttribute(String name) {
     var result;
     var lcName = name.toLowerCase();
 
@@ -545,11 +611,11 @@ class _ElementSeleniumAttributes extends PageLoaderAttributes {
       }
       // 6
       if (name == 'class') {
-        return this['className'];
+        return this.getAttribute('className');
       }
       // 6
       if (name == 'readonly') {
-        return this['readOnly'];
+        return this.getAttribute('readOnly');
       }
     }
     // 7
@@ -577,7 +643,10 @@ class _ElementComputedStyle extends PageLoaderAttributes {
   _ElementComputedStyle(this._node);
 
   @override
-  Future<String> operator [](String name) async =>
+  Future<String> operator [](String name) async => getAttribute(name);
+
+  @override
+  String getAttribute(String name) =>
       _node.getComputedStyle().getPropertyValue(name);
 }
 
@@ -587,8 +656,10 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  Future<String> operator [](String name) async =>
-      _node.style.getPropertyValue(name);
+  Future<String> operator [](String name) async => getAttribute(name);
+
+  @override
+  String getAttribute(String name) => _node.style.getPropertyValue(name);
 }
 
 class _EmptyAttributes implements PageLoaderAttributes {
@@ -596,6 +667,9 @@ class _EmptyAttributes implements PageLoaderAttributes {
 
   @override
   Future<String> operator [](String name) async => null;
+
+  @override
+  String getAttribute(String name) => null;
 }
 
 String _elementText(n) {

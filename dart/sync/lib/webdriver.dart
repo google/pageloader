@@ -135,7 +135,8 @@ abstract class WebDriverPageLoaderElement implements PageLoaderElement {
   int get hashCode => context.hashCode;
 
   @override
-  bool operator ==(Object other) => other != null &&
+  bool operator ==(Object other) =>
+      other != null &&
       other.runtimeType == runtimeType &&
       (other as WebDriverPageLoaderElement).context == context &&
       (other as WebDriverPageLoaderElement).loader == loader;

@@ -223,92 +223,76 @@ void runTests() {
       verifyRows(page.rowsTypeDef());
     });
 
-    test(
-        'shadow dom',
-        () {
-          PageForShadowDomTest page = loader.getInstance(PageForShadowDomTest);
+    test('shadow dom', () {
+      PageForShadowDomTest page = loader.getInstance(PageForShadowDomTest);
 
-          expect(page.button1.button.visibleText, contains('button 1'));
-          expect(page.button1.button.visibleText, contains('some'));
-          expect(page.button2.button.visibleText, contains('button 2'));
-          expect(page.button2.button.visibleText, contains('some'));
-          if (loader.useShadowDom) {
-            expect(page.shouldBeEmpty, hasLength(0));
-          }
-        },
-        testOn: 'browser');
+      expect(page.button1.button.visibleText, contains('button 1'));
+      expect(page.button1.button.visibleText, contains('some'));
+      expect(page.button2.button.visibleText, contains('button 2'));
+      expect(page.button2.button.visibleText, contains('some'));
+      if (loader.useShadowDom) {
+        expect(page.shouldBeEmpty, hasLength(0));
+      }
+    }, testOn: 'browser');
 
-    test(
-        'WithVisibleText in shadow dom',
-        () {
-          PageForShadowDomWithVisibleTextTest page =
-              loader.getInstance(PageForShadowDomWithVisibleTextTest);
+    test('WithVisibleText in shadow dom', () {
+      PageForShadowDomWithVisibleTextTest page =
+          loader.getInstance(PageForShadowDomWithVisibleTextTest);
 
-          expect(page.button1.visibleText, contains('button 1'));
-          expect(page.button1.visibleText, contains('some'));
-        },
-        testOn: 'browser');
+      expect(page.button1.visibleText, contains('button 1'));
+      expect(page.button1.visibleText, contains('some'));
+    }, testOn: 'browser');
 
-    test(
-        'chain',
-        () {
-          PageForChainTest page = loader.getInstance(PageForChainTest);
+    test('chain', () {
+      PageForChainTest page = loader.getInstance(PageForChainTest);
 
-          expect(page.outerDivsText, anyElement(contains('outer div 1')));
-          expect(page.outerDivsText, anyElement(contains('outer div 2')));
-          expect(page.innerDivsText,
-              orderedEquals(['inner div 1', 'inner div 2']));
-          expect(page.innerDivSpecial.visibleText, 'inner div 2');
-          expect(page.innerShadow.visibleText, contains('some'));
-        },
-        testOn: 'browser');
+      expect(page.outerDivsText, anyElement(contains('outer div 1')));
+      expect(page.outerDivsText, anyElement(contains('outer div 2')));
+      expect(page.innerDivsText, orderedEquals(['inner div 1', 'inner div 2']));
+      expect(page.innerDivSpecial.visibleText, 'inner div 2');
+      expect(page.innerShadow.visibleText, contains('some'));
+    }, testOn: 'browser');
 
-    test(
-        'WithInnerText in shadow dom',
-        () {
-          if (!loader.useShadowDom) {
-            // if shadow dom is disabled, then visibleText and innerText are
-            // identical
-            return;
-          }
-          PageForShadowDomWithInnerTextTest page =
-              loader.getInstance(PageForShadowDomWithInnerTextTest);
+    test('WithInnerText in shadow dom', () {
+      if (!loader.useShadowDom) {
+        // if shadow dom is disabled, then visibleText and innerText are
+        // identical
+        return;
+      }
+      PageForShadowDomWithInnerTextTest page =
+          loader.getInstance(PageForShadowDomWithInnerTextTest);
 
-          expect(page.shouldBeEmpty, isEmpty);
-          expect(page.button1.visibleText, contains('button 1'));
-          expect(page.button1.visibleText, contains('some'));
-          expect(page.button1.innerText, contains('button 1'));
-          expect(page.button1.innerText, isNot(contains('some')));
-        },
-        testOn: 'browser');
+      expect(page.shouldBeEmpty, isEmpty);
+      expect(page.button1.visibleText, contains('button 1'));
+      expect(page.button1.visibleText, contains('some'));
+      expect(page.button1.innerText, contains('button 1'));
+      expect(page.button1.innerText, isNot(contains('some')));
+    }, testOn: 'browser');
 
-    test(
-        'text methods on shadow root',
-        () {
-          PageForTextOnShadowRootTest page =
-              loader.getInstance(PageForTextOnShadowRootTest);
+    test('text methods on shadow root', () {
+      PageForTextOnShadowRootTest page =
+          loader.getInstance(PageForTextOnShadowRootTest);
 
-          expect(page.buttons, hasLength(3));
-          expect(page.buttons[1].shadowRoot.visibleText, contains('button 1'));
-          expect(page.buttons[1].shadowRoot.visibleText, contains('some'));
-          expect(page.buttons[2].shadowRoot.visibleText, contains('button 2'));
-          expect(page.buttons[2].shadowRoot.visibleText, contains('some'));
-          if (loader.useShadowDom) {
-            expect(page.buttons[1].shadowRoot.innerText,
-                isNot(contains('button 1')));
-          } else {
-            expect(page.buttons[1].shadowRoot.innerText, contains('button 1'));
-          }
-          expect(page.buttons[1].shadowRoot.innerText, contains('some'));
-          if (loader.useShadowDom) {
-            expect(page.buttons[2].shadowRoot.innerText,
-                isNot(contains('button 2')));
-          } else {
-            expect(page.buttons[2].shadowRoot.innerText, contains('button 2'));
-          }
-          expect(page.buttons[2].shadowRoot.innerText, contains('some'));
-        },
-        testOn: 'browser');
+      expect(page.buttons, hasLength(3));
+      expect(page.buttons[1].shadowRoot.visibleText, contains('button 1'));
+      expect(page.buttons[1].shadowRoot.visibleText, contains('some'));
+      expect(page.buttons[2].shadowRoot.visibleText, contains('button 2'));
+      expect(page.buttons[2].shadowRoot.visibleText, contains('some'));
+      if (loader.useShadowDom) {
+        expect(
+            page.buttons[1].shadowRoot.innerText, isNot(contains('button 1')));
+      } else {
+        expect(page.buttons[1].shadowRoot.innerText, contains('button 1'));
+      }
+      expect(page.buttons[1].shadowRoot.innerText, contains('some'));
+      if (loader.useShadowDom) {
+        expect(
+            page.buttons[2].shadowRoot.innerText, isNot(contains('button 2')));
+      } else {
+        expect(page.buttons[2].shadowRoot.innerText, contains('button 2'));
+      }
+      expect(page.buttons[2].shadowRoot.innerText, contains('some'));
+    }, testOn: 'browser');
 
     test('classes', () {
       PageForSimpleTest page = loader.getInstance(PageForSimpleTest);
@@ -347,21 +331,18 @@ void runTests() {
       expect(page.shouldBeNonNull(), isNotNull);
     });
 
-    test(
-        'mouse',
-        () {
-          PageForMouseTest page = loader.getInstance(PageForMouseTest);
+    test('mouse', () {
+      PageForMouseTest page = loader.getInstance(PageForMouseTest);
 
-          loader.mouse.moveTo(page.element, 2, 2);
-          loader.waitFor(() => page.element.visibleText, contains('MouseMove'));
-          loader.mouse.down(0);
-          loader.waitFor(() => page.element.visibleText, contains('MouseDown'));
-          loader.mouse
-            ..moveTo(page.element, 10, 10)
-            ..up(0);
-          loader.waitFor(() => page.element.visibleText, contains('MouseUp'));
-        },
-        testOn: 'vm');
+      loader.mouse.moveTo(page.element, 2, 2);
+      loader.waitFor(() => page.element.visibleText, contains('MouseMove'));
+      loader.mouse.down(0);
+      loader.waitFor(() => page.element.visibleText, contains('MouseDown'));
+      loader.mouse
+        ..moveTo(page.element, 10, 10)
+        ..up(0);
+      loader.waitFor(() => page.element.visibleText, contains('MouseUp'));
+    }, testOn: 'vm');
 
     test('mouse with event target', () {
       PageForMouseTest page = loader.getInstance(PageForMouseTest);

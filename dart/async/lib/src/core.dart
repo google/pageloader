@@ -88,17 +88,6 @@ abstract class BasePageLoader implements PageLoader {
   }
 }
 
-typedef Future<T> _LazyFunction<T>();
-
-class _Lazy<T> implements Lazy<T> {
-  final _LazyFunction _call;
-
-  _Lazy(this._call);
-
-  @override
-  Future<T> call() => _call();
-}
-
 class _ClassInfo<T> {
   static final Map<Type, Map<ClassMirror, _ClassInfo>> _classInfoCache =
       <Type, Map<ClassMirror, _ClassInfo>>{};
@@ -249,8 +238,8 @@ abstract class _FieldInfo {
     bool required = true;
     bool displayCheck = true;
     TypeMirror type;
+    ClassMirror lazyType;
     Symbol name;
-    bool lazy = false;
     bool list = false;
     bool injected = false;
 
@@ -322,7 +311,7 @@ abstract class _FieldInfo {
     }
 
     if (type.simpleName == #Lazy) {
-      lazy = true;
+      lazyType = type;
       type = type.typeArguments.isNotEmpty
           ? type.typeArguments.single
           : reflectClass(PageLoaderElement);
@@ -350,8 +339,8 @@ abstract class _FieldInfo {
       fieldInfo = new _BasicFieldInfo(
           name, finder, filters, type, displayCheck, required);
     }
-    if (lazy) {
-      fieldInfo = new _LazyFieldInfo(fieldInfo);
+    if (lazyType != null) {
+      fieldInfo = new _LazyFieldInfo(fieldInfo, lazyType);
     }
     return fieldInfo;
   }
@@ -479,15 +468,21 @@ class _ListFieldInfo extends _FieldInfo {
 
 class _LazyFieldInfo extends _FieldInfo {
   final _FieldInfo _impl;
+  final ClassMirror lazyType;
 
-  _LazyFieldInfo(_FieldInfo impl)
+  _LazyFieldInfo(_FieldInfo impl, this.lazyType)
       : this._impl = impl,
         super._(impl._fieldName);
+
+  Lazy _createLazyInstance(value) {
+    var instance = lazyType.newInstance(const Symbol(''), [value]);
+    return instance.reflectee;
+  }
 
   @override
   Future calculateFieldValue(
       PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
-    return new Future.value(new _Lazy(
+    return new Future.value(_createLazyInstance(
         () => _impl.calculateFieldValue(context, loader, displayCheck)));
   }
 
