@@ -14,9 +14,11 @@
 @TestOn('vm')
 library pageloader.test.webdriver_test_setup;
 
+import 'dart:async';
 import 'dart:io';
 import 'dart:mirrors' show currentMirrorSystem;
 
+import 'package:pageloader/webdriver.dart';
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 import 'package:webdriver/sync_io.dart'
@@ -77,4 +79,12 @@ WebDriver _createTestDriver() {
   }
 
   return createDriver(desired: capabilities);
+}
+
+class SyncLoader extends shared.Loader {
+  final WebDriverPageLoader loader;
+  SyncLoader(WebDriver driver) : loader = new WebDriverPageLoader.sync(driver);
+
+  Future<T> getInstance<T>(Type type, [dynamic context]) async =>
+      loader.getInstanceSync(type);
 }

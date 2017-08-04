@@ -18,13 +18,12 @@ import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'data/html_no_shadow_dom_setup.dart' as html_setup;
-import 'setup/html_test_setup.dart' show runTests, syncFn;
+import 'setup/html_test_setup.dart' show HtmlLoader, runTests, syncFn;
 
 void main() {
-  runTests(pageloaderFactory);
+  runTests(pageLoaderFactory);
 }
 
-PageLoader pageloaderFactory() {
-  var div = html_setup.setUp();
-  return new HtmlPageLoader(div, executeSyncedFn: syncFn, useShadowDom: false);
-}
+HtmlLoader pageLoaderFactory() =>
+    new HtmlLoader(new HtmlPageLoader(html_setup.setUp(),
+        executeSyncedFn: syncFn, useShadowDom: false));
