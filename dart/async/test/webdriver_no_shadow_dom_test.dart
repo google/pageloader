@@ -31,9 +31,8 @@ class AsyncLoader extends shared.Loader {
   final WebDriverPageLoader loader;
   AsyncLoader(WebDriver driver) : loader = new WebDriverPageLoader(driver);
 
-  Future<T> getInstance<T>(Type type, [dynamic context])  =>
+  Future<T> getInstance<T>(Type type, [dynamic context]) =>
       loader.getInstance(type);
 }
 
 AsyncLoader pageLoaderFactory(WebDriver driver) => new AsyncLoader(driver);
-

@@ -20,7 +20,7 @@ import 'package:pageloader/objects.dart';
 
 Loader loader;
 
-abstract class Loader  {
+abstract class Loader {
   PageLoader loader;
 
   Future<T> getInstance<T>(Type type, [dynamic context]);

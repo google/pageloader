@@ -490,7 +490,7 @@ class _LazyFieldInfo extends _FieldInfo {
   dynamic calculateFieldValueSync(
       PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
     return _createLazyInstance(
-            () => _impl.calculateFieldValue(context, loader, displayCheck));
+        () => _impl.calculateFieldValue(context, loader, displayCheck));
   }
 }
 
@@ -531,7 +531,6 @@ List<PageLoaderElement> _getElementsSync(PageLoaderElement context,
     Finder finder, List<Filter> filters, bool displayCheck) {
   if (finder is SyncFinder) {
     var elements = finder.findElementsSync(context);
-
 
     for (var filter in filters) {
       if (filter is SyncFilter) {

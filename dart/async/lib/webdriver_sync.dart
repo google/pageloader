@@ -68,8 +68,7 @@ abstract class _BaseWebDriverPageLoaderElementSync
   List<WebDriverPageLoaderElement> getElementsByCssSync(String selector) =>
       _syncContext
           .findElements(new sync_wd.By.cssSelector(selector))
-          .map((e) =>
-              new _BaseWebDriverPageLoaderElementSync(e, loader))
+          .map((e) => new _BaseWebDriverPageLoaderElementSync(e, loader))
           .toList();
 
   @override
@@ -246,7 +245,7 @@ class _WebElementPageLoaderElementSync
 
   @override
   Future clear(
-      {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (focusBefore) await focus(sync: false);
         await _syncContext.clear();
@@ -254,11 +253,12 @@ class _WebElementPageLoaderElementSync
       }, sync);
 
   @override
-  Future click({bool sync: true}) => loader.executeSynced(_syncContext.click, sync);
+  Future click({bool sync: true}) =>
+      loader.executeSynced(_syncContext.click, sync);
 
   @override
   Future type(String keys,
-      {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (focusBefore) await focus(sync: false);
         await _syncContext.sendKeys(keys);
@@ -267,11 +267,13 @@ class _WebElementPageLoaderElementSync
 
   @override
   Future blur({bool sync: true}) => loader.executeSynced(
-          () => _syncContext.driver.execute('arguments[0].blur();', [context]), sync);
+      () => _syncContext.driver.execute('arguments[0].blur();', [context]),
+      sync);
 
   @override
   Future focus({bool sync: true}) => loader.executeSynced(
-          () => _syncContext.driver.execute('arguments[0].focus();', [context]), sync);
+      () => _syncContext.driver.execute('arguments[0].focus();', [context]),
+      sync);
 }
 
 class _WebDriverPageLoaderElementSync

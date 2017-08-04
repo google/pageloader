@@ -40,7 +40,8 @@ void runTests() {
 
       // make sure mouse is not on element;
       await loader.loader.mouse.moveTo(page.element, -10, -10);
-      await loader.loader.mouse.down(MouseButton.primary, eventTarget: page.element);
+      await loader.loader.mouse
+          .down(MouseButton.primary, eventTarget: page.element);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseDown'));
       await loader.loader.mouse.moveTo(page.element, 200, 200);

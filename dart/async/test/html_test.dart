@@ -25,7 +25,6 @@ import 'data/html_setup.dart' as html_setup;
 import 'setup/html_test_setup.dart' show runTests, syncFn;
 import 'src/shared.dart' as shared;
 
-
 void main() {
   runTests(pageloaderFactory);
 }
@@ -39,11 +38,9 @@ class HtmlLoader extends shared.Loader {
   final HtmlPageLoader loader;
   HtmlLoader(this.loader);
 
-  Future<T> getInstance<T>(Type type, [dynamic context])  =>
+  Future<T> getInstance<T>(Type type, [dynamic context]) =>
       loader.getInstance(type);
 }
 
-HtmlLoader pageLoaderFactory()  =>
-  new HtmlLoader(new HtmlPageLoader(html_setup.setUp(), executeSyncedFn: syncFn));
-
-
+HtmlLoader pageLoaderFactory() => new HtmlLoader(
+    new HtmlPageLoader(html_setup.setUp(), executeSyncedFn: syncFn));
