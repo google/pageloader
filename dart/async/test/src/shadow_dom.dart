@@ -27,7 +27,7 @@ void runTests() {
       expect(await page.button1.button.visibleText, contains('some'));
       expect(await page.button2.button.visibleText, contains('button 2'));
       expect(await page.button2.button.visibleText, contains('some'));
-      if (loader.useShadowDom) {
+      if (loader.loader.useShadowDom) {
         expect(page.shouldBeEmpty, hasLength(0));
       }
     }, testOn: 'browser');
@@ -41,7 +41,7 @@ void runTests() {
     }, testOn: 'browser');
 
     test('WithInnerText in shadow dom', () async {
-      if (!loader.useShadowDom) {
+      if (!loader.loader.useShadowDom) {
         // if shadow dom is disabled, then visibleText and innerText are
         // identical
         return;
@@ -69,7 +69,7 @@ void runTests() {
           contains('button 2'));
       expect(await (await page.buttons[2].shadowRoot).visibleText,
           contains('some'));
-      if (loader.useShadowDom) {
+      if (loader.loader.useShadowDom) {
         expect(await (await page.buttons[1].shadowRoot).innerText,
             isNot(contains('button 1')));
       } else {
@@ -78,7 +78,7 @@ void runTests() {
       }
       expect(
           await (await page.buttons[1].shadowRoot).innerText, contains('some'));
-      if (loader.useShadowDom) {
+      if (loader.loader.useShadowDom) {
         expect(await (await page.buttons[2].shadowRoot).innerText,
             isNot(contains('button 2')));
       } else {

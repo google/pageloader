@@ -22,7 +22,7 @@ void runTests() {
     test('simple', () async {
       PageForSimpleTest page = await loader.getInstance(PageForSimpleTest);
       await verifyTable(page.table);
-      expect(page.loader, loader);
+      expect(page.loader, loader.loader);
     });
 
     test('class annotations', () async {
@@ -44,7 +44,7 @@ void runTests() {
     test('setters', () async {
       PageForSettersTest page = await loader.getInstance(PageForSettersTest);
       expect(page.shouldHaveOneElement, hasLength(1));
-      expect(page.loader, loader);
+      expect(page.loader, loader.loader);
     });
 
     test('skip fields without finders', () async {

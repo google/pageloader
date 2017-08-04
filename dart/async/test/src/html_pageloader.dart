@@ -39,7 +39,7 @@ void runTests() {
       var data = 'my data';
       var list = <int>[];
       html.document.body.onKeyPress.listen((evt) => list.add(evt.charCode));
-      await loader.globalContext.type(data);
+      await loader.loader.globalContext.type(data);
       expect(new String.fromCharCodes(list), equals(data));
     }, onPlatform: {'!js': new Skip('Key events do not work on dartium')});
   }, onPlatform: {'!browser': new Skip('In-browser specific tests')});

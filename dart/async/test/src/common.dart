@@ -28,15 +28,15 @@ import 'typing.dart' as typing;
 
 void runTests() {
   group('core PageLoader', () {
-    annotations.runTests();
-    attributes.runTests();
+    //annotations.runTests();
+    //attributes.runTests();
     basic.runTests();
-    display_filtering.runTests();
+    /*display_filtering.runTests();
     errors.runTests();
     mouse.runTests();
     properties.runTests();
     selenium_attributes.runTests();
     shadow_dom.runTests();
-    typing.runTests();
+    typing.runTests();*/
   });
 }

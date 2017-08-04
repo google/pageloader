@@ -14,15 +14,25 @@
 @TestOn('vm')
 library pageloader.test.webdriver_no_shadow_dom;
 
+import 'dart:async';
+
 import 'package:pageloader/webdriver.dart';
 import 'package:test/test.dart';
 import 'package:webdriver/sync_io.dart' show WebDriver;
 
 import 'setup/webdriver_sync_test_setup.dart' show runTests;
+import 'src/shared.dart' as shared;
 
 void main() {
   runTests(pageLoaderFactory, 'webdriver_test_page.html');
 }
 
-PageLoader pageLoaderFactory(WebDriver driver) =>
-    new WebDriverPageLoader.sync(driver);
+class SyncLoader extends shared.Loader {
+  final WebDriverPageLoader loader;
+  SyncLoader(WebDriver driver) : loader = new WebDriverPageLoader.sync(driver);
+
+  Future<T> getInstance<T>(Type type, [dynamic context]) async =>
+      loader.getInstanceSync(type);
+}
+
+SyncLoader pageLoaderFactory(WebDriver driver) => new SyncLoader(driver);

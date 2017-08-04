@@ -489,8 +489,8 @@ class _LazyFieldInfo extends _FieldInfo {
   @override
   dynamic calculateFieldValueSync(
       PageLoaderElement context, BasePageLoader loader, bool displayCheck) {
-    return new _Lazy(
-        () => _impl.calculateFieldValueSync(context, loader, displayCheck));
+    return _createLazyInstance(
+            () => _impl.calculateFieldValue(context, loader, displayCheck));
   }
 }
 
@@ -532,8 +532,14 @@ List<PageLoaderElement> _getElementsSync(PageLoaderElement context,
   if (finder is SyncFinder) {
     var elements = finder.findElementsSync(context);
 
+
     for (var filter in filters) {
-      elements = filter.filterSync(elements);
+      if (filter is SyncFilter) {
+        elements = filter.filterSync(elements);
+      } else {
+        throw new PageLoaderException(
+            'Found non-syncified Filter: ${filter.runtimeType}');
+      }
     }
 
     if (!displayCheck) {
