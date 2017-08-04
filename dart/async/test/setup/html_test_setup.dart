@@ -24,7 +24,7 @@ import '../src/shared.dart' as shared;
 
 void runTests(pageLoaderFactory) {
   setUp(() {
-    shared.loader = pageLoaderFactory();
+    shared.loaderUtil = pageLoaderFactory();
   });
 
   plt.runTests();

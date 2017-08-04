@@ -33,12 +33,12 @@ void runTests(pageLoaderFactory, String testPage) {
   setUp(() async {
     driver = _createTestDriver();
     driver.get(_testPagePath(testPage));
-    shared.loader = pageLoaderFactory(driver);
+    shared.loaderUtil = pageLoaderFactory(driver);
   });
 
   tearDown(() async {
     driver.quit();
-    shared.loader = null;
+    shared.loaderUtil = null;
   });
 
   plt.runTests();

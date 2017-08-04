@@ -20,7 +20,7 @@ import 'shared.dart';
 void runTests() {
   group('seleniumAttributes', () {
     test('style', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       // According to the spec, red below should be returned as an
       // RGBA value.
       expect(await page.divWithStyle.seleniumAttributes['style'],
@@ -32,26 +32,26 @@ void runTests() {
     });
 
     test('checked', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(await page.checkbox.seleniumAttributes['checked'], isNull);
       await page.checkbox.click();
       expect(await page.checkbox.seleniumAttributes['checked'], 'true');
     });
 
     test('disabled', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(await page.readOnly.seleniumAttributes['disabled'], 'true');
       expect(await page.text.seleniumAttributes['disabled'], isNull);
     });
 
     test('not a property', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(await page.table.seleniumAttributes['non-standard'],
           'a non standard attr');
     });
 
     test('option values', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       // The expects below are according to the WebDriver spec, but currently
       // fail
       // expect(page.option1.seleniumAttributes['value'], 'option 1');
@@ -61,13 +61,13 @@ void runTests() {
     });
 
     test('option selected', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       await page.option2.click();
       expect(await page.select1.seleniumAttributes['value'], equals('value 2'));
     });
 
     test('selected on checkbox', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(await page.checkbox.seleniumAttributes['selected'], isNull);
       expect(await page.checkbox.seleniumAttributes['SeLeCtEd'], isNull);
       await page.checkbox.click();
@@ -76,7 +76,7 @@ void runTests() {
     });
 
     test('selected on radio', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(await page.radio.seleniumAttributes['selected'], isNull);
       expect(await page.radio.seleniumAttributes['SeLeCtEd'], isNull);
       await page.radio.click();
@@ -85,18 +85,18 @@ void runTests() {
     });
 
     test('href on a', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(
           await page.anchor.seleniumAttributes['href'], endsWith('/test.html'));
     });
 
     test('src on img', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(await page.img.seleniumAttributes['src'], endsWith('/test.png'));
     });
 
     test('class/className', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(
           await page.table.seleniumAttributes['class'], 'class1 class2 class3');
       expect(await page.table.seleniumAttributes['className'],
@@ -104,7 +104,7 @@ void runTests() {
     });
 
     test('readonly/readOnly', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(await page.readOnly.seleniumAttributes['readonly'], 'true');
       expect(await page.readOnly.seleniumAttributes['readOnly'], 'true');
       expect(await page.text.seleniumAttributes['readonly'], isNull);
@@ -112,7 +112,7 @@ void runTests() {
     });
 
     test('value on text', () async {
-      var page = await loader.getInstance(PageForSeleniumAttributesTests);
+      var page = await loaderUtil.getInstance(PageForSeleniumAttributesTests);
       expect(await page.text.seleniumAttributes['value'], '');
       await page.text.type('some text');
       expect(await page.text.seleniumAttributes['value'], 'some text');

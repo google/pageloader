@@ -21,7 +21,7 @@ void runTests() {
   group('display filtering tests', () {
     test('displayed filtering', () async {
       PageForDisplayedFilteringTest page =
-          await loader.getInstance(PageForDisplayedFilteringTest);
+          await loaderUtil.getInstance(PageForDisplayedFilteringTest);
 
       expect(page.shouldHaveOneElement, hasLength(1));
       expect(page.shouldBeEmpty, isEmpty);

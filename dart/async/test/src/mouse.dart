@@ -21,31 +21,31 @@ import 'shared.dart';
 void runTests() {
   group('mouse tests', () {
     test('mouse', () async {
-      PageForMouseTest page = await loader.getInstance(PageForMouseTest);
+      PageForMouseTest page = await loaderUtil.getInstance(PageForMouseTest);
 
-      await loader.loader.mouse.moveTo(page.element, 2, 2);
+      await loaderUtil.loader.mouse.moveTo(page.element, 2, 2);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseMove'));
-      await loader.loader.mouse.down(MouseButton.primary);
+      await loaderUtil.loader.mouse.down(MouseButton.primary);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseDown'));
-      await loader.loader.mouse.moveTo(page.element, 10, 10);
-      await loader.loader.mouse.up(MouseButton.primary);
+      await loaderUtil.loader.mouse.moveTo(page.element, 10, 10);
+      await loaderUtil.loader.mouse.up(MouseButton.primary);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseUp'));
     }, testOn: 'vm');
 
     test('mouse with event target', () async {
-      PageForMouseTest page = await loader.getInstance(PageForMouseTest);
+      PageForMouseTest page = await loaderUtil.getInstance(PageForMouseTest);
 
       // make sure mouse is not on element;
-      await loader.loader.mouse.moveTo(page.element, -10, -10);
-      await loader.loader.mouse
+      await loaderUtil.loader.mouse.moveTo(page.element, -10, -10);
+      await loaderUtil.loader.mouse
           .down(MouseButton.primary, eventTarget: page.element);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseDown'));
-      await loader.loader.mouse.moveTo(page.element, 200, 200);
-      await loader.loader.mouse
+      await loaderUtil.loader.mouse.moveTo(page.element, 200, 200);
+      await loaderUtil.loader.mouse
         ..up(MouseButton.primary, eventTarget: page.element);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseUp'));

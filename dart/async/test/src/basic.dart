@@ -20,42 +20,42 @@ import 'shared.dart';
 void runTests() {
   group('basic tests', () {
     test('simple', () async {
-      PageForSimpleTest page = await loader.getInstance(PageForSimpleTest);
+      PageForSimpleTest page = await loaderUtil.getInstance(PageForSimpleTest);
       await verifyTable(page.table);
-      expect(page.loader, loader.loader);
+      expect(page.loader, loaderUtil.loader);
     });
 
     test('class annotations', () async {
-      Table table = await loader.getInstance(Table);
+      Table table = await loaderUtil.getInstance(Table);
       await verifyTable(table);
     });
 
     test('class annotation on nested field', () async {
       PageForClassAnnotationTest page =
-          await loader.getInstance(PageForClassAnnotationTest);
+          await loaderUtil.getInstance(PageForClassAnnotationTest);
       await verifyTable(page.table);
     });
 
     test('sub-class', () async {
-      SubclassPage page = await loader.getInstance(SubclassPage);
+      SubclassPage page = await loaderUtil.getInstance(SubclassPage);
       await verifyTable(page.table);
     });
 
     test('setters', () async {
-      PageForSettersTest page = await loader.getInstance(PageForSettersTest);
+      PageForSettersTest page = await loaderUtil.getInstance(PageForSettersTest);
       expect(page.shouldHaveOneElement, hasLength(1));
-      expect(page.loader, loader.loader);
+      expect(page.loader, loaderUtil.loader);
     });
 
     test('skip fields without finders', () async {
       PageForSkipFieldsWithoutFinderTest page =
-          await loader.getInstance(PageForSkipFieldsWithoutFinderTest);
+          await loaderUtil.getInstance(PageForSkipFieldsWithoutFinderTest);
       expect(page.shouldHaveOneElement, hasLength(1));
       expect(page.shouldBeNull, isNull);
     });
 
     test('mixin', () async {
-      PageForMixinTest page = await loader.getInstance(PageForMixinTest);
+      PageForMixinTest page = await loaderUtil.getInstance(PageForMixinTest);
       await verifyTable(page.table);
       expect(page.shouldHaveOneElement, hasLength(1));
       expect(page.shouldBeEmpty, isEmpty);
@@ -64,19 +64,19 @@ void runTests() {
 
     test('private constructor', () async {
       PageForPrivateConstructorTest page =
-          await loader.getInstance(PageForPrivateConstructorTest);
+          await loaderUtil.getInstance(PageForPrivateConstructorTest);
 
       await verifyTable(page.table);
     });
 
     test('private fields', () async {
       PageForPrivateFieldsTest page =
-          await loader.getInstance(PageForPrivateFieldsTest);
+          await loaderUtil.getInstance(PageForPrivateFieldsTest);
       await verifyTable(page.table);
     });
 
     test('Lazy fields', () async {
-      PageForLazyTest page = await loader.getInstance(PageForLazyTest);
+      PageForLazyTest page = await loaderUtil.getInstance(PageForLazyTest);
 
       expect(await (await page.lazyElement()).visibleText, contains('r1c1'));
       await verifyTable(await page.lazyTable());
@@ -86,7 +86,7 @@ void runTests() {
     });
 
     test('has focus', () async {
-      PageForFocusTest page = await loader.getInstance(PageForFocusTest);
+      PageForFocusTest page = await loaderUtil.getInstance(PageForFocusTest);
 
       expect(await page.textfield.isFocused, false);
 
@@ -100,7 +100,7 @@ void runTests() {
     });
 
     test('classes', () async {
-      PageForSimpleTest page = await loader.getInstance(PageForSimpleTest);
+      PageForSimpleTest page = await loaderUtil.getInstance(PageForSimpleTest);
 
       expect(await page.table.table.classes.toList(),
           orderedEquals(['class1', 'class2', 'class3']));
@@ -109,14 +109,14 @@ void runTests() {
     });
 
     test('style', () async {
-      PageForSimpleTest page = await loader.getInstance(PageForSimpleTest);
+      PageForSimpleTest page = await loaderUtil.getInstance(PageForSimpleTest);
 
       expect(await page.table.table.style['color'], 'rgb(128, 0, 128)');
       expect(await page.table.table.style['backgroundColor'], '');
     });
 
     test('computedStyle', () async {
-      PageForSimpleTest page = await loader.getInstance(PageForSimpleTest);
+      PageForSimpleTest page = await loaderUtil.getInstance(PageForSimpleTest);
 
       expect(await page.table.table.computedStyle['color'], 'rgb(128, 0, 128)');
       expect(await page.table.table.computedStyle['background-color'],
@@ -125,21 +125,21 @@ void runTests() {
 
     test('optional with Lazy', () async {
       PageForOptionalFunctionTest page =
-          await loader.getInstance(PageForOptionalFunctionTest);
+          await loaderUtil.getInstance(PageForOptionalFunctionTest);
 
       expect(await page.shouldBeNull(), isNull);
       expect(await page.shouldBeNonNull(), isNotNull);
     });
 
     test('nbsp in text', () async {
-      PageForNbspTest page = await loader.getInstance(PageForNbspTest);
+      PageForNbspTest page = await loaderUtil.getInstance(PageForNbspTest);
       expect(await page.span.visibleText, '   ');
       expect(await page.span.innerText, '');
     });
 
     test('optional', () async {
       PageForOptionalElementTest page =
-          await loader.getInstance(PageForOptionalElementTest);
+          await loaderUtil.getInstance(PageForOptionalElementTest);
       expect(page.doesntExist, isNull);
     });
   });

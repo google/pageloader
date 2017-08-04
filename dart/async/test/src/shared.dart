@@ -18,7 +18,7 @@ import 'dart:async';
 import 'package:test/test.dart';
 import 'package:pageloader/objects.dart';
 
-Loader loader;
+Loader loaderUtil;
 
 abstract class Loader {
   PageLoader loader;
