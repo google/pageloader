@@ -529,17 +529,21 @@ Stream _getElements(PageLoaderElement context, Finder finder,
 
 List<PageLoaderElement> _getElementsSync(PageLoaderElement context,
     Finder finder, List<Filter> filters, bool displayCheck) {
-  var elements = finder.findElementsSync(context);
+  if (finder is SyncFinder) {
+    var elements = finder.findElementsSync(context);
 
-  for (var filter in filters) {
-    elements = filter.filterSync(elements);
-  }
+    for (var filter in filters) {
+      elements = filter.filterSync(elements);
+    }
 
-  if (!displayCheck) {
-    return elements;
-  } else {
-    return elements.where((el) => el.displayedSync).toList();
+    if (!displayCheck) {
+      return elements;
+    } else {
+      return elements.where((el) => el.displayedSync).toList();
+    }
   }
+  throw new PageLoaderException(
+      'Found non-syncified Finder: ${finder.runtimeType}');
 }
 
 Future<PageLoaderElement> _getElement(PageLoaderElement context, Finder finder,

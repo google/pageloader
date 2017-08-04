@@ -11,13 +11,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.test.basic;
+library pageloader.test.sync.sync;
 
 import 'package:test/test.dart';
 import '../shared.dart';
 
 void runTests() {
   group('sync smoke tests', () {
+    // TODO(staats): make these all fail.
     test('globalContext sync functions work', () async {
       expect(loader.globalContext.nameSync, '__document__');
       expect(loader.globalContext.displayedSync, true);

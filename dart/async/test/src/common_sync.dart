@@ -15,10 +15,12 @@ library pageloader.test;
 
 import 'package:test/test.dart';
 
+import 'sync/basic.dart' as basic;
 import 'sync/sync.dart' as sync;
 
 void runTests() {
   group('core PageLoader', () {
+    basic.runTests();
     sync.runTests();
   });
 }
