@@ -42,7 +42,8 @@ void runTests() {
     });
 
     test('setters', () async {
-      PageForSettersTest page = await loaderUtil.getInstance(PageForSettersTest);
+      PageForSettersTest page =
+          await loaderUtil.getInstance(PageForSettersTest);
       expect(page.shouldHaveOneElement, hasLength(1));
       expect(page.loader, loaderUtil.loader);
     });

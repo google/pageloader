@@ -31,7 +31,8 @@ void runTests() {
     });
 
     test('typing should append', () async {
-      PageForTypingTests page = await loaderUtil.getInstance(PageForTypingTests);
+      PageForTypingTests page =
+          await loaderUtil.getInstance(PageForTypingTests);
       expect(await page.text.properties['value'], '');
       await page.text.type('some text');
       expect(await page.text.properties['value'], 'some text');
@@ -40,7 +41,8 @@ void runTests() {
     });
 
     test('value after clear', () async {
-      PageForTypingTests page = await loaderUtil.getInstance(PageForTypingTests);
+      PageForTypingTests page =
+          await loaderUtil.getInstance(PageForTypingTests);
       expect(await page.text.properties['value'], '');
       await page.text.type('some text');
       expect(await page.text.properties['value'], 'some text');

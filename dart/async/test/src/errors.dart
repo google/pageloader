@@ -32,12 +32,13 @@ runTests() {
     });
 
     test('multiple matching element', () {
-      expect(loaderUtil.getInstance(PageForMultipleMatchingElementTest), throws);
+      expect(
+          loaderUtil.getInstance(PageForMultipleMatchingElementTest), throws);
     });
 
     test('multiple matching class element', () {
-      expect(
-          loaderUtil.getInstance(PageForMultipleMatchingClassElementTest), throws);
+      expect(loaderUtil.getInstance(PageForMultipleMatchingClassElementTest),
+          throws);
     });
 
     test('multiple finders', () {

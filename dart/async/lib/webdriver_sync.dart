@@ -248,31 +248,32 @@ class _WebElementPageLoaderElementSync
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (focusBefore) await focus(sync: false);
-        await _syncContext.clear();
+        _syncContext.clear();
         if (blurAfter) await blur(sync: false);
       }, sync);
 
   @override
   Future click({bool sync: true}) =>
-      loader.executeSynced(_syncContext.click, sync);
+      loader.executeSynced(() async => _syncContext.click, sync);
 
   @override
   Future type(String keys,
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       loader.executeSynced(() async {
         if (focusBefore) await focus(sync: false);
-        await _syncContext.sendKeys(keys);
+        _syncContext.sendKeys(keys);
         if (blurAfter) await blur(sync: false);
       }, sync);
 
   @override
   Future blur({bool sync: true}) => loader.executeSynced(
-      () => _syncContext.driver.execute('arguments[0].blur();', [context]),
+      () => _syncContext.driver.execute('arguments[0].blur();', [_syncContext]),
       sync);
 
   @override
   Future focus({bool sync: true}) => loader.executeSynced(
-      () => _syncContext.driver.execute('arguments[0].focus();', [context]),
+      () =>
+          _syncContext.driver.execute('arguments[0].focus();', [_syncContext]),
       sync);
 }
 

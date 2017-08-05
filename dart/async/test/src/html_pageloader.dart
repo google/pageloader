@@ -23,7 +23,8 @@ import 'shared.dart';
 void runTests() {
   group('html PageLoader', () {
     test('value on text', () async {
-      PageForTypingTests page = await loaderUtil.getInstance(PageForTypingTests);
+      PageForTypingTests page =
+          await loaderUtil.getInstance(PageForTypingTests);
       var handlerCalled = new Completer<bool>();
       var node = (page.text as HtmlPageLoaderElement).node as html.InputElement;
       node.onInput.listen((event) {
