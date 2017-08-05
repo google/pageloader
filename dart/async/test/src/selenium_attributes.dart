@@ -36,9 +36,9 @@ void runTests() {
       expect(await page.checkbox.seleniumAttributes['checked'], isNull);
       await page.checkbox.click();
       print('----HERE-----');
-      print(await page.checkbox.properties('checked'));
-      print(await page.checkbox.attibutes('checked'));
-      print(await page.checkbox.seleniumAttributes('checked'));
+      print(await page.checkbox.properties['checked']);
+      print(await page.checkbox.attibutes['checked']);
+      print(await page.checkbox.seleniumAttributes['checked']);
       expect(await page.checkbox.seleniumAttributes['checked'], 'true');
     });
 
