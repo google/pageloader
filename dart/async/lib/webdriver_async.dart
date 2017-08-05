@@ -171,7 +171,7 @@ class _WebDriverMouseAsync implements PageLoaderMouse {
           {PageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
         if (eventTarget == null &&
-            element is _WebElementPageLoaderElementAsync) {
+            element is WebDriverPageLoaderElement) {
           return driver.mouse.moveTo(
               element: element.context, xOffset: xOffset, yOffset: yOffset);
         }
@@ -194,7 +194,7 @@ class _WebDriverMouseAsync implements PageLoaderMouse {
           "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
           "{'button' : arguments[2]}));",
           [
-            (eventTarget as _WebElementPageLoaderElementAsync).context,
+            (eventTarget as WebDriverPageLoaderElement).context,
             type,
             button?.value
           ]);
