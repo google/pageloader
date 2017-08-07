@@ -81,7 +81,7 @@ class WebDriverPageLoader extends BasePageLoader {
         throw new PageLoaderException('Invalid context: $context');
       }
     }
-    return null;
+    return context;
   }
 }
 

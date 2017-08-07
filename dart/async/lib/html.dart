@@ -65,7 +65,7 @@ class HtmlPageLoader extends BasePageLoader {
         throw new PageLoaderException('Invalid context: $context');
       }
     }
-    return null;
+    return context;
   }
 }
 
