@@ -253,8 +253,9 @@ class _WebElementPageLoaderElementSync
       }, sync);
 
   @override
-  Future click({bool sync: true}) =>
-      loader.executeSynced(() async => _syncContext.click, sync);
+  Future click({bool sync: true}) async => loader.executeSynced(() async {
+  _syncContext.click();
+  }, sync);
 
   @override
   Future type(String keys,
@@ -365,7 +366,6 @@ class _ElementSeleniumAttributesSync extends PageLoaderAttributes {
 
   @override
   Future<String> operator [](String name) async => getAttribute(name);
-
   @override
   String getAttribute(String name) => _nodeSync.attributes[name];
 }
