@@ -76,7 +76,7 @@ void runTests() {
 
     test('@Global', () async {
       PageForGlobalTest page = await loaderUtil.getInstance(PageForGlobalTest);
-      expect(page.nested.table, equals(page.table));
+      expect(await page.nested.table.innerText, equals(await page.table.innerText));
     });
   });
 }
