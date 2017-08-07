@@ -15,12 +15,6 @@
 /// PageLoader in WebDriver-based tests.
 part of pageloader.webdriver;
 
-final _unsupportedAsyncException = new PageLoaderException(
-    'Async operations unsupported unless page object loading is asynchronous');
-
-final _unsupportedInteractionException = new PageLoaderException(
-    'Interactions using synchronously loaded page objects are not allowed');
-
 abstract class _BaseWebDriverPageLoaderElementSync
     implements WebDriverPageLoaderElement {
   @override
@@ -68,14 +62,13 @@ abstract class _BaseWebDriverPageLoaderElementSync
 
   @override
   Stream<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
-      throw _unsupportedAsyncException;
+      _fromList(getElementsByCssSync(selector));
 
   @override
   List<WebDriverPageLoaderElement> getElementsByCssSync(String selector) =>
       _syncContext
           .findElements(new sync_wd.By.cssSelector(selector))
-          .map((e) =>
-              new _BaseWebDriverPageLoaderElementSync(_syncContext, loader))
+          .map((e) => new _BaseWebDriverPageLoaderElementSync(e, loader))
           .toList();
 
   @override
@@ -92,7 +85,7 @@ abstract class _BaseWebDriverPageLoaderElementSync
   String toString() => '$runtimeType<${context.toString()}>';
 
   @override
-  Future<bool> get isFocused => throw _unsupportedAsyncException;
+  Future<bool> get isFocused async => isFocusedSync;
 
   @override
   bool get isFocusedSync {
@@ -103,20 +96,21 @@ abstract class _BaseWebDriverPageLoaderElementSync
   }
 
   @override
-  Stream<String> get classes => throw _unsupportedAsyncException;
+  Stream<String> get classes async* {}
 
   @override
   List<String> get classesSync => [];
 
   @override
-  Future<Rectangle> getBoundingClientRect() => throw _unsupportedAsyncException;
+  Future<Rectangle> getBoundingClientRect() async =>
+      getBoundingClientRectSync();
 
   @override
   Rectangle getBoundingClientRectSync() => throw new PageLoaderException(
       '$runtimeType.getBoundingClientRectSync() is unsupported');
 
   @override
-  Future<Rectangle> get offset => throw _unsupportedAsyncException;
+  Future<Rectangle> get offset async => offsetSync;
 
   @override
   Rectangle get offsetSync =>
@@ -125,28 +119,32 @@ abstract class _BaseWebDriverPageLoaderElementSync
   @override
   Future clear(
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
-      throw _unsupportedInteractionException;
+      throw new PageLoaderException('$runtimeType.clear() is unsupported');
 
   @override
-  Future click({bool sync: true}) => throw _unsupportedInteractionException;
+  Future click({bool sync: true}) =>
+      throw new PageLoaderException('$runtimeType.click() is unsupported');
 
   @override
   Future type(String keys,
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
-      throw _unsupportedInteractionException;
+      throw new PageLoaderException('$runtimeType.type() is unsupported');
 
   @override
-  Future<PageLoaderElement> get shadowRoot => throw _unsupportedAsyncException;
+  Future<PageLoaderElement> get shadowRoot =>
+      throw new PageLoaderException('$runtimeType.shadowRoot is unsupported');
 
   @override
   PageLoaderElement get shadowRootSync => throw new PageLoaderException(
       '$runtimeType.shadowRootSync is unsupported');
 
   @override
-  Future blur({bool sync: true}) => throw _unsupportedInteractionException;
+  Future blur({bool sync: true}) =>
+      throw new PageLoaderException('$runtimeType.blur() is unsupported');
 
   @override
-  Future focus({bool sync: true}) => throw _unsupportedInteractionException;
+  Future focus({bool sync: true}) =>
+      throw new PageLoaderException('$runtimeType.focus() is unsupported');
 }
 
 class _WebElementPageLoaderElementSync
@@ -164,8 +162,7 @@ class _WebElementPageLoaderElementSync
             style: new _ElementStyleSync(context));
 
   @override
-  Future<WebDriverPageLoaderElement> get shadowRoot =>
-      throw _unsupportedAsyncException;
+  Future<WebDriverPageLoaderElement> get shadowRoot async => shadowRootSync;
 
   @override
   WebDriverPageLoaderElement get shadowRootSync {
@@ -180,13 +177,13 @@ class _WebElementPageLoaderElementSync
   }
 
   @override
-  Future<String> get name => throw _unsupportedAsyncException;
+  Future<String> get name async => nameSync;
 
   @override
   String get nameSync => _syncContext.name;
 
   @override
-  Future<String> get innerText => throw _unsupportedAsyncException;
+  Future<String> get innerText async => innerTextSync;
 
   @override
   String get innerTextSync => (_syncContext.driver
@@ -194,19 +191,19 @@ class _WebElementPageLoaderElementSync
       .trim();
 
   @override
-  Future<String> get visibleText => throw _unsupportedAsyncException;
+  Future<String> get visibleText async => visibleTextSync;
 
   @override
   String get visibleTextSync => _syncContext.text;
 
   @override
-  Future<bool> get displayed => throw _unsupportedAsyncException;
+  Future<bool> get displayed async => displayedSync;
 
   @override
   bool get displayedSync => _syncContext.displayed;
 
   @override
-  Stream<String> get classes => throw _unsupportedAsyncException;
+  Stream<String> get classes => _fromList(classesSync);
 
   @override
   List<String> get classesSync {
@@ -218,7 +215,8 @@ class _WebElementPageLoaderElementSync
   }
 
   @override
-  Future<Rectangle> getBoundingClientRect() => throw _unsupportedAsyncException;
+  Future<Rectangle> getBoundingClientRect() async =>
+      getBoundingClientRectSync();
 
   @override
   Rectangle getBoundingClientRectSync() {
@@ -229,7 +227,7 @@ class _WebElementPageLoaderElementSync
   }
 
   @override
-  Future<Rectangle> get offset => throw _unsupportedAsyncException;
+  Future<Rectangle> get offset async => offsetSync;
 
   @override
   Rectangle get offsetSync {
@@ -244,6 +242,40 @@ class _WebElementPageLoaderElementSync
     return new Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
+
+  @override
+  Future clear(
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
+      loader.executeSynced(() async {
+        if (focusBefore) await focus(sync: false);
+        _syncContext.clear();
+        if (blurAfter) await blur(sync: false);
+      }, sync);
+
+  @override
+  Future click({bool sync: true}) async => loader.executeSynced(() async {
+        _syncContext.click();
+      }, sync);
+
+  @override
+  Future type(String keys,
+          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
+      loader.executeSynced(() async {
+        if (focusBefore) await focus(sync: false);
+        _syncContext.sendKeys(keys);
+        if (blurAfter) await blur(sync: false);
+      }, sync);
+
+  @override
+  Future blur({bool sync: true}) => loader.executeSynced(
+      () => _syncContext.driver.execute('arguments[0].blur();', [_syncContext]),
+      sync);
+
+  @override
+  Future focus({bool sync: true}) => loader.executeSynced(
+      () =>
+          _syncContext.driver.execute('arguments[0].focus();', [_syncContext]),
+      sync);
 }
 
 class _WebDriverPageLoaderElementSync
@@ -256,19 +288,19 @@ class _WebDriverPageLoaderElementSync
         super._(loader, properties: new _DocumentPropertiesSync(context));
 
   @override
-  Future<String> get name => throw _unsupportedAsyncException;
+  Future<String> get name async => nameSync;
 
   @override
   String get nameSync => '__document__';
 
   @override
-  Future<bool> get displayed => throw _unsupportedAsyncException;
+  Future<bool> get displayed async => displayedSync;
 
   @override
   bool get displayedSync => true;
 
   @override
-  Future<String> get innerText => throw _unsupportedAsyncException;
+  Future<String> get innerText async => innerTextSync;
 
   @override
   String get innerTextSync =>
@@ -276,7 +308,7 @@ class _WebDriverPageLoaderElementSync
           .trim();
 
   @override
-  Future<String> get visibleText => throw _unsupportedAsyncException;
+  Future<String> get visibleText async => visibleTextSync;
 
   @override
   String get visibleTextSync => _rootSync.text;
@@ -297,32 +329,28 @@ class _ShadowRootPageLoaderElementSync
   }
 
   @override
-  Future<String> get name => throw _unsupportedAsyncException;
+  Future<String> get name async => nameSync;
 
   @override
   String get nameSync => '__shadow_root__';
 
   @override
-  Future<String> get visibleText => throw _unsupportedAsyncException;
+  Future<String> get visibleText async => visibleTextSync;
 
   @override
   String get visibleTextSync => _syncContext.text;
 
   @override
-  Future<String> get innerText => throw _unsupportedAsyncException;
+  Future<String> get innerText async => innerTextSync;
 
   @override
   String get innerTextSync => _executeSync('.textContent').trim();
 
   @override
-  Future<bool> get displayed => throw _unsupportedAsyncException;
+  Future<bool> get displayed async => displayedSync;
 
   @override
   bool get displayedSync => _syncContext.displayed;
-
-  @override
-  Stream<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
-      throw _unsupportedAsyncException;
 
   dynamic _executeSync(String script) {
     return _syncContext.driver
@@ -337,8 +365,7 @@ class _ElementSeleniumAttributesSync extends PageLoaderAttributes {
   _ElementSeleniumAttributesSync(this._nodeSync);
 
   @override
-  Future<String> operator [](String name) => throw _unsupportedAsyncException;
-
+  Future<String> operator [](String name) async => getAttribute(name);
   @override
   String getAttribute(String name) => _nodeSync.attributes[name];
 }
@@ -349,7 +376,7 @@ class _ElementAttributesSync extends PageLoaderAttributes {
   _ElementAttributesSync(this._nodeSync);
 
   @override
-  Future<String> operator [](String name) => throw _unsupportedAsyncException;
+  Future<String> operator [](String name) async => getAttribute(name);
 
   @override
   String getAttribute(String name) => (_nodeSync.driver.execute(
@@ -370,7 +397,7 @@ class _ElementPropertiesSync extends PageLoaderAttributes {
   _ElementPropertiesSync(this._nodeSync);
 
   @override
-  Future<String> operator [](String name) => throw _unsupportedAsyncException;
+  Future<String> operator [](String name) async => getAttribute(name);
 
   @override
   String getAttribute(String name) =>
@@ -384,7 +411,7 @@ class _ElementComputedStyleSync extends PageLoaderAttributes {
   _ElementComputedStyleSync(this._nodeSync);
 
   @override
-  Future<String> operator [](String name) => throw _unsupportedAsyncException;
+  Future<String> operator [](String name) async => getAttribute(name);
 
   @override
   String getAttribute(String name) => (_nodeSync.driver.execute(
@@ -399,7 +426,7 @@ class _ElementStyleSync extends PageLoaderAttributes {
   _ElementStyleSync(this._nodeSync);
 
   @override
-  Future<String> operator [](String name) => throw _unsupportedAsyncException;
+  Future<String> operator [](String name) async => getAttribute(name);
 
   @override
   String getAttribute(String name) => (_nodeSync.driver.execute(
@@ -413,7 +440,7 @@ class _DocumentPropertiesSync extends PageLoaderAttributes {
   _DocumentPropertiesSync(this._driverSync);
 
   @override
-  Future<String> operator [](String name) => throw _unsupportedAsyncException;
+  Future<String> operator [](String name) async => getAttribute(name);
 
   @override
   String getAttribute(String name) =>
@@ -426,10 +453,16 @@ class _ShadowRootPropertiesSync extends PageLoaderAttributes {
   _ShadowRootPropertiesSync(this._nodeSync);
 
   @override
-  Future<String> operator [](String name) => throw _unsupportedAsyncException;
+  Future<String> operator [](String name) async => getAttribute(name);
 
   @override
   String getAttribute(String name) => (_nodeSync.driver
           .execute('return arguments[0].shadowRoot.["$name"];', [_nodeSync]))
       ?.toString();
+}
+
+Stream _fromList(List elements) async* {
+  for (var element in elements) {
+    yield element;
+  }
 }

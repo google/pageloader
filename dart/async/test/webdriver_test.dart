@@ -14,15 +14,13 @@
 @TestOn('vm')
 library pageloader.test.webdriver_no_shadow_dom;
 
-import 'package:pageloader/webdriver.dart';
 import 'package:test/test.dart';
 import 'package:webdriver/io.dart' show WebDriver;
 
-import 'setup/webdriver_test_setup.dart' show runTests;
+import 'setup/webdriver_test_setup.dart' show AsyncLoader, runTests;
 
 void main() {
   runTests(pageLoaderFactory, 'webdriver_test_page.html');
 }
 
-PageLoader pageLoaderFactory(WebDriver driver) =>
-    new WebDriverPageLoader(driver);
+AsyncLoader pageLoaderFactory(WebDriver driver) => new AsyncLoader(driver);

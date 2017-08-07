@@ -56,7 +56,7 @@ class _DisableDisplayedCheck {
 
 // Finder Annotations
 
-class ById implements Finder {
+class ById implements SyncFinder {
   final String _id;
 
   const ById(this._id);
@@ -66,10 +66,14 @@ class ById implements Finder {
       context.getElementsByCss('#$_id');
 
   @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      context.getElementsByCssSync('#$_id');
+
+  @override
   String toString() => '@ById("$_id")';
 }
 
-class ByTagName implements Finder {
+class ByTagName extends SyncFinder {
   final String _name;
 
   const ByTagName(this._name);
@@ -79,10 +83,14 @@ class ByTagName implements Finder {
       context.getElementsByCss(_name);
 
   @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      context.getElementsByCssSync(_name);
+
+  @override
   String toString() => '@ByTagName("$_name")';
 }
 
-class ByCss implements Finder {
+class ByCss implements SyncFinder {
   final String _locator;
 
   const ByCss(this._locator);
@@ -90,6 +98,10 @@ class ByCss implements Finder {
   @override
   Stream<PageLoaderElement> findElements(PageLoaderElement context) =>
       context.getElementsByCss(_locator);
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      context.getElementsByCssSync(_locator);
 
   @override
   String toString() => '@ByCss("$_locator")';
@@ -104,9 +116,13 @@ class FirstByCss extends ByCss {
   @override
   Stream<PageLoaderElement> findElements(PageLoaderElement context) =>
       super.findElements(context).take(1);
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      [super.findElementsSync(context)[0]];
 }
 
-class ByClass implements Finder {
+class ByClass implements SyncFinder {
   final String _class;
 
   const ByClass(this._class);
@@ -115,12 +131,16 @@ class ByClass implements Finder {
   Stream<PageLoaderElement> findElements(PageLoaderElement context) =>
       context.getElementsByCss('.$_class');
 
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      context.getElementsByCssSync('.$_class');
+
   String toString() => '@ByClass("$_class")';
 }
 
 /// Finds elements with the given tag name. Unlike [ByTagName],
 /// this will also find the current Root if it is the given tag.
-class EnsureTag implements Finder {
+class EnsureTag implements SyncFinder {
   final String _name;
 
   const EnsureTag(this._name);
@@ -131,6 +151,14 @@ class EnsureTag implements Finder {
       yield context;
     }
     yield* context.getElementsByCss(this._name);
+  }
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) {
+    if (context.nameSync == this._name) {
+      return [context];
+    }
+    return context.getElementsByCssSync(this._name);
   }
 
   @override
@@ -162,13 +190,17 @@ class InShadowDom implements Finder {
 /// current page object.
 const root = const _Root();
 
-class _Root implements Finder {
+class _Root implements SyncFinder {
   const _Root();
 
   @override
   Stream<PageLoaderElement> findElements(PageLoaderElement context) async* {
     yield context;
   }
+
+  @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
+      [context];
 
   @override
   String toString() => '@root';
@@ -230,7 +262,7 @@ class Chain implements Finder {
 
 /// Evaluates the nested annotation from the global context for the PageLoader
 /// instance being used.
-class Global implements Finder {
+class Global implements SyncFinder {
   final Finder _finder;
 
   const Global([this._finder = root]);
@@ -240,13 +272,25 @@ class Global implements Finder {
       _finder.findElements(context.loader.globalContext);
 
   @override
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) {
+    if (_finder is SyncFinder) {
+      // Hint for IntelliJ.
+      return (_finder as SyncFinder)
+          .findElementsSync(context.loader.globalContext);
+    }
+
+    throw new PageLoaderException(
+        '@Global uses non-SyncFinder: ${_finder.runtimeType}');
+  }
+
+  @override
   String toString() => '@Global($_finder)';
 }
 
 // Filters
 
 /// Filters element based on visibility.
-class IsDisplayed extends ElementFilter {
+class IsDisplayed extends SyncElementFilter {
   final bool _displayed;
 
   const IsDisplayed([this._displayed = true]);
@@ -256,12 +300,16 @@ class IsDisplayed extends ElementFilter {
       (await element.displayed) == _displayed;
 
   @override
+  bool keepSync(PageLoaderElement element) =>
+      element.displayedSync == _displayed;
+
+  @override
   String toString() => '@IsDisplayed($_displayed)';
 }
 
 /// Keeps only [PageLoaderElement]s that have the given attribute with the
 /// given value.
-class WithAttribute extends ElementFilter {
+class WithAttribute extends SyncElementFilter {
   final String _attribute;
   final String _value;
 
@@ -271,12 +319,16 @@ class WithAttribute extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.attributes[_attribute]) == _value;
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      element.attributes.getAttribute(_attribute) == _value;
+
   String toString() => '@WithAttribute($_attribute, $_value)';
 }
 
 /// Keeps only [PageLoaderElement]s that have the given property with the
 /// given value.
-class WithProperty extends ElementFilter {
+class WithProperty extends SyncElementFilter {
   final String _property;
   final String _value;
 
@@ -286,6 +338,10 @@ class WithProperty extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.properties[_property]) == _value;
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      element.properties.getAttribute(_property) == _value;
+
   String toString() => '@WithProperty($_property, $_value)';
 }
 
@@ -294,7 +350,7 @@ class WithProperty extends ElementFilter {
 ///
 /// Note: this is primarily inteaded for transition to separate WithAttribute
 /// WithProperty Filters that differentiate between attributes/properties.
-class WithSeleniumAttribute extends ElementFilter {
+class WithSeleniumAttribute extends SyncElementFilter {
   final String _attribute;
   final String _value;
 
@@ -304,11 +360,15 @@ class WithSeleniumAttribute extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.seleniumAttributes[_attribute]) == _value;
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      element.seleniumAttributes.getAttribute(_attribute) == _value;
+
   String toString() => '@WithSeleniumAttribute($_attribute, $_value)';
 }
 
 /// Keeps only [PageLoaderElement]s that correspond to the given tag.
-class IsTag extends ElementFilter {
+class IsTag extends SyncElementFilter {
   final String _name;
 
   const IsTag(this._name);
@@ -317,11 +377,14 @@ class IsTag extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.name) == _name;
 
+  @override
+  bool keepSync(PageLoaderElement element) => element.nameSync == _name;
+
   String toString() => '@IsTag("$_name")';
 }
 
 /// Keeps only [PageLoaderElement]s with the given class.
-class WithClass extends ElementFilter {
+class WithClass extends SyncElementFilter {
   final String _class;
 
   const WithClass(this._class);
@@ -330,11 +393,15 @@ class WithClass extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       await element.classes.contains(_class);
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      element.classesSync.contains(_class);
+
   String toString() => '@WithClass($_class)';
 }
 
 /// Keeps only [PageLoaderElement]s with the given inner text.
-class WithInnerText extends ElementFilter {
+class WithInnerText extends SyncElementFilter {
   final String _text;
 
   const WithInnerText(this._text);
@@ -343,11 +410,15 @@ class WithInnerText extends ElementFilter {
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.innerText).contains(_text);
 
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      element.innerTextSync.contains(_text);
+
   String toString() => '@WithInnerText($_text)';
 }
 
 /// Keeps only [PageLoaderElement]s with the given visible text.
-class WithVisibleText extends ElementFilter {
+class WithVisibleText extends SyncElementFilter {
   final String _text;
 
   const WithVisibleText(this._text);
@@ -355,6 +426,10 @@ class WithVisibleText extends ElementFilter {
   @override
   Future<bool> keep(PageLoaderElement element) async =>
       (await element.visibleText).contains(_text);
+
+  @override
+  bool keepSync(PageLoaderElement element) =>
+      element.visibleTextSync.contains(_text);
 
   String toString() => '@WithVisibleText($_text)';
 }

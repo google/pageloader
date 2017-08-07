@@ -18,6 +18,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:mirrors' show currentMirrorSystem;
 
+import 'package:pageloader/webdriver.dart';
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 import 'package:webdriver/io.dart' show Capabilities, WebDriver, createDriver;
@@ -31,12 +32,12 @@ void runTests(pageLoaderFactory, String testPage) {
   setUp(() async {
     driver = await _createTestDriver();
     await driver.get(_testPagePath(testPage));
-    shared.loader = pageLoaderFactory(driver);
+    shared.loaderUtil = pageLoaderFactory(driver);
   });
 
   tearDown(() async {
     await driver.quit();
-    shared.loader = null;
+    shared.loaderUtil = null;
   });
 
   plt.runTests();
@@ -77,4 +78,12 @@ Future<WebDriver> _createTestDriver() {
   }
 
   return createDriver(desired: capabilities);
+}
+
+class AsyncLoader extends shared.Loader {
+  final WebDriverPageLoader loader;
+  AsyncLoader(WebDriver driver) : loader = new WebDriverPageLoader(driver);
+
+  Future<T> getInstance<T>(Type type, [dynamic context]) =>
+      loader.getInstance(type);
 }

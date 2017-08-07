@@ -21,7 +21,7 @@ void runTests() {
   group('typing tests', () {
     test('Type into textarea', () async {
       PageForTextAreaTypingText page =
-          await loader.getInstance(PageForTextAreaTypingText);
+          await loaderUtil.getInstance(PageForTextAreaTypingText);
       await page.textArea.type('some');
       expect(await page.textArea.properties['value'], 'some');
       await page.textArea.type(' string');
@@ -31,7 +31,8 @@ void runTests() {
     });
 
     test('typing should append', () async {
-      PageForTypingTests page = await loader.getInstance(PageForTypingTests);
+      PageForTypingTests page =
+          await loaderUtil.getInstance(PageForTypingTests);
       expect(await page.text.properties['value'], '');
       await page.text.type('some text');
       expect(await page.text.properties['value'], 'some text');
@@ -40,7 +41,8 @@ void runTests() {
     });
 
     test('value after clear', () async {
-      PageForTypingTests page = await loader.getInstance(PageForTypingTests);
+      PageForTypingTests page =
+          await loaderUtil.getInstance(PageForTypingTests);
       expect(await page.text.properties['value'], '');
       await page.text.type('some text');
       expect(await page.text.properties['value'], 'some text');

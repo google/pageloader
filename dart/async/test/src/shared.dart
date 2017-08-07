@@ -13,10 +13,18 @@
 
 library pageloader.test.shared;
 
+import 'dart:async';
+
 import 'package:test/test.dart';
 import 'package:pageloader/objects.dart';
 
-PageLoader loader;
+Loader loaderUtil;
+
+abstract class Loader {
+  PageLoader loader;
+
+  Future<T> getInstance<T>(Type type, [dynamic context]);
+}
 
 class PageForSimpleTest {
   @inject

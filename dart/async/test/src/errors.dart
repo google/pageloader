@@ -20,63 +20,64 @@ import 'shared.dart';
 runTests() {
   group('error tests', () {
     test('exception on finals', () {
-      expect(loader.getInstance(PageForExceptionOnFinalsTest), throws);
+      expect(loaderUtil.getInstance(PageForExceptionOnFinalsTest), throws);
     });
 
     test('no matching element', () {
-      expect(loader.getInstance(PageForNoMatchingElementTest), throws);
+      expect(loaderUtil.getInstance(PageForNoMatchingElementTest), throws);
     });
 
     test('no matching class element', () {
-      expect(loader.getInstance(PageForNoMatchingClassElementTest), throws);
+      expect(loaderUtil.getInstance(PageForNoMatchingClassElementTest), throws);
     });
 
     test('multiple matching element', () {
-      expect(loader.getInstance(PageForMultipleMatchingElementTest), throws);
+      expect(
+          loaderUtil.getInstance(PageForMultipleMatchingElementTest), throws);
     });
 
     test('multiple matching class element', () {
-      expect(
-          loader.getInstance(PageForMultipleMatchingClassElementTest), throws);
+      expect(loaderUtil.getInstance(PageForMultipleMatchingClassElementTest),
+          throws);
     });
 
     test('multiple finders', () {
-      expect(loader.getInstance(PageForMultipleFinderTest), throws);
+      expect(loaderUtil.getInstance(PageForMultipleFinderTest), throws);
     });
 
     test('multiple class finders', () {
-      expect(loader.getInstance(PageForMultipleClassFinderTest), throws);
+      expect(loaderUtil.getInstance(PageForMultipleClassFinderTest), throws);
     });
 
     test('filter without finder', () {
-      expect(loader.getInstance(PageForFilterWithoutFinderTest), throws);
+      expect(loaderUtil.getInstance(PageForFilterWithoutFinderTest), throws);
     });
 
     test('invalid constructor', () {
-      expect(loader.getInstance(PageForInvalidConstructorTest), throws);
+      expect(loaderUtil.getInstance(PageForInvalidConstructorTest), throws);
     });
 
     test('ambiguous element test', () {
-      expect(loader.getInstance(PageForAmbiguousTest), throws);
+      expect(loaderUtil.getInstance(PageForAmbiguousTest), throws);
     });
 
     test('private setters', () {
-      expect(loader.getInstance(PageForPrivateSettersTest), throws);
+      expect(loaderUtil.getInstance(PageForPrivateSettersTest), throws);
     });
 
     test('static field', () {
-      expect(loader.getInstance(PageForStaticFieldsTest), throws);
+      expect(loaderUtil.getInstance(PageForStaticFieldsTest), throws);
     });
 
     test('static setter', () {
-      expect(loader.getInstance(PageForStaticSettersTest), throws);
+      expect(loaderUtil.getInstance(PageForStaticSettersTest), throws);
     });
   });
 
   group('check exception stack traces', () {
     test('ensure stack trace from getInstance includes test', () async {
       try {
-        await loader.getInstance(PageForNoMatchingElementTest);
+        await loaderUtil.getInstance(PageForNoMatchingElementTest);
         fail('expected exception');
       } on PageLoaderException catch (e, s) {
         expect(s.toString(), contains('errors.dart'));

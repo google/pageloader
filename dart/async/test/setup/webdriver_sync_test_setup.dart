@@ -14,15 +14,17 @@
 @TestOn('vm')
 library pageloader.test.webdriver_test_setup;
 
+import 'dart:async';
 import 'dart:io';
 import 'dart:mirrors' show currentMirrorSystem;
 
+import 'package:pageloader/webdriver.dart';
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 import 'package:webdriver/sync_io.dart'
     show Capabilities, WebDriver, createDriver;
 
-import '../src/common_sync.dart' as plt;
+import '../src/common.dart' as plt;
 import '../src/shared.dart' as shared;
 
 void runTests(pageLoaderFactory, String testPage) {
@@ -31,12 +33,12 @@ void runTests(pageLoaderFactory, String testPage) {
   setUp(() async {
     driver = _createTestDriver();
     driver.get(_testPagePath(testPage));
-    shared.loader = pageLoaderFactory(driver);
+    shared.loaderUtil = pageLoaderFactory(driver);
   });
 
   tearDown(() async {
     driver.quit();
-    shared.loader = null;
+    shared.loaderUtil = null;
   });
 
   plt.runTests();
@@ -77,4 +79,12 @@ WebDriver _createTestDriver() {
   }
 
   return createDriver(desired: capabilities);
+}
+
+class SyncLoader extends shared.Loader {
+  final WebDriverPageLoader loader;
+  SyncLoader(WebDriver driver) : loader = new WebDriverPageLoader.sync(driver);
+
+  Future<T> getInstance<T>(Type type, [dynamic context]) async =>
+      loader.getInstanceSync(type);
 }

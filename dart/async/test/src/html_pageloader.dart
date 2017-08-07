@@ -23,7 +23,8 @@ import 'shared.dart';
 void runTests() {
   group('html PageLoader', () {
     test('value on text', () async {
-      PageForTypingTests page = await loader.getInstance(PageForTypingTests);
+      PageForTypingTests page =
+          await loaderUtil.getInstance(PageForTypingTests);
       var handlerCalled = new Completer<bool>();
       var node = (page.text as HtmlPageLoaderElement).node as html.InputElement;
       node.onInput.listen((event) {
@@ -39,7 +40,7 @@ void runTests() {
       var data = 'my data';
       var list = <int>[];
       html.document.body.onKeyPress.listen((evt) => list.add(evt.charCode));
-      await loader.globalContext.type(data);
+      await loaderUtil.loader.globalContext.type(data);
       expect(new String.fromCharCodes(list), equals(data));
     }, onPlatform: {'!js': new Skip('Key events do not work on dartium')});
   }, onPlatform: {'!browser': new Skip('In-browser specific tests')});

@@ -21,33 +21,33 @@ void runTests() {
   group('shadow dom tests', () {
     test('shadow dom', () async {
       PageForShadowDomTest page =
-          await loader.getInstance(PageForShadowDomTest);
+          await loaderUtil.getInstance(PageForShadowDomTest);
 
       expect(await page.button1.button.visibleText, contains('button 1'));
       expect(await page.button1.button.visibleText, contains('some'));
       expect(await page.button2.button.visibleText, contains('button 2'));
       expect(await page.button2.button.visibleText, contains('some'));
-      if (loader.useShadowDom) {
+      if (loaderUtil.loader.useShadowDom) {
         expect(page.shouldBeEmpty, hasLength(0));
       }
     }, testOn: 'browser');
 
     test('WithVisibleText in shadow dom', () async {
       PageForShadowDomWithVisibleTextTest page =
-          await loader.getInstance(PageForShadowDomWithVisibleTextTest);
+          await loaderUtil.getInstance(PageForShadowDomWithVisibleTextTest);
 
       expect(await page.button1.visibleText, contains('button 1'));
       expect(await page.button1.visibleText, contains('some'));
     }, testOn: 'browser');
 
     test('WithInnerText in shadow dom', () async {
-      if (!loader.useShadowDom) {
+      if (!loaderUtil.loader.useShadowDom) {
         // if shadow dom is disabled, then visibleText and innerText are
         // identical
         return;
       }
       PageForShadowDomWithInnerTextTest page =
-          await loader.getInstance(PageForShadowDomWithInnerTextTest);
+          await loaderUtil.getInstance(PageForShadowDomWithInnerTextTest);
 
       expect(page.shouldBeEmpty, isEmpty);
       expect(await page.button1.visibleText, contains('button 1'));
@@ -58,7 +58,7 @@ void runTests() {
 
     test('text methods on shadow root', () async {
       PageForTextOnShadowRootTest page =
-          await loader.getInstance(PageForTextOnShadowRootTest);
+          await loaderUtil.getInstance(PageForTextOnShadowRootTest);
 
       expect(page.buttons, hasLength(3));
       expect(await (await page.buttons[1].shadowRoot).visibleText,
@@ -69,7 +69,7 @@ void runTests() {
           contains('button 2'));
       expect(await (await page.buttons[2].shadowRoot).visibleText,
           contains('some'));
-      if (loader.useShadowDom) {
+      if (loaderUtil.loader.useShadowDom) {
         expect(await (await page.buttons[1].shadowRoot).innerText,
             isNot(contains('button 1')));
       } else {
@@ -78,7 +78,7 @@ void runTests() {
       }
       expect(
           await (await page.buttons[1].shadowRoot).innerText, contains('some'));
-      if (loader.useShadowDom) {
+      if (loaderUtil.loader.useShadowDom) {
         expect(await (await page.buttons[2].shadowRoot).innerText,
             isNot(contains('button 2')));
       } else {

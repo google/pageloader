@@ -16,6 +16,7 @@ library pageloader.test.html_test_setup;
 import 'dart:async';
 
 import 'package:test/test.dart';
+import 'package:pageloader/html.dart';
 
 import '../src/common.dart' as plt;
 import '../src/html_pageloader.dart' as html_test;
@@ -23,11 +24,19 @@ import '../src/shared.dart' as shared;
 
 void runTests(pageLoaderFactory) {
   setUp(() {
-    shared.loader = pageLoaderFactory();
+    shared.loaderUtil = pageLoaderFactory();
   });
 
   plt.runTests();
   html_test.runTests();
+}
+
+class HtmlLoader extends shared.Loader {
+  final HtmlPageLoader loader;
+  HtmlLoader(this.loader);
+
+  Future<T> getInstance<T>(Type type, [dynamic context]) =>
+      loader.getInstance(type);
 }
 
 Future syncFn(Future fn()) async {

@@ -50,7 +50,14 @@ class HtmlPageLoader extends BasePageLoader {
   }
 
   @override
-  Future<T> getInstance<T>(Type type, [dynamic context]) async {
+  Future<T> getInstance<T>(Type type, [dynamic context]) async =>
+      getInstanceInternal(type, _getContext(context));
+
+  @override
+  T getInstanceSync<T>(Type type, [dynamic context]) =>
+      getInstanceInternalSync(type, _getContext(context));
+
+  dynamic _getContext(dynamic context) {
     if (context != null) {
       if (context is Node) {
         context = new HtmlPageLoaderElement(context, this);
@@ -58,7 +65,7 @@ class HtmlPageLoader extends BasePageLoader {
         throw new PageLoaderException('Invalid context: $context');
       }
     }
-    return getInstanceInternal(type, context);
+    return context;
   }
 }
 
@@ -329,7 +336,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   String get nameSync => node.tagName.toLowerCase();
 
   @override
-  Future<bool> get displayed async => displayed;
+  Future<bool> get displayed async => displayedSync;
 
   @override
   bool get displayedSync => node.getComputedStyle().display != 'none';

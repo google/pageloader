@@ -37,6 +37,8 @@ abstract class PageLoader {
 
   Future<T> getInstance<T>(Type type, [dynamic context]);
 
+  T getInstanceSync<T>(Type type, [dynamic context]);
+
   PageLoaderMouse get mouse;
 }
 
@@ -192,10 +194,30 @@ abstract class Finder {
   Stream<PageLoaderElement> findElements(PageLoaderElement context);
 }
 
+/// SyncFinders can find elements synchronously.
+abstract class SyncFinder implements Finder {
+  const SyncFinder();
+
+  /// Delegates findElements to findElementsSync.
+  @override
+  Stream<PageLoaderElement> findElements(PageLoaderElement context);
+
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context);
+}
+
 abstract class Filter {
   const Filter();
 
   Stream<PageLoaderElement> filter(Stream<PageLoaderElement> elements);
+}
+
+/// SyncFilter can filter elements synchronously.
+abstract class SyncFilter implements Filter {
+  const SyncFilter();
+
+  Stream<PageLoaderElement> filter(Stream<PageLoaderElement> elements);
+
+  List<PageLoaderElement> filterSync(List<PageLoaderElement> elements);
 }
 
 abstract class ElementFilter implements Filter {
@@ -213,6 +235,29 @@ abstract class ElementFilter implements Filter {
   Future<bool> keep(PageLoaderElement element);
 }
 
+/// SyncElementFilter can filter elements synchronously.
+abstract class SyncElementFilter implements ElementFilter, SyncFilter {
+  const SyncElementFilter();
+
+  @override
+  Stream<PageLoaderElement> filter(Stream<PageLoaderElement> elements) async* {
+    for (PageLoaderElement el in await elements.toList()) {
+      if (await keep(el)) {
+        yield el;
+      }
+    }
+  }
+
+  @override
+  List<PageLoaderElement> filterSync(List<PageLoaderElement> elements) =>
+      elements.where((e) => keepSync(e)).toList();
+
+  @override
+  Future<bool> keep(PageLoaderElement element);
+
+  bool keepSync(PageLoaderElement element);
+}
+
 class PageLoaderException {
   final String message;
 
@@ -220,4 +265,10 @@ class PageLoaderException {
 
   @override
   String toString() => 'PageLoaderException: $message';
+}
+
+Stream<PageLoaderElement> _fromList(List<PageLoaderElement> nodes) async* {
+  for (var node in nodes) {
+    yield node;
+  }
 }

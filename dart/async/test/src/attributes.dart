@@ -20,7 +20,7 @@ import 'shared.dart';
 void runTests() {
   group('attributes', () {
     test('style', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       // According to the spec, red below should be returned as an
       // RGBA value.
       expect(await page.divWithStyle.attributes['style'],
@@ -32,26 +32,26 @@ void runTests() {
     });
 
     test('checked', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.checkbox.attributes['checked'], isNull);
       await page.checkbox.click();
       expect(await page.checkbox.attributes['checked'], isNull);
     });
 
     test('disabled', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.readOnly.attributes['disabled'], '');
       expect(await page.text.attributes['disabled'], isNull);
     });
 
     test('not a property', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(
           await page.table.attributes['non-standard'], 'a non standard attr');
     });
 
     test('option values', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
 
       expect(await page.option1.attributes['value'], 'value 1');
       expect(await page.option1.attributes['VaLuE'], 'value 1');
@@ -60,13 +60,13 @@ void runTests() {
     });
 
     test('option selected', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       await page.option2.click();
       expect(await page.select1.attributes['value'], isNull);
     });
 
     test('selected on checkbox', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.checkbox.attributes['selected'], isNull);
       expect(await page.checkbox.attributes['SeLeCtEd'], isNull);
       await page.checkbox.click();
@@ -75,7 +75,7 @@ void runTests() {
     });
 
     test('selected on radio', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.radio.attributes['selected'], isNull);
       expect(await page.radio.attributes['SeLeCtEd'], isNull);
       await page.radio.click();
@@ -84,23 +84,23 @@ void runTests() {
     });
 
     test('href on a', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.anchor.attributes['href'], 'test.html');
     });
 
     test('src on img', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.img.attributes['src'], 'test.png');
     });
 
     test('class/className', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.table.attributes['class'], 'class1 class2 class3');
       expect(await page.table.attributes['className'], isNull);
     });
 
     test('readonly/readOnly', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.readOnly.attributes['readonly'], '');
       expect(await page.readOnly.attributes['readOnly'], '');
       expect(await page.text.attributes['readonly'], isNull);
@@ -108,7 +108,7 @@ void runTests() {
     });
 
     test('value on text', () async {
-      var page = await loader.getInstance(PageForAttributesTests);
+      var page = await loaderUtil.getInstance(PageForAttributesTests);
       expect(await page.text.attributes['value'], isNull);
       await page.text.type('some text');
       expect(await page.text.attributes['value'], isNull);

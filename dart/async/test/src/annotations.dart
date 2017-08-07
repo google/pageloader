@@ -21,48 +21,48 @@ import 'shared.dart';
 void runTests() {
   group('annotation tests', () {
     test('EnsureTag annotation', () async {
-      TableForEnsureTag table = await loader.getInstance(TableForEnsureTag);
+      TableForEnsureTag table = await loaderUtil.getInstance(TableForEnsureTag);
       expect(await table.table.name, 'table');
       await verifyRows(table.rows);
 
-      table = await loader.getInstance(TableForEnsureTag, table.table);
+      table = await loaderUtil.getInstance(TableForEnsureTag, table.table);
       expect(await table.table.name, 'table');
       await verifyRows(table.rows);
     });
 
     test('FirstByCss', () async {
       PageForFirstByCssTest page =
-          await loader.getInstance(PageForFirstByCssTest);
+          await loaderUtil.getInstance(PageForFirstByCssTest);
       expect(await page.element.visibleText, 'r1c1');
     });
 
     test('WithSeleniumAttribute', () async {
       PageForWithSeleniumAttributeTest page =
-          await loader.getInstance(PageForWithSeleniumAttributeTest);
+          await loaderUtil.getInstance(PageForWithSeleniumAttributeTest);
       expect(await page.element.seleniumAttributes['type'], 'checkbox');
     });
 
     test('WithAttribute', () async {
       PageForWithAttributeTest page =
-          await loader.getInstance(PageForWithAttributeTest);
+          await loaderUtil.getInstance(PageForWithAttributeTest);
       expect(await page.element.attributes['type'], 'checkbox');
     });
 
     test('WithProperty', () async {
       PageForWithPropertyTest page =
-          await loader.getInstance(PageForWithPropertyTest);
+          await loaderUtil.getInstance(PageForWithPropertyTest);
       expect(await page.element.properties['type'], 'checkbox');
     });
 
     test('WithClass', () async {
-      var page = await loader.getInstance(PageForWithClassTest);
+      var page = await loaderUtil.getInstance(PageForWithClassTest);
       expect(await page.element.seleniumAttributes['type'], 'checkbox');
       expect(await page.element.classes.toList(),
           unorderedEquals(['with-class-test', 'class1', 'class2']));
     });
 
     test('Chain', () async {
-      PageForChainTest page = await loader.getInstance(PageForChainTest);
+      PageForChainTest page = await loaderUtil.getInstance(PageForChainTest);
 
       expect(await page.outerDivsText.toList(),
           anyElement(contains('outer div 1')));
@@ -75,8 +75,9 @@ void runTests() {
     }, testOn: 'browser');
 
     test('@Global', () async {
-      PageForGlobalTest page = await loader.getInstance(PageForGlobalTest);
-      expect(page.nested.table, equals(page.table));
+      PageForGlobalTest page = await loaderUtil.getInstance(PageForGlobalTest);
+      expect(await page.nested.table.innerText,
+          equals(await page.table.innerText));
     });
   });
 }
