@@ -275,7 +275,8 @@ class Global implements SyncFinder {
   List<PageLoaderElement> findElementsSync(PageLoaderElement context) {
     if (_finder is SyncFinder) {
       // Hint for IntelliJ.
-      return (_finder as SyncFinder).findElementsSync(context.loader.globalContext);
+      return (_finder as SyncFinder)
+          .findElementsSync(context.loader.globalContext);
     }
 
     throw new PageLoaderException(
