@@ -254,8 +254,8 @@ class _WebElementPageLoaderElementSync
 
   @override
   Future click({bool sync: true}) async => loader.executeSynced(() async {
-  _syncContext.click();
-  }, sync);
+        _syncContext.click();
+      }, sync);
 
   @override
   Future type(String keys,

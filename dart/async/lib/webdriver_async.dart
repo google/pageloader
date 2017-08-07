@@ -170,8 +170,7 @@ class _WebDriverMouseAsync implements PageLoaderMouse {
   Future moveTo(PageLoaderElement element, int xOffset, int yOffset,
           {PageLoaderElement eventTarget, bool sync: true}) =>
       loader.executeSynced(() {
-        if (eventTarget == null &&
-            element is WebDriverPageLoaderElement) {
+        if (eventTarget == null && element is WebDriverPageLoaderElement) {
           return driver.mouse.moveTo(
               element: element.context, xOffset: xOffset, yOffset: yOffset);
         }
