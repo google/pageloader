@@ -330,7 +330,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   }
 
   @override
-  Future<String> get name async => name;
+  Future<String> get name async => nameSync;
 
   @override
   String get nameSync => node.tagName.toLowerCase();
