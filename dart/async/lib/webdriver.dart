@@ -29,11 +29,9 @@ export 'src/interfaces.dart';
 part 'webdriver_async.dart';
 part 'webdriver_sync.dart';
 
-sync_wd.WebDriver _fromAsyncDriver(async_wd.WebDriver driver) =>
-    sync_wd.fromExistingSession(driver.id, uri: driver.uri);
-
 class WebDriverPageLoader extends BasePageLoader {
-  async_wd.WebDriver get driver => syncDriver.asyncDriver;
+  async_wd.WebDriver get driver => asyncDriver ?? syncDriver.asyncDriver;
+  final async_wd.WebDriver asyncDriver;
   final sync_wd.WebDriver syncDriver;
 
   WebDriverPageLoaderElement _globalContext;
@@ -45,7 +43,8 @@ class WebDriverPageLoader extends BasePageLoader {
   WebDriverPageLoader(async_wd.SearchContext globalContext,
       {bool useShadowDom: true,
       SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
-      : this.syncDriver = _fromAsyncDriver(globalContext.driver),
+      : this.asyncDriver = globalContext.driver,
+        this.syncDriver = null,
         super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
     this._mouse = new _WebDriverMouseAsync(this);
     this._globalContext =
@@ -56,6 +55,7 @@ class WebDriverPageLoader extends BasePageLoader {
       {bool useShadowDom: true,
       SyncedExecutionFn executeSyncedFn: noOpExecuteSyncedFn})
       : this.syncDriver = globalContext.driver,
+        this.asyncDriver = null,
         super(useShadowDom: useShadowDom, executeSyncedFn: executeSyncedFn) {
     this._mouse = new _WebDriverMouseAsync(this); // Not synchronous, but OK.
     this._globalContext =
@@ -77,10 +77,7 @@ class WebDriverPageLoader extends BasePageLoader {
     if (context != null) {
       if (context is async_wd.SearchContext) {
         context = new _BaseWebDriverPageLoaderElementAsync(context, this);
-      } else if (context is sync_wd.SearchContext) {
-        context = new _BaseWebDriverPageLoaderElementSync(context, this);
-      } else if (context is! _BaseWebDriverPageLoaderElementAsync &&
-          context is! _BaseWebDriverPageLoaderElementSync) {
+      } else if (context is! _BaseWebDriverPageLoaderElementAsync) {
         throw new PageLoaderException('Invalid context: $context');
       }
     }
