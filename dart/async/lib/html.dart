@@ -202,7 +202,7 @@ abstract class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   List<HtmlPageLoaderElement> getElementsByCssSync(String selector) => node
       .querySelectorAll(selector)
-      .map((n) => new HtmlPageLoaderElement(node, loader))
+      .map((n) => new HtmlPageLoaderElement(n, loader))
       .toList();
 
   Stream<HtmlPageLoaderElement> _fromNodeList(List<Node> nodes) async* {
