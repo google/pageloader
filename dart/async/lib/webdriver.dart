@@ -77,7 +77,10 @@ class WebDriverPageLoader extends BasePageLoader {
     if (context != null) {
       if (context is async_wd.SearchContext) {
         context = new _BaseWebDriverPageLoaderElementAsync(context, this);
-      } else if (context is! _BaseWebDriverPageLoaderElementAsync) {
+      } else if (context is sync_wd.SearchContext) {
+        context = new _BaseWebDriverPageLoaderElementSync(context, this);
+      } else if (context is! _BaseWebDriverPageLoaderElementAsync &&
+          context is! _BaseWebDriverPageLoaderElementSync) {
         throw new PageLoaderException('Invalid context: $context');
       }
     }
