@@ -118,8 +118,10 @@ class FirstByCss extends ByCss {
       super.findElements(context).take(1);
 
   @override
-  List<PageLoaderElement> findElementsSync(PageLoaderElement context) =>
-      [super.findElementsSync(context)[0]];
+  List<PageLoaderElement> findElementsSync(PageLoaderElement context) {
+    final elements = super.findElementsSync(context);
+    return elements.sublist(0, elements.length > 0 ? 1 : 0);
+  }
 }
 
 class ByClass implements SyncFinder {
