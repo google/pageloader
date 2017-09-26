@@ -89,24 +89,26 @@ class _HtmlMouse implements PageLoaderMouse {
 
   @override
   void down(int button,
-      {_ElementPageLoaderElement eventTarget, bool sync: true}) {
-    dispatchEvent('mousedown', eventTarget, button);
+      {PageLoaderElement eventTarget, bool sync: true}) {
+    dispatchEvent('mousedown', eventTarget as _ElementPageLoaderElement, button);
     loader.sync(sync);
   }
 
   @override
-  void moveTo(_ElementPageLoaderElement element, int xOffset, int yOffset,
-      {_ElementPageLoaderElement eventTarget, bool sync: true}) {
-    clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
-    clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
-    dispatchEvent('mousemove', eventTarget);
+  void moveTo(PageLoaderElement element, int xOffset, int yOffset,
+      {PageLoaderElement eventTarget, bool sync: true}) {
+    if (element is _ElementPageLoaderElement) {
+      clientX = (element.node.getBoundingClientRect().left + xOffset).ceil();
+      clientY = (element.node.getBoundingClientRect().top + yOffset).ceil();
+    }
+    dispatchEvent('mousemove', eventTarget as _ElementPageLoaderElement);
     loader.sync(sync);
   }
 
   @override
   void up(int button,
-      {_ElementPageLoaderElement eventTarget, bool sync: true}) {
-    dispatchEvent('mouseup', eventTarget);
+      {PageLoaderElement eventTarget, bool sync: true}) {
+    dispatchEvent('mouseup', eventTarget as _ElementPageLoaderElement);
     loader.sync(sync);
   }
 
@@ -218,11 +220,11 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   final PageLoaderAttributes style;
 
   _ElementPageLoaderElement(Element _node, HtmlPageLoader loader)
-      : super._(loader),
-        this.node = _node,
+      : this.node = _node,
         this.attributes = new _ElementAttributes(_node),
         this.computedStyle = new _ElementComputedStyle(_node),
-        this.style = new _ElementStyle(_node);
+        this.style = new _ElementStyle(_node),
+        super._(loader);
 
   @override
   PageLoaderElement get shadowRoot {
@@ -266,7 +268,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
     _fireKeyPressEvents(node, keys);
     if (node is InputElement || node is TextAreaElement) {
       // suppress warning by hiding field
-      var node = this.node;
+      dynamic node = this.node;
       var value = node.value + keys;
       node.value = '';
       node.dispatchEvent(new TextEvent('textInput', data: value));
@@ -278,7 +280,7 @@ class _ElementPageLoaderElement extends HtmlPageLoaderElement {
   @override
   void clear({bool sync: true}) {
     if (node is InputElement || node is TextAreaElement) {
-      var node = this.node;
+      dynamic node = this.node;
       node.value = '';
       node.dispatchEvent(new TextEvent('textInput', data: ''));
     } else {
