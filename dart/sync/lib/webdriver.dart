@@ -31,8 +31,8 @@ class WebDriverPageLoader extends BasePageLoader {
   final _WebDriverMouse mouse;
 
   WebDriverPageLoader(wd.SearchContext globalContext, {useShadowDom: true})
-      : super(clock: const _IOClock(), useShadowDom: useShadowDom),
-        this.mouse = new _WebDriverMouse(globalContext.driver) {
+      : this.mouse = new _WebDriverMouse(globalContext.driver),
+        super(clock: const _IOClock(), useShadowDom: useShadowDom) {
     this._globalContext = new WebDriverPageLoaderElement(globalContext, this);
   }
 
@@ -59,32 +59,35 @@ class _WebDriverMouse implements PageLoaderMouse {
 
   @override
   void down(int button,
-      {_WebElementPageLoaderElement eventTarget, bool sync: true}) {
+      {PageLoaderElement eventTarget, bool sync: true}) {
     if (eventTarget == null) {
       driver.mouse.down(button);
     } else {
-      _fireEvent(eventTarget, 'mousedown', button);
+      _fireEvent(
+        eventTarget as _WebElementPageLoaderElement, 'mousedown', button);
     }
   }
 
   @override
-  void moveTo(_WebElementPageLoaderElement element, int xOffset, int yOffset,
-      {_WebElementPageLoaderElement eventTarget, bool sync: true}) {
+  void moveTo(PageLoaderElement element, int xOffset, int yOffset,
+      {PageLoaderElement eventTarget, bool sync: true}) {
     if (eventTarget != null) {
       throw new ArgumentError(
           'eventTarget not supported on WebDriverPageLoader.mouse.moveTo');
     }
     driver.mouse
-        .moveTo(element: element.context, xOffset: xOffset, yOffset: yOffset);
+        .moveTo(element: (element as _WebElementPageLoaderElement).context,
+                xOffset: xOffset, yOffset: yOffset);
   }
 
   @override
   void up(int button,
-      {_WebElementPageLoaderElement eventTarget, bool sync: true}) {
+      {PageLoaderElement eventTarget, bool sync: true}) {
     if (eventTarget == null) {
       driver.mouse.up(button);
     } else {
-      _fireEvent(eventTarget, 'mouseup', button);
+      _fireEvent(
+        eventTarget as _WebElementPageLoaderElement, 'mouseup', button);
     }
   }
 
@@ -153,11 +156,11 @@ class _WebElementPageLoaderElement extends WebDriverPageLoaderElement {
 
   _WebElementPageLoaderElement(
       wd.WebElement _context, WebDriverPageLoader loader)
-      : super._(loader),
-        this.context = _context,
+      : this.context = _context,
         this.attributes = new _ElementAttributes(_context),
         this.computedStyle = new _ElementComputedStyle(_context),
-        this.style = new _ElementStyle(_context);
+        this.style = new _ElementStyle(_context),
+        super._(loader);
 
   @override
   WebDriverPageLoaderElement get shadowRoot {
@@ -257,7 +260,7 @@ class _ShadowRootPageLoaderElement extends WebDriverPageLoaderElement {
   bool get displayed => context.displayed;
 
   @override
-  List<PageLoaderElement> getElementsByCss(String selector) =>
+  List<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
       _fromContextList(_execute('.querySelectorAll("$selector")'));
 
   dynamic _execute(String script) {

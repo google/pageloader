@@ -108,7 +108,7 @@ class InShadowDom implements Finder {
     }
     candidates = candidates.map((candidate) => candidate.shadowRoot);
     if (find != null) {
-      var newCandidates = new Set();
+      var newCandidates = new Set<PageLoaderElement>();
       for (var candidate in candidates) {
         newCandidates.addAll(find.findElements(candidate));
       }
@@ -336,7 +336,7 @@ class Chain implements Finder {
           newElements.addAll(annotation.findElements(element));
         }
       }
-      elements = newElements;
+      elements = newElements.toList();
     }
 
     return new UnmodifiableListView<PageLoaderElement>(elements);
