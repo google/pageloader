@@ -12,8 +12,9 @@
 // limitations under the License.
 
 import 'package:build/build.dart';
-import 'package:pageloader/src/generators/pageobject_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'src/generators/pageobject_generator.dart';
+
 Builder pageloaderBuilder([_]) =>
-    new PartBuilder(const [const PageObjectGenerator()]);
+    new PartBuilder(const [const PageObjectGenerator()]); // Part builder

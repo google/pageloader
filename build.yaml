@@ -1,0 +1,24 @@
+targets:
+  _library:
+    sources: ["lib/**"]
+    builders:
+      built_value_generator|built_value:
+        enabled: true
+      pageloader|pageloader:
+        enabled: false
+  _tests:
+    sources: ["test/**"]
+    builders:
+      built_value_generator|built_value:
+        enabled: false
+      pageloader|pageloader:
+        enabled: true
+
+
+builders:
+  pageloader:
+    import: "package:pageloader/pageloader_builder.dart"
+    builder_factories: ["pageloaderBuilder"]
+    build_extensions: {".dart": [".g.dart"]}
+    auto_apply: dependents
+    build_to: source

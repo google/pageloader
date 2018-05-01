@@ -36,7 +36,8 @@ void runTests(GetNewContext contextGenerator) {
 
       final page = new PageForSimpleTest.create(root);
       expect(page.table.table.exists, true); // Do something.
-      printedLines = printedLines.map((s) => s.trim()).toList(); // Drop the whitespace.
+      printedLines =
+          printedLines.map((s) => s.trim()).toList(); // Drop the whitespace.
       expect(
           printedLines.toString(),
           stringContainsInOrder(
