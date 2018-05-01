@@ -13,7 +13,7 @@
 
 import 'dart:html';
 
-import 'package:pageloader3/pageloader.dart';
+import 'package:pageloader/pageloader.dart';
 
 import 'html_mouse.dart';
 import 'html_page_loader_element.dart';

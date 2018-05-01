@@ -14,7 +14,7 @@
 import 'dart:async';
 import 'dart:html' as html;
 
-import 'package:pageloader3/html.dart';
+import 'package:pageloader/html.dart';
 
 /// Returns the root level element of the document.
 ///

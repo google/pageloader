@@ -16,9 +16,9 @@ library pageloader3.core;
 import 'package:analyzer/analyzer.dart';
 import 'package:quiver/core.dart';
 
-import 'annotation_evaluators_internal.dart';
+import 'annotation_evaluators.dart';
 
-export 'annotation_evaluators_internal.dart' show AnnotationKind;
+export 'annotation_evaluators.dart' show AnnotationKind;
 
 /// Core generation functions.
 

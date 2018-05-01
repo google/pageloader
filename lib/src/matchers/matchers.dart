@@ -13,7 +13,7 @@
 
 import 'package:matcher/matcher.dart';
 
-import 'package:pageloader3/utils.dart' as utils;
+import 'package:pageloader/utils.dart' as utils;
 
 /// A matcher that checks if a PageLoaderElement/PageObject exists.
 const Matcher exists = const _Exists();

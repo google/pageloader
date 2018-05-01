@@ -12,7 +12,7 @@
 // limitations under the License.
 
 import 'dart:async';
-import 'package:pageloader3/pageloader.dart';
+import 'package:pageloader/pageloader.dart';
 import 'package:test/test.dart';
 
 part 'list.g.dart';

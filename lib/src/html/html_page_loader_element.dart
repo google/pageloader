@@ -17,8 +17,8 @@ import 'dart:js' as js;
 import 'dart:math';
 import 'dart:svg' show SvgElement;
 
-import 'package:pageloader3/core.dart' as core;
-import 'package:pageloader3/pageloader.dart';
+import 'package:pageloader/core.dart' as core;
+import 'package:pageloader/pageloader.dart';
 
 import 'html_iterators.dart';
 import 'html_page_utils.dart';

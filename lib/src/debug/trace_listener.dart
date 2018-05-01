@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:pageloader3/pageloader.dart';
+import 'package:pageloader/pageloader.dart';
 
 typedef void PrintLine(String s);
 void standardPrint(String s) => print(s);

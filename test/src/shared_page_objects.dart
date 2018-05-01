@@ -13,7 +13,7 @@
 
 import 'dart:async';
 
-import 'package:pageloader3/pageloader.dart';
+import 'package:pageloader/pageloader.dart';
 import 'package:test/test.dart';
 
 part 'shared_page_objects.g.dart';

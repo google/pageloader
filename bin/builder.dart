@@ -12,7 +12,7 @@
 // limitations under the License.
 
 import 'package:build/build.dart';
-import 'package:pageloader3/src/generators/pageobject_generator.dart';
+import 'package:pageloader/src/generators/pageobject_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder pageloaderBuilder([_]) =>

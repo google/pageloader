@@ -14,7 +14,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:pageloader3/pageloader.dart';
+import 'package:pageloader/pageloader.dart';
 
 /// Concrete implementations for use in code generation tests, mostly via
 /// toString().

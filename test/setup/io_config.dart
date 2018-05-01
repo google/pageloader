@@ -42,7 +42,7 @@ WebDriver createTestDriver({Map<String, dynamic> additionalCapabilities}) {
   return createDriver(desired: capabilities);
 }
 
-String get testPagePath {
+String testPagePath() {
   String testPagePath =
       path.absolute('test', 'data', 'webdriver_test_page.html');
   if (!FileSystemEntity.isFileSync(testPagePath)) {

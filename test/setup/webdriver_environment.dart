@@ -13,7 +13,7 @@
 
 import 'dart:async';
 
-import 'package:pageloader3/webdriver.dart';
+import 'package:pageloader/webdriver.dart';
 import 'package:webdriver/sync_io.dart';
 
 import 'io_config.dart' as webtest;

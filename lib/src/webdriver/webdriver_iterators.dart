@@ -13,7 +13,7 @@
 
 import 'dart:async';
 
-import 'package:pageloader3/pageloader.dart';
+import 'package:pageloader/pageloader.dart';
 import 'package:webdriver/sync_core.dart' as wd;
 
 import 'webdriver_page_loader_element.dart';

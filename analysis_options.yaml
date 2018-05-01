@@ -46,7 +46,6 @@ linter:
     - prefer_final_locals
     - prefer_is_empty
     - prefer_is_not_empty
-    - prefer_typing_uninitialized_variables
     - recursive_getters
     # - public_member_api_docs - we don't document trivial accessors
     - slash_for_doc_comments
