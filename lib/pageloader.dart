@@ -20,11 +20,4 @@ export 'src/api/page_loader_element_interface.dart';
 export 'src/api/page_loader_listener.dart';
 export 'src/api/page_loader_mouse_interface.dart';
 export 'src/api/page_object_list_interface.dart';
-
-/// Following should export the internal version.
-export 'src/api/page_utils_interface_internal.dart';
-
-/// Following are available internally only.
-export 'src/api/lazy.dart';
-export 'src/api/legacy_iterable_interfaces.dart';
-export 'src/api/legacy_annotations.dart';
+export 'src/api/page_utils_interface.dart';

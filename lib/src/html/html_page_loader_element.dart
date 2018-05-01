@@ -21,7 +21,7 @@ import 'package:pageloader3/core.dart' as core;
 import 'package:pageloader3/pageloader.dart';
 
 import 'html_iterators.dart';
-import 'html_page_utils_internal.dart';
+import 'html_page_utils.dart';
 
 /// Function used for synchronizing execution.
 typedef Future<T> SyncFn<T>(Future<T> fn());

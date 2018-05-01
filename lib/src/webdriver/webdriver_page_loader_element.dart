@@ -21,7 +21,7 @@ import 'package:webdriver/sync_core.dart' as sync_wd;
 
 import 'webdriver_finder.dart';
 import 'webdriver_iterators.dart';
-import 'webdriver_page_utils_internal.dart';
+import 'webdriver_page_utils.dart';
 
 /// Implements [PageLoaderElement] for WebDriver test environments.
 ///
