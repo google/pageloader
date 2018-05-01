@@ -20,7 +20,7 @@ import 'package:source_gen/source_gen.dart';
 
 import '../api/page_object_annotation.dart';
 import 'class_checks_collector.dart' show generateClassChecks;
-import 'collector_visitor_internal.dart';
+import 'collector_visitor.dart';
 import 'methods/core.dart' as core;
 
 /// Page object generator. Generates the source code for a given page object.

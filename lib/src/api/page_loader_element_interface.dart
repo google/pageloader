@@ -19,7 +19,7 @@ import 'dart:math';
 import 'annotation_interfaces.dart';
 import 'iterable_interfaces.dart';
 import 'page_loader_listener.dart';
-import 'page_utils_interface_internal.dart';
+import 'page_utils_interface.dart';
 
 /// Base class for interacting with raw DOM elements, e.g. buttons, input
 /// fields, etc.
