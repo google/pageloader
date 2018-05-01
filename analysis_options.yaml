@@ -1,0 +1,64 @@
+analyzer:
+  strong-mode: true
+    # implicit-dynamic: false
+    # implicit-casts: false
+  exclude:
+    - bazel-*
+
+linter:
+  rules:
+    - always_declare_return_types
+    # - always_specify_types - needed for having shorthand final / var
+    - annotate_overrides
+    # - avoid_as - needed for strong mode
+    - avoid_empty_else
+    - avoid_init_to_null
+    - avoid_return_types_on_setters
+    - await_only_futures
+    - camel_case_types
+    - cancel_subscriptions
+    - close_sinks
+    # - constant_identifier_names - very minor.
+    - control_flow_in_finally
+    - directives_ordering
+    - empty_catches
+    - empty_constructor_bodies
+    - empty_statements
+    - hash_and_equals
+    - implementation_imports
+    - invariant_booleans
+    - iterable_contains_unrelated_type
+    - library_names
+    - library_prefixes
+    - literal_only_boolean_expressions
+    - list_remove_unrelated_type
+    - no_duplicate_case_values
+    - non_constant_identifier_names
+    # - one_member_abstracts - better object oriented code.
+    # - only_throw_errors - throwing strings is fine
+    - overridden_fields
+    - package_api_docs
+    - package_names
+    - package_prefixed_library_names
+    - prefer_adjacent_string_concatenation
+    - prefer_collection_literals
+    - prefer_final_fields
+    - prefer_final_locals
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - prefer_typing_uninitialized_variables
+    - recursive_getters
+    # - public_member_api_docs - we don't document trivial accessors
+    - slash_for_doc_comments
+    # - sort_constructors_first - we have accessors close to members first
+    - sort_unnamed_constructors_first
+    - super_goes_last
+    - test_types_in_equals
+    - throw_in_finally
+    # - type_annotate_public_apis - we don't add types for final vars
+    - type_init_formals
+    - unawaited_futures
+    # - unnecessary_brace_in_string_interps - very minor
+    # - unnecessary_getters_setters - needed for strong mode overrides
+    - unrelated_type_equality_checks
+    - valid_regexps
