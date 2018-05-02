@@ -16,7 +16,6 @@ before_install:
   - export CHROMEDRIVER_BINARY=/usr/bin/chromium-browser
   - export CHROMEDRIVER_ARGS=--no-sandbox
   - /usr/bin/chromium-browser --version
-
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 

@@ -17,11 +17,11 @@
 STATUS=0
 
 # Analyze package.
-#dartanalyzer .
-#ANALYSIS_STATUS=$?
-#if [[ $ANALYSIS_STATUS -ne 0 ]]; then
-#  STATUS=$ANALYSIS_STATUS
-#fi
+dartanalyzer .
+ANALYSIS_STATUS=$?
+if [[ $ANALYSIS_STATUS -ne 0 ]]; then
+  STATUS=$ANALYSIS_STATUS
+fi
 
 # Run non-html and non-webdriver tests
 core_tests=("test/core_method_information_test.dart" "test/correct_gen_test.dart" "test/matchers_test.dart")
