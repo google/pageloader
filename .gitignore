@@ -9,3 +9,7 @@ pubspec.lock
 *~
 .pub/
 bazel-*
+.idea/
+.gitignore
+.dart_tool/
+*.g.dart
