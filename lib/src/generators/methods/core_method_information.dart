@@ -58,8 +58,8 @@ TypeInformation extractPageObjectInfo(TypeInformation typeInfo, String source) {
     throw new InvalidMethodException(
         source,
         'Expected exactly one type argument for ${typeInfo.type}'
-        ' in return type. Check the return type, and if needed file a bug'
-        ' at go/pageloader3-bug. Original source: \n\n$source');
+        ' in return type. Check the return type, and if needed file a bug.'
+        ' Original source: \n\n$source');
   }
   final nestedInfo = typeInfo.typeArguments.single;
   if (nestedInfo.type == 'List') {

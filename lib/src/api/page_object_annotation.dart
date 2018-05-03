@@ -13,7 +13,7 @@
 
 library pageloader.page_object;
 
-/// This annotation is required by the pageloader3 generator.
+/// This annotation is required by the pageloader generator.
 
 /// Class level annotation, present on all page objects. If this is not present
 /// no generation will take place.

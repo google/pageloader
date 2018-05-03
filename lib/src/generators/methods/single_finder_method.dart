@@ -157,7 +157,7 @@ abstract class SingleFinderMethodMixin {
       return _contextWithRoot;
     } else {
       // Should already by caught, but let's be sure.
-      throw 'No finder or @root element? (this is a PageLoader3 bug).';
+      throw 'No finder or @root element? (this is a PageLoader bug).';
     }
   }
 

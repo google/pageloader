@@ -146,7 +146,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
         .forEach((m) => errors.add('Unsupported method, \n\n${m}'));
     visitor.oversupportedMethods.forEach((m) => errors
         .add('Method matched multiple page object method generation schemes '
-            '-- this is a Pageloader3 error, file a bug! \n\nSchemes:\n\n'
+            '-- this is a Pageloader error, file a bug! \n\nSchemes:\n\n'
             '${m.matchingMethodTypes.join("\n")} \n\n${m.methodSource}'));
     if (visitor.badMethods.isNotEmpty ||
         visitor.oversupportedMethods.isNotEmpty ||

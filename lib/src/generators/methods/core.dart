@@ -53,7 +53,7 @@ Optional<Annotation> getEnsureTag(ClassDeclaration declaration) {
 bool isPageloaderAnnotation(Annotation annotation) =>
     getAnnotationKind(annotation).isNotEmpty;
 
-/// Returns set of all Pageloader3 annotation the current annotation satisfies.
+/// Returns set of all Pageloader annotation the current annotation satisfies.
 Set<AnnotationKind> getAnnotationKind(Annotation annotation) {
   final returnSet = new Set<AnnotationKind>();
   final element = annotation.element;

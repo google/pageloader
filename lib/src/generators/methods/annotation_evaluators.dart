@@ -21,17 +21,17 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 
 /// Library for provided pageloader annotations.
-final String pageLoader3Annotations = 'pageloader3.annotations';
+final String pageLoaderAnnotations = 'pageloader.annotations';
 
 /// Library for interfaces of pageloader annotations.
-final String pageLoader3AnnotationInterface =
-    'pageloader3.api.annotation_interfaces';
+final String pageLoaderAnnotationInterface =
+    'pageloader.api.annotation_interfaces';
 
 /// Returns set of AnnotationKinds that match '@root', '@Mouse'.
 Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
   final returnSet = new Set<AnnotationKind>();
   if (element is PropertyAccessorElement &&
-      element.library.name == pageLoader3Annotations) {
+      element.library.name == pageLoaderAnnotations) {
     final result = classNameToAnnotationKind(element.name, isAtomic: true);
     if (result != null) {
       returnSet.add(result);
@@ -61,7 +61,7 @@ Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
     final seenValidAnnotations = new Set<AnnotationKind>();
     do {
       type = types.removeFirst();
-      if (type.element.library.name == pageLoader3AnnotationInterface) {
+      if (type.element.library.name == pageLoaderAnnotationInterface) {
         seenValidAnnotations
             .add(classNameToAnnotationKind(type.element.name, isAtomic: false));
       }
@@ -75,7 +75,7 @@ Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
   return returnSet;
 }
 
-/// Types of Pageloader3 annotations.
+/// Types of Pageloader annotations.
 enum AnnotationKind {
   checker,
   disableDisplayedCheck,

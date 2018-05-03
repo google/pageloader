@@ -34,7 +34,7 @@ import 'src/api/page_object_list_interface.dart';
 // utils duplicate its functionality.
 
 /// A matcher that checks if a PageLoaderElement/PageObject exists.
-/// If used on a List annotated by a Pageloader3 annotation, checks to see
+/// If used on a List annotated by a Pageloader annotation, checks to see
 /// if not empty.
 bool exists(item) {
   if (item is PageLoaderElement) {

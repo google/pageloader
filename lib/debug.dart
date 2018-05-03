@@ -13,7 +13,7 @@
 
 library pageloader.debug;
 
-/// Debug support for PageLoader3.
+/// Debug support for PageLoader.
 export 'src/debug/performance/profiler_listener.dart';
 export 'src/debug/performance/timer_duration.dart';
 export 'src/debug/trace_listener.dart';

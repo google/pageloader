@@ -10,8 +10,8 @@ Starting with version 3.0.0, PageLoader is changed significantly from version
 
 A strongly typed implementation of PageLoader for Dart. Does not rely on
 dart:mirrors, which is slated for removal in Dart 2.0. If you're starting fresh with
-Dart UI testing, we recommend you use PageLoader3. PageLoader2 will be going away
-in a quarter or two.
+Dart UI testing, we recommend you use PageLoader version 3.X.X. PageLoader version 2.X.X
+and below is deprecated and no longer supported.
 
 Migration guide will be added shortly.
 
