@@ -17,4 +17,4 @@ import 'package:source_gen/source_gen.dart';
 import 'src/generators/pageobject_generator.dart';
 
 Builder pageloaderBuilder([_]) =>
-    new PartBuilder(const [const PageObjectGenerator()]); // Part builder
+    new PartBuilder(const [const PageObjectGenerator()]);
