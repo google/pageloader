@@ -3,6 +3,8 @@ PageLoader
 
 [![Build Status](https://travis-ci.org/google/pageloader.svg?branch=master)](https://travis-ci.org/google/pageloader)
 
+[![pub package](https://img.shields.io/pub/v/pageloader.svg)](https://pub.dartlang.org/packages/pageloader)
+
 A framework for creating page objects for in-browser tests or Webdriver tests.
 
 Starting with version 3.0.0, PageLoader is changed significantly from version
