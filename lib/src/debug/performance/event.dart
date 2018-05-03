@@ -34,7 +34,7 @@ class TraceEvent implements JsonSerializable {
     final events = {
       constants.traceEvents: traceEvents.map((e) => e.toMap()).toList()
     };
-    return JSON.encode(events);
+    return json.encode(events);
   }
 }
 
@@ -92,5 +92,5 @@ class DurationEvent implements Event {
   }
 
   @override
-  String toJson() => JSON.encode(toMap());
+  String toJson() => json.encode(toMap());
 }
