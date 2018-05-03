@@ -7,7 +7,5 @@ if [ ! -f pubspec.yaml ]; then
     exit
 fi
 
-cp ../LICENSE LICENSE
-cp ../README.md README.md
 pub get
 pub publish

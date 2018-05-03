@@ -1,12 +1,13 @@
 language: dart
 sudo: false
 
+addons:
+  chrome: stable
+
 dart:
   - dev
   # Stable is temporarily disabled since this requires dart 2.0 and above.
   # - stable
-
-with_content_shell: true
 
 matrix:
   allow_failures:
