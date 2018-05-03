@@ -101,7 +101,7 @@ abstract class ListFinderMethodMixin {
   String get createObjectIterable => 'new PageObjectList<$listTypeArgument>'
       '($_createElementIterator, $constructor)';
 
-  String get _createElementIterator => '${root}.createList('
+  String get _createElementIterator => '$root.createList('
       '$finderDeclaration, $filterDeclarations, $checkerDeclarations)';
 }
 

@@ -143,7 +143,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     visitor.badMethods.forEach((m) => errors
         .add('Invalid method, reason: ${m.message}\n\n${m.methodSource}'));
     visitor.unsupportedMethods
-        .forEach((m) => errors.add('Unsupported method, \n\n${m}'));
+        .forEach((m) => errors.add('Unsupported method, \n\n$m'));
     visitor.oversupportedMethods.forEach((m) => errors
         .add('Method matched multiple page object method generation schemes '
             '-- this is a Pageloader error, file a bug! \n\nSchemes:\n\n'
