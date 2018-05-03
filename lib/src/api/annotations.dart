@@ -87,7 +87,7 @@ class ByDebugId implements CssFinder {
       : _debugAnnotation = 'debug${useDash? '-' : ''}id';
 
   @override
-  String get cssSelector => "[$_debugAnnotation='${_debugId}']";
+  String get cssSelector => "[$_debugAnnotation='$_debugId']";
 
   @override
   String toString() => '@ByDebugId("$_debugId")';
@@ -240,6 +240,7 @@ class IsTag extends Filter {
   @override
   bool keep(PageLoaderElement element) => element.name == _name;
 
+  @override
   String toString() => '@IsTag("$_name")';
 }
 

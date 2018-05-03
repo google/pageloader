@@ -319,12 +319,12 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<Null> focus() async => syncFn(() async => _retryWhenStale(() async {
-        _microtask(_single.focus);
+        await _microtask(_single.focus);
       }));
 
   @override
   Future<Null> blur() async => syncFn(() async => _retryWhenStale(() async {
-        _microtask(_single.blur);
+        await _microtask(_single.blur);
       }));
 
   /// Dispatches an html [event] from [_single].

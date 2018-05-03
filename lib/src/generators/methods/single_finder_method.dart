@@ -55,7 +55,6 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
       .map((a) => generateAnnotationDeclaration(a))
       .toList();
 
-  final isFuture = node.returnType.toSource().startsWith('Future<');
   final isRoot = methodAnnotations.any(isPageloaderRoot);
 
   // Get initial type information.

@@ -95,5 +95,5 @@ class _HasInnerText extends CustomMatcher {
       : super("Has inner text that is", "inner text", matcher);
 
   @override
-  featureValueOf(item) => utils.getInnerText(item);
+  dynamic featureValueOf(item) => utils.getInnerText(item);
 }
