@@ -10,4 +10,4 @@ pubspec.lock
 .pub/
 bazel-*
 .dart_tool/
-*.g.dart
+test/**/*.g.dart
