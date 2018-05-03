@@ -62,7 +62,7 @@ Future verifyRows(PageObjectIterable<Row> rows) async {
     var cellCount = 0;
     while (cellIt.moveNext()) {
       cellCount++;
-      expect(cellIt.current.visibleText, 'r${rowCount}c${cellCount}');
+      expect(cellIt.current.visibleText, 'r${rowCount}c$cellCount');
     }
     expect(cellCount, 2);
   }

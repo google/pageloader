@@ -98,7 +98,7 @@ abstract class IterableFinderMethod
       'PageObjectIterable<$iterableTypeArgument> get $name';
 
   String get _createElementIterator =>
-      '${root}.createIterable($finderDeclaration, $filterDeclarations, $checkerDeclarations)';
+      '$root.createIterable($finderDeclaration, $filterDeclarations, $checkerDeclarations)';
 
   String get _createObjectIterable =>
       'new PageObjectIterable<$iterableTypeArgument>'

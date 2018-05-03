@@ -70,7 +70,7 @@ Future verifyRows(List<Row> rows) async {
     var cellCount = 0;
     for (final cell in cells) {
       cellCount++;
-      expect(cell.visibleText, 'r${rowCount}c${cellCount}');
+      expect(cell.visibleText, 'r${rowCount}c$cellCount');
     }
   }
 }

@@ -62,7 +62,7 @@ class HtmlMouse implements PageLoaderMouse {
 
   Future _dispatchEvent(String type, HtmlPageLoaderElement eventTarget,
       [MouseButton button = MouseButton.primary]) async {
-    var event = new MouseEvent(type,
+    final event = new MouseEvent(type,
         button: button.value,
         clientX: _clientX,
         clientY: _clientY,

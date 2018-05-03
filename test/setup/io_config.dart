@@ -18,10 +18,10 @@ import 'package:webdriver/sync_core.dart' show Capabilities, WebDriver;
 import 'package:webdriver/sync_io.dart' show createDriver;
 
 WebDriver createTestDriver({Map<String, dynamic> additionalCapabilities}) {
-  var capabilities = Capabilities.chrome;
-  Map env = Platform.environment;
+  final capabilities = Capabilities.chrome;
+  final env = Platform.environment;
 
-  Map chromeOptions = {};
+  final chromeOptions = {};
 
   if (env['CHROMEDRIVER_BINARY'] != null) {
     chromeOptions['binary'] = env['CHROMEDRIVER_BINARY'];
@@ -43,7 +43,7 @@ WebDriver createTestDriver({Map<String, dynamic> additionalCapabilities}) {
 }
 
 String testPagePath() {
-  String testPagePath =
+  final testPagePath =
       path.absolute('test', 'data', 'webdriver_test_page.html');
   if (!FileSystemEntity.isFileSync(testPagePath)) {
     throw new Exception('Could not find the test file at "$testPagePath".'
