@@ -40,7 +40,7 @@ html_tests="$(find test -type f -name "html_*_test.dart")"
 
 for test in ${html_tests[@]}
 do
-  pub run test -r expanded -p content-shell "$test"
+  pub run test -r expanded -p chrome "$test"
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
