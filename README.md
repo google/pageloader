@@ -2,32 +2,19 @@ PageLoader
 ==========
 
 [![Build Status](https://travis-ci.org/google/pageloader.svg?branch=master)](https://travis-ci.org/google/pageloader)
-
-A framework for creating page objects for in-browser tests or
-WebDriver tests.
-
-PageLoader for Dart comes in two flavours: async and sync.
-
-Async PageLoader for Dart
--------------------------
-
 [![pub package](https://img.shields.io/pub/v/pageloader.svg)](https://pub.dartlang.org/packages/pageloader)
 
-Async PageLoader for Dart is the **recommended** version going forward. It is designed to work with [webdriver.dart](https://github.com/google/webdriver.dart). 
+A framework for creating page objects for in-browser tests or Webdriver tests.
 
-Sync PageLoader for Dart
-------------------------
+Starting with version 3.0.0, PageLoader is changed significantly from version
+2.X.X.
 
-[![pub package](https://img.shields.io/pub/v/sync_pageloader.svg)](https://pub.dartlang.org/packages/sync_pageloader)
+A strongly typed implementation of PageLoader for Dart. Does not rely on
+dart:mirrors, which is slated for removal in Dart 2.0. If you're starting fresh with
+Dart UI testing, we recommend you use PageLoader version 3.X.X. PageLoader version 2.X.X
+and below is deprecated and no longer supported.
 
-The sync version is **deprecated** and will eventually be **removed** from this repository.
-Consider switching to the async version.
+Migration guide will be added shortly.
 
-Sync Pageloader was designed to work with the now deprecated [Dart Sync WebDriver](https://github.com/google/dart-sync-webdriver).
-
-When using Sync PageLoader with Dart Sync WebDriver, you must build the native extension for
-https://github.com/google/dart-sync-socket
-This can be done by running the following after running pub get or upgrade:
-```
-  # ./packages/sync_socket/../tool/build.sh
-```
+If you are looking for the legacy version of PageLoader (with mirrors), refer
+to the branch "2-stable" which is in sync with version 2.2.7.

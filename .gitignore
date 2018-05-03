@@ -9,3 +9,5 @@ pubspec.lock
 *~
 .pub/
 bazel-*
+.dart_tool/
+test/**/*.g.dart

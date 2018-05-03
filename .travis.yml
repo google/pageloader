@@ -1,18 +1,24 @@
 language: dart
-sudo: false
+sudo: required
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 
 dart:
   - dev
-  - stable
-
-with_content_shell: true
+  # Stable is temporarily disabled since this requires dart 2.0 and above.
+  # - stable
 
 matrix:
   allow_failures:
     - dart: dev
 
 before_install:
-  - export CHROMEDRIVER_BINARY=/usr/bin/chromium-browser
+  - export CHROMEDRIVER_BINARY=/usr/bin/google-chrome
   - export CHROMEDRIVER_ARGS=--no-sandbox
   - /usr/bin/chromium-browser --version
 
@@ -20,12 +26,10 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-# We use a slightly older version of chromedriver; the newer ones require a later
-# version of chromium than is available on travis by default.
-  - wget http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip
+  - wget http://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
   - export PATH=$PATH:$PWD
-  - ./dart/async/tool/travis-setup.sh
+  - ./tool/travis-setup.sh
 
 script: 
-  - ./dart/async/tool/travis.sh
+  - ./tool/travis.sh
