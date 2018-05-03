@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader3.listeners;
+library pageloader.listeners;
 
 import 'core.dart';
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of pageloader3.getter;
+part of pageloader.getter;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator

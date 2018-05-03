@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader3.invalid_method_exception;
+library pageloader.invalid_method_exception;
 
 /// Thrown when a method defined in a page object is invalid in some way.
 class InvalidMethodException implements Exception {

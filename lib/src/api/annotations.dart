@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader3.annotations;
+library pageloader.annotations;
 
 import 'annotation_interfaces.dart';
 import 'page_loader_element_interface.dart';

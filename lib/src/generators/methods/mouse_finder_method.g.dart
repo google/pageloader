@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of pageloader3.mouse_finder_method;
+part of pageloader.mouse_finder_method;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator

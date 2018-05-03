@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader3.oversupported_method;
+library pageloader.oversupported_method;
 
 /// Used when a method defined in a page object appears to be supported by
 /// multiple method generators.

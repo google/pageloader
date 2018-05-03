@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader3.api.page_loader_element_interface;
+library pageloader.api.page_loader_element_interface;
 
 import 'dart:async';
 import 'dart:math';

@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader3.core_method_information;
+library pageloader.core_method_information;
 
 import 'package:analyzer/analyzer.dart';
 import 'package:built_value/built_value.dart';

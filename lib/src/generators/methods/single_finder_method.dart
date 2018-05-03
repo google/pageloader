@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader3.single_finder_method;
+library pageloader.single_finder_method;
 
 import 'package:analyzer/analyzer.dart';
 import 'package:built_value/built_value.dart';

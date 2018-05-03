@@ -12,7 +12,7 @@
 // limitations under the License.
 
 const mockAnnotations = '''
-library pageloader3.annotations;
+library pageloader.annotations;
 
 import '/test/root/path/annotation_interfaces.dart';
 

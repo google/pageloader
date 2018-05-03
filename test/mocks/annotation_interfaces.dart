@@ -12,7 +12,7 @@
 // limitations under the License.
 
 const mockAnnotationInterfaces = '''
-library pageloader3.api.annotation_interfaces;
+library pageloader.api.annotation_interfaces;
 
 abstract class Finder {}
 

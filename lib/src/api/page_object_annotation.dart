@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader3.page_object;
+library pageloader.page_object;
 
 /// This annotation is required by the pageloader3 generator.
 

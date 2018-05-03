@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of pageloader3.iterable_finder_method;
+part of pageloader.iterable_finder_method;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator

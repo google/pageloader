@@ -1,7 +1,8 @@
 analyzer:
   strong-mode: true
-    # implicit-dynamic: false
-    # implicit-casts: false
+  exclude:
+    - lib/**/*.g.dart
+    - test/**/*.g.dart
 
 linter:
   rules:
