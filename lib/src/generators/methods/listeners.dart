@@ -11,11 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Generation support for listeners.
 library pageloader.listeners;
 
 import 'core.dart';
-
-/// Generation support for listeners.
 
 final String listeners = '__listeners__';
 

@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Core generation functions.
 library pageloader.core;
 
 import 'package:analyzer/analyzer.dart';
@@ -19,8 +20,6 @@ import 'package:quiver/core.dart';
 import 'annotation_evaluators.dart';
 
 export 'annotation_evaluators.dart' show AnnotationKind;
-
-/// Core generation functions.
 
 /// Name of root PageLoaderElement for a generated page object.
 final String root = '\$__root__';

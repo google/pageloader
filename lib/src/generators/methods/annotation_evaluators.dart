@@ -11,15 +11,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Functions that evaluate an element's annotations on PageLoader annotations
+/// and returns its kind.
 library pageloader.annotation_evaluators;
 
 import 'dart:collection' show Queue;
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-
-/// Functions that evaluate an element's annotations on PageLoader annotations
-/// and returns its kind.
 
 /// Library for provided pageloader annotations.
 final String pageLoader3Annotations = 'pageloader3.annotations';

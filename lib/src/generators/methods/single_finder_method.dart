@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Generation for page object getters.
 library pageloader.single_finder_method;
 
 import 'package:analyzer/analyzer.dart';
@@ -22,8 +23,6 @@ import 'invalid_method_exception.dart';
 import 'listeners.dart';
 
 part 'single_finder_method.g.dart';
-
-/// Generation for page object getters.
 
 /// Returns a [SingleFinderMethod] for abstract getters where the return type
 /// is not [PageObjectIterable]. At least one [Finder] must be present.

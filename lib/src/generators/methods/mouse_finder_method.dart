@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Generation for @Mouse annotations.
 library pageloader.mouse_finder_method;
 
 import 'package:built_value/built_value.dart';
@@ -22,8 +23,6 @@ import 'invalid_method_exception.dart';
 import 'listeners.dart';
 
 part 'mouse_finder_method.g.dart';
-
-/// Generation for @Mouse annotations.
 
 /// Returns a [MouseFinderMethod] if a valid @Mouse getter is present, and
 /// [absent()] otherwise.

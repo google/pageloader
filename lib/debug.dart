@@ -11,6 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+library pageloader.debug;
+
 /// Debug support for PageLoader3.
 export 'src/debug/performance/profiler_listener.dart';
 export 'src/debug/performance/timer_duration.dart';

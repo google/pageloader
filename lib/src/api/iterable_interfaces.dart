@@ -11,17 +11,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.api.iterable_interfaces;
-
-import 'dart:async';
-
-import 'page_loader_element_interface.dart';
-
 /// Iterables specific for Pageloader.
 ///
 /// These iterables are intended to function roughly like normal Dart
 /// [Iterable]s, but return [Future]s for calls that may result in async
 /// behavior (e.g., interacting with WebDriver).
+
+library pageloader.api.iterable_interfaces;
+
+import 'dart:async';
+
+import 'page_loader_element_interface.dart';
 
 /// Function for constructing a page object.
 typedef E PageObjectConstructor<E>(PageLoaderElement e);

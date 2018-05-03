@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Generates code for normal setters. Currently just a pass through.
 library pageloader.setter;
 
 import 'package:analyzer/analyzer.dart';
@@ -19,8 +20,6 @@ import 'package:quiver/core.dart';
 import 'listeners.dart';
 
 part 'setter.g.dart';
-
-/// Generates code for normal setters. Currently just a pass through.
 
 /// Returns a [Setter] for concrete setters, and [absent()] otherwise.
 Optional<Setter> collectUnannotatedSetter(MethodDeclaration node) {

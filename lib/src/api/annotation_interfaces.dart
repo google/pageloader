@@ -11,11 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Interfaces for annotations.
 library pageloader.api.annotation_interfaces;
 
 import 'page_loader_element_interface.dart';
-
-/// Interfaces for annotations.
 
 /// Finds all matching elements within the parent context.
 ///

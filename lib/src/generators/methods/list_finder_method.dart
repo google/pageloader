@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Generation for page object lists.
 library pageloader.list_finder_method;
 
 import 'package:built_value/built_value.dart';
@@ -21,8 +22,6 @@ import 'core_method_information.dart';
 import 'listeners.dart';
 
 part 'list_finder_method.g.dart';
-
-/// Generation for page object lists.
 
 /// Returns a [ListFinderMethod] for abstract getters when at least one
 /// [Finder] is present and the return type is [Future<List<X>>] or [List<X>],

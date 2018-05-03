@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Generates code for normal getters. Currently just a pass through.
 library pageloader.getter;
 
 import 'package:analyzer/analyzer.dart';
@@ -19,8 +20,6 @@ import 'package:quiver/core.dart';
 import 'listeners.dart';
 
 part 'getter.g.dart';
-
-/// Generates code for normal getters. Currently just a pass through.
 
 /// Returns a [Getter] for a concrete getters, or [absent()] otherwise.
 Optional<Getter> collectUnannotatedGetter(MethodDeclaration node) {

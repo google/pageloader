@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Generation for page object iterables.
 library pageloader.iterable_finder_method;
 
 import 'package:analyzer/analyzer.dart';
@@ -22,8 +23,6 @@ import 'invalid_method_exception.dart';
 import 'listeners.dart';
 
 part 'iterable_finder_method.g.dart';
-
-/// Generation for page object iterables.
 
 /// Returns a [IterableFinderMethod] for abstract getters when at least one
 /// [Finder] is present and the return type is [PageObjectIterable], and
