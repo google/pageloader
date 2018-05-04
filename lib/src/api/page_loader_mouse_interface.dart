@@ -27,18 +27,18 @@ abstract class PageLoaderMouse {
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  Future down(MouseButton button, {PageLoaderElement eventTarget});
+  Future<void> down(MouseButton button, {PageLoaderElement eventTarget});
 
   /// Release [button] on the mouse at its current location. If [eventTarget] is
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  Future up(MouseButton button, {PageLoaderElement eventTarget});
+  Future<void> up(MouseButton button, {PageLoaderElement eventTarget});
 
   /// Move the mouse to a location relative to [element]. If [eventTarget] is
   /// specified, PageLoader will attempt to fire the corresponding mouse events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current mouse location.
-  Future moveTo(PageLoaderElement element, int xOffset, int yOffset,
+  Future<void> moveTo(PageLoaderElement element, int xOffset, int yOffset,
       {PageLoaderElement eventTarget});
 }

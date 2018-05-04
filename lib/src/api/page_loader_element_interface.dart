@@ -133,23 +133,23 @@ abstract class PageLoaderElement {
   ///
   /// [focusBefore] indicates whether to focus this element before clearing.
   /// [blurAfter] indicates whether to blur this element after clearing.
-  Future<Null> clear({bool focusBefore: true, bool blurAfter: true});
+  Future<void> clear({bool focusBefore: true, bool blurAfter: true});
 
   /// Clicks on the element.
-  Future<Null> click();
+  Future<void> click();
 
   /// Types [keys] into this element, if possible (e.g. for an input element).
   ///
   /// [focusBefore] indicates whether to focus this element before typing.
   /// [blurAfter] indicates whether to blur this element after typing.
-  Future<Null> type(String keys,
+  Future<void> type(String keys,
       {bool focusBefore: true, bool blurAfter: true});
 
   /// Focuses the element.
-  Future<Null> focus();
+  Future<void> focus();
 
   /// Blurs the element (= lose focus).
-  Future<Null> blur();
+  Future<void> blur();
 }
 
 /// Generic attributes interface, allowing bracket notation referencing.
