@@ -63,6 +63,10 @@ and pass in the context. You want the `<html>` node for tests.
 final myPO = new MyPO.create(pageLoaderElementContext);
 ```
 
+How do I trigger the generation step?
+=====================================
+`pub run build_runner build`
+
 Lazy Loading
 ============
 In PageLoader3, all elements are lazy.
@@ -193,6 +197,3 @@ abstract class ExtraPO extends Object with BasePOMixin {
 }
 ```
 
-How do I trigger the generation step?
-=====================================
-`pub run build_runner build`
