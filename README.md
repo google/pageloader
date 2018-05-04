@@ -192,3 +192,7 @@ abstract class ExtraPO extends Object with BasePOMixin {
   MyExtraWidgetPO get extraWidget;
 }
 ```
+
+How do I trigger the generation step?
+=====================================
+`pub run build_runner build`
