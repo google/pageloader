@@ -21,7 +21,7 @@ to the branch "2-stable" which is in sync with version 2.2.7.
 What Changed since version 2?
 =============================
 
-There's three big changes here:
+There are three big changes here:
 
 1. Instead of using dart:mirrors, code generation is used. 
    Unfortunately this means extra boilerplate code. Every PageObject
