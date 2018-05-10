@@ -10,12 +10,6 @@ addons:
 
 dart:
   - dev
-  # Stable is temporarily disabled since this requires dart 2.0 and above.
-  # - stable
-
-matrix:
-  allow_failures:
-    - dart: dev
 
 before_install:
   - export CHROMEDRIVER_BINARY=/usr/bin/google-chrome
@@ -33,3 +27,11 @@ before_script:
 
 script: 
   - ./tool/travis.sh
+
+# Only building master means that we don't run two builds for each pull request.
+branches:
+  only: [master]
+
+cache:
+ directories:
+   - $HOME/.pub-cache
