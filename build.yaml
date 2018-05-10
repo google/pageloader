@@ -17,7 +17,7 @@ targets:
 
 builders:
   pageloader:
-    import: "package:pageloader/pageloader_builder.dart"
+    import: "package:pageloader/builder.dart"
     builder_factories: ["pageloaderBuilder"]
     build_extensions: {".dart": [".g.dart"]}
     auto_apply: dependents
