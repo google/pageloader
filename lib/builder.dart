@@ -26,5 +26,24 @@ import 'package:source_gen/source_gen.dart';
 
 import 'src/generators/pageobject_generator.dart';
 
-Builder pageloaderBuilder([_]) =>
-    new PartBuilder(const [const PageObjectGenerator()]);
+/// Supports `package:build_runner` creation and configuration of `pageloader`.
+///
+/// Not meant to be invoked by hand-authored code.
+Builder pageloaderBuilder(BuilderOptions options) {
+  // Paranoid copy of options.config - don't assume it's mutable or needed
+  // elsewhere.
+  final optionsMap = new Map<String, dynamic>.from(options.config);
+
+  final builder = new PartBuilder([
+    new PageObjectGenerator(),
+  ], header: optionsMap.remove('header') as String);
+
+  if (optionsMap.isNotEmpty) {
+    if (log == null) {
+      throw new StateError('Upgrade `build_runner` to at least 0.8.2.');
+    } else {
+      log.warning('These options were ignored: `$optionsMap`.');
+    }
+  }
+  return builder;
+}
