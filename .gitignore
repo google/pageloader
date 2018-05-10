@@ -1,13 +1,5 @@
-.DS_Store
+.dart_tool
 .packages
-packages
-pubspec.lock
-.project
-.buildlog
-*.o
-*.so
-*~
 .pub/
+pubspec.lock
 bazel-*
-.dart_tool/
-test/**/*.g.dart
