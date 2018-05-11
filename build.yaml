@@ -1,5 +1,5 @@
 targets:
-  _library:
+  $default:
     sources: ["lib/**"]
     builders:
       built_value_generator|built_value:
