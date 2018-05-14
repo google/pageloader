@@ -68,15 +68,15 @@ final context = new HtmlPageLoaderElement.createFromElement(myElement);
 final myPO = new MyPO.create(context);
 ```
 
-`createFromElement` has an additional named argument `SyncFn externalSyncFn`
-with `SyncFn`. This synchronizing function is called on asynchronous events 
+`createFromElement` has an additional named argument `SyncFn externalSyncFn`.
+This synchronizing function is called on asynchronous events 
 (click, type, etc.) and ensures that these events have time to take 
 into effect. By default, this is a no-op function. 
 
 An example of a custom sync function:
 
 ```dart
-new HtmlPageLoaderElement.createFromElement(setUp(),
+new HtmlPageLoaderElement.createFromElement(myElement,
         externalSyncFn: (Future action()) async {
       await action();
       // Wait longer than normal
@@ -88,7 +88,7 @@ new HtmlPageLoaderElement.createFromElement(setUp(),
 
 Note that this `externalSyncFn` is then called on every asynchronous method
 of that `HtmlPageLoaderElement` as well as its childrens' 
-`HtmlPageLoaderElement`s. Refer to "What is synchronous/asynchronouse" section
+`HtmlPageLoaderElement`s. Refer to **"What is synchronous/asynchronous"** section
 for more information about which events are asynchronous.
 
 ### `WebdriverPageLoaderElement` example:
@@ -97,8 +97,8 @@ for more information about which events are asynchronous.
 import 'package:pageloader/webdriver.dart';
 import 'package:webdriver/sync_io.dart';
 
-String pagePath = ...;
-Webdriver driver = webtest.createTestDriver();
+String pagePath = ...; // Page uri path
+Webdriver driver = ...; // Refer to Webdriver package documentation
 WebDriverPageUtils loader = new WebDriverPageUtils(driver);
 driver.get(pagePath);
 
@@ -112,8 +112,6 @@ final myPO = new MyPO.create(context);
 loader = null;
 driver.quit();
 ```
-
-
 
 How do I trigger the generation step?
 =====================================
@@ -138,6 +136,44 @@ expect(anotherPO.innertext, 'text'); // Finds page object again and reads inner 
 
 This matches how the rest of the API worked: you read attributes lazily,
 you read text lazily, and now you find elements lazily.
+
+Existence Checking
+==================
+
+In PageLoader version 2.X.X, the `@optional` tag was used to mark some entity
+as possibly not existing. For example:
+
+// Pageloader2
+class MyPO {
+  @optional
+  @ByTagName('maybe-here')
+  PageLoaderElement someElement;
+  
+  @optional
+  @ByTagName('also-maybe-here')
+  SomePO somePO;
+}
+
+In the case that either `someElement` or `somePO` did not
+exist, it would have `null` value. 
+
+From version 3, `@optional` is removed and these entities no
+longer return as `null`. For `PageLoaderElement`, you directly use
+its `.exists` getter to check.
+
+```dart
+PageLoaderElement myElement = ...;
+expect(myElement.exists, isTrue);
+```
+
+For PageObjects, matchers are provided:
+
+```dart
+import 'package:pageloader/testing.dart';
+
+SomePO somePO = new SomePO.create(context);
+expect(somePO, exists);
+```
 
 What is synchronous/asynchronous?
 =================================
