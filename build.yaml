@@ -27,3 +27,5 @@ builders:
     build_extensions: {".dart": [".g.dart"]}
     auto_apply: dependents
     build_to: source
+    defaults:
+      generate_for: ["test/**", "testing/**"]
