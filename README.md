@@ -69,10 +69,9 @@ final myPO = new MyPO.create(context);
 ```
 
 `createFromElement` has an additional named argument `SyncFn externalSyncFn`
-with `SyncFn` being `typedef Future<T> SyncFn<T>(Future<T> fn());`. This 
-synchronizing function is called on asynchronous events (click, type, etc.)
-and ensures that these events have time to take into effect. By default,
-this is a no-op function. 
+with `SyncFn`. This synchronizing function is called on asynchronous events 
+(click, type, etc.) and ensures that these events have time to take 
+into effect. By default, this is a no-op function. 
 
 An example of a custom sync function:
 
