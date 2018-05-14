@@ -55,11 +55,62 @@ abstract class MyPO {
 Above is the bare minimum boilerplate code needed for a PageObject.
 Feel free to cut/paste this when starting new page objects.
 
-Construction of these PageObjects are easy; call the 'create' constructor
-and pass in the context. You want the `<html>` node for tests.
+To construct a PageObject, use this `create` constructor on either
+`HtmlPageLoaderElement` or `WebdriverPageLoaderElement`.
+
+### `HtmlPageLoaderElement` example:
 
 ```dart
-final myPO = new MyPO.create(pageLoaderElementContext);
+import 'package:pageloader/html.dart';
+
+Element myElement = ...;
+final context = new HtmlPageLoaderElement.createFromElement(myElement);
+final myPO = new MyPO.create(context);
+```
+
+`createFromElement` has an additional named argument `SyncFn externalSyncFn`.
+This synchronizing function is called on asynchronous events 
+(click, type, etc.) and ensures that these events have time to take 
+into effect. By default, this is a no-op function. 
+
+An example of a custom sync function:
+
+```dart
+new HtmlPageLoaderElement.createFromElement(myElement,
+        externalSyncFn: (Future action()) async {
+      await action();
+      // Wait longer than normal
+      for (var i = 0; i < 1000; i++) {
+        await new Future.value();
+      }
+    });
+```
+
+Note that this `externalSyncFn` is then called on every asynchronous method
+of that `HtmlPageLoaderElement` as well as its childrens' 
+`HtmlPageLoaderElement`s. Refer to **"What is synchronous/asynchronous"** section
+for more information about which events are asynchronous.
+
+### `WebdriverPageLoaderElement` example:
+
+```dart
+import 'package:pageloader/webdriver.dart';
+import 'package:webdriver/sync_io.dart';
+
+String pagePath = ...; // Page uri path
+Webdriver driver = ...; // Refer to Webdriver package documentation
+WebDriverPageUtils loader = new WebDriverPageUtils(driver);
+driver.get(pagePath);
+
+WebDriverPageLoaderElement context = loader.root;
+WebDriverMouse get mouse = loader.mouse;
+
+final myPO = new MyPO.create(context);
+
+// ...run tests...
+
+loader = null;
+driver.quit();
 ```
 
 How do I trigger the generation step?
@@ -68,7 +119,7 @@ How do I trigger the generation step?
 
 Lazy Loading
 ============
-In PageLoader3, all elements are lazy.
+Starting from version 3, all elements are lazy.
 
 ```dart
 final myPO = new MyPO.create(pageLoaderElementContext);
@@ -85,6 +136,49 @@ expect(anotherPO.innertext, 'text'); // Finds page object again and reads inner 
 
 This matches how the rest of the API worked: you read attributes lazily,
 you read text lazily, and now you find elements lazily.
+
+Existence Checking
+==================
+
+In PageLoader version 2.X.X, the `@optional` tag was used to mark some entity
+as possibly not existing. For example:
+
+```dart
+// Pageloader2
+class MyPO {
+  @optional
+  @ByTagName('maybe-here')
+  PageLoaderElement someElement;
+  
+  @optional
+  @ByTagName('also-maybe-here')
+  SomePO somePO;
+}
+```
+
+In the case that either `someElement` or `somePO` did not
+exist, it would have `null` value. 
+
+Starting from version 3, `@optional` is removed and these entities no
+longer return as `null`. For `PageLoaderElement`, you directly use
+its `.exists` getter to check or use provided matchers.
+
+```dart
+import 'package:pageloader/testing.dart';
+
+PageLoaderElement myElement = ...;
+expect(myElement.exists, isTrue);
+expect(myElement, exists);
+```
+
+For PageObjects, use provided matchers:
+
+```dart
+import 'package:pageloader/testing.dart';
+
+SomePO somePO = new SomePO.create(context);
+expect(somePO, exists);
+```
 
 What is synchronous/asynchronous?
 =================================
@@ -104,6 +198,34 @@ Future<bool> doSomething() async {
   return myOtherElement.attributes['someattr'] == 'value';
 }
 ```
+
+### Why do we still have async methods?
+
+Interactions, e.g. clicking, typing, etc. still return `Future`s. Why?
+
+Remember that component tests actually run in the browser, with the component,
+in the same thread. Dart (like JavaScript) has no threads, so if the test is
+doing something then the component is not. If the whole test is synchronous
+it'll execute start to finish without any pause, as one massive action in
+the event loop.
+
+So, we'll type something, but the component won't update... because it
+can't actually execute. And the next line, where we assert something about
+the component it will fail:
+
+```dart
+myPo.type('someKeys');
+expect(myPo.someElement.innerText, 'someKeys'); // This won't work!
+```
+
+We need to allow the component to update. Having interactions with the browser
+(i.e. clicking, typing) be asynchronous allows the component to change:
+
+```dart
+await myPo.type('someKeys'); // Generates a Future.
+expect(myPo.someElement.innerText, 'someKeys'); // This is fine now.
+```
+
 
 Inheritance
 ===========
