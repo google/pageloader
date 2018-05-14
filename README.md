@@ -161,14 +161,17 @@ exist, it would have `null` value.
 
 Starting from version 3, `@optional` is removed and these entities no
 longer return as `null`. For `PageLoaderElement`, you directly use
-its `.exists` getter to check.
+its `.exists` getter to check or use provided matchers.
 
 ```dart
+import 'package:pageloader/testing.dart';
+
 PageLoaderElement myElement = ...;
 expect(myElement.exists, isTrue);
+expect(myElement, exists);
 ```
 
-For PageObjects, matchers are provided:
+For PageObjects, use provided matchers:
 
 ```dart
 import 'package:pageloader/testing.dart';
