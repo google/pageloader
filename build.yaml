@@ -28,4 +28,4 @@ builders:
     auto_apply: dependents
     build_to: source
     defaults:
-      generate_for: ["test/**", "testing/**"]
+      generate_for: ["test/**/*_po.dart", "testing/**/*_po.dart"]
