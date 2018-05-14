@@ -119,7 +119,7 @@ How do I trigger the generation step?
 
 Lazy Loading
 ============
-In PageLoader3, all elements are lazy.
+Starting from version 3, all elements are lazy.
 
 ```dart
 final myPO = new MyPO.create(pageLoaderElementContext);
