@@ -143,6 +143,7 @@ Existence Checking
 In PageLoader version 2.X.X, the `@optional` tag was used to mark some entity
 as possibly not existing. For example:
 
+```dart
 // Pageloader2
 class MyPO {
   @optional
@@ -153,11 +154,12 @@ class MyPO {
   @ByTagName('also-maybe-here')
   SomePO somePO;
 }
+```
 
 In the case that either `someElement` or `somePO` did not
 exist, it would have `null` value. 
 
-From version 3, `@optional` is removed and these entities no
+Starting from version 3, `@optional` is removed and these entities no
 longer return as `null`. For `PageLoaderElement`, you directly use
 its `.exists` getter to check.
 
