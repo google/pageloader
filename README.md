@@ -55,7 +55,7 @@ abstract class MyPO {
 Above is the bare minimum boilerplate code needed for a PageObject.
 Feel free to cut/paste this when starting new page objects.
 
-To construct a Page Object, use this `create` constructor on either
+To construct a PageObject, use this `create` constructor on either
 `HtmlPageLoaderElement` or `WebdriverPageLoaderElement`.
 
 ### `HtmlPageLoaderElement` example:
