@@ -59,7 +59,7 @@ For example:
 1. `test/page_objects/special_po.dart` will work
 2. `testing/foo/page_objects/special_po.dart` will work
 3. `lib/src/foo/my_po.dart` will not work
-    * File is located in `lib/...` directory
+    * File is located in `lib/...` directory; must be in `test/...`
 
 The above restriction is only **temporary** and will be relaxed in the future.
 But by convention, this should be done even after the requirement is relaxed.
