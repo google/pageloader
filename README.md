@@ -55,10 +55,11 @@ abstract class MyPO {
 **PageObject containing Dart files must be within either in `test/...` or
 `testing/...` directory for the code generation step.**
 
-For example: 
-1. `lib/src/foo/my_po.dart` will not work
-2. `test/foo/bar/special_po.dart` will work
-3. `testing/foo/special_po.dart` will work
+For example:
+1. `test/page_objects/special_po.dart` will work
+2. `testing/foo/page_objects/special_po.dart` will work
+3. `lib/src/foo/my_po.dart` will not work
+    * File is located in `lib/...` directory
 
 The above restriction is only **temporary** and will be relaxed in the future.
 But by convention, this should be done even after the requirement is relaxed.
