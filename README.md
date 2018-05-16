@@ -52,6 +52,18 @@ abstract class MyPO {
 }
 ```
 
+**PageObject containing Dart files must be in `test/...` directory
+for the code generation step to occur.**
+
+For example:
+1. `test/page_objects/special_po.dart` will work
+2. `test/src/page_objects/special_po.dart` will work
+3. `lib/src/foo/my_po.dart` will not work
+    * File is located in `lib/...` directory; must be in `test/...`
+
+The above restriction is only **temporary** and will be relaxed in the future.
+But by convention, this should be done even after the requirement is relaxed.
+
 Above is the bare minimum boilerplate code needed for a PageObject.
 Feel free to cut/paste this when starting new page objects.
 
