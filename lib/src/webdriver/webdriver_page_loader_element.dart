@@ -268,8 +268,8 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   Rectangle get offset {
-    final Map<String, num> rect =
-        _retryWhenStale(() => _driver.execute('''return {
+    final rect =
+        _retryWhenStale<Map>(() => _driver.execute('''return {
           left: arguments[0].offsetLeft,
           top: arguments[0].offsetTop,
           width: arguments[0].offsetWidth,
@@ -281,7 +281,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   Rectangle getBoundingClientRect() {
-    final Map<String, num> rect = _retryWhenStale(() => _driver.execute(
+    final rect = _retryWhenStale<Map>(() => _driver.execute(
         'return arguments[0].getBoundingClientRect();', [_single.context]));
     return new Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
