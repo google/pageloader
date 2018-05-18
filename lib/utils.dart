@@ -30,23 +30,18 @@ import 'src/api/page_object_list_interface.dart';
 ///    Future submit() => exists(submitButton) ? submitButton.click() : null;
 ///
 
-// TODO: Consider using rootElementOf here, since many of these
-// utils duplicate its functionality.
-
 /// A matcher that checks if a PageLoaderElement/PageObject exists.
 /// If used on a List annotated by a Pageloader annotation, checks to see
 /// if not empty.
 bool exists(item) {
-  if (item is PageLoaderElement) {
-    return item.exists;
-  }
   if (item is PageObjectList) {
     return item.isNotEmpty;
   }
   try {
-    return item.$root.exists;
-  } catch (_) {}
-  return false;
+    return rootElementOf(item).exists;
+  } catch (_) {
+    throw new PageLoaderUtilsError.existsError();
+  }
 }
 
 /// A matcher that checks if a PageLoaderElement/PageObject does not exist.
@@ -54,25 +49,21 @@ bool notExists(item) => !exists(item);
 
 /// Checks if a PageLoaderElement/PageObject contains given class.
 bool hasClass(item, String className) {
-  if (item is PageLoaderElement) {
-    return item.classes.contains(className);
-  }
   try {
-    return item.$root.classes.contains(className);
-  } catch (_) {}
-  return false;
+    return rootElementOf(item).classes.contains(className);
+  } catch (_) {
+    throw new PageLoaderUtilsError.hasClassError();
+  }
 }
 
 /// Checks if a PageLoaderElement/PageObject is displayed based on "display"
 /// style.
 bool isDisplayed(item) {
-  if (item is PageLoaderElement) {
-    return item.displayed;
-  }
   try {
-    return item.$root.displayed;
-  } catch (_) {}
-  return false;
+    return rootElementOf(item).displayed;
+  } catch (_) {
+    throw new PageLoaderUtilsError.isDisplayedError();
+  }
 }
 
 /// Checks if a PageLoaderElement/PageObject is not displayed based on
@@ -81,13 +72,11 @@ bool isNotDisplayed(item) => !isDisplayed(item);
 
 /// Checks if PageLoaderElement/PageObject is focused.
 bool isFocused(item) {
-  if (item is PageLoaderElement) {
-    return item.isFocused;
-  }
   try {
-    return item.$root.isFocused;
-  } catch (_) {}
-  return false;
+    return rootElementOf(item).isFocused;
+  } catch (_) {
+    throw new PageLoaderUtilsError.isFocusedError();
+  }
 }
 
 /// Checks if PageLoaderElement/PageObject is not focused.
@@ -95,13 +84,11 @@ bool isNotFocused(item) => !isFocused(item);
 
 /// Gets the innerText of a PageLoaderElement/PageObject.
 String getInnerText(item) {
-  if (item is PageLoaderElement) {
-    return item.innerText;
-  }
   try {
-    return item.$root.innerText;
-  } catch (_) {}
-  return null;
+    return rootElementOf(item).innerText;
+  } catch (_) {
+    throw new PageLoaderUtilsError.innerTextError();
+  }
 }
 
 /// Function for PageObject constructor. Typically in form:
@@ -131,7 +118,36 @@ PageLoaderElement rootElementOf(item) {
   try {
     return item.$root;
   } catch (_) {
-    throw "'rootElementOf' may only be called on PageObjects. "
-        "'${item.runtimeType}' is not a PageObject.";
+    throw new PageLoaderUtilsError.rootElementOfError();
   }
+}
+
+class PageLoaderUtilsError extends Error {
+  final String message;
+
+  PageLoaderUtilsError._(this.message);
+
+  static String _message(String f) => "'$f' may only be called on PageObjects"
+      'or PageLoaderElements';
+
+  factory PageLoaderUtilsError.existsError() =>
+      new PageLoaderUtilsError._(_message('exists/notExists'));
+
+  factory PageLoaderUtilsError.hasClassError() =>
+      new PageLoaderUtilsError._(_message('hasClass'));
+
+  factory PageLoaderUtilsError.isDisplayedError() =>
+      new PageLoaderUtilsError._(_message('isDisplayed/isNotDisplayed'));
+
+  factory PageLoaderUtilsError.isFocusedError() =>
+      new PageLoaderUtilsError._(_message('isFocused/isNotFocused'));
+
+  factory PageLoaderUtilsError.innerTextError() =>
+      new PageLoaderUtilsError._(_message('getInnerText/hasInnerText'));
+
+  factory PageLoaderUtilsError.rootElementOfError() =>
+      new PageLoaderUtilsError._(_message('rootElementOf'));
+
+  @override
+  String toString() => message;
 }
