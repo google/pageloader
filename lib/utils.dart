@@ -40,7 +40,7 @@ bool exists(item) {
   try {
     return rootElementOf(item).exists;
   } catch (_) {
-    throw new PageLoaderUtilsError.existsError();
+    throw new PageLoaderArgumentError.existsError();
   }
 }
 
@@ -52,7 +52,7 @@ bool hasClass(item, String className) {
   try {
     return rootElementOf(item).classes.contains(className);
   } catch (_) {
-    throw new PageLoaderUtilsError.hasClassError();
+    throw new PageLoaderArgumentError.hasClassError();
   }
 }
 
@@ -62,7 +62,7 @@ bool isDisplayed(item) {
   try {
     return rootElementOf(item).displayed;
   } catch (_) {
-    throw new PageLoaderUtilsError.isDisplayedError();
+    throw new PageLoaderArgumentError.isDisplayedError();
   }
 }
 
@@ -75,7 +75,7 @@ bool isFocused(item) {
   try {
     return rootElementOf(item).isFocused;
   } catch (_) {
-    throw new PageLoaderUtilsError.isFocusedError();
+    throw new PageLoaderArgumentError.isFocusedError();
   }
 }
 
@@ -87,7 +87,7 @@ String getInnerText(item) {
   try {
     return rootElementOf(item).innerText;
   } catch (_) {
-    throw new PageLoaderUtilsError.innerTextError();
+    throw new PageLoaderArgumentError.innerTextError();
   }
 }
 
@@ -118,36 +118,31 @@ PageLoaderElement rootElementOf(item) {
   try {
     return item.$root;
   } catch (_) {
-    throw new PageLoaderUtilsError.rootElementOfError();
+    throw new PageLoaderArgumentError.rootElementOfError();
   }
 }
 
-class PageLoaderUtilsError extends Error {
-  final String message;
-
-  PageLoaderUtilsError._(this.message);
+class PageLoaderArgumentError extends ArgumentError {
+  PageLoaderArgumentError._(String message) : super(message);
 
   static String _message(String f) => "'$f' may only be called on PageObjects"
       'or PageLoaderElements';
 
-  factory PageLoaderUtilsError.existsError() =>
-      new PageLoaderUtilsError._(_message('exists/notExists'));
+  factory PageLoaderArgumentError.existsError() =>
+      new PageLoaderArgumentError._(_message('exists/notExists'));
 
-  factory PageLoaderUtilsError.hasClassError() =>
-      new PageLoaderUtilsError._(_message('hasClass'));
+  factory PageLoaderArgumentError.hasClassError() =>
+      new PageLoaderArgumentError._(_message('hasClass'));
 
-  factory PageLoaderUtilsError.isDisplayedError() =>
-      new PageLoaderUtilsError._(_message('isDisplayed/isNotDisplayed'));
+  factory PageLoaderArgumentError.isDisplayedError() =>
+      new PageLoaderArgumentError._(_message('isDisplayed/isNotDisplayed'));
 
-  factory PageLoaderUtilsError.isFocusedError() =>
-      new PageLoaderUtilsError._(_message('isFocused/isNotFocused'));
+  factory PageLoaderArgumentError.isFocusedError() =>
+      new PageLoaderArgumentError._(_message('isFocused/isNotFocused'));
 
-  factory PageLoaderUtilsError.innerTextError() =>
-      new PageLoaderUtilsError._(_message('getInnerText/hasInnerText'));
+  factory PageLoaderArgumentError.innerTextError() =>
+      new PageLoaderArgumentError._(_message('getInnerText/hasInnerText'));
 
-  factory PageLoaderUtilsError.rootElementOfError() =>
-      new PageLoaderUtilsError._(_message('rootElementOf'));
-
-  @override
-  String toString() => message;
+  factory PageLoaderArgumentError.rootElementOfError() =>
+      new PageLoaderArgumentError._(_message('rootElementOf'));
 }
