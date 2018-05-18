@@ -24,7 +24,7 @@ if [[ $ANALYSIS_STATUS -ne 0 ]]; then
 fi
 
 # Run non-html and non-webdriver tests
-core_tests=("test/core_method_information_test.dart" "test/correct_gen_test.dart" "test/matchers_test.dart")
+core_tests=("test/core_method_information_test.dart" "test/correct_gen_test.dart" "test/matchers_test.dart" "test/utils_test.dart")
 
 for test in ${core_tests[@]}
 do

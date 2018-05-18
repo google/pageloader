@@ -40,7 +40,7 @@ abstract class Setter implements Built<Setter, SetterBuilder> {
   String get setterValueName;
 
   String generate(String pageObjectName) {
-    return 'void set $name($setterType $setterValueName) { ' +
+    return 'set $name($setterType $setterValueName) { ' +
         generateStartMethodListeners(pageObjectName, name) +
         'super.$name = $setterValueName; ' +
         generateEndMethodListeners(pageObjectName, name) +
