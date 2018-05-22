@@ -1,6 +1,6 @@
 name: pageloader
 
-version: 3.0.0-dev
+version: 3.0.0-alpha
 
 authors:
   - Marc Fisher II (emeritus) <fisherii@google.com>
