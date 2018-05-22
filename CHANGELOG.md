@@ -1,8 +1,9 @@
-## 3.0.0
+## 3.0.0-alpha
 
 - Dart 2 compatible version that uses code generation instead of
   mirrors.
 - Dropped `@FirstByCss()` annotation class. Use `@First(ByCss(...))`.
+- Added matchers for `PageLoaderElement` and PageObjects.
 
 ## 2.2.6
 
