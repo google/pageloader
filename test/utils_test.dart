@@ -43,6 +43,14 @@ void main() {
     expect(() => isNotDisplayed(foo), utilsError);
   });
 
+  test('isHidden fails', () {
+    expect(() => isHidden(foo), utilsError);
+  });
+
+  test('isNotHidden fails', () {
+    expect(() => isNotHidden(foo), utilsError);
+  });
+
   test('isFocused fails', () {
     expect(() => isFocused(foo), utilsError);
   });
