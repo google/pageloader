@@ -70,6 +70,25 @@ bool isDisplayed(item) {
 /// "display" style.
 bool isNotDisplayed(item) => !isDisplayed(item);
 
+const _hidden = const ['hidden', 'collapse'];
+
+/// Checks if a PageLoaderElement/PageObject is hidden based on "visibility"
+/// style.
+///
+/// A PageLoaderElement/PageObject is considered hidden if its `visibility`
+/// style is either `hidden` or `collapse`.
+bool isHidden(item) {
+  try {
+    return _hidden.contains(rootElementOf(item).computedStyle['visibility']);
+  } catch (_) {
+    throw new PageLoaderArgumentError.isHiddenError();
+  }
+}
+
+/// Checks if PageLoaderElement/PageObject is not hidden based on "visibility"
+/// style.
+bool isNotHidden(item) => !isHidden(item);
+
 /// Checks if PageLoaderElement/PageObject is focused.
 bool isFocused(item) {
   try {
@@ -136,6 +155,9 @@ class PageLoaderArgumentError extends ArgumentError {
 
   factory PageLoaderArgumentError.isDisplayedError() =>
       new PageLoaderArgumentError._(_message('isDisplayed/isNotDisplayed'));
+
+  factory PageLoaderArgumentError.isHiddenError() =>
+      new PageLoaderArgumentError._(_message('isHidden/isNotHidden'));
 
   factory PageLoaderArgumentError.isFocusedError() =>
       new PageLoaderArgumentError._(_message('isFocused/isNotFocused'));

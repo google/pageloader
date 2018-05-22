@@ -15,6 +15,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:pageloader/pageloader.dart';
+import 'package:quiver/collection.dart';
 
 /// Concrete implementations for use in code generation tests, mostly via
 /// toString().
@@ -86,6 +87,7 @@ class DummyPageLoaderElement implements PageLoaderElement {
   final bool _focused;
   final bool _displayed;
   final _classes = <String>[];
+  final _computedStyle = new DummyPageLoaderAttributes();
 
   DummyPageLoaderElement(
       {bool exists: true,
@@ -186,7 +188,7 @@ class DummyPageLoaderElement implements PageLoaderElement {
   PageLoaderAttributes get properties => throw 'not implemented';
 
   @override
-  PageLoaderAttributes get computedStyle => throw 'not implemented';
+  PageLoaderAttributes get computedStyle => _computedStyle;
 
   @override
   PageLoaderAttributes get style => throw 'not implemented';
@@ -231,4 +233,12 @@ class DummyPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<Null> blur() => throw 'not implemented';
+}
+
+class DummyPageLoaderAttributes extends DelegatingMap<String, String>
+    implements PageLoaderAttributes {
+  final _map = <String, String>{};
+
+  @override
+  Map<String, String> get delegate => _map;
 }

@@ -16,7 +16,7 @@ import 'package:pageloader/testing.dart';
 import 'package:test/test.dart';
 
 import 'generation_test_setup/dummy_page_loader_element.dart'
-    show DummyPageLoaderElement;
+    show DummyPageLoaderElement, DummyPageLoaderAttributes;
 
 void main() {
   test('exists', () {
@@ -57,6 +57,31 @@ void main() {
 
     expect(context, isNotDisplayed);
     expect(po, isNotDisplayed);
+  });
+
+  test('isHidden', () {
+    final context1 = new DummyPageLoaderElement();
+    (context1.computedStyle as DummyPageLoaderAttributes)['visibility'] =
+        'hidden';
+    final context2 = new DummyPageLoaderElement();
+    (context2.computedStyle as DummyPageLoaderAttributes)['visibility'] =
+        'collapse';
+
+    final po1 = new DummyPO(context1);
+    final po2 = new DummyPO(context2);
+
+    expect(context1, isHidden);
+    expect(context2, isHidden);
+    expect(po1, isHidden);
+    expect(po2, isHidden);
+  });
+
+  test('isNotHidden', () {
+    final context = new DummyPageLoaderElement();
+    final po = new DummyPO(context);
+
+    expect(context, isNotHidden);
+    expect(po, isNotHidden);
   });
 
   test('isFocused', () {

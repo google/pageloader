@@ -12,7 +12,6 @@
 // limitations under the License.
 
 import 'package:matcher/matcher.dart';
-
 import 'package:pageloader/utils.dart' as utils;
 
 /// A matcher that checks if a PageLoaderElement/PageObject exists.
@@ -32,6 +31,16 @@ const Matcher isDisplayed = const _IsDisplayed();
 /// A matcher that checks if a PageLoaderElement/PageObject is not displayed
 /// based on "display" style.
 Matcher isNotDisplayed = isNot(isDisplayed);
+
+/// A matcher that checks if a PageLoaderElement/PageObject is hidden.
+///
+/// Checks that the item's `visibility` is `hidden` or `collapse`.
+/// Does not check whether the item has been hidden by other means, e.g., being
+/// obscured by other elements.
+const Matcher isHidden = const _IsHidden();
+
+/// A matcher that checks if a PageLoaderElement/PageObject is not hidden.
+Matcher isNotHidden = isNot(isHidden);
 
 /// A matcher that checks if PageLoaderElement/PageObject is focused.
 const Matcher isFocused = const _IsFocused();
@@ -77,6 +86,17 @@ class _IsDisplayed extends Matcher {
   @override
   Description describe(Description description) =>
       description.add('$_item is displayed');
+}
+
+class _IsHidden extends Matcher {
+  const _IsHidden();
+
+  @override
+  bool matches(item, Map matchState) => utils.isHidden(item);
+
+  @override
+  Description describe(Description description) =>
+      description.add('PageLoaderElement/PageObject is hidden');
 }
 
 class _IsFocused extends Matcher {
