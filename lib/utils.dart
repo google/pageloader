@@ -40,11 +40,10 @@ bool exists(item) {
   }
   try {
     return rootElementOf(item).exists;
-  } on PageLoaderException catch (e) {
-    // On PageLoaderException, throw it back.
-    throw e;
-  } on PageLoaderArgumentError catch (e) {
-    throw e;
+  } on PageLoaderException {
+    rethrow;
+  } on PageLoaderArgumentError {
+    rethrow;
   } catch (_) {
     throw new PageLoaderArgumentError.onWrongType('exists/notExists');
   }
