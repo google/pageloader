@@ -144,7 +144,7 @@ PageLoaderElement rootElementOf(item) {
 class PageLoaderArgumentError extends ArgumentError {
   PageLoaderArgumentError._(String message) : super(message);
 
-  static String _message(String f) => "'$f' may only be called on PageObjects"
+  static String _message(String f) => "'$f' may only be called on PageObjects "
       'or PageLoaderElements';
 
   factory PageLoaderArgumentError.existsError() =>
