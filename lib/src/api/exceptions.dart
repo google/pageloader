@@ -15,6 +15,11 @@ library pageloader.api.exceptions;
 
 import 'page_loader_element_interface.dart';
 
+class FoundZeroElementsInSingleException extends PageLoaderException {
+  const FoundZeroElementsInSingleException(PageLoaderElement element)
+      : super.withContext('Found 0 elements in _single', element);
+}
+
 class PageLoaderException {
   final String message;
   final PageLoaderElement element;
