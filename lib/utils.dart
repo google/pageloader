@@ -46,8 +46,7 @@ bool exists(item) {
   } on PageLoaderArgumentError catch (e) {
     throw e;
   } catch (_) {
-    throw _;
-    //throw new PageLoaderArgumentError.onWrongType('exists/notExists');
+    throw new PageLoaderArgumentError.onWrongType('exists/notExists');
   }
 }
 
