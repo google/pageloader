@@ -120,8 +120,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
     final elems = elements;
     if (elems.isEmpty) {
-      throw new PageLoaderException.withContext(
-          'Found 0 elements in _single', this);
+      throw new FoundZeroElementsInSingleException(this);
     } else if (elems.length > 1) {
       throw new PageLoaderException.withContext(
           'Found multiple elements in _single', this);
@@ -219,7 +218,13 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   @override
   bool get exists {
-    final count = (elements).length;
+    List<Element> foundElements;
+    try {
+      foundElements = elements;
+    } on FoundZeroElementsInSingleException {
+      return false;
+    }
+    final count = foundElements.length;
     if (count == 1)
       return true;
     else if (count == 0) return false;
