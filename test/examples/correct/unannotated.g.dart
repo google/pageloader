@@ -27,7 +27,7 @@ class $Unannotated extends Unannotated with $$Unannotated {
     return returnMe;
   }
 
-  void set myField(bool setValue) {
+  set myField(bool setValue) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Unannotated', 'myField');
     }

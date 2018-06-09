@@ -20,6 +20,11 @@ class FoundZeroElementsInSingleException extends PageLoaderException {
       : super.withContext('Found 0 elements in _single', element);
 }
 
+class FoundMultipleElementsInSingleException extends PageLoaderException {
+  const FoundMultipleElementsInSingleException(PageLoaderElement element)
+      : super.withContext('Found multiple elements in _single', element);
+}
+
 class PageLoaderException {
   final String message;
   final PageLoaderElement element;

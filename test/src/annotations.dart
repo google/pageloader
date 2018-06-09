@@ -81,6 +81,10 @@ void runTests(GetNewContext contextGenerator) {
       final page = new DebugIds.create(contextGenerator());
       expect(page.option1.innerText, 'option 1');
       expect(page.option2.innerText, 'option 2');
+      expect(page.option3.innerText, 'option 3');
+      expect(page.usePlain.innerText, 'option 1');
+      expect(page.useDash.innerText, 'option 2');
+      expect(page.useCamelCase.innerText, 'option 3');
     });
   });
 
@@ -238,11 +242,23 @@ abstract class DebugIds {
   DebugIds();
   factory DebugIds.create(PageLoaderElement context) = $DebugIds.create;
 
-  @ByDebugId('option')
+  @ByDebugId('option1')
   PageLoaderElement get option1;
 
-  @ByDebugId('option', useDash: true)
+  @ByDebugId('option2')
   PageLoaderElement get option2;
+
+  @ByDebugId('option3')
+  PageLoaderElement get option3;
+
+  @ByDebugId('option1', usePlain: true)
+  PageLoaderElement get usePlain;
+
+  @ByDebugId('option2', useDash: true)
+  PageLoaderElement get useDash;
+
+  @ByDebugId('option3', useCamelCase: true)
+  PageLoaderElement get useCamelCase;
 }
 
 class PseudoByTagName implements CssFinder {
