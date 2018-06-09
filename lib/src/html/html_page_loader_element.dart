@@ -122,8 +122,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
     if (elems.isEmpty) {
       throw new FoundZeroElementsInSingleException(this);
     } else if (elems.length > 1) {
-      throw new PageLoaderException.withContext(
-          'Found multiple elements in _single', this);
+      throw new FoundMultipleElementsInSingleException(this);
     }
     _cachedElement = elems[0];
     return _cachedElement;
@@ -217,20 +216,17 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       _retryWhenStale(() => document.activeElement == _single);
 
   @override
-  bool get exists {
-    List<Element> foundElements;
-    try {
-      foundElements = elements;
-    } on FoundZeroElementsInSingleException {
-      return false;
-    }
-    final count = foundElements.length;
-    if (count == 1)
-      return true;
-    else if (count == 0) return false;
-    throw new PageLoaderException.withContext(
-        'Found $count elements on call to exists', this);
-  }
+  bool get exists => _retryWhenStale(() {
+        try {
+          _single;
+        } on FoundZeroElementsInSingleException {
+          return false;
+        } on FoundMultipleElementsInSingleException {
+          throw new PageLoaderException.withContext(
+              'Found multiple elements on call to exists', this);
+        }
+        return true;
+      });
 
   @override
   Rectangle get offset => _retryWhenStale(() => _single.offset);
