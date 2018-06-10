@@ -106,8 +106,8 @@ void runTests(GetNewContext contextGenerator) {
       } catch (e) {
         expect(
             e.toString(),
-            contains('PageLoaderException: Found multiple elements '
-                'on call to exists'));
+            contains(
+                'PageLoaderException: Found 4 elements on call to exists'));
       }
     });
 

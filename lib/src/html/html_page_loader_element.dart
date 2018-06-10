@@ -216,17 +216,14 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       _retryWhenStale(() => document.activeElement == _single);
 
   @override
-  bool get exists => _retryWhenStale(() {
-        try {
-          _single;
-        } on FoundZeroElementsInSingleException {
-          return false;
-        } on FoundMultipleElementsInSingleException {
-          throw new PageLoaderException.withContext(
-              'Found multiple elements on call to exists', this);
-        }
-        return true;
-      });
+  bool get exists {
+    final count = (elements).length;
+    if (count == 1)
+      return true;
+    else if (count == 0) return false;
+    throw new PageLoaderException.withContext(
+        'Found $count elements on call to exists', this);
+  }
 
   @override
   Rectangle get offset => _retryWhenStale(() => _single.offset);

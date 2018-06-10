@@ -12,7 +12,6 @@
 // limitations under the License.
 
 import 'src/api/annotation_interfaces.dart';
-import 'src/api/exceptions.dart' show PageLoaderException;
 import 'src/api/page_loader_element_interface.dart';
 import 'src/api/page_object_list_interface.dart';
 
@@ -38,15 +37,7 @@ bool exists(item) {
   if (item is PageObjectList) {
     return item.isNotEmpty;
   }
-  try {
-    return rootElementOf(item).exists;
-  } on PageLoaderException {
-    rethrow;
-  } on PageLoaderArgumentError {
-    rethrow;
-  } catch (_) {
-    throw new PageLoaderArgumentError.onWrongType('exists/notExists');
-  }
+  return _rootElementOfAndRethrow(item, 'exists/notExists').exists;
 }
 
 /// A matcher that checks if a PageLoaderElement/PageObject does not exist.
@@ -54,12 +45,12 @@ bool notExists(item) => !exists(item);
 
 /// Checks if a PageLoaderElement/PageObject contains given class.
 bool hasClass(item, String className) =>
-    _rootElementOfAndCheck(item, 'hasClass').classes.contains(className);
+    _rootElementOfAndRethrow(item, 'hasClass').classes.contains(className);
 
 /// Checks if a PageLoaderElement/PageObject is displayed based on "display"
 /// style.
 bool isDisplayed(item) =>
-    _rootElementOfAndCheck(item, 'isDisplayed/isNotDisplayed').displayed;
+    _rootElementOfAndRethrow(item, 'isDisplayed/isNotDisplayed').displayed;
 
 /// Checks if a PageLoaderElement/PageObject is not displayed based on
 /// "display" style.
@@ -73,7 +64,7 @@ const _hidden = const ['hidden', 'collapse'];
 /// A PageLoaderElement/PageObject is considered hidden if its `visibility`
 /// style is either `hidden` or `collapse`.
 bool isHidden(item) =>
-    _hidden.contains(_rootElementOfAndCheck(item, 'isHidden/isNotHidden')
+    _hidden.contains(_rootElementOfAndRethrow(item, 'isHidden/isNotHidden')
         .computedStyle['visibility']);
 
 /// Checks if PageLoaderElement/PageObject is not hidden based on "visibility"
@@ -82,14 +73,14 @@ bool isNotHidden(item) => !isHidden(item);
 
 /// Checks if PageLoaderElement/PageObject is focused.
 bool isFocused(item) =>
-    _rootElementOfAndCheck(item, 'isFocused/isNotFocused').isFocused;
+    _rootElementOfAndRethrow(item, 'isFocused/isNotFocused').isFocused;
 
 /// Checks if PageLoaderElement/PageObject is not focused.
 bool isNotFocused(item) => !isFocused(item);
 
 /// Gets the innerText of a PageLoaderElement/PageObject.
 String getInnerText(item) =>
-    _rootElementOfAndCheck(item, 'getInnerText').innerText;
+    _rootElementOfAndRethrow(item, 'getInnerText').innerText;
 
 /// Function for PageObject constructor. Typically in form:
 ///   (c) => new SomePO.create(c)
@@ -117,24 +108,20 @@ PageLoaderElement rootElementOf(item) {
   }
   try {
     return item.$root;
-  } catch (_) {
+  } on NoSuchMethodError {
     throw new PageLoaderArgumentError.onWrongType('rootElementOf');
   }
 }
 
-/// First checks to see if 'item' is either PageLoaderElement or PageObject.
-/// If neither, throws an error.
-/// Then checks to see if 'item' exists. If it doesn't exist, throws an error.
-/// Returns 'item' as PageLoaderElement.
-PageLoaderElement _rootElementOfAndCheck(item, String f) {
+/// Grabs root element of a PageLoaderElement or PageObject. If the `item` is
+/// neither, rethrows the error with the utility function used instead of
+/// 'rootElementOf'.
+PageLoaderElement _rootElementOfAndRethrow(item, String f) {
   PageLoaderElement _root;
   try {
     _root = rootElementOf(item);
-  } catch (_) {
+  } on PageLoaderArgumentError {
     throw new PageLoaderArgumentError.onWrongType(f);
-  }
-  if (!_root.exists) {
-    throw new PageLoaderArgumentError.onNonExisting(f);
   }
   return _root;
 }
@@ -145,9 +132,4 @@ class PageLoaderArgumentError extends ArgumentError {
   factory PageLoaderArgumentError.onWrongType(String f) =>
       new PageLoaderArgumentError._("'$f' may only be called on PageObjects "
           "or PageLoaderElements");
-
-  factory PageLoaderArgumentError.onNonExisting(String f) =>
-      new PageLoaderArgumentError._("'$f' is being called on a non-existent "
-          "PageObject or PageLoaderElement. If this "
-          "is intentional, use 'exists' instead.");
 }
