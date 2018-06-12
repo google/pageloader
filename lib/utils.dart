@@ -43,6 +43,10 @@ bool exists(item) {
 /// A matcher that checks if a PageLoaderElement/PageObject does not exist.
 bool notExists(item) => !exists(item);
 
+/// A matcher that checks if a PageLoaderElement/PageObject both exists
+/// and is displayed based on "display" style.
+bool existsAndDisplayed(item) => exists(item) && isDisplayed(item);
+
 /// Checks if a PageLoaderElement/PageObject contains given class.
 bool hasClass(item, String className) =>
     _rootElementOfAndRethrow(item, 'hasClass').classes.contains(className);

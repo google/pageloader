@@ -17,6 +17,10 @@ import 'package:pageloader/utils.dart' as utils;
 /// A matcher that checks if a PageLoaderElement/PageObject exists.
 const Matcher exists = const _Exists();
 
+/// A matcher that checks if a PageLoaderElement/PageObject exists
+/// and is displayed based on "display" style.
+Matcher existsAndDisplayed = allOf(exists, isDisplayed);
+
 /// A matcher that checks if a PageLoaderElement/PageObject does not exist.
 Matcher notExists = isNot(exists);
 
