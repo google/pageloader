@@ -141,8 +141,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     if (elems.isEmpty) {
       throw new FoundZeroElementsInSingleException(this);
     } else if (elems.length > 1) {
-      throw new PageLoaderException.withContext(
-          'Found multiple elements in _single', this);
+      throw new FoundMultipleElementsInSingleException(this);
     }
     _cachedElement = elems[0];
     return _cachedElement;
@@ -257,13 +256,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   bool get exists {
-    List<sync_wd.WebElement> foundElements;
-    try {
-      foundElements = elements;
-    } on FoundZeroElementsInSingleException {
-      return false;
-    }
-    final count = foundElements.length;
+    final count = elements.length;
     if (count == 1)
       return true;
     else if (count == 0) return false;

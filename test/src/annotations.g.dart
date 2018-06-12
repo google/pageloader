@@ -369,7 +369,7 @@ class $$DebugIds {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('DebugIds', 'option1');
     }
-    final element = $__root__.createElement(const ByDebugId('option'), [], []);
+    final element = $__root__.createElement(const ByDebugId('option1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'option1');
@@ -381,11 +381,61 @@ class $$DebugIds {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('DebugIds', 'option2');
     }
-    final element = $__root__
-        .createElement(const ByDebugId('option', useDash: true), [], []);
+    final element = $__root__.createElement(const ByDebugId('option2'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'option2');
+    }
+    return returnMe;
+  }
+
+  PageLoaderElement get option3 {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('DebugIds', 'option3');
+    }
+    final element = $__root__.createElement(const ByDebugId('option3'), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('DebugIds', 'option3');
+    }
+    return returnMe;
+  }
+
+  PageLoaderElement get usePlain {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('DebugIds', 'usePlain');
+    }
+    final element = $__root__
+        .createElement(const ByDebugId('option1', usePlain: true), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('DebugIds', 'usePlain');
+    }
+    return returnMe;
+  }
+
+  PageLoaderElement get useDash {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('DebugIds', 'useDash');
+    }
+    final element = $__root__
+        .createElement(const ByDebugId('option2', useDash: true), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('DebugIds', 'useDash');
+    }
+    return returnMe;
+  }
+
+  PageLoaderElement get useCamelCase {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('DebugIds', 'useCamelCase');
+    }
+    final element = $__root__
+        .createElement(const ByDebugId('option3', useCamelCase: true), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('DebugIds', 'useCamelCase');
     }
     return returnMe;
   }

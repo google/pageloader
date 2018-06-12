@@ -78,16 +78,49 @@ class ByCss implements CssFinder {
 /// Finds element by debugid.
 class ByDebugId implements CssFinder {
   final String _debugId;
-  final String _debugAnnotation;
+  final bool useDash;
+  final bool usePlain;
+  final bool useCamelCase;
 
-  /// @ByDebugId('x') looks for 'debugid="x"'.
+  /// @ByDebugId('x') looks for debug id attribute. By default (no args),
+  /// looks for 'debugid=x', 'debug-id=x', or 'debugId="x"'.
   ///
-  /// @ByDebugId('x', useDash:true) looks for 'debug-id="x"'.
-  const ByDebugId(this._debugId, {bool useDash: false})
-      : _debugAnnotation = 'debug${useDash? '-' : ''}id';
+  /// Args:
+  ///   `useDash` looks for 'debug-id'
+  ///   `usePlain` looks for 'debugid'
+  ///   `useCamelCase` looks for 'debugId'
+  ///
+  /// If one or more named args are provided, looks for only those debug ids:
+  ///   Example: @ByDebugId('x', useDash: true, usePlain: true)
+  ///       looks for 'debug-id=x' or 'debugid=x'
+  const ByDebugId(this._debugId,
+      {this.useDash: false, this.usePlain: false, this.useCamelCase: false});
+
+  String get _default => '$_useDash,$_usePlain,$_useCamelCase';
+
+  String get _useDash => '[debug-id=$_debugId]';
+
+  String get _usePlain => '[debugid=$_debugId]';
+
+  String get _useCamelCase => '[debugId=$_debugId]';
 
   @override
-  String get cssSelector => "[$_debugAnnotation='$_debugId']";
+  String get cssSelector {
+    final selectors = <String>[];
+    if (useDash) {
+      selectors.add(_useDash);
+    }
+    if (usePlain) {
+      selectors.add(_usePlain);
+    }
+    if (useCamelCase) {
+      selectors.add(_useCamelCase);
+    }
+    if (selectors.isEmpty) {
+      return _default;
+    }
+    return selectors.join(',');
+  }
 
   @override
   String toString() => '@ByDebugId("$_debugId")';
