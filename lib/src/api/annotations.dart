@@ -217,6 +217,8 @@ class CheckTags implements Checker {
 /// This is only really useful if you plan to create the page object directly,
 /// e.g. from a test. Otherwise you'll be chaining Finders, which is at best
 /// a performance hit and at worse a cause of tricky bugs.
+@Deprecated("Use '@CheckTag' instead. '@EnsureTag' is only kept to make "
+    "migration easier. Will be removed in a future version.")
 class EnsureTag implements Checker, ContextFinder {
   final String _expectedTagName;
 
