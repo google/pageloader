@@ -45,7 +45,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
     throw new InvalidMethodException(
         node.toSource(), 'multiple Finders cannot be used for single method');
   }
-  String finder = finders.length == 1 ? finders.single : null;
+  var finder = finders.length == 1 ? finders.single : null;
   final filters = methodAnnotations
       .where(isPageloaderFilter)
       .map((a) => generateAnnotationDeclaration(a))
