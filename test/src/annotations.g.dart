@@ -34,6 +34,18 @@ class $$BaseObject {
     return returnMe;
   }
 
+  TableForCheckTag get tableUsingCheckedTag {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('BaseObject', 'tableUsingCheckedTag');
+    }
+    final element = $__root__.createElement(const ByTagName('table'), [], []);
+    final returnMe = new TableForCheckTag.create(element);
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('BaseObject', 'tableUsingCheckedTag');
+    }
+    return returnMe;
+  }
+
   PageLoaderElement get globalTable {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BaseObject', 'globalTable');

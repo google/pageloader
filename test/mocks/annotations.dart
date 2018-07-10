@@ -43,6 +43,10 @@ class CheckTag implements Checker {
   String toString() => '@CheckTag("\$_expectedTagName")';
 }
 
+class ByCheckTag implements Finder {
+  const ByCheckTag();
+}
+
 class ByTagName implements CssFinder {
   final String _tagName;
 

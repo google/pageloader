@@ -47,6 +47,19 @@ class $$Iterables {
     }
     return returnMe;
   }
+
+  PageObjectIterable<CheckTagPO> get checkTagPO {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('Iterables', 'checkTagPO');
+    }
+    final returnMe = new PageObjectIterable<CheckTagPO>(
+        $__root__.createIterable(const ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => new CheckTagPO.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('Iterables', 'checkTagPO');
+    }
+    return returnMe;
+  }
 }
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -83,6 +96,19 @@ class $$InnerObject {
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerObject', 'innerIterable');
+    }
+    return returnMe;
+  }
+
+  PageObjectIterable<CheckTagPO> get innerCheckTagPO {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('InnerObject', 'innerCheckTagPO');
+    }
+    final returnMe = new PageObjectIterable<CheckTagPO>(
+        $__root__.createIterable(const ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => new CheckTagPO.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('InnerObject', 'innerCheckTagPO');
     }
     return returnMe;
   }
@@ -134,6 +160,19 @@ class $$IterablesMixin {
     }
     return returnMe;
   }
+
+  PageObjectIterable<CheckTagPO> get checkTagPO {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('IterablesMixin', 'checkTagPO');
+    }
+    final returnMe = new PageObjectIterable<CheckTagPO>(
+        $__root__.createIterable(const ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => new CheckTagPO.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('IterablesMixin', 'checkTagPO');
+    }
+    return returnMe;
+  }
 }
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -178,6 +217,19 @@ class $$InnerObjectMixin {
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerObjectMixin', 'innerIterable');
+    }
+    return returnMe;
+  }
+
+  PageObjectIterable<CheckTagPO> get innerCheckTagPO {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('InnerObjectMixin', 'innerCheckTagPO');
+    }
+    final returnMe = new PageObjectIterable<CheckTagPO>(
+        $__root__.createIterable(const ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => new CheckTagPO.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('InnerObjectMixin', 'innerCheckTagPO');
     }
     return returnMe;
   }

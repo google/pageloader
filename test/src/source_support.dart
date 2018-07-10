@@ -38,12 +38,16 @@ Future<MethodDeclaration> getMethodDeclaration(
     String methodDeclaration, String methodName,
     {String preamble: ''}) async {
   final classToParse = '''
+import 'dart:async';
 import '/test/root/path/annotations.dart';
 import '/test/root/path/annotation_interfaces.dart';
 
 $preamble
 
 class _SomePageObject_ { $methodDeclaration }
+
+@CheckTag('demo-checked')
+class DemoCheckedPO {}
 ''';
   final driver = new TestDriver();
   final unit = await driver.resultForFile('test_mock.dart', classToParse);

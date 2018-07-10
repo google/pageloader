@@ -45,7 +45,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
     throw new InvalidMethodException(
         node.toSource(), 'multiple Finders cannot be used for single method');
   }
-  final finder = finders.length == 1 ? finders.single : null;
+  String finder = finders.length == 1 ? finders.single : null;
   final filters = methodAnnotations
       .where(isPageloaderFilter)
       .map((a) => generateAnnotationDeclaration(a))
@@ -70,6 +70,11 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
     }
     templateType = typeArguments[0];
     typeArgument = typeArgument.substring(0, typeArgument.indexOf('<'));
+  }
+
+  // Convert 'ByCheckTag' to 'ByTagName' if necessary.
+  if (finder != null && finder.contains('ByCheckTag')) {
+    finder = generateByTagNameFromByCheckTag(node.returnType.type);
   }
 
   if (finder == null) {

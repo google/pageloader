@@ -58,6 +58,12 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
         'return type should specify exactly one type argument');
   }
 
+  // Convert 'ByCheckTag' to 'ByTagName' if necessary.
+  if (finder != null && finder.contains('ByCheckTag')) {
+    finder = generateByTagNameFromByCheckTag(
+        getInnerType(node.returnType.type, typeArguments[0]));
+  }
+
   if (finder == null) {
     if (filters.isNotEmpty) {
       throw new InvalidMethodException(

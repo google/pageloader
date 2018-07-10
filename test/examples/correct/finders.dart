@@ -31,6 +31,22 @@ abstract class Finders {
   @ByCss('some-other-class')
   @WithAttribute('also-with', 'this-attribute')
   PageLoaderElement get filtered;
+
+  @ByCheckTag()
+  CheckTagPO get checkTagPO;
+}
+
+@CheckTag('check-tag-po')
+@PageObject()
+abstract class CheckTagPO {
+  CheckTagPO();
+  factory CheckTagPO.create(PageLoaderElement context) = $CheckTagPO.create;
+
+  @root
+  PageLoaderElement get _root;
+
+  @override
+  String toString() => _root.toString();
 }
 
 // Mixin implementation
@@ -55,4 +71,7 @@ abstract class FindersMixin {
   @ByCss('some-other-class')
   @WithAttribute('also-with', 'this-attribute')
   PageLoaderElement get filtered;
+
+  @ByCheckTag()
+  CheckTagPO get checkTagPO;
 }

@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 // Test failures only; successes are tested in matchers_test.dart
 void main() {
-  final utilsError = throwsA(new isInstanceOf<PageLoaderArgumentError>());
+  final utilsError = throwsA(new TypeMatcher<PageLoaderArgumentError>());
   final foo = 'foo';
 
   test('exists fails', () {

@@ -40,7 +40,7 @@ class WebDriverPageUtils extends PageUtils {
 
   @override
   WebDriverPageLoaderElement byTag(String tag) =>
-      new WebDriverPageLoaderElement(driver).getElementsByCss(tag).single;
+      root.getElementsByCss(tag).single;
 
   /// Gets the mouse.
   @override
