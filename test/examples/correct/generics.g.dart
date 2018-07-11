@@ -6,7 +6,7 @@
 part of 'generics.dart';
 
 // **************************************************************************
-// Generator: PageObjectGenerator
+// PageObjectGenerator
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -175,6 +175,7 @@ class $$GenericsUsingMixin<T> {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$GenericsMixin<T> {
@@ -198,6 +199,7 @@ class $$GenericPairUsingMixin<T, V> {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$GenericPairMixin<T, V> {
@@ -221,6 +223,7 @@ class $$RootPoUsingMixin<T> {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$RootPoMixin<T> {

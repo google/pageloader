@@ -77,7 +77,7 @@ abstract class UnannotatedMethod
     final named = namedParams.isNotEmpty ? '{$namedParams}' : '';
 
     final positionalParams = parameters
-        .where((p) => p.isPositional)
+        .where((p) => p.isOptionalPositional)
         .map((p) => p.toSource())
         .join(', ');
     final positional = positionalParams.isNotEmpty ? '[$positionalParams]' : '';
@@ -97,7 +97,7 @@ abstract class UnannotatedMethod
         .join(', ');
 
     final positional = parameters
-        .where((p) => p.isPositional)
+        .where((p) => p.isOptionalPositional)
         .map((p) => p.element.name)
         .join(', ');
 

@@ -6,7 +6,7 @@
 part of 'unannotated.dart';
 
 // **************************************************************************
-// Generator: PageObjectGenerator
+// PageObjectGenerator
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -126,6 +126,7 @@ class $$UnannotatedUsingMixin {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$UnannotatedMixin {
