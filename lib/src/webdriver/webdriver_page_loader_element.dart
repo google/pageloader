@@ -289,7 +289,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       _retryWhenStale(() => _single
           .findElements(new sync_wd.By.cssSelector(selector))
           .map((elem) => new WebDriverPageLoaderElement.createFromElement(elem))
-          .map((elem) => elem.addListeners(this.listeners))
+          .map((elem) => elem..addListeners(this.listeners))
           .toList());
 
   @override
