@@ -6,7 +6,7 @@
 part of 'generics.dart';
 
 // **************************************************************************
-// Generator: PageObjectGenerator
+// PageObjectGenerator
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -40,6 +40,31 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 }
 
 class $$Generics<T> {
+  PageLoaderElement $__root__;
+  PageLoaderMouse __mouse__;
+  PageLoaderElement get $root => $__root__;
+}
+
+// ignore_for_file: private_collision_in_mixin_application
+class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
+  PageLoaderElement $__root__;
+  $CheckedGenerics.create(PageLoaderElement currentContext)
+      : $__root__ = currentContext {
+    $__root__.addCheckers([new CheckTag('checked-generics')]);
+  }
+  String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('CheckedGenerics', 'typeDefParameter');
+    }
+    final returnMe = super.typeDefParameter(thing, typeDef);
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('CheckedGenerics', 'typeDefParameter');
+    }
+    return returnMe;
+  }
+}
+
+class $$CheckedGenerics<T> {
   PageLoaderElement $__root__;
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
@@ -95,6 +120,19 @@ class $$RootPo<T> {
     return returnMe;
   }
 
+  CheckedGenerics<T> get checkedGenerics {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('RootPo', 'checkedGenerics');
+    }
+    final element =
+        $__root__.createElement(const ByTagName('checked-generics'), [], []);
+    final returnMe = new CheckedGenerics<T>.create(element);
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('RootPo', 'checkedGenerics');
+    }
+    return returnMe;
+  }
+
   PageObjectList<Generics<T>> get genericsList {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPo', 'genericsList');
@@ -104,6 +142,19 @@ class $$RootPo<T> {
         (PageLoaderElement e) => new Generics<T>.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPo', 'genericsList');
+    }
+    return returnMe;
+  }
+
+  PageObjectList<CheckedGenerics<T>> get checkedGenericsList {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('RootPo', 'checkedGenericsList');
+    }
+    final returnMe = new PageObjectList<CheckedGenerics<T>>(
+        $__root__.createList(const ByTagName('checked-generics'), [], []),
+        (PageLoaderElement e) => new CheckedGenerics<T>.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('RootPo', 'checkedGenericsList');
     }
     return returnMe;
   }
@@ -124,6 +175,7 @@ class $$GenericsUsingMixin<T> {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$GenericsMixin<T> {
@@ -147,6 +199,7 @@ class $$GenericPairUsingMixin<T, V> {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$GenericPairMixin<T, V> {
@@ -170,6 +223,7 @@ class $$RootPoUsingMixin<T> {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$RootPoMixin<T> {
@@ -188,6 +242,19 @@ class $$RootPoMixin<T> {
     return returnMe;
   }
 
+  CheckedGenerics<T> get checkedGenerics {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('RootPoMixin', 'checkedGenerics');
+    }
+    final element =
+        $__root__.createElement(const ByTagName('checked-generics'), [], []);
+    final returnMe = new CheckedGenerics<T>.create(element);
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('RootPoMixin', 'checkedGenerics');
+    }
+    return returnMe;
+  }
+
   PageObjectList<Generics<T>> get genericsList {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPoMixin', 'genericsList');
@@ -197,6 +264,19 @@ class $$RootPoMixin<T> {
         (PageLoaderElement e) => new Generics<T>.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPoMixin', 'genericsList');
+    }
+    return returnMe;
+  }
+
+  PageObjectList<CheckedGenerics<T>> get checkedGenericsList {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('RootPoMixin', 'checkedGenericsList');
+    }
+    final returnMe = new PageObjectList<CheckedGenerics<T>>(
+        $__root__.createList(const ByTagName('checked-generics'), [], []),
+        (PageLoaderElement e) => new CheckedGenerics<T>.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('RootPoMixin', 'checkedGenericsList');
     }
     return returnMe;
   }

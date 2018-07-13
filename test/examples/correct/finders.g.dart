@@ -6,7 +6,7 @@
 part of 'finders.dart';
 
 // **************************************************************************
-// Generator: PageObjectGenerator
+// PageObjectGenerator
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -68,6 +68,55 @@ class $$Finders {
     }
     return returnMe;
   }
+
+  CheckTagPO get checkTagPO {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('Finders', 'checkTagPO');
+    }
+    final element =
+        $__root__.createElement(const ByTagName('check-tag-po'), [], []);
+    final returnMe = new CheckTagPO.create(element);
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('Finders', 'checkTagPO');
+    }
+    return returnMe;
+  }
+}
+
+// ignore_for_file: private_collision_in_mixin_application
+class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
+  PageLoaderElement $__root__;
+  $CheckTagPO.create(PageLoaderElement currentContext)
+      : $__root__ = currentContext {
+    $__root__.addCheckers([new CheckTag('check-tag-po')]);
+  }
+  String toString() {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('CheckTagPO', 'toString');
+    }
+    final returnMe = super.toString();
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('CheckTagPO', 'toString');
+    }
+    return returnMe;
+  }
+}
+
+class $$CheckTagPO {
+  PageLoaderElement $__root__;
+  PageLoaderMouse __mouse__;
+  PageLoaderElement get $root => $__root__;
+  PageLoaderElement get _root {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('CheckTagPO', '_root');
+    }
+    final element = $__root__;
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('CheckTagPO', '_root');
+    }
+    return returnMe;
+  }
 }
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -85,6 +134,7 @@ class $$FindersUsingMixin {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$FindersMixin {
@@ -124,6 +174,19 @@ class $$FindersMixin {
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('FindersMixin', 'filtered');
+    }
+    return returnMe;
+  }
+
+  CheckTagPO get checkTagPO {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('FindersMixin', 'checkTagPO');
+    }
+    final element =
+        $__root__.createElement(const ByTagName('check-tag-po'), [], []);
+    final returnMe = new CheckTagPO.create(element);
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('FindersMixin', 'checkTagPO');
     }
     return returnMe;
   }

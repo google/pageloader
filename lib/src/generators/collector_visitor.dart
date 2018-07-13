@@ -148,7 +148,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
 
   void handleListGetters(MethodDeclaration node, List<String> collected) {
     final methodInfo = collectCoreMethodInformation(node);
-    final listGetter = collectListFinderGetter(methodInfo);
+    final listGetter = collectListFinderGetter(methodInfo, node);
     if (listGetter.isPresent) {
       collected.add('list iterable finder');
       listFinderMethods.add(listGetter.value);

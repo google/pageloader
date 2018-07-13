@@ -25,6 +25,7 @@ void runTests(GetNewContext contextGenerator) {
     test('CheckTag annotation', () async {
       final base = new BaseObject.create(contextGenerator());
       expect(base.table.table.name, 'table');
+      expect(base.tableUsingCheckedTag.table.name, base.table.table.name);
       await verifyRows(base.table.rows);
     });
 
@@ -125,6 +126,9 @@ abstract class BaseObject {
 
   @ByTagName('table')
   TableForCheckTag get table;
+
+  @ByCheckTag()
+  TableForCheckTag get tableUsingCheckedTag;
 
   @Global(const ByTagName('table'))
   PageLoaderElement get globalTable;

@@ -6,7 +6,7 @@
 part of 'list.dart';
 
 // **************************************************************************
-// Generator: PageObjectGenerator
+// PageObjectGenerator
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -47,6 +47,19 @@ class $$Lists {
     return returnMe;
   }
 
+  Future<PageObjectList<CheckTagPO>> get checkTagPO async {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('Lists', 'checkTagPO');
+    }
+    final returnMe = new PageObjectList<CheckTagPO>(
+        $__root__.createList(const ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => new CheckTagPO.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('Lists', 'checkTagPO');
+    }
+    return returnMe;
+  }
+
   PageObjectList<PageLoaderElement> get basicsSync {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'basicsSync');
@@ -69,6 +82,19 @@ class $$Lists {
         (PageLoaderElement e) => new InnerListObject.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'nestedSync');
+    }
+    return returnMe;
+  }
+
+  PageObjectList<CheckTagPO> get checkTagPOSync {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('Lists', 'checkTagPOSync');
+    }
+    final returnMe = new PageObjectList<CheckTagPO>(
+        $__root__.createList(const ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => new CheckTagPO.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('Lists', 'checkTagPOSync');
     }
     return returnMe;
   }
@@ -128,6 +154,7 @@ class $$ListsUsingMixin {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$ListsMixin {
@@ -160,6 +187,19 @@ class $$ListsMixin {
     return returnMe;
   }
 
+  Future<PageObjectList<CheckTagPO>> get checkTagPO async {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('ListsMixin', 'checkTagPO');
+    }
+    final returnMe = new PageObjectList<CheckTagPO>(
+        $__root__.createList(const ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => new CheckTagPO.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('ListsMixin', 'checkTagPO');
+    }
+    return returnMe;
+  }
+
   PageObjectList<PageLoaderElement> get basicsSync {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ListsMixin', 'basicsSync');
@@ -185,6 +225,19 @@ class $$ListsMixin {
     }
     return returnMe;
   }
+
+  PageObjectList<CheckTagPO> get checkTagPOSync {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('ListsMixin', 'checkTagPOSync');
+    }
+    final returnMe = new PageObjectList<CheckTagPO>(
+        $__root__.createList(const ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => new CheckTagPO.create(e));
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('ListsMixin', 'checkTagPOSync');
+    }
+    return returnMe;
+  }
 }
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -202,6 +255,7 @@ class $$InnerListObjectUsingMixin {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
 // ignore_for_file: private_collision_in_mixin_application
 
 class $$InnerListObjectMixin {

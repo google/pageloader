@@ -52,14 +52,18 @@ void main() {
       expect(finders.secret.toString(), '@ByCss("secret")');
       expect(finders.filtered.toString(),
           '@ByCss("some-other-class") @WithAttribute("also-with", "this-attribute")');
+      expect(finders.checkTagPO.toString(),
+          '@ByTagName("check-tag-po")  @CheckTag("check-tag-po")');
     });
 
     test('iterators work', () {
       final inner = new InnerObject.create(context());
       expect(inner.innerIterable.toString(), '@ByCss("nested-iterable")');
+      expect(inner.innerCheckTagPO.toString(), '@ByTagName("check-tag-po")');
       final iterables = new Iterables.create(context());
       expect(iterables.basics.toString(), '@ByCss("basic")');
       expect(iterables.nested.toString(), '@ByCss("nested")');
+      expect(iterables.checkTagPO.toString(), '@ByTagName("check-tag-po")');
     });
 
     test('list works', () async {
@@ -68,14 +72,20 @@ void main() {
       expect((await list.basics)[0].toString(), '@ByCss("basic")');
       expect(await list.nested, hasLength(1));
       expect((await list.nested)[0].toString(), contains('\$InnerListObject'));
+      expect(await list.checkTagPO, hasLength(1));
+      expect((await list.checkTagPO)[0].toString(),
+          '@ByTagName("check-tag-po")  @CheckTag("check-tag-po")');
     });
 
     test('list works synchronously', () async {
       final list = new Lists.create(context());
       expect(list.basicsSync, hasLength(1));
-      expect((list.basicsSync)[0].toString(), '@ByCss("basic")');
+      expect(list.basicsSync[0].toString(), '@ByCss("basic")');
       expect(list.nestedSync, hasLength(1));
-      expect((list.nestedSync)[0].toString(), contains('\$InnerListObject'));
+      expect(list.nestedSync[0].toString(), contains('\$InnerListObject'));
+      expect(list.checkTagPOSync, hasLength(1));
+      expect(list.checkTagPOSync[0].toString(),
+          '@ByTagName("check-tag-po")  @CheckTag("check-tag-po")');
     });
 
     test('listeners works', () async {
@@ -154,11 +164,17 @@ void main() {
       final rootPo = new RootPo<String>.create(context());
       expect(rootPo.generics.typeDefParameter(' 42 ', (String x) => x.trim()),
           '42');
+      expect(
+          rootPo.checkedGenerics
+              .typeDefParameter(' 42 ', (String x) => x.trim()),
+          '42');
     });
 
     test('parameterized getter lists in classes work', () {
       final rootPo = new RootPo<String>.create(context());
-      expect(rootPo.genericsList, new isInstanceOf<List<Generics<String>>>());
+      expect(rootPo.genericsList, new TypeMatcher<List<Generics<String>>>());
+      expect(rootPo.checkedGenericsList,
+          new TypeMatcher<List<CheckedGenerics<String>>>());
     });
 
     test('generic methods work for singles', () {
@@ -203,14 +219,18 @@ void main() {
       expect(finders.secret.toString(), '@ByCss("secret")');
       expect(finders.filtered.toString(),
           '@ByCss("some-other-class") @WithAttribute("also-with", "this-attribute")');
+      expect(finders.checkTagPO.toString(),
+          '@ByTagName("check-tag-po")  @CheckTag("check-tag-po")');
     });
 
     test('iterators work', () {
       final inner = new InnerObjectUsingMixin.create(context());
       expect(inner.innerIterable.toString(), '@ByCss("nested-iterable")');
+      expect(inner.innerCheckTagPO.toString(), '@ByTagName("check-tag-po")');
       final iterables = new IterablesUsingMixin.create(context());
       expect(iterables.basics.toString(), '@ByCss("basic")');
       expect(iterables.nested.toString(), '@ByCss("nested")');
+      expect(iterables.checkTagPO.toString(), '@ByTagName("check-tag-po")');
     });
 
     test('list works', () async {
@@ -219,14 +239,20 @@ void main() {
       expect((await list.basics)[0].toString(), '@ByCss("basic")');
       expect(await list.nested, hasLength(1));
       expect((await list.nested)[0].toString(), contains('\$InnerListObject'));
+      expect(await list.checkTagPO, hasLength(1));
+      expect((await list.checkTagPO)[0].toString(),
+          '@ByTagName("check-tag-po")  @CheckTag("check-tag-po")');
     });
 
     test('list works synchronously', () async {
       final list = new ListsUsingMixin.create(context());
       expect(list.basicsSync, hasLength(1));
-      expect((list.basicsSync)[0].toString(), '@ByCss("basic")');
+      expect(list.basicsSync[0].toString(), '@ByCss("basic")');
       expect(list.nestedSync, hasLength(1));
-      expect((list.nestedSync)[0].toString(), contains('\$InnerListObject'));
+      expect(list.nestedSync[0].toString(), contains('\$InnerListObject'));
+      expect(list.checkTagPOSync, hasLength(1));
+      expect(list.checkTagPOSync[0].toString(),
+          '@ByTagName("check-tag-po")  @CheckTag("check-tag-po")');
     });
 
     test('listeners works', () async {
@@ -292,11 +318,17 @@ void main() {
       final rootPo = new RootPoUsingMixin<String>.create(context());
       expect(rootPo.generics.typeDefParameter(' 42 ', (String x) => x.trim()),
           '42');
+      expect(
+          rootPo.checkedGenerics
+              .typeDefParameter(' 42 ', (String x) => x.trim()),
+          '42');
     });
 
     test('parameterized getter lists in classes work', () {
       final rootPo = new RootPoUsingMixin<String>.create(context());
-      expect(rootPo.genericsList, new isInstanceOf<List<Generics<String>>>());
+      expect(rootPo.genericsList, new TypeMatcher<List<Generics<String>>>());
+      expect(rootPo.checkedGenericsList,
+          new TypeMatcher<List<CheckedGenerics<String>>>());
     });
 
     test('generic methods work for singles', () {

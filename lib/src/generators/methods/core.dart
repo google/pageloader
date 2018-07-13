@@ -15,6 +15,8 @@
 library pageloader.core;
 
 import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:quiver/core.dart';
 
 import 'annotation_evaluators.dart';
@@ -35,6 +37,35 @@ final String pageObjectList = 'PageObjectList';
 /// Returns a declaration of a annotation.
 String generateAnnotationDeclaration(Annotation annotation) =>
     'const ${annotation.name}(${annotation.arguments.arguments.join(", ")})';
+
+/// Returns a 'ByTagName' declaration from the 'ByCheckTag' annotation.
+String generateByTagNameFromByCheckTag(InterfaceType node) {
+  final defaultTagName = _extractTagName(node.element);
+  if (defaultTagName.isEmpty) {
+    throw "'@ByCheckTag' can only be used on getters that return a "
+        "PageObject type with the'@CheckTag' annotation.";
+  }
+  return "const ByTagName('$defaultTagName')";
+}
+
+/// Extracts the tag name from a PageLoader2 class based on `@CheckTag`.
+/// If there is no tag name associated with the Page Object,
+/// returns and empty string.
+String _extractTagName(ClassElement poTypeElement) {
+  var expectedTag = '';
+  for (final annotation in poTypeElement.metadata) {
+    final annotationElement = annotation.element;
+    if (annotationElement is ConstructorElement) {
+      final annotationName = annotationElement.enclosingElement.displayName;
+      final annotationValue = annotation.computeConstantValue();
+      if (annotationName == 'CheckTag') {
+        final inner = annotationValue.getField('_expectedTagName');
+        expectedTag = inner.toStringValue();
+      }
+    }
+  }
+  return expectedTag;
+}
 
 /// Returns the @EnsureTag annotation if it exists.
 Optional<Annotation> getEnsureTag(ClassDeclaration declaration) {
@@ -104,4 +135,20 @@ List<String> getReturnTypeArguments(String returnStr) {
       .split(',')
       .map((e) => e.trim())
       .toList();
+}
+
+/// Given a type parameterized type (ex: Future<T>), returns the inner type
+/// matching name [matchingType].
+///
+/// Assumes that the inner-type has a single type (ex: not Foo<A, B>).
+DartType getInnerType(DartType topType, String matchingType) {
+  // Filter out type name incase prefixes exist on the type.
+  matchingType =
+      matchingType.contains('.') ? matchingType.split('.')[1] : matchingType;
+  final typeArgs = (topType as ParameterizedType).typeArguments;
+  final first = typeArgs.first;
+  if (first.name == matchingType) {
+    return first;
+  }
+  return getInnerType(first, matchingType);
 }

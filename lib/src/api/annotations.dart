@@ -49,6 +49,22 @@ class _Mouse {
 
 /// Finder annotations. See [CssFinder] for usage details.
 
+/// Finds elements by the page object's @CheckTag contents.
+///
+/// Example, given:
+///   @CheckTag('example-tag')
+///   @PageObject()
+///   abstract class ExampleTagPO { ... }
+/// Then:
+///   @ByCheckTag()
+///   ExampleTagPO get exampleTag;
+/// is equivalent to:
+///   @ByTagName('example-tag')
+///   ExampleTagPO get exampleTag;
+class ByCheckTag implements Finder {
+  const ByCheckTag();
+}
+
 /// Finds elements by their CSS class.
 class ByClass implements CssFinder {
   final String _class;

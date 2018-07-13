@@ -6,7 +6,7 @@
 part of 'annotations.dart';
 
 // **************************************************************************
-// Generator: PageObjectGenerator
+// PageObjectGenerator
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
@@ -30,6 +30,18 @@ class $$BaseObject {
     final returnMe = new TableForCheckTag.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BaseObject', 'table');
+    }
+    return returnMe;
+  }
+
+  TableForCheckTag get tableUsingCheckedTag {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('BaseObject', 'tableUsingCheckedTag');
+    }
+    final element = $__root__.createElement(const ByTagName('table'), [], []);
+    final returnMe = new TableForCheckTag.create(element);
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('BaseObject', 'tableUsingCheckedTag');
     }
     return returnMe;
   }
