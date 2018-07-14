@@ -1,3 +1,11 @@
+## 3.0.0-beta
+- `@EnsureTag` is marked as deprecated. Will be removed in a future
+  release.
+- Add listeners into `WebdriverPageLoaderElement` if searching for
+  descendants.
+- Add `@ByCheckTag()` as a convenience annotation that can be used
+  in place of `@ByTagName(...)`.
+
 ## 3.0.0-alpha
 
 - Dart 2 compatible version that uses code generation instead of
