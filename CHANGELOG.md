@@ -1,4 +1,11 @@
+## 3.0.0-beta.1
+
+- Update to the latest `source_gen`. This generator can now be used with other
+  generators that want to write to .g.dart files without a manual build script.
+- Breaking: The `header` builder option is no longer supported.
+
 ## 3.0.0-beta
+
 - `@EnsureTag` is marked as deprecated. Will be removed in a future
   release.
 - Add listeners into `WebdriverPageLoaderElement` if searching for

@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'unannotated.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'unannotated.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $Unannotated extends Unannotated with $$Unannotated {
   PageLoaderElement $__root__;
   $Unannotated.create(PageLoaderElement currentContext)
@@ -111,7 +110,6 @@ class $$Unannotated {
   PageLoaderElement get $root => $__root__;
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $UnannotatedUsingMixin extends UnannotatedUsingMixin
     with $$UnannotatedMixin, $$UnannotatedUsingMixin {
   PageLoaderElement $__root__;
@@ -126,8 +124,6 @@ class $$UnannotatedUsingMixin {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$UnannotatedMixin {
   PageLoaderElement $__root__;

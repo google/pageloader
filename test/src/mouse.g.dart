@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'mouse.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'mouse.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
   PageLoaderElement $__root__;
   $PageForMouseTest.create(PageLoaderElement currentContext)

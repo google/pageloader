@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'class_checks.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'class_checks.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $ClassChecks extends ClassChecks with $$ClassChecks {
   PageLoaderElement $__root__;
   $ClassChecks.create(PageLoaderElement currentContext)
@@ -35,7 +34,6 @@ class $$ClassChecks {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $EnsureTagChecks extends EnsureTagChecks with $$EnsureTagChecks {
   PageLoaderElement $__root__;
   $EnsureTagChecks.create(PageLoaderElement currentContext)
@@ -62,7 +60,6 @@ class $$EnsureTagChecks {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $ClassChecksUsingMixin extends ClassChecksUsingMixin
     with $$ChecksMixin, $$ClassChecksUsingMixin {
   PageLoaderElement $__root__;
@@ -78,7 +75,6 @@ class $$ClassChecksUsingMixin {
   PageLoaderElement get $root => $__root__;
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $EnsureTagChecksUsingMixin extends EnsureTagChecksUsingMixin
     with $$ChecksMixin, $$EnsureTagChecksUsingMixin {
   PageLoaderElement $__root__;
@@ -94,8 +90,6 @@ class $$EnsureTagChecksUsingMixin {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$ChecksMixin {
   PageLoaderElement $__root__;

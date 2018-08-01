@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'shared_page_objects.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'shared_page_objects.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
   PageLoaderElement $__root__;
   $PageForSimpleTest.create(PageLoaderElement currentContext)
@@ -35,7 +34,6 @@ class $$PageForSimpleTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $Table extends Table with $$Table {
   PageLoaderElement $__root__;
   $Table.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -83,7 +81,6 @@ class $$Table {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $Row extends Row with $$Row {
   PageLoaderElement $__root__;
   $Row.create(PageLoaderElement currentContext) : $__root__ = currentContext {

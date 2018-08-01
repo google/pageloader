@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'iterables.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'iterables.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $Iterables extends Iterables with $$Iterables {
   PageLoaderElement $__root__;
   $Iterables.create(PageLoaderElement currentContext)
@@ -62,7 +61,6 @@ class $$Iterables {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $InnerObject extends InnerObject with $$InnerObject {
   PageLoaderElement $__root__;
   $InnerObject.create(PageLoaderElement currentContext)
@@ -114,7 +112,6 @@ class $$InnerObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $IterablesUsingMixin extends IterablesUsingMixin
     with $$IterablesMixin, $$IterablesUsingMixin {
   PageLoaderElement $__root__;
@@ -129,8 +126,6 @@ class $$IterablesUsingMixin {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$IterablesMixin {
   PageLoaderElement $__root__;
@@ -176,7 +171,6 @@ class $$IterablesMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $InnerObjectUsingMixin extends InnerObjectUsingMixin
     with $$InnerObjectMixin, $$InnerObjectUsingMixin {
   PageLoaderElement $__root__;
@@ -191,8 +185,6 @@ class $$InnerObjectUsingMixin {
   PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$InnerObjectMixin {
   PageLoaderElement $__root__;

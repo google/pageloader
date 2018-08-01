@@ -34,9 +34,8 @@ Builder pageloaderBuilder(BuilderOptions options) {
   // elsewhere.
   final optionsMap = new Map<String, dynamic>.from(options.config);
 
-  final builder = new PartBuilder([
-    new PageObjectGenerator(),
-  ], header: optionsMap.remove('header') as String);
+  final builder =
+      new SharedPartBuilder([const PageObjectGenerator()], 'pageloader');
 
   if (optionsMap.isNotEmpty) {
     if (log == null) {

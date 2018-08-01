@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'generics.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'generics.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $Generics<T> extends Generics<T> with $$Generics<T> {
   PageLoaderElement $__root__;
   $Generics.create(PageLoaderElement currentContext)
@@ -34,7 +33,6 @@ class $$Generics<T> {
   PageLoaderElement get $root => $__root__;
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
   PageLoaderElement $__root__;
   $RootPo.create(PageLoaderElement currentContext)
