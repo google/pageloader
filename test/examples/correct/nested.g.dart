@@ -16,6 +16,12 @@ class $Nested extends Nested with $$Nested {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Nested.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Nested is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Nested". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Nested {
@@ -44,6 +50,12 @@ class $NestedUsingMixin extends NestedUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $NestedUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "NestedUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "NestedUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$NestedUsingMixin {

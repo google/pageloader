@@ -12,6 +12,7 @@
 // limitations under the License.
 
 import 'dart:async';
+import 'dart:core';
 import 'dart:math';
 
 import 'package:pageloader/pageloader.dart';
@@ -43,7 +44,9 @@ class DummyPageLoaderMouse implements PageLoaderMouse {
 
   @override
   Future<Null> moveTo(PageLoaderElement element, int xOffset, int yOffset,
-          {PageLoaderElement eventTarget}) =>
+          {List<PageLoaderElement> dispatchTo,
+          int stepPixels,
+          Duration duration}) =>
       throw 'can not even';
 }
 
@@ -215,12 +218,18 @@ class DummyPageLoaderElement implements PageLoaderElement {
       throw 'not implemented';
 
   @override
+  DummyPageLoaderElement byTag(String tag) => throw 'not implemented';
+
+  @override
   Future<Null> clear(
           {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
       throw 'not implemented';
 
   @override
   Future<Null> click() => throw 'not implemented';
+
+  @override
+  Future<Null> clickOutside() => throw 'not implemented';
 
   @override
   Future<Null> type(String keys,

@@ -80,6 +80,19 @@ Optional<Annotation> getEnsureTag(ClassDeclaration declaration) {
       : const Optional.absent();
 }
 
+/// Returns the @CheckTag annotation if it exists.
+Optional<Annotation> getCheckTag(ClassDeclaration declaration) {
+  final checks =
+      declaration.metadata.where((a) => a.name.toSource() == 'CheckTag');
+  if (checks.length > 1) {
+    throw 'Found multiple @CheckTag annotations in class: '
+        '${declaration.toSource()}';
+  }
+  return checks.length == 1
+      ? new Optional.of(checks.single)
+      : const Optional.absent();
+}
+
 /// Returns true if annotation is some type of Pageloader annotation.
 bool isPageloaderAnnotation(Annotation annotation) =>
     getAnnotationKind(annotation).isNotEmpty;

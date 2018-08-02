@@ -15,6 +15,12 @@ class $Lists extends Lists with $$Lists {
   $Lists.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Lists.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Lists is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Lists". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Lists {
@@ -107,6 +113,12 @@ class $InnerListObject extends InnerListObject with $$InnerListObject {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $InnerListObject.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "InnerListObject is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "InnerListObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$InnerListObject {
@@ -147,6 +159,12 @@ class $ListsUsingMixin extends ListsUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $ListsUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "ListsUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "ListsUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$ListsUsingMixin {
@@ -248,6 +266,12 @@ class $InnerListObjectUsingMixin extends InnerListObjectUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $InnerListObjectUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "InnerListObjectUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "InnerListObjectUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$InnerListObjectUsingMixin {

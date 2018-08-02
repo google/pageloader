@@ -15,6 +15,12 @@ class $A extends A with $$A {
   $A.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $A.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "A is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "A". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$A {
@@ -41,6 +47,12 @@ class $B extends B with $$B {
   $B.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $B.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "B is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "B". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$B {
@@ -66,6 +78,12 @@ class $C extends C with $$C {
   $C.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $C.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "C is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "C". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$C {

@@ -16,6 +16,12 @@ class $Finders extends Finders with $$Finders {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Finders.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Finders is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Finders". Requires @CheckTag annotation in order for "tagName" to be generated.';
   PageLoaderElement get secret {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Finders', 'secret');
@@ -90,6 +96,9 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
       : $__root__ = currentContext {
     $__root__.addCheckers([new CheckTag('check-tag-po')]);
   }
+  factory $CheckTagPO.lookup(PageLoaderSource source) =>
+      new $CheckTagPO.create(source.byTag('check-tag-po'));
+  static String get tagName => 'check-tag-po';
   String toString() {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CheckTagPO', 'toString');
@@ -127,6 +136,12 @@ class $FindersUsingMixin extends FindersUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $FindersUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "FindersUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "FindersUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$FindersUsingMixin {

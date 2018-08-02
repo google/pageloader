@@ -16,6 +16,9 @@ class $ClassChecks extends ClassChecks with $$ClassChecks {
       : $__root__ = currentContext {
     $__root__.addCheckers([new CheckTag('some-tag')]);
   }
+  factory $ClassChecks.lookup(PageLoaderSource source) =>
+      new $ClassChecks.create(source.byTag('some-tag'));
+  static String get tagName => 'some-tag';
 }
 
 class $$ClassChecks {
@@ -43,6 +46,9 @@ class $EnsureTagChecks extends EnsureTagChecks with $$EnsureTagChecks {
             .createElement(const EnsureTag('some-other-tag'), [], []) {
     $__root__.addCheckers([new EnsureTag('some-other-tag')]);
   }
+  factory $EnsureTagChecks.lookup(PageLoaderSource source) =>
+      new $EnsureTagChecks.create(source.byTag('some-other-tag'));
+  static String get tagName => 'some-other-tag';
 }
 
 class $$EnsureTagChecks {
@@ -70,6 +76,9 @@ class $ClassChecksUsingMixin extends ClassChecksUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([new CheckTag('some-tag')]);
   }
+  factory $ClassChecksUsingMixin.lookup(PageLoaderSource source) =>
+      new $ClassChecksUsingMixin.create(source.byTag('some-tag'));
+  static String get tagName => 'some-tag';
 }
 
 class $$ClassChecksUsingMixin {
@@ -87,6 +96,9 @@ class $EnsureTagChecksUsingMixin extends EnsureTagChecksUsingMixin
             .createElement(const EnsureTag('some-other-tag'), [], []) {
     $__root__.addCheckers([new EnsureTag('some-other-tag')]);
   }
+  factory $EnsureTagChecksUsingMixin.lookup(PageLoaderSource source) =>
+      new $EnsureTagChecksUsingMixin.create(source.byTag('some-other-tag'));
+  static String get tagName => 'some-other-tag';
 }
 
 class $$EnsureTagChecksUsingMixin {

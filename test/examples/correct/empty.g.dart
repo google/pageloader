@@ -15,6 +15,12 @@ class $Empty extends Empty with $$Empty {
   $Empty.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Empty.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Empty is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Empty". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Empty {

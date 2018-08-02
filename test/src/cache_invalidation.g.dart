@@ -16,6 +16,12 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $CacheInvalidation.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "CacheInvalidation is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "CacheInvalidation". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$CacheInvalidation {
@@ -54,6 +60,12 @@ class $_Nested extends _Nested with $$_Nested {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $_Nested.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "_Nested is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "_Nested". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$_Nested {

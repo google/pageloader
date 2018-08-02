@@ -16,6 +16,12 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Generics.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Generics is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Generics". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Generics', 'typeDefParameter');
@@ -52,6 +58,9 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([new CheckTag('checked-generics')]);
   }
+  factory $CheckedGenerics.lookup(PageLoaderSource source) =>
+      new $CheckedGenerics.create(source.byTag('checked-generics'));
+  static String get tagName => 'checked-generics';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CheckedGenerics', 'typeDefParameter');
@@ -77,6 +86,12 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $GenericPair.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "GenericPair is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "GenericPair". Requires @CheckTag annotation in order for "tagName" to be generated.';
   Map<T, V> exampleMethodMap<T, V>(T t, V v) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('GenericPair', 'exampleMethodMap');
@@ -102,6 +117,12 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $RootPo.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "RootPo is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "RootPo". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$RootPo<T> {
@@ -168,6 +189,12 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $GenericsUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "GenericsUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "GenericsUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$GenericsUsingMixin<T> {
@@ -192,6 +219,12 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $GenericPairUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "GenericPairUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "GenericPairUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$GenericPairUsingMixin<T, V> {
@@ -216,6 +249,12 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $RootPoUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "RootPoUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "RootPoUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$RootPoUsingMixin<T> {

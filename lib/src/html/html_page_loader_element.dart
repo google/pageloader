@@ -138,7 +138,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
     Iterable<Element> elements;
     if (_finder == null) {
-      elements = [base];
+      elements = [_cachedElement ?? base];
     } else if (_finder is ContextFinder) {
       elements = (_finder as ContextFinder)
           .findElements(this._parentElement)
@@ -244,6 +244,9 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       });
 
   @override
+  PageLoaderElement byTag(String tagName) => getElementsByCss(tagName).single;
+
+  @override
   Future<Null> clear({bool focusBefore: true, bool blurAfter: true}) async =>
       syncFn(() async => _retryWhenStale(() async {
             final element = _single;
@@ -280,6 +283,12 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
         return _microtask(element.click);
       }));
+
+  @override
+  Future<void> clickOutside() async {
+    if (!exists || !displayed || utils.root == this) return;
+    await utils.root.click();
+  }
 
   Future<Null> _clickOptionElement() async => _retryWhenStale(() async {
         final option = _single as OptionElement;

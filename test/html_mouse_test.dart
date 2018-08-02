@@ -15,9 +15,90 @@
 
 import 'package:test/test.dart';
 
+import 'package:pageloader/html.dart';
 import 'data/html_setup.dart' as html_setup;
-import 'src/mouse.dart' as mouse;
+import 'src/mouse.dart';
 
 void main() {
-  mouse.runTests(() => html_setup.getRoot());
+  runTests(() => html_setup.getRoot());
+
+  group('HTML-only mouse tests', () {
+    PageForMouseTest page;
+    PageLoaderMouse mouse;
+
+    setUp(() {
+      page = new PageForMouseTest.create(html_setup.getRoot());
+      mouse = page.mouse;
+    });
+
+    test('additional events are fired on moveTo', () async {
+      // make sure mouse is not on element;
+      await mouse.moveTo(page.element, -10, -10);
+      expect(page.element.visibleText, equals('area for mouse events'));
+
+      // move to element...
+      await mouse.moveTo(page.element, 0, 0);
+      expect(page.element.visibleText, isNot(contains('MouseLeave')));
+      expect(page.element.visibleText, isNot(contains('MouseOut')));
+      expect(page.element.visibleText, contains('MouseMove'));
+      expect(page.element.visibleText, contains('MouseEnter'));
+      expect(page.element.visibleText, contains('MouseOver'));
+
+      // then move out
+      await mouse.moveTo(page.element, -10, -10);
+      expect(page.element.visibleText, contains('MouseLeave'));
+      expect(page.element.visibleText, contains('MouseOut'));
+    });
+
+    group('moves to center on', () {
+      int expectedXCenter;
+      int expectedYCenter;
+
+      setUp(() {
+        final rect =
+            (page.element as HtmlPageLoaderElement).getBoundingClientRect();
+        expectedXCenter = rect.left + (rect.width * 0.5).ceil();
+        expectedYCenter = rect.top + (rect.height * 0.5).ceil();
+      });
+
+      test('moveTo with null,null coords', () async {
+        await mouse.moveTo(page.element, null, null);
+        expect(page.element.visibleText,
+            contains('MouseMove: $expectedXCenter, $expectedYCenter'));
+      });
+
+      test('down with eventTarget', () async {
+        await mouse.down(MouseButton.primary, eventTarget: page.element);
+        expect(page.element.visibleText,
+            contains('MouseMove: $expectedXCenter, $expectedYCenter'));
+      });
+
+      test('up with eventTarget', () async {
+        await mouse.up(MouseButton.primary, eventTarget: page.element);
+        expect(page.element.visibleText,
+            contains('MouseMove: $expectedXCenter, $expectedYCenter'));
+      });
+    });
+
+    test('stepPixels and trackedElements works', () async {
+      // Send mouse events to only top and bottom, and expect
+      // center mouse event to also detect mouse events
+      final center = page.centerElement;
+
+      // Make sure center element has no events registered initially
+      expect(center.visibleText, equals('center area for mouse events'));
+
+      await mouse.moveTo(page.topElement, 0, null);
+      // Track the center element and move at 2 pixel at a time
+      // between every movement.
+      await mouse.moveTo(page.bottomElement, 0, null,
+          dispatchTo: [center], stepPixels: 2);
+
+      expect(center.visibleText, contains('MouseLeave'));
+      expect(center.visibleText, contains('MouseOut'));
+      expect(center.visibleText, contains('MouseMove'));
+      expect(center.visibleText, contains('MouseEnter'));
+      expect(center.visibleText, contains('MouseOver'));
+    });
+  });
 }

@@ -32,7 +32,13 @@ void runTests(GetNewContext contextGenerator) {
     test('synchronously', () async {
       final list = new Lists.create(contextGenerator());
       final rows = list.tableRowsSync;
+      final rowsAsPO = list.tableRowsSyncAsPO;
       expect(rows, hasLength(2));
+      expect(rowsAsPO, hasLength(2));
+      expect(rowsAsPO[0].exists, isTrue);
+      expect(rowsAsPO[1].exists, isTrue);
+      expect(rows[0].exists, isTrue);
+      expect(rows[1].exists, isTrue);
       expect(_removeWhiteSpace(rows[0].innerText), 'r1c1r1c2');
       expect(_removeWhiteSpace(rows[1].innerText), 'r2c1r2c2');
     });
@@ -49,4 +55,19 @@ abstract class Lists {
 
   @ByTagName('tr')
   List<PageLoaderElement> get tableRowsSync;
+
+  @ByTagName('tr')
+  List<RowPO> get tableRowsSyncAsPO;
+}
+
+@CheckTag('tr')
+@PageObject()
+abstract class RowPO {
+  RowPO();
+  factory RowPO.create(PageLoaderElement context) = $RowPO.create;
+
+  @root
+  PageLoaderElement get _root;
+
+  bool get exists => _root.exists;
 }

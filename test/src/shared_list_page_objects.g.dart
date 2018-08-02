@@ -16,6 +16,12 @@ class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForSimpleTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForSimpleTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForSimpleTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForSimpleTest {
@@ -53,6 +59,12 @@ class $Table extends Table with $$Table {
   $Table.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Table.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Table is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Table". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Table {
@@ -104,6 +116,12 @@ class $Row extends Row with $$Row {
   $Row.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Row.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Row is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Row". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Row {

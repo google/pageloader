@@ -16,6 +16,12 @@ class $Unannotated extends Unannotated with $$Unannotated {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Unannotated.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Unannotated is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Unannotated". Requires @CheckTag annotation in order for "tagName" to be generated.';
   bool get isFieldSet {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Unannotated', 'isFieldSet');
@@ -119,6 +125,12 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $UnannotatedUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "UnannotatedUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "UnannotatedUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$UnannotatedUsingMixin {

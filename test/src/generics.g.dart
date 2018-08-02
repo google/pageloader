@@ -16,6 +16,12 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Generics.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Generics is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Generics". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Generics', 'typeDefParameter');
@@ -41,6 +47,12 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $RootPo.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "RootPo is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "RootPo". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$RootPo<T> {

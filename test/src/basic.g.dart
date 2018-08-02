@@ -16,6 +16,12 @@ class $PageForExistsTest extends PageForExistsTest with $$PageForExistsTest {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForExistsTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForExistsTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForExistsTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForExistsTest {
@@ -68,6 +74,12 @@ class $PageForVisibilityTest extends PageForVisibilityTest
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForVisibilityTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForVisibilityTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForVisibilityTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForVisibilityTest {
@@ -109,6 +121,12 @@ class $PageForClassAnnotationTest extends PageForClassAnnotationTest
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForClassAnnotationTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForClassAnnotationTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForClassAnnotationTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForClassAnnotationTest {
@@ -136,6 +154,12 @@ class $PageForPrivateFieldsTest extends PageForPrivateFieldsTest
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForPrivateFieldsTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForPrivateFieldsTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForPrivateFieldsTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
   Table get table {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPrivateFieldsTest', 'table');
@@ -174,6 +198,12 @@ class $PageForFocusTest extends PageForFocusTest with $$PageForFocusTest {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForFocusTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForFocusTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForFocusTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForFocusTest {
@@ -200,6 +230,12 @@ class $PageForNbspTest extends PageForNbspTest with $$PageForNbspTest {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForNbspTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForNbspTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForNbspTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForNbspTest {
@@ -225,6 +261,12 @@ class $Basic extends Basic with $$Basic {
   $Basic.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Basic.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Basic is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Basic". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Basic {
@@ -252,6 +294,12 @@ class $OuterNested extends OuterNested with $$OuterNested {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $OuterNested.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "OuterNested is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "OuterNested". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$OuterNested {
@@ -279,6 +327,12 @@ class $DebugId extends DebugId with $$DebugId {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $DebugId.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "DebugId is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "DebugId". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$DebugId {
@@ -305,6 +359,12 @@ class $Display extends Display with $$Display {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Display.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Display is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Display". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Display {

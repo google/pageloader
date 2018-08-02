@@ -83,7 +83,14 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
         PageLoaderElement ${core.root};
       \$$className.create(PageLoaderElement currentContext) : ''');
 
-      // If @EnsureTag used, we add finder to constructor. Checker is added later.
+      // Default tag associated with this PO if @CheckTag or @EnsureTag is
+      // present.
+      String defaultTag;
+
+      // Generate the 'create' constructor.
+
+      // If @EnsureTag used, we add finder to constructor. Otherwise
+      // set current root as the passed 'currentContext'.
       final ensureTag = core.getEnsureTag(declaration);
       if (ensureTag.isPresent) {
         constructorBuffer.write('${core.root} = currentContext.createElement'
@@ -92,12 +99,35 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       } else {
         constructorBuffer.write('${core.root} = currentContext { \n');
       }
-      // Add class checkers and close constructor.
+      // Add class checkers and close 'create' constructor.
       constructorBuffer.write('${core.root}.addCheckers'
           '([${generateClassChecks(declaration)}]);\n}');
 
+      // Generate the 'lookup' factory constructor.
+
+      constructorBuffer
+          .write('factory \$$className.lookup(PageLoaderSource source) => ');
+      final checkTag = core.getCheckTag(declaration);
+
+      // If '@CheckTag' or '@EnsureTag' exists on this PageObject,
+      // generate the 'lookup' constructor. If neither exists, insert
+      // throw error clause.
+      if (ensureTag.isPresent || checkTag.isPresent) {
+        defaultTag = ensureTag.isPresent
+            ? getAnnotationSingleArg(ensureTag.value)
+            : getAnnotationSingleArg(checkTag.value);
+        constructorBuffer
+            .write('new \$$className.create(source.byTag($defaultTag));');
+      } else {
+        constructorBuffer.write('''throw  "'lookup' constructor for class "
+        "$className is not generated and can only be used on Page Object "
+        "classes that have @CheckTag annotation.";
+        ''');
+      }
+
       // Constructor class gets the methods/getters/setters.
-      collectorVisitor.writeToConstructorBuffer(constructorBuffer, className);
+      collectorVisitor.writeToConstructorBuffer(
+          constructorBuffer, className, defaultTag);
 
       // Close constructor class
       constructorBuffer.writeln('}');
@@ -192,6 +222,12 @@ String generateWithClause(ClassElement mainPo, String mainSignature) {
   return 'with ${withs.join(', ')}';
 }
 
+/// Gets the single argument within an [Annotation].
+///
+/// Assumes that the annotation has exactly one argument.
+String getAnnotationSingleArg(Annotation annotation) =>
+    annotation.arguments.arguments.single.toSource();
+
 /// Checks if the PageObject has the standard constructors:
 ///   abstract class MyPO {
 ///     MyPO();
@@ -202,9 +238,10 @@ bool hasPoConstructors(ClassElement element) {
   if (constructors.isNotEmpty) {
     final hasDefaultConstructor =
         constructors.any((c) => c.isDefaultConstructor);
-    final hasFactoryCreate =
-        constructors.any((c) => c.isFactory && c.displayName == 'create');
-    return hasDefaultConstructor && hasFactoryCreate;
+    final hasFactoryCreateOrLookup = constructors.any((c) =>
+        c.isFactory &&
+        (c.displayName == 'create' || c.displayName == 'lookup'));
+    return hasDefaultConstructor && hasFactoryCreateOrLookup;
   }
   return false;
 }

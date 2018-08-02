@@ -65,4 +65,13 @@ abstract class PageForMouseTest {
 
   @ById('mouse')
   PageLoaderElement get element;
+
+  @ById('mouse-top')
+  PageLoaderElement get topElement;
+
+  @ById('mouse-center')
+  PageLoaderElement get centerElement;
+
+  @ById('mouse-bottom')
+  PageLoaderElement get bottomElement;
 }

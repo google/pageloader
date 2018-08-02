@@ -78,7 +78,13 @@ html.Element setUp() {
       <a-custom-tag id="button-2">
         button 2
       </a-custom-tag>
-      <p id="nbsp"> &nbsp; &nbsp; </p>''';
+      <b-custom-tag>
+        <c-custom-tag>C tag inner text</c-custom-tag>
+      </b-custom-tag>
+      <p id="nbsp"> &nbsp; &nbsp; </p>
+      <div id='mouse-top'>top area for mouse events</div>
+      <div id='mouse-center'>center area for mouse events</div>
+      <div id='mouse-bottom'>bottom area for mouse events</div>''';
 
   final templateHtml = '<button id="inner">some <content></content></button>';
 
@@ -100,24 +106,52 @@ html.Element setUp() {
       shadow.setInnerHtml(templateHtml, validator: new NoOpNodeValidator());
     }
   });
+
+  // Get all mouseevent driven div elements and bind them
   final displayedDiv = html.document.getElementById('mouse');
-  displayedDiv.onMouseDown.listen((evt) {
-    displayedDiv.text = displayedDiv.text +
+  final centerDiv = html.document.getElementById('mouse-center');
+  bindMouseEvents(displayedDiv);
+  bindMouseEvents(centerDiv);
+
+  return div;
+}
+
+void bindMouseEvents(html.Element element) {
+  element.onMouseDown.listen((evt) {
+    element.text = element.text +
         " MouseDown: ${evt.client.x}, ${evt.client.y}; "
         "${evt.screen.x}, ${evt.screen.y}";
   });
-  displayedDiv.onMouseUp.listen((evt) {
-    displayedDiv.text = displayedDiv.text +
+  element.onMouseUp.listen((evt) {
+    element.text = element.text +
         " MouseUp: ${evt.client.x}, ${evt.client.y}; "
         "${evt.screen.x}, ${evt.screen.y}";
   });
-  displayedDiv.onMouseMove.listen((evt) {
-    displayedDiv.text = displayedDiv.text +
+  element.onMouseMove.listen((evt) {
+    element.text = element.text +
         " MouseMove: ${evt.client.x}, ${evt.client.y}; "
         "${evt.screen.x}, ${evt.screen.y}";
   });
-
-  return div;
+  element.onMouseLeave.listen((evt) {
+    element.text = element.text +
+        " MouseLeave: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseOut.listen((evt) {
+    element.text = element.text +
+        " MouseOut: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseEnter.listen((evt) {
+    element.text = element.text +
+        " MouseEnter: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseOver.listen((evt) {
+    element.text = element.text +
+        " MouseOver: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
 }
 
 HtmlPageLoaderElement getRoot() =>

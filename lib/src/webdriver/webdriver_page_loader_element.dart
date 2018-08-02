@@ -166,7 +166,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
     Iterable<sync_wd.WebElement> elements;
     if (_finder == null) {
-      elements = [base];
+      elements = [_cachedElement ?? base];
     } else if (_finder is ContextFinder) {
       elements = (_finder as ContextFinder)
           .findElements(this._parentElement)
@@ -271,15 +271,15 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
           top: arguments[0].offsetTop,
           width: arguments[0].offsetWidth,
           height: arguments[0].offsetHeight
-        }''', [_single.context]));
+        }''', [_single]));
     return new Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
   @override
   Rectangle getBoundingClientRect() {
-    final rect = _retryWhenStale<Map>(() => _driver.execute(
-        'return arguments[0].getBoundingClientRect();', [_single.context]));
+    final rect = _retryWhenStale<Map>(() => _driver
+        .execute('return arguments[0].getBoundingClientRect();', [_single]));
     return new Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
@@ -293,6 +293,10 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
           .toList());
 
   @override
+  WebDriverPageLoaderElement byTag(String tagName) =>
+      getElementsByCss(tagName).single;
+
+  @override
   Future<Null> clear({bool focusBefore: true, bool blurAfter: true}) async =>
       _retryWhenStale(() async {
         if (focusBefore) await focus();
@@ -304,6 +308,42 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   Future<Null> click() => _retryWhenStale<Null>(() {
         _single.click();
       });
+
+  @override
+  Future<void> clickOutside() async {
+    if (!exists || !displayed) return;
+
+    final rect = getBoundingClientRect();
+    _retryWhenStale<void>(() {
+      final bodyElement = _utils.byTag('body');
+      final bodyRect = bodyElement.getBoundingClientRect();
+      if (!rect.intersects(bodyRect)) {
+        // No intersection. Just click the body which is outside of [_single].
+        bodyElement.click();
+        return;
+      }
+
+      // Find a [Point] that is not in the current element.
+      final point = [
+        bodyRect.topLeft,
+        bodyRect.topRight,
+        bodyRect.bottomLeft,
+        bodyRect.bottomRight
+      ].firstWhere((p) => !rect.containsPoint(p), orElse: () => null);
+
+      if (point != null) {
+        _utils.driver.mouse.moveTo(
+            element: bodyElement.contextSync,
+            xOffset: point.x.toInt() - bodyRect.left,
+            yOffset: point.y.toInt() - bodyRect.top);
+        _utils.driver.mouse.click();
+      } else {
+        throw new PageLoaderException(
+            'Could not click outside of the current element [$this].'
+            ' It is because it covers the whole <body>.');
+      }
+    });
+  }
 
   @override
   Future<Null> type(String keys,

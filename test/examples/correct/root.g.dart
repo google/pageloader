@@ -16,6 +16,12 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $ParentRoot.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "ParentRoot is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "ParentRoot". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$ParentRoot {
@@ -41,6 +47,12 @@ class $Root extends Root with $$Root {
   $Root.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Root.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Root is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Root". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Root {
@@ -80,6 +92,12 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $ParentRootUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "ParentRootUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "ParentRootUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$ParentRootUsingMixin {
@@ -115,6 +133,12 @@ class $RootUsingMixin extends RootUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $RootUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "RootUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "RootUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$RootUsingMixin {

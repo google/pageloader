@@ -16,6 +16,12 @@ class $MouseObject extends MouseObject with $$MouseObject {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $MouseObject.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "MouseObject is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "MouseObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$MouseObject {
@@ -43,6 +49,12 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $MouseObjectUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "MouseObjectUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "MouseObjectUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$MouseObjectUsingMixin {

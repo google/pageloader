@@ -21,12 +21,10 @@ import 'html_page_loader_element.dart';
 /// Support for [PageUtils] in HTML context.
 class HtmlPageUtils extends PageUtils {
   final SyncFn syncFn;
-  final HtmlMouse _mouse;
   HtmlPageLoaderElement _cachedRoot;
 
   HtmlPageUtils({SyncFn externalSyncFn: noOpExecuteSyncedFn})
-      : syncFn = externalSyncFn,
-        _mouse = new HtmlMouse(externalSyncFn);
+      : syncFn = externalSyncFn;
 
   /// Gets the body for the current page.
   ///
@@ -51,5 +49,5 @@ class HtmlPageUtils extends PageUtils {
 
   /// Gets the mouse.
   @override
-  PageLoaderMouse get mouse => _mouse;
+  PageLoaderMouse get mouse => globalMouse(this.syncFn);
 }

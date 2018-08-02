@@ -17,6 +17,12 @@ class $PageForAttributesTests extends PageForAttributesTests
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForAttributesTests.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForAttributesTests is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForAttributesTests". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForAttributesTests {

@@ -16,6 +16,12 @@ class $BaseObject extends BaseObject with $$BaseObject {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $BaseObject.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "BaseObject is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "BaseObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$BaseObject {
@@ -79,6 +85,12 @@ class $PseudoBaseObject extends PseudoBaseObject with $$PseudoBaseObject {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PseudoBaseObject.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PseudoBaseObject is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PseudoBaseObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PseudoBaseObject {
@@ -132,6 +144,9 @@ class $TableForCheckTag extends TableForCheckTag with $$TableForCheckTag {
       : $__root__ = currentContext {
     $__root__.addCheckers([new CheckTag('table')]);
   }
+  factory $TableForCheckTag.lookup(PageLoaderSource source) =>
+      new $TableForCheckTag.create(source.byTag('table'));
+  static String get tagName => 'table';
 }
 
 class $$TableForCheckTag {
@@ -184,6 +199,12 @@ class $BaseEnsureObject extends BaseEnsureObject with $$BaseEnsureObject {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $BaseEnsureObject.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "BaseEnsureObject is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "BaseEnsureObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$BaseEnsureObject {
@@ -223,6 +244,9 @@ class $TableForEnsureTag extends TableForEnsureTag with $$TableForEnsureTag {
             currentContext.createElement(const EnsureTag('table'), [], []) {
     $__root__.addCheckers([new EnsureTag('table')]);
   }
+  factory $TableForEnsureTag.lookup(PageLoaderSource source) =>
+      new $TableForEnsureTag.create(source.byTag('table'));
+  static String get tagName => 'table';
 }
 
 class $$TableForEnsureTag {
@@ -262,6 +286,9 @@ class $CheckTagFails extends CheckTagFails with $$CheckTagFails {
       : $__root__ = currentContext {
     $__root__.addCheckers([new CheckTag('inconceivable')]);
   }
+  factory $CheckTagFails.lookup(PageLoaderSource source) =>
+      new $CheckTagFails.create(source.byTag('inconceivable'));
+  static String get tagName => 'inconceivable';
 }
 
 class $$CheckTagFails {
@@ -289,6 +316,9 @@ class $EnsureTagFails extends EnsureTagFails with $$EnsureTagFails {
             .createElement(const EnsureTag('inconceivable'), [], []) {
     $__root__.addCheckers([new EnsureTag('inconceivable')]);
   }
+  factory $EnsureTagFails.lookup(PageLoaderSource source) =>
+      new $EnsureTagFails.create(source.byTag('inconceivable'));
+  static String get tagName => 'inconceivable';
 }
 
 class $$EnsureTagFails {
@@ -316,6 +346,12 @@ class $PageForWithAttributeTest extends PageForWithAttributeTest
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForWithAttributeTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForWithAttributeTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForWithAttributeTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForWithAttributeTest {
@@ -344,6 +380,12 @@ class $PageForWithClassTest extends PageForWithClassTest
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForWithClassTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForWithClassTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForWithClassTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForWithClassTest {
@@ -371,6 +413,12 @@ class $DebugIds extends DebugIds with $$DebugIds {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $DebugIds.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "DebugIds is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "DebugIds". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$DebugIds {
