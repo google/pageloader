@@ -225,16 +225,19 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   String get name => _retryWhenStale(() => _single.name);
 
   @override
-  PageLoaderAttributes get attributes => new _ElementAttributes(this);
+  PageLoaderAttributes get attributes =>
+      _retryWhenStale(() => new _ElementAttributes(this));
 
   @override
   PageLoaderAttributes get seleniumAttributes => attributes;
 
   @override
-  PageLoaderAttributes get properties => new _ElementProperties(this);
+  PageLoaderAttributes get properties =>
+      _retryWhenStale(() => new _ElementProperties(this));
 
   @override
-  PageLoaderAttributes get computedStyle => new _ElementComputedStyle(this);
+  PageLoaderAttributes get computedStyle =>
+      _retryWhenStale(() => new _ElementComputedStyle(this));
 
   @override
   PageLoaderAttributes get style => new _ElementStyle(this);
