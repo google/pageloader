@@ -317,7 +317,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     if (!exists || !displayed) return;
 
     final rect = getBoundingClientRect();
-    _retryWhenStale<void>(() {
+    await _retryWhenStale<void>(() {
       final bodyElement = _utils.byTag('body');
       final bodyRect = bodyElement.getBoundingClientRect();
       if (!rect.intersects(bodyRect)) {
