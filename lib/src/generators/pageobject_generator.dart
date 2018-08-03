@@ -137,7 +137,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     mixinBuffer.write('''
       class \$\$$signature {
         PageLoaderElement ${core.root};
-        PageLoaderMouse ${core.mouse};
+        PageLoaderMouse ${core.mouse}; // ignore: unused_field
     ''');
 
     // Add generated root accessor to be used in internal code.
