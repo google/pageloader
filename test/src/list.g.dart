@@ -66,7 +66,6 @@ class $$Lists {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $RowPO extends RowPO with $$RowPO {
   PageLoaderElement $__root__;
   $RowPO.create(PageLoaderElement currentContext) : $__root__ = currentContext {
