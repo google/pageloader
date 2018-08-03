@@ -16,6 +16,12 @@ class $Parameters extends Parameters with $$Parameters {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Parameters.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Parameters is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Parameters". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String testOptionalPositionalParam(
       [String first = 'a', String second = 'b']) {
     for (final __listener in $__root__.listeners) {
@@ -73,7 +79,7 @@ class $Parameters extends Parameters with $$Parameters {
 
 class $$Parameters {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -85,11 +91,17 @@ class $ParametersUsingMixin extends ParametersUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $ParametersUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "ParametersUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "ParametersUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$ParametersUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -97,6 +109,6 @@ class $$ParametersUsingMixin {
 
 class $$ParametersMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }

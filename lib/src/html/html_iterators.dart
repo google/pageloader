@@ -35,7 +35,7 @@ class HtmlPageElementIterator extends Iterator<HtmlPageLoaderElement> {
     if (_current == -1) {
       return null;
     }
-    return new HtmlPageLoaderElement.createFromElement(_elements[_current],
+    return HtmlPageLoaderElement.createFromElement(_elements[_current],
         externalSyncFn: _syncFn);
   }
 }
@@ -52,12 +52,12 @@ class HtmlPageElementIterable extends PageElementIterable {
 
   @override
   Future<PageLoaderElement> get first async =>
-      new HtmlPageLoaderElement.createFromElement(_drivingElement.elements[0],
+      HtmlPageLoaderElement.createFromElement(_drivingElement.elements[0],
           externalSyncFn: _drivingElement.syncFn);
 
   @override
   Future<Iterator<PageLoaderElement>> get iterator async {
-    return new HtmlPageElementIterator(
+    return HtmlPageElementIterator(
         _drivingElement.syncFn, _drivingElement.elements);
   }
 

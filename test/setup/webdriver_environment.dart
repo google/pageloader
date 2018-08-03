@@ -25,7 +25,7 @@ class WebDriverEnvironment {
 
   Future setUp() async {
     driver = webtest.createTestDriver();
-    _loader = new WebDriverPageUtils(driver);
+    _loader = WebDriverPageUtils(driver);
     driver.get(webtest.testPagePath());
   }
 

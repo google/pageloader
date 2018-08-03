@@ -34,8 +34,7 @@ class WebDriverPageElementIterator
     if (_current == -1) {
       return null;
     }
-    return new WebDriverPageLoaderElement.createFromElement(
-        _elements[_current]);
+    return WebDriverPageLoaderElement.createFromElement(_elements[_current]);
   }
 }
 
@@ -51,12 +50,11 @@ class WebDriverPageElementIterable extends PageElementIterable {
 
   @override
   Future<PageLoaderElement> get first async =>
-      new WebDriverPageLoaderElement.createFromElement(
-          _drivingElement.elements[0]);
+      WebDriverPageLoaderElement.createFromElement(_drivingElement.elements[0]);
 
   @override
   Future<Iterator<PageLoaderElement>> get iterator async {
-    return new WebDriverPageElementIterator(_drivingElement.elements);
+    return WebDriverPageElementIterator(_drivingElement.elements);
   }
 
   @override

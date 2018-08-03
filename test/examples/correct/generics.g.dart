@@ -16,6 +16,12 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Generics.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Generics is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Generics". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Generics', 'typeDefParameter');
@@ -41,7 +47,7 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 
 class $$Generics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -50,8 +56,11 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
   PageLoaderElement $__root__;
   $CheckedGenerics.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
-    $__root__.addCheckers([new CheckTag('checked-generics')]);
+    $__root__.addCheckers([CheckTag('checked-generics')]);
   }
+  factory $CheckedGenerics.lookup(PageLoaderSource source) =>
+      $CheckedGenerics.create(source.byTag('checked-generics'));
+  static String get tagName => 'checked-generics';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CheckedGenerics', 'typeDefParameter');
@@ -66,7 +75,7 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
 
 class $$CheckedGenerics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -77,6 +86,12 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $GenericPair.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "GenericPair is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "GenericPair". Requires @CheckTag annotation in order for "tagName" to be generated.';
   Map<T, V> exampleMethodMap<T, V>(T t, V v) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('GenericPair', 'exampleMethodMap');
@@ -91,7 +106,7 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
 
 class $$GenericPair<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -102,18 +117,24 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $RootPo.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "RootPo is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "RootPo". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$RootPo<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Generics<T> get generics {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPo', 'generics');
     }
-    final element = $__root__.createElement(const ByTagName('x'), [], []);
-    final returnMe = new Generics<T>.create(element);
+    final element = $__root__.createElement(ByTagName('x'), [], []);
+    final returnMe = Generics<T>.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPo', 'generics');
     }
@@ -125,8 +146,8 @@ class $$RootPo<T> {
       __listener.startPageObjectMethod('RootPo', 'checkedGenerics');
     }
     final element =
-        $__root__.createElement(const ByTagName('checked-generics'), [], []);
-    final returnMe = new CheckedGenerics<T>.create(element);
+        $__root__.createElement(ByTagName('checked-generics'), [], []);
+    final returnMe = CheckedGenerics<T>.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPo', 'checkedGenerics');
     }
@@ -137,9 +158,9 @@ class $$RootPo<T> {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPo', 'genericsList');
     }
-    final returnMe = new PageObjectList<Generics<T>>(
-        $__root__.createList(const ByTagName('y'), [], []),
-        (PageLoaderElement e) => new Generics<T>.create(e));
+    final returnMe = PageObjectList<Generics<T>>(
+        $__root__.createList(ByTagName('y'), [], []),
+        (PageLoaderElement e) => Generics<T>.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPo', 'genericsList');
     }
@@ -150,9 +171,9 @@ class $$RootPo<T> {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPo', 'checkedGenericsList');
     }
-    final returnMe = new PageObjectList<CheckedGenerics<T>>(
-        $__root__.createList(const ByTagName('checked-generics'), [], []),
-        (PageLoaderElement e) => new CheckedGenerics<T>.create(e));
+    final returnMe = PageObjectList<CheckedGenerics<T>>(
+        $__root__.createList(ByTagName('checked-generics'), [], []),
+        (PageLoaderElement e) => CheckedGenerics<T>.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPo', 'checkedGenericsList');
     }
@@ -168,11 +189,17 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $GenericsUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "GenericsUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "GenericsUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$GenericsUsingMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -180,7 +207,7 @@ class $$GenericsUsingMixin<T> {
 
 class $$GenericsMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -192,11 +219,17 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $GenericPairUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "GenericPairUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "GenericPairUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$GenericPairUsingMixin<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -204,7 +237,7 @@ class $$GenericPairUsingMixin<T, V> {
 
 class $$GenericPairMixin<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -216,11 +249,17 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $RootPoUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "RootPoUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "RootPoUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$RootPoUsingMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -228,14 +267,14 @@ class $$RootPoUsingMixin<T> {
 
 class $$RootPoMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Generics<T> get generics {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPoMixin', 'generics');
     }
-    final element = $__root__.createElement(const ByTagName('x'), [], []);
-    final returnMe = new Generics<T>.create(element);
+    final element = $__root__.createElement(ByTagName('x'), [], []);
+    final returnMe = Generics<T>.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPoMixin', 'generics');
     }
@@ -247,8 +286,8 @@ class $$RootPoMixin<T> {
       __listener.startPageObjectMethod('RootPoMixin', 'checkedGenerics');
     }
     final element =
-        $__root__.createElement(const ByTagName('checked-generics'), [], []);
-    final returnMe = new CheckedGenerics<T>.create(element);
+        $__root__.createElement(ByTagName('checked-generics'), [], []);
+    final returnMe = CheckedGenerics<T>.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPoMixin', 'checkedGenerics');
     }
@@ -259,9 +298,9 @@ class $$RootPoMixin<T> {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPoMixin', 'genericsList');
     }
-    final returnMe = new PageObjectList<Generics<T>>(
-        $__root__.createList(const ByTagName('y'), [], []),
-        (PageLoaderElement e) => new Generics<T>.create(e));
+    final returnMe = PageObjectList<Generics<T>>(
+        $__root__.createList(ByTagName('y'), [], []),
+        (PageLoaderElement e) => Generics<T>.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPoMixin', 'genericsList');
     }
@@ -272,9 +311,9 @@ class $$RootPoMixin<T> {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPoMixin', 'checkedGenericsList');
     }
-    final returnMe = new PageObjectList<CheckedGenerics<T>>(
-        $__root__.createList(const ByTagName('checked-generics'), [], []),
-        (PageLoaderElement e) => new CheckedGenerics<T>.create(e));
+    final returnMe = PageObjectList<CheckedGenerics<T>>(
+        $__root__.createList(ByTagName('checked-generics'), [], []),
+        (PageLoaderElement e) => CheckedGenerics<T>.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPoMixin', 'checkedGenericsList');
     }

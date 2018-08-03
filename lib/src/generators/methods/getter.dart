@@ -24,11 +24,11 @@ part 'getter.g.dart';
 /// Returns a [Getter] for a concrete getters, or [absent()] otherwise.
 Optional<Getter> collectUnannotatedGetter(MethodDeclaration node) {
   if (!node.isAbstract && node.isGetter) {
-    return new Optional.of(new Getter((b) => b
+    return Optional.of(Getter((b) => b
       ..returnType = node.returnType.toString()
       ..name = node.name.toString()));
   }
-  return new Optional.absent();
+  return Optional.absent();
 }
 
 /// Generates source for getter.

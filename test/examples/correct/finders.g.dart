@@ -16,6 +16,12 @@ class $Finders extends Finders with $$Finders {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Finders.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Finders is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Finders". Requires @CheckTag annotation in order for "tagName" to be generated.';
   PageLoaderElement get secret {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Finders', 'secret');
@@ -30,13 +36,13 @@ class $Finders extends Finders with $$Finders {
 
 class $$Finders {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _secret {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Finders', '_secret');
     }
-    final element = $__root__.createElement(const ByCss('secret'), [], []);
+    final element = $__root__.createElement(ByCss('secret'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Finders', '_secret');
@@ -48,7 +54,7 @@ class $$Finders {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Finders', 'element');
     }
-    final element = $__root__.createElement(const ByCss('some-class'), [], []);
+    final element = $__root__.createElement(ByCss('some-class'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Finders', 'element');
@@ -60,8 +66,8 @@ class $$Finders {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Finders', 'filtered');
     }
-    final element = $__root__.createElement(const ByCss('some-other-class'),
-        [const WithAttribute('also-with', 'this-attribute')], []);
+    final element = $__root__.createElement(ByCss('some-other-class'),
+        [WithAttribute('also-with', 'this-attribute')], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Finders', 'filtered');
@@ -73,9 +79,8 @@ class $$Finders {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Finders', 'checkTagPO');
     }
-    final element =
-        $__root__.createElement(const ByTagName('check-tag-po'), [], []);
-    final returnMe = new CheckTagPO.create(element);
+    final element = $__root__.createElement(ByTagName('check-tag-po'), [], []);
+    final returnMe = CheckTagPO.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Finders', 'checkTagPO');
     }
@@ -88,8 +93,11 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
   PageLoaderElement $__root__;
   $CheckTagPO.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
-    $__root__.addCheckers([new CheckTag('check-tag-po')]);
+    $__root__.addCheckers([CheckTag('check-tag-po')]);
   }
+  factory $CheckTagPO.lookup(PageLoaderSource source) =>
+      $CheckTagPO.create(source.byTag('check-tag-po'));
+  static String get tagName => 'check-tag-po';
   String toString() {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CheckTagPO', 'toString');
@@ -104,7 +112,7 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
 
 class $$CheckTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
@@ -127,11 +135,17 @@ class $FindersUsingMixin extends FindersUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $FindersUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "FindersUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "FindersUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$FindersUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -139,13 +153,13 @@ class $$FindersUsingMixin {
 
 class $$FindersMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _secret {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('FindersMixin', '_secret');
     }
-    final element = $__root__.createElement(const ByCss('secret'), [], []);
+    final element = $__root__.createElement(ByCss('secret'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('FindersMixin', '_secret');
@@ -157,7 +171,7 @@ class $$FindersMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('FindersMixin', 'element');
     }
-    final element = $__root__.createElement(const ByCss('some-class'), [], []);
+    final element = $__root__.createElement(ByCss('some-class'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('FindersMixin', 'element');
@@ -169,8 +183,8 @@ class $$FindersMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('FindersMixin', 'filtered');
     }
-    final element = $__root__.createElement(const ByCss('some-other-class'),
-        [const WithAttribute('also-with', 'this-attribute')], []);
+    final element = $__root__.createElement(ByCss('some-other-class'),
+        [WithAttribute('also-with', 'this-attribute')], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('FindersMixin', 'filtered');
@@ -182,9 +196,8 @@ class $$FindersMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('FindersMixin', 'checkTagPO');
     }
-    final element =
-        $__root__.createElement(const ByTagName('check-tag-po'), [], []);
-    final returnMe = new CheckTagPO.create(element);
+    final element = $__root__.createElement(ByTagName('check-tag-po'), [], []);
+    final returnMe = CheckTagPO.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('FindersMixin', 'checkTagPO');
     }

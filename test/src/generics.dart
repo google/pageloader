@@ -21,18 +21,18 @@ typedef PageLoaderElement GetNewContext();
 void runTests(GetNewContext contextGenerator) {
   group('generics', () {
     test('works for functions', () async {
-      final generics = new Generics<int>.create(contextGenerator());
+      final generics = Generics<int>.create(contextGenerator());
       expect(generics.typeDefParameter(42, (int x) => x.toString()), '42');
     });
 
     test('works for parameterized getters', () {
-      final rootPo = new RootPo<String>.create(contextGenerator());
+      final rootPo = RootPo<String>.create(contextGenerator());
       expect(rootPo.generics.typeDefParameter(' 42 ', (String x) => x.trim()),
           '42');
     });
 
     test('words for parameterized getter lists', () {
-      final rootPo = new RootPo<String>.create(contextGenerator());
+      final rootPo = RootPo<String>.create(contextGenerator());
       expect(rootPo.genericsList, hasLength(4));
       expect(
           rootPo.genericsList[0]

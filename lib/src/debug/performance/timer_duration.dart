@@ -13,7 +13,7 @@
 
 import 'event.dart';
 
-final _defaultTimerConfiguration = new CollectingTimerConfiguration();
+final _defaultTimerConfiguration = CollectingTimerConfiguration();
 
 typedef void Collector(List<DurationEvent> events);
 
@@ -24,13 +24,13 @@ class CollectingTimerFactory {
 
   CollectingTimer create(String timerName,
       {CollectingTimerConfiguration timerConfiguration}) {
-    final configuration = new CollectingTimerConfiguration.from(
+    final configuration = CollectingTimerConfiguration.from(
         timerConfiguration ?? _defaultTimerConfiguration)
       ..timerName = timerName;
-    return new CollectingTimer(_collect, configuration);
+    return CollectingTimer(_collect, configuration);
   }
 
-  TraceEvent serialize() => new TraceEvent()..traceEvents = _collectedEvents;
+  TraceEvent serialize() => TraceEvent()..traceEvents = _collectedEvents;
 
   void _collect(List<DurationEvent> events) {
     _collectedEvents.addAll(events);
@@ -50,7 +50,7 @@ class CollectingTimerConfiguration {
 
   factory CollectingTimerConfiguration.from(
       CollectingTimerConfiguration other) {
-    return new CollectingTimerConfiguration()
+    return CollectingTimerConfiguration()
       ..timerName = other.timerName
       ..pid = other.pid
       ..tid = other.tid;
@@ -62,7 +62,7 @@ class CollectingTimerConfiguration {
 /// On [stop], the event is collected back to the main factory.
 class CollectingTimer {
   final CollectingTimerConfiguration configuration;
-  final Stopwatch _stopwatch = new Stopwatch();
+  final Stopwatch _stopwatch = Stopwatch();
   final Collector _collector;
   bool _isRunning = false;
   DateTime _startDuration;
@@ -72,7 +72,7 @@ class CollectingTimer {
   void start() {
     assert(!_isRunning);
     _isRunning = true;
-    _startDuration = new DateTime.now();
+    _startDuration = DateTime.now();
     _stopwatch.reset();
     _stopwatch.start();
   }
@@ -82,20 +82,20 @@ class CollectingTimer {
     _isRunning = false;
     _stopwatch.stop();
 
-    final startEvent = new DurationEvent()
+    final startEvent = DurationEvent()
       ..name = configuration.timerName
       ..pid = configuration.pid
       ..tid = configuration.tid
       ..phase = DurationEventPhase.begin
       ..ts = _startDuration;
 
-    final endEvent = new DurationEvent()
+    final endEvent = DurationEvent()
       ..name = configuration.timerName
       ..pid = configuration.pid
       ..tid = configuration.tid
       ..phase = DurationEventPhase.end
       ..ts = _startDuration
-          .add(new Duration(microseconds: _stopwatch.elapsedMicroseconds));
+          .add(Duration(microseconds: _stopwatch.elapsedMicroseconds));
 
     _collector([startEvent, endEvent]);
   }

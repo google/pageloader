@@ -21,74 +21,74 @@ typedef PageLoaderElement GetNewContext();
 void runTests(GetNewContext contextGenerator) {
   group('properties', () {
     test('checked', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.checkbox.properties['checked'], 'false');
       await page.checkbox.click();
       expect(page.checkbox.properties['checked'], 'true');
     });
 
     test('disabled', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.readOnly.properties['disabled'], 'true');
       expect(page.text.properties['disabled'], 'false');
     });
 
     test('not a property', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.table.properties['non-standard'], isNull);
     });
 
     test('option values', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
 
       expect(page.option1.properties['value'], 'value 1');
       expect(page.option2.properties['value'], 'value 2');
     });
 
     test('option selected', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       await page.option2.click();
       expect(page.select1.properties['value'], equals('value 2'));
     });
 
     test('selected on checkbox', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.checkbox.properties['checked'], 'false');
       await page.checkbox.click();
       expect(page.checkbox.properties['checked'], 'true');
     });
 
     test('selected on radio', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.radio.properties['checked'], 'false');
       await page.radio.click();
       expect(page.radio.properties['checked'], 'true');
     });
 
     test('href on a', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.anchor.properties['href'], endsWith('/test.html'));
     });
 
     test('src on img', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.img.properties['src'], endsWith('/test.png'));
     });
 
     test('class/className', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.table.properties['class'], isNull);
       expect(page.table.properties['className'], 'class1 class2 class3');
     });
 
     test('readonly/readOnly', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.readOnly.properties['readOnly'], 'true');
       expect(page.text.properties['readOnly'], 'false');
     });
 
     test('value on text', () async {
-      final page = new PageForPropertiesTests.create(contextGenerator());
+      final page = PageForPropertiesTests.create(contextGenerator());
       expect(page.text.properties['value'], '');
       await page.text.type('some text');
       expect(page.text.properties['value'], 'some text');

@@ -21,12 +21,10 @@ import 'html_page_loader_element.dart';
 /// Support for [PageUtils] in HTML context.
 class HtmlPageUtils extends PageUtils {
   final SyncFn syncFn;
-  final HtmlMouse _mouse;
   HtmlPageLoaderElement _cachedRoot;
 
   HtmlPageUtils({SyncFn externalSyncFn: noOpExecuteSyncedFn})
-      : syncFn = externalSyncFn,
-        _mouse = new HtmlMouse(externalSyncFn);
+      : syncFn = externalSyncFn;
 
   /// Gets the body for the current page.
   ///
@@ -34,7 +32,7 @@ class HtmlPageUtils extends PageUtils {
   /// to persist.
   @override
   HtmlPageLoaderElement get root {
-    _cachedRoot ??= new HtmlPageLoaderElement.createFromElement(document.body,
+    _cachedRoot ??= HtmlPageLoaderElement.createFromElement(document.body,
         externalSyncFn: this.syncFn);
     return _cachedRoot;
   }
@@ -44,12 +42,12 @@ class HtmlPageUtils extends PageUtils {
   /// This is element you should pass in your tests to create new page objects.
   @override
   PageLoaderElement byTag(String tag) =>
-      new HtmlPageLoaderElement.createFromElement(document.body,
+      HtmlPageLoaderElement.createFromElement(document.body,
               externalSyncFn: this.syncFn)
           .getElementsByCss(tag)
           .single;
 
   /// Gets the mouse.
   @override
-  PageLoaderMouse get mouse => _mouse;
+  PageLoaderMouse get mouse => globalMouse(this.syncFn);
 }

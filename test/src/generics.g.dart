@@ -16,6 +16,12 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Generics.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Generics is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Generics". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Generics', 'typeDefParameter');
@@ -30,7 +36,7 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 
 class $$Generics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -41,18 +47,24 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $RootPo.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "RootPo is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "RootPo". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$RootPo<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Generics<T> get generics {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPo', 'generics');
     }
-    final element = $__root__.createElement(const ById('button-1'), [], []);
-    final returnMe = new Generics<T>.create(element);
+    final element = $__root__.createElement(ById('button-1'), [], []);
+    final returnMe = Generics<T>.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPo', 'generics');
     }
@@ -63,9 +75,9 @@ class $$RootPo<T> {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootPo', 'genericsList');
     }
-    final returnMe = new PageObjectList<Generics<T>>(
-        $__root__.createList(const ByTagName('td'), [], []),
-        (PageLoaderElement e) => new Generics<T>.create(e));
+    final returnMe = PageObjectList<Generics<T>>(
+        $__root__.createList(ByTagName('td'), [], []),
+        (PageLoaderElement e) => Generics<T>.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootPo', 'genericsList');
     }

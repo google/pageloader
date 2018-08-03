@@ -16,7 +16,7 @@ library pageloader.api.annotation_interfaces;
 
 import 'page_loader_element_interface.dart';
 
-/// Finds all matching elements within the parent context.
+/// Finds all matching elements STRICTLY underneath the parent context.
 ///
 /// Can only be used on an abstract getter method.
 abstract class Finder {}

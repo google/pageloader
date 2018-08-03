@@ -46,7 +46,14 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
 
   /// Write constructor-based contents into string buffer.
   void writeToConstructorBuffer(
-      StringBuffer constructorBuffer, String className) {
+      StringBuffer constructorBuffer, String className, String defaultTag) {
+    if (defaultTag != null) {
+      constructorBuffer.write('static String get tagName => $defaultTag;');
+    } else {
+      constructorBuffer.write("static String get tagName => throw '\"tagName\" "
+          "is not defined by Page Object \"$className\". Requires @CheckTag "
+          "annotation in order for \"tagName\" to be generated.';");
+    }
     final addToConstructor =
         (method) => constructorBuffer.writeln(method.generate(className));
     getters.forEach(addToConstructor);
@@ -70,7 +77,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
   void visitFieldDeclaration(FieldDeclaration node) {
     final matching = node.metadata.where(isPageloaderAnnotation);
     if (matching.isNotEmpty) {
-      badMethods.add(new InvalidMethodException(
+      badMethods.add(InvalidMethodException(
           node.toSource(),
           'Field declarations should never have PageLoader annotations. '
           '(Did you forget "get" on a PageLoader getter?)'));
@@ -102,7 +109,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
         unsupportedMethods.add(node.toSource());
       } else if (collected.length > 1) {
         oversupportedMethods
-            .add(new OverSupportedMethod(node.toSource(), collected));
+            .add(OverSupportedMethod(node.toSource(), collected));
       }
     }
   }
