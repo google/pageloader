@@ -25,12 +25,12 @@ part 'setter.g.dart';
 Optional<Setter> collectUnannotatedSetter(MethodDeclaration node) {
   if (!node.isAbstract && node.isSetter) {
     final param = node.parameters.parameters.first;
-    return new Optional.of(new Setter((b) => b
+    return Optional.of(Setter((b) => b
       ..name = node.name.toString()
       ..setterType = param.element.type.toString()
       ..setterValueName = param.element.name));
   }
-  return new Optional.absent();
+  return Optional.absent();
 }
 
 /// Generates code for normal setters.

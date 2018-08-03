@@ -29,28 +29,27 @@ part 'mouse_finder_method.g.dart';
 Optional<MouseFinderMethod> collectMouseFinderGetter(
     CoreMethodInformationBase methodInfo) {
   if (!methodInfo.isMouse) {
-    return new Optional.absent();
+    return Optional.absent();
   }
 
   if (!methodInfo.isAbstract || !methodInfo.isGetter) {
-    throw new InvalidMethodException(methodInfo.nodeSource,
+    throw InvalidMethodException(methodInfo.nodeSource,
         '@Mouse annotation must be used with abstract getter');
   }
   if (methodInfo.finder.isPresent) {
-    throw new InvalidMethodException(
+    throw InvalidMethodException(
         methodInfo.nodeSource, 'cannot use Finder with Mouse annotation');
   }
   if (methodInfo.filters.isNotEmpty) {
-    throw new InvalidMethodException(
+    throw InvalidMethodException(
         methodInfo.nodeSource, 'cannot use Filter with Mouse annotation');
   }
   if (methodInfo.checkers.isNotEmpty) {
-    throw new InvalidMethodException(
+    throw InvalidMethodException(
         methodInfo.nodeSource, 'cannot use Checker with Mouse annotation');
   }
 
-  return new Optional.of(
-      new MouseFinderMethod((b) => b..name = methodInfo.name));
+  return Optional.of(MouseFinderMethod((b) => b..name = methodInfo.name));
 }
 
 /// Generation for @Mouse getters.

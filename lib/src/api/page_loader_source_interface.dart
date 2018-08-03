@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc. All rights reserved.
+// Copyright 2018 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,17 +11,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library pageloader.api.page_loader_interface;
+library pageloader3.api.page_loader_source_interface;
 
 import 'page_loader_element_interface.dart';
-import 'page_loader_mouse_interface.dart';
-import 'page_loader_source_interface.dart';
 
-/// Convenience methods that vary based on environment.
-abstract class PageUtils extends PageLoaderSource {
-  /// Gets the current root element for the DOM. Used to create page objects.
-  PageLoaderElement get root;
-
-  /// Gets the mouse.
-  PageLoaderMouse get mouse;
+/// Base class for Pageloader entities that behave as the source for other
+/// [PageLoaderElement]s.
+abstract class PageLoaderSource {
+  /// Finds [PageLoaderElement] from this source by [tag].
+  ///
+  /// If used with [PageUtils], finds the element representing [tag]
+  /// found from the document root.
+  /// If used with [PageLoaderElement], finds the element representing [tag]
+  /// found from the [PageLoaderElement] as root.
+  PageLoaderElement byTag(String tag);
 }

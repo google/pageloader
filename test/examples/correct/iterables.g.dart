@@ -15,18 +15,24 @@ class $Iterables extends Iterables with $$Iterables {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Iterables.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Iterables is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Iterables". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Iterables {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageObjectIterable<PageLoaderElement> get basics {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Iterables', 'basics');
     }
-    final returnMe = new PageObjectIterable<PageLoaderElement>(
-        $__root__.createIterable(const ByCss('basic'), [], []),
+    final returnMe = PageObjectIterable<PageLoaderElement>(
+        $__root__.createIterable(ByCss('basic'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Iterables', 'basics');
@@ -38,9 +44,9 @@ class $$Iterables {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Iterables', 'nested');
     }
-    final returnMe = new PageObjectIterable<InnerObject>(
-        $__root__.createIterable(const ByCss('nested'), [], []),
-        (PageLoaderElement e) => new InnerObject.create(e));
+    final returnMe = PageObjectIterable<InnerObject>(
+        $__root__.createIterable(ByCss('nested'), [], []),
+        (PageLoaderElement e) => InnerObject.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Iterables', 'nested');
     }
@@ -51,9 +57,9 @@ class $$Iterables {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Iterables', 'checkTagPO');
     }
-    final returnMe = new PageObjectIterable<CheckTagPO>(
-        $__root__.createIterable(const ByTagName('check-tag-po'), [], []),
-        (PageLoaderElement e) => new CheckTagPO.create(e));
+    final returnMe = PageObjectIterable<CheckTagPO>(
+        $__root__.createIterable(ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => CheckTagPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Iterables', 'checkTagPO');
     }
@@ -67,17 +73,23 @@ class $InnerObject extends InnerObject with $$InnerObject {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $InnerObject.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "InnerObject is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "InnerObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$InnerObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerObject', 'single');
     }
-    final element = $__root__.createElement(const ByCss('single'), [], []);
+    final element = $__root__.createElement(ByCss('single'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerObject', 'single');
@@ -89,8 +101,8 @@ class $$InnerObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerObject', 'innerIterable');
     }
-    final returnMe = new PageObjectIterable<PageLoaderElement>(
-        $__root__.createIterable(const ByCss('nested-iterable'), [], []),
+    final returnMe = PageObjectIterable<PageLoaderElement>(
+        $__root__.createIterable(ByCss('nested-iterable'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerObject', 'innerIterable');
@@ -102,9 +114,9 @@ class $$InnerObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerObject', 'innerCheckTagPO');
     }
-    final returnMe = new PageObjectIterable<CheckTagPO>(
-        $__root__.createIterable(const ByTagName('check-tag-po'), [], []),
-        (PageLoaderElement e) => new CheckTagPO.create(e));
+    final returnMe = PageObjectIterable<CheckTagPO>(
+        $__root__.createIterable(ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => CheckTagPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerObject', 'innerCheckTagPO');
     }
@@ -119,24 +131,30 @@ class $IterablesUsingMixin extends IterablesUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $IterablesUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "IterablesUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "IterablesUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$IterablesUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
 class $$IterablesMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageObjectIterable<PageLoaderElement> get basics {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('IterablesMixin', 'basics');
     }
-    final returnMe = new PageObjectIterable<PageLoaderElement>(
-        $__root__.createIterable(const ByCss('basic'), [], []),
+    final returnMe = PageObjectIterable<PageLoaderElement>(
+        $__root__.createIterable(ByCss('basic'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('IterablesMixin', 'basics');
@@ -148,9 +166,9 @@ class $$IterablesMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('IterablesMixin', 'nested');
     }
-    final returnMe = new PageObjectIterable<InnerObjectUsingMixin>(
-        $__root__.createIterable(const ByCss('nested'), [], []),
-        (PageLoaderElement e) => new InnerObjectUsingMixin.create(e));
+    final returnMe = PageObjectIterable<InnerObjectUsingMixin>(
+        $__root__.createIterable(ByCss('nested'), [], []),
+        (PageLoaderElement e) => InnerObjectUsingMixin.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('IterablesMixin', 'nested');
     }
@@ -161,9 +179,9 @@ class $$IterablesMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('IterablesMixin', 'checkTagPO');
     }
-    final returnMe = new PageObjectIterable<CheckTagPO>(
-        $__root__.createIterable(const ByTagName('check-tag-po'), [], []),
-        (PageLoaderElement e) => new CheckTagPO.create(e));
+    final returnMe = PageObjectIterable<CheckTagPO>(
+        $__root__.createIterable(ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => CheckTagPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('IterablesMixin', 'checkTagPO');
     }
@@ -178,23 +196,29 @@ class $InnerObjectUsingMixin extends InnerObjectUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $InnerObjectUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "InnerObjectUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "InnerObjectUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$InnerObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
 class $$InnerObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerObjectMixin', 'single');
     }
-    final element = $__root__.createElement(const ByCss('single'), [], []);
+    final element = $__root__.createElement(ByCss('single'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerObjectMixin', 'single');
@@ -206,8 +230,8 @@ class $$InnerObjectMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerObjectMixin', 'innerIterable');
     }
-    final returnMe = new PageObjectIterable<PageLoaderElement>(
-        $__root__.createIterable(const ByCss('nested-iterable'), [], []),
+    final returnMe = PageObjectIterable<PageLoaderElement>(
+        $__root__.createIterable(ByCss('nested-iterable'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerObjectMixin', 'innerIterable');
@@ -219,9 +243,9 @@ class $$InnerObjectMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerObjectMixin', 'innerCheckTagPO');
     }
-    final returnMe = new PageObjectIterable<CheckTagPO>(
-        $__root__.createIterable(const ByTagName('check-tag-po'), [], []),
-        (PageLoaderElement e) => new CheckTagPO.create(e));
+    final returnMe = PageObjectIterable<CheckTagPO>(
+        $__root__.createIterable(ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => CheckTagPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerObjectMixin', 'innerCheckTagPO');
     }

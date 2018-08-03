@@ -59,13 +59,13 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   }
 
   String _generateClass(ClassDeclaration declaration) {
-    final collectorVisitor = new CollectorVisitor(declaration);
+    final collectorVisitor = CollectorVisitor(declaration);
     declaration.visitChildren(collectorVisitor);
 
     _doErrorHandling(collectorVisitor);
 
-    final constructorBuffer = new StringBuffer();
-    final mixinBuffer = new StringBuffer();
+    final constructorBuffer = StringBuffer();
+    final mixinBuffer = StringBuffer();
     final className = declaration.name.toString();
     final generics = _generateTypeParameters(declaration);
     final genericsArgs = _generateTypeArguments(declaration);
@@ -75,7 +75,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     // Run check to make sure PO is not extending another PO.
     // Only mixins are allowed.
     if (poExtendsAnotherPo(declaration.element)) {
-      throw new Exception('******************\n\n'
+      throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           "PageObject class '${declaration.name.name}' is extending another "
           "PageObject class. PageObjects may not extend other PageObjects; "
@@ -92,7 +92,14 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
         PageLoaderElement ${core.root};
       \$$className.create(PageLoaderElement currentContext) : ''');
 
-      // If @EnsureTag used, we add finder to constructor. Checker is added later.
+      // Default tag associated with this PO if @CheckTag or @EnsureTag is
+      // present.
+      String defaultTag;
+
+      // Generate the 'create' constructor.
+
+      // If @EnsureTag used, we add finder to constructor. Otherwise
+      // set current root as the passed 'currentContext'.
       final ensureTag = core.getEnsureTag(declaration);
       if (ensureTag.isPresent) {
         constructorBuffer.write('${core.root} = currentContext.createElement'
@@ -101,12 +108,35 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       } else {
         constructorBuffer.write('${core.root} = currentContext { \n');
       }
-      // Add class checkers and close constructor.
+      // Add class checkers and close 'create' constructor.
       constructorBuffer.write('${core.root}.addCheckers'
           '([${generateClassChecks(declaration)}]);\n}');
 
+      // Generate the 'lookup' factory constructor.
+
+      constructorBuffer
+          .write('factory \$$className.lookup(PageLoaderSource source) => ');
+      final checkTag = core.getCheckTag(declaration);
+
+      // If '@CheckTag' or '@EnsureTag' exists on this PageObject,
+      // generate the 'lookup' constructor. If neither exists, insert
+      // throw error clause.
+      if (ensureTag.isPresent || checkTag.isPresent) {
+        defaultTag = ensureTag.isPresent
+            ? getAnnotationSingleArg(ensureTag.value)
+            : getAnnotationSingleArg(checkTag.value);
+        constructorBuffer
+            .write('\$$className.create(source.byTag($defaultTag));');
+      } else {
+        constructorBuffer.write('''throw  "'lookup' constructor for class "
+        "$className is not generated and can only be used on Page Object "
+        "classes that have @CheckTag annotation.";
+        ''');
+      }
+
       // Constructor class gets the methods/getters/setters.
-      collectorVisitor.writeToConstructorBuffer(constructorBuffer, className);
+      collectorVisitor.writeToConstructorBuffer(
+          constructorBuffer, className, defaultTag);
 
       // Close constructor class
       constructorBuffer.writeln('}');
@@ -116,7 +146,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     mixinBuffer.write('''
       class \$\$$signature {
         PageLoaderElement ${core.root};
-        PageLoaderMouse ${core.mouse};
+        PageLoaderMouse ${core.mouse}; // ignore: unused_field
     ''');
 
     // Add generated root accessor to be used in internal code.
@@ -161,7 +191,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     if (visitor.badMethods.isNotEmpty ||
         visitor.oversupportedMethods.isNotEmpty ||
         visitor.unsupportedMethods.isNotEmpty) {
-      throw new Exception('******************\n\n'
+      throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           '${errors.join('\n\n-------------------\n')}'
           '\n\n******************');
@@ -201,6 +231,12 @@ String generateWithClause(ClassElement mainPo, String mainSignature) {
   return 'with ${withs.join(', ')}';
 }
 
+/// Gets the single argument within an [Annotation].
+///
+/// Assumes that the annotation has exactly one argument.
+String getAnnotationSingleArg(Annotation annotation) =>
+    annotation.arguments.arguments.single.toSource();
+
 /// Checks if the PageObject has the standard constructors:
 ///   abstract class MyPO {
 ///     MyPO();
@@ -211,9 +247,10 @@ bool hasPoConstructors(ClassElement element) {
   if (constructors.isNotEmpty) {
     final hasDefaultConstructor =
         constructors.any((c) => c.isDefaultConstructor);
-    final hasFactoryCreate =
-        constructors.any((c) => c.isFactory && c.displayName == 'create');
-    return hasDefaultConstructor && hasFactoryCreate;
+    final hasFactoryCreateOrLookup = constructors.any((c) =>
+        c.isFactory &&
+        (c.displayName == 'create' || c.displayName == 'lookup'));
+    return hasDefaultConstructor && hasFactoryCreateOrLookup;
   }
   return false;
 }

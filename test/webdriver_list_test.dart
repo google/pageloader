@@ -17,7 +17,7 @@ import 'setup/webdriver_environment.dart';
 import 'src/list.dart' as list;
 
 void main() {
-  final environment = new WebDriverEnvironment();
+  final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
   list.runTests(() => environment.getBaseElement());

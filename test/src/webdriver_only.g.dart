@@ -15,17 +15,23 @@ class $WebDriverOnly extends WebDriverOnly with $$WebDriverOnly {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $WebDriverOnly.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "WebDriverOnly is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "WebDriverOnly". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$WebDriverOnly {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get button1 {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('WebDriverOnly', 'button1');
     }
-    final element = $__root__.createElement(const ById('button-1'), [], []);
+    final element = $__root__.createElement(ById('button-1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('WebDriverOnly', 'button1');

@@ -25,14 +25,14 @@ part 'unannotated_method.g.dart';
 /// Currently just a pass through.
 Optional<UnannotatedMethod> collectUnannotatedMethod(MethodDeclaration node) {
   if (node.isAbstract || node.isGetter || node.isSetter || node.isOperator) {
-    return const Optional.absent();
+    return Optional.absent();
   }
 
-  return new Optional.of(new UnannotatedMethod((b) => b
+  return Optional.of(UnannotatedMethod((b) => b
     ..name = node.name.toString()
     ..returnType = node.returnType.toString()
     ..parameters = node.parameters.parameters
-    ..typeParameters = new Optional.fromNullable(node.typeParameters)));
+    ..typeParameters = Optional.fromNullable(node.typeParameters)));
 }
 
 /// Generation for unannotated method.

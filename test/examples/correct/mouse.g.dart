@@ -15,11 +15,17 @@ class $MouseObject extends MouseObject with $$MouseObject {
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $MouseObject.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "MouseObject is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "MouseObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$MouseObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderMouse get mouse {
     for (final __listener in $__root__.listeners) {
@@ -41,17 +47,23 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $MouseObjectUsingMixin.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "MouseObjectUsingMixin is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "MouseObjectUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$MouseObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
 class $$MouseObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderMouse get mouse {
     for (final __listener in $__root__.listeners) {

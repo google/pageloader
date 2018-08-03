@@ -48,7 +48,7 @@ class PageObjectIterable<E> {
 
   /// Creates a [PageObjectIterator] based on the underlying
   /// [PageElementIterable].
-  Future<Iterator<E>> get iterator async => new PageObjectIterator<E>(
+  Future<Iterator<E>> get iterator async => PageObjectIterator<E>(
       await _elementIterable.iterator, _pageObjectConstructor);
 
   /// Gets the current length of the underlying [PageElementIterable].

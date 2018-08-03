@@ -24,8 +24,7 @@ typedef void DoRefresh();
 void runTests(GetNewContext contextGenerator, DoRefresh refresh) {
   group('cache invalidation ', () {
     test('handled correctly for single', () async {
-      final cacheInvalidation =
-          new CacheInvalidation.create(contextGenerator());
+      final cacheInvalidation = CacheInvalidation.create(contextGenerator());
       final button1 = cacheInvalidation.button1;
       await button1.click();
       refresh();
@@ -33,8 +32,7 @@ void runTests(GetNewContext contextGenerator, DoRefresh refresh) {
     });
 
     test('stale elements handled correctly for nested', () async {
-      final cacheInvalidation =
-          new CacheInvalidation.create(contextGenerator());
+      final cacheInvalidation = CacheInvalidation.create(contextGenerator());
       final select1 = cacheInvalidation.select1;
       expect(select1.option1.innerText, 'option 1');
       expect(select1.option2.innerText, 'option 2');

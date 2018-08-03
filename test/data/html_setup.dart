@@ -78,7 +78,13 @@ html.Element setUp() {
       <a-custom-tag id="button-2">
         button 2
       </a-custom-tag>
-      <p id="nbsp"> &nbsp; &nbsp; </p>''';
+      <b-custom-tag>
+        <c-custom-tag>C tag inner text</c-custom-tag>
+      </b-custom-tag>
+      <p id="nbsp"> &nbsp; &nbsp; </p>
+      <div id='mouse-top'>top area for mouse events</div>
+      <div id='mouse-center'>center area for mouse events</div>
+      <div id='mouse-bottom'>bottom area for mouse events</div>''';
 
   final templateHtml = '<button id="inner">some <content></content></button>';
 
@@ -88,44 +94,72 @@ html.Element setUp() {
   if (results.length == 1) {
     div = results[0];
   } else {
-    div = new html.DivElement();
+    div = html.DivElement();
     div.id = 'testdocument';
     body.append(div);
   }
-  div.setInnerHtml(bodyHtml, validator: new NoOpNodeValidator());
+  div.setInnerHtml(bodyHtml, validator: NoOpNodeValidator());
 
   html.document.getElementsByTagName('a-custom-tag').forEach((element) {
     if (element is html.Element) {
       final shadow = element.createShadowRoot();
-      shadow.setInnerHtml(templateHtml, validator: new NoOpNodeValidator());
+      shadow.setInnerHtml(templateHtml, validator: NoOpNodeValidator());
     }
   });
+
+  // Get all mouseevent driven div elements and bind them
   final displayedDiv = html.document.getElementById('mouse');
-  displayedDiv.onMouseDown.listen((evt) {
-    displayedDiv.text = displayedDiv.text +
-        " MouseDown: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
-  });
-  displayedDiv.onMouseUp.listen((evt) {
-    displayedDiv.text = displayedDiv.text +
-        " MouseUp: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
-  });
-  displayedDiv.onMouseMove.listen((evt) {
-    displayedDiv.text = displayedDiv.text +
-        " MouseMove: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
-  });
+  final centerDiv = html.document.getElementById('mouse-center');
+  bindMouseEvents(displayedDiv);
+  bindMouseEvents(centerDiv);
 
   return div;
 }
 
+void bindMouseEvents(html.Element element) {
+  element.onMouseDown.listen((evt) {
+    element.text = element.text +
+        " MouseDown: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseUp.listen((evt) {
+    element.text = element.text +
+        " MouseUp: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseMove.listen((evt) {
+    element.text = element.text +
+        " MouseMove: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseLeave.listen((evt) {
+    element.text = element.text +
+        " MouseLeave: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseOut.listen((evt) {
+    element.text = element.text +
+        " MouseOut: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseEnter.listen((evt) {
+    element.text = element.text +
+        " MouseEnter: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+  element.onMouseOver.listen((evt) {
+    element.text = element.text +
+        " MouseOver: ${evt.client.x}, ${evt.client.y}; "
+        "${evt.screen.x}, ${evt.screen.y}";
+  });
+}
+
 HtmlPageLoaderElement getRoot() =>
-    new HtmlPageLoaderElement.createFromElement(setUp(),
+    HtmlPageLoaderElement.createFromElement(setUp(),
         externalSyncFn: (Future action()) async {
       await action();
       // Ensure that page has chance to execute before HTML test continues.
-      await new Future.value();
+      await Future.value();
     });
 
 void reset() {

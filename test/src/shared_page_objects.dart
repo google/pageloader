@@ -40,7 +40,7 @@ abstract class Table {
   PageObjectIterable<Row> get rows;
 
   Future doSlowAction() async {
-    return new Future.delayed(new Duration(seconds: 5));
+    return Future.delayed(Duration(seconds: 5));
   }
 }
 

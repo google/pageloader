@@ -25,7 +25,7 @@ export 'page_object_annotation.dart';
 ///
 /// Must be applied to a [PageLoaderElement] getter. No other annotations may be
 /// used.
-const root = const _Root();
+const root = _Root();
 
 class _Root {
   const _Root();
@@ -38,7 +38,7 @@ class _Root {
 ///
 /// Must be applied to a [PageLoaderMouse] getter. No other annotations may be
 /// used.
-const Mouse = const _Mouse();
+const Mouse = _Mouse();
 
 class _Mouse {
   const _Mouse();

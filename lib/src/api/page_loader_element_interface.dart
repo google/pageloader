@@ -19,11 +19,12 @@ import 'dart:math';
 import 'annotation_interfaces.dart';
 import 'iterable_interfaces.dart';
 import 'page_loader_listener.dart';
+import 'page_loader_source_interface.dart';
 import 'page_utils_interface.dart';
 
 /// Base class for interacting with raw DOM elements, e.g. buttons, input
 /// fields, etc.
-abstract class PageLoaderElement {
+abstract class PageLoaderElement extends PageLoaderSource {
   /// Creates a new element based on the current context plus the passed
   /// [Finder], [Filter]s, and [Checker]s.
   PageLoaderElement createElement(
@@ -137,6 +138,11 @@ abstract class PageLoaderElement {
 
   /// Clicks on the element.
   Future<void> click();
+
+  /// Clicks outside of the current element.
+  ///
+  /// If the current element does not exist or is not displayed, do nothing.
+  Future<void> clickOutside();
 
   /// Types [keys] into this element, if possible (e.g. for an input element).
   ///

@@ -36,7 +36,7 @@ final String pageObjectList = 'PageObjectList';
 
 /// Returns a declaration of a annotation.
 String generateAnnotationDeclaration(Annotation annotation) =>
-    'const ${annotation.name}(${annotation.arguments.arguments.join(", ")})';
+    '${annotation.name}(${annotation.arguments.arguments.join(", ")})';
 
 /// Returns a 'ByTagName' declaration from the 'ByCheckTag' annotation.
 String generateByTagNameFromByCheckTag(InterfaceType node) {
@@ -45,7 +45,7 @@ String generateByTagNameFromByCheckTag(InterfaceType node) {
     throw "'@ByCheckTag' can only be used on getters that return a "
         "PageObject type with the'@CheckTag' annotation.";
   }
-  return "const ByTagName('$defaultTagName')";
+  return "ByTagName('$defaultTagName')";
 }
 
 /// Extracts the tag name from a PageLoader2 class based on `@CheckTag`.
@@ -75,9 +75,18 @@ Optional<Annotation> getEnsureTag(ClassDeclaration declaration) {
     throw 'Found multiple @EnsureTag annotations in class: '
         '${declaration.toSource()}';
   }
-  return ensures.length == 1
-      ? new Optional.of(ensures.single)
-      : const Optional.absent();
+  return ensures.length == 1 ? Optional.of(ensures.single) : Optional.absent();
+}
+
+/// Returns the @CheckTag annotation if it exists.
+Optional<Annotation> getCheckTag(ClassDeclaration declaration) {
+  final checks =
+      declaration.metadata.where((a) => a.name.toSource() == 'CheckTag');
+  if (checks.length > 1) {
+    throw 'Found multiple @CheckTag annotations in class: '
+        '${declaration.toSource()}';
+  }
+  return checks.length == 1 ? Optional.of(checks.single) : Optional.absent();
 }
 
 /// Returns true if annotation is some type of Pageloader annotation.
@@ -86,7 +95,7 @@ bool isPageloaderAnnotation(Annotation annotation) =>
 
 /// Returns set of all Pageloader annotation the current annotation satisfies.
 Set<AnnotationKind> getAnnotationKind(Annotation annotation) {
-  final returnSet = new Set<AnnotationKind>();
+  final returnSet = Set<AnnotationKind>();
   final element = annotation.element;
   if (element != null) {
     returnSet

@@ -56,7 +56,7 @@ bool isDisplayed(item) =>
 /// "display" style.
 bool isNotDisplayed(item) => !isDisplayed(item);
 
-const _hidden = const ['hidden', 'collapse'];
+const _hidden = ['hidden', 'collapse'];
 
 /// Checks if a PageLoaderElement/PageObject is hidden based on "visibility"
 /// style.
@@ -83,15 +83,15 @@ String getInnerText(item) =>
     _rootElementOfAndRethrow(item, 'getInnerText').innerText;
 
 /// Function for PageObject constructor. Typically in form:
-///   (c) => new SomePO.create(c)
+///   (c) => SomePO.create(c)
 typedef T POFactory<T>(PageLoaderElement context);
 
 /// Generates PO of type T using [source] as context. If [finder] is provided,
 /// creates a new PO using context plus [finder].
 ///
 /// Example:
-///   final myPO = createPO<MyPO>(someElement, (c) => new MyPO.create(c),
-///       finder: const ByCss('some-tag'));
+///   final myPO = createPO<MyPO>(someElement, (c) => MyPO.create(c),
+///       finder: ByCss('some-tag'));
 T createPO<T>(PageLoaderElement source, POFactory<T> poFactory,
     {Finder finder}) {
   final element =
@@ -109,7 +109,7 @@ PageLoaderElement rootElementOf(item) {
   try {
     return item.$root;
   } on NoSuchMethodError {
-    throw new PageLoaderArgumentError.onWrongType('rootElementOf');
+    throw PageLoaderArgumentError.onWrongType('rootElementOf');
   }
 }
 
@@ -121,7 +121,7 @@ PageLoaderElement _rootElementOfAndRethrow(item, String f) {
   try {
     _root = rootElementOf(item);
   } on PageLoaderArgumentError {
-    throw new PageLoaderArgumentError.onWrongType(f);
+    throw PageLoaderArgumentError.onWrongType(f);
   }
   return _root;
 }
@@ -130,6 +130,6 @@ class PageLoaderArgumentError extends ArgumentError {
   PageLoaderArgumentError._(String message) : super(message);
 
   factory PageLoaderArgumentError.onWrongType(String f) =>
-      new PageLoaderArgumentError._("'$f' may only be called on PageObjects "
+      PageLoaderArgumentError._("'$f' may only be called on PageObjects "
           "or PageLoaderElements");
 }
