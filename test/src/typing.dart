@@ -21,7 +21,7 @@ typedef PageLoaderElement GetNewContext();
 void runTests(GetNewContext contextGenerator) {
   group('typing', () {
     test('Type into textarea', () async {
-      final page = new PageForTextAreaTypingText.create(contextGenerator());
+      final page = PageForTextAreaTypingText.create(contextGenerator());
       await page.textArea.type('some');
       expect(page.textArea.properties['value'], 'some');
       await page.textArea.type(' string');
@@ -31,7 +31,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('typing should append', () async {
-      final page = new PageForTypingTests.create(contextGenerator());
+      final page = PageForTypingTests.create(contextGenerator());
       expect(page.text.properties['value'], '');
       await page.text.type('some text');
       expect(page.text.properties['value'], 'some text');
@@ -40,7 +40,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('value after clear', () async {
-      final page = new PageForTypingTests.create(contextGenerator());
+      final page = PageForTypingTests.create(contextGenerator());
       expect(page.text.properties['value'], '');
       await page.text.type('some text');
       expect(page.text.properties['value'], 'some text');

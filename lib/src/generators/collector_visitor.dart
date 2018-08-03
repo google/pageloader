@@ -77,7 +77,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
   void visitFieldDeclaration(FieldDeclaration node) {
     final matching = node.metadata.where(isPageloaderAnnotation);
     if (matching.isNotEmpty) {
-      badMethods.add(new InvalidMethodException(
+      badMethods.add(InvalidMethodException(
           node.toSource(),
           'Field declarations should never have PageLoader annotations. '
           '(Did you forget "get" on a PageLoader getter?)'));
@@ -109,7 +109,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
         unsupportedMethods.add(node.toSource());
       } else if (collected.length > 1) {
         oversupportedMethods
-            .add(new OverSupportedMethod(node.toSource(), collected));
+            .add(OverSupportedMethod(node.toSource(), collected));
       }
     }
   }

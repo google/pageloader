@@ -16,7 +16,7 @@ library pageloader.annotations;
 
 import '/test/root/path/annotation_interfaces.dart';
 
-const root = const _Root();
+const root = _Root();
 
 class _Root {
   const _Root();
@@ -25,7 +25,7 @@ class _Root {
   String toString() => '@root';
 }
 
-const Mouse = const _Mouse();
+const Mouse = _Mouse();
 
 class _Mouse {
   const _Mouse();

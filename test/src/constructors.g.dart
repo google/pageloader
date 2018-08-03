@@ -26,15 +26,15 @@ class $BasePO extends BasePO with $$BasePO {
 
 class $$BasePO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   BCustomTagPO get bTagPO {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BasePO', 'bTagPO');
     }
     final element =
-        $__root__.createElement(const ByTagName(BCustomTagPO.tagName), [], []);
-    final returnMe = new BCustomTagPO.create(element);
+        $__root__.createElement(ByTagName(BCustomTagPO.tagName), [], []);
+    final returnMe = BCustomTagPO.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BasePO', 'bTagPO');
     }
@@ -47,10 +47,10 @@ class $BCustomTagPO extends BCustomTagPO with $$BCustomTagPO {
   PageLoaderElement $__root__;
   $BCustomTagPO.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
-    $__root__.addCheckers([new CheckTag(BCustomTagPO.tagName)]);
+    $__root__.addCheckers([CheckTag(BCustomTagPO.tagName)]);
   }
   factory $BCustomTagPO.lookup(PageLoaderSource source) =>
-      new $BCustomTagPO.create(source.byTag(BCustomTagPO.tagName));
+      $BCustomTagPO.create(source.byTag(BCustomTagPO.tagName));
   static String get tagName => BCustomTagPO.tagName;
   PageLoaderElement get rootElement {
     for (final __listener in $__root__.listeners) {
@@ -110,7 +110,7 @@ class $BCustomTagPO extends BCustomTagPO with $$BCustomTagPO {
 
 class $$BCustomTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
@@ -130,10 +130,10 @@ class $CCustomTagPO extends CCustomTagPO with $$CCustomTagPO {
   PageLoaderElement $__root__;
   $CCustomTagPO.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
-    $__root__.addCheckers([new CheckTag(CCustomTagPO.tagName)]);
+    $__root__.addCheckers([CheckTag(CCustomTagPO.tagName)]);
   }
   factory $CCustomTagPO.lookup(PageLoaderSource source) =>
-      new $CCustomTagPO.create(source.byTag(CCustomTagPO.tagName));
+      $CCustomTagPO.create(source.byTag(CCustomTagPO.tagName));
   static String get tagName => CCustomTagPO.tagName;
   String get innerText {
     for (final __listener in $__root__.listeners) {
@@ -149,7 +149,7 @@ class $CCustomTagPO extends CCustomTagPO with $$CCustomTagPO {
 
 class $$CCustomTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
@@ -181,6 +181,6 @@ class $NoLookupPO extends NoLookupPO with $$NoLookupPO {
 
 class $$NoLookupPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }

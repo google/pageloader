@@ -26,7 +26,7 @@ class WebDriverPageUtils extends PageUtils {
 
   WebDriverPageLoaderElement _cachedRoot;
 
-  WebDriverPageUtils(this.driver) : _mouse = new WebDriverMouse(driver);
+  WebDriverPageUtils(this.driver) : _mouse = WebDriverMouse(driver);
 
   /// Gets the root element for the given page.
   ///
@@ -34,7 +34,7 @@ class WebDriverPageUtils extends PageUtils {
   /// listeners to persist.
   @override
   WebDriverPageLoaderElement get root {
-    _cachedRoot ??= new WebDriverPageLoaderElement(driver);
+    _cachedRoot ??= WebDriverPageLoaderElement(driver);
     return _cachedRoot;
   }
 

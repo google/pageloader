@@ -22,7 +22,7 @@ typedef PageLoaderElement GetNewContext();
 void runTests(GetNewContext contextGenerator) {
   group('mouse support', () {
     test('basically works', () async {
-      final page = new PageForMouseTest.create(contextGenerator());
+      final page = PageForMouseTest.create(contextGenerator());
       final mouse = page.mouse;
 
       await mouse.moveTo(page.element, 2, 2);
@@ -38,7 +38,7 @@ void runTests(GetNewContext contextGenerator) {
     }, testOn: 'vm');
 
     test('works with event target', () async {
-      final page = new PageForMouseTest.create(contextGenerator());
+      final page = PageForMouseTest.create(contextGenerator());
       final mouse = page.mouse;
 
       // make sure mouse is not on element;

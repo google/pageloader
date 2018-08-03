@@ -30,7 +30,7 @@ HtmlMouse globalMouse(SyncFn syncFn) {
   // indicates the scope of the [HtmlMouse] is outdated.
   if (_cachedSyncFn == null || _cachedSyncFn != syncFn) {
     _cachedSyncFn = syncFn;
-    _globalMouse = new HtmlMouse(_cachedSyncFn);
+    _globalMouse = HtmlMouse(_cachedSyncFn);
   }
   return _globalMouse;
 }
@@ -38,7 +38,7 @@ HtmlMouse globalMouse(SyncFn syncFn) {
 /// Support for mouse in in-browser context by dispatching [MouseEvent]s.
 class HtmlMouse implements PageLoaderMouse {
   // Last known coordination and the [TrackedElement] at that point.
-  var _cachedPoint = new Point<int>(0, 0);
+  var _cachedPoint = Point<int>(0, 0);
   TrackedElement _cachedElement;
   SyncFn syncFn;
 
@@ -91,8 +91,8 @@ class HtmlMouse implements PageLoaderMouse {
     xOffset ??= center.x;
     yOffset ??= center.y;
 
-    final endPoint = new Point<int>(
-        (rect.left + xOffset).ceil(), (rect.top + yOffset).ceil());
+    final endPoint =
+        Point<int>((rect.left + xOffset).ceil(), (rect.top + yOffset).ceil());
 
     // Calculate steps needed for mouse move event.
     final distance = startPoint.distanceTo(endPoint).toInt();
@@ -140,7 +140,7 @@ class HtmlMouse implements PageLoaderMouse {
   Point<int> _centerOfRect(Rectangle rect) {
     final x = (rect.width * 0.5).ceil();
     final y = (rect.height * 0.5).ceil();
-    return new Point(x, y);
+    return Point(x, y);
   }
 
   /// Calculate the next point of the current step based on [stepRatio].
@@ -151,7 +151,7 @@ class HtmlMouse implements PageLoaderMouse {
         (startPoint.x + (stepRatio * (endPoint.x - startPoint.x))).toInt();
     final y =
         (startPoint.y + (stepRatio * (endPoint.y - startPoint.y))).toInt();
-    return new Point<int>(x, y);
+    return Point<int>(x, y);
   }
 
   // Gets the current, top-most [Element] under mouse. If no element can be
@@ -163,7 +163,7 @@ class HtmlMouse implements PageLoaderMouse {
 
   Future _dispatchEvent(String type, HtmlPageLoaderElement eventTarget,
       [MouseButton button = MouseButton.primary]) async {
-    final event = new MouseEvent(type,
+    final event = MouseEvent(type,
         button: button.value,
         clientX: _cachedPoint.x,
         clientY: _cachedPoint.y,
@@ -266,7 +266,7 @@ class HtmlMouse implements PageLoaderMouse {
   /// once.
   Future<void> _dispatchBubblingEvents(bool Function(TrackedElement) test,
       Future<void> Function(TrackedElement) dispatcher) async {
-    final _checked = new Set<TrackedElement>();
+    final _checked = Set<TrackedElement>();
     Future<void> _dispatch(TrackedElement target) async {
       if (_checked.contains(target)) return;
       _checked.add(target);
@@ -287,20 +287,20 @@ class HtmlMouse implements PageLoaderMouse {
     // We only need to iterate over the roots of the forest
     // [_trackedElements], and while elements may be added to by
     // [_dispatch], none of the new elements can be roots.
-    final potentialRoots = new List.from(_trackedElements);
+    final potentialRoots = List.from(_trackedElements);
     for (final element in potentialRoots) {
       await _dispatch(element);
     }
   }
 
-  Future _sleep(Duration duration) => new Future.delayed(duration);
+  Future _sleep(Duration duration) => Future.delayed(duration);
 
   /// Given [element], either returns an already existing [TrackedElement] for
   /// it or creates a new [TrackedElement].
   TrackedElement _track(Element element, {bool includeChildren = false}) {
     final existing = _elementToTrackedElement[element];
     if (existing != null) return existing;
-    final newTrackedElement = new TrackedElement(element);
+    final newTrackedElement = TrackedElement(element);
     _trackedElements.add(newTrackedElement);
     _elementToTrackedElement[element] = newTrackedElement;
     if (includeChildren) {
@@ -314,7 +314,7 @@ class HtmlMouse implements PageLoaderMouse {
 
 /// execute [fn] as a separate microtask and return a [Future] that completes
 /// normally when that [Future] completes (normally or with an error).
-Future _microtask(fn()) => new Future.microtask(fn).whenComplete(() {});
+Future _microtask(fn()) => Future.microtask(fn).whenComplete(() {});
 
 /// Wrapper class on [Element] to handle basic mouse tracking and sending
 /// events.
@@ -337,7 +337,7 @@ class TrackedElement {
 
   /// Sends mouse enter event to element.
   Future dispatchMouseEnter(int x, int y) =>
-      _microtask(() => element.dispatchEvent(new MouseEvent('mouseenter',
+      _microtask(() => element.dispatchEvent(MouseEvent('mouseenter',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,
@@ -346,7 +346,7 @@ class TrackedElement {
 
   /// Sends mouse over event to element or the appropriate child.
   Future dispatchMouseOver(int x, int y) =>
-      _microtask(() => element.dispatchEvent(new MouseEvent('mouseover',
+      _microtask(() => element.dispatchEvent(MouseEvent('mouseover',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,
@@ -355,7 +355,7 @@ class TrackedElement {
 
   /// Sends mouse leave event to element.
   Future dispatchMouseLeave(int x, int y) =>
-      _microtask(() => element.dispatchEvent(new MouseEvent('mouseleave',
+      _microtask(() => element.dispatchEvent(MouseEvent('mouseleave',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,
@@ -364,7 +364,7 @@ class TrackedElement {
 
   /// Sends mouse out event to element or the appropriate child.
   Future dispatchMouseOut(int x, int y) =>
-      _microtask(() => element.dispatchEvent(new MouseEvent('mouseout',
+      _microtask(() => element.dispatchEvent(MouseEvent('mouseout',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,
@@ -373,7 +373,7 @@ class TrackedElement {
 
   /// Sends mouse leave event to element.
   Future dispatchMouseMove(int x, int y) =>
-      _microtask(() => element.dispatchEvent(new MouseEvent('mousemove',
+      _microtask(() => element.dispatchEvent(MouseEvent('mousemove',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,

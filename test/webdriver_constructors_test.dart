@@ -17,7 +17,7 @@ import 'setup/webdriver_environment.dart';
 import 'src/constructors.dart' as constructors;
 
 void main() {
-  final environment = new WebDriverEnvironment();
+  final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
   constructors.runTests(() => environment.getBaseElement());

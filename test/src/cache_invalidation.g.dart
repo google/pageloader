@@ -26,13 +26,13 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
 
 class $$CacheInvalidation {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get button1 {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CacheInvalidation', 'button1');
     }
-    final element = $__root__.createElement(const ById('button-1'), [], []);
+    final element = $__root__.createElement(ById('button-1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('CacheInvalidation', 'button1');
@@ -44,8 +44,8 @@ class $$CacheInvalidation {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CacheInvalidation', 'select1');
     }
-    final element = $__root__.createElement(const ById('select1'), [], []);
-    final returnMe = new _Nested.create(element);
+    final element = $__root__.createElement(ById('select1'), [], []);
+    final returnMe = _Nested.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('CacheInvalidation', 'select1');
     }
@@ -70,13 +70,13 @@ class $_Nested extends _Nested with $$_Nested {
 
 class $$_Nested {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get option1 {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('_Nested', 'option1');
     }
-    final element = $__root__.createElement(const ById('option1'), [], []);
+    final element = $__root__.createElement(ById('option1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('_Nested', 'option1');
@@ -88,7 +88,7 @@ class $$_Nested {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('_Nested', 'option2');
     }
-    final element = $__root__.createElement(const ById('option2'), [], []);
+    final element = $__root__.createElement(ById('option2'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('_Nested', 'option2');

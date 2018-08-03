@@ -17,7 +17,7 @@ import 'setup/webdriver_environment.dart';
 import 'src/mouse.dart' as mouse;
 
 void main() {
-  final environment = new WebDriverEnvironment();
+  final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
   mouse.runTests(() => environment.getBaseElement());

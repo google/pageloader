@@ -27,13 +27,13 @@ class $PageForTextAreaTypingText extends PageForTextAreaTypingText
 
 class $$PageForTextAreaTypingText {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get textArea {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForTextAreaTypingText', 'textArea');
     }
-    final element = $__root__.createElement(const ById('textarea'), [], []);
+    final element = $__root__.createElement(ById('textarea'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForTextAreaTypingText', 'textArea');
@@ -59,13 +59,13 @@ class $PageForTypingTests extends PageForTypingTests with $$PageForTypingTests {
 
 class $$PageForTypingTests {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get text {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForTypingTests', 'text');
     }
-    final element = $__root__.createElement(const ById('text'), [], []);
+    final element = $__root__.createElement(ById('text'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForTypingTests', 'text');

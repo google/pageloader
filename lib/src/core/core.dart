@@ -35,7 +35,7 @@ List<PageLoaderElement> applyFiltersAndChecks(List<PageLoaderElement> elements,
   for (final element in filteredElements) {
     for (final check in checkers) {
       if (!check.check(element)) {
-        throw new PageLoaderException.withContext(
+        throw PageLoaderException.withContext(
             'Failed check: ${check.toString()}', element);
       }
     }

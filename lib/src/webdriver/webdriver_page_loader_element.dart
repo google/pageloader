@@ -43,7 +43,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   /// Constructs an element without context. Corresponds to the global context,
   /// i.e. the root HTML node.
   WebDriverPageLoaderElement(this._driver)
-      : _utils = new WebDriverPageUtils(_driver),
+      : _utils = WebDriverPageUtils(_driver),
         _cachedElement = null,
         _finder = null,
         _filters = <Filter>[],
@@ -56,10 +56,10 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   /// Constructs an element from a [WebElement].
   WebDriverPageLoaderElement.createFromElement(sync_wd.WebElement element) {
     this._driver = element.driver;
-    this._utils = new WebDriverPageUtils(_driver);
+    this._utils = WebDriverPageUtils(_driver);
     this._parentElement = null;
     this._cachedElement = element;
-    _finder = new WebElementFinder(element);
+    _finder = WebElementFinder(element);
     _filters = [];
     _checkers = [];
     _listeners = [];
@@ -70,7 +70,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   WebDriverPageLoaderElement createElement(
       Finder finder, List<Filter> filters, List<Checker> checkers) {
-    return new WebDriverPageLoaderElement(this._driver)
+    return WebDriverPageLoaderElement(this._driver)
       .._finder = finder
       .._filters = filters
       .._checkers = checkers
@@ -83,13 +83,12 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   WebDriverPageElementIterable createIterable(
           Finder finder, List<Filter> filters, List<Checker> checkers) =>
-      new WebDriverPageElementIterable(
-          new WebDriverPageLoaderElement(this._driver)
-            .._finder = finder
-            .._filters = filters
-            .._checkers = checkers
-            .._listeners = this._listeners
-            .._parentElement = this);
+      WebDriverPageElementIterable(WebDriverPageLoaderElement(this._driver)
+        .._finder = finder
+        .._filters = filters
+        .._checkers = checkers
+        .._listeners = this._listeners
+        .._parentElement = this);
 
   /// Create a new list using the current element as the parent context.
   @override
@@ -97,7 +96,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       Finder finder, List<Filter> filter, List<Checker> checkers) {
     final rootElement = createElement(finder, filter, checkers);
     final createdList = (rootElement.elements)
-        .map((elem) => new WebDriverPageLoaderElement.createFromElement(elem))
+        .map((elem) => WebDriverPageLoaderElement.createFromElement(elem))
         .toList();
     createdList.forEach((elem) => elem.addListeners(_listeners));
     return createdList;
@@ -139,9 +138,9 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
     final elems = elements;
     if (elems.isEmpty) {
-      throw new FoundZeroElementsInSingleException(this);
+      throw FoundZeroElementsInSingleException(this);
     } else if (elems.length > 1) {
-      throw new FoundMultipleElementsInSingleException(this);
+      throw FoundMultipleElementsInSingleException(this);
     }
     _cachedElement = elems[0];
     return _cachedElement;
@@ -151,13 +150,12 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   List<sync_wd.WebElement> get elements {
     sync_wd.WebElement base;
     if (_parentElement == null) {
-      final root =
-          _driver.findElements(new sync_wd.By.tagName('html')).toList();
+      final root = _driver.findElements(sync_wd.By.tagName('html')).toList();
       if (root.isEmpty) {
-        throw new PageLoaderException('Could not find HTML tag at root');
+        throw PageLoaderException('Could not find HTML tag at root');
       }
       if (root.length > 1) {
-        throw new PageLoaderException('Found multiple HTML tags');
+        throw PageLoaderException('Found multiple HTML tags');
       }
       base = root[0];
     } else {
@@ -176,7 +174,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     } else if (_finder is CssFinder) {
       elements = base
           .findElements(
-              new sync_wd.By.cssSelector((_finder as CssFinder).cssSelector))
+              sync_wd.By.cssSelector((_finder as CssFinder).cssSelector))
           .toList();
     } else {
       throw 'Unknown Finder type, ${_finder.runtimeType}';
@@ -184,7 +182,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
     // Filter/Checker API is based on PageLoaderElements; casting for this.
     final tempElements = elements
-        .map((e) => new WebDriverPageLoaderElement._castFromElement(e))
+        .map((e) => WebDriverPageLoaderElement._castFromElement(e))
         .toList();
     final filteredElements =
         core.applyFiltersAndChecks(tempElements, _filters, _checkers);
@@ -226,21 +224,21 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   PageLoaderAttributes get attributes =>
-      _retryWhenStale(() => new _ElementAttributes(this));
+      _retryWhenStale(() => _ElementAttributes(this));
 
   @override
   PageLoaderAttributes get seleniumAttributes => attributes;
 
   @override
   PageLoaderAttributes get properties =>
-      _retryWhenStale(() => new _ElementProperties(this));
+      _retryWhenStale(() => _ElementProperties(this));
 
   @override
   PageLoaderAttributes get computedStyle =>
-      _retryWhenStale(() => new _ElementComputedStyle(this));
+      _retryWhenStale(() => _ElementComputedStyle(this));
 
   @override
-  PageLoaderAttributes get style => new _ElementStyle(this);
+  PageLoaderAttributes get style => _ElementStyle(this);
 
   @override
   bool get displayed => _retryWhenStale(() => _single.displayed);
@@ -263,7 +261,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     if (count == 1)
       return true;
     else if (count == 0) return false;
-    throw new PageLoaderException.withContext(
+    throw PageLoaderException.withContext(
         'Found $count elements on call to exists', this);
   }
 
@@ -275,7 +273,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
           width: arguments[0].offsetWidth,
           height: arguments[0].offsetHeight
         }''', [_single]));
-    return new Rectangle<num>(
+    return Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
@@ -283,15 +281,15 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   Rectangle getBoundingClientRect() {
     final rect = _retryWhenStale<Map>(() => _driver
         .execute('return arguments[0].getBoundingClientRect();', [_single]));
-    return new Rectangle<num>(
+    return Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
   @override
   List<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
       _retryWhenStale(() => _single
-          .findElements(new sync_wd.By.cssSelector(selector))
-          .map((elem) => new WebDriverPageLoaderElement.createFromElement(elem))
+          .findElements(sync_wd.By.cssSelector(selector))
+          .map((elem) => WebDriverPageLoaderElement.createFromElement(elem))
           .map((elem) => elem..addListeners(this.listeners))
           .toList());
 
@@ -317,7 +315,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     if (!exists || !displayed) return;
 
     final rect = getBoundingClientRect();
-    await _retryWhenStale<void>(() {
+    await _retryWhenStale<void>(() { // ignore: await_only_futures
       final bodyElement = _utils.byTag('body');
       final bodyRect = bodyElement.getBoundingClientRect();
       if (!rect.intersects(bodyRect)) {
@@ -341,7 +339,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
             yOffset: point.y.toInt() - bodyRect.top);
         _utils.driver.mouse.click();
       } else {
-        throw new PageLoaderException(
+        throw PageLoaderException(
             'Could not click outside of the current element [$this].'
             ' It is because it covers the whole <body>.');
       }
@@ -432,5 +430,5 @@ class _ElementStyle extends PageLoaderAttributes {
 }
 
 /// Convert hyphenated-properties to camelCase.
-String _cssPropName(String name) => name.splitMapJoin(new RegExp(r'-(\w)'),
+String _cssPropName(String name) => name.splitMapJoin(RegExp(r'-(\w)'),
     onMatch: (m) => m.group(1).toUpperCase(), onNonMatch: (m) => m);

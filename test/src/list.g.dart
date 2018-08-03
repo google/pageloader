@@ -25,14 +25,14 @@ class $Lists extends Lists with $$Lists {
 
 class $$Lists {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Future<PageObjectList<PageLoaderElement>> get tableRows async {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'tableRows');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByTagName('tr'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByTagName('tr'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'tableRows');
@@ -44,8 +44,8 @@ class $$Lists {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'tableRowsSync');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByTagName('tr'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByTagName('tr'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'tableRowsSync');
@@ -57,9 +57,9 @@ class $$Lists {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'tableRowsSyncAsPO');
     }
-    final returnMe = new PageObjectList<RowPO>(
-        $__root__.createList(const ByTagName('tr'), [], []),
-        (PageLoaderElement e) => new RowPO.create(e));
+    final returnMe = PageObjectList<RowPO>(
+        $__root__.createList(ByTagName('tr'), [], []),
+        (PageLoaderElement e) => RowPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'tableRowsSyncAsPO');
     }
@@ -71,10 +71,10 @@ class $$Lists {
 class $RowPO extends RowPO with $$RowPO {
   PageLoaderElement $__root__;
   $RowPO.create(PageLoaderElement currentContext) : $__root__ = currentContext {
-    $__root__.addCheckers([new CheckTag('tr')]);
+    $__root__.addCheckers([CheckTag('tr')]);
   }
   factory $RowPO.lookup(PageLoaderSource source) =>
-      new $RowPO.create(source.byTag('tr'));
+      $RowPO.create(source.byTag('tr'));
   static String get tagName => 'tr';
   bool get exists {
     for (final __listener in $__root__.listeners) {
@@ -90,7 +90,7 @@ class $RowPO extends RowPO with $$RowPO {
 
 class $$RowPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {

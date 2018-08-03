@@ -32,7 +32,7 @@ class HtmlPageUtils extends PageUtils {
   /// to persist.
   @override
   HtmlPageLoaderElement get root {
-    _cachedRoot ??= new HtmlPageLoaderElement.createFromElement(document.body,
+    _cachedRoot ??= HtmlPageLoaderElement.createFromElement(document.body,
         externalSyncFn: this.syncFn);
     return _cachedRoot;
   }
@@ -42,7 +42,7 @@ class HtmlPageUtils extends PageUtils {
   /// This is element you should pass in your tests to create new page objects.
   @override
   PageLoaderElement byTag(String tag) =>
-      new HtmlPageLoaderElement.createFromElement(document.body,
+      HtmlPageLoaderElement.createFromElement(document.body,
               externalSyncFn: this.syncFn)
           .getElementsByCss(tag)
           .single;

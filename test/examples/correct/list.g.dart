@@ -25,14 +25,14 @@ class $Lists extends Lists with $$Lists {
 
 class $$Lists {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Future<PageObjectList<PageLoaderElement>> get basics async {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'basics');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByCss('basic'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByCss('basic'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'basics');
@@ -44,9 +44,9 @@ class $$Lists {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'nested');
     }
-    final returnMe = new PageObjectList<InnerListObject>(
-        $__root__.createList(const ByCss('nested'), [], []),
-        (PageLoaderElement e) => new InnerListObject.create(e));
+    final returnMe = PageObjectList<InnerListObject>(
+        $__root__.createList(ByCss('nested'), [], []),
+        (PageLoaderElement e) => InnerListObject.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'nested');
     }
@@ -57,9 +57,9 @@ class $$Lists {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'checkTagPO');
     }
-    final returnMe = new PageObjectList<CheckTagPO>(
-        $__root__.createList(const ByTagName('check-tag-po'), [], []),
-        (PageLoaderElement e) => new CheckTagPO.create(e));
+    final returnMe = PageObjectList<CheckTagPO>(
+        $__root__.createList(ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => CheckTagPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'checkTagPO');
     }
@@ -70,8 +70,8 @@ class $$Lists {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'basicsSync');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByCss('basic'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByCss('basic'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'basicsSync');
@@ -83,9 +83,9 @@ class $$Lists {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'nestedSync');
     }
-    final returnMe = new PageObjectList<InnerListObject>(
-        $__root__.createList(const ByCss('nested'), [], []),
-        (PageLoaderElement e) => new InnerListObject.create(e));
+    final returnMe = PageObjectList<InnerListObject>(
+        $__root__.createList(ByCss('nested'), [], []),
+        (PageLoaderElement e) => InnerListObject.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'nestedSync');
     }
@@ -96,9 +96,9 @@ class $$Lists {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Lists', 'checkTagPOSync');
     }
-    final returnMe = new PageObjectList<CheckTagPO>(
-        $__root__.createList(const ByTagName('check-tag-po'), [], []),
-        (PageLoaderElement e) => new CheckTagPO.create(e));
+    final returnMe = PageObjectList<CheckTagPO>(
+        $__root__.createList(ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => CheckTagPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Lists', 'checkTagPOSync');
     }
@@ -123,13 +123,13 @@ class $InnerListObject extends InnerListObject with $$InnerListObject {
 
 class $$InnerListObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerListObject', 'single');
     }
-    final element = $__root__.createElement(const ByCss('single'), [], []);
+    final element = $__root__.createElement(ByCss('single'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerListObject', 'single');
@@ -141,8 +141,8 @@ class $$InnerListObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerListObject', 'innerIterable');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByCss('nested-iterable'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByCss('nested-iterable'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerListObject', 'innerIterable');
@@ -169,7 +169,7 @@ class $ListsUsingMixin extends ListsUsingMixin
 
 class $$ListsUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -177,14 +177,14 @@ class $$ListsUsingMixin {
 
 class $$ListsMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Future<PageObjectList<PageLoaderElement>> get basics async {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ListsMixin', 'basics');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByCss('basic'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByCss('basic'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ListsMixin', 'basics');
@@ -196,9 +196,9 @@ class $$ListsMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ListsMixin', 'nested');
     }
-    final returnMe = new PageObjectList<InnerListObjectUsingMixin>(
-        $__root__.createList(const ByCss('nested'), [], []),
-        (PageLoaderElement e) => new InnerListObjectUsingMixin.create(e));
+    final returnMe = PageObjectList<InnerListObjectUsingMixin>(
+        $__root__.createList(ByCss('nested'), [], []),
+        (PageLoaderElement e) => InnerListObjectUsingMixin.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ListsMixin', 'nested');
     }
@@ -209,9 +209,9 @@ class $$ListsMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ListsMixin', 'checkTagPO');
     }
-    final returnMe = new PageObjectList<CheckTagPO>(
-        $__root__.createList(const ByTagName('check-tag-po'), [], []),
-        (PageLoaderElement e) => new CheckTagPO.create(e));
+    final returnMe = PageObjectList<CheckTagPO>(
+        $__root__.createList(ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => CheckTagPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ListsMixin', 'checkTagPO');
     }
@@ -222,8 +222,8 @@ class $$ListsMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ListsMixin', 'basicsSync');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByCss('basic'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByCss('basic'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ListsMixin', 'basicsSync');
@@ -235,9 +235,9 @@ class $$ListsMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ListsMixin', 'nestedSync');
     }
-    final returnMe = new PageObjectList<InnerListObjectUsingMixin>(
-        $__root__.createList(const ByCss('nested'), [], []),
-        (PageLoaderElement e) => new InnerListObjectUsingMixin.create(e));
+    final returnMe = PageObjectList<InnerListObjectUsingMixin>(
+        $__root__.createList(ByCss('nested'), [], []),
+        (PageLoaderElement e) => InnerListObjectUsingMixin.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ListsMixin', 'nestedSync');
     }
@@ -248,9 +248,9 @@ class $$ListsMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ListsMixin', 'checkTagPOSync');
     }
-    final returnMe = new PageObjectList<CheckTagPO>(
-        $__root__.createList(const ByTagName('check-tag-po'), [], []),
-        (PageLoaderElement e) => new CheckTagPO.create(e));
+    final returnMe = PageObjectList<CheckTagPO>(
+        $__root__.createList(ByTagName('check-tag-po'), [], []),
+        (PageLoaderElement e) => CheckTagPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ListsMixin', 'checkTagPOSync');
     }
@@ -276,7 +276,7 @@ class $InnerListObjectUsingMixin extends InnerListObjectUsingMixin
 
 class $$InnerListObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -284,13 +284,13 @@ class $$InnerListObjectUsingMixin {
 
 class $$InnerListObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerListObjectMixin', 'single');
     }
-    final element = $__root__.createElement(const ByCss('single'), [], []);
+    final element = $__root__.createElement(ByCss('single'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerListObjectMixin', 'single');
@@ -302,8 +302,8 @@ class $$InnerListObjectMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerListObjectMixin', 'innerIterable');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByCss('nested-iterable'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByCss('nested-iterable'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('InnerListObjectMixin', 'innerIterable');

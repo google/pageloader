@@ -79,7 +79,7 @@ class $Parameters extends Parameters with $$Parameters {
 
 class $$Parameters {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -101,7 +101,7 @@ class $ParametersUsingMixin extends ParametersUsingMixin
 
 class $$ParametersUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -109,6 +109,6 @@ class $$ParametersUsingMixin {
 
 class $$ParametersMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }

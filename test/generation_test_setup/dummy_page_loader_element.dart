@@ -58,7 +58,7 @@ class DummyPageLoader extends PageUtils {
   PageLoaderElement byTag(String tag) => throw 'not implemented';
 
   @override
-  PageLoaderMouse get mouse => new DummyPageLoaderMouse();
+  PageLoaderMouse get mouse => DummyPageLoaderMouse();
 }
 
 class DummyPageElementIterable extends PageElementIterable {
@@ -116,7 +116,7 @@ class DummyPageLoaderElement implements PageLoaderElement {
   @override
   PageLoaderElement createElement(
       Finder finder, List<Filter> filter, List<Checker> checkers) {
-    final newElement = new DummyPageLoaderElement();
+    final newElement = DummyPageLoaderElement();
     newElement._finders.addAll(this._finders);
     newElement._finders.add(finder);
     newElement._filter.addAll(filter);
@@ -131,13 +131,13 @@ class DummyPageLoaderElement implements PageLoaderElement {
     final finders = <Finder>[];
     finders.addAll(_finders);
     finders.add(finder);
-    return new DummyPageElementIterable(finders);
+    return DummyPageElementIterable(finders);
   }
 
   @override
   List<PageLoaderElement> createList(
       Finder finder, List<Filter> filter, List<Checker> checkers) {
-    final newElement = new DummyPageLoaderElement();
+    final newElement = DummyPageLoaderElement();
     newElement._finders.addAll(this._finders);
     newElement._finders.add(finder);
     newElement._filter.addAll(filter);
@@ -166,7 +166,7 @@ class DummyPageLoaderElement implements PageLoaderElement {
   dynamic get contextSync => '';
 
   @override
-  PageUtils get utils => new DummyPageLoader();
+  PageUtils get utils => DummyPageLoader();
 
   @override
   DummyPageLoaderElement get shadowRoot => throw 'not implemented';
@@ -190,7 +190,7 @@ class DummyPageLoaderElement implements PageLoaderElement {
   PageLoaderAttributes get properties => throw 'not implemented';
 
   @override
-  final PageLoaderAttributes computedStyle = new DummyPageLoaderAttributes();
+  final PageLoaderAttributes computedStyle = DummyPageLoaderAttributes();
 
   @override
   PageLoaderAttributes get style => throw 'not implemented';

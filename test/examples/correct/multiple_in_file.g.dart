@@ -25,15 +25,14 @@ class $A extends A with $$A {
 
 class $$A {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   B get b {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('A', 'b');
     }
-    final element =
-        $__root__.createElement(const ByCss('b-in-a-class'), [], []);
-    final returnMe = new B.create(element);
+    final element = $__root__.createElement(ByCss('b-in-a-class'), [], []);
+    final returnMe = B.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('A', 'b');
     }
@@ -57,13 +56,13 @@ class $B extends B with $$B {
 
 class $$B {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get base {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('B', 'base');
     }
-    final element = $__root__.createElement(const ByCss('base-class'), [], []);
+    final element = $__root__.createElement(ByCss('base-class'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('B', 'base');
@@ -88,15 +87,14 @@ class $C extends C with $$C {
 
 class $$C {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   B get b {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('C', 'b');
     }
-    final element =
-        $__root__.createElement(const ByCss('b-in-c-class'), [], []);
-    final returnMe = new B.create(element);
+    final element = $__root__.createElement(ByCss('b-in-c-class'), [], []);
+    final returnMe = B.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('C', 'b');
     }

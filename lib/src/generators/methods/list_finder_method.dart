@@ -32,7 +32,7 @@ Optional<ListFinderMethod> collectListFinderGetter(
   if ((!methodInfo.isAbstract || !methodInfo.isGetter) ||
       !methodInfo.finder.isPresent ||
       !methodInfo.isList) {
-    return new Optional.absent();
+    return Optional.absent();
   }
 
   // Convert 'ByCheckTag' to 'ByTagName' if necessary.
@@ -42,7 +42,7 @@ Optional<ListFinderMethod> collectListFinderGetter(
         getInnerType(node.returnType.type, methodInfo.pageObjectType));
   }
 
-  return new Optional.of(new ListFinderMethod((b) => b
+  return Optional.of(ListFinderMethod((b) => b
     ..name = methodInfo.name
     ..listTypeArgument = methodInfo.pageObjectType
     ..finderDeclaration = finder
@@ -95,7 +95,7 @@ abstract class ListFinderMethodMixin {
       return '(PageLoaderElement e) => e';
     } else {
       return '(PageLoaderElement e) => '
-          'new $listTypeArgument$generic.create(e)';
+          '$listTypeArgument$generic.create(e)';
     }
   }
 
@@ -106,8 +106,7 @@ abstract class ListFinderMethodMixin {
 
   String get pageObjectList => 'PageObjectList<$listTypeArgument$generic>';
 
-  String get createObjectIterable =>
-      'new PageObjectList<$listTypeArgument$generic>'
+  String get createObjectIterable => 'PageObjectList<$listTypeArgument$generic>'
       '($_createElementIterator, $constructor)';
 
   String get _createElementIterator => '$root.createList('

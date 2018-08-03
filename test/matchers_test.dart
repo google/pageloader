@@ -20,55 +20,55 @@ import 'generation_test_setup/dummy_page_loader_element.dart'
 
 void main() {
   test('exists', () {
-    final context = new DummyPageLoaderElement(exists: true);
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement(exists: true);
+    final po = DummyPO(context);
 
     expect(context, exists);
     expect(po, exists);
   });
 
   test('notExists', () {
-    final context = new DummyPageLoaderElement(exists: false);
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement(exists: false);
+    final po = DummyPO(context);
 
     expect(context, notExists);
     expect(po, notExists);
   });
 
   test('hasClass', () {
-    final context = new DummyPageLoaderElement(classes: ['foo']);
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement(classes: ['foo']);
+    final po = DummyPO(context);
 
     expect(context, hasClass('foo'));
     expect(po, hasClass('foo'));
   });
 
   test('isDisplayed', () {
-    final context = new DummyPageLoaderElement(displayed: true);
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement(displayed: true);
+    final po = DummyPO(context);
 
     expect(context, isDisplayed);
     expect(po, isDisplayed);
   });
 
   test('isNotDisplayed', () {
-    final context = new DummyPageLoaderElement(displayed: false);
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement(displayed: false);
+    final po = DummyPO(context);
 
     expect(context, isNotDisplayed);
     expect(po, isNotDisplayed);
   });
 
   test('isHidden', () {
-    final context1 = new DummyPageLoaderElement();
+    final context1 = DummyPageLoaderElement();
     (context1.computedStyle as DummyPageLoaderAttributes)['visibility'] =
         'hidden';
-    final context2 = new DummyPageLoaderElement();
+    final context2 = DummyPageLoaderElement();
     (context2.computedStyle as DummyPageLoaderAttributes)['visibility'] =
         'collapse';
 
-    final po1 = new DummyPO(context1);
-    final po2 = new DummyPO(context2);
+    final po1 = DummyPO(context1);
+    final po2 = DummyPO(context2);
 
     expect(context1, isHidden);
     expect(context2, isHidden);
@@ -77,24 +77,24 @@ void main() {
   });
 
   test('isNotHidden', () {
-    final context = new DummyPageLoaderElement();
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement();
+    final po = DummyPO(context);
 
     expect(context, isNotHidden);
     expect(po, isNotHidden);
   });
 
   test('isFocused', () {
-    final context = new DummyPageLoaderElement(focused: true);
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement(focused: true);
+    final po = DummyPO(context);
 
     expect(context, isFocused);
     expect(po, isFocused);
   });
 
   test('isNotFocused', () {
-    final context = new DummyPageLoaderElement(focused: false);
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement(focused: false);
+    final po = DummyPO(context);
 
     expect(context, isNotFocused);
     expect(po, isNotFocused);

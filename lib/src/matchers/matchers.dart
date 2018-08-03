@@ -15,18 +15,18 @@ import 'package:matcher/matcher.dart';
 import 'package:pageloader/utils.dart' as utils;
 
 /// A matcher that checks if a PageLoaderElement/PageObject exists.
-const Matcher exists = const _Exists();
+const Matcher exists = _Exists();
 
 /// A matcher that checks if a PageLoaderElement/PageObject does not exist.
 Matcher notExists = isNot(exists);
 
 /// A matcher that checks if a PageLoaderElement/PageObject
 /// contains given class.
-Matcher hasClass(String className) => new _HasClass(className);
+Matcher hasClass(String className) => _HasClass(className);
 
 /// A matcher that checks if a PageLoaderElement/PageObject is displayed
 /// based on "display" style.
-const Matcher isDisplayed = const _IsDisplayed();
+const Matcher isDisplayed = _IsDisplayed();
 
 /// A matcher that checks if a PageLoaderElement/PageObject is not displayed
 /// based on "display" style.
@@ -37,19 +37,19 @@ Matcher isNotDisplayed = isNot(isDisplayed);
 /// Checks that the item's `visibility` is `hidden` or `collapse`.
 /// Does not check whether the item has been hidden by other means, e.g., being
 /// obscured by other elements.
-const Matcher isHidden = const _IsHidden();
+const Matcher isHidden = _IsHidden();
 
 /// A matcher that checks if a PageLoaderElement/PageObject is not hidden.
 Matcher isNotHidden = isNot(isHidden);
 
 /// A matcher that checks if PageLoaderElement/PageObject is focused.
-const Matcher isFocused = const _IsFocused();
+const Matcher isFocused = _IsFocused();
 
 /// A matcher that checks if PageLoaderElement/PageObject is not focused.
 Matcher isNotFocused = isNot(isFocused);
 
 /// A matcher that matches the given matcher against an element's inner text.
-Matcher hasInnerText(matcher) => new _HasInnerText(matcher);
+Matcher hasInnerText(matcher) => _HasInnerText(matcher);
 
 const _item = 'PageLoaderElement/PageObject';
 

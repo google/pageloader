@@ -27,14 +27,14 @@ class $PageForPropertiesTests extends PageForPropertiesTests
 
 class $$PageForPropertiesTests {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get divWithStyle {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod(
           'PageForPropertiesTests', 'divWithStyle');
     }
-    final element = $__root__.createElement(const ById('div'), [], []);
+    final element = $__root__.createElement(ById('div'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'divWithStyle');
@@ -47,7 +47,7 @@ class $$PageForPropertiesTests {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'checkbox');
     }
     final element =
-        $__root__.createElement(const ByCss('input[type=checkbox]'), [], []);
+        $__root__.createElement(ByCss('input[type=checkbox]'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'checkbox');
@@ -59,7 +59,7 @@ class $$PageForPropertiesTests {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'table');
     }
-    final element = $__root__.createElement(const ById('table1'), [], []);
+    final element = $__root__.createElement(ById('table1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'table');
@@ -71,7 +71,7 @@ class $$PageForPropertiesTests {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'select1');
     }
-    final element = $__root__.createElement(const ById('select1'), [], []);
+    final element = $__root__.createElement(ById('select1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'select1');
@@ -83,7 +83,7 @@ class $$PageForPropertiesTests {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'option1');
     }
-    final element = $__root__.createElement(const ById('option1'), [], []);
+    final element = $__root__.createElement(ById('option1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'option1');
@@ -95,7 +95,7 @@ class $$PageForPropertiesTests {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'option2');
     }
-    final element = $__root__.createElement(const ById('option2'), [], []);
+    final element = $__root__.createElement(ById('option2'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'option2');
@@ -108,7 +108,7 @@ class $$PageForPropertiesTests {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'radio');
     }
     final element =
-        $__root__.createElement(const ByCss('input[value=radio1]'), [], []);
+        $__root__.createElement(ByCss('input[value=radio1]'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'radio');
@@ -120,7 +120,7 @@ class $$PageForPropertiesTests {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'anchor');
     }
-    final element = $__root__.createElement(const ById('anchor'), [], []);
+    final element = $__root__.createElement(ById('anchor'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'anchor');
@@ -132,7 +132,7 @@ class $$PageForPropertiesTests {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'img');
     }
-    final element = $__root__.createElement(const ByTagName('img'), [], []);
+    final element = $__root__.createElement(ByTagName('img'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'img');
@@ -144,7 +144,7 @@ class $$PageForPropertiesTests {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'readOnly');
     }
-    final element = $__root__.createElement(const ById('readonly'), [], []);
+    final element = $__root__.createElement(ById('readonly'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'readOnly');
@@ -156,7 +156,7 @@ class $$PageForPropertiesTests {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPropertiesTests', 'text');
     }
-    final element = $__root__.createElement(const ById('text'), [], []);
+    final element = $__root__.createElement(ById('text'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPropertiesTests', 'text');

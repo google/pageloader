@@ -26,7 +26,7 @@ class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
 
 class $$PageForSimpleTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get rootElement {
     for (final __listener in $__root__.listeners) {
@@ -44,8 +44,8 @@ class $$PageForSimpleTest {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForSimpleTest', 'table');
     }
-    final element = $__root__.createElement(const ByTagName('table'), [], []);
-    final returnMe = new Table.create(element);
+    final element = $__root__.createElement(ByTagName('table'), [], []);
+    final returnMe = Table.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForSimpleTest', 'table');
     }
@@ -69,7 +69,7 @@ class $Table extends Table with $$Table {
 
 class $$Table {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -87,9 +87,9 @@ class $$Table {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Table', 'rows');
     }
-    final returnMe = new PageObjectList<Row>(
-        $__root__.createList(const ByTagName('tr'), [], []),
-        (PageLoaderElement e) => new Row.create(e));
+    final returnMe = PageObjectList<Row>(
+        $__root__.createList(ByTagName('tr'), [], []),
+        (PageLoaderElement e) => Row.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Table', 'rows');
     }
@@ -100,9 +100,9 @@ class $$Table {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Table', 'rowsSync');
     }
-    final returnMe = new PageObjectList<Row>(
-        $__root__.createList(const ByTagName('tr'), [], []),
-        (PageLoaderElement e) => new Row.create(e));
+    final returnMe = PageObjectList<Row>(
+        $__root__.createList(ByTagName('tr'), [], []),
+        (PageLoaderElement e) => Row.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Table', 'rowsSync');
     }
@@ -126,7 +126,7 @@ class $Row extends Row with $$Row {
 
 class $$Row {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get rootElement {
     for (final __listener in $__root__.listeners) {
@@ -144,8 +144,8 @@ class $$Row {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Row', 'cells');
     }
-    final returnMe = new PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByTagName('td'), [], []),
+    final returnMe = PageObjectList<PageLoaderElement>(
+        $__root__.createList(ByTagName('td'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Row', 'cells');

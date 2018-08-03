@@ -26,14 +26,14 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
 
 class $$ParentRoot {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Root get root {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ParentRoot', 'root');
     }
-    final element = $__root__.createElement(const ById('root-id'), [], []);
-    final returnMe = new Root.create(element);
+    final element = $__root__.createElement(ById('root-id'), [], []);
+    final returnMe = Root.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ParentRoot', 'root');
     }
@@ -57,7 +57,7 @@ class $Root extends Root with $$Root {
 
 class $$Root {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get myRoot {
     for (final __listener in $__root__.listeners) {
@@ -75,7 +75,7 @@ class $$Root {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Root', 'myId');
     }
-    final element = $__root__.createElement(const ById('some-id'), [], []);
+    final element = $__root__.createElement(ById('some-id'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Root', 'myId');
@@ -102,7 +102,7 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
 
 class $$ParentRootUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -110,14 +110,14 @@ class $$ParentRootUsingMixin {
 
 class $$ParentRootMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   RootUsingMixin get root {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ParentRootMixin', 'root');
     }
-    final element = $__root__.createElement(const ById('root-id'), [], []);
-    final returnMe = new RootUsingMixin.create(element);
+    final element = $__root__.createElement(ById('root-id'), [], []);
+    final returnMe = RootUsingMixin.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ParentRootMixin', 'root');
     }
@@ -143,7 +143,7 @@ class $RootUsingMixin extends RootUsingMixin
 
 class $$RootUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -151,7 +151,7 @@ class $$RootUsingMixin {
 
 class $$RootMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get myRoot {
     for (final __listener in $__root__.listeners) {
@@ -169,7 +169,7 @@ class $$RootMixin {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RootMixin', 'myId');
     }
-    final element = $__root__.createElement(const ById('some-id'), [], []);
+    final element = $__root__.createElement(ById('some-id'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('RootMixin', 'myId');

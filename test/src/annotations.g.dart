@@ -26,14 +26,14 @@ class $BaseObject extends BaseObject with $$BaseObject {
 
 class $$BaseObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   TableForCheckTag get table {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BaseObject', 'table');
     }
-    final element = $__root__.createElement(const ByTagName('table'), [], []);
-    final returnMe = new TableForCheckTag.create(element);
+    final element = $__root__.createElement(ByTagName('table'), [], []);
+    final returnMe = TableForCheckTag.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BaseObject', 'table');
     }
@@ -44,8 +44,8 @@ class $$BaseObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BaseObject', 'tableUsingCheckedTag');
     }
-    final element = $__root__.createElement(const ByTagName('table'), [], []);
-    final returnMe = new TableForCheckTag.create(element);
+    final element = $__root__.createElement(ByTagName('table'), [], []);
+    final returnMe = TableForCheckTag.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BaseObject', 'tableUsingCheckedTag');
     }
@@ -56,8 +56,7 @@ class $$BaseObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BaseObject', 'globalTable');
     }
-    final element =
-        $__root__.createElement(const Global(const ByTagName('table')), [], []);
+    final element = $__root__.createElement(Global(ByTagName('table')), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BaseObject', 'globalTable');
@@ -69,8 +68,8 @@ class $$BaseObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BaseObject', 'badTable');
     }
-    final element = $__root__.createElement(const ByTagName('table'), [], []);
-    final returnMe = new CheckTagFails.create(element);
+    final element = $__root__.createElement(ByTagName('table'), [], []);
+    final returnMe = CheckTagFails.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BaseObject', 'badTable');
     }
@@ -95,15 +94,14 @@ class $PseudoBaseObject extends PseudoBaseObject with $$PseudoBaseObject {
 
 class $$PseudoBaseObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   TableForCheckTag get table {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PseudoBaseObject', 'table');
     }
-    final element =
-        $__root__.createElement(const PseudoByTagName('table'), [], []);
-    final returnMe = new TableForCheckTag.create(element);
+    final element = $__root__.createElement(PseudoByTagName('table'), [], []);
+    final returnMe = TableForCheckTag.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PseudoBaseObject', 'table');
     }
@@ -114,8 +112,8 @@ class $$PseudoBaseObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PseudoBaseObject', 'globalTable');
     }
-    final element = $__root__
-        .createElement(const Global(const PseudoByTagName('table')), [], []);
+    final element =
+        $__root__.createElement(Global(PseudoByTagName('table')), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PseudoBaseObject', 'globalTable');
@@ -127,9 +125,8 @@ class $$PseudoBaseObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PseudoBaseObject', 'badTable');
     }
-    final element =
-        $__root__.createElement(const PseudoByTagName('table'), [], []);
-    final returnMe = new CheckTagFails.create(element);
+    final element = $__root__.createElement(PseudoByTagName('table'), [], []);
+    final returnMe = CheckTagFails.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PseudoBaseObject', 'badTable');
     }
@@ -142,16 +139,16 @@ class $TableForCheckTag extends TableForCheckTag with $$TableForCheckTag {
   PageLoaderElement $__root__;
   $TableForCheckTag.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
-    $__root__.addCheckers([new CheckTag('table')]);
+    $__root__.addCheckers([CheckTag('table')]);
   }
   factory $TableForCheckTag.lookup(PageLoaderSource source) =>
-      new $TableForCheckTag.create(source.byTag('table'));
+      $TableForCheckTag.create(source.byTag('table'));
   static String get tagName => 'table';
 }
 
 class $$TableForCheckTag {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -169,8 +166,7 @@ class $$TableForCheckTag {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('TableForCheckTag', 'globalTable');
     }
-    final element =
-        $__root__.createElement(const Global(const ByTagName('table')), [], []);
+    final element = $__root__.createElement(Global(ByTagName('table')), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('TableForCheckTag', 'globalTable');
@@ -182,9 +178,9 @@ class $$TableForCheckTag {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('TableForCheckTag', 'rows');
     }
-    final returnMe = new PageObjectIterable<Row>(
-        $__root__.createIterable(const ByTagName('tr'), [], []),
-        (PageLoaderElement e) => new Row.create(e));
+    final returnMe = PageObjectIterable<Row>(
+        $__root__.createIterable(ByTagName('tr'), [], []),
+        (PageLoaderElement e) => Row.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('TableForCheckTag', 'rows');
     }
@@ -209,14 +205,14 @@ class $BaseEnsureObject extends BaseEnsureObject with $$BaseEnsureObject {
 
 class $$BaseEnsureObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   TableForEnsureTag get table {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BaseEnsureObject', 'table');
     }
-    final element = $__root__.createElement(const ByTagName('table'), [], []);
-    final returnMe = new TableForEnsureTag.create(element);
+    final element = $__root__.createElement(ByTagName('table'), [], []);
+    final returnMe = TableForEnsureTag.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BaseEnsureObject', 'table');
     }
@@ -227,8 +223,8 @@ class $$BaseEnsureObject {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BaseEnsureObject', 'badTable');
     }
-    final element = $__root__.createElement(const ByTagName('table'), [], []);
-    final returnMe = new EnsureTagFails.create(element);
+    final element = $__root__.createElement(ByTagName('table'), [], []);
+    final returnMe = EnsureTagFails.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BaseEnsureObject', 'badTable');
     }
@@ -240,18 +236,17 @@ class $$BaseEnsureObject {
 class $TableForEnsureTag extends TableForEnsureTag with $$TableForEnsureTag {
   PageLoaderElement $__root__;
   $TableForEnsureTag.create(PageLoaderElement currentContext)
-      : $__root__ =
-            currentContext.createElement(const EnsureTag('table'), [], []) {
-    $__root__.addCheckers([new EnsureTag('table')]);
+      : $__root__ = currentContext.createElement(EnsureTag('table'), [], []) {
+    $__root__.addCheckers([EnsureTag('table')]);
   }
   factory $TableForEnsureTag.lookup(PageLoaderSource source) =>
-      new $TableForEnsureTag.create(source.byTag('table'));
+      $TableForEnsureTag.create(source.byTag('table'));
   static String get tagName => 'table';
 }
 
 class $$TableForEnsureTag {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -269,9 +264,9 @@ class $$TableForEnsureTag {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('TableForEnsureTag', 'rows');
     }
-    final returnMe = new PageObjectIterable<Row>(
-        $__root__.createIterable(const ByTagName('tr'), [], []),
-        (PageLoaderElement e) => new Row.create(e));
+    final returnMe = PageObjectIterable<Row>(
+        $__root__.createIterable(ByTagName('tr'), [], []),
+        (PageLoaderElement e) => Row.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('TableForEnsureTag', 'rows');
     }
@@ -284,16 +279,16 @@ class $CheckTagFails extends CheckTagFails with $$CheckTagFails {
   PageLoaderElement $__root__;
   $CheckTagFails.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
-    $__root__.addCheckers([new CheckTag('inconceivable')]);
+    $__root__.addCheckers([CheckTag('inconceivable')]);
   }
   factory $CheckTagFails.lookup(PageLoaderSource source) =>
-      new $CheckTagFails.create(source.byTag('inconceivable'));
+      $CheckTagFails.create(source.byTag('inconceivable'));
   static String get tagName => 'inconceivable';
 }
 
 class $$CheckTagFails {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -312,18 +307,18 @@ class $$CheckTagFails {
 class $EnsureTagFails extends EnsureTagFails with $$EnsureTagFails {
   PageLoaderElement $__root__;
   $EnsureTagFails.create(PageLoaderElement currentContext)
-      : $__root__ = currentContext
-            .createElement(const EnsureTag('inconceivable'), [], []) {
-    $__root__.addCheckers([new EnsureTag('inconceivable')]);
+      : $__root__ =
+            currentContext.createElement(EnsureTag('inconceivable'), [], []) {
+    $__root__.addCheckers([EnsureTag('inconceivable')]);
   }
   factory $EnsureTagFails.lookup(PageLoaderSource source) =>
-      new $EnsureTagFails.create(source.byTag('inconceivable'));
+      $EnsureTagFails.create(source.byTag('inconceivable'));
   static String get tagName => 'inconceivable';
 }
 
 class $$EnsureTagFails {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -356,14 +351,14 @@ class $PageForWithAttributeTest extends PageForWithAttributeTest
 
 class $$PageForWithAttributeTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get element {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForWithAttributeTest', 'element');
     }
-    final element = $__root__.createElement(const ByTagName('input'),
-        [const WithAttribute('type', 'checkbox')], []);
+    final element = $__root__.createElement(
+        ByTagName('input'), [WithAttribute('type', 'checkbox')], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForWithAttributeTest', 'element');
@@ -390,14 +385,14 @@ class $PageForWithClassTest extends PageForWithClassTest
 
 class $$PageForWithClassTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get element {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForWithClassTest', 'element');
     }
-    final element = $__root__.createElement(
-        const ByTagName('input'), [const WithClass('with-class-test')], []);
+    final element = $__root__
+        .createElement(ByTagName('input'), [WithClass('with-class-test')], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForWithClassTest', 'element');
@@ -423,13 +418,13 @@ class $DebugIds extends DebugIds with $$DebugIds {
 
 class $$DebugIds {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get option1 {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('DebugIds', 'option1');
     }
-    final element = $__root__.createElement(const ByDebugId('option1'), [], []);
+    final element = $__root__.createElement(ByDebugId('option1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'option1');
@@ -441,7 +436,7 @@ class $$DebugIds {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('DebugIds', 'option2');
     }
-    final element = $__root__.createElement(const ByDebugId('option2'), [], []);
+    final element = $__root__.createElement(ByDebugId('option2'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'option2');
@@ -453,7 +448,7 @@ class $$DebugIds {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('DebugIds', 'option3');
     }
-    final element = $__root__.createElement(const ByDebugId('option3'), [], []);
+    final element = $__root__.createElement(ByDebugId('option3'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'option3');
@@ -465,8 +460,8 @@ class $$DebugIds {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('DebugIds', 'usePlain');
     }
-    final element = $__root__
-        .createElement(const ByDebugId('option1', usePlain: true), [], []);
+    final element =
+        $__root__.createElement(ByDebugId('option1', usePlain: true), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'usePlain');
@@ -478,8 +473,8 @@ class $$DebugIds {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('DebugIds', 'useDash');
     }
-    final element = $__root__
-        .createElement(const ByDebugId('option2', useDash: true), [], []);
+    final element =
+        $__root__.createElement(ByDebugId('option2', useDash: true), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'useDash');
@@ -492,7 +487,7 @@ class $$DebugIds {
       __listener.startPageObjectMethod('DebugIds', 'useCamelCase');
     }
     final element = $__root__
-        .createElement(const ByDebugId('option3', useCamelCase: true), [], []);
+        .createElement(ByDebugId('option3', useCamelCase: true), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'useCamelCase');

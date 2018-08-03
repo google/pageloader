@@ -26,13 +26,13 @@ class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
 
 class $$PageForMouseTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get element {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForMouseTest', 'element');
     }
-    final element = $__root__.createElement(const ById('mouse'), [], []);
+    final element = $__root__.createElement(ById('mouse'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForMouseTest', 'element');
@@ -44,7 +44,7 @@ class $$PageForMouseTest {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForMouseTest', 'topElement');
     }
-    final element = $__root__.createElement(const ById('mouse-top'), [], []);
+    final element = $__root__.createElement(ById('mouse-top'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForMouseTest', 'topElement');
@@ -56,7 +56,7 @@ class $$PageForMouseTest {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForMouseTest', 'centerElement');
     }
-    final element = $__root__.createElement(const ById('mouse-center'), [], []);
+    final element = $__root__.createElement(ById('mouse-center'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForMouseTest', 'centerElement');
@@ -68,7 +68,7 @@ class $$PageForMouseTest {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForMouseTest', 'bottomElement');
     }
-    final element = $__root__.createElement(const ById('mouse-bottom'), [], []);
+    final element = $__root__.createElement(ById('mouse-bottom'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForMouseTest', 'bottomElement');

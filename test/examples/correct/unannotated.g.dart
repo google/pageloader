@@ -113,7 +113,7 @@ class $Unannotated extends Unannotated with $$Unannotated {
 
 class $$Unannotated {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -135,7 +135,7 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
 
 class $$UnannotatedUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -143,6 +143,6 @@ class $$UnannotatedUsingMixin {
 
 class $$UnannotatedMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }

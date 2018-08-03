@@ -25,12 +25,12 @@ String _removeWhiteSpace(String s) =>
 void runTests(GetNewContext contextGenerator) {
   group('list works', () {
     test('asynchronously', () async {
-      final list = new Lists.create(contextGenerator());
+      final list = Lists.create(contextGenerator());
       expect(await list.tableRows, hasLength(2));
     });
 
     test('synchronously', () async {
-      final list = new Lists.create(contextGenerator());
+      final list = Lists.create(contextGenerator());
       final rows = list.tableRowsSync;
       final rowsAsPO = list.tableRowsSyncAsPO;
       expect(rows, hasLength(2));

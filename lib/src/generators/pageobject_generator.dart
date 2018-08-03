@@ -50,13 +50,13 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   }
 
   String _generateClass(ClassDeclaration declaration) {
-    final collectorVisitor = new CollectorVisitor(declaration);
+    final collectorVisitor = CollectorVisitor(declaration);
     declaration.visitChildren(collectorVisitor);
 
     _doErrorHandling(collectorVisitor);
 
-    final constructorBuffer = new StringBuffer();
-    final mixinBuffer = new StringBuffer();
+    final constructorBuffer = StringBuffer();
+    final mixinBuffer = StringBuffer();
     final className = declaration.name.toString();
     final generics = _generateTypeParameters(declaration);
     final genericsArgs = _generateTypeArguments(declaration);
@@ -66,7 +66,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     // Run check to make sure PO is not extending another PO.
     // Only mixins are allowed.
     if (poExtendsAnotherPo(declaration.element)) {
-      throw new Exception('******************\n\n'
+      throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           "PageObject class '${declaration.name.name}' is extending another "
           "PageObject class. PageObjects may not extend other PageObjects; "
@@ -117,7 +117,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
             ? getAnnotationSingleArg(ensureTag.value)
             : getAnnotationSingleArg(checkTag.value);
         constructorBuffer
-            .write('new \$$className.create(source.byTag($defaultTag));');
+            .write('\$$className.create(source.byTag($defaultTag));');
       } else {
         constructorBuffer.write('''throw  "'lookup' constructor for class "
         "$className is not generated and can only be used on Page Object "
@@ -182,7 +182,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     if (visitor.badMethods.isNotEmpty ||
         visitor.oversupportedMethods.isNotEmpty ||
         visitor.unsupportedMethods.isNotEmpty) {
-      throw new Exception('******************\n\n'
+      throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           '${errors.join('\n\n-------------------\n')}'
           '\n\n******************');

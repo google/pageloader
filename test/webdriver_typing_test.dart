@@ -17,7 +17,7 @@ import 'setup/webdriver_environment.dart';
 import 'src/typing.dart' as typing;
 
 void main() {
-  final environment = new WebDriverEnvironment();
+  final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
   typing.runTests(() => environment.getBaseElement());

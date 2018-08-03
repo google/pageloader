@@ -17,7 +17,7 @@ import 'setup/webdriver_environment.dart';
 import 'src/generics.dart' as generics;
 
 void main() {
-  final environment = new WebDriverEnvironment();
+  final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
   generics.runTests(() => environment.getBaseElement());

@@ -24,7 +24,7 @@ typedef void DoRefresh();
 void runTests(GetNewContext contextGenerator) {
   group('webdriver ', () {
     test('computes offset sensibly', () async {
-      final webdriverOnly = new WebDriverOnly.create(contextGenerator());
+      final webdriverOnly = WebDriverOnly.create(contextGenerator());
       expect(webdriverOnly.button1.offset.width, greaterThan(80));
       expect(webdriverOnly.button1.offset.width, lessThan(150));
       expect(webdriverOnly.button1.offset.height, greaterThan(10));
@@ -32,7 +32,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('computes bounding rect sensibly', () async {
-      final webdriverOnly = new WebDriverOnly.create(contextGenerator());
+      final webdriverOnly = WebDriverOnly.create(contextGenerator());
       final boundingRect = webdriverOnly.button1.getBoundingClientRect();
       expect(boundingRect.width, greaterThan(80));
       expect(boundingRect.width, lessThan(150));

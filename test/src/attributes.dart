@@ -21,7 +21,7 @@ typedef PageLoaderElement GetNewContext();
 void runTests(GetNewContext contextGenerator) {
   group('attributes ', () {
     test('style', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       // According to the spec, red below should be returned as an
       // RGBA value.
       expect(page.divWithStyle.attributes['style'],
@@ -33,25 +33,25 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('checked', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.checkbox.attributes['checked'], isNull);
       await page.checkbox.click();
       expect(page.checkbox.attributes['checked'], isNull);
     });
 
     test('disabled', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.readOnly.attributes['disabled'], '');
       expect(page.text.attributes['disabled'], isNull);
     });
 
     test('not a property', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.table.attributes['non-standard'], 'a non standard attr');
     });
 
     test('option values', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.option1.attributes['value'], 'value 1');
       expect(page.option1.attributes['VaLuE'], 'value 1');
       expect(page.option2.attributes['value'], 'value 2');
@@ -59,13 +59,13 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('option selected', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       await page.option2.click();
       expect(page.select1.attributes['value'], isNull);
     });
 
     test('selected on checkbox', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.checkbox.attributes['selected'], isNull);
       expect(page.checkbox.attributes['SeLeCtEd'], isNull);
       await page.checkbox.click();
@@ -74,7 +74,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('selected on radio', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.radio.attributes['selected'], isNull);
       expect(page.radio.attributes['SeLeCtEd'], isNull);
       await page.radio.click();
@@ -83,23 +83,23 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('href on a', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.anchor.attributes['href'], endsWith('test.html'));
     });
 
     test('src on img', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.img.attributes['src'], endsWith('test.png'));
     });
 
     test('class/className', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.table.attributes['class'], 'class1 class2 class3');
       expect(page.table.attributes['className'], isNull);
     });
 
     test('readonly/readOnly', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.readOnly.attributes['readonly'], '');
       expect(page.readOnly.attributes['readOnly'], '');
       expect(page.text.attributes['readonly'], isNull);
@@ -107,7 +107,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('value on text', () async {
-      final page = new PageForAttributesTests.create(contextGenerator());
+      final page = PageForAttributesTests.create(contextGenerator());
       expect(page.text.attributes['value'], isNull);
       await page.text.type('some text');
       expect(page.text.attributes['value'], isNull);

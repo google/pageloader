@@ -26,7 +26,7 @@ class $MouseObject extends MouseObject with $$MouseObject {
 
 class $$MouseObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderMouse get mouse {
     for (final __listener in $__root__.listeners) {
@@ -59,7 +59,7 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
 
 class $$MouseObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -67,7 +67,7 @@ class $$MouseObjectUsingMixin {
 
 class $$MouseObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderMouse get mouse {
     for (final __listener in $__root__.listeners) {

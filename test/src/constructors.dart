@@ -24,7 +24,7 @@ void runTests(GetNewContext contextGenerator) {
     BCustomTagPO bTag;
 
     setUp(() {
-      base = new BasePO.create(contextGenerator());
+      base = BasePO.create(contextGenerator());
       bTag = base.bTagPO;
     });
 
@@ -96,10 +96,10 @@ abstract class BCustomTagPO {
 
   PageUtils get _utils => _root.utils;
 
-  CCustomTagPO get cTagFromPLE => new CCustomTagPO.lookup(_root);
-  CCustomTagPO get cTagFromUtils => new CCustomTagPO.lookup(_utils);
+  CCustomTagPO get cTagFromPLE => CCustomTagPO.lookup(_root);
+  CCustomTagPO get cTagFromUtils => CCustomTagPO.lookup(_utils);
 
-  NoLookupPO get noLookupPO => new NoLookupPO.lookup(_root);
+  NoLookupPO get noLookupPO => NoLookupPO.lookup(_root);
 }
 
 @PageObject()

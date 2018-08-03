@@ -27,7 +27,7 @@ void main() {
     PageLoaderMouse mouse;
 
     setUp(() {
-      page = new PageForMouseTest.create(html_setup.getRoot());
+      page = PageForMouseTest.create(html_setup.getRoot());
       mouse = page.mouse;
     });
 

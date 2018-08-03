@@ -26,15 +26,14 @@ class $Nested extends Nested with $$Nested {
 
 class $$Nested {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Finders get findersElement {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Nested', 'findersElement');
     }
-    final element =
-        $__root__.createElement(const ByCss('some-nested-class'), [], []);
-    final returnMe = new Finders.create(element);
+    final element = $__root__.createElement(ByCss('some-nested-class'), [], []);
+    final returnMe = Finders.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Nested', 'findersElement');
     }
@@ -60,7 +59,7 @@ class $NestedUsingMixin extends NestedUsingMixin
 
 class $$NestedUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
 
@@ -68,15 +67,14 @@ class $$NestedUsingMixin {
 
 class $$NestedMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   FindersUsingMixin get findersElement {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('NestedMixin', 'findersElement');
     }
-    final element =
-        $__root__.createElement(const ByCss('some-nested-class'), [], []);
-    final returnMe = new FindersUsingMixin.create(element);
+    final element = $__root__.createElement(ByCss('some-nested-class'), [], []);
+    final returnMe = FindersUsingMixin.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('NestedMixin', 'findersElement');
     }
