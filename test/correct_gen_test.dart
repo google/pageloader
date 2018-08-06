@@ -11,6 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@TestOn('vm')
+
 import 'package:test/test.dart';
 
 import 'examples/correct/class_checks.dart';
