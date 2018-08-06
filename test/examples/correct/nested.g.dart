@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'nested.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'nested.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $Nested extends Nested with $$Nested {
   PageLoaderElement $__root__;
   $Nested.create(PageLoaderElement currentContext)
@@ -41,7 +40,6 @@ class $$Nested {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $NestedUsingMixin extends NestedUsingMixin
     with $$NestedMixin, $$NestedUsingMixin {
   PageLoaderElement $__root__;
@@ -62,8 +60,6 @@ class $$NestedUsingMixin {
   PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$NestedMixin {
   PageLoaderElement $__root__;

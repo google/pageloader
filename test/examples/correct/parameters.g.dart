@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'parameters.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'parameters.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $Parameters extends Parameters with $$Parameters {
   PageLoaderElement $__root__;
   $Parameters.create(PageLoaderElement currentContext)
@@ -83,7 +82,6 @@ class $$Parameters {
   PageLoaderElement get $root => $__root__;
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $ParametersUsingMixin extends ParametersUsingMixin
     with $$ParametersMixin, $$ParametersUsingMixin {
   PageLoaderElement $__root__;
@@ -104,8 +102,6 @@ class $$ParametersUsingMixin {
   PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$ParametersMixin {
   PageLoaderElement $__root__;

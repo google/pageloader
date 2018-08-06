@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'list.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'list.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $Lists extends Lists with $$Lists {
   PageLoaderElement $__root__;
   $Lists.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -67,7 +66,6 @@ class $$Lists {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $RowPO extends RowPO with $$RowPO {
   PageLoaderElement $__root__;
   $RowPO.create(PageLoaderElement currentContext) : $__root__ = currentContext {

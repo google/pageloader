@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'constructors.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'constructors.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $BasePO extends BasePO with $$BasePO {
   PageLoaderElement $__root__;
   $BasePO.create(PageLoaderElement currentContext)
@@ -42,7 +41,6 @@ class $$BasePO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $BCustomTagPO extends BCustomTagPO with $$BCustomTagPO {
   PageLoaderElement $__root__;
   $BCustomTagPO.create(PageLoaderElement currentContext)
@@ -125,7 +123,6 @@ class $$BCustomTagPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $CCustomTagPO extends CCustomTagPO with $$CCustomTagPO {
   PageLoaderElement $__root__;
   $CCustomTagPO.create(PageLoaderElement currentContext)
@@ -164,7 +161,6 @@ class $$CCustomTagPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $NoLookupPO extends NoLookupPO with $$NoLookupPO {
   PageLoaderElement $__root__;
   $NoLookupPO.create(PageLoaderElement currentContext)

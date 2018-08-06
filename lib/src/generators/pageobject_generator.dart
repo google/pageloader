@@ -27,6 +27,17 @@ import 'methods/core.dart' as core;
 class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   const PageObjectGenerator();
 
+  @override
+  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
+    final result = await super.generate(library, buildStep);
+    if (result?.isEmpty ?? true) return '';
+    const ignore =
+        '// ignore_for_file: private_collision_in_mixin_application\n'
+        '// ignore_for_file: unused_field, non_constant_identifier_names\n'
+        '// ignore_for_file: overridden_fields, annotate_overrides\n';
+    return '$ignore$result';
+  }
+
   /// Generates a page object, as source String, for a class annotated with
   /// '@PageObject()'.
   @override
@@ -35,9 +46,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     final annotatedNode = element.computeNode();
     if (annotatedNode is ClassDeclaration) {
       try {
-        final ignore =
-            '// ignore_for_file: private_collision_in_mixin_application\n';
-        return '$ignore${_generateClass(annotatedNode)}';
+        return _generateClass(annotatedNode);
       } catch (e, stackTrace) {
         print('Failure generating class for ${element.library}! '
             '\n $e \n $stackTrace');

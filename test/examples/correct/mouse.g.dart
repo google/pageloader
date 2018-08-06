@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'mouse.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'mouse.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $MouseObject extends MouseObject with $$MouseObject {
   PageLoaderElement $__root__;
   $MouseObject.create(PageLoaderElement currentContext)
@@ -41,7 +40,6 @@ class $$MouseObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $MouseObjectUsingMixin extends MouseObjectUsingMixin
     with $$MouseObjectMixin, $$MouseObjectUsingMixin {
   PageLoaderElement $__root__;
@@ -62,8 +60,6 @@ class $$MouseObjectUsingMixin {
   PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$MouseObjectMixin {
   PageLoaderElement $__root__;

@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'cache_invalidation.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'cache_invalidation.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
   PageLoaderElement $__root__;
   $CacheInvalidation.create(PageLoaderElement currentContext)
@@ -53,7 +52,6 @@ class $$CacheInvalidation {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $_Nested extends _Nested with $$_Nested {
   PageLoaderElement $__root__;
   $_Nested.create(PageLoaderElement currentContext)

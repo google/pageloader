@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'finders.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'finders.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $Finders extends Finders with $$Finders {
   PageLoaderElement $__root__;
   $Finders.create(PageLoaderElement currentContext)
@@ -88,7 +87,6 @@ class $$Finders {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
   PageLoaderElement $__root__;
   $CheckTagPO.create(PageLoaderElement currentContext)
@@ -127,7 +125,6 @@ class $$CheckTagPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $FindersUsingMixin extends FindersUsingMixin
     with $$FindersMixin, $$FindersUsingMixin {
   PageLoaderElement $__root__;
@@ -148,8 +145,6 @@ class $$FindersUsingMixin {
   PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$FindersMixin {
   PageLoaderElement $__root__;

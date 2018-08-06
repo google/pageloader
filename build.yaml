@@ -13,19 +13,14 @@ targets:
         enabled: false
       pageloader|pageloader:
         enabled: true
-        options:
-          header: |+
-           // GENERATED CODE - DO NOT MODIFY BY HAND
-
-           // ignore_for_file: unused_field, non_constant_identifier_names
-           // ignore_for_file: overridden_fields, annotate_overrides
 
 builders:
   pageloader:
     import: "package:pageloader/builder.dart"
     builder_factories: ["pageloaderBuilder"]
-    build_extensions: {".dart": [".g.dart"]}
+    build_extensions: {".dart": [".pageloader.g.part"]}
     auto_apply: dependents
-    build_to: source
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
     defaults:
       generate_for: ["test/**"]

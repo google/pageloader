@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'multiple_in_file.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'multiple_in_file.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $A extends A with $$A {
   PageLoaderElement $__root__;
   $A.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -40,7 +39,6 @@ class $$A {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $B extends B with $$B {
   PageLoaderElement $__root__;
   $B.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -71,7 +69,6 @@ class $$B {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $C extends C with $$C {
   PageLoaderElement $__root__;
   $C.create(PageLoaderElement currentContext) : $__root__ = currentContext {

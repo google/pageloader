@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'basic.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'basic.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $PageForExistsTest extends PageForExistsTest with $$PageForExistsTest {
   PageLoaderElement $__root__;
   $PageForExistsTest.create(PageLoaderElement currentContext)
@@ -65,7 +64,6 @@ class $$PageForExistsTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForVisibilityTest extends PageForVisibilityTest
     with $$PageForVisibilityTest {
   PageLoaderElement $__root__;
@@ -111,7 +109,6 @@ class $$PageForVisibilityTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForClassAnnotationTest extends PageForClassAnnotationTest
     with $$PageForClassAnnotationTest {
   PageLoaderElement $__root__;
@@ -144,7 +141,6 @@ class $$PageForClassAnnotationTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForPrivateFieldsTest extends PageForPrivateFieldsTest
     with $$PageForPrivateFieldsTest {
   PageLoaderElement $__root__;
@@ -189,7 +185,6 @@ class $$PageForPrivateFieldsTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForFocusTest extends PageForFocusTest with $$PageForFocusTest {
   PageLoaderElement $__root__;
   $PageForFocusTest.create(PageLoaderElement currentContext)
@@ -221,7 +216,6 @@ class $$PageForFocusTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForNbspTest extends PageForNbspTest with $$PageForNbspTest {
   PageLoaderElement $__root__;
   $PageForNbspTest.create(PageLoaderElement currentContext)
@@ -253,7 +247,6 @@ class $$PageForNbspTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $Basic extends Basic with $$Basic {
   PageLoaderElement $__root__;
   $Basic.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -284,7 +277,6 @@ class $$Basic {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $OuterNested extends OuterNested with $$OuterNested {
   PageLoaderElement $__root__;
   $OuterNested.create(PageLoaderElement currentContext)
@@ -316,7 +308,6 @@ class $$OuterNested {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $DebugId extends DebugId with $$DebugId {
   PageLoaderElement $__root__;
   $DebugId.create(PageLoaderElement currentContext)
@@ -348,7 +339,6 @@ class $$DebugId {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $Display extends Display with $$Display {
   PageLoaderElement $__root__;
   $Display.create(PageLoaderElement currentContext)

@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'root.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'root.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $ParentRoot extends ParentRoot with $$ParentRoot {
   PageLoaderElement $__root__;
   $ParentRoot.create(PageLoaderElement currentContext)
@@ -41,7 +40,6 @@ class $$ParentRoot {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $Root extends Root with $$Root {
   PageLoaderElement $__root__;
   $Root.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -84,7 +82,6 @@ class $$Root {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $ParentRootUsingMixin extends ParentRootUsingMixin
     with $$ParentRootMixin, $$ParentRootUsingMixin {
   PageLoaderElement $__root__;
@@ -106,8 +103,6 @@ class $$ParentRootUsingMixin {
   PageLoaderElement get $root => $__root__;
 }
 
-// ignore_for_file: private_collision_in_mixin_application
-
 class $$ParentRootMixin {
   PageLoaderElement $__root__;
   PageLoaderMouse __mouse__; // ignore: unused_field
@@ -125,7 +120,6 @@ class $$ParentRootMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $RootUsingMixin extends RootUsingMixin
     with $$RootMixin, $$RootUsingMixin {
   PageLoaderElement $__root__;
@@ -146,8 +140,6 @@ class $$RootUsingMixin {
   PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$RootMixin {
   PageLoaderElement $__root__;

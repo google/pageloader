@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'typing.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'typing.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $PageForTextAreaTypingText extends PageForTextAreaTypingText
     with $$PageForTextAreaTypingText {
   PageLoaderElement $__root__;
@@ -42,7 +41,6 @@ class $$PageForTextAreaTypingText {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForTypingTests extends PageForTypingTests with $$PageForTypingTests {
   PageLoaderElement $__root__;
   $PageForTypingTests.create(PageLoaderElement currentContext)

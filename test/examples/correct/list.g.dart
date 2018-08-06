@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'list.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'list.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $Lists extends Lists with $$Lists {
   PageLoaderElement $__root__;
   $Lists.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -106,7 +105,6 @@ class $$Lists {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $InnerListObject extends InnerListObject with $$InnerListObject {
   PageLoaderElement $__root__;
   $InnerListObject.create(PageLoaderElement currentContext)
@@ -151,7 +149,6 @@ class $$InnerListObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $ListsUsingMixin extends ListsUsingMixin
     with $$ListsMixin, $$ListsUsingMixin {
   PageLoaderElement $__root__;
@@ -172,8 +169,6 @@ class $$ListsUsingMixin {
   PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$ListsMixin {
   PageLoaderElement $__root__;
@@ -258,7 +253,6 @@ class $$ListsMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $InnerListObjectUsingMixin extends InnerListObjectUsingMixin
     with $$InnerListObjectMixin, $$InnerListObjectUsingMixin {
   PageLoaderElement $__root__;
@@ -279,8 +273,6 @@ class $$InnerListObjectUsingMixin {
   PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
 }
-
-// ignore_for_file: private_collision_in_mixin_application
 
 class $$InnerListObjectMixin {
   PageLoaderElement $__root__;

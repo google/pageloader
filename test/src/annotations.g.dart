@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'annotations.dart';
 
 // **************************************************************************
@@ -10,6 +7,8 @@ part of 'annotations.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $BaseObject extends BaseObject with $$BaseObject {
   PageLoaderElement $__root__;
   $BaseObject.create(PageLoaderElement currentContext)
@@ -77,7 +76,6 @@ class $$BaseObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PseudoBaseObject extends PseudoBaseObject with $$PseudoBaseObject {
   PageLoaderElement $__root__;
   $PseudoBaseObject.create(PageLoaderElement currentContext)
@@ -134,7 +132,6 @@ class $$PseudoBaseObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $TableForCheckTag extends TableForCheckTag with $$TableForCheckTag {
   PageLoaderElement $__root__;
   $TableForCheckTag.create(PageLoaderElement currentContext)
@@ -188,7 +185,6 @@ class $$TableForCheckTag {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $BaseEnsureObject extends BaseEnsureObject with $$BaseEnsureObject {
   PageLoaderElement $__root__;
   $BaseEnsureObject.create(PageLoaderElement currentContext)
@@ -232,7 +228,6 @@ class $$BaseEnsureObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $TableForEnsureTag extends TableForEnsureTag with $$TableForEnsureTag {
   PageLoaderElement $__root__;
   $TableForEnsureTag.create(PageLoaderElement currentContext)
@@ -274,7 +269,6 @@ class $$TableForEnsureTag {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $CheckTagFails extends CheckTagFails with $$CheckTagFails {
   PageLoaderElement $__root__;
   $CheckTagFails.create(PageLoaderElement currentContext)
@@ -303,7 +297,6 @@ class $$CheckTagFails {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $EnsureTagFails extends EnsureTagFails with $$EnsureTagFails {
   PageLoaderElement $__root__;
   $EnsureTagFails.create(PageLoaderElement currentContext)
@@ -333,7 +326,6 @@ class $$EnsureTagFails {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForWithAttributeTest extends PageForWithAttributeTest
     with $$PageForWithAttributeTest {
   PageLoaderElement $__root__;
@@ -367,7 +359,6 @@ class $$PageForWithAttributeTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForWithClassTest extends PageForWithClassTest
     with $$PageForWithClassTest {
   PageLoaderElement $__root__;
@@ -401,7 +392,6 @@ class $$PageForWithClassTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $DebugIds extends DebugIds with $$DebugIds {
   PageLoaderElement $__root__;
   $DebugIds.create(PageLoaderElement currentContext)
