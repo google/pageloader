@@ -48,7 +48,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       try {
         return _generateClass(annotatedNode);
       } catch (e, stackTrace) {
-        print('Failure generating class for ${element.library}! '
+        log.warning('Failure generating class for ${element.library}! '
             '\n $e \n $stackTrace');
         rethrow;
       }
