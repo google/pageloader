@@ -1,3 +1,20 @@
+## 3.0.0
+
+- Added `lookup` constructor that can also be delegated as another constructor.
+- Improved HtmlMouse to send more accurate mouse events. `moveTo` API changed.
+- Added `clickOutside()` API to PageLoaderElement.
+- Lint-based errors fixes.
+- Remove unnecessary usages of `new` and `const`.
+- Bump `webdriver` to v2.0.0.
+ 
+
+Add 'lookup' constructor that can also be delegated similar to 'create'.
+HtmlMouse is improved to provide more mouseevents that better simulate user mouse movements.
+Add 'clickOutside()' to PageLoaderElement
+Add ignore lint for 'unused_field' #144
+Remove usage of unnecessary new and const #152
+Bug fixes
+
 ## 3.0.0-beta.1
 
 - Update to the latest `source_gen`. This generator can now be used with other
