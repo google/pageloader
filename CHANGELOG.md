@@ -3,7 +3,7 @@
 - Added `lookup` constructor that can also be delegated as another constructor.
 - Improved HtmlMouse to send more accurate mouse events. `moveTo` API changed.
 - Added `clickOutside()` API to PageLoaderElement.
-- Lint-based errors fixes.
+- Lint fixes and suppression in generated code.
 - Remove unnecessary usages of `new` and `const`.
 - Bump `webdriver` to v2.0.0.
 
