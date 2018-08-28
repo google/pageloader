@@ -318,12 +318,8 @@ abstract class BasePOMixin {
 abstract class ExtraPO extends Object with BasePOMixin {
   // ... boilerplate code ...
   
-  @root
-  BasePO get _basePO;
-  
-  MyWidgetPO get myWidget => _basePO.myWidget;
-  
-  String get widgetInnerText => _basePO.widgetInnerText;
+  // No need to define 'myWidget' and 'widgetInnerText' here.
+  // The mixin will handle these.
   
   @ByTagName('extra-widget')
   MyExtraWidgetPO get extraWidget;
