@@ -25,6 +25,7 @@ dependencies:
   webdriver: ^2.0.0-beta
 
 dev_dependencies:
+  analyzer: ^0.32.5
   build_config: ^0.2.4
   build_runner: ^0.8.8
   built_value_generator: ^5.4.0
