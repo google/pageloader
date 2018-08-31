@@ -1,33 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-
 part of 'basic.dart';
 
 // **************************************************************************
-// Generator: PageObjectGenerator
+// PageObjectGenerator
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
 class $PageForExistsTest extends PageForExistsTest with $$PageForExistsTest {
   PageLoaderElement $__root__;
   $PageForExistsTest.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForExistsTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForExistsTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForExistsTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForExistsTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get doesntExist {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForExistsTest', 'doesntExist');
     }
-    final element =
-        $__root__.createElement(const ByTagName('non-existant'), [], []);
+    final element = $__root__.createElement(ByTagName('non-existant'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForExistsTest', 'doesntExist');
@@ -39,7 +43,7 @@ class $$PageForExistsTest {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForExistsTest', 'doesExist');
     }
-    final element = $__root__.createElement(const ById('button-1'), [], []);
+    final element = $__root__.createElement(ById('button-1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForExistsTest', 'doesExist');
@@ -51,7 +55,7 @@ class $$PageForExistsTest {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForExistsTest', 'tooManyExist');
     }
-    final element = $__root__.createElement(const ByTagName('td'), [], []);
+    final element = $__root__.createElement(ByTagName('td'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForExistsTest', 'tooManyExist');
@@ -60,7 +64,6 @@ class $$PageForExistsTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForVisibilityTest extends PageForVisibilityTest
     with $$PageForVisibilityTest {
   PageLoaderElement $__root__;
@@ -68,18 +71,23 @@ class $PageForVisibilityTest extends PageForVisibilityTest
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForVisibilityTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForVisibilityTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForVisibilityTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForVisibilityTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get invisibleDiv {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForVisibilityTest', 'invisibleDiv');
     }
-    final element =
-        $__root__.createElement(const ById('invisible-div'), [], []);
+    final element = $__root__.createElement(ById('invisible-div'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForVisibilityTest', 'invisibleDiv');
@@ -92,7 +100,7 @@ class $$PageForVisibilityTest {
       __listener.startPageObjectMethod(
           'PageForVisibilityTest', 'visibleButton');
     }
-    final element = $__root__.createElement(const ById('button-1'), [], []);
+    final element = $__root__.createElement(ById('button-1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForVisibilityTest', 'visibleButton');
@@ -101,7 +109,6 @@ class $$PageForVisibilityTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForClassAnnotationTest extends PageForClassAnnotationTest
     with $$PageForClassAnnotationTest {
   PageLoaderElement $__root__;
@@ -109,18 +116,24 @@ class $PageForClassAnnotationTest extends PageForClassAnnotationTest
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForClassAnnotationTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForClassAnnotationTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForClassAnnotationTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForClassAnnotationTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Table get table {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForClassAnnotationTest', 'table');
     }
     final element = $__root__;
-    final returnMe = new Table.create(element);
+    final returnMe = Table.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForClassAnnotationTest', 'table');
     }
@@ -128,7 +141,6 @@ class $$PageForClassAnnotationTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForPrivateFieldsTest extends PageForPrivateFieldsTest
     with $$PageForPrivateFieldsTest {
   PageLoaderElement $__root__;
@@ -136,6 +148,12 @@ class $PageForPrivateFieldsTest extends PageForPrivateFieldsTest
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForPrivateFieldsTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForPrivateFieldsTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForPrivateFieldsTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
   Table get table {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForPrivateFieldsTest', 'table');
@@ -150,15 +168,15 @@ class $PageForPrivateFieldsTest extends PageForPrivateFieldsTest
 
 class $$PageForPrivateFieldsTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   Table get _privateTable {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod(
           'PageForPrivateFieldsTest', '_privateTable');
     }
-    final element = $__root__.createElement(const ByTagName('table'), [], []);
-    final returnMe = new Table.create(element);
+    final element = $__root__.createElement(ByTagName('table'), [], []);
+    final returnMe = Table.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod(
           'PageForPrivateFieldsTest', '_privateTable');
@@ -167,24 +185,29 @@ class $$PageForPrivateFieldsTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForFocusTest extends PageForFocusTest with $$PageForFocusTest {
   PageLoaderElement $__root__;
   $PageForFocusTest.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForFocusTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForFocusTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForFocusTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForFocusTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get textfield {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForFocusTest', 'textfield');
     }
-    final element = $__root__.createElement(const ById('text'), [], []);
+    final element = $__root__.createElement(ById('text'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForFocusTest', 'textfield');
@@ -193,24 +216,29 @@ class $$PageForFocusTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $PageForNbspTest extends PageForNbspTest with $$PageForNbspTest {
   PageLoaderElement $__root__;
   $PageForNbspTest.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $PageForNbspTest.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "PageForNbspTest is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "PageForNbspTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$PageForNbspTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get span {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForNbspTest', 'span');
     }
-    final element = $__root__.createElement(const ById('nbsp'), [], []);
+    final element = $__root__.createElement(ById('nbsp'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForNbspTest', 'span');
@@ -219,25 +247,29 @@ class $$PageForNbspTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $Basic extends Basic with $$Basic {
   PageLoaderElement $__root__;
   $Basic.create(PageLoaderElement currentContext) : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Basic.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Basic is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Basic". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Basic {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   OuterNested get outerNested {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Basic', 'outerNested');
     }
-    final element =
-        $__root__.createElement(const ByClass('outer-nested'), [], []);
-    final returnMe = new OuterNested.create(element);
+    final element = $__root__.createElement(ByClass('outer-nested'), [], []);
+    final returnMe = OuterNested.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Basic', 'outerNested');
     }
@@ -245,25 +277,29 @@ class $$Basic {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $OuterNested extends OuterNested with $$OuterNested {
   PageLoaderElement $__root__;
   $OuterNested.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $OuterNested.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "OuterNested is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "OuterNested". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$OuterNested {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get innerNested {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('OuterNested', 'innerNested');
     }
-    final element =
-        $__root__.createElement(const ByClass('inner-nested'), [], []);
+    final element = $__root__.createElement(ByClass('inner-nested'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('OuterNested', 'innerNested');
@@ -272,24 +308,29 @@ class $$OuterNested {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $DebugId extends DebugId with $$DebugId {
   PageLoaderElement $__root__;
   $DebugId.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $DebugId.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "DebugId is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "DebugId". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$DebugId {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get debug {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('DebugId', 'debug');
     }
-    final element = $__root__.createElement(const ByDebugId('debugId'), [], []);
+    final element = $__root__.createElement(ByDebugId('debugId'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugId', 'debug');
@@ -298,24 +339,29 @@ class $$DebugId {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 class $Display extends Display with $$Display {
   PageLoaderElement $__root__;
   $Display.create(PageLoaderElement currentContext)
       : $__root__ = currentContext {
     $__root__.addCheckers([]);
   }
+  factory $Display.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+      "Display is not generated and can only be used on Page Object "
+      "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "Display". Requires @CheckTag annotation in order for "tagName" to be generated.';
 }
 
 class $$Display {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+  PageLoaderMouse __mouse__; // ignore: unused_field
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get notDisplayed {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Display', 'notDisplayed');
     }
-    final element = $__root__.createElement(const ById('div'), [], []);
+    final element = $__root__.createElement(ById('div'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Display', 'notDisplayed');

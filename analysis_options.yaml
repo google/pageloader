@@ -1,5 +1,4 @@
 analyzer:
-  strong-mode: true
   exclude:
     - lib/**/*.g.dart
     - test/**/*.g.dart
@@ -57,6 +56,8 @@ linter:
     - type_init_formals
     - unawaited_futures
     - unnecessary_brace_in_string_interps
+    - unnecessary_const
     - unnecessary_getters_setters
+    - unnecessary_new
     - unrelated_type_equality_checks
     - valid_regexps

@@ -1,5 +1,20 @@
-## 3.0.0-alpha
+## 3.0.0
 
+- Added `lookup` constructor that can also be delegated as another constructor.
+- Improved HtmlMouse to send more accurate mouse events. `moveTo` API changed.
+- Added `clickOutside()` API to PageLoaderElement.
+- Lint fixes and suppression in generated code.
+- Remove unnecessary usages of `new` and `const`.
+- Bump `webdriver` to v2.0.0.
+- Update to the latest `source_gen`. This generator can now be used with other
+  generators that want to write to .g.dart files without a manual build script.
+- Breaking: The `header` builder option is no longer supported.
+- `@EnsureTag` is marked as deprecated. Will be removed in a future
+  release.
+- Add listeners into `WebdriverPageLoaderElement` if searching for
+  descendants.
+- Add `@ByCheckTag()` as a convenience annotation that can be used
+  in place of `@ByTagName(...)`.
 - Dart 2 compatible version that uses code generation instead of
   mirrors.
 - Dropped `@FirstByCss()` annotation class. Use `@First(ByCss(...))`.

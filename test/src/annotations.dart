@@ -23,19 +23,20 @@ typedef PageLoaderElement GetNewContext();
 void runTests(GetNewContext contextGenerator) {
   group('annotations', () {
     test('CheckTag annotation', () async {
-      final base = new BaseObject.create(contextGenerator());
+      final base = BaseObject.create(contextGenerator());
       expect(base.table.table.name, 'table');
+      expect(base.tableUsingCheckedTag.table.name, base.table.table.name);
       await verifyRows(base.table.rows);
     });
 
     test('EnsureTag annotation', () async {
-      final base = new BaseEnsureObject.create(contextGenerator());
+      final base = BaseEnsureObject.create(contextGenerator());
       expect(base.table.table.name, 'table');
       await verifyRows(base.table.rows);
     });
 
     test('CheckTag annotation fails as expected', () async {
-      final base = new BaseObject.create(contextGenerator());
+      final base = BaseObject.create(contextGenerator());
       try {
         base.badTable.table.name;
         fail('Expected to throw on bad @CheckTag');
@@ -46,7 +47,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('EnsureTag annotation fails as expected', () async {
-      final base = new BaseEnsureObject.create(contextGenerator());
+      final base = BaseEnsureObject.create(contextGenerator());
       try {
         base.badTable.table.name;
         fail('Expected to throw on bad @EnsureTag');
@@ -56,29 +57,29 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('Global top ', () async {
-      final base = new BaseObject.create(contextGenerator());
+      final base = BaseObject.create(contextGenerator());
       expect(base.globalTable.name, 'table');
     });
 
     test('Global nested', () async {
-      final base = new BaseObject.create(contextGenerator());
+      final base = BaseObject.create(contextGenerator());
       expect(base.table.globalTable.name, 'table');
     });
 
     test('WithAttribute', () async {
-      final page = new PageForWithAttributeTest.create(contextGenerator());
+      final page = PageForWithAttributeTest.create(contextGenerator());
       expect(page.element.attributes['type'], 'checkbox');
     });
 
     test('WithClass', () async {
-      final page = new PageForWithClassTest.create(contextGenerator());
+      final page = PageForWithClassTest.create(contextGenerator());
       expect(page.element.attributes['type'], 'checkbox');
       expect(page.element.classes,
           unorderedEquals(['with-class-test', 'class1', 'class2']));
     });
 
     test('DebugId', () async {
-      final page = new DebugIds.create(contextGenerator());
+      final page = DebugIds.create(contextGenerator());
       expect(page.option1.innerText, 'option 1');
       expect(page.option2.innerText, 'option 2');
       expect(page.option3.innerText, 'option 3');
@@ -90,13 +91,13 @@ void runTests(GetNewContext contextGenerator) {
 
   group('custom annotations', () {
     test('CheckTag annotation', () async {
-      final base = new PseudoBaseObject.create(contextGenerator());
+      final base = PseudoBaseObject.create(contextGenerator());
       expect(base.table.table.name, 'table');
       await verifyRows(base.table.rows);
     });
 
     test('CheckTag annotation fails as expected', () async {
-      final base = new PseudoBaseObject.create(contextGenerator());
+      final base = PseudoBaseObject.create(contextGenerator());
       try {
         base.badTable.table.name;
         fail('Expected to throw on bad @CheckTag');
@@ -107,12 +108,12 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('Global top ', () async {
-      final base = new PseudoBaseObject.create(contextGenerator());
+      final base = PseudoBaseObject.create(contextGenerator());
       expect(base.globalTable.name, 'table');
     });
 
     test('Global nested', () async {
-      final base = new PseudoBaseObject.create(contextGenerator());
+      final base = PseudoBaseObject.create(contextGenerator());
       expect(base.table.globalTable.name, 'table');
     });
   });
@@ -126,7 +127,10 @@ abstract class BaseObject {
   @ByTagName('table')
   TableForCheckTag get table;
 
-  @Global(const ByTagName('table'))
+  @ByCheckTag()
+  TableForCheckTag get tableUsingCheckedTag;
+
+  @Global(ByTagName('table'))
   PageLoaderElement get globalTable;
 
   @ByTagName('table')
@@ -142,7 +146,7 @@ abstract class PseudoBaseObject {
   @PseudoByTagName('table')
   TableForCheckTag get table;
 
-  @Global(const PseudoByTagName('table'))
+  @Global(PseudoByTagName('table'))
   PageLoaderElement get globalTable;
 
   @PseudoByTagName('table')
@@ -159,7 +163,7 @@ abstract class TableForCheckTag {
   @root
   PageLoaderElement get table;
 
-  @Global(const ByTagName('table'))
+  @Global(ByTagName('table'))
   PageLoaderElement get globalTable;
 
   @ByTagName('tr')

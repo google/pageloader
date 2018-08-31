@@ -46,7 +46,7 @@ String testPagePath() {
   final testPagePath =
       path.absolute('test', 'data', 'webdriver_test_page.html');
   if (!FileSystemEntity.isFileSync(testPagePath)) {
-    throw new Exception('Could not find the test file at "$testPagePath".'
+    throw Exception('Could not find the test file at "$testPagePath".'
         ' Make sure you are running tests from the root of the project.');
   }
   return path.toUri(testPagePath).toString();

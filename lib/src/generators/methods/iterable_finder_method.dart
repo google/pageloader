@@ -32,7 +32,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
   if (!node.isGetter ||
       !node.isAbstract ||
       !node.returnType.toString().startsWith(pageObjectIterable)) {
-    return new Optional.absent();
+    return Optional.absent();
   }
 
   String finder;
@@ -41,7 +41,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
   for (final annotation in methodAnnotations) {
     if (isPageloaderFinder(annotation)) {
       if (finder != null) {
-        throw new InvalidMethodException(node.toSource(),
+        throw InvalidMethodException(node.toSource(),
             'multiple Finders cannot be used for single method');
       }
       finder = generateAnnotationDeclaration(annotation);
@@ -54,22 +54,28 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
 
   final typeArguments = getReturnTypeArguments(node.returnType.toString());
   if (typeArguments.length != 1) {
-    throw new InvalidMethodException(node.toSource(),
+    throw InvalidMethodException(node.toSource(),
         'return type should specify exactly one type argument');
+  }
+
+  // Convert 'ByCheckTag' to 'ByTagName' if necessary.
+  if (finder != null && finder.contains('ByCheckTag')) {
+    finder = generateByTagNameFromByCheckTag(
+        getInnerType(node.returnType.type, typeArguments[0]));
   }
 
   if (finder == null) {
     if (filters.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'found Filters but no Finder');
     }
     if (checkers.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'found Checkers but no Finder');
     }
-    return new Optional.absent();
+    return Optional.absent();
   } else {
-    return new Optional.of(new IterableFinderMethod((b) => b
+    return Optional.of(IterableFinderMethod((b) => b
       ..name = node.name.toString()
       ..iterableTypeArgument = typeArguments[0]
       ..finderDeclaration = finder
@@ -101,14 +107,14 @@ abstract class IterableFinderMethod
       '$root.createIterable($finderDeclaration, $filterDeclarations, $checkerDeclarations)';
 
   String get _createObjectIterable =>
-      'new PageObjectIterable<$iterableTypeArgument>'
+      'PageObjectIterable<$iterableTypeArgument>'
       '($_createElementIterator, $_constructor)';
 
   String get _constructor {
     if (iterableTypeArgument == 'PageLoaderElement') {
       return '(PageLoaderElement e) => e';
     } else {
-      return '(PageLoaderElement e) => new $iterableTypeArgument.create(e)';
+      return '(PageLoaderElement e) => $iterableTypeArgument.create(e)';
     }
   }
 

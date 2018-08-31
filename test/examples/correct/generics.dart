@@ -29,6 +29,18 @@ abstract class Generics<T> {
   T exampleMethod<T>(T v) => v;
 }
 
+@CheckTag('checked-generics')
+@PageObject()
+abstract class CheckedGenerics<T> {
+  CheckedGenerics();
+  factory CheckedGenerics.create(PageLoaderElement context) =
+      $CheckedGenerics<T>.create;
+
+  String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
+    return typeDef(thing);
+  }
+}
+
 @PageObject()
 abstract class GenericPair<T, V> {
   GenericPair();
@@ -48,6 +60,12 @@ abstract class RootPo<T> {
 
   @ByTagName('y')
   List<Generics<T>> get genericsList;
+
+  @ByCheckTag()
+  CheckedGenerics<T> get checkedGenerics;
+
+  @ByCheckTag()
+  List<CheckedGenerics<T>> get checkedGenericsList;
 }
 
 // Mixin implementation
@@ -94,4 +112,10 @@ abstract class RootPoMixin<T> {
 
   @ByTagName('y')
   List<Generics<T>> get genericsList;
+
+  @ByCheckTag()
+  CheckedGenerics<T> get checkedGenerics;
+
+  @ByCheckTag()
+  List<CheckedGenerics<T>> get checkedGenericsList;
 }

@@ -38,16 +38,20 @@ Future<MethodDeclaration> getMethodDeclaration(
     String methodDeclaration, String methodName,
     {String preamble: ''}) async {
   final classToParse = '''
+import 'dart:async';
 import '/test/root/path/annotations.dart';
 import '/test/root/path/annotation_interfaces.dart';
 
 $preamble
 
 class _SomePageObject_ { $methodDeclaration }
+
+@CheckTag('demo-checked')
+class DemoCheckedPO {}
 ''';
-  final driver = new TestDriver();
+  final driver = TestDriver();
   final unit = await driver.resultForFile('test_mock.dart', classToParse);
-  final finder = new MethodFinder(methodName);
+  final finder = MethodFinder(methodName);
   unit.accept(finder);
 
   return finder.method;
@@ -79,35 +83,34 @@ class TestDriver {
   /// Root path on all scoped files.
   final String root = '/test/root/path';
 
-  final ResourceProvider resourceProvider = new MemoryResourceProvider();
+  final ResourceProvider resourceProvider = MemoryResourceProvider();
 
   CompilationUnit get compilationUnit => _compilationUnit;
 
   Future<TypeProvider> get typeProvider => session.typeProvider;
 
   TestDriver() {
-    final byteStore = new MemoryByteStore();
-    final sdk = new MockSdk(resourceProvider: resourceProvider);
+    final byteStore = MemoryByteStore();
+    final sdk = MockSdk(resourceProvider: resourceProvider);
     final resolvers = [
-      new DartUriResolver(sdk),
-      new ResourceUriResolver(resourceProvider),
+      DartUriResolver(sdk),
+      ResourceUriResolver(resourceProvider),
     ];
 
-    final logger = new PerformanceLog(new StringBuffer());
-    final scheduler = new AnalysisDriverScheduler(logger)..start();
-    final allResolvers = <UriResolver>[new DartUriResolver(sdk)]
-      ..addAll(resolvers);
-    final sourceFactory = new SourceFactory(allResolvers);
+    final logger = PerformanceLog(StringBuffer());
+    final scheduler = AnalysisDriverScheduler(logger)..start();
+    final allResolvers = <UriResolver>[DartUriResolver(sdk)]..addAll(resolvers);
+    final sourceFactory = SourceFactory(allResolvers);
 
-    driver = new AnalysisDriver(
+    driver = AnalysisDriver(
       scheduler,
       logger,
       resourceProvider,
       byteStore,
-      new FileContentOverlay(),
+      FileContentOverlay(),
       null, // ContextRoot
       sourceFactory,
-      new AnalysisOptionsImpl()..strongMode = true,
+      AnalysisOptionsImpl()..strongMode = true,
     );
     session = driver.currentSession;
 

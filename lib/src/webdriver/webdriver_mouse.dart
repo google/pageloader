@@ -12,6 +12,7 @@
 // limitations under the License.
 
 import 'dart:async';
+import 'dart:core';
 
 import 'package:pageloader/pageloader.dart';
 import 'package:webdriver/sync_core.dart' as wd;
@@ -38,16 +39,13 @@ class WebDriverMouse implements PageLoaderMouse {
 
   @override
   Future moveTo(PageLoaderElement element, int xOffset, int yOffset,
-      {PageLoaderElement eventTarget}) async {
-    if (eventTarget is WebDriverPageLoaderElement) {
-      return _fireEvent(eventTarget, 'mousemove');
-    } else {
-      return _driver.mouse.moveTo(
+          {List<PageLoaderElement> dispatchTo,
+          int stepPixels,
+          Duration duration}) async =>
+      _driver.mouse.moveTo(
           element: (element as WebDriverPageLoaderElement).contextSync,
           xOffset: xOffset,
           yOffset: yOffset);
-    }
-  }
 
   @override
   Future up(MouseButton button, {PageLoaderElement eventTarget}) async {

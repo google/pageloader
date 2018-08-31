@@ -76,8 +76,8 @@ To construct a PageObject, use this `create` constructor on either
 import 'package:pageloader/html.dart';
 
 Element myElement = ...;
-final context = new HtmlPageLoaderElement.createFromElement(myElement);
-final myPO = new MyPO.create(context);
+final context = HtmlPageLoaderElement.createFromElement(myElement);
+final myPO = MyPO.create(context);
 ```
 
 `createFromElement` has an additional named argument `SyncFn externalSyncFn`.
@@ -88,12 +88,12 @@ into effect. By default, this is a no-op function.
 An example of a custom sync function:
 
 ```dart
-new HtmlPageLoaderElement.createFromElement(myElement,
+HtmlPageLoaderElement.createFromElement(myElement,
         externalSyncFn: (Future action()) async {
       await action();
       // Wait longer than normal
       for (var i = 0; i < 1000; i++) {
-        await new Future.value();
+        await Future.value();
       }
     });
 ```
@@ -111,13 +111,13 @@ import 'package:webdriver/sync_io.dart';
 
 String pagePath = ...; // Page uri path
 Webdriver driver = ...; // Refer to Webdriver package documentation
-WebDriverPageUtils loader = new WebDriverPageUtils(driver);
+WebDriverPageUtils loader = WebDriverPageUtils(driver);
 driver.get(pagePath);
 
 WebDriverPageLoaderElement context = loader.root;
 WebDriverMouse get mouse = loader.mouse;
 
-final myPO = new MyPO.create(context);
+final myPO = MyPO.create(context);
 
 // ...run tests...
 
@@ -134,7 +134,7 @@ Lazy Loading
 Starting from version 3, all elements are lazy.
 
 ```dart
-final myPO = new MyPO.create(pageLoaderElementContext);
+final myPO = MyPO.create(pageLoaderElementContext);
 ```
 
 Nothing happens with the browser at this point. You need to either
@@ -188,7 +188,7 @@ For PageObjects, use provided matchers:
 ```dart
 import 'package:pageloader/testing.dart';
 
-SomePO somePO = new SomePO.create(context);
+SomePO somePO = SomePO.create(context);
 expect(somePO, exists);
 ```
 
@@ -318,12 +318,8 @@ abstract class BasePOMixin {
 abstract class ExtraPO extends Object with BasePOMixin {
   // ... boilerplate code ...
   
-  @root
-  BasePO get _basePO;
-  
-  MyWidgetPO get myWidget => _basePO.myWidget;
-  
-  String get widgetInnerText => _basePO.widgetInnerText;
+  // No need to define 'myWidget' and 'widgetInnerText' here.
+  // The mixin will handle these.
   
   @ByTagName('extra-widget')
   MyExtraWidgetPO get extraWidget;

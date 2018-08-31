@@ -59,7 +59,6 @@ abstract class Row {
 }
 
 Future verifyRows(List<Row> rows) async {
-  print(rows);
   expect(rows.length, 2);
   var rowCount = 0;
   for (final row in rows) {

@@ -32,27 +32,27 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('are shared with root element', () async {
-      root.addListeners([new TestListener('A')]);
+      root.addListeners([TestListener('A')]);
 
-      final page = new PageForSimpleTest.create(root);
+      final page = PageForSimpleTest.create(root);
 
       expect(root.listeners, hasLength(1));
       expect(page.rootElement.listeners, hasLength(1));
     });
 
     test('are shared with created page object', () async {
-      root.addListeners([new TestListener('A')]);
+      root.addListeners([TestListener('A')]);
 
-      final page = new PageForSimpleTest.create(root);
+      final page = PageForSimpleTest.create(root);
 
       expect(root.listeners, hasLength(1));
       expect(page.table.table.listeners, hasLength(1));
     });
 
     test('are shared with created list', () async {
-      root.addListeners([new TestListener('A')]);
+      root.addListeners([TestListener('A')]);
 
-      final page = new PageForSimpleTest.create(root);
+      final page = PageForSimpleTest.create(root);
 
       expect(root.listeners, hasLength(1));
       expect((await page.table.rows)[0].rootElement.listeners, hasLength(1));

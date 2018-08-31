@@ -38,11 +38,11 @@ class PageObjectList<E> extends ListBase<E> {
   int get length => _elementList.length;
 
   @override
-  set length(int newLength) => throw new PageLoaderException(
+  set length(int newLength) => throw PageLoaderException(
       'Cannot modify PageObjectList (call to length setter)');
 
   @override
-  void operator []=(int index, E value) => throw new PageLoaderException(
+  void operator []=(int index, E value) => throw PageLoaderException(
       'Cannot modify PageObjectList (call to operator[]=)');
 
   @override

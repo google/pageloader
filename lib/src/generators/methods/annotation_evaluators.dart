@@ -29,7 +29,7 @@ final String pageLoaderAnnotationInterface =
 
 /// Returns set of AnnotationKinds that match '@root', '@Mouse'.
 Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
-  final returnSet = new Set<AnnotationKind>();
+  final returnSet = Set<AnnotationKind>();
   if (element is PropertyAccessorElement &&
       element.library.name == pageLoaderAnnotations) {
     final result = classNameToAnnotationKind(element.name, isAtomic: true);
@@ -43,7 +43,7 @@ Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
 /// Returns set of AnnotationKinds if the annotation is a subclass of
 /// Finder, Checker, and/or Filter.
 Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
-  final returnSet = new Set<AnnotationKind>();
+  final returnSet = Set<AnnotationKind>();
   InterfaceType type;
   if (element is PropertyAccessorElement) {
     // Annotation is a top-level variable.
@@ -57,8 +57,8 @@ Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
   }
 
   if (type != null) {
-    final types = new Queue<InterfaceType>()..add(type);
-    final seenValidAnnotations = new Set<AnnotationKind>();
+    final types = Queue<InterfaceType>()..add(type);
+    final seenValidAnnotations = Set<AnnotationKind>();
     do {
       type = types.removeFirst();
       if (type.element.library.name == pageLoaderAnnotationInterface) {

@@ -11,13 +11,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@TestOn('vm')
+
 import 'package:test/test.dart';
 
 import 'setup/webdriver_environment.dart';
 import 'src/webdriver_only.dart' as webdriver_only;
 
 void main() {
-  final environment = new WebDriverEnvironment();
+  final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
   webdriver_only.runTests(() => environment.getBaseElement());

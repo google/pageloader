@@ -36,7 +36,7 @@ TypeInformation getTypeInformation(String type) {
   final left = type.indexOf('<');
   final right = type.lastIndexOf('>');
   if (left < 0 || right < 0) {
-    return new TypeInformation((b) => b
+    return TypeInformation((b) => b
       ..type = type
       ..typeArguments = []);
   }
@@ -48,14 +48,14 @@ TypeInformation getTypeInformation(String type) {
       .map((e) => e.trim())
       .map((e) => getTypeInformation(e))
       .toList();
-  return new TypeInformation((b) => b
+  return TypeInformation((b) => b
     ..type = genericType
     ..typeArguments = typeArguments);
 }
 
 TypeInformation extractPageObjectInfo(TypeInformation typeInfo, String source) {
   if (typeInfo.typeArguments.length != 1) {
-    throw new InvalidMethodException(
+    throw InvalidMethodException(
         source,
         'Expected exactly one type argument for ${typeInfo.type}'
         ' in return type. Check the return type, and if needed file a bug.'
@@ -94,7 +94,7 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
       .map((a) => generateAnnotationDeclaration(a))
       .toList();
   if (finders.length > 1) {
-    throw new InvalidMethodException(
+    throw InvalidMethodException(
         node.toSource(), 'multiple Finders cannot be used for single method');
   }
 
@@ -110,43 +110,43 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
 
   if (finder == null) {
     if (filters.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'found Filters but no Finder');
     }
     if (checkers.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'found Checkers but no Finder');
     }
   }
 
   if (isRoot) {
     if (filters.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'cannot use Filters with @root');
     }
     if (checkers.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'cannot use Checkers with @root');
     }
   }
 
   if (finder != null && isRoot) {
-    throw new InvalidMethodException(
+    throw InvalidMethodException(
         node.toSource(), 'cannot use finder with @root');
   }
 
-  return new CoreMethodInformation((b) => b
+  return CoreMethodInformation((b) => b
     ..name = node.name.toSource()
     ..isGetter = node.isGetter
     ..isAbstract = node.isAbstract
     ..pageObjectType = pageObjectInfo.type
-    ..pageObjectTemplate = new Optional<String>.fromNullable(
+    ..pageObjectTemplate = Optional<String>.fromNullable(
         pageObjectInfo.typeArguments.length == 1
             ? pageObjectInfo.typeArguments.single.type
             : null)
     ..isFuture = isFuture
     ..isList = isList
-    ..finder = new Optional<String>.fromNullable(finder)
+    ..finder = Optional<String>.fromNullable(finder)
     ..filters = filters
     ..checkers = checkers
     ..isMouse = isMouse

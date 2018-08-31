@@ -32,9 +32,9 @@ void runTests(GetNewContext contextGenerator) {
     test('trace listener', () async {
       var printedLines = <String>[];
       root.addListeners(
-          [new TraceListener(printLine: (String s) => printedLines.add(s))]);
+          [TraceListener(printLine: (String s) => printedLines.add(s))]);
 
-      final page = new PageForSimpleTest.create(root);
+      final page = PageForSimpleTest.create(root);
       expect(page.table.table.exists, true); // Do something.
       printedLines =
           printedLines.map((s) => s.trim()).toList(); // Drop the whitespace.
@@ -45,10 +45,10 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('profiler listener', () async {
-      final timerFactory = new CollectingTimerFactory();
-      root.addListeners([new ProfilerListener(timerFactory)]);
+      final timerFactory = CollectingTimerFactory();
+      root.addListeners([ProfilerListener(timerFactory)]);
 
-      final page = new PageForSimpleTest.create(root);
+      final page = PageForSimpleTest.create(root);
 
       await page.table.table.click();
       await page.table.doSlowAction(); // Do something.

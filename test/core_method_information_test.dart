@@ -11,6 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@TestOn('vm')
+
 import 'package:pageloader/src/generators/methods/core_method_information.dart';
 import 'package:test/test.dart';
 
@@ -50,7 +52,7 @@ void main() {
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const ByTagName("myid")');
+      expect(info.finder.value, 'ByTagName("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, isEmpty);
     });
@@ -70,7 +72,7 @@ void main() {
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const ByTagName("myid")');
+      expect(info.finder.value, 'ByTagName("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, hasLength(1));
     });
@@ -90,7 +92,7 @@ void main() {
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const ByTagName("myid")');
+      expect(info.finder.value, 'ByTagName("myid")');
       expect(info.filters, hasLength(1));
       expect(info.checkers, isEmpty);
     });
@@ -109,7 +111,7 @@ void main() {
       expect(info.isFuture, true);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const ByTagName("myid")');
+      expect(info.finder.value, 'ByTagName("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, isEmpty);
     });
@@ -129,7 +131,7 @@ void main() {
       expect(info.isFuture, true);
       expect(info.isList, true);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const ByTagName("myid")');
+      expect(info.finder.value, 'ByTagName("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, isEmpty);
     });
@@ -148,7 +150,7 @@ void main() {
       expect(info.isFuture, false);
       expect(info.isList, true);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const ByTagName("myid")');
+      expect(info.finder.value, 'ByTagName("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, isEmpty);
     });
@@ -239,7 +241,7 @@ class MyAnnotation implements CssFinder {
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const MyAnnotation("myid")');
+      expect(info.finder.value, 'MyAnnotation("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, isEmpty);
     });
@@ -275,7 +277,7 @@ class MyAnnotation implements CssFinder, Checker {
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const MyAnnotation("myid")');
+      expect(info.finder.value, 'MyAnnotation("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, hasLength(1));
     });
@@ -317,7 +319,7 @@ class MyAnnotation implements CssFinder, Filter {
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const MyAnnotation("myid", "att", "")');
+      expect(info.finder.value, 'MyAnnotation("myid", "att", "")');
       expect(info.filters, hasLength(1));
       expect(info.checkers, isEmpty);
     });
@@ -337,7 +339,7 @@ class MyAnnotation implements CssFinder, Filter {
       expect(info.isFuture, true);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const MyAnnotation("myid")');
+      expect(info.finder.value, 'MyAnnotation("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, isEmpty);
     });
@@ -358,7 +360,7 @@ class MyAnnotation implements CssFinder, Filter {
       expect(info.isFuture, true);
       expect(info.isList, true);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const MyAnnotation("myid")');
+      expect(info.finder.value, 'MyAnnotation("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, isEmpty);
     });
@@ -378,7 +380,7 @@ class MyAnnotation implements CssFinder, Filter {
       expect(info.isFuture, false);
       expect(info.isList, true);
       expect(info.finder.isPresent, true);
-      expect(info.finder.value, 'const MyAnnotation("myid")');
+      expect(info.finder.value, 'MyAnnotation("myid")');
       expect(info.filters, isEmpty);
       expect(info.checkers, isEmpty);
     });

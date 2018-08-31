@@ -25,14 +25,14 @@ part 'unannotated_method.g.dart';
 /// Currently just a pass through.
 Optional<UnannotatedMethod> collectUnannotatedMethod(MethodDeclaration node) {
   if (node.isAbstract || node.isGetter || node.isSetter || node.isOperator) {
-    return const Optional.absent();
+    return Optional.absent();
   }
 
-  return new Optional.of(new UnannotatedMethod((b) => b
+  return Optional.of(UnannotatedMethod((b) => b
     ..name = node.name.toString()
     ..returnType = node.returnType.toString()
     ..parameters = node.parameters.parameters
-    ..typeParameters = new Optional.fromNullable(node.typeParameters)));
+    ..typeParameters = Optional.fromNullable(node.typeParameters)));
 }
 
 /// Generation for unannotated method.
@@ -68,18 +68,16 @@ abstract class UnannotatedMethod
 
   String get _parameterDeclarations {
     final required = parameters
-        .where((p) => p.kind == ParameterKind.REQUIRED)
+        .where((p) => p.isRequired)
         .map((p) => p.toSource())
         .join(', ');
 
-    final namedParams = parameters
-        .where((p) => p.kind == ParameterKind.NAMED)
-        .map((p) => p.toSource())
-        .join(', ');
+    final namedParams =
+        parameters.where((p) => p.isNamed).map((p) => p.toSource()).join(', ');
     final named = namedParams.isNotEmpty ? '{$namedParams}' : '';
 
     final positionalParams = parameters
-        .where((p) => p.kind == ParameterKind.POSITIONAL)
+        .where((p) => p.isOptionalPositional)
         .map((p) => p.toSource())
         .join(', ');
     final positional = positionalParams.isNotEmpty ? '[$positionalParams]' : '';
@@ -89,17 +87,17 @@ abstract class UnannotatedMethod
 
   String get _parameterNames {
     final required = parameters
-        .where((p) => p.kind == ParameterKind.REQUIRED)
+        .where((p) => p.isRequired)
         .map((p) => p.element.name)
         .join(', ');
 
     final named = parameters
-        .where((p) => p.kind == ParameterKind.NAMED)
+        .where((p) => p.isNamed)
         .map((p) => '${p.element.name}:${p.element.name}')
         .join(', ');
 
     final positional = parameters
-        .where((p) => p.kind == ParameterKind.POSITIONAL)
+        .where((p) => p.isOptionalPositional)
         .map((p) => p.element.name)
         .join(', ');
 

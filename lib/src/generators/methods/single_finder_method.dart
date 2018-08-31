@@ -34,7 +34,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
       node.returnType.toString().startsWith('Future<List<') ||
       node.returnType.toString().startsWith('List<') ||
       node.returnType.toString().startsWith('Lazy<List<')) {
-    return new Optional.absent();
+    return Optional.absent();
   }
 
   final finders = methodAnnotations
@@ -42,10 +42,10 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
       .map((a) => generateAnnotationDeclaration(a))
       .toList();
   if (finders.length > 1) {
-    throw new InvalidMethodException(
+    throw InvalidMethodException(
         node.toSource(), 'multiple Finders cannot be used for single method');
   }
-  final finder = finders.length == 1 ? finders.single : null;
+  var finder = finders.length == 1 ? finders.single : null;
   final filters = methodAnnotations
       .where(isPageloaderFilter)
       .map((a) => generateAnnotationDeclaration(a))
@@ -65,51 +65,56 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
   if (typeArgument.contains('<')) {
     final typeArguments = getReturnTypeArguments(typeArgument);
     if (typeArguments.length != 1) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'only single template arguments are supported');
     }
     templateType = typeArguments[0];
     typeArgument = typeArgument.substring(0, typeArgument.indexOf('<'));
   }
 
+  // Convert 'ByCheckTag' to 'ByTagName' if necessary.
+  if (finder != null && finder.contains('ByCheckTag')) {
+    finder = generateByTagNameFromByCheckTag(node.returnType.type);
+  }
+
   if (finder == null) {
     if (filters.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'found Filters but no Finder');
     }
     if (checkers.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'found Checkers but no Finder');
     }
   }
 
   if (isRoot) {
     if (filters.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'cannot use Filters with @root');
     }
     if (checkers.isNotEmpty) {
-      throw new InvalidMethodException(
+      throw InvalidMethodException(
           node.toSource(), 'cannot use Checkers with @root');
     }
   }
 
   if (finder != null && isRoot) {
-    throw new InvalidMethodException(
+    throw InvalidMethodException(
         node.toSource(), 'cannot use finder with @root');
   }
 
   if (finder == null && !isRoot) {
-    return new Optional.absent();
+    return Optional.absent();
   }
 
-  return new Optional.of(new SingleFinderMethod((b) => b
+  return Optional.of(SingleFinderMethod((b) => b
     ..name = node.name.toString()
     ..pageObjectType = typeArgument
-    ..finderDeclaration = new Optional.fromNullable(finder)
+    ..finderDeclaration = Optional.fromNullable(finder)
     ..filterDeclarations = '[${filters.join(', ')}]'
     ..checkerDeclarations = '[${checkers.join(', ')}]'
-    ..templateType = new Optional.fromNullable(templateType)
+    ..templateType = Optional.fromNullable(templateType)
     ..isRoot = isRoot));
 }
 
@@ -170,7 +175,7 @@ abstract class SingleFinderMethodMixin {
     if (pageObjectType == 'PageLoaderElement') {
       return 'element';
     } else {
-      return 'new $pageObjectType$template.create(element)';
+      return '$pageObjectType$template.create(element)';
     }
   }
 

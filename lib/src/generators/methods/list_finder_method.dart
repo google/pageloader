@@ -14,6 +14,7 @@
 /// Generation for page object lists.
 library pageloader.list_finder_method;
 
+import 'package:analyzer/analyzer.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 
@@ -27,17 +28,24 @@ part 'list_finder_method.g.dart';
 /// [Finder] is present and the return type is [Future<List<X>>] or [List<X>],
 /// and [absent()] otherwise.
 Optional<ListFinderMethod> collectListFinderGetter(
-    CoreMethodInformationBase methodInfo) {
+    CoreMethodInformationBase methodInfo, MethodDeclaration node) {
   if ((!methodInfo.isAbstract || !methodInfo.isGetter) ||
       !methodInfo.finder.isPresent ||
       !methodInfo.isList) {
-    return new Optional.absent();
+    return Optional.absent();
   }
 
-  return new Optional.of(new ListFinderMethod((b) => b
+  // Convert 'ByCheckTag' to 'ByTagName' if necessary.
+  var finder = methodInfo.finder.value;
+  if (finder != null && finder.contains('ByCheckTag')) {
+    finder = generateByTagNameFromByCheckTag(
+        getInnerType(node.returnType.type, methodInfo.pageObjectType));
+  }
+
+  return Optional.of(ListFinderMethod((b) => b
     ..name = methodInfo.name
     ..listTypeArgument = methodInfo.pageObjectType
-    ..finderDeclaration = methodInfo.finder.value
+    ..finderDeclaration = finder
     ..filterDeclarations = '[${methodInfo.filters.join(', ')}]'
     ..checkerDeclarations = '[${methodInfo.checkers.join(', ')}]'
     ..isFuture = methodInfo.isFuture
@@ -87,7 +95,7 @@ abstract class ListFinderMethodMixin {
       return '(PageLoaderElement e) => e';
     } else {
       return '(PageLoaderElement e) => '
-          'new $listTypeArgument$generic.create(e)';
+          '$listTypeArgument$generic.create(e)';
     }
   }
 
@@ -98,8 +106,7 @@ abstract class ListFinderMethodMixin {
 
   String get pageObjectList => 'PageObjectList<$listTypeArgument$generic>';
 
-  String get createObjectIterable =>
-      'new PageObjectList<$listTypeArgument$generic>'
+  String get createObjectIterable => 'PageObjectList<$listTypeArgument$generic>'
       '($_createElementIterator, $constructor)';
 
   String get _createElementIterator => '$root.createList('

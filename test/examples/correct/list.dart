@@ -14,6 +14,8 @@
 import 'dart:async';
 import 'package:pageloader/pageloader.dart';
 
+import 'finders.dart' show CheckTagPO;
+
 part 'list.g.dart';
 
 @PageObject()
@@ -27,11 +29,17 @@ abstract class Lists {
   @ByCss('nested')
   Future<List<InnerListObject>> get nested;
 
+  @ByCheckTag()
+  Future<List<CheckTagPO>> get checkTagPO;
+
   @ByCss('basic')
   List<PageLoaderElement> get basicsSync;
 
   @ByCss('nested')
   List<InnerListObject> get nestedSync;
+
+  @ByCheckTag()
+  List<CheckTagPO> get checkTagPOSync;
 }
 
 @PageObject()
@@ -63,11 +71,17 @@ abstract class ListsMixin {
   @ByCss('nested')
   Future<List<InnerListObjectUsingMixin>> get nested;
 
+  @ByCheckTag()
+  Future<List<CheckTagPO>> get checkTagPO;
+
   @ByCss('basic')
   List<PageLoaderElement> get basicsSync;
 
   @ByCss('nested')
   List<InnerListObjectUsingMixin> get nestedSync;
+
+  @ByCheckTag()
+  List<CheckTagPO> get checkTagPOSync;
 }
 
 @PageObject()

@@ -13,6 +13,8 @@
 
 import 'package:pageloader/pageloader.dart';
 
+import 'finders.dart' show CheckTagPO;
+
 part 'iterables.g.dart';
 
 @PageObject()
@@ -25,6 +27,9 @@ abstract class Iterables {
 
   @ByCss('nested')
   PageObjectIterable<InnerObject> get nested;
+
+  @ByCheckTag()
+  PageObjectIterable<CheckTagPO> get checkTagPO;
 }
 
 @PageObject()
@@ -37,6 +42,9 @@ abstract class InnerObject {
 
   @ByCss('nested-iterable')
   PageObjectIterable<PageLoaderElement> get innerIterable;
+
+  @ByCheckTag()
+  PageObjectIterable<CheckTagPO> get innerCheckTagPO;
 }
 
 // Mixin implementation
@@ -54,6 +62,9 @@ abstract class IterablesMixin {
 
   @ByCss('nested')
   PageObjectIterable<InnerObjectUsingMixin> get nested;
+
+  @ByCheckTag()
+  PageObjectIterable<CheckTagPO> get checkTagPO;
 }
 
 @PageObject()
@@ -70,4 +81,7 @@ abstract class InnerObjectMixin {
 
   @ByCss('nested-iterable')
   PageObjectIterable<PageLoaderElement> get innerIterable;
+
+  @ByCheckTag()
+  PageObjectIterable<CheckTagPO> get innerCheckTagPO;
 }

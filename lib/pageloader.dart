@@ -19,5 +19,6 @@ export 'src/api/iterable_interfaces.dart';
 export 'src/api/page_loader_element_interface.dart';
 export 'src/api/page_loader_listener.dart';
 export 'src/api/page_loader_mouse_interface.dart';
+export 'src/api/page_loader_source_interface.dart';
 export 'src/api/page_object_list_interface.dart';
 export 'src/api/page_utils_interface.dart';

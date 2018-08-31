@@ -11,13 +11,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@TestOn('vm')
+
 import 'package:test/test.dart';
 
 import 'setup/webdriver_environment.dart';
 import 'src/cache_invalidation.dart' as cache_invalidation;
 
 void main() {
-  final environment = new WebDriverEnvironment();
+  final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
   cache_invalidation.runTests(

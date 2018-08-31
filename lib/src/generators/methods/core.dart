@@ -15,6 +15,8 @@
 library pageloader.core;
 
 import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:quiver/core.dart';
 
 import 'annotation_evaluators.dart';
@@ -34,7 +36,36 @@ final String pageObjectList = 'PageObjectList';
 
 /// Returns a declaration of a annotation.
 String generateAnnotationDeclaration(Annotation annotation) =>
-    'const ${annotation.name}(${annotation.arguments.arguments.join(", ")})';
+    '${annotation.name}(${annotation.arguments.arguments.join(", ")})';
+
+/// Returns a 'ByTagName' declaration from the 'ByCheckTag' annotation.
+String generateByTagNameFromByCheckTag(InterfaceType node) {
+  final defaultTagName = _extractTagName(node.element);
+  if (defaultTagName.isEmpty) {
+    throw "'@ByCheckTag' can only be used on getters that return a "
+        "PageObject type with the'@CheckTag' annotation.";
+  }
+  return "ByTagName('$defaultTagName')";
+}
+
+/// Extracts the tag name from a PageLoader2 class based on `@CheckTag`.
+/// If there is no tag name associated with the Page Object,
+/// returns and empty string.
+String _extractTagName(ClassElement poTypeElement) {
+  var expectedTag = '';
+  for (final annotation in poTypeElement.metadata) {
+    final annotationElement = annotation.element;
+    if (annotationElement is ConstructorElement) {
+      final annotationName = annotationElement.enclosingElement.displayName;
+      final annotationValue = annotation.computeConstantValue();
+      if (annotationName == 'CheckTag') {
+        final inner = annotationValue.getField('_expectedTagName');
+        expectedTag = inner.toStringValue();
+      }
+    }
+  }
+  return expectedTag;
+}
 
 /// Returns the @EnsureTag annotation if it exists.
 Optional<Annotation> getEnsureTag(ClassDeclaration declaration) {
@@ -44,9 +75,18 @@ Optional<Annotation> getEnsureTag(ClassDeclaration declaration) {
     throw 'Found multiple @EnsureTag annotations in class: '
         '${declaration.toSource()}';
   }
-  return ensures.length == 1
-      ? new Optional.of(ensures.single)
-      : const Optional.absent();
+  return ensures.length == 1 ? Optional.of(ensures.single) : Optional.absent();
+}
+
+/// Returns the @CheckTag annotation if it exists.
+Optional<Annotation> getCheckTag(ClassDeclaration declaration) {
+  final checks =
+      declaration.metadata.where((a) => a.name.toSource() == 'CheckTag');
+  if (checks.length > 1) {
+    throw 'Found multiple @CheckTag annotations in class: '
+        '${declaration.toSource()}';
+  }
+  return checks.length == 1 ? Optional.of(checks.single) : Optional.absent();
 }
 
 /// Returns true if annotation is some type of Pageloader annotation.
@@ -55,7 +95,7 @@ bool isPageloaderAnnotation(Annotation annotation) =>
 
 /// Returns set of all Pageloader annotation the current annotation satisfies.
 Set<AnnotationKind> getAnnotationKind(Annotation annotation) {
-  final returnSet = new Set<AnnotationKind>();
+  final returnSet = Set<AnnotationKind>();
   final element = annotation.element;
   if (element != null) {
     returnSet
@@ -104,4 +144,20 @@ List<String> getReturnTypeArguments(String returnStr) {
       .split(',')
       .map((e) => e.trim())
       .toList();
+}
+
+/// Given a type parameterized type (ex: Future<T>), returns the inner type
+/// matching name [matchingType].
+///
+/// Assumes that the inner-type has a single type (ex: not Foo<A, B>).
+DartType getInnerType(DartType topType, String matchingType) {
+  // Filter out type name incase prefixes exist on the type.
+  matchingType =
+      matchingType.contains('.') ? matchingType.split('.')[1] : matchingType;
+  final typeArgs = (topType as ParameterizedType).typeArguments;
+  final first = typeArgs.first;
+  if (first.name == matchingType) {
+    return first;
+  }
+  return getInnerType(first, matchingType);
 }

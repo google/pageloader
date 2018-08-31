@@ -26,33 +26,33 @@ typedef PageLoaderElement GetNewContext();
 void runTests(GetNewContext contextGenerator) {
   group('basic', () {
     test('load', () async {
-      final basic = new Basic.create(contextGenerator());
+      final basic = Basic.create(contextGenerator());
       final innerNested = basic.outerNested.innerNested;
       expect(innerNested.visibleText, 'inner nested');
     });
 
     test('simple page', () async {
-      final page = new PageForSimpleTest.create(contextGenerator());
+      final page = PageForSimpleTest.create(contextGenerator());
       await verifyTable(page.table);
     });
 
     test('class annotations', () async {
-      final table = new Table.create(contextGenerator());
+      final table = Table.create(contextGenerator());
       await verifyTable(table);
     });
 
     test('class annotation on nested field', () async {
-      final page = new PageForClassAnnotationTest.create(contextGenerator());
+      final page = PageForClassAnnotationTest.create(contextGenerator());
       await verifyTable(page.table);
     });
 
     test('private fields', () async {
-      final page = new PageForPrivateFieldsTest.create(contextGenerator());
+      final page = PageForPrivateFieldsTest.create(contextGenerator());
       await verifyTable(page.table);
     });
 
     test('has focus', () async {
-      final page = new PageForFocusTest.create(contextGenerator());
+      final page = PageForFocusTest.create(contextGenerator());
       expect(page.textfield.isFocused, false);
 
       await page.textfield.focus();
@@ -63,7 +63,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('classes', () async {
-      final page = new PageForSimpleTest.create(contextGenerator());
+      final page = PageForSimpleTest.create(contextGenerator());
 
       expect(page.table.table.classes,
           orderedEquals(['class1', 'class2', 'class3']));
@@ -72,14 +72,14 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('style', () async {
-      final page = new PageForSimpleTest.create(contextGenerator());
+      final page = PageForSimpleTest.create(contextGenerator());
 
       expect(page.table.table.style['color'], 'rgb(128, 0, 128)');
       expect(page.table.table.style['backgroundColor'], '');
     });
 
     test('computedStyle', () async {
-      final page = new PageForSimpleTest.create(contextGenerator());
+      final page = PageForSimpleTest.create(contextGenerator());
 
       expect(page.table.table.computedStyle['color'], 'rgb(128, 0, 128)');
       expect(
@@ -87,19 +87,19 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('exists', () async {
-      final page = new PageForExistsTest.create(contextGenerator());
+      final page = PageForExistsTest.create(contextGenerator());
       expect(page.doesExist, exists);
       expect(page.doesntExist, notExists);
     });
 
     test('visibility', () async {
-      final page = new PageForVisibilityTest.create(contextGenerator());
+      final page = PageForVisibilityTest.create(contextGenerator());
       expect(page.visibleButton, isNot(hasClass('invisible')));
       expect(page.invisibleDiv, hasClass('invisible'));
     });
 
     test('exist throws on multiple elements with exists', () async {
-      final page = new PageForExistsTest.create(contextGenerator());
+      final page = PageForExistsTest.create(contextGenerator());
       try {
         page.tooManyExist.exists;
         fail('Expected to throw on exists with multiple element');
@@ -112,7 +112,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('actions throw on non-existant elements', () async {
-      final page = new PageForExistsTest.create(contextGenerator());
+      final page = PageForExistsTest.create(contextGenerator());
       try {
         await page.doesntExist.click();
         fail('Expected to throw on clicking non-existant element');
@@ -123,28 +123,28 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('nbsp in text', () async {
-      final page = new PageForNbspTest.create(contextGenerator());
+      final page = PageForNbspTest.create(contextGenerator());
       expect(page.span.visibleText, '   ');
       expect(page.span.innerText, '');
     });
 
     test('list', () async {
-      final page = new list_shared.PageForSimpleTest.create(contextGenerator());
+      final page = list_shared.PageForSimpleTest.create(contextGenerator());
       await list_shared.verifyTable(page.table);
     });
 
     test('debugId', () async {
-      final page = new DebugId.create(contextGenerator());
+      final page = DebugId.create(contextGenerator());
       expect(page.debug.exists, isTrue);
     });
 
     test('displayed works', () async {
-      final page = new DebugId.create(contextGenerator());
+      final page = DebugId.create(contextGenerator());
       expect(page.debug.displayed, isTrue);
     });
 
     test('not displayed works', () async {
-      final page = new Display.create(contextGenerator());
+      final page = Display.create(contextGenerator());
       expect(page.notDisplayed.displayed, isFalse);
     });
 
