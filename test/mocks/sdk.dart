@@ -621,9 +621,7 @@ class MockSdk implements DartSdk {
     final librarySources = sdkLibraries
         .map((SdkLibrary library) => mapDartUri(library.shortName))
         .toList();
-    return SummaryBuilder(
-            librarySources, context, context.analysisOptions.strongMode)
-        .build();
+    return SummaryBuilder(librarySources, context).build();
   }
 }
 
