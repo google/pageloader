@@ -1,3 +1,7 @@
+## 3.0.1
+
+- Support the latest release of `package:build`.
+
 ## 3.0.0
 
 - Added `lookup` constructor that can also be delegated as another constructor.
