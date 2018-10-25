@@ -1,3 +1,8 @@
+## 3.0.2
+
+- Support the latest release of `package:built_value`,
+  `package:quiver`, and `package:source_gen`.
+
 ## 3.0.1
 
 - Support the latest release of `package:build`.
