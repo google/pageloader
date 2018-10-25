@@ -14,7 +14,7 @@ description:
 homepage: https://github.com/google/pageloader
 
 environment:
-  sdk: '>=2.0.0-dev <3.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
   build: '>0.12.7 <2.0.0'
