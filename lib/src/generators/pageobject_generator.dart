@@ -15,6 +15,8 @@ import 'dart:async';
 
 import 'package:analyzer/analyzer.dart';
 import 'package:analyzer/dart/element/element.dart';
+// ignore: implementation_imports
+import 'package:analyzer/src/dart/analysis/results.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -43,9 +45,11 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   @override
   Future<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {
-    final annotatedNode = element.computeNode();
-    if (annotatedNode is ClassDeclaration) {
+    if (element is ClassElement) {
       try {
+        // ignore: deprecated_member_use
+        final parsedLibrary = ParsedLibraryResultImpl.tmp(element.library);
+        final annotatedNode = parsedLibrary.getElementDeclaration(element).node;
         return _generateClass(annotatedNode);
       } catch (e, stackTrace) {
         log.warning('Failure generating class for ${element.library}! '
@@ -54,7 +58,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       }
     } else {
       throw '@PageObject() can only be applied to classes, '
-          'not type: ${annotatedNode.runtimeType}';
+          'not type: ${element.runtimeType}';
     }
   }
 
