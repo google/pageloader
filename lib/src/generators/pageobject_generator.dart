@@ -50,7 +50,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
         // ignore: deprecated_member_use
         final parsedLibrary = ParsedLibraryResultImpl.tmp(element.library);
         final annotatedNode = parsedLibrary.getElementDeclaration(element).node;
-        return _generateClass(annotatedNode);
+        return _generateClass(element, annotatedNode);
       } catch (e, stackTrace) {
         log.warning('Failure generating class for ${element.library}! '
             '\n $e \n $stackTrace');
@@ -62,7 +62,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     }
   }
 
-  String _generateClass(ClassDeclaration declaration) {
+  String _generateClass(ClassElement element, ClassDeclaration declaration) {
     final collectorVisitor = CollectorVisitor(declaration);
     declaration.visitChildren(collectorVisitor);
 
@@ -78,7 +78,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // Run check to make sure PO is not extending another PO.
     // Only mixins are allowed.
-    if (poExtendsAnotherPo(declaration.element)) {
+    if (poExtendsAnotherPo(element)) {
       throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           "PageObject class '${declaration.name.name}' is extending another "
@@ -89,8 +89,8 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // If PageObject has constructor, define constructor class with root
     // and start constructor.
-    if (hasPoConstructors(declaration.element)) {
-      final withClause = generateWithClause(declaration.element, signatureArgs);
+    if (hasPoConstructors(element)) {
+      final withClause = generateWithClause(element, signatureArgs);
       constructorBuffer.write('''
       class \$$signature extends $signatureArgs $withClause {
         PageLoaderElement ${core.root};
