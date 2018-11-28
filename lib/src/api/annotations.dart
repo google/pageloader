@@ -110,7 +110,7 @@ class ByDebugId implements CssFinder {
   ///   Example: @ByDebugId('x', useDash: true, usePlain: true)
   ///       looks for 'debug-id=x' or 'debugid=x'
   const ByDebugId(this._debugId,
-      {this.useDash: false, this.usePlain: false, this.useCamelCase: false});
+      {this.useDash = false, this.usePlain = false, this.useCamelCase = false});
 
   String get _default => '$_useDash,$_usePlain,$_useCamelCase';
 
@@ -178,6 +178,9 @@ class Global implements ContextFinder {
   List<PageLoaderElement> findElements(PageLoaderElement context) {
     return context.utils.root.getElementsByCss(_finder.cssSelector);
   }
+
+  @override
+  String toString() => '@Global($_finder)';
 }
 
 /// Given a finder select the first element.
@@ -191,6 +194,9 @@ class First implements ContextFinder {
     final results = context.getElementsByCss(_finder.cssSelector);
     return results.isEmpty ? [] : [results.first];
   }
+
+  @override
+  String toString() => '@First($_finder)';
 }
 
 /// Checker annotations. See [Checker] for usage details.
