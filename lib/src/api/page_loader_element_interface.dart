@@ -67,15 +67,15 @@ abstract class PageLoaderElement extends PageLoaderSource {
 
   /// The inner text of this element.
   ///
-  /// This should return the value of
-  /// [`<element>.innerText`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText),
+  /// This should return the value of [`<element>.innerText`](
+  /// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText),
   /// but behaviour may vary for the different pageloader implementations.
   String get innerText;
 
   /// Visible text within this element.
   ///
-  /// This should return the value of webdriver's
-  /// [`getText()`](http://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebElement.html#getText--),
+  /// This should return the value of webdriver's [`getText()`](
+  /// http://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebElement.html#getText--),
   /// but behaviour may vary for the different pageloader implementations.
   String get visibleText;
 
