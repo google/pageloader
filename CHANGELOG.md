@@ -1,3 +1,8 @@
+## 3.0.3
+
+- Support the latest release of `package:built_value_generator`
+  and `package:analyzer`.
+
 ## 3.0.2
 
 - Support the latest release of `package:built_value`,
