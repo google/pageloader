@@ -70,8 +70,8 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // Run check to make sure PO is not extending another PO.
     // Only mixins are allowed.
-    if (poExtendsAnotherPo(declaration.element)) {
-      throw new Exception('******************\n\n'
+    if (poExtendsAnotherPo(declaration.declaredElement)) {
+      throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           "PageObject class '${declaration.name.name}' is extending another "
           "PageObject class. PageObjects may not extend other PageObjects; "
@@ -81,8 +81,9 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // If PageObject has constructor, define constructor class with root
     // and start constructor.
-    if (hasPoConstructors(declaration.element)) {
-      final withClause = generateWithClause(declaration.element, signatureArgs);
+    if (hasPoConstructors(declaration.declaredElement)) {
+      final withClause =
+          generateWithClause(declaration.declaredElement, signatureArgs);
       constructorBuffer.write('''
       class \$$signature extends $signatureArgs $withClause {
         PageLoaderElement ${core.root};
@@ -190,7 +191,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     if (visitor.badMethods.isNotEmpty ||
         visitor.oversupportedMethods.isNotEmpty ||
         visitor.unsupportedMethods.isNotEmpty) {
-      throw new Exception('******************\n\n'
+      throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           '${errors.join('\n\n-------------------\n')}'
           '\n\n******************');

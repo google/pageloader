@@ -35,7 +35,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
       node.returnType.toString().startsWith('Future<List<') ||
       node.returnType.toString().startsWith('List<') ||
       node.returnType.toString().startsWith('Lazy<List<')) {
-    return new Optional.absent();
+    return Optional.absent();
   }
 
   final finders = methodAnnotations
@@ -128,16 +128,16 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
   }
 
   if (finder == null && (!isRoot && !isNullElement)) {
-    return new Optional.absent();
+    return Optional.absent();
   }
 
-  return new Optional.of(SingleFinderMethod((b) => b
+  return Optional.of(SingleFinderMethod((b) => b
     ..name = node.name.toString()
     ..pageObjectType = typeArgument
-    ..finderDeclaration = new Optional.fromNullable(finder)
+    ..finderDeclaration = Optional.fromNullable(finder)
     ..filterDeclarations = '[${filters.join(', ')}]'
     ..checkerDeclarations = '[${checkers.join(', ')}]'
-    ..templateType = new Optional.fromNullable(templateType)
+    ..templateType = Optional.fromNullable(templateType)
     ..isRoot = isRoot
     ..isNullElement = isNullElement));
 }

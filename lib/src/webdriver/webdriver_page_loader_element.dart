@@ -138,7 +138,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
     final elems = elements;
     if (elems.length != 1) {
-      throw new SinglePageObjectException(this, elems.length);
+      throw SinglePageObjectException(this, elems.length);
     }
     _cachedElement = elems[0];
     return _cachedElement;

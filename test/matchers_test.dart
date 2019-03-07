@@ -101,27 +101,27 @@ void main() {
   });
 
   test('isVisible', () {
-    final context = new DummyPageLoaderElement();
-    final po = new DummyPO(context);
+    final context = DummyPageLoaderElement();
+    final po = DummyPO(context);
 
     expect(context, isVisible);
     expect(po, isVisible);
   });
 
   test('isNotVisible', () {
-    final context1 = new DummyPageLoaderElement();
+    final context1 = DummyPageLoaderElement();
     (context1.computedStyle as DummyPageLoaderAttributes)['visibility'] =
         'hidden';
-    final context2 = new DummyPageLoaderElement();
+    final context2 = DummyPageLoaderElement();
     (context2.computedStyle as DummyPageLoaderAttributes)['visibility'] =
         'collapse';
-    final context3 = new DummyPageLoaderElement(exists: false);
-    final context4 = new DummyPageLoaderElement(displayed: false);
+    final context3 = DummyPageLoaderElement(exists: false);
+    final context4 = DummyPageLoaderElement(displayed: false);
 
-    final po1 = new DummyPO(context1);
-    final po2 = new DummyPO(context2);
-    final po3 = new DummyPO(context3);
-    final po4 = new DummyPO(context4);
+    final po1 = DummyPO(context1);
+    final po2 = DummyPO(context2);
+    final po3 = DummyPO(context3);
+    final po4 = DummyPO(context4);
 
     expect(context1, isNotVisible);
     expect(context2, isNotVisible);

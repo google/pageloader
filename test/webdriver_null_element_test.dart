@@ -17,7 +17,7 @@ import 'setup/webdriver_environment.dart';
 import 'src/null_element.dart' as null_element;
 
 void main() {
-  final environment = new WebDriverEnvironment();
+  final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
   null_element.runTests(() => environment.getBaseElement());

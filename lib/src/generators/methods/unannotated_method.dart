@@ -88,17 +88,17 @@ abstract class UnannotatedMethod
   String get _parameterNames {
     final required = parameters
         .where((p) => p.isRequired)
-        .map((p) => p.element.name)
+        .map((p) => p.declaredElement.name)
         .join(', ');
 
     final named = parameters
         .where((p) => p.isNamed)
-        .map((p) => '${p.element.name}:${p.element.name}')
+        .map((p) => '${p.declaredElement.name}:${p.declaredElement.name}')
         .join(', ');
 
     final positional = parameters
         .where((p) => p.isOptionalPositional)
-        .map((p) => p.element.name)
+        .map((p) => p.declaredElement.name)
         .join(', ');
 
     return _combineParameters(required, named, positional);

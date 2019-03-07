@@ -129,7 +129,7 @@ class TestDriver {
   Future<CompilationUnit> resultForFile(String path, String contents) async {
     newSource(path, contents);
     session = driver.currentSession;
-    return (await session.getResolvedAst(pather.join(root, path))).unit;
+    return (await session.getResolvedUnit(pather.join(root, path))).unit;
   }
 
   /// Adds a new source and contents to the driver's scope.

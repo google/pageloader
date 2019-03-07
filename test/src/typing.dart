@@ -23,7 +23,7 @@ typedef PageLoaderElement GetNewContext();
 void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
   group('typing', () {
     test('Type into textarea', () async {
-      final page = new PageForTextAreaTypingText.create(contextGenerator());
+      final page = PageForTextAreaTypingText.create(contextGenerator());
       await page.textArea.type('Some');
       expect(page.textArea.properties['value'], 'Some');
       await page.textArea.type(' string');
@@ -33,7 +33,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
     });
 
     test('typing should append', () async {
-      final page = new PageForTypingTests.create(contextGenerator());
+      final page = PageForTypingTests.create(contextGenerator());
       expect(page.text.properties['value'], '');
       await page.text.type('some Text');
       expect(page.text.properties['value'], 'some Text');
@@ -42,7 +42,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
     });
 
     test('value after clear', () async {
-      final page = new PageForTypingTests.create(contextGenerator());
+      final page = PageForTypingTests.create(contextGenerator());
       expect(page.text.properties['value'], '');
       await page.text.type('soMe text');
       expect(page.text.properties['value'], 'soMe text');
@@ -51,7 +51,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
     });
 
     test('repeated caps does not blow up', () async {
-      final page = new PageForTextAreaTypingText.create(contextGenerator());
+      final page = PageForTextAreaTypingText.create(contextGenerator());
       await page.textArea.type('FOO BAR BAZ');
       expect(page.textArea.properties['value'], 'FOO BAR BAZ');
     });
@@ -62,8 +62,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
       PageForTypingTestsWithFocusAndBlur page;
 
       setUp(() {
-        page =
-            new PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
+        page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
         expect(page.text.properties['value'], '');
         expect(page.focusCount, 0);
         expect(page.blurCount, 0);
@@ -104,8 +103,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
       int blurCount;
 
       setUp(() {
-        page =
-            new PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
+        page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
         focusCount = 0;
         blurCount = 0;
       });
@@ -174,7 +172,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
 
       setUp(() {
         kb = PageLoaderKeyboard();
-        listener = new KeyboardListenerPO.create(contextGenerator()).listener;
+        listener = KeyboardListenerPO.create(contextGenerator()).listener;
       });
 
       test('enter all sent', () async {

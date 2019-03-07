@@ -56,7 +56,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   HtmlPageLoaderElement createElement(
       Finder finder, List<Filter> filters, List<Checker> checkers) {
-    return new HtmlPageLoaderElement(externalSyncFn: this.syncFn)
+    return HtmlPageLoaderElement(externalSyncFn: this.syncFn)
       .._finder = finder
       .._filters = filters
       .._checkers = checkers
@@ -67,13 +67,12 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   HtmlPageElementIterable createIterable(
           Finder finder, List<Filter> filters, List<Checker> checkers) =>
-      new HtmlPageElementIterable(
-          new HtmlPageLoaderElement(externalSyncFn: this.syncFn)
-            .._finder = finder
-            .._filters = filters
-            .._checkers = checkers
-            .._listeners = this._listeners
-            .._parentElement = this);
+      HtmlPageElementIterable(HtmlPageLoaderElement(externalSyncFn: this.syncFn)
+        .._finder = finder
+        .._filters = filters
+        .._checkers = checkers
+        .._listeners = this._listeners
+        .._parentElement = this);
 
   /// Create a new list using the current element as the parent context.
   @override
@@ -81,7 +80,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       Finder finder, List<Filter> filter, List<Checker> checkers) {
     final rootElement = createElement(finder, filter, checkers);
     final createdList = (rootElement.elements)
-        .map((elem) => new HtmlPageLoaderElement.createFromElement(elem,
+        .map((elem) => HtmlPageLoaderElement.createFromElement(elem,
             externalSyncFn: syncFn))
         .toList();
     createdList.forEach((elem) => elem.addListeners(_listeners));
@@ -103,7 +102,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   List<PageLoaderListener> get listeners => _listeners;
 
   @override
-  PageUtils get utils => new HtmlPageUtils(externalSyncFn: syncFn);
+  PageUtils get utils => HtmlPageUtils(externalSyncFn: syncFn);
 
   @override
   dynamic get context => _single;
@@ -119,7 +118,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
     final elems = elements;
     if (elems.length != 1) {
-      throw new SinglePageObjectException(this, elems.length);
+      throw SinglePageObjectException(this, elems.length);
     }
     _cachedElement = elems[0];
     return _cachedElement;
@@ -148,7 +147,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
     // Filter/Checker API is based on PageLoaderElements; casting for this.
     final tempElements = elements
-        .map((e) => new HtmlPageLoaderElement._castFromElement(this.syncFn, e))
+        .map((e) => HtmlPageLoaderElement._castFromElement(this.syncFn, e))
         .toList();
     final filteredElements =
         core.applyFiltersAndChecks(tempElements, _filters, _checkers);
@@ -194,19 +193,19 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   String get name => _retryWhenStale(() => _single.tagName.toLowerCase());
 
   @override
-  PageLoaderAttributes get attributes => new _ElementAttributes(this);
+  PageLoaderAttributes get attributes => _ElementAttributes(this);
 
   @override
   PageLoaderAttributes get seleniumAttributes => attributes;
 
   @override
-  PageLoaderAttributes get properties => new _ElementProperties(this);
+  PageLoaderAttributes get properties => _ElementProperties(this);
 
   @override
-  PageLoaderAttributes get computedStyle => new _ElementComputedStyle(this);
+  PageLoaderAttributes get computedStyle => _ElementComputedStyle(this);
 
   @override
-  PageLoaderAttributes get style => new _ElementStyle(this);
+  PageLoaderAttributes get style => _ElementStyle(this);
 
   @override
   bool get displayed =>
@@ -225,8 +224,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
     if (count == 1)
       return true;
     else if (count == 0) return false;
-    throw new PageLoaderException(
-        'Found $count elements on call to exists', this);
+    throw PageLoaderException('Found $count elements on call to exists', this);
   }
 
   @override
@@ -242,7 +240,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
         final element = _single;
         return element
             .querySelectorAll(selector)
-            .map((elem) => new HtmlPageLoaderElement.createFromElement(elem,
+            .map((elem) => HtmlPageLoaderElement.createFromElement(elem,
                 externalSyncFn: syncFn))
             .toList();
       });
@@ -257,13 +255,12 @@ class HtmlPageLoaderElement implements PageLoaderElement {
             if (_hasValueProperty(element)) {
               if (focusBefore) await focus();
               _setValue(element, '');
+              await _microtask(() => element.dispatchEvent(TextEvent('input')));
               await _microtask(
-                  () => element.dispatchEvent(new TextEvent('input')));
-              await _microtask(
-                  () => element.dispatchEvent(new TextEvent('change')));
+                  () => element.dispatchEvent(TextEvent('change')));
               if (blurAfter) await blur();
             } else {
-              throw new PageLoaderException(
+              throw PageLoaderException(
                   '${element.runtimeType} does not support clear.');
             }
           }));
@@ -275,14 +272,14 @@ class HtmlPageLoaderElement implements PageLoaderElement {
           return _clickOptionElement();
         }
 
-        await _microtask(() => element
-            .dispatchEvent(new Event.eventType('MouseEvent', 'mousedown')));
-        await _microtask(() => element
-            .dispatchEvent(new Event.eventType('MouseEvent', 'mouseup')));
+        await _microtask(() =>
+            element.dispatchEvent(Event.eventType('MouseEvent', 'mousedown')));
+        await _microtask(() =>
+            element.dispatchEvent(Event.eventType('MouseEvent', 'mouseup')));
 
         if (element is SvgElement) {
-          return _microtask(() => element
-              .dispatchEvent(new Event.eventType('MouseEvent', 'click')));
+          return _microtask(() =>
+              element.dispatchEvent(Event.eventType('MouseEvent', 'click')));
         }
 
         return _microtask(element.click);
@@ -297,7 +294,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   Future<Null> _clickOptionElement() async => _retryWhenStale(() async {
         final option = _single as OptionElement;
         option.selected = true;
-        return _microtask(() => option.dispatchEvent(new Event('change')));
+        return _microtask(() => option.dispatchEvent(Event('change')));
       });
 
   @override
@@ -353,7 +350,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
         if (_isContentEditable(_single)) {
           final keyValue = String.fromCharCode(charCode);
           _single.text += keyValue;
-          await _microtask(() => _single.dispatchEvent(new TextEvent('input')));
+          await _microtask(() => _single.dispatchEvent(TextEvent('input')));
         }
 
         await _fireKeyboardEvent('keypress',
@@ -407,8 +404,8 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       if (initialValue == _getValue(_single)) {
         _setValue(_single, _getValue(_single) + toAppend);
       }
-      await _microtask(() => _single.dispatchEvent(new TextEvent('input')));
-      await _microtask(() => _single.dispatchEvent(new TextEvent('change')));
+      await _microtask(() => _single.dispatchEvent(TextEvent('input')));
+      await _microtask(() => _single.dispatchEvent(TextEvent('change')));
     }
   }
 
@@ -419,7 +416,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
           bool ctrlKey = false,
           bool metaKey = false,
           bool shiftKey = false}) =>
-      _microtask(() => dispatchEvent(new KeyEvent(event,
+      _microtask(() => dispatchEvent(KeyEvent(event,
               keyCode: keyCode,
               charCode: charCode,
               altKey: altKey,
@@ -475,7 +472,7 @@ class _ElementProperties extends PageLoaderAttributes {
 
   @override
   String operator [](String name) => core.staleElementWrapper(() {
-        final object = new js.JsObject.fromBrowserObject(_node._single);
+        final object = js.JsObject.fromBrowserObject(_node._single);
         if (object.hasProperty(name)) {
           return object[name].toString();
         }
@@ -503,7 +500,7 @@ bool _hasValueProperty(Element element) =>
 String _getValue(Element element) {
   if (element is InputElementBase) return element.value;
   if (element is TextAreaElement) return element.value;
-  throw new PageLoaderException(
+  throw PageLoaderException(
       'Cannot find value for type: ${element.runtimeType}');
 }
 
@@ -516,7 +513,7 @@ void _setValue(Element element, String value) {
     element.value = value;
     return;
   }
-  throw new PageLoaderException(
+  throw PageLoaderException(
       'Cannot find value for type: ${element.runtimeType}');
 }
 
@@ -528,7 +525,7 @@ bool _isContentEditable(Element element) {
 // execute [fn] as a separate microtask and return a [Future] that completes
 // normally when that [Future] completes (normally or with an error).
 Future<Null> _microtask(fn()) {
-  return new Future<Null>.microtask(() {
+  return Future<Null>.microtask(() {
     fn();
   }).whenComplete(() {});
 }
@@ -554,12 +551,12 @@ String _elementText(List<Node> elements) {
   return _elementText(elem.nodes);
 }
 
-final _nonBreaking = new RegExp(r'^[\S\xa0]$');
+final _nonBreaking = RegExp(r'^[\S\xa0]$');
 
 String _normalize(String string) {
   var skipWS = true;
   var addWS = false;
-  final buffer = new StringBuffer();
+  final buffer = StringBuffer();
   for (int i = 0; i < string.length; i++) {
     final char = string[i];
     if (char.contains(_nonBreaking)) {

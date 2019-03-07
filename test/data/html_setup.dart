@@ -95,16 +95,16 @@ html.Element setUp() {
   if (results.length == 1) {
     div = results[0];
   } else {
-    div = new html.DivElement();
+    div = html.DivElement();
     div.id = 'testdocument';
     body.append(div);
   }
-  div.setInnerHtml(bodyHtml, validator: new NoOpNodeValidator());
+  div.setInnerHtml(bodyHtml, validator: NoOpNodeValidator());
 
   html.document.getElementsByTagName('a-custom-tag').forEach((element) {
     if (element is html.Element) {
       final shadow = element.createShadowRoot();
-      shadow.setInnerHtml(templateHtml, validator: new NoOpNodeValidator());
+      shadow.setInnerHtml(templateHtml, validator: NoOpNodeValidator());
     }
   });
 
@@ -179,11 +179,11 @@ void bindMouseEvents(html.Element element) {
 }
 
 HtmlPageLoaderElement getRoot() =>
-    new HtmlPageLoaderElement.createFromElement(setUp(),
+    HtmlPageLoaderElement.createFromElement(setUp(),
         externalSyncFn: (Future action()) async {
       await action();
       // Ensure that page has chance to execute before HTML test continues.
-      await new Future.value();
+      await Future.value();
     });
 
 void reset() {

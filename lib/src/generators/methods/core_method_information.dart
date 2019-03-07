@@ -36,7 +36,7 @@ TypeInformation getTypeInformation(String type) {
   final left = type.indexOf('<');
   final right = type.lastIndexOf('>');
   if (left < 0 || right < 0) {
-    return new TypeInformation((b) => b
+    return TypeInformation((b) => b
       ..type = type
       ..typeArguments = []);
   }
@@ -48,7 +48,7 @@ TypeInformation getTypeInformation(String type) {
       .map((e) => e.trim())
       .map((e) => getTypeInformation(e))
       .toList();
-  return new TypeInformation((b) => b
+  return TypeInformation((b) => b
     ..type = genericType
     ..typeArguments = typeArguments);
 }
@@ -153,18 +153,18 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
     }
   }
 
-  return new CoreMethodInformation((b) => b
+  return CoreMethodInformation((b) => b
     ..name = node.name.toSource()
     ..isGetter = node.isGetter
     ..isAbstract = node.isAbstract
     ..pageObjectType = pageObjectInfo.type
-    ..pageObjectTemplate = new Optional<String>.fromNullable(
+    ..pageObjectTemplate = Optional<String>.fromNullable(
         pageObjectInfo.typeArguments.length == 1
             ? pageObjectInfo.typeArguments.single.type
             : null)
     ..isFuture = isFuture
     ..isList = isList
-    ..finder = new Optional<String>.fromNullable(finder)
+    ..finder = Optional<String>.fromNullable(finder)
     ..filters = filters
     ..checkers = checkers
     ..isMouse = isMouse
