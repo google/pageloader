@@ -29,7 +29,9 @@ part 'list_finder_method.g.dart';
 /// and [absent()] otherwise.
 Optional<ListFinderMethod> collectListFinderGetter(
     CoreMethodInformationBase methodInfo, MethodDeclaration node) {
-  if ((!methodInfo.isAbstract || !methodInfo.isGetter) ||
+  if (!methodInfo.isAbstract ||
+      !methodInfo.isGetter ||
+      node.isStatic ||
       !methodInfo.finder.isPresent ||
       !methodInfo.isList) {
     return Optional.absent();

@@ -24,7 +24,11 @@ part 'unannotated_method.g.dart';
 /// Generation for unannotated methods that are not getters or setters.
 /// Currently just a pass through.
 Optional<UnannotatedMethod> collectUnannotatedMethod(MethodDeclaration node) {
-  if (node.isAbstract || node.isGetter || node.isSetter || node.isOperator) {
+  if (node.isAbstract ||
+      node.isGetter ||
+      node.isSetter ||
+      node.isOperator ||
+      node.isStatic) {
     return Optional.absent();
   }
 

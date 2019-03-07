@@ -33,7 +33,7 @@ class WebDriverMouse implements PageLoaderMouse {
     if (eventTarget is WebDriverPageLoaderElement) {
       return _fireEvent(eventTarget, 'mousedown', button);
     } else {
-      return _driver.mouse.down(button);
+      _driver.mouse.down(button);
     }
   }
 
@@ -52,7 +52,7 @@ class WebDriverMouse implements PageLoaderMouse {
     if (eventTarget is WebDriverPageLoaderElement) {
       return _fireEvent(eventTarget, 'mouseup', button);
     } else {
-      return _driver.mouse.up(button);
+      _driver.mouse.up(button);
     }
   }
 

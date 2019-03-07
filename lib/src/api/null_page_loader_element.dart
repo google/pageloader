@@ -130,7 +130,7 @@ class NullPageLoaderElement implements PageLoaderElement {
       throw NullPageLoaderElementAccessException('getElementsBycss', this);
 
   @override
-  Future<void> clear({bool focusBefore: true, bool blurAfter: true}) =>
+  Future<void> clear({bool focusBefore = true, bool blurAfter = true}) =>
       throw NullPageLoaderElementAccessException('clear', this);
 
   @override
@@ -143,7 +143,7 @@ class NullPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<void> type(String keys,
-          {bool focusBefore: true, bool blurAfter: true}) =>
+          {bool focusBefore = true, bool blurAfter = true}) =>
       throw NullPageLoaderElementAccessException('type', this);
 
   @override

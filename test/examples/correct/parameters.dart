@@ -30,12 +30,12 @@ abstract class Parameters {
     return x + first + second;
   }
 
-  String testOptionalNamedParam({String first: 'a', String second: 'b'}) {
+  String testOptionalNamedParam({String first = 'a', String second = 'b'}) {
     return first + second;
   }
 
   String testMixedOptionalNamedParam(String x,
-      {String first: 'a', String second: 'b'}) {
+      {String first = 'a', String second = 'b'}) {
     return x + first + second;
   }
 }
@@ -60,12 +60,12 @@ abstract class ParametersMixin {
     return x + first + second;
   }
 
-  String testOptionalNamedParam({String first: 'a', String second: 'b'}) {
+  String testOptionalNamedParam({String first = 'a', String second = 'b'}) {
     return first + second;
   }
 
   String testMixedOptionalNamedParam(String x,
-      {String first: 'a', String second: 'b'}) {
+      {String first = 'a', String second = 'b'}) {
     return x + first + second;
   }
 }

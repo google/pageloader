@@ -32,7 +32,7 @@ WebDriver createTestDriver({Map<String, dynamic> additionalCapabilities}) {
   }
 
   if (chromeOptions.isNotEmpty) {
-    capabilities['chromeOptions'] = chromeOptions;
+    capabilities[Capabilities.chromeOptions] = chromeOptions;
   }
 
   if (additionalCapabilities != null) {

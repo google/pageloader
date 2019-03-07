@@ -13,9 +13,9 @@
 
 @TestOn('browser')
 
+import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'package:pageloader/html.dart';
 import 'data/html_setup.dart' as html_setup;
 import 'src/mouse.dart';
 

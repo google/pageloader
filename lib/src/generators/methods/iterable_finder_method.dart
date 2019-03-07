@@ -31,6 +31,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
     MethodDeclaration node, List<Annotation> methodAnnotations) {
   if (!node.isGetter ||
       !node.isAbstract ||
+      node.isStatic ||
       !node.returnType.toString().startsWith(pageObjectIterable)) {
     return Optional.absent();
   }

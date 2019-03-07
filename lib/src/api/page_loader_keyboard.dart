@@ -74,7 +74,7 @@ class PageLoaderKeyboard {
   /// is being held down or not. For example: if 'keydown' on shift is
   /// already in sequence without sending a 'keyup' and [key] of '1' is sent,
   /// throws an error. Error is also thrown in the opposite case.
-  void typeKey(String key, {bool keyDown: true, bool keyUp: true}) {
+  void typeKey(String key, {bool keyDown = true, bool keyUp = true}) {
     // Throw if not exactly of length 1.
     if (key.length != 1) {
       throw ArgumentError("'typeKey' requires a key of exactly length 1");
@@ -107,7 +107,7 @@ class PageLoaderKeyboard {
   ///
   /// [keyDown] and [keyUp] determines whether those events should be sent.
   void typeSpecialKey(PageLoaderSpecialKey key,
-      {bool keyDown: true, bool keyUp: true}) {
+      {bool keyDown = true, bool keyUp = true}) {
     if (keyDown) {
       switch (key) {
         case PageLoaderSpecialKey.alt:

@@ -37,7 +37,7 @@ import '../mocks/sdk.dart';
 /// [preamble] should be used for custom annotations.
 Future<MethodDeclaration> getMethodDeclaration(
     String methodDeclaration, String methodName,
-    {String preamble: ''}) async {
+    {String preamble = ''}) async {
   final classToParse = '''
 import 'dart:async';
 import '/test/root/path/annotations.dart';

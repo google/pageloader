@@ -74,7 +74,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// The shadow root hosted by this element.
   PageLoaderElement get shadowRoot;
 
-  /// The inner text of this element.
+  /// The inner content of this element.
   ///
   /// This should return the value of [`<element>.innerText`](
   /// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText),
@@ -143,7 +143,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   ///
   /// [focusBefore] indicates whether to focus this element before clearing.
   /// [blurAfter] indicates whether to blur this element after clearing.
-  Future<void> clear({bool focusBefore: true, bool blurAfter: true});
+  Future<void> clear({bool focusBefore = true, bool blurAfter = true});
 
   /// Clicks on the element.
   Future<void> click();
@@ -158,7 +158,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// [focusBefore] indicates whether to focus this element before typing.
   /// [blurAfter] indicates whether to blur this element after typing.
   Future<void> type(String keys,
-      {bool focusBefore: true, bool blurAfter: true});
+      {bool focusBefore = true, bool blurAfter = true});
 
   /// Types sequence of keyboard [keys] into element, if possible.
   ///

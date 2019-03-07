@@ -198,6 +198,10 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
           ' in:\n${(_parentElement ?? utils.root).properties['outerHTML']}';
 
   @override
+  String toStringDeep() =>
+      "<$name>\n\nHTML:\n${properties['outerHTML']}\n\n$this";
+
+  @override
   WebDriverPageLoaderElement get shadowRoot => throw 'not implemented';
 
   // We could incrementally clear until we find a web element that's still
@@ -225,18 +229,18 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   PageLoaderAttributes get attributes =>
-      _retryWhenStale(() => _ElementAttributes(this));
+      _retryWhenStale(() => _ElementAttributes(_single));
 
   @override
   PageLoaderAttributes get seleniumAttributes => attributes;
 
   @override
   PageLoaderAttributes get properties =>
-      _retryWhenStale(() => _ElementProperties(this));
+      _retryWhenStale(() => _ElementProperties(_single));
 
   @override
   PageLoaderAttributes get computedStyle =>
-      _retryWhenStale(() => _ElementComputedStyle(this));
+      _retryWhenStale(() => _ElementComputedStyle(_single));
 
   @override
   PageLoaderAttributes get style => _ElementStyle(this);
@@ -297,11 +301,22 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   WebDriverPageLoaderElement byTag(String tagName) =>
       getElementsByCss(tagName).single;
 
+  /// WebDriver `clear` spec always performs a focus event and a blur event,
+  /// which contradict with Pageloader `clear` API.
+  /// Instead of using the `clear` API, we send a CTRL-A, then Backspace key and
+  /// an empty string.
   @override
   Future<Null> clear({bool focusBefore: true, bool blurAfter: true}) async =>
       _retryWhenStale(() async {
         if (focusBefore) await focus();
-        _single.clear();
+        _single.driver.keyboard.sendChord([sync_wd.Keyboard.control, 'a']);
+        await _single.sendKeys(sync_wd.Keyboard.backSpace);
+
+        // Some elements do not support `back space`, and some elements'
+        // [innerText] is detached from themselves, so we send an empty string
+        // in case the above method does not work.
+        _single.driver.keyboard.sendChord([sync_wd.Keyboard.control, 'a']);
+        await _single.sendKeys('');
         if (blurAfter) await blur();
       });
 
@@ -315,8 +330,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     if (!exists || !displayed) return;
 
     final rect = getBoundingClientRect();
-    // ignore: await_only_futures
-    await _retryWhenStale<void>(() {
+    _retryWhenStale<void>(() {
       final bodyElement = _utils.byTag('body');
       final bodyRect = bodyElement.getBoundingClientRect();
       if (!rect.intersects(bodyRect)) {
@@ -349,7 +363,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<Null> type(String keys,
-          {bool focusBefore: true, bool blurAfter: true}) async =>
+          {bool focusBefore = true, bool blurAfter = true}) async =>
       _retryWhenStale(() async {
         if (focusBefore) await focus();
         _single.sendKeys(keys);
@@ -367,10 +381,6 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   Future<Null> blur() async =>
       _retryWhenStale(() => _driver.execute('arguments[0].blur();', [_single]));
-
-  @override
-  String toStringDeep() =>
-      "<$name>\n\nHTML:\n${properties['outerHTML']}\n\n$this";
 }
 
 // Hack to support JSON and W3c style exception handling.
@@ -378,50 +388,31 @@ bool _isStaleElementException(Object e) =>
     e.toString().contains('StaleElementReferenceException');
 
 class _ElementAttributes extends PageLoaderAttributes {
-  final WebDriverPageLoaderElement _node;
+  final sync_wd.WebElement _node;
 
   _ElementAttributes(this._node);
 
   @override
-  String operator [](String name) => core.staleElementWrapper(
-      () => (_node._driver.execute("""
-    var attr = arguments[0].attributes["$name"];
-    if(attr) {
-      return attr.value;
-    }
-    return null;
-    """, [_node._single]))?.toString(),
-      _node._clearCache,
-      _isStaleElementException);
+  String operator [](String name) => _node.attributes[name];
 }
 
 class _ElementComputedStyle extends PageLoaderAttributes {
-  final WebDriverPageLoaderElement _node;
+  final sync_wd.WebElement _node;
 
   _ElementComputedStyle(this._node);
 
   @override
-  String operator [](String name) => core.staleElementWrapper(
-      () => _node._driver.execute(
-          'return window.getComputedStyle(arguments[0]).${_cssPropName(name)};',
-          [_node._single]),
-      _node._clearCache,
-      _isStaleElementException);
+  String operator [](String name) => _node.cssProperties[name];
 }
 
 // Retrieves properties via Javascript.
 class _ElementProperties extends PageLoaderAttributes {
-  final WebDriverPageLoaderElement _node;
+  final sync_wd.WebElement _node;
 
   _ElementProperties(this._node);
 
   @override
-  String operator [](String name) => core.staleElementWrapper(
-      () => (_node._driver
-              .execute('return arguments[0]["$name"];', [_node._single]))
-          ?.toString(),
-      _node._clearCache,
-      _isStaleElementException);
+  String operator [](String name) => _node.properties[name];
 }
 
 // Retrieves style via JavaScript '.style'.

@@ -20,7 +20,7 @@ class TraceListener extends PageLoaderListener {
   final PrintLine printLine;
   int _currentIndent = 0;
 
-  TraceListener({PrintLine printLine: standardPrint}) : printLine = printLine;
+  TraceListener({PrintLine printLine = standardPrint}) : printLine = printLine;
 
   @override
   void startPageObjectMethod(String pageObjectName, String methodName) {
