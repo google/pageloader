@@ -53,6 +53,7 @@ html.Element setUp() {
         <option id='option3' value='value 3' debugId="option3">option 3</option>
       </select>
       <textarea id='textarea'></textarea>
+      <div id='keyboard-listener'>Listening:</div>
       <div class="outer-div">
         outer div 1
         <a-custom-tag></a-custom-tag>
@@ -94,16 +95,16 @@ html.Element setUp() {
   if (results.length == 1) {
     div = results[0];
   } else {
-    div = html.DivElement();
+    div = new html.DivElement();
     div.id = 'testdocument';
     body.append(div);
   }
-  div.setInnerHtml(bodyHtml, validator: NoOpNodeValidator());
+  div.setInnerHtml(bodyHtml, validator: new NoOpNodeValidator());
 
   html.document.getElementsByTagName('a-custom-tag').forEach((element) {
     if (element is html.Element) {
       final shadow = element.createShadowRoot();
-      shadow.setInnerHtml(templateHtml, validator: NoOpNodeValidator());
+      shadow.setInnerHtml(templateHtml, validator: new NoOpNodeValidator());
     }
   });
 
@@ -113,7 +114,30 @@ html.Element setUp() {
   bindMouseEvents(displayedDiv);
   bindMouseEvents(centerDiv);
 
+  // Bind KeyboardEvent driven div element.
+  final keyboardListenerDiv = html.document.getElementById('keyboard-listener');
+  bindKeyboardListener(keyboardListenerDiv);
+
   return div;
+}
+
+void bindKeyboardListener(html.Element element) {
+  // 13 == keyCode for enter
+  element.onKeyDown.listen((evt) {
+    if (evt.keyCode == 13) {
+      element.text += ' enter keydown;';
+    }
+  });
+  element.onKeyPress.listen((evt) {
+    if (evt.keyCode == 13) {
+      element.text += ' enter keypress;';
+    }
+  });
+  element.onKeyUp.listen((evt) {
+    if (evt.keyCode == 13) {
+      element.text += ' enter keyup;';
+    }
+  });
 }
 
 void bindMouseEvents(html.Element element) {
@@ -155,11 +179,11 @@ void bindMouseEvents(html.Element element) {
 }
 
 HtmlPageLoaderElement getRoot() =>
-    HtmlPageLoaderElement.createFromElement(setUp(),
+    new HtmlPageLoaderElement.createFromElement(setUp(),
         externalSyncFn: (Future action()) async {
       await action();
       // Ensure that page has chance to execute before HTML test continues.
-      await Future.value();
+      await new Future.value();
     });
 
 void reset() {

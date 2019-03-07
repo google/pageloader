@@ -52,7 +52,8 @@ void runTests(GetNewContext contextGenerator) {
         base.badTable.table.name;
         fail('Expected to throw on bad @EnsureTag');
       } catch (e) {
-        expect(e.toString(), contains('Found 0 elements in _single'));
+        expect(e.toString(),
+            contains('Expected to find exactly 1 match, but found 0 for:'));
       }
     });
 
@@ -122,6 +123,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class BaseObject {
   BaseObject();
+
   factory BaseObject.create(PageLoaderElement context) = $BaseObject.create;
 
   @ByTagName('table')
@@ -140,6 +142,7 @@ abstract class BaseObject {
 @PageObject()
 abstract class PseudoBaseObject {
   PseudoBaseObject();
+
   factory PseudoBaseObject.create(PageLoaderElement context) =
       $PseudoBaseObject.create;
 
@@ -157,6 +160,7 @@ abstract class PseudoBaseObject {
 @PageObject()
 abstract class TableForCheckTag {
   TableForCheckTag();
+
   factory TableForCheckTag.create(PageLoaderElement context) =
       $TableForCheckTag.create;
 
@@ -173,6 +177,7 @@ abstract class TableForCheckTag {
 @PageObject()
 abstract class BaseEnsureObject {
   BaseEnsureObject();
+
   factory BaseEnsureObject.create(PageLoaderElement context) =
       $BaseEnsureObject.create;
 
@@ -187,6 +192,7 @@ abstract class BaseEnsureObject {
 @PageObject()
 abstract class TableForEnsureTag {
   TableForEnsureTag();
+
   factory TableForEnsureTag.create(PageLoaderElement context) =
       $TableForEnsureTag.create;
 
@@ -201,6 +207,7 @@ abstract class TableForEnsureTag {
 @PageObject()
 abstract class CheckTagFails {
   CheckTagFails();
+
   factory CheckTagFails.create(PageLoaderElement context) =
       $CheckTagFails.create;
 
@@ -212,6 +219,7 @@ abstract class CheckTagFails {
 @PageObject()
 abstract class EnsureTagFails {
   EnsureTagFails();
+
   factory EnsureTagFails.create(PageLoaderElement context) =
       $EnsureTagFails.create;
 
@@ -222,6 +230,7 @@ abstract class EnsureTagFails {
 @PageObject()
 abstract class PageForWithAttributeTest {
   PageForWithAttributeTest();
+
   factory PageForWithAttributeTest.create(PageLoaderElement context) =
       $PageForWithAttributeTest.create;
 
@@ -233,6 +242,7 @@ abstract class PageForWithAttributeTest {
 @PageObject()
 abstract class PageForWithClassTest {
   PageForWithClassTest();
+
   factory PageForWithClassTest.create(PageLoaderElement context) =
       $PageForWithClassTest.create;
 
@@ -244,6 +254,7 @@ abstract class PageForWithClassTest {
 @PageObject()
 abstract class DebugIds {
   DebugIds();
+
   factory DebugIds.create(PageLoaderElement context) = $DebugIds.create;
 
   @ByDebugId('option1')

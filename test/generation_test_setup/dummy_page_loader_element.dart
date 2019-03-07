@@ -237,10 +237,16 @@ class DummyPageLoaderElement implements PageLoaderElement {
       throw 'not implemented';
 
   @override
+  Future<Null> typeSequence(PageLoaderKeyboard keys) => throw 'not implemented';
+
+  @override
   Future<Null> focus() => throw 'not implemented';
 
   @override
   Future<Null> blur() => throw 'not implemented';
+
+  @override
+  String toStringDeep() => 'DummyPageLoaderElement';
 }
 
 class DummyPageLoaderAttributes extends DelegatingMap<String, String>

@@ -266,7 +266,7 @@ class HtmlMouse implements PageLoaderMouse {
   /// once.
   Future<void> _dispatchBubblingEvents(bool Function(TrackedElement) test,
       Future<void> Function(TrackedElement) dispatcher) async {
-    final _checked = Set<TrackedElement>();
+    final _checked = <TrackedElement>{};
     Future<void> _dispatch(TrackedElement target) async {
       if (_checked.contains(target)) return;
       _checked.add(target);

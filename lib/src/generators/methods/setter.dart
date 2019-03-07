@@ -14,7 +14,7 @@
 /// Generates code for normal setters. Currently just a pass through.
 library pageloader.setter;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 import 'listeners.dart';
@@ -27,8 +27,8 @@ Optional<Setter> collectUnannotatedSetter(MethodDeclaration node) {
     final param = node.parameters.parameters.first;
     return Optional.of(Setter((b) => b
       ..name = node.name.toString()
-      ..setterType = param.element.type.toString()
-      ..setterValueName = param.element.name));
+      ..setterType = param.declaredElement.type.toString()
+      ..setterValueName = param.declaredElement.name));
   }
   return Optional.absent();
 }

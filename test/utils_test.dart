@@ -16,50 +16,49 @@ import 'package:test/test.dart';
 
 // Test failures only; successes are tested in matchers_test.dart
 void main() {
-  final utilsError = throwsA(TypeMatcher<PageLoaderArgumentError>());
-  final foo = 'foo';
+  final foo = DefinitelyNotAPO();
 
-  test('exists fails', () {
-    expect(() => exists(foo), utilsError);
+  // Utility methods that will be tested. Does not include 'hasClass'
+  final utilMethodsMap = {
+    'exists/notExists': [exists, notExists],
+    'getInnerText': [getInnerText],
+    'isDisplayed/isNotDisplayed': [isDisplayed, isNotDisplayed],
+    'isHidden/isNotHidden': [isHidden, isNotHidden],
+    'isVisible/isNotVisible': [isVisible, isNotVisible],
+    'isFocused/isNotFocused': [isFocused, isNotFocused],
+    'rootElementOf': [rootElementOf],
+  };
+
+  // Test everything in `utilMethodsMap`
+  utilMethodsMap.forEach((functionName, methods) {
+    methods.forEach((method) {
+      test('$method fails', () {
+        try {
+          method(foo);
+          fail("Expected to throw on '$method'");
+        } catch (e) {
+          checkError(e, functionName, foo.runtimeType);
+        }
+      });
+    });
   });
 
-  test('notExists fails', () {
-    expect(() => notExists(foo), utilsError);
-  });
-
-  test('hasClass fails', () {
-    expect(() => hasClass(foo, 'bar'), utilsError);
-  });
-
-  test('innerText fails', () {
-    expect(() => getInnerText(foo), utilsError);
-  });
-
-  test('isDisplayed fails', () {
-    expect(() => isDisplayed(foo), utilsError);
-  });
-
-  test('isNotDisplayed fails', () {
-    expect(() => isNotDisplayed(foo), utilsError);
-  });
-
-  test('isHidden fails', () {
-    expect(() => isHidden(foo), utilsError);
-  });
-
-  test('isNotHidden fails', () {
-    expect(() => isNotHidden(foo), utilsError);
-  });
-
-  test('isFocused fails', () {
-    expect(() => isFocused(foo), utilsError);
-  });
-
-  test('isNotFocused fails', () {
-    expect(() => isNotFocused(foo), utilsError);
-  });
-
-  test('rootElementOf fails', () {
-    expect(() => rootElementOf(foo), utilsError);
+  // `hasClass` has to be done separately since it's not a unary func
+  test("'hasClass' fails", () {
+    try {
+      hasClass(foo, 'bar');
+      fail("Expected to throw on 'hasClass'");
+    } catch (e) {
+      checkError(e, 'hasClass', foo.runtimeType);
+    }
   });
 }
+
+void checkError(dynamic error, String functionName, Type type) {
+  final errorMessage = error.toString();
+  expect(error, TypeMatcher<PageLoaderArgumentError>());
+  expect(errorMessage, contains("'$functionName'"));
+  expect(errorMessage, contains("'$type'"));
+}
+
+class DefinitelyNotAPO {}

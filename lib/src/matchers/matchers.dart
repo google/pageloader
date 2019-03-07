@@ -48,6 +48,17 @@ const Matcher isFocused = _IsFocused();
 /// A matcher that checks if PageLoaderElement/PageObject is not focused.
 Matcher isNotFocused = isNot(isFocused);
 
+/// A matcher that checks if PageLoaderElement/PageObject is visible.
+///
+/// A PageLoaderElement/PageObject is considered visible if it:
+/// *   exists
+/// *   isDisplayed
+/// *   isNotHidden
+const Matcher isVisible = _IsVisible();
+
+/// A matcher that checks if PageLoaderElement/PageObject is not visible.
+Matcher isNotVisible = isNot(isVisible);
+
 /// A matcher that matches the given matcher against an element's inner text.
 Matcher hasInnerText(matcher) => _HasInnerText(matcher);
 
@@ -108,6 +119,17 @@ class _IsFocused extends Matcher {
   @override
   Description describe(Description description) =>
       description.add('$_item is focused');
+}
+
+class _IsVisible extends Matcher {
+  const _IsVisible();
+
+  @override
+  bool matches(item, Map matchState) => utils.isVisible(item);
+
+  @override
+  Description describe(Description description) =>
+      description.add('$_item is visible');
 }
 
 class _HasInnerText extends CustomMatcher {

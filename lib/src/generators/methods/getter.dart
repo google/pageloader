@@ -14,7 +14,7 @@
 /// Generates code for normal getters. Currently just a pass through.
 library pageloader.getter;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 import 'listeners.dart';

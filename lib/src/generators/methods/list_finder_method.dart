@@ -14,7 +14,7 @@
 /// Generation for page object lists.
 library pageloader.list_finder_method;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 

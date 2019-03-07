@@ -137,10 +137,8 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     }
 
     final elems = elements;
-    if (elems.isEmpty) {
-      throw FoundZeroElementsInSingleException(this);
-    } else if (elems.length > 1) {
-      throw FoundMultipleElementsInSingleException(this);
+    if (elems.length != 1) {
+      throw new SinglePageObjectException(this, elems.length);
     }
     _cachedElement = elems[0];
     return _cachedElement;
@@ -192,9 +190,12 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  String toString() =>
-      '${_parentElement == null ? "(no parent)" : _parentElement.toString()} ->'
-      '$_finder | $_filters | $_checkers';
+  String toString() => _finder == null
+      ? _parentElement.toString()
+      : 'Element selected by $_finder,' +
+          (_filters.isNotEmpty ? ' filtered by $_filters,' : '') +
+          (_checkers.isNotEmpty ? ' checked with $_checkers,' : '') +
+          ' in:\n${(_parentElement ?? utils.root).properties['outerHTML']}';
 
   @override
   WebDriverPageLoaderElement get shadowRoot => throw 'not implemented';
@@ -261,8 +262,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     if (count == 1)
       return true;
     else if (count == 0) return false;
-    throw PageLoaderException.withContext(
-        'Found $count elements on call to exists', this);
+    throw PageLoaderException('Found $count elements on call to exists', this);
   }
 
   @override
@@ -357,12 +357,20 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       });
 
   @override
+  Future<void> typeSequence(PageLoaderKeyboard keys) =>
+      throw 'not yet implemented';
+
+  @override
   Future<Null> focus() async => _retryWhenStale(
       () => _driver.execute('arguments[0].focus();', [_single]));
 
   @override
   Future<Null> blur() async =>
       _retryWhenStale(() => _driver.execute('arguments[0].blur();', [_single]));
+
+  @override
+  String toStringDeep() =>
+      "<$name>\n\nHTML:\n${properties['outerHTML']}\n\n$this";
 }
 
 // Hack to support JSON and W3c style exception handling.

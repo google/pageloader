@@ -25,6 +25,16 @@ class _Root {
   String toString() => '@root';
 }
 
+const nullElement = const _NullElement():
+
+class _NullElement {
+  const _NullElement();
+
+  @override
+  String toString() => '@nullElement';
+}
+
+
 const Mouse = _Mouse();
 
 class _Mouse {

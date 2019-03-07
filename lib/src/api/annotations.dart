@@ -34,6 +34,35 @@ class _Root {
   String toString() => '@root';
 }
 
+/// Labels a PageLoaderElement or PageObject as an empty entity.
+/// Calling 'exists' on a PageLoaderElement or PageObject annotated with
+/// '@nullElement' will always return false. An empty PageLoaderElement or
+/// PageObject should be used in place of returning a null value.
+///
+/// PageLoaderElement or PageObjects annotated with this should not
+/// have any other annotations. In addition, this annotation should
+/// not be used on 'PageLoaderIterable' or on a List.
+///
+/// For example:
+///   abstract class MyPO {
+///     @ByTagName('item')
+///     List<ItemPO> get _items;
+///
+///     @nullElement
+///     ItemPO get _nullItem;
+///
+///     ItemPO getItemByName(String name) => _items.firstWhere(
+///         (ItemPO item) => item.name == name, orElse: () => _nullItem);
+///   }
+const nullElement = _NullElement();
+
+class _NullElement {
+  const _NullElement();
+
+  @override
+  String toString() => '@nullElement';
+}
+
 /// Convenience annotation for using [PageLoaderMouse] within a page object.
 ///
 /// Must be applied to a [PageLoaderMouse] getter. No other annotations may be
@@ -261,21 +290,11 @@ class EnsureTag implements Checker, ContextFinder {
   String toString() => '@EnsureTag("$_expectedTagName")';
 }
 
-/// Filter annotations. See [Filter] for usage details.
-class DisplayedOnly extends Filter {
-  const DisplayedOnly();
-
-  @override
-  bool keep(PageLoaderElement element) => element.displayed;
-
-  @override
-  String toString() => '@DisplayedOnly()';
-}
-
-/// Similar to [DisplayedOnly], but adjustable to filter non-displayed.
+/// Keeps [PageLoaderElement] that are displayed or non-displayed based
+/// on 'display' style.
 ///
-/// `IsDisplayed()` and `IsDisplayed(true)` is identical to
-/// [DisplayedOnly].
+/// '@IsDisplayed()' to only show displayed elements and '@IsDisplayed(false)'
+/// to only show non-displayed.
 class IsDisplayed extends Filter {
   final bool _displayed;
 

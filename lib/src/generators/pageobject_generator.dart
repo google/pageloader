@@ -29,17 +29,6 @@ import 'methods/core.dart' as core;
 class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   const PageObjectGenerator();
 
-  @override
-  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
-    final result = await super.generate(library, buildStep);
-    if (result?.isEmpty ?? true) return '';
-    const ignore =
-        '// ignore_for_file: private_collision_in_mixin_application\n'
-        '// ignore_for_file: unused_field, non_constant_identifier_names\n'
-        '// ignore_for_file: overridden_fields, annotate_overrides\n';
-    return '$ignore$result';
-  }
-
   /// Generates a page object, as source String, for a class annotated with
   /// '@PageObject()'.
   @override
@@ -51,9 +40,11 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
     if (annotatedNode is ClassDeclaration) {
       try {
-        return _generateClass(annotatedNode);
+        final ignore =
+            '// ignore_for_file: private_collision_in_mixin_application\n';
+        return '$ignore${_generateClass(annotatedNode)}';
       } catch (e, stackTrace) {
-        log.warning('Failure generating class for $library! '
+        print('Failure generating class for $library! '
             '\n $e \n $stackTrace');
         rethrow;
       }
@@ -80,7 +71,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     // Run check to make sure PO is not extending another PO.
     // Only mixins are allowed.
     if (poExtendsAnotherPo(declaration.element)) {
-      throw Exception('******************\n\n'
+      throw new Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           "PageObject class '${declaration.name.name}' is extending another "
           "PageObject class. PageObjects may not extend other PageObjects; "
@@ -143,6 +134,9 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       collectorVisitor.writeToConstructorBuffer(
           constructorBuffer, className, defaultTag);
 
+      constructorBuffer.writeln('String toStringDeep() => '
+          ''''$className\\n\\n\${${core.root}.toStringDeep()}';''');
+
       // Close constructor class
       constructorBuffer.writeln('}');
     }
@@ -151,7 +145,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     mixinBuffer.write('''
       class \$\$$signature {
         PageLoaderElement ${core.root};
-        PageLoaderMouse ${core.mouse}; // ignore: unused_field
+        PageLoaderMouse ${core.mouse};
     ''');
 
     // Add generated root accessor to be used in internal code.
@@ -196,7 +190,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     if (visitor.badMethods.isNotEmpty ||
         visitor.oversupportedMethods.isNotEmpty ||
         visitor.unsupportedMethods.isNotEmpty) {
-      throw Exception('******************\n\n'
+      throw new Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           '${errors.join('\n\n-------------------\n')}'
           '\n\n******************');

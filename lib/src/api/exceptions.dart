@@ -15,25 +15,21 @@ library pageloader.api.exceptions;
 
 import 'page_loader_element_interface.dart';
 
-class FoundZeroElementsInSingleException extends PageLoaderException {
-  const FoundZeroElementsInSingleException(PageLoaderElement element)
-      : super.withContext('Found 0 elements in _single', element);
-}
-
-class FoundMultipleElementsInSingleException extends PageLoaderException {
-  const FoundMultipleElementsInSingleException(PageLoaderElement element)
-      : super.withContext('Found multiple elements in _single', element);
+class SinglePageObjectException extends PageLoaderException {
+  const SinglePageObjectException(PageLoaderElement element, int actualCount)
+      : super(
+            'Unable to locate element.\n\n'
+            'Expected to find exactly 1 match, but found $actualCount for:',
+            element);
 }
 
 class PageLoaderException {
   final String message;
   final PageLoaderElement element;
 
-  const PageLoaderException(this.message) : element = null;
-
-  const PageLoaderException.withContext(this.message, this.element);
+  const PageLoaderException(this.message, [this.element]);
 
   @override
-  String toString() => 'PageLoaderException: $message'
-      ' \n\n  ---Context: \n\n${element?.toString()}';
+  String toString() => 'PageLoaderException: $message\n\n'
+      '${element?.toString()}';
 }

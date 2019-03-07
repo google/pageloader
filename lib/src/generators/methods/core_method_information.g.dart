@@ -6,16 +6,6 @@ part of pageloader.core_method_information;
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-
 class _$TypeInformation extends TypeInformation {
   @override
   final String type;
@@ -26,10 +16,12 @@ class _$TypeInformation extends TypeInformation {
       (new TypeInformationBuilder()..update(updates)).build();
 
   _$TypeInformation._({this.type, this.typeArguments}) : super._() {
-    if (type == null)
+    if (type == null) {
       throw new BuiltValueNullFieldError('TypeInformation', 'type');
-    if (typeArguments == null)
+    }
+    if (typeArguments == null) {
       throw new BuiltValueNullFieldError('TypeInformation', 'typeArguments');
+    }
   }
 
   @override
@@ -41,10 +33,11 @@ class _$TypeInformation extends TypeInformation {
       new TypeInformationBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! TypeInformation) return false;
-    return type == other.type && typeArguments == other.typeArguments;
+    return other is TypeInformation &&
+        type == other.type &&
+        typeArguments == other.typeArguments;
   }
 
   @override
@@ -87,7 +80,9 @@ class TypeInformationBuilder
 
   @override
   void replace(TypeInformation other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$TypeInformation;
   }
 
@@ -131,7 +126,11 @@ class _$CoreMethodInformation extends CoreMethodInformation {
   @override
   final bool isRoot;
   @override
+  final bool isNullElement;
+  @override
   final String nodeSource;
+  @override
+  final AstNode node;
 
   factory _$CoreMethodInformation(
           [void updates(CoreMethodInformationBuilder b)]) =>
@@ -150,36 +149,58 @@ class _$CoreMethodInformation extends CoreMethodInformation {
       this.filters,
       this.checkers,
       this.isRoot,
-      this.nodeSource})
+      this.isNullElement,
+      this.nodeSource,
+      this.node})
       : super._() {
-    if (name == null)
+    if (name == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'name');
-    if (isGetter == null)
+    }
+    if (isGetter == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'isGetter');
-    if (isAbstract == null)
+    }
+    if (isAbstract == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'isAbstract');
-    if (pageObjectType == null)
+    }
+    if (pageObjectType == null) {
       throw new BuiltValueNullFieldError(
           'CoreMethodInformation', 'pageObjectType');
-    if (pageObjectTemplate == null)
+    }
+    if (pageObjectTemplate == null) {
       throw new BuiltValueNullFieldError(
           'CoreMethodInformation', 'pageObjectTemplate');
-    if (isFuture == null)
+    }
+    if (isFuture == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'isFuture');
-    if (isList == null)
+    }
+    if (isList == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'isList');
-    if (isMouse == null)
+    }
+    if (isMouse == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'isMouse');
-    if (finder == null)
+    }
+    if (finder == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'finder');
-    if (filters == null)
+    }
+    if (filters == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'filters');
-    if (checkers == null)
+    }
+    if (checkers == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'checkers');
-    if (isRoot == null)
+    }
+    if (isRoot == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'isRoot');
-    if (nodeSource == null)
+    }
+    if (isNullElement == null) {
+      throw new BuiltValueNullFieldError(
+          'CoreMethodInformation', 'isNullElement');
+    }
+    if (nodeSource == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'nodeSource');
+    }
+    if (node == null) {
+      throw new BuiltValueNullFieldError('CoreMethodInformation', 'node');
+    }
   }
 
   @override
@@ -191,10 +212,10 @@ class _$CoreMethodInformation extends CoreMethodInformation {
       new CoreMethodInformationBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! CoreMethodInformation) return false;
-    return name == other.name &&
+    return other is CoreMethodInformation &&
+        name == other.name &&
         isGetter == other.isGetter &&
         isAbstract == other.isAbstract &&
         pageObjectType == other.pageObjectType &&
@@ -206,7 +227,9 @@ class _$CoreMethodInformation extends CoreMethodInformation {
         filters == other.filters &&
         checkers == other.checkers &&
         isRoot == other.isRoot &&
-        nodeSource == other.nodeSource;
+        isNullElement == other.isNullElement &&
+        nodeSource == other.nodeSource &&
+        node == other.node;
   }
 
   @override
@@ -222,19 +245,25 @@ class _$CoreMethodInformation extends CoreMethodInformation {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc($jc(0, name.hashCode),
-                                                    isGetter.hashCode),
-                                                isAbstract.hashCode),
-                                            pageObjectType.hashCode),
-                                        pageObjectTemplate.hashCode),
-                                    isFuture.hashCode),
-                                isList.hashCode),
-                            isMouse.hashCode),
-                        finder.hashCode),
-                    filters.hashCode),
-                checkers.hashCode),
-            isRoot.hashCode),
-        nodeSource.hashCode));
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(0,
+                                                                name.hashCode),
+                                                            isGetter.hashCode),
+                                                        isAbstract.hashCode),
+                                                    pageObjectType.hashCode),
+                                                pageObjectTemplate.hashCode),
+                                            isFuture.hashCode),
+                                        isList.hashCode),
+                                    isMouse.hashCode),
+                                finder.hashCode),
+                            filters.hashCode),
+                        checkers.hashCode),
+                    isRoot.hashCode),
+                isNullElement.hashCode),
+            nodeSource.hashCode),
+        node.hashCode));
   }
 
   @override
@@ -252,7 +281,9 @@ class _$CoreMethodInformation extends CoreMethodInformation {
           ..add('filters', filters)
           ..add('checkers', checkers)
           ..add('isRoot', isRoot)
-          ..add('nodeSource', nodeSource))
+          ..add('isNullElement', isNullElement)
+          ..add('nodeSource', nodeSource)
+          ..add('node', node))
         .toString();
   }
 }
@@ -313,9 +344,18 @@ class CoreMethodInformationBuilder
   bool get isRoot => _$this._isRoot;
   set isRoot(bool isRoot) => _$this._isRoot = isRoot;
 
+  bool _isNullElement;
+  bool get isNullElement => _$this._isNullElement;
+  set isNullElement(bool isNullElement) =>
+      _$this._isNullElement = isNullElement;
+
   String _nodeSource;
   String get nodeSource => _$this._nodeSource;
   set nodeSource(String nodeSource) => _$this._nodeSource = nodeSource;
+
+  AstNode _node;
+  AstNode get node => _$this._node;
+  set node(AstNode node) => _$this._node = node;
 
   CoreMethodInformationBuilder();
 
@@ -333,7 +373,9 @@ class CoreMethodInformationBuilder
       _filters = _$v.filters;
       _checkers = _$v.checkers;
       _isRoot = _$v.isRoot;
+      _isNullElement = _$v.isNullElement;
       _nodeSource = _$v.nodeSource;
+      _node = _$v.node;
       _$v = null;
     }
     return this;
@@ -341,7 +383,9 @@ class CoreMethodInformationBuilder
 
   @override
   void replace(covariant CoreMethodInformation other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$CoreMethodInformation;
   }
 
@@ -366,7 +410,9 @@ class CoreMethodInformationBuilder
             filters: filters,
             checkers: checkers,
             isRoot: isRoot,
-            nodeSource: nodeSource);
+            isNullElement: isNullElement,
+            nodeSource: nodeSource,
+            node: node);
     replace(_$result);
     return _$result;
   }
@@ -411,6 +457,14 @@ abstract class CoreMethodInformationBaseBuilder {
   bool get isRoot;
   set isRoot(bool isRoot);
 
+  bool get isNullElement;
+  set isNullElement(bool isNullElement);
+
   String get nodeSource;
   set nodeSource(String nodeSource);
+
+  AstNode get node;
+  set node(AstNode node);
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
