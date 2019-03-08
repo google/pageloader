@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc. All rights reserved.
+// Copyright 2018 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,11 +14,11 @@
 import 'package:test/test.dart';
 
 import 'setup/webdriver_environment.dart';
-import 'src/typing.dart' as typing;
+import 'src/null_element.dart' as null_element;
 
 void main() {
   final environment = WebDriverEnvironment();
   setUp(environment.setUp);
   tearDown(environment.tearDown);
-  typing.runTests(() => environment.getBaseElement());
+  null_element.runTests(() => environment.getBaseElement());
 }

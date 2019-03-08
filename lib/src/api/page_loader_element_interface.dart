@@ -18,6 +18,7 @@ import 'dart:math';
 
 import 'annotation_interfaces.dart';
 import 'iterable_interfaces.dart';
+import 'page_loader_keyboard.dart';
 import 'page_loader_listener.dart';
 import 'page_loader_source_interface.dart';
 import 'page_utils_interface.dart';
@@ -49,12 +50,20 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// Gets registered listeners.
   List<PageLoaderListener> get listeners;
 
-  /// Support for PageLoader2 page objects, needed for migration.
-  @deprecated
+  /// The context of this PageLoaderElement. This should only be used if
+  /// this API does not provide desired functionality; otherwise usage should
+  /// be avoided.
+  ///
+  /// This value should be casted. Casting should occur in test Dart files
+  /// and should not be occur in PageObject files.
   dynamic get context;
 
-  /// Support for PageLoader2 page objects, needed for migration.
-  @deprecated
+  /// Synchronously returns the context of this PageLoaderElement. This should
+  /// only be used if this API does not provide desired functionality;
+  /// otherwise usage should be avoided.
+  ///
+  /// This value should be casted. Casting should occur in test Dart files
+  /// and should not be occur in PageObject files.
   dynamic get contextSync;
 
   /// Returns an instance of [PageUtils].
@@ -65,7 +74,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// The shadow root hosted by this element.
   PageLoaderElement get shadowRoot;
 
-  /// The inner text of this element.
+  /// The inner content of this element.
   ///
   /// This should return the value of [`<element>.innerText`](
   /// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText),
@@ -134,7 +143,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   ///
   /// [focusBefore] indicates whether to focus this element before clearing.
   /// [blurAfter] indicates whether to blur this element after clearing.
-  Future<void> clear({bool focusBefore: true, bool blurAfter: true});
+  Future<void> clear({bool focusBefore = true, bool blurAfter = true});
 
   /// Clicks on the element.
   Future<void> click();
@@ -149,13 +158,22 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// [focusBefore] indicates whether to focus this element before typing.
   /// [blurAfter] indicates whether to blur this element after typing.
   Future<void> type(String keys,
-      {bool focusBefore: true, bool blurAfter: true});
+      {bool focusBefore = true, bool blurAfter = true});
+
+  /// Types sequence of keyboard [keys] into element, if possible.
+  ///
+  /// Provides finer control on sequence of keyboard events being sent. This
+  /// does NOT automatically focus before and after.
+  Future<void> typeSequence(PageLoaderKeyboard keys);
 
   /// Focuses the element.
   Future<void> focus();
 
   /// Blurs the element (= lose focus).
   Future<void> blur();
+
+  /// Gives a full description of the element for debugger.
+  String toStringDeep();
 }
 
 /// Generic attributes interface, allowing bracket notation referencing.

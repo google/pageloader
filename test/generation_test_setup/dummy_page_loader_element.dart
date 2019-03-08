@@ -92,10 +92,10 @@ class DummyPageLoaderElement implements PageLoaderElement {
   final _classes = <String>[];
 
   DummyPageLoaderElement(
-      {bool exists: true,
-      bool displayed: true,
-      bool focused: true,
-      List<String> classes: const <String>[]})
+      {bool exists = true,
+      bool displayed = true,
+      bool focused = true,
+      List<String> classes = const <String>[]})
       : _exists = exists,
         _displayed = displayed,
         _focused = focused,
@@ -222,7 +222,7 @@ class DummyPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<Null> clear(
-          {bool sync: true, bool focusBefore: true, bool blurAfter: true}) =>
+          {bool sync = true, bool focusBefore = true, bool blurAfter = true}) =>
       throw 'not implemented';
 
   @override
@@ -233,14 +233,20 @@ class DummyPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<Null> type(String keys,
-          {bool focusBefore: true, bool blurAfter: true}) =>
+          {bool focusBefore = true, bool blurAfter = true}) =>
       throw 'not implemented';
+
+  @override
+  Future<Null> typeSequence(PageLoaderKeyboard keys) => throw 'not implemented';
 
   @override
   Future<Null> focus() => throw 'not implemented';
 
   @override
   Future<Null> blur() => throw 'not implemented';
+
+  @override
+  String toStringDeep() => 'DummyPageLoaderElement';
 }
 
 class DummyPageLoaderAttributes extends DelegatingMap<String, String>

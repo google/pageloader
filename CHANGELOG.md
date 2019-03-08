@@ -1,3 +1,20 @@
+## 3.1.0
+
+- Added `@nullElement` annotation to create a non-existent PageLoaderElement object. 
+  Null elements should be returned instead of `null` for better compatibility with
+  utils and matcher.
+- (`HtmlPageLoaderElement` only) `type(...)` better emulates individual keystrokes and sends
+  `keyUp`, `keyPress` and `keyDown` more accurately.
+- (`HtmlPageLoaderElement` only) `typeSequence(...)` added to better emulate sequence of
+  individual keystrokes.
+- `isVisible` utility function and matcher to determine whether an element exists,
+  isDisplayed, and isNotHidden.
+- Removed `@DisplayedOnly`. Use only `@IsDisplayed` instead.
+- (`HtmlPageLoaderElement` only) Supports keyboard input into elements with 
+  `contenteditable` attribute.
+- More descriptive error messages.
+- Lint and deprecated artifact clean up.
+
 ## 3.0.3
 
 - Support the latest release of `package:built_value_generator`

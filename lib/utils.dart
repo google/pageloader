@@ -58,18 +58,36 @@ bool isNotDisplayed(item) => !isDisplayed(item);
 
 const _hidden = ['hidden', 'collapse'];
 
+bool _isHidden(PageLoaderElement root) =>
+    _hidden.contains(root.computedStyle['visibility']);
+
 /// Checks if a PageLoaderElement/PageObject is hidden based on "visibility"
 /// style.
 ///
 /// A PageLoaderElement/PageObject is considered hidden if its `visibility`
 /// style is either `hidden` or `collapse`.
 bool isHidden(item) =>
-    _hidden.contains(_rootElementOfAndRethrow(item, 'isHidden/isNotHidden')
-        .computedStyle['visibility']);
+    _isHidden(_rootElementOfAndRethrow(item, 'isHidden/isNotHidden'));
 
 /// Checks if PageLoaderElement/PageObject is not hidden based on "visibility"
 /// style.
 bool isNotHidden(item) => !isHidden(item);
+
+/// Checks if a PageLoaderElement/PageObject is visible.
+///
+/// A PageLoaderElement/PageObject is considered visible if it:
+/// *   exists
+/// *   isDisplayed
+/// *   isNotHidden
+///
+/// Does NOT check whether the element is on screen and unobscured.
+bool isVisible(item) {
+  final root = _rootElementOfAndRethrow(item, 'isVisible/isNotVisible');
+  return root.exists && root.displayed && !_isHidden(root);
+}
+
+/// Checks if a PageLoaderElement/PageObject is not visible.
+bool isNotVisible(item) => !isVisible(item);
 
 /// Checks if PageLoaderElement/PageObject is focused.
 bool isFocused(item) =>
@@ -109,7 +127,8 @@ PageLoaderElement rootElementOf(item) {
   try {
     return item.$root;
   } on NoSuchMethodError {
-    throw PageLoaderArgumentError.onWrongType('rootElementOf');
+    throw PageLoaderArgumentError.onWrongType(
+        'rootElementOf', item.runtimeType);
   }
 }
 
@@ -121,7 +140,7 @@ PageLoaderElement _rootElementOfAndRethrow(item, String f) {
   try {
     _root = rootElementOf(item);
   } on PageLoaderArgumentError {
-    throw PageLoaderArgumentError.onWrongType(f);
+    throw PageLoaderArgumentError.onWrongType(f, item.runtimeType);
   }
   return _root;
 }
@@ -129,7 +148,8 @@ PageLoaderElement _rootElementOfAndRethrow(item, String f) {
 class PageLoaderArgumentError extends ArgumentError {
   PageLoaderArgumentError._(String message) : super(message);
 
-  factory PageLoaderArgumentError.onWrongType(String f) =>
-      PageLoaderArgumentError._("'$f' may only be called on PageObjects "
-          "or PageLoaderElements");
+  factory PageLoaderArgumentError.onWrongType(String f, Type actualType) =>
+      PageLoaderArgumentError._(
+          "'$f' must be called on PageObjects or 'PageLoaderElement' type. "
+          "Currently being called on type '$actualType'.");
 }

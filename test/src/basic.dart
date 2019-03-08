@@ -118,7 +118,7 @@ void runTests(GetNewContext contextGenerator) {
         fail('Expected to throw on clicking non-existant element');
       } catch (e) {
         expect(e.toString(),
-            contains('PageLoaderException: Found 0 elements in _single'));
+            contains('Expected to find exactly 1 match, but found 0 for:'));
       }
     });
 

@@ -6,16 +6,6 @@ part of pageloader.single_finder_method;
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-
 class _$SingleFinderMethod extends SingleFinderMethod {
   @override
   final String name;
@@ -31,6 +21,8 @@ class _$SingleFinderMethod extends SingleFinderMethod {
   final Optional<String> templateType;
   @override
   final bool isRoot;
+  @override
+  final bool isNullElement;
 
   factory _$SingleFinderMethod([void updates(SingleFinderMethodBuilder b)]) =>
       (new SingleFinderMethodBuilder()..update(updates)).build();
@@ -42,26 +34,37 @@ class _$SingleFinderMethod extends SingleFinderMethod {
       this.filterDeclarations,
       this.checkerDeclarations,
       this.templateType,
-      this.isRoot})
+      this.isRoot,
+      this.isNullElement})
       : super._() {
-    if (name == null)
+    if (name == null) {
       throw new BuiltValueNullFieldError('SingleFinderMethod', 'name');
-    if (pageObjectType == null)
+    }
+    if (pageObjectType == null) {
       throw new BuiltValueNullFieldError(
           'SingleFinderMethod', 'pageObjectType');
-    if (finderDeclaration == null)
+    }
+    if (finderDeclaration == null) {
       throw new BuiltValueNullFieldError(
           'SingleFinderMethod', 'finderDeclaration');
-    if (filterDeclarations == null)
+    }
+    if (filterDeclarations == null) {
       throw new BuiltValueNullFieldError(
           'SingleFinderMethod', 'filterDeclarations');
-    if (checkerDeclarations == null)
+    }
+    if (checkerDeclarations == null) {
       throw new BuiltValueNullFieldError(
           'SingleFinderMethod', 'checkerDeclarations');
-    if (templateType == null)
+    }
+    if (templateType == null) {
       throw new BuiltValueNullFieldError('SingleFinderMethod', 'templateType');
-    if (isRoot == null)
+    }
+    if (isRoot == null) {
       throw new BuiltValueNullFieldError('SingleFinderMethod', 'isRoot');
+    }
+    if (isNullElement == null) {
+      throw new BuiltValueNullFieldError('SingleFinderMethod', 'isNullElement');
+    }
   }
 
   @override
@@ -73,16 +76,17 @@ class _$SingleFinderMethod extends SingleFinderMethod {
       new SingleFinderMethodBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! SingleFinderMethod) return false;
-    return name == other.name &&
+    return other is SingleFinderMethod &&
+        name == other.name &&
         pageObjectType == other.pageObjectType &&
         finderDeclaration == other.finderDeclaration &&
         filterDeclarations == other.filterDeclarations &&
         checkerDeclarations == other.checkerDeclarations &&
         templateType == other.templateType &&
-        isRoot == other.isRoot;
+        isRoot == other.isRoot &&
+        isNullElement == other.isNullElement;
   }
 
   @override
@@ -91,12 +95,14 @@ class _$SingleFinderMethod extends SingleFinderMethod {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, name.hashCode), pageObjectType.hashCode),
-                        finderDeclaration.hashCode),
-                    filterDeclarations.hashCode),
-                checkerDeclarations.hashCode),
-            templateType.hashCode),
-        isRoot.hashCode));
+                    $jc(
+                        $jc($jc($jc(0, name.hashCode), pageObjectType.hashCode),
+                            finderDeclaration.hashCode),
+                        filterDeclarations.hashCode),
+                    checkerDeclarations.hashCode),
+                templateType.hashCode),
+            isRoot.hashCode),
+        isNullElement.hashCode));
   }
 
   @override
@@ -108,7 +114,8 @@ class _$SingleFinderMethod extends SingleFinderMethod {
           ..add('filterDeclarations', filterDeclarations)
           ..add('checkerDeclarations', checkerDeclarations)
           ..add('templateType', templateType)
-          ..add('isRoot', isRoot))
+          ..add('isRoot', isRoot)
+          ..add('isNullElement', isNullElement))
         .toString();
   }
 }
@@ -152,6 +159,11 @@ class SingleFinderMethodBuilder
   bool get isRoot => _$this._isRoot;
   set isRoot(bool isRoot) => _$this._isRoot = isRoot;
 
+  bool _isNullElement;
+  bool get isNullElement => _$this._isNullElement;
+  set isNullElement(bool isNullElement) =>
+      _$this._isNullElement = isNullElement;
+
   SingleFinderMethodBuilder();
 
   SingleFinderMethodBuilder get _$this {
@@ -163,6 +175,7 @@ class SingleFinderMethodBuilder
       _checkerDeclarations = _$v.checkerDeclarations;
       _templateType = _$v.templateType;
       _isRoot = _$v.isRoot;
+      _isNullElement = _$v.isNullElement;
       _$v = null;
     }
     return this;
@@ -170,7 +183,9 @@ class SingleFinderMethodBuilder
 
   @override
   void replace(covariant SingleFinderMethod other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$SingleFinderMethod;
   }
 
@@ -189,7 +204,8 @@ class SingleFinderMethodBuilder
             filterDeclarations: filterDeclarations,
             checkerDeclarations: checkerDeclarations,
             templateType: templateType,
-            isRoot: isRoot);
+            isRoot: isRoot,
+            isNullElement: isNullElement);
     replace(_$result);
     return _$result;
   }
@@ -218,4 +234,9 @@ abstract class SingleFinderMethodBaseBuilder {
 
   bool get isRoot;
   set isRoot(bool isRoot);
+
+  bool get isNullElement;
+  set isNullElement(bool isNullElement);
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

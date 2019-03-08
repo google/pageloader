@@ -99,6 +99,39 @@ void main() {
     expect(context, isNotFocused);
     expect(po, isNotFocused);
   });
+
+  test('isVisible', () {
+    final context = DummyPageLoaderElement();
+    final po = DummyPO(context);
+
+    expect(context, isVisible);
+    expect(po, isVisible);
+  });
+
+  test('isNotVisible', () {
+    final context1 = DummyPageLoaderElement();
+    (context1.computedStyle as DummyPageLoaderAttributes)['visibility'] =
+        'hidden';
+    final context2 = DummyPageLoaderElement();
+    (context2.computedStyle as DummyPageLoaderAttributes)['visibility'] =
+        'collapse';
+    final context3 = DummyPageLoaderElement(exists: false);
+    final context4 = DummyPageLoaderElement(displayed: false);
+
+    final po1 = DummyPO(context1);
+    final po2 = DummyPO(context2);
+    final po3 = DummyPO(context3);
+    final po4 = DummyPO(context4);
+
+    expect(context1, isNotVisible);
+    expect(context2, isNotVisible);
+    expect(context3, isNotVisible);
+    expect(context4, isNotVisible);
+    expect(po1, isNotVisible);
+    expect(po2, isNotVisible);
+    expect(po3, isNotVisible);
+    expect(po4, isNotVisible);
+  });
 }
 
 class DummyPO {

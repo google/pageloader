@@ -14,7 +14,7 @@
 /// Core generation functions.
 library pageloader.core;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:quiver/core.dart';
@@ -95,7 +95,7 @@ bool isPageloaderAnnotation(Annotation annotation) =>
 
 /// Returns set of all Pageloader annotation the current annotation satisfies.
 Set<AnnotationKind> getAnnotationKind(Annotation annotation) {
-  final returnSet = Set<AnnotationKind>();
+  final returnSet = <AnnotationKind>{};
   final element = annotation.element;
   if (element != null) {
     returnSet
@@ -124,6 +124,10 @@ bool isPageloaderChecker(Annotation annotation) =>
 /// True if annotation is a [Mouse].
 bool isPageloaderMouse(Annotation annotation) =>
     getAnnotationKind(annotation).contains(AnnotationKind.mouse);
+
+/// True if annotation is [nullElement].
+bool isPageloaderNullElement(Annotation annotation) =>
+    getAnnotationKind(annotation).contains(AnnotationKind.nullElement);
 
 /// True if annotation is a [root].
 bool isPageloaderRoot(Annotation annotation) =>

@@ -14,7 +14,7 @@
 /// Generation for page object lists.
 library pageloader.list_finder_method;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 
@@ -29,7 +29,9 @@ part 'list_finder_method.g.dart';
 /// and [absent()] otherwise.
 Optional<ListFinderMethod> collectListFinderGetter(
     CoreMethodInformationBase methodInfo, MethodDeclaration node) {
-  if ((!methodInfo.isAbstract || !methodInfo.isGetter) ||
+  if (!methodInfo.isAbstract ||
+      !methodInfo.isGetter ||
+      node.isStatic ||
       !methodInfo.finder.isPresent ||
       !methodInfo.isList) {
     return Optional.absent();

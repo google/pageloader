@@ -13,13 +13,35 @@
 
 library pageloader.invalid_method_exception;
 
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/element/element.dart';
+
 /// Thrown when a method defined in a page object is invalid in some way.
 class InvalidMethodException implements Exception {
   final String _message;
-  final String _methodSource;
+  final AstNode _methodNode;
 
-  InvalidMethodException(this._methodSource, this._message);
+  InvalidMethodException(this._methodNode, this._message);
 
   String get message => _message;
-  String get methodSource => _methodSource;
+  String get methodSource => _nodeMessage(_methodNode);
+
+  /// Generates a detailed message on the [node] throwing the error
+  /// that includes file and location.
+  String _nodeMessage(AstNode node) {
+    final compUnitElement = _getCompilationUnitElement(node);
+    final uri = compUnitElement.source.uri;
+
+    final exactLineInfo = compUnitElement.lineInfo.getLocation(node.offset);
+    return '$uri $exactLineInfo\t\t ${node.toSource()}';
+  }
+
+  /// Returns the [CompilationUnitElement] of [node].
+  CompilationUnitElement _getCompilationUnitElement(AstNode node) {
+    AstNode _node = node;
+    while (_node is! CompilationUnit) {
+      _node = _node.parent;
+    }
+    return (_node as CompilationUnit).declaredElement;
+  }
 }

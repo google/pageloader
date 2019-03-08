@@ -13,7 +13,7 @@
 
 library pageloader.core_method_information;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 
@@ -53,7 +53,8 @@ TypeInformation getTypeInformation(String type) {
     ..typeArguments = typeArguments);
 }
 
-TypeInformation extractPageObjectInfo(TypeInformation typeInfo, String source) {
+TypeInformation extractPageObjectInfo(
+    TypeInformation typeInfo, AstNode source) {
   if (typeInfo.typeArguments.length != 1) {
     throw InvalidMethodException(
         source,
@@ -79,7 +80,7 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
 
   TypeInformation pageObjectInfo;
   if (isFuture || isList) {
-    pageObjectInfo = extractPageObjectInfo(typeInfo, node.toSource());
+    pageObjectInfo = extractPageObjectInfo(typeInfo, node);
   } else {
     pageObjectInfo = typeInfo;
   }
@@ -88,6 +89,7 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
   final methodAnnotations = node.metadata;
   final isMouse = methodAnnotations.any(isPageloaderMouse);
   final isRoot = methodAnnotations.any(isPageloaderRoot);
+  final isNullElement = methodAnnotations.any(isPageloaderNullElement);
 
   final finders = methodAnnotations
       .where(isPageloaderFinder)
@@ -95,7 +97,7 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
       .toList();
   if (finders.length > 1) {
     throw InvalidMethodException(
-        node.toSource(), 'multiple Finders cannot be used for single method');
+        node, 'multiple Finders cannot be used for single method');
   }
 
   final finder = finders.length == 1 ? finders.single : null;
@@ -110,29 +112,45 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
 
   if (finder == null) {
     if (filters.isNotEmpty) {
-      throw InvalidMethodException(
-          node.toSource(), 'found Filters but no Finder');
+      throw InvalidMethodException(node, 'found Filters but no Finder');
     }
     if (checkers.isNotEmpty) {
-      throw InvalidMethodException(
-          node.toSource(), 'found Checkers but no Finder');
+      throw InvalidMethodException(node, 'found Checkers but no Finder');
     }
+  }
+
+  if (isRoot && isNullElement) {
+    throw InvalidMethodException(
+        node, 'cannot use @root and @nullElement together');
   }
 
   if (isRoot) {
     if (filters.isNotEmpty) {
-      throw InvalidMethodException(
-          node.toSource(), 'cannot use Filters with @root');
+      throw InvalidMethodException(node, 'cannot use Filters with @root');
     }
     if (checkers.isNotEmpty) {
-      throw InvalidMethodException(
-          node.toSource(), 'cannot use Checkers with @root');
+      throw InvalidMethodException(node, 'cannot use Checkers with @root');
+    }
+    if (finder != null) {
+      throw InvalidMethodException(node, 'cannot use finder with @root');
     }
   }
 
-  if (finder != null && isRoot) {
-    throw InvalidMethodException(
-        node.toSource(), 'cannot use finder with @root');
+  if (isNullElement) {
+    if (filters.isNotEmpty) {
+      throw InvalidMethodException(
+          node, 'cannot use Filters with @nullElement');
+    }
+    if (checkers.isNotEmpty) {
+      throw InvalidMethodException(
+          node, 'cannot use Checkers with @nullElement');
+    }
+    if (isList) {
+      throw InvalidMethodException(node, 'cannot use @nullElement on a List');
+    }
+    if (finder != null) {
+      throw InvalidMethodException(node, 'cannot use finder with @nullElement');
+    }
   }
 
   return CoreMethodInformation((b) => b
@@ -151,6 +169,8 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
     ..checkers = checkers
     ..isMouse = isMouse
     ..isRoot = isRoot
+    ..isNullElement = isNullElement
+    ..node = node
     ..nodeSource = node.toSource());
 }
 
@@ -183,6 +203,8 @@ abstract class CoreMethodInformationBase {
   List<String> get filters;
   List<String> get checkers;
   bool get isRoot;
+  bool get isNullElement;
 
   String get nodeSource;
+  AstNode get node;
 }

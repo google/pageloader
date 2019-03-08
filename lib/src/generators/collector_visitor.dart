@@ -11,7 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart';
 
 import 'methods/core.dart';
 import 'methods/core_method_information.dart';
@@ -78,7 +79,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
     final matching = node.metadata.where(isPageloaderAnnotation);
     if (matching.isNotEmpty) {
       badMethods.add(InvalidMethodException(
-          node.toSource(),
+          node,
           'Field declarations should never have PageLoader annotations. '
           '(Did you forget "get" on a PageLoader getter?)'));
     }

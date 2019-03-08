@@ -31,6 +31,7 @@ void main() {
       expect(info.pageObjectType, 'String');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, false);
@@ -49,6 +50,7 @@ void main() {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
@@ -69,6 +71,7 @@ void main() {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
@@ -89,6 +92,7 @@ void main() {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
@@ -108,6 +112,7 @@ void main() {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, true);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
@@ -128,6 +133,7 @@ void main() {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, true);
       expect(info.isList, true);
       expect(info.finder.isPresent, true);
@@ -147,6 +153,7 @@ void main() {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, true);
       expect(info.finder.isPresent, true);
@@ -166,6 +173,26 @@ void main() {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, true);
+      expect(info.isNullElement, false);
+      expect(info.isFuture, false);
+      expect(info.isList, false);
+      expect(info.finder.isPresent, false);
+      expect(info.filters, isEmpty);
+      expect(info.checkers, isEmpty);
+    });
+
+    test('nullElement', () async {
+      final method = await support.getMethodDeclaration(
+          '@nullElement PageObject get nullMethod;', 'nullMethod');
+      final info = collectCoreMethodInformation(method);
+
+      expect(info.name, 'nullMethod');
+      expect(info.isGetter, true);
+      expect(info.isAbstract, true);
+      expect(info.pageObjectType, 'PageObject');
+      expect(info.pageObjectTemplate.isPresent, false);
+      expect(info.isRoot, false);
+      expect(info.isNullElement, true);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, false);
@@ -185,6 +212,7 @@ void main() {
       expect(info.pageObjectTemplate.isPresent, true);
       expect(info.pageObjectTemplate.value, 'PageObject');
       expect(info.isRoot, true);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, false);
@@ -204,6 +232,7 @@ void main() {
       expect(info.pageObjectTemplate.isPresent, true);
       expect(info.pageObjectTemplate.value, 'PageObject');
       expect(info.isRoot, true);
+      expect(info.isNullElement, false);
       expect(info.isFuture, true);
       expect(info.isList, false);
       expect(info.finder.isPresent, false);
@@ -238,6 +267,7 @@ class MyAnnotation implements CssFinder {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
@@ -274,6 +304,7 @@ class MyAnnotation implements CssFinder, Checker {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
@@ -316,6 +347,7 @@ class MyAnnotation implements CssFinder, Filter {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
@@ -336,6 +368,7 @@ class MyAnnotation implements CssFinder, Filter {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, true);
       expect(info.isList, false);
       expect(info.finder.isPresent, true);
@@ -357,6 +390,7 @@ class MyAnnotation implements CssFinder, Filter {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, true);
       expect(info.isList, true);
       expect(info.finder.isPresent, true);
@@ -377,6 +411,7 @@ class MyAnnotation implements CssFinder, Filter {
       expect(info.pageObjectType, 'PageObject');
       expect(info.pageObjectTemplate.isPresent, false);
       expect(info.isRoot, false);
+      expect(info.isNullElement, false);
       expect(info.isFuture, false);
       expect(info.isList, true);
       expect(info.finder.isPresent, true);

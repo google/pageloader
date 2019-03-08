@@ -14,7 +14,7 @@
 /// Generation for page object iterables.
 library pageloader.iterable_finder_method;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 
@@ -31,6 +31,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
     MethodDeclaration node, List<Annotation> methodAnnotations) {
   if (!node.isGetter ||
       !node.isAbstract ||
+      node.isStatic ||
       !node.returnType.toString().startsWith(pageObjectIterable)) {
     return Optional.absent();
   }
@@ -41,10 +42,13 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
   for (final annotation in methodAnnotations) {
     if (isPageloaderFinder(annotation)) {
       if (finder != null) {
-        throw InvalidMethodException(node.toSource(),
-            'multiple Finders cannot be used for single method');
+        throw InvalidMethodException(
+            node, 'multiple Finders cannot be used for single method');
       }
       finder = generateAnnotationDeclaration(annotation);
+    } else if (isPageloaderNullElement(annotation)) {
+      throw InvalidMethodException(
+          node, "cannot use '@nullElement' with PageObjectIterable");
     } else if (isPageloaderFilter(annotation)) {
       filters.add(generateAnnotationDeclaration(annotation));
     } else if (isPageloaderChecker(annotation)) {
@@ -54,8 +58,8 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
 
   final typeArguments = getReturnTypeArguments(node.returnType.toString());
   if (typeArguments.length != 1) {
-    throw InvalidMethodException(node.toSource(),
-        'return type should specify exactly one type argument');
+    throw InvalidMethodException(
+        node, 'return type should specify exactly one type argument');
   }
 
   // Convert 'ByCheckTag' to 'ByTagName' if necessary.
@@ -66,12 +70,10 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
 
   if (finder == null) {
     if (filters.isNotEmpty) {
-      throw InvalidMethodException(
-          node.toSource(), 'found Filters but no Finder');
+      throw InvalidMethodException(node, 'found Filters but no Finder');
     }
     if (checkers.isNotEmpty) {
-      throw InvalidMethodException(
-          node.toSource(), 'found Checkers but no Finder');
+      throw InvalidMethodException(node, 'found Checkers but no Finder');
     }
     return Optional.absent();
   } else {

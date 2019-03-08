@@ -13,7 +13,8 @@
 
 import 'dart:async';
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/file_system.dart';
@@ -36,7 +37,7 @@ import '../mocks/sdk.dart';
 /// [preamble] should be used for custom annotations.
 Future<MethodDeclaration> getMethodDeclaration(
     String methodDeclaration, String methodName,
-    {String preamble: ''}) async {
+    {String preamble = ''}) async {
   final classToParse = '''
 import 'dart:async';
 import '/test/root/path/annotations.dart';
@@ -110,7 +111,7 @@ class TestDriver {
       FileContentOverlay(),
       null, // ContextRoot
       sourceFactory,
-      AnalysisOptionsImpl()..strongMode = true,
+      AnalysisOptionsImpl(),
     );
     session = driver.currentSession;
 
@@ -128,7 +129,7 @@ class TestDriver {
   Future<CompilationUnit> resultForFile(String path, String contents) async {
     newSource(path, contents);
     session = driver.currentSession;
-    return (await session.getResolvedAst(pather.join(root, path))).unit;
+    return (await session.getResolvedUnit(pather.join(root, path))).unit;
   }
 
   /// Adds a new source and contents to the driver's scope.

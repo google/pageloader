@@ -53,6 +53,7 @@ html.Element setUp() {
         <option id='option3' value='value 3' debugId="option3">option 3</option>
       </select>
       <textarea id='textarea'></textarea>
+      <div id='keyboard-listener'>Listening:</div>
       <div class="outer-div">
         outer div 1
         <a-custom-tag></a-custom-tag>
@@ -113,7 +114,30 @@ html.Element setUp() {
   bindMouseEvents(displayedDiv);
   bindMouseEvents(centerDiv);
 
+  // Bind KeyboardEvent driven div element.
+  final keyboardListenerDiv = html.document.getElementById('keyboard-listener');
+  bindKeyboardListener(keyboardListenerDiv);
+
   return div;
+}
+
+void bindKeyboardListener(html.Element element) {
+  // 13 == keyCode for enter
+  element.onKeyDown.listen((evt) {
+    if (evt.keyCode == 13) {
+      element.text += ' enter keydown;';
+    }
+  });
+  element.onKeyPress.listen((evt) {
+    if (evt.keyCode == 13) {
+      element.text += ' enter keypress;';
+    }
+  });
+  element.onKeyUp.listen((evt) {
+    if (evt.keyCode == 13) {
+      element.text += ' enter keyup;';
+    }
+  });
 }
 
 void bindMouseEvents(html.Element element) {

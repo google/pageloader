@@ -35,6 +35,17 @@ limitations under the License.
         }
       }
 
+      function onFocusForText(event) {
+        var countDiv = document.querySelector('#text-with-focus-and-blur-focus-count');
+        var count = parseInt(countDiv.innerText) + 1;
+        countDiv.innerText = count;
+      }
+
+      function onBlurForText(event) {
+        var countDiv = document.querySelector('#text-with-focus-and-blur-blur-count');
+        var count = parseInt(countDiv.innerText) + 1;
+        countDiv.innerText = count;
+      }
   </script>
 </head>
 
@@ -60,6 +71,11 @@ limitations under the License.
      onmousemove='mouseProcessor(event);'>area for mouse events
 </div>
 <input type='text' id='text'/>
+<div>
+  <input type='text' id="text-with-focus-and-blur" onfocus="onFocusForText()" onblur="onBlurForText()"/>
+  <div id='text-with-focus-and-blur-focus-count'>0</div>
+  <div id='text-with-focus-and-blur-blur-count'>0</div>
+</div>
 <input type='text' readonly id='readonly' disabled/>
 <input type='checkbox' class='with-class-test class1 class2'/>
 <input type='radio' name='radio' value='radio1' debugid='debugId'/>

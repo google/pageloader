@@ -14,7 +14,7 @@
 /// Generates code for normal getters. Currently just a pass through.
 library pageloader.getter;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 import 'listeners.dart';
@@ -23,7 +23,7 @@ part 'getter.g.dart';
 
 /// Returns a [Getter] for a concrete getters, or [absent()] otherwise.
 Optional<Getter> collectUnannotatedGetter(MethodDeclaration node) {
-  if (!node.isAbstract && node.isGetter) {
+  if (!node.isAbstract && node.isGetter && !node.isStatic) {
     return Optional.of(Getter((b) => b
       ..returnType = node.returnType.toString()
       ..name = node.name.toString()));

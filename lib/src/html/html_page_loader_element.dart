@@ -41,11 +41,11 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   List<Checker> _checkers;
   List<PageLoaderListener> _listeners;
 
-  HtmlPageLoaderElement({SyncFn externalSyncFn: noOpExecuteSyncedFn})
+  HtmlPageLoaderElement({SyncFn externalSyncFn = noOpExecuteSyncedFn})
       : syncFn = externalSyncFn;
 
   HtmlPageLoaderElement.createFromElement(this._cachedElement,
-      {SyncFn externalSyncFn: noOpExecuteSyncedFn})
+      {SyncFn externalSyncFn = noOpExecuteSyncedFn})
       : _parentElement = null,
         _finder = null,
         _filters = [],
@@ -104,11 +104,10 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   PageUtils get utils => HtmlPageUtils(externalSyncFn: syncFn);
 
-  @deprecated
   @override
   dynamic get context => _single;
 
-  @deprecated
+  /// Same as [context].
   @override
   dynamic get contextSync => _single;
 
@@ -118,10 +117,8 @@ class HtmlPageLoaderElement implements PageLoaderElement {
     }
 
     final elems = elements;
-    if (elems.isEmpty) {
-      throw FoundZeroElementsInSingleException(this);
-    } else if (elems.length > 1) {
-      throw FoundMultipleElementsInSingleException(this);
+    if (elems.length != 1) {
+      throw SinglePageObjectException(this, elems.length);
     }
     _cachedElement = elems[0];
     return _cachedElement;
@@ -171,9 +168,16 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       core.staleElementWrapper(method, _clearCache, _isStaleElementException);
 
   @override
-  String toString() =>
-      '${_parentElement == null ? "(no parent)" : _parentElement.toString()} ->'
-      '$_finder | $_filters | $_checkers';
+  String toString() => _finder == null
+      ? _parentElement.toString()
+      : 'Element selected by $_finder,' +
+          (_filters.isNotEmpty ? ' filtered by $_filters,' : '') +
+          (_checkers.isNotEmpty ? ' checked with $_checkers,' : '') +
+          ' in:\n${(_parentElement ?? utils.root).properties['outerHTML']}';
+
+  @override
+  String toStringDeep() =>
+      "<$name>\n\nHTML:\n${properties['outerHTML']}\n\n$this";
 
   @override
   PageLoaderElement get shadowRoot => throw 'not implemented';
@@ -220,8 +224,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
     if (count == 1)
       return true;
     else if (count == 0) return false;
-    throw PageLoaderException.withContext(
-        'Found $count elements on call to exists', this);
+    throw PageLoaderException('Found $count elements on call to exists', this);
   }
 
   @override
@@ -246,7 +249,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   PageLoaderElement byTag(String tagName) => getElementsByCss(tagName).single;
 
   @override
-  Future<Null> clear({bool focusBefore: true, bool blurAfter: true}) async =>
+  Future<Null> clear({bool focusBefore = true, bool blurAfter = true}) async =>
       syncFn(() async => _retryWhenStale(() async {
             final element = _single;
             if (_hasValueProperty(element)) {
@@ -296,28 +299,131 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<Null> type(String keys,
-          {bool focusBefore: true, bool blurAfter: true}) async =>
+          {bool focusBefore = true, bool blurAfter = true}) async =>
       syncFn(() async => _retryWhenStale(() async {
-            final node = _single;
             if (focusBefore) await focus();
-            await _fireKeyPressEvents(node, keys.length);
-            if (_hasValueProperty(node)) {
-              _setValue(node, _getValue(node) + keys);
-              await _microtask(() => node.dispatchEvent(TextEvent('input')));
-              await _microtask(() => node.dispatchEvent(TextEvent('change')));
-            }
+            await _typeSequence(_keysToKeyboard(keys));
             if (blurAfter) await blur();
           }));
 
-  // KeyEvent doesn't work in Dartium due to:
-  // https://code.google.com/p/dart/issues/detail?id=13902
-  // There is no reliable way to set the actual key values, so we just fire a number of
-  // key presses instead.
-  Future<Null> _fireKeyPressEvents(Element element, int numKeys) async {
-    for (int i = 0; i < numKeys; ++i) {
-      await _microtask(() => element.dispatchEvent(KeyboardEvent('keypress')));
+  PageLoaderKeyboard _keysToKeyboard(String keys) {
+    final kb = PageLoaderKeyboard();
+    for (var i = 0; i < keys.length; i++) {
+      final key = keys[i];
+      if (PageLoaderKeyboard.isShiftValue(key)) {
+        kb
+          ..typeSpecialKey(PageLoaderSpecialKey.shift, keyUp: false)
+          ..typeKey(key)
+          ..typeSpecialKey(PageLoaderSpecialKey.shift, keyDown: false);
+      } else {
+        kb.typeKey(key);
+      }
+    }
+    return kb;
+  }
+
+  @override
+  Future<void> typeSequence(PageLoaderKeyboard keys) =>
+      _retryWhenStale(() => _typeSequence(keys));
+
+  Future<void> _typeSequence(PageLoaderKeyboard keys) async {
+    // Variables used for adjusting text input values.
+    final keypressCharCodes = <int>[];
+    String initialValue;
+
+    if (_hasValueProperty(_single)) {
+      initialValue = _getValue(_single) ?? '';
+    }
+
+    // Handle key events.
+    for (final event in keys.events) {
+      // Handle 'keypress' event. If element has value, insert into value.
+      if (event.type == KeyboardEventType.keyPress) {
+        var charCode = 0;
+        if (!event.isSpecial) {
+          charCode = event.key.codeUnitAt(0);
+        } else if (event.specialKey == PageLoaderSpecialKey.enter) {
+          charCode = KeyCode.ENTER;
+        }
+
+        // Dispatch associated events on contenteditable elements.
+        if (_isContentEditable(_single)) {
+          final keyValue = String.fromCharCode(charCode);
+          _single.text += keyValue;
+          await _microtask(() => _single.dispatchEvent(TextEvent('input')));
+        }
+
+        await _fireKeyboardEvent('keypress',
+            keyCode: charCode, // In 'keypress', this is charCode
+            charCode: charCode,
+            altKey: event.altMod,
+            ctrlKey: event.ctrlMod,
+            metaKey: event.metaMod,
+            shiftKey: event.shiftMod);
+        keypressCharCodes.add(charCode);
+      } else {
+        // 'keydown' or 'keyup' events
+        var keyCode = 0;
+        if (event.isSpecial) {
+          keyCode = _specialToKeyCode[event.specialKey];
+        } else {
+          final charCode = event.key.codeUnitAt(0);
+          if (charCode >= _charCodeSmallA && charCode <= _charCodeSmallZ) {
+            keyCode = KeyCode.A + (charCode - _charCodeSmallA);
+          } else if (charCode >= _charCodeA && charCode <= _charCodeZ) {
+            keyCode = KeyCode.A + (charCode - _charCodeA);
+          } else if (charCode >= _charCode0 && charCode <= _charCode9) {
+            keyCode = KeyCode.ZERO + (charCode - _charCode0);
+          } else {
+            keyCode = _charToKeyCodes[event.key];
+          }
+        }
+        // If 'keyCode' could not be determined to a value (ex: '\n'), keep
+        // it at 0 and use this instead.
+        final type =
+            event.type == KeyboardEventType.keyDown ? 'keydown' : 'keyup';
+        await _fireKeyboardEvent(type,
+            keyCode: keyCode,
+            charCode: 0, // Always 0 in 'keydown' or 'keyup'
+            altKey: event.altMod,
+            ctrlKey: event.ctrlMod,
+            metaKey: event.metaMod,
+            shiftKey: event.shiftMod);
+      }
+    }
+
+    // Dispatch associated [TextEvent]s if needed on keypresses.
+    if (_hasValueProperty(_single)) {
+      final toAppend =
+          keypressCharCodes.map((c) => String.fromCharCode(c)).join();
+      // This is needed since on some elements, sending 'keypress' will
+      // automatically update the value while on some they don't and must
+      // be manually injected. If the 'initialValue' differs, then we know
+      // that the keypress events updated the values and we do not have to
+      // manually update.
+      if (initialValue == _getValue(_single)) {
+        _setValue(_single, _getValue(_single) + toAppend);
+      }
+      await _microtask(() => _single.dispatchEvent(TextEvent('input')));
+      await _microtask(() => _single.dispatchEvent(TextEvent('change')));
     }
   }
+
+  Future<Null> _fireKeyboardEvent(String event,
+          {int keyCode = 0,
+          int charCode = 0,
+          bool altKey = false,
+          bool ctrlKey = false,
+          bool metaKey = false,
+          bool shiftKey = false}) =>
+      _microtask(() => dispatchEvent(KeyEvent(event,
+              keyCode: keyCode,
+              charCode: charCode,
+              altKey: altKey,
+              ctrlKey: ctrlKey,
+              metaKey: metaKey,
+              shiftKey: shiftKey)
+          .wrapped));
 
   @override
   Future<Null> focus() async => syncFn(() async => _retryWhenStale(() async {
@@ -411,6 +517,11 @@ void _setValue(Element element, String value) {
       'Cannot find value for type: ${element.runtimeType}');
 }
 
+bool _isContentEditable(Element element) {
+  final editable = element.attributes['contenteditable'];
+  return editable == '' || editable == 'true';
+}
+
 // execute [fn] as a separate microtask and return a [Future] that completes
 // normally when that [Future] completes (normally or with an error).
 Future<Null> _microtask(fn()) {
@@ -466,3 +577,84 @@ String _normalize(String string) {
   }
   return buffer.toString();
 }
+
+// Values and functions used for key mapping.
+
+final _charCodeSmallA = 'a'.codeUnitAt(0);
+final _charCodeA = 'A'.codeUnitAt(0);
+final _charCodeSmallZ = 'z'.codeUnitAt(0);
+final _charCodeZ = 'z'.codeUnitAt(0);
+final _charCode0 = '0'.codeUnitAt(0);
+final _charCode9 = '9'.codeUnitAt(0);
+
+// Mapping of String-based keys to its keyCode.
+const _charToKeyCodes = {
+  ')': KeyCode.ZERO,
+  '!': KeyCode.ONE,
+  '@': KeyCode.TWO,
+  '#': KeyCode.THREE,
+  r'$': KeyCode.FOUR,
+  '%': KeyCode.FIVE,
+  '^': KeyCode.SIX,
+  '&': KeyCode.SEVEN,
+  '*': KeyCode.EIGHT,
+  '(': KeyCode.NINE,
+  ';': KeyCode.SEMICOLON,
+  ':': KeyCode.SEMICOLON,
+  '=': KeyCode.EQUALS,
+  '+': KeyCode.EQUALS,
+  ',': KeyCode.COMMA,
+  '<': KeyCode.COMMA,
+  '-': KeyCode.DASH,
+  '_': KeyCode.DASH,
+  '.': KeyCode.PERIOD,
+  '>': KeyCode.PERIOD,
+  '/': KeyCode.SLASH,
+  '?': KeyCode.SLASH,
+  '`': KeyCode.TILDE,
+  '~': KeyCode.TILDE,
+  '[': KeyCode.OPEN_SQUARE_BRACKET,
+  '{': KeyCode.OPEN_SQUARE_BRACKET,
+  r'\': KeyCode.BACKSLASH,
+  '|': KeyCode.BACKSLASH,
+  ']': KeyCode.CLOSE_SQUARE_BRACKET,
+  '}': KeyCode.CLOSE_SQUARE_BRACKET,
+  '\'': KeyCode.SINGLE_QUOTE,
+  '"': KeyCode.SINGLE_QUOTE,
+  '\t': KeyCode.TAB,
+  ' ': KeyCode.SPACE,
+};
+
+// Mapping of special keys to its keyCode
+const _specialToKeyCode = {
+  PageLoaderSpecialKey.backSpace: KeyCode.BACKSPACE,
+  PageLoaderSpecialKey.tab: KeyCode.TAB,
+  PageLoaderSpecialKey.enter: KeyCode.ENTER,
+  PageLoaderSpecialKey.shift: KeyCode.SHIFT,
+  PageLoaderSpecialKey.control: KeyCode.CTRL,
+  PageLoaderSpecialKey.alt: KeyCode.ALT,
+  PageLoaderSpecialKey.pause: KeyCode.PAUSE,
+  PageLoaderSpecialKey.escape: KeyCode.ESC,
+  PageLoaderSpecialKey.pageUp: KeyCode.PAGE_UP,
+  PageLoaderSpecialKey.pageDown: KeyCode.PAGE_DOWN,
+  PageLoaderSpecialKey.end: KeyCode.END,
+  PageLoaderSpecialKey.home: KeyCode.HOME,
+  PageLoaderSpecialKey.left: KeyCode.LEFT,
+  PageLoaderSpecialKey.up: KeyCode.UP,
+  PageLoaderSpecialKey.right: KeyCode.RIGHT,
+  PageLoaderSpecialKey.down: KeyCode.DOWN,
+  PageLoaderSpecialKey.insert: KeyCode.INSERT,
+  PageLoaderSpecialKey.f1: KeyCode.F1,
+  PageLoaderSpecialKey.f2: KeyCode.F2,
+  PageLoaderSpecialKey.f3: KeyCode.F3,
+  PageLoaderSpecialKey.f4: KeyCode.F4,
+  PageLoaderSpecialKey.f5: KeyCode.F5,
+  PageLoaderSpecialKey.f6: KeyCode.F6,
+  PageLoaderSpecialKey.f7: KeyCode.F7,
+  PageLoaderSpecialKey.f8: KeyCode.F8,
+  PageLoaderSpecialKey.f9: KeyCode.F9,
+  PageLoaderSpecialKey.f10: KeyCode.F10,
+  PageLoaderSpecialKey.f11: KeyCode.F11,
+  PageLoaderSpecialKey.f12: KeyCode.F12,
+  PageLoaderSpecialKey.meta: KeyCode.META,
+};

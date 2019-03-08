@@ -26,7 +26,7 @@ abstract class Generics<T> {
     return typeDef(thing);
   }
 
-  T exampleMethod<T>(T v) => v;
+  S exampleMethod<S>(S s) => s;
 }
 
 @CheckTag('checked-generics')
@@ -47,7 +47,7 @@ abstract class GenericPair<T, V> {
   factory GenericPair.create(PageLoaderElement context) =
       $GenericPair<T, V>.create;
 
-  Map<T, V> exampleMethodMap<T, V>(T t, V v) => {t: v};
+  Map<R, S> exampleMethodMap<R, S>(R r, S s) => {r: s};
 }
 
 @PageObject()
@@ -82,7 +82,7 @@ abstract class GenericsMixin<T> {
     return typeDef(thing);
   }
 
-  T exampleMethod<T>(T v) => v;
+  R exampleMethod<R>(R r) => r;
 }
 
 @PageObject()
@@ -95,7 +95,7 @@ abstract class GenericPairUsingMixin<T, V> extends Object
 
 @PageObject()
 abstract class GenericPairMixin<T, V> {
-  Map<T, V> exampleMethodMap<T, V>(T t, V v) => {t: v};
+  Map<R, S> exampleMethodMap<R, S>(R r, S s) => {r: s};
 }
 
 @PageObject()

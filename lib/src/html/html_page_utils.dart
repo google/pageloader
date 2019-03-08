@@ -23,7 +23,7 @@ class HtmlPageUtils extends PageUtils {
   final SyncFn syncFn;
   HtmlPageLoaderElement _cachedRoot;
 
-  HtmlPageUtils({SyncFn externalSyncFn: noOpExecuteSyncedFn})
+  HtmlPageUtils({SyncFn externalSyncFn = noOpExecuteSyncedFn})
       : syncFn = externalSyncFn;
 
   /// Gets the body for the current page.
