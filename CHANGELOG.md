@@ -3,7 +3,8 @@
 - Added `@nullElement` annotation to create a non-existent PageLoaderElement object. 
   Null elements should be returned instead of `null` for better compatibility with
   utils and matcher.
-- (`HtmlPageLoaderElement` only) `PageLoaderKeyboard` added for more accurate keyboard inputs.
+- (`HtmlPageLoaderElement` only) `type(...)` better emulates individual keystrokes and sends
+  `keyUp`, `keyPress` and `keyDown` more accurately.
 - (`HtmlPageLoaderElement` only) `typeSequence(...)` added to better emulate sequence of
   individual keystrokes.
 - `isVisible` utility function and matcher to determine whether an element exists,
