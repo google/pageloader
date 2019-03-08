@@ -306,7 +306,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   /// Instead of using the `clear` API, we send a CTRL-A, then Backspace key and
   /// an empty string.
   @override
-  Future<Null> clear({bool focusBefore: true, bool blurAfter: true}) async =>
+  Future<Null> clear({bool focusBefore = true, bool blurAfter = true}) async =>
       _retryWhenStale(() async {
         if (focusBefore) await focus();
         _single.driver.keyboard.sendChord([sync_wd.Keyboard.control, 'a']);
