@@ -220,7 +220,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   @override
   bool get exists {
-    final count = (elements).length;
+    final count = elements.length;
     if (count == 1)
       return true;
     else if (count == 0) return false;
