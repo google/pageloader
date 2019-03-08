@@ -1,11 +1,11 @@
 name: pageloader
 
-version: 3.0.3
+version: 3.1.0
 
 authors:
   - Marc Fisher II (emeritus) <fisherii@google.com>
   - Max Kim <maxkim@google.com>
-  - Matt Staats (emeritus)
+  - Matt Staats <staats@google.com>
 
 description:
   Supports the creation of page objects that can be shared between in-browser tests
