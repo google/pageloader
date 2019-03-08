@@ -49,7 +49,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
   void writeToConstructorBuffer(
       StringBuffer constructorBuffer, String className, String defaultTag) {
     if (defaultTag != null) {
-      constructorBuffer.write('static String get tagName => $defaultTag;');
+      constructorBuffer.write('static const String tagName => $defaultTag;');
     } else {
       constructorBuffer.write("static String get tagName => throw '\"tagName\" "
           "is not defined by Page Object \"$className\". Requires @CheckTag "
