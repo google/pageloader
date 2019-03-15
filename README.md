@@ -246,6 +246,7 @@ you can use mixins or delegation to keep 'inheritance-like'
 behavior in your code.
 
 Consider: 
+
 ```dart
 @PageObject()
 abstract class BasePO {
@@ -267,6 +268,7 @@ abstract class ExtraPO extends BasePO { // 'extends' not allowed
 ```
 
 Delegation method fix:
+
 ```dart
 @PageObject()
 abstract class BasePO {
@@ -295,6 +297,7 @@ abstract class ExtraPO {
 ```
 
 Mixin method fix:
+
 ```dart
 @PageObject()
 abstract class BasePO extends Object with BasePOMixin {
