@@ -323,8 +323,8 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  Future<void> typeSequence(PageLoaderKeyboard keys) =>
-      _retryWhenStale(() => _typeSequence(keys));
+  Future<void> typeSequence(PageLoaderKeyboard keys) async =>
+      syncFn(() async => _retryWhenStale(() => _typeSequence(keys)));
 
   Future<void> _typeSequence(PageLoaderKeyboard keys) async {
     // Variables used for adjusting text input values.
