@@ -1,3 +1,9 @@
+## 3.1.1
+
+- Lint fixes.
+- Generated `tagName` getter is now const if valid, getter if not valid.
+- HtmlPageLoaderElement's `typeSequence` now calls `syncFn` to be aligned with `type`.
+
 ## 3.1.0
 
 - Added `@nullElement` annotation to create a non-existent PageLoaderElement object. 
