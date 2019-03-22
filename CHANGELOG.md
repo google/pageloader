@@ -1,7 +1,7 @@
 ## 3.1.1
 
 - Generated `tagName` getter is now const if valid, getter if not valid.
-- HtmlPageLoaderElement's `typeSequence` now calls `syncFn` to be aligned with `type`.
+- HtmlPageLoaderElement's `typeSequence` now calls `syncFn`.
 
 ## 3.1.0
 
