@@ -209,7 +209,7 @@ If your PageObject needs to create other PageObjects of variable type, use
 Example:
 
 ```dart
-import 'package:pageloader3/utils.dart';
+import 'package:pageloader/utils.dart';
 
 // ...
 
@@ -342,7 +342,7 @@ or PageObject. Users should use these API whenever possible.
 BAD:
 
 ```dart
-import 'package:pageloader3/pageloader.dart';
+import 'package:pageloader/pageloader.dart';
 
 @PageObject()
 @CheckTag('some-tag')
@@ -360,8 +360,8 @@ final poExists = somePO.rootElement.exists;
 GOOD:
 
 ```dart
-import 'package:pageloader3/pageloader.dart';
-import 'package:pageloader3/utils.dart';
+import 'package:pageloader/pageloader.dart';
+import 'package:pageloader/utils.dart';
 
 @PageObject()
 @CheckTag('some-tag')
@@ -385,7 +385,7 @@ expect(somePO.rootElement.exists, isTrue);
 GOOD:
 
 ```dart
-import 'package:pageloader3/testing.dart';
+import 'package:pageloader/testing.dart';
 
 expect(somePO, exists);
 ```
