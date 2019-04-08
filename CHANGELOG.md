@@ -1,3 +1,8 @@
+## 3.2.0
+
+- Allow `analyzer` version `0.36.x`.
+- Require Dart SDK `>=2.2.0`.
+
 ## 3.1.1
 
 - Generated `tagName` getter is now const if valid, getter if not valid.
