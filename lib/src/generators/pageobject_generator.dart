@@ -15,8 +15,6 @@ import 'dart:async';
 
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
-// ignore: implementation_imports
-import 'package:analyzer/src/dart/analysis/results.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -36,7 +34,8 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       Element element, ConstantReader annotation, BuildStep buildStep) async {
     final library = element.library;
     // ignore: deprecated_member_use
-    final resolvedLibrary = await ResolvedLibraryResultImpl.tmp(library);
+    final resolvedLibrary =
+        await library.session.getResolvedLibraryByElement(library);
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
     if (annotatedNode is ClassDeclaration) {
       try {
