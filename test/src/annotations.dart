@@ -88,6 +88,11 @@ void runTests(GetNewContext contextGenerator) {
       expect(page.useDash.innerText, 'option 2');
       expect(page.useCamelCase.innerText, 'option 3');
     });
+    
+    test('TestId', () async {
+      final page = TestIds.create(contextGenerator());
+      expect(page.divOne.innerText, 'data-test-id');
+    });
   });
 
   group('custom annotations', () {
@@ -274,6 +279,16 @@ abstract class DebugIds {
 
   @ByDebugId('option3', useCamelCase: true)
   PageLoaderElement get useCamelCase;
+}
+
+@PageObject()
+abstract class TestIds {
+  TestIds();
+
+  factory TestIds.create(PageLoaderElement context) = $TestIds.create;
+
+  @ByTestId('one')
+  PageLoaderElement get divOne;
 }
 
 class PseudoByTagName implements CssFinder {
