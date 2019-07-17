@@ -1,5 +1,6 @@
 language: dart
 sudo: required
+dist: trusty
 
 addons:
   apt:
@@ -8,9 +9,6 @@ addons:
     packages:
       - google-chrome-stable
 
-services:
-  - xfvb
-
 dart:
   - dev
 
@@ -18,11 +16,10 @@ before_install:
   - export CHROMEDRIVER_BINARY=/usr/bin/google-chrome
   - export CHROMEDRIVER_ARGS=--no-sandbox
   - /usr/bin/google-chrome --version
-
   - export DISPLAY=:99.0
 
 before_script:
-  - wget http://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip
+  - wget http://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
   - export PATH=$PATH:$PWD
   - ./tool/travis-setup.sh
