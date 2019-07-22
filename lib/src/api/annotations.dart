@@ -171,6 +171,43 @@ class ByDebugId implements CssFinder {
   String toString() => '@ByDebugId("$_debugId")';
 }
 
+/// Finds element by 'data-test-id' attribute.
+///
+/// To use this annotation, add a 'data-test-id' HTML attribute to the element
+/// you wish to select. This assigns a test-only ID to the element so this
+/// annotation can target select that element.
+///
+/// For more detailed explaination and rationales,
+/// please see go/change-resilient-ui-testing-dd or
+/// https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change
+///
+/// Example:
+///
+/// ```html
+/// <button data-test-id="cancel-button">
+/// <button data-test-id="submit-button">
+/// ```
+///
+/// Then these button can be selected as follow:
+/// ```dart
+/// @ByTestId("cancel-button")
+/// MaterialButtonPO get cancelButton;
+///
+/// @ByTestId("submit-button")
+/// MaterialButtonPO get submitButton;
+/// ```
+class ByTestId implements CssFinder {
+  final String _testId;
+
+  const ByTestId(this._testId);
+
+  @override
+  String get cssSelector => '[data-test-id="$_testId"]';
+
+  @override
+  String toString() => '@ByTestId("$_testId")';
+}
+
 /// Finds element by ID.
 class ById implements CssFinder {
   final String _id;

@@ -52,6 +52,7 @@ html.Element setUp() {
         <option id='option2' value='value 2' debug-id="option2">option 2</option>
         <option id='option3' value='value 3' debugId="option3">option 3</option>
       </select>
+      <div data-test-id="one">data-test-id</div>
       <textarea id='textarea'></textarea>
       <div id='keyboard-listener'>Listening:</div>
       <div class="outer-div">
