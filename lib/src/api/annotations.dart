@@ -171,9 +171,9 @@ class ByDebugId implements CssFinder {
   String toString() => '@ByDebugId("$_debugId")';
 }
 
-/// Finds element by 'data-test-id' attribute.
+/// Finds element by data-test-id attribute.
 ///
-/// To use this annotation, add a 'data-test-id' HTML attribute to the element
+/// To use this annotation, add a [data-test-id] HTML attribute to the element
 /// you wish to select. This assigns a test-only ID to the element so this
 /// annotation can target select that element.
 ///
