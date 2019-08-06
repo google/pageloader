@@ -9,7 +9,8 @@ authors:
 
 description:
   Supports the creation of page objects that can be shared between in-browser tests
-@@ -14,19 +14,19 @@ description:
+  and WebDriver tests.
+
 homepage: https://github.com/google/pageloader
 
 environment:
