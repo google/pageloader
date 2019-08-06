@@ -1,6 +1,6 @@
 ## 3.2.1
 
-- `build_config` dependency now uses version range
+- `build_config` dependency now uses version range.
 
 ## 3.2.0
 
