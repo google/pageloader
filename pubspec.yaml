@@ -20,6 +20,7 @@ dependencies:
   analyzer: '>=0.35.0 <0.37.0'
   build: '>0.12.7 <2.0.0'
   built_value: ^6.1.0
+  build_config: '>=0.3.1 <5.0.0'
   matcher: ^0.12.0+1
   quiver: '>=2.0.0 <3.0.0'
   source_gen: ^0.9.1+3
