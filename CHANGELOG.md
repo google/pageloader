@@ -1,3 +1,7 @@
+## 3.2.1
+
+- `build_config` dependency now uses version range
+
 ## 3.2.0
 
 - Allow `analyzer` version `0.36.x`.
