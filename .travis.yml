@@ -17,8 +17,8 @@ before_install:
   - sleep 3 # give time for xvfb to start
 
 before_script:
-# - wget http://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip When WD is updated
-  - wget http://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
+  - wget http://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip
+# - wget http://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
   - export PATH=$PATH:$PWD
   - ./tool/travis-setup.sh
