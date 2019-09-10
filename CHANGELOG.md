@@ -1,7 +1,7 @@
 ## 3.2.2
 
 - `build_config` bumped to 1.6.0.
-- Alloq `analyzer` version `0.37.x`.
+- Allow `analyzer` version `0.37.x`.
 
 ## 3.2.1
 
