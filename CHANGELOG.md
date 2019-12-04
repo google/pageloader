@@ -1,3 +1,6 @@
+## 3.2.3
+- Bump `analyzer` version to up to `0.40.0`.
+
 ## 3.2.2
 
 - `build_config` bumped to 1.6.0.
