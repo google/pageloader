@@ -100,7 +100,7 @@ class TestDriver {
 
     final logger = PerformanceLog(StringBuffer());
     final scheduler = AnalysisDriverScheduler(logger)..start();
-    final allResolvers = <UriResolver>[DartUriResolver(sdk)]..addAll(resolvers);
+    final allResolvers = <UriResolver>[DartUriResolver(sdk),..resolvers];
     final sourceFactory = SourceFactory(allResolvers);
 
     driver = AnalysisDriver(
