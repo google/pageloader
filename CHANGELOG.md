@@ -1,3 +1,6 @@
+## 3.2.4
+- Bump SDK minimum version to 2.3.
+
 ## 3.2.3
 - Bump `analyzer` version to up to `0.40.0`.
 
