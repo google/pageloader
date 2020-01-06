@@ -7,8 +7,6 @@ part of 'parameters.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $Parameters extends Parameters with $$Parameters {
   PageLoaderElement $__root__;
   $Parameters.create(PageLoaderElement currentContext)
@@ -17,8 +15,8 @@ class $Parameters extends Parameters with $$Parameters {
   }
   factory $Parameters.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Parameters is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Parameters is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Parameters". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String testOptionalPositionalParam(
@@ -49,7 +47,7 @@ class $Parameters extends Parameters with $$Parameters {
     return returnMe;
   }
 
-  String testOptionalNamedParam({String first: 'a', String second: 'b'}) {
+  String testOptionalNamedParam({String first = 'a', String second = 'b'}) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Parameters', 'testOptionalNamedParam');
     }
@@ -61,7 +59,7 @@ class $Parameters extends Parameters with $$Parameters {
   }
 
   String testMixedOptionalNamedParam(String x,
-      {String first: 'a', String second: 'b'}) {
+      {String first = 'a', String second = 'b'}) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod(
           'Parameters', 'testMixedOptionalNamedParam');
@@ -74,14 +72,17 @@ class $Parameters extends Parameters with $$Parameters {
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'Parameters\n\n${$__root__.toStringDeep()}';
 }
 
 class $$Parameters {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $ParametersUsingMixin extends ParametersUsingMixin
     with $$ParametersMixin, $$ParametersUsingMixin {
   PageLoaderElement $__root__;
@@ -91,20 +92,24 @@ class $ParametersUsingMixin extends ParametersUsingMixin
   }
   factory $ParametersUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "ParametersUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "ParametersUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "ParametersUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() =>
+      'ParametersUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$ParametersUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+
 class $$ParametersMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }

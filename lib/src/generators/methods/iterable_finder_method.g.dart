@@ -19,7 +19,7 @@ class _$IterableFinderMethod extends IterableFinderMethod {
   final String checkerDeclarations;
 
   factory _$IterableFinderMethod(
-          [void updates(IterableFinderMethodBuilder b)]) =>
+          [void Function(IterableFinderMethodBuilder) updates]) =>
       (new IterableFinderMethodBuilder()..update(updates)).build();
 
   _$IterableFinderMethod._(
@@ -51,7 +51,8 @@ class _$IterableFinderMethod extends IterableFinderMethod {
   }
 
   @override
-  IterableFinderMethod rebuild(void updates(IterableFinderMethodBuilder b)) =>
+  IterableFinderMethod rebuild(
+          void Function(IterableFinderMethodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -142,7 +143,7 @@ class IterableFinderMethodBuilder
   }
 
   @override
-  void update(void updates(IterableFinderMethodBuilder b)) {
+  void update(void Function(IterableFinderMethodBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -7,8 +7,6 @@ part of 'constructors.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $BasePO extends BasePO with $$BasePO {
   PageLoaderElement $__root__;
   $BasePO.create(PageLoaderElement currentContext)
@@ -17,15 +15,16 @@ class $BasePO extends BasePO with $$BasePO {
   }
   factory $BasePO.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "BasePO is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "BasePO is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "BasePO". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'BasePO\n\n${$__root__.toStringDeep()}';
 }
 
 class $$BasePO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   BCustomTagPO get bTagPO {
     for (final __listener in $__root__.listeners) {
@@ -41,6 +40,7 @@ class $$BasePO {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $BCustomTagPO extends BCustomTagPO with $$BCustomTagPO {
   PageLoaderElement $__root__;
   $BCustomTagPO.create(PageLoaderElement currentContext)
@@ -49,7 +49,7 @@ class $BCustomTagPO extends BCustomTagPO with $$BCustomTagPO {
   }
   factory $BCustomTagPO.lookup(PageLoaderSource source) =>
       $BCustomTagPO.create(source.byTag(BCustomTagPO.tagName));
-  static String get tagName => BCustomTagPO.tagName;
+  static const String tagName = BCustomTagPO.tagName;
   PageLoaderElement get rootElement {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BCustomTagPO', 'rootElement');
@@ -104,11 +104,13 @@ class $BCustomTagPO extends BCustomTagPO with $$BCustomTagPO {
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'BCustomTagPO\n\n${$__root__.toStringDeep()}';
 }
 
 class $$BCustomTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
@@ -123,6 +125,7 @@ class $$BCustomTagPO {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $CCustomTagPO extends CCustomTagPO with $$CCustomTagPO {
   PageLoaderElement $__root__;
   $CCustomTagPO.create(PageLoaderElement currentContext)
@@ -131,7 +134,7 @@ class $CCustomTagPO extends CCustomTagPO with $$CCustomTagPO {
   }
   factory $CCustomTagPO.lookup(PageLoaderSource source) =>
       $CCustomTagPO.create(source.byTag(CCustomTagPO.tagName));
-  static String get tagName => CCustomTagPO.tagName;
+  static const String tagName = CCustomTagPO.tagName;
   String get innerText {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CCustomTagPO', 'innerText');
@@ -142,11 +145,13 @@ class $CCustomTagPO extends CCustomTagPO with $$CCustomTagPO {
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'CCustomTagPO\n\n${$__root__.toStringDeep()}';
 }
 
 class $$CCustomTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
@@ -161,6 +166,7 @@ class $$CCustomTagPO {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $NoLookupPO extends NoLookupPO with $$NoLookupPO {
   PageLoaderElement $__root__;
   $NoLookupPO.create(PageLoaderElement currentContext)
@@ -169,14 +175,15 @@ class $NoLookupPO extends NoLookupPO with $$NoLookupPO {
   }
   factory $NoLookupPO.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "NoLookupPO is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "NoLookupPO is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "NoLookupPO". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'NoLookupPO\n\n${$__root__.toStringDeep()}';
 }
 
 class $$NoLookupPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }

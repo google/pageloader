@@ -15,8 +15,8 @@ class $BasePO extends BasePO with $$BasePO {
   }
   factory $BasePO.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "BasePO is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "BasePO is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "BasePO". Requires @CheckTag annotation in order for "tagName" to be generated.';
   List<PageLoaderElement> get allRows {
@@ -52,7 +52,7 @@ class $$BasePO {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BasePO', 'button');
     }
-    final element = $__root__.createElement(const ById('button-1'), [], []);
+    final element = $__root__.createElement(ById('button-1'), [], []);
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BasePO', 'button');
@@ -76,7 +76,7 @@ class $$BasePO {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BasePO', 'buttonPO');
     }
-    final element = $__root__.createElement(const ById('button-1'), [], []);
+    final element = $__root__.createElement(ById('button-1'), [], []);
     final returnMe = ButtonPO.create(element);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BasePO', 'buttonPO');
@@ -125,7 +125,7 @@ class $$BasePO {
       __listener.startPageObjectMethod('BasePO', '_rowElements');
     }
     final returnMe = PageObjectList<PageLoaderElement>(
-        $__root__.createList(const ByTagName('tr'), [], []),
+        $__root__.createList(ByTagName('tr'), [], []),
         (PageLoaderElement e) => e);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BasePO', '_rowElements');
@@ -138,7 +138,7 @@ class $$BasePO {
       __listener.startPageObjectMethod('BasePO', '_rowPOs');
     }
     final returnMe = PageObjectList<RowPO>(
-        $__root__.createList(const ByTagName('tr'), [], []),
+        $__root__.createList(ByTagName('tr'), [], []),
         (PageLoaderElement e) => RowPO.create(e));
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('BasePO', '_rowPOs');
@@ -156,8 +156,8 @@ class $ButtonPO extends ButtonPO with $$ButtonPO {
   }
   factory $ButtonPO.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "ButtonPO is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "ButtonPO is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "ButtonPO". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'ButtonPO\n\n${$__root__.toStringDeep()}';
@@ -177,8 +177,8 @@ class $RowPO extends RowPO with $$RowPO {
   }
   factory $RowPO.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "RowPO is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "RowPO is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "RowPO". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'RowPO\n\n${$__root__.toStringDeep()}';

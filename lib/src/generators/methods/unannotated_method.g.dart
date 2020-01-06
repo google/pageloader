@@ -16,7 +16,8 @@ class _$UnannotatedMethod extends UnannotatedMethod {
   @override
   final Optional<TypeParameterList> typeParameters;
 
-  factory _$UnannotatedMethod([void updates(UnannotatedMethodBuilder b)]) =>
+  factory _$UnannotatedMethod(
+          [void Function(UnannotatedMethodBuilder) updates]) =>
       (new UnannotatedMethodBuilder()..update(updates)).build();
 
   _$UnannotatedMethod._(
@@ -37,7 +38,7 @@ class _$UnannotatedMethod extends UnannotatedMethod {
   }
 
   @override
-  UnannotatedMethod rebuild(void updates(UnannotatedMethodBuilder b)) =>
+  UnannotatedMethod rebuild(void Function(UnannotatedMethodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -117,7 +118,7 @@ class UnannotatedMethodBuilder
   }
 
   @override
-  void update(void updates(UnannotatedMethodBuilder b)) {
+  void update(void Function(UnannotatedMethodBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -7,8 +7,6 @@ part of 'class_checks.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $ClassChecks extends ClassChecks with $$ClassChecks {
   PageLoaderElement $__root__;
   $ClassChecks.create(PageLoaderElement currentContext)
@@ -17,12 +15,13 @@ class $ClassChecks extends ClassChecks with $$ClassChecks {
   }
   factory $ClassChecks.lookup(PageLoaderSource source) =>
       $ClassChecks.create(source.byTag('some-tag'));
-  static String get tagName => 'some-tag';
+  static const String tagName = 'some-tag';
+  String toStringDeep() => 'ClassChecks\n\n${$__root__.toStringDeep()}';
 }
 
 class $$ClassChecks {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get myRoot {
     for (final __listener in $__root__.listeners) {
@@ -37,6 +36,7 @@ class $$ClassChecks {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $EnsureTagChecks extends EnsureTagChecks with $$EnsureTagChecks {
   PageLoaderElement $__root__;
   $EnsureTagChecks.create(PageLoaderElement currentContext)
@@ -46,12 +46,13 @@ class $EnsureTagChecks extends EnsureTagChecks with $$EnsureTagChecks {
   }
   factory $EnsureTagChecks.lookup(PageLoaderSource source) =>
       $EnsureTagChecks.create(source.byTag('some-other-tag'));
-  static String get tagName => 'some-other-tag';
+  static const String tagName = 'some-other-tag';
+  String toStringDeep() => 'EnsureTagChecks\n\n${$__root__.toStringDeep()}';
 }
 
 class $$EnsureTagChecks {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get myRoot {
     for (final __listener in $__root__.listeners) {
@@ -66,6 +67,7 @@ class $$EnsureTagChecks {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $ClassChecksUsingMixin extends ClassChecksUsingMixin
     with $$ChecksMixin, $$ClassChecksUsingMixin {
   PageLoaderElement $__root__;
@@ -75,15 +77,18 @@ class $ClassChecksUsingMixin extends ClassChecksUsingMixin
   }
   factory $ClassChecksUsingMixin.lookup(PageLoaderSource source) =>
       $ClassChecksUsingMixin.create(source.byTag('some-tag'));
-  static String get tagName => 'some-tag';
+  static const String tagName = 'some-tag';
+  String toStringDeep() =>
+      'ClassChecksUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$ClassChecksUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $EnsureTagChecksUsingMixin extends EnsureTagChecksUsingMixin
     with $$ChecksMixin, $$EnsureTagChecksUsingMixin {
   PageLoaderElement $__root__;
@@ -94,18 +99,22 @@ class $EnsureTagChecksUsingMixin extends EnsureTagChecksUsingMixin
   }
   factory $EnsureTagChecksUsingMixin.lookup(PageLoaderSource source) =>
       $EnsureTagChecksUsingMixin.create(source.byTag('some-other-tag'));
-  static String get tagName => 'some-other-tag';
+  static const String tagName = 'some-other-tag';
+  String toStringDeep() =>
+      'EnsureTagChecksUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$EnsureTagChecksUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+
 class $$ChecksMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get myRoot {
     for (final __listener in $__root__.listeners) {

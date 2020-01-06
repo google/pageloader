@@ -7,8 +7,6 @@ part of 'generics.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $Generics<T> extends Generics<T> with $$Generics<T> {
   PageLoaderElement $__root__;
   $Generics.create(PageLoaderElement currentContext)
@@ -17,8 +15,8 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
   }
   factory $Generics.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Generics is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Generics is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Generics". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
@@ -32,24 +30,27 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
     return returnMe;
   }
 
-  T exampleMethod<T>(T v) {
+  S exampleMethod<S>(S s) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Generics', 'exampleMethod');
     }
-    final returnMe = super.exampleMethod(v);
+    final returnMe = super.exampleMethod(s);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Generics', 'exampleMethod');
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'Generics\n\n${$__root__.toStringDeep()}';
 }
 
 class $$Generics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
   PageLoaderElement $__root__;
   $CheckedGenerics.create(PageLoaderElement currentContext)
@@ -58,7 +59,7 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
   }
   factory $CheckedGenerics.lookup(PageLoaderSource source) =>
       $CheckedGenerics.create(source.byTag('checked-generics'));
-  static String get tagName => 'checked-generics';
+  static const String tagName = 'checked-generics';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CheckedGenerics', 'typeDefParameter');
@@ -69,14 +70,17 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'CheckedGenerics\n\n${$__root__.toStringDeep()}';
 }
 
 class $$CheckedGenerics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
   PageLoaderElement $__root__;
   $GenericPair.create(PageLoaderElement currentContext)
@@ -85,28 +89,31 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
   }
   factory $GenericPair.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "GenericPair is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "GenericPair is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "GenericPair". Requires @CheckTag annotation in order for "tagName" to be generated.';
-  Map<T, V> exampleMethodMap<T, V>(T t, V v) {
+  Map<R, S> exampleMethodMap<R, S>(R r, S s) {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('GenericPair', 'exampleMethodMap');
     }
-    final returnMe = super.exampleMethodMap(t, v);
+    final returnMe = super.exampleMethodMap(r, s);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('GenericPair', 'exampleMethodMap');
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'GenericPair\n\n${$__root__.toStringDeep()}';
 }
 
 class $$GenericPair<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
   PageLoaderElement $__root__;
   $RootPo.create(PageLoaderElement currentContext)
@@ -115,15 +122,16 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
   }
   factory $RootPo.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "RootPo is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "RootPo is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "RootPo". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'RootPo\n\n${$__root__.toStringDeep()}';
 }
 
 class $$RootPo<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   Generics<T> get generics {
     for (final __listener in $__root__.listeners) {
@@ -177,6 +185,7 @@ class $$RootPo<T> {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
     with $$GenericsMixin<T>, $$GenericsUsingMixin<T> {
   PageLoaderElement $__root__;
@@ -186,24 +195,28 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
   }
   factory $GenericsUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "GenericsUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "GenericsUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "GenericsUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'GenericsUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$GenericsUsingMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
+// ignore_for_file: private_collision_in_mixin_application
 
 class $$GenericsMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
     with $$GenericPairMixin<T, V>, $$GenericPairUsingMixin<T, V> {
   PageLoaderElement $__root__;
@@ -213,24 +226,29 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
   }
   factory $GenericPairUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "GenericPairUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "GenericPairUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "GenericPairUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() =>
+      'GenericPairUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$GenericPairUsingMixin<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
+
+// ignore_for_file: private_collision_in_mixin_application
 
 class $$GenericPairMixin<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
     with $$RootPoMixin<T>, $$RootPoUsingMixin<T> {
   PageLoaderElement $__root__;
@@ -240,21 +258,24 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
   }
   factory $RootPoUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "RootPoUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "RootPoUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "RootPoUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'RootPoUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$RootPoUsingMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+
 class $$RootPoMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   Generics<T> get generics {
     for (final __listener in $__root__.listeners) {

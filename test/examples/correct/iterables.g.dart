@@ -7,8 +7,6 @@ part of 'iterables.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $Iterables extends Iterables with $$Iterables {
   PageLoaderElement $__root__;
   $Iterables.create(PageLoaderElement currentContext)
@@ -17,15 +15,16 @@ class $Iterables extends Iterables with $$Iterables {
   }
   factory $Iterables.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Iterables is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Iterables is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Iterables". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'Iterables\n\n${$__root__.toStringDeep()}';
 }
 
 class $$Iterables {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageObjectIterable<PageLoaderElement> get basics {
     for (final __listener in $__root__.listeners) {
@@ -67,6 +66,7 @@ class $$Iterables {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $InnerObject extends InnerObject with $$InnerObject {
   PageLoaderElement $__root__;
   $InnerObject.create(PageLoaderElement currentContext)
@@ -75,15 +75,16 @@ class $InnerObject extends InnerObject with $$InnerObject {
   }
   factory $InnerObject.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "InnerObject is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "InnerObject is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "InnerObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'InnerObject\n\n${$__root__.toStringDeep()}';
 }
 
 class $$InnerObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
@@ -124,6 +125,7 @@ class $$InnerObject {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $IterablesUsingMixin extends IterablesUsingMixin
     with $$IterablesMixin, $$IterablesUsingMixin {
   PageLoaderElement $__root__;
@@ -133,21 +135,24 @@ class $IterablesUsingMixin extends IterablesUsingMixin
   }
   factory $IterablesUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "IterablesUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "IterablesUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "IterablesUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'IterablesUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$IterablesUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+
 class $$IterablesMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageObjectIterable<PageLoaderElement> get basics {
     for (final __listener in $__root__.listeners) {
@@ -189,6 +194,7 @@ class $$IterablesMixin {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $InnerObjectUsingMixin extends InnerObjectUsingMixin
     with $$InnerObjectMixin, $$InnerObjectUsingMixin {
   PageLoaderElement $__root__;
@@ -198,21 +204,25 @@ class $InnerObjectUsingMixin extends InnerObjectUsingMixin
   }
   factory $InnerObjectUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "InnerObjectUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "InnerObjectUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "InnerObjectUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() =>
+      'InnerObjectUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$InnerObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+
 class $$InnerObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {

@@ -7,8 +7,6 @@ part of 'finders.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $Finders extends Finders with $$Finders {
   PageLoaderElement $__root__;
   $Finders.create(PageLoaderElement currentContext)
@@ -17,8 +15,8 @@ class $Finders extends Finders with $$Finders {
   }
   factory $Finders.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Finders is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Finders is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Finders". Requires @CheckTag annotation in order for "tagName" to be generated.';
   PageLoaderElement get secret {
@@ -31,11 +29,13 @@ class $Finders extends Finders with $$Finders {
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'Finders\n\n${$__root__.toStringDeep()}';
 }
 
 class $$Finders {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _secret {
     for (final __listener in $__root__.listeners) {
@@ -87,6 +87,7 @@ class $$Finders {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
   PageLoaderElement $__root__;
   $CheckTagPO.create(PageLoaderElement currentContext)
@@ -95,7 +96,7 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
   }
   factory $CheckTagPO.lookup(PageLoaderSource source) =>
       $CheckTagPO.create(source.byTag('check-tag-po'));
-  static String get tagName => 'check-tag-po';
+  static const String tagName = 'check-tag-po';
   String toString() {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CheckTagPO', 'toString');
@@ -106,11 +107,13 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'CheckTagPO\n\n${$__root__.toStringDeep()}';
 }
 
 class $$CheckTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
@@ -125,6 +128,7 @@ class $$CheckTagPO {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $FindersUsingMixin extends FindersUsingMixin
     with $$FindersMixin, $$FindersUsingMixin {
   PageLoaderElement $__root__;
@@ -134,21 +138,24 @@ class $FindersUsingMixin extends FindersUsingMixin
   }
   factory $FindersUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "FindersUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "FindersUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "FindersUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'FindersUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$FindersUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+
 class $$FindersMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get _secret {
     for (final __listener in $__root__.listeners) {

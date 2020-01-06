@@ -14,7 +14,7 @@ class _$Setter extends Setter {
   @override
   final String setterValueName;
 
-  factory _$Setter([void updates(SetterBuilder b)]) =>
+  factory _$Setter([void Function(SetterBuilder) updates]) =>
       (new SetterBuilder()..update(updates)).build();
 
   _$Setter._({this.name, this.setterType, this.setterValueName}) : super._() {
@@ -30,7 +30,7 @@ class _$Setter extends Setter {
   }
 
   @override
-  Setter rebuild(void updates(SetterBuilder b)) =>
+  Setter rebuild(void Function(SetterBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -98,7 +98,7 @@ class SetterBuilder implements Builder<Setter, SetterBuilder> {
   }
 
   @override
-  void update(void updates(SetterBuilder b)) {
+  void update(void Function(SetterBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -7,8 +7,6 @@ part of 'mouse.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
   PageLoaderElement $__root__;
   $PageForMouseTest.create(PageLoaderElement currentContext)
@@ -17,15 +15,16 @@ class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
   }
   factory $PageForMouseTest.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "PageForMouseTest is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "PageForMouseTest is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "PageForMouseTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'PageForMouseTest\n\n${$__root__.toStringDeep()}';
 }
 
 class $$PageForMouseTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get element {
     for (final __listener in $__root__.listeners) {

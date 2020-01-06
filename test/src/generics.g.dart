@@ -7,8 +7,6 @@ part of 'generics.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $Generics<T> extends Generics<T> with $$Generics<T> {
   PageLoaderElement $__root__;
   $Generics.create(PageLoaderElement currentContext)
@@ -17,8 +15,8 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
   }
   factory $Generics.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Generics is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Generics is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Generics". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
@@ -31,14 +29,17 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
     }
     return returnMe;
   }
+
+  String toStringDeep() => 'Generics\n\n${$__root__.toStringDeep()}';
 }
 
 class $$Generics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
   PageLoaderElement $__root__;
   $RootPo.create(PageLoaderElement currentContext)
@@ -47,15 +48,16 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
   }
   factory $RootPo.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "RootPo is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "RootPo is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "RootPo". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'RootPo\n\n${$__root__.toStringDeep()}';
 }
 
 class $$RootPo<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   Generics<T> get generics {
     for (final __listener in $__root__.listeners) {

@@ -7,8 +7,6 @@ part of 'unannotated.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $Unannotated extends Unannotated with $$Unannotated {
   PageLoaderElement $__root__;
   $Unannotated.create(PageLoaderElement currentContext)
@@ -17,8 +15,8 @@ class $Unannotated extends Unannotated with $$Unannotated {
   }
   factory $Unannotated.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Unannotated is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Unannotated is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Unannotated". Requires @CheckTag annotation in order for "tagName" to be generated.';
   bool get isFieldSet {
@@ -108,14 +106,17 @@ class $Unannotated extends Unannotated with $$Unannotated {
     }
     return;
   }
+
+  String toStringDeep() => 'Unannotated\n\n${$__root__.toStringDeep()}';
 }
 
 class $$Unannotated {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $UnannotatedUsingMixin extends UnannotatedUsingMixin
     with $$UnannotatedMixin, $$UnannotatedUsingMixin {
   PageLoaderElement $__root__;
@@ -125,20 +126,24 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
   }
   factory $UnannotatedUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "UnannotatedUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "UnannotatedUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "UnannotatedUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() =>
+      'UnannotatedUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$UnannotatedUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+
 class $$UnannotatedMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }

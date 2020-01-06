@@ -7,8 +7,6 @@ part of 'multiple_in_file.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
 class $A extends A with $$A {
   PageLoaderElement $__root__;
   $A.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -16,15 +14,16 @@ class $A extends A with $$A {
   }
   factory $A.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "A is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "A is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "A". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'A\n\n${$__root__.toStringDeep()}';
 }
 
 class $$A {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   B get b {
     for (final __listener in $__root__.listeners) {
@@ -39,6 +38,7 @@ class $$A {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $B extends B with $$B {
   PageLoaderElement $__root__;
   $B.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -46,15 +46,16 @@ class $B extends B with $$B {
   }
   factory $B.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "B is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "B is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "B". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'B\n\n${$__root__.toStringDeep()}';
 }
 
 class $$B {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get base {
     for (final __listener in $__root__.listeners) {
@@ -69,6 +70,7 @@ class $$B {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
 class $C extends C with $$C {
   PageLoaderElement $__root__;
   $C.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -76,15 +78,16 @@ class $C extends C with $$C {
   }
   factory $C.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "C is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "C is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "C". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'C\n\n${$__root__.toStringDeep()}';
 }
 
 class $$C {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   B get b {
     for (final __listener in $__root__.listeners) {

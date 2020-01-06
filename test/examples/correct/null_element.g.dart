@@ -15,8 +15,8 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
   }
   factory $ParentRoot.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "ParentRoot is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "ParentRoot is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "ParentRoot". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'ParentRoot\n\n${$__root__.toStringDeep()}';
@@ -25,9 +25,7 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
 class $$ParentRoot {
   PageLoaderElement $__root__;
   PageLoaderMouse __mouse__;
-
   PageLoaderElement get $root => $__root__;
-
   PageLoaderElement get _nullElement {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ParentRoot', '_nullElement');
@@ -61,6 +59,7 @@ class $$ParentRoot {
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ParentRoot', 'gens');
     }
+    return returnMe;
   }
 }
 
@@ -73,8 +72,8 @@ class $NullPO extends NullPO with $$NullPO {
   }
   factory $NullPO.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "NullPO is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "NullPO is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "NullPO". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'NullPO\n\n${$__root__.toStringDeep()}';
@@ -95,8 +94,8 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
   }
   factory $Generics.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Generics is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Generics is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Generics". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'Generics\n\n${$__root__.toStringDeep()}';
