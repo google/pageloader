@@ -9,6 +9,7 @@ part of 'cache_invalidation.dart';
 // ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
   PageLoaderElement $__root__;
   $CacheInvalidation.create(PageLoaderElement currentContext)
@@ -17,15 +18,16 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
   }
   factory $CacheInvalidation.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "CacheInvalidation is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "CacheInvalidation is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "CacheInvalidation". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'CacheInvalidation\n\n${$__root__.toStringDeep()}';
 }
 
 class $$CacheInvalidation {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get button1 {
     for (final __listener in $__root__.listeners) {
@@ -52,6 +54,10 @@ class $$CacheInvalidation {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $_Nested extends _Nested with $$_Nested {
   PageLoaderElement $__root__;
   $_Nested.create(PageLoaderElement currentContext)
@@ -60,15 +66,16 @@ class $_Nested extends _Nested with $$_Nested {
   }
   factory $_Nested.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "_Nested is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "_Nested is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "_Nested". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => '_Nested\n\n${$__root__.toStringDeep()}';
 }
 
 class $$_Nested {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get option1 {
     for (final __listener in $__root__.listeners) {

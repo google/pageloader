@@ -22,7 +22,8 @@ class _$ListFinderMethod extends ListFinderMethod {
   @override
   final Optional<String> genericType;
 
-  factory _$ListFinderMethod([void updates(ListFinderMethodBuilder b)]) =>
+  factory _$ListFinderMethod(
+          [void Function(ListFinderMethodBuilder) updates]) =>
       (new ListFinderMethodBuilder()..update(updates)).build();
 
   _$ListFinderMethod._(
@@ -62,7 +63,7 @@ class _$ListFinderMethod extends ListFinderMethod {
   }
 
   @override
-  ListFinderMethod rebuild(void updates(ListFinderMethodBuilder b)) =>
+  ListFinderMethod rebuild(void Function(ListFinderMethodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -174,7 +175,7 @@ class ListFinderMethodBuilder
   }
 
   @override
-  void update(void updates(ListFinderMethodBuilder b)) {
+  void update(void Function(ListFinderMethodBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -196,7 +197,7 @@ class ListFinderMethodBuilder
 
 abstract class ListFinderMethodBaseBuilder {
   void replace(ListFinderMethodBase other);
-  void update(void updates(ListFinderMethodBaseBuilder b));
+  void update(void Function(ListFinderMethodBaseBuilder) updates);
   String get name;
   set name(String name);
 

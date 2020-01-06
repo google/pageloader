@@ -10,7 +10,8 @@ class _$MouseFinderMethod extends MouseFinderMethod {
   @override
   final String name;
 
-  factory _$MouseFinderMethod([void updates(MouseFinderMethodBuilder b)]) =>
+  factory _$MouseFinderMethod(
+          [void Function(MouseFinderMethodBuilder) updates]) =>
       (new MouseFinderMethodBuilder()..update(updates)).build();
 
   _$MouseFinderMethod._({this.name}) : super._() {
@@ -20,7 +21,7 @@ class _$MouseFinderMethod extends MouseFinderMethod {
   }
 
   @override
-  MouseFinderMethod rebuild(void updates(MouseFinderMethodBuilder b)) =>
+  MouseFinderMethod rebuild(void Function(MouseFinderMethodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -72,7 +73,7 @@ class MouseFinderMethodBuilder
   }
 
   @override
-  void update(void updates(MouseFinderMethodBuilder b)) {
+  void update(void Function(MouseFinderMethodBuilder) updates) {
     if (updates != null) updates(this);
   }
 

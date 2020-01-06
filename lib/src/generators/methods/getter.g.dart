@@ -12,7 +12,7 @@ class _$Getter extends Getter {
   @override
   final String returnType;
 
-  factory _$Getter([void updates(GetterBuilder b)]) =>
+  factory _$Getter([void Function(GetterBuilder) updates]) =>
       (new GetterBuilder()..update(updates)).build();
 
   _$Getter._({this.name, this.returnType}) : super._() {
@@ -25,7 +25,7 @@ class _$Getter extends Getter {
   }
 
   @override
-  Getter rebuild(void updates(GetterBuilder b)) =>
+  Getter rebuild(void Function(GetterBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -84,7 +84,7 @@ class GetterBuilder implements Builder<Getter, GetterBuilder> {
   }
 
   @override
-  void update(void updates(GetterBuilder b)) {
+  void update(void Function(GetterBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -26,11 +26,11 @@ import 'package:analyzer/src/dart/analysis/performance_logger.dart';
 import 'package:analyzer/src/generated/engine.dart';
 import 'package:analyzer/src/generated/resolver.dart';
 import 'package:analyzer/src/generated/source.dart';
+import 'package:analyzer/src/test_utilities/mock_sdk.dart';
 import 'package:path/path.dart' as pather;
 
 import '../mocks/annotation_interfaces.dart';
 import '../mocks/annotations.dart';
-import '../mocks/sdk.dart';
 
 /// Declare pageloader annotated method.
 ///
