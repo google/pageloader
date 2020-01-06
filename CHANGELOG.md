@@ -1,3 +1,8 @@
+## 3.2.5
+
+- Use `built_value` version `7.0.0`.
+- Re-add lint ignores in generated files.
+
 ## 3.2.4
 - Bump SDK minimum version to 2.3.
 
