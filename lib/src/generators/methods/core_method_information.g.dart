@@ -118,6 +118,8 @@ class _$CoreMethodInformation extends CoreMethodInformation {
   @override
   final bool isMouse;
   @override
+  final bool isPointer;
+  @override
   final Optional<String> finder;
   @override
   final List<String> filters;
@@ -145,6 +147,7 @@ class _$CoreMethodInformation extends CoreMethodInformation {
       this.isFuture,
       this.isList,
       this.isMouse,
+      this.isPointer,
       this.finder,
       this.filters,
       this.checkers,
@@ -178,6 +181,9 @@ class _$CoreMethodInformation extends CoreMethodInformation {
     }
     if (isMouse == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'isMouse');
+    }
+    if (isPointer == null) {
+      throw new BuiltValueNullFieldError('CoreMethodInformation', 'isPointer');
     }
     if (finder == null) {
       throw new BuiltValueNullFieldError('CoreMethodInformation', 'finder');
@@ -224,6 +230,7 @@ class _$CoreMethodInformation extends CoreMethodInformation {
         isFuture == other.isFuture &&
         isList == other.isList &&
         isMouse == other.isMouse &&
+        isPointer == other.isPointer &&
         finder == other.finder &&
         filters == other.filters &&
         checkers == other.checkers &&
@@ -249,15 +256,23 @@ class _$CoreMethodInformation extends CoreMethodInformation {
                                                 $jc(
                                                     $jc(
                                                         $jc(
-                                                            $jc(0,
-                                                                name.hashCode),
-                                                            isGetter.hashCode),
-                                                        isAbstract.hashCode),
-                                                    pageObjectType.hashCode),
-                                                pageObjectTemplate.hashCode),
-                                            isFuture.hashCode),
-                                        isList.hashCode),
-                                    isMouse.hashCode),
+                                                            $jc(
+                                                                $jc(
+                                                                    0,
+                                                                    name
+                                                                        .hashCode),
+                                                                isGetter
+                                                                    .hashCode),
+                                                            isAbstract
+                                                                .hashCode),
+                                                        pageObjectType
+                                                            .hashCode),
+                                                    pageObjectTemplate
+                                                        .hashCode),
+                                                isFuture.hashCode),
+                                            isList.hashCode),
+                                        isMouse.hashCode),
+                                    isPointer.hashCode),
                                 finder.hashCode),
                             filters.hashCode),
                         checkers.hashCode),
@@ -278,6 +293,7 @@ class _$CoreMethodInformation extends CoreMethodInformation {
           ..add('isFuture', isFuture)
           ..add('isList', isList)
           ..add('isMouse', isMouse)
+          ..add('isPointer', isPointer)
           ..add('finder', finder)
           ..add('filters', filters)
           ..add('checkers', checkers)
@@ -329,6 +345,10 @@ class CoreMethodInformationBuilder
   bool get isMouse => _$this._isMouse;
   set isMouse(bool isMouse) => _$this._isMouse = isMouse;
 
+  bool _isPointer;
+  bool get isPointer => _$this._isPointer;
+  set isPointer(bool isPointer) => _$this._isPointer = isPointer;
+
   Optional<String> _finder;
   Optional<String> get finder => _$this._finder;
   set finder(Optional<String> finder) => _$this._finder = finder;
@@ -370,6 +390,7 @@ class CoreMethodInformationBuilder
       _isFuture = _$v.isFuture;
       _isList = _$v.isList;
       _isMouse = _$v.isMouse;
+      _isPointer = _$v.isPointer;
       _finder = _$v.finder;
       _filters = _$v.filters;
       _checkers = _$v.checkers;
@@ -407,6 +428,7 @@ class CoreMethodInformationBuilder
             isFuture: isFuture,
             isList: isList,
             isMouse: isMouse,
+            isPointer: isPointer,
             finder: finder,
             filters: filters,
             checkers: checkers,
@@ -445,6 +467,9 @@ abstract class CoreMethodInformationBaseBuilder {
 
   bool get isMouse;
   set isMouse(bool isMouse);
+
+  bool get isPointer;
+  set isPointer(bool isPointer);
 
   Optional<String> get finder;
   set finder(Optional<String> finder);

@@ -18,11 +18,17 @@ library pageloader.api.page_loader_keyboard;
 ///
 /// Example: Ctrl + c
 /// PageLoaderKeyboard()
-///   ..typeSpecialKey(PageLoaderSpecialKey.control, pageUp: false)
+///   ..typeSpecialKey(PageLoaderSpecialKey.control, keyUp: false)
 ///   ..typeKey('c')
-///   ..typeSpecialKey(PageLoaderSpecialKey.control, pageDown: false);
+///   ..typeSpecialKey(PageLoaderSpecialKey.control, keyDown: false);
 class PageLoaderKeyboard {
+  // All combinations of 'keydown', 'keypress', and 'keyup' events.
   final events = <_Key>[];
+
+  // List of unique buttons being pressed without 'keyX' event combinations.
+  // This is used in webdriver keyboard.
+  final uniqueEvents = <_Key>[];
+
   var _altMod = false;
   var _ctrlMod = false;
   var _shiftMod = false;
@@ -63,6 +69,12 @@ class PageLoaderKeyboard {
         _Key(specialKey, key, type, _altMod, _ctrlMod, _metaMod, _shiftMod));
   }
 
+  void _addUniqueEvent(PageLoaderSpecialKey specialKey, String key) {
+    // using keyPress as placeholder
+    uniqueEvents.add(_Key(specialKey, key, KeyboardEventType.keyPress, _altMod,
+        _ctrlMod, _metaMod, _shiftMod));
+  }
+
   /// Adds to sequence: ('keydown', 'keypress', 'keyup') events on [key].
   ///
   /// [key] must be a single-length String of the character sent.
@@ -100,6 +112,7 @@ class PageLoaderKeyboard {
     if (keyUp) {
       _addEvent(null, key, KeyboardEventType.keyUp);
     }
+    _addUniqueEvent(null, key);
   }
 
   /// Adds to sequence: ('keydown', 'keyup') events on [key]. If the special
@@ -151,6 +164,7 @@ class PageLoaderKeyboard {
       }
       _addEvent(key, null, KeyboardEventType.keyUp);
     }
+    _addUniqueEvent(key, null);
   }
 }
 
@@ -193,6 +207,7 @@ enum PageLoaderSpecialKey {
   right,
   down,
   insert,
+  delete,
   f1,
   f2,
   f3,

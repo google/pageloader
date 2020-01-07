@@ -65,7 +65,7 @@ abstract class MouseFinderMethod
       generateEndMethodListeners(pageObjectName, name) +
       'return returnMe; }';
 
-  factory MouseFinderMethod([updates(MouseFinderMethodBuilder b)]) =
+  factory MouseFinderMethod([Function(MouseFinderMethodBuilder) updates]) =
       _$MouseFinderMethod;
   MouseFinderMethod._();
 }

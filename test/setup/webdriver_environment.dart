@@ -22,11 +22,14 @@ import 'io_config.dart' as webtest;
 class WebDriverEnvironment {
   WebDriver driver;
   WebDriverPageUtils _loader;
+  bool useLong;
+
+  WebDriverEnvironment({this.useLong = false});
 
   Future setUp() async {
     driver = webtest.createTestDriver();
     _loader = WebDriverPageUtils(driver);
-    driver.get(webtest.testPagePath());
+    driver.get(webtest.testPagePath(useLong: useLong));
   }
 
   Future tearDown() async {
@@ -37,5 +40,5 @@ class WebDriverEnvironment {
   WebDriverPageLoaderElement getBaseElement() => _loader.root;
   WebDriverMouse get mouse => _loader.mouse;
 
-  void doRefresh() => driver.get(webtest.testPagePath());
+  void doRefresh() => driver.get(webtest.testPagePath(useLong: useLong));
 }

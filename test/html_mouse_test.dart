@@ -80,6 +80,49 @@ void main() {
       });
     });
 
+    group('click on ', () {
+      int expectedXCenter;
+      int expectedYCenter;
+      int expectedXLeft;
+      int expectedYTop;
+      final clickOption = ClickOption();
+
+      setUp(() {
+        final rect =
+            (page.element as HtmlPageLoaderElement).getBoundingClientRect();
+        expectedXCenter = rect.left + (rect.width * 0.5).ceil();
+        expectedYCenter = rect.top + (rect.height * 0.5).ceil();
+        expectedXLeft = rect.left;
+        expectedYTop = rect.top;
+      });
+
+      test('non-svg element', () async {
+        await page.element.click(clickOption: clickOption);
+
+        expect(page.svgOutputElement.visibleText.contains('Click: '), isFalse);
+      });
+
+      test('svg element on top-left', () async {
+        clickOption.clientX = expectedXLeft;
+        clickOption.clientY = expectedYTop;
+
+        await page.svgElement.click(clickOption: clickOption);
+
+        expect(page.svgOutputElement.visibleText,
+            contains('Click: $expectedXLeft, $expectedYTop'));
+      });
+
+      test('svg element in the center', () async {
+        clickOption.clientX = expectedXCenter;
+        clickOption.clientY = expectedYCenter;
+
+        await page.svgElement.click(clickOption: clickOption);
+
+        expect(page.svgOutputElement.visibleText,
+            contains('Click: $expectedXCenter, $expectedYCenter'));
+      });
+    });
+
     test('stepPixels and trackedElements works', () async {
       // Send mouse events to only top and bottom, and expect
       // center mouse event to also detect mouse events

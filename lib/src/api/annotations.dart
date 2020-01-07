@@ -16,6 +16,7 @@ library pageloader.annotations;
 import 'annotation_interfaces.dart';
 import 'page_loader_element_interface.dart';
 import 'page_loader_mouse_interface.dart';
+import 'page_loader_pointer_interface.dart';
 
 export 'page_object_annotation.dart';
 
@@ -74,6 +75,19 @@ class _Mouse {
 
   @override
   String toString() => '@Mouse';
+}
+
+/// Convenience annotation for using [PageLoaderPointer] within a page object.
+///
+/// Must be applied to a [PageLoaderPointer] getter. No other annotations may be
+/// used.
+const Pointer = _Pointer();
+
+class _Pointer {
+  const _Pointer();
+
+  @override
+  String toString() => '@Pointer';
 }
 
 /// Finder annotations. See [CssFinder] for usage details.
@@ -277,7 +291,8 @@ class CheckTag implements Checker {
   const CheckTag(this._expectedTagName);
 
   @override
-  bool check(PageLoaderElement element) => element.name == _expectedTagName;
+  bool check(PageLoaderElement element) =>
+      element.name.toLowerCase() == _expectedTagName;
 
   @override
   String toString() => '@CheckTag("$_expectedTagName")';
@@ -294,7 +309,8 @@ class CheckTags implements Checker {
   const CheckTags(this._tagNames);
 
   @override
-  bool check(PageLoaderElement element) => _tagNames.contains(element.name);
+  bool check(PageLoaderElement element) =>
+      _tagNames.contains(element.name.toLowerCase());
 
   @override
   String toString() => '@CheckTags("$_tagNames")';
@@ -306,14 +322,15 @@ class CheckTags implements Checker {
 /// e.g. from a test. Otherwise you'll be chaining Finders, which is at best
 /// a performance hit and at worse a cause of tricky bugs.
 @Deprecated("Use '@CheckTag' instead. '@EnsureTag' is only kept to make "
-    "migration easier. Will be removed in a future version.")
+    'migration easier. Will be removed in a future version.')
 class EnsureTag implements Checker, ContextFinder {
   final String _expectedTagName;
 
   const EnsureTag(this._expectedTagName);
 
   @override
-  bool check(PageLoaderElement element) => element.name == _expectedTagName;
+  bool check(PageLoaderElement element) =>
+      element.name.toLowerCase() == _expectedTagName;
 
   @override
   List<PageLoaderElement> findElements(PageLoaderElement context) {
@@ -351,7 +368,7 @@ class IsTag extends Filter {
   const IsTag(this._name);
 
   @override
-  bool keep(PageLoaderElement element) => element.name == _name;
+  bool keep(PageLoaderElement element) => element.name.toLowerCase() == _name;
 
   @override
   String toString() => '@IsTag("$_name")';

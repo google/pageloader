@@ -6,13 +6,14 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS'  BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 import 'dart:async';
 import 'dart:html' as html;
+import 'dart:svg' show SvgElement;
 
 import 'package:pageloader/html.dart';
 
@@ -24,8 +25,15 @@ html.Element setUp() {
   const bodyHtml = '''
       <style>
         .class1 { background-color: #00FF00; }
+        #scroll-box {
+          border: 1px solid black;
+          width: 200px;
+          height: 100px;
+          overflow: scroll;
+          font: 24px/36px sans-serif;
+        }
       </style>
-      <div id="invisible-div" class="invisible">invisible section</div>
+      <div id="invisible-div"  class="invisible">invisible section</div>
       <table id='table1' non-standard='a non standard attr'
           class='class1 class2 class3' style='color: #800080;'>
         <tr>
@@ -40,12 +48,22 @@ html.Element setUp() {
       <div id='div' style='display: none; background-color: red;'>
         some not displayed text</div>
       <div id='mouse'>area for mouse events</div>
+      <svg id='svg-element' width='400' height='100'>
+        <rect width='400' height='100' style='fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)' />
+      </svg>
+      <div id='svg-output'>area for svg element</div>
+      <div id='pointer'>area for pointer events</div>
       <input type='text' id='text' />
+      <div>
+        <input type='text' id="text-with-focus-and-blur"/>
+        <div id='text-with-focus-and-blur-focus-count'>0</div>
+        <div id='text-with-focus-and-blur-blur-count'>0</div>
+      </div>
       <input type='text' readonly id='readonly' disabled />
       <input type='checkbox' class='with-class-test class1 class2' />
       <input type='radio' name='radio' value='radio1' debugid='debugId'/>
       <input type='radio' name='radio' value='radio2' />
-      <a href="test.html" id="anchor">test</a>
+      <a href="test.html"  id="anchor">test</a>
       <img src="test.png">
       <select id='select1'>
         <option id='option1' value='value 1' debugid="option1">option 1</option>
@@ -86,7 +104,21 @@ html.Element setUp() {
       <p id="nbsp"> &nbsp; &nbsp; </p>
       <div id='mouse-top'>top area for mouse events</div>
       <div id='mouse-center'>center area for mouse events</div>
-      <div id='mouse-bottom'>bottom area for mouse events</div>''';
+      <div id='mouse-bottom'>bottom area for mouse events</div>
+      <div id='pointer-top'>top area for pointer events</div>
+      <div id='pointer-center'>center area for pointer events</div>
+      <div id='pointer-bottom'>bottom area for pointer events</div>
+      <div id='scroll-box'>
+        loremipsumloremipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        <br><br>
+        loremipsumloremipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        <p id="scroll-bottom">bottom text</p>
+      </div>
+      <p>Scroll box scrollLeft: <span id="scroll-left">0</span></p>
+      <p>Scroll box scrollTop: <span id="scroll-top">0</span></p>
+      <div id="mixin-div">mixin div</div>''';
 
   final templateHtml = '<button id="inner">some <content></content></button>';
 
@@ -110,14 +142,35 @@ html.Element setUp() {
   });
 
   // Get all mouseevent driven div elements and bind them
-  final displayedDiv = html.document.getElementById('mouse');
-  final centerDiv = html.document.getElementById('mouse-center');
-  bindMouseEvents(displayedDiv);
-  bindMouseEvents(centerDiv);
+  final displayedMouseDiv = html.document.getElementById('mouse');
+  final centerMouseDiv = html.document.getElementById('mouse-center');
+  final svgElement = html.document.getElementById('svg-element');
+  final svgOutputDiv = html.document.getElementById('svg-output');
+  bindMouseEvents(displayedMouseDiv);
+  bindMouseEvents(centerMouseDiv);
+  bindMouseEventsWithSvg(svgElement, svgOutputDiv);
+
+  // Get all pointerevent driven div elements and bind them
+  final displayedPointerDiv = html.document.getElementById('pointer');
+  final centerPointerDiv = html.document.getElementById('pointer-center');
+  bindPointerEvents(displayedPointerDiv);
+  bindPointerEvents(centerPointerDiv);
 
   // Bind KeyboardEvent driven div element.
   final keyboardListenerDiv = html.document.getElementById('keyboard-listener');
   bindKeyboardListener(keyboardListenerDiv);
+
+  // Bind typing tests driven by focus/blur events.
+  final typingFocusBlurElement =
+      html.document.getElementById('text-with-focus-and-blur');
+  bindTextFocus(typingFocusBlurElement);
+  bindTextBlur(typingFocusBlurElement);
+
+  // Bind scroll element and counter.
+  final scrollBox = html.document.getElementById('scroll-box');
+  final scrollLeft = html.document.getElementById('scroll-left');
+  final scrollTop = html.document.getElementById('scroll-top');
+  bindScrollEvents(scrollBox, scrollLeft, scrollTop);
 
   return div;
 }
@@ -141,47 +194,133 @@ void bindKeyboardListener(html.Element element) {
   });
 }
 
+void bindTextFocus(html.Element element) {
+  element.onFocus.listen((evt) {
+    final countDiv =
+        html.document.getElementById('text-with-focus-and-blur-focus-count');
+    final count = int.parse(countDiv.innerText) + 1;
+    countDiv.innerText = count.toString();
+  });
+}
+
+void bindTextBlur(html.Element element) {
+  element.onBlur.listen((evt) {
+    final countDiv =
+        html.document.getElementById('text-with-focus-and-blur-blur-count');
+    final count = int.parse(countDiv.innerText) + 1;
+    countDiv.innerText = count.toString();
+  });
+}
+
 void bindMouseEvents(html.Element element) {
   element.onMouseDown.listen((evt) {
     element.text = element.text +
-        " MouseDown: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
+        '  MouseDown: ${evt.client.x}, ${evt.client.y}; '
+            '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseUp.listen((evt) {
     element.text = element.text +
-        " MouseUp: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
+        '  MouseUp: ${evt.client.x}, ${evt.client.y}; '
+            '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseMove.listen((evt) {
     element.text = element.text +
-        " MouseMove: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
+        '  MouseMove: ${evt.client.x}, ${evt.client.y}; '
+            '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseLeave.listen((evt) {
     element.text = element.text +
-        " MouseLeave: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
+        '  MouseLeave: ${evt.client.x}, ${evt.client.y}; '
+            '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseOut.listen((evt) {
     element.text = element.text +
-        " MouseOut: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
+        '  MouseOut: ${evt.client.x}, ${evt.client.y}; '
+            '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseEnter.listen((evt) {
     element.text = element.text +
-        " MouseEnter: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
+        '  MouseEnter: ${evt.client.x}, ${evt.client.y}; '
+            '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseOver.listen((evt) {
     element.text = element.text +
-        " MouseOver: ${evt.client.x}, ${evt.client.y}; "
-        "${evt.screen.x}, ${evt.screen.y}";
+        '  MouseOver: ${evt.client.x}, ${evt.client.y}; '
+            '${evt.screen.x}, ${evt.screen.y}';
+  });
+}
+
+void bindMouseEventsWithSvg(SvgElement element, html.Element outputElement) {
+  element.onClick.listen((evt) {
+    outputElement.text = outputElement.text +
+        '  Click: ${evt.client.x}, ${evt.client.y}; '
+            '${evt.screen.x}, ${evt.screen.y}';
+  });
+}
+
+void bindPointerEvents(html.Element element) {
+  element.on['pointerdown'].listen((evt) {
+    if (evt is html.PointerEvent) {
+      element.text = element.text +
+          '  PointerDown: ${evt.client.x}, ${evt.client.y}; '
+              '${evt.screen.x}, ${evt.screen.y}';
+    }
+  });
+  element.on['pointerup'].listen((evt) {
+    if (evt is html.PointerEvent) {
+      element.text = element.text +
+          '  PointerUp: ${evt.client.x}, ${evt.client.y}; '
+              '${evt.screen.x}, ${evt.screen.y}';
+    }
+  });
+  element.on['pointermove'].listen((evt) {
+    if (evt is html.PointerEvent) {
+      element.text = element.text +
+          '  PointerMove: ${evt.client.x}, ${evt.client.y}; '
+              '${evt.screen.x}, ${evt.screen.y}';
+    }
+  });
+  element.on['pointerleave'].listen((evt) {
+    if (evt is html.PointerEvent) {
+      element.text = element.text +
+          ' PointerLeave: ${evt.client.x}, ${evt.client.y}; '
+              '${evt.screen.x}, ${evt.screen.y}';
+    }
+  });
+  element.on['pointerout'].listen((evt) {
+    if (evt is html.PointerEvent) {
+      element.text = element.text +
+          '  PointerOut: ${evt.client.x}, ${evt.client.y}; '
+              '${evt.screen.x}, ${evt.screen.y}';
+    }
+  });
+  element.on['pointerenter'].listen((evt) {
+    if (evt is html.PointerEvent) {
+      element.text = element.text +
+          '  PointerEnter: ${evt.client.x}, ${evt.client.y}; '
+              '${evt.screen.x}, ${evt.screen.y}';
+    }
+  });
+  element.on['pointerover'].listen((evt) {
+    if (evt is html.PointerEvent) {
+      element.text = element.text +
+          '  PointerOver: ${evt.client.x}, ${evt.client.y}; '
+              '${evt.screen.x}, ${evt.screen.y}';
+    }
+  });
+}
+
+void bindScrollEvents(
+    html.Element scrollBox, html.Element scrollLeft, html.Element scrollTop) {
+  scrollBox.onScroll.listen((evt) {
+    scrollLeft.innerHtml = scrollBox.scrollLeft.toString();
+    scrollTop.innerHtml = scrollBox.scrollTop.toString();
   });
 }
 
 HtmlPageLoaderElement getRoot() =>
     HtmlPageLoaderElement.createFromElement(setUp(),
-        externalSyncFn: (Future action()) async {
+        externalSyncFn: (Future Function() action) async {
       await action();
       // Ensure that page has chance to execute before HTML test continues.
       await Future.value();

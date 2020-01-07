@@ -15,7 +15,7 @@ import 'package:pageloader/pageloader.dart';
 
 part 'generics.g.dart';
 
-typedef String MyGenericTypeDef<T>(T item);
+typedef MyGenericTypeDef<T> = String Function(T item);
 
 @PageObject()
 abstract class Generics<T> {

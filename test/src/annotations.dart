@@ -88,7 +88,7 @@ void runTests(GetNewContext contextGenerator) {
       expect(page.useDash.innerText, 'option 2');
       expect(page.useCamelCase.innerText, 'option 3');
     });
-    
+
     test('TestId', () async {
       final page = TestIds.create(contextGenerator());
       expect(page.divOne.innerText, 'data-test-id');
@@ -193,7 +193,7 @@ abstract class BaseEnsureObject {
   EnsureTagFails get badTable;
 }
 
-@EnsureTag('table')
+@EnsureTag('table') // ignore: deprecated_member_use_from_same_package
 @PageObject()
 abstract class TableForEnsureTag {
   TableForEnsureTag();
@@ -220,7 +220,7 @@ abstract class CheckTagFails {
   PageLoaderElement get table;
 }
 
-@EnsureTag('inconceivable')
+@EnsureTag('inconceivable') // ignore: deprecated_member_use_from_same_package
 @PageObject()
 abstract class EnsureTagFails {
   EnsureTagFails();

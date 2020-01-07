@@ -24,7 +24,7 @@ import 'dart:async';
 import 'page_loader_element_interface.dart';
 
 /// Function for constructing a page object.
-typedef E PageObjectConstructor<E>(PageLoaderElement e);
+typedef PageObjectConstructor<E> = E Function(PageLoaderElement e);
 
 /// Iterable for collections of page objects and [PageLoaderElement]s.
 ///
@@ -37,8 +37,8 @@ typedef E PageObjectConstructor<E>(PageLoaderElement e);
 /// return consistent results. For example, it is possible consecutive calls to
 /// 'length' will return different results.
 class PageObjectIterable<E> {
-  PageElementIterable _elementIterable;
-  PageObjectConstructor<E> _pageObjectConstructor;
+  final PageElementIterable _elementIterable;
+  final PageObjectConstructor<E> _pageObjectConstructor;
 
   PageObjectIterable(this._elementIterable, this._pageObjectConstructor);
 
@@ -62,9 +62,9 @@ class PageObjectIterable<E> {
 ///
 /// Essentially wraps an iterator of [PageLoaderElement]s.
 class PageObjectIterator<E> extends Iterator<E> {
-  PageObjectConstructor<E> _pageObjectConstructor;
+  final PageObjectConstructor<E> _pageObjectConstructor;
 
-  Iterator<PageLoaderElement> _iterator;
+  final Iterator<PageLoaderElement> _iterator;
 
   PageObjectIterator(this._iterator, this._pageObjectConstructor);
 
@@ -72,7 +72,7 @@ class PageObjectIterator<E> extends Iterator<E> {
   bool moveNext() => _iterator.moveNext();
 
   @override
-  E get current => this._pageObjectConstructor(_iterator.current);
+  E get current => _pageObjectConstructor(_iterator.current);
 }
 
 /// Interface for iterables of [PageLoaderElement]s.

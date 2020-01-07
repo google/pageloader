@@ -18,23 +18,28 @@ import 'dart:core';
 
 import 'package:webdriver/sync_core.dart' show MouseButton;
 
+import 'page_loader_click_option.dart';
 import 'page_loader_element_interface.dart';
 
 export 'package:webdriver/sync_core.dart' show MouseButton;
 
 /// Interface for the mouse.
 abstract class PageLoaderMouse {
-  /// Press [button] on the mouse at its current location. If [eventTarget] is
-  /// specified, PageLoader will attempt to fire the corresponding mouse events
-  /// on that target, otherwise it will fire the events on the target that is
-  /// under the current mouse location.
-  Future<void> down(MouseButton button, {PageLoaderElement eventTarget});
+  /// Press [button] on the mouse at its current location with [clickOption].
+  /// If [eventTarget] is specified, PageLoader will attempt to fire the
+  /// corresponding mouse events on that target, otherwise it will fire the
+  /// events on the target that is under the current mouse location.
+  /// [clickOption] is only used for Html.
+  Future<void> down(MouseButton button,
+      {PageLoaderElement eventTarget, ClickOption clickOption});
 
-  /// Release [button] on the mouse at its current location. If [eventTarget] is
-  /// specified, PageLoader will attempt to fire the corresponding mouse events
-  /// on that target, otherwise it will fire the events on the target that is
-  /// under the current mouse location.
-  Future<void> up(MouseButton button, {PageLoaderElement eventTarget});
+  /// Release [button] on the mouse at its current location with [clickOption].
+  /// If [eventTarget] is specified, PageLoader will attempt to fire the
+  /// corresponding mouse events on that target, otherwise it will fire the
+  /// events on the target that is under the current mouse location.
+  /// [clickOption] is only used for Html.
+  Future<void> up(MouseButton button,
+      {PageLoaderElement eventTarget, ClickOption clickOption});
 
   /// Move the mouse from previous location to a location relative to [element],
   /// offset by [xOffset] and [yOffset].
@@ -52,7 +57,7 @@ abstract class PageLoaderMouse {
   /// instantaneously moves from its current position to the final position
   /// with no intermediate steps. If provided, [stepPixels] must be a value
   /// greater than zero.
-  // TODO: Determine consistent behavior when element is null and
+  // TODO(maxkim): Determine consistent behavior when element is null and
   // how off-screen events should be handled.
   Future<void> moveTo(
       covariant PageLoaderElement element, int xOffset, int yOffset,

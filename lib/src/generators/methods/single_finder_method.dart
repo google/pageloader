@@ -15,6 +15,7 @@
 library pageloader.single_finder_method;
 
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 
@@ -47,7 +48,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
         node, 'multiple Finders cannot be used for single method');
   }
 
-  String finder = finders.length == 1 ? finders.single : null;
+  var finder = finders.length == 1 ? finders.single : null;
   final filters = methodAnnotations
       .where(isPageloaderFilter)
       .map((a) => generateAnnotationDeclaration(a))
@@ -61,7 +62,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
   final isNullElement = methodAnnotations.any(isPageloaderNullElement);
 
   // Get initial type information.
-  String typeArgument = node.returnType.toString();
+  var typeArgument = node.returnType.toString();
 
   // Get template, if it exists.
   String templateType;
@@ -84,7 +85,13 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
 
   // Convert 'ByCheckTag' to 'ByTagName' if necessary.
   if (finder != null && finder.contains('ByCheckTag')) {
-    finder = generateByTagNameFromByCheckTag(node.returnType.type);
+    // Check to see if return type is expected [InterfaceType]. If not, then
+    // this means there is an error in the original Dart file but we don't
+    // throw an error here since it hides underlying Dart error.
+    if (node.returnType.type is InterfaceType) {
+      finder = generateByTagNameFromByCheckTag(
+          node.returnType.type, node.toSource());
+    }
   }
 
   if (finder == null) {
@@ -148,8 +155,9 @@ abstract class SingleFinderMethod extends Object
     implements
         SingleFinderMethodBase,
         Built<SingleFinderMethod, SingleFinderMethodBuilder> {
-  factory SingleFinderMethod([updates(SingleFinderMethodBuilder b)]) =
+  factory SingleFinderMethod([Function(SingleFinderMethodBuilder) updates]) =
       _$SingleFinderMethod;
+
   SingleFinderMethod._();
 }
 
@@ -159,12 +167,19 @@ abstract class SingleFinderMethodMixin {
   // Getters from [SingleFinderMethodBase] that need to be declared in this
   // mixin to be used in the methods below.
   String get name;
+
   String get pageObjectType;
+
   Optional<String> get finderDeclaration;
+
   Optional<String> get templateType;
+
   String get filterDeclarations;
+
   String get checkerDeclarations;
+
   bool get isRoot;
+
   bool get isNullElement;
 
   String generate(String pageObjectName) =>
@@ -174,6 +189,42 @@ abstract class SingleFinderMethodMixin {
       'final returnMe = $elementCreation;' +
       generateEndMethodListeners(pageObjectName, name) +
       ' return returnMe;}';
+
+  /// Generates code that given list of [PageLoaderElement] ids called
+  /// `internalIds`, determine whether and where this element appears in the
+  /// list and what code should be further generated for this.
+  ///
+  /// There are two cases depending on [pageObjectType]. One is
+  /// [PageLoaderElement], where generation would stopped, and return the
+  /// member name. The other one can be any page object, where we would try to
+  /// get the id via $__root__.id and if successful, call [findChain].
+  String generateFindChain() => '''
+      try {
+        $chainIndexCreation
+        if (${name}Index >= 0 && ${name}Index < closestIndex) {
+          closestIndex = ${name}Index;
+          closestValue = $chainValueCreation;
+        }
+      } catch (_) {
+        // Ignored.
+      }''';
+
+  bool get produceFindChain => true;
+
+  String get chainIndexCreation => createChainIndex;
+
+  String get createChainIndex => pageObjectType == 'PageLoaderElement'
+      ? 'var ${name}Index = internalIds.indexOf(this.$name.id);'
+      : '''var ${name}Element = this.$name as dynamic;
+           var ${name}Index = internalIds.indexOf(${name}Element.\$__root__.id);''';
+
+  String get chainValueCreation => createChainValue;
+
+  String get createChainValue => pageObjectType == 'PageLoaderElement'
+      ? "(_) => '$name.\${PageObject.defaultCode[action] ?? "
+          "PageObject.defaultCode['default']}'"
+      : "(ids) => '$name.\${${name}Element.findChain(ids, action)}'"
+          ".replaceAll(RegExp('\\\\.\\\$'), '')";
 
   String get methodSignature => '$pageObjectType$template get $name';
 
@@ -217,12 +268,18 @@ abstract class SingleFinderMethodMixin {
 @BuiltValue(instantiable: false)
 abstract class SingleFinderMethodBase {
   String get name;
+
   String get pageObjectType;
+
   Optional<String> get finderDeclaration;
+
   String get filterDeclarations;
+
   String get checkerDeclarations;
+
   Optional<String> get templateType;
 
   bool get isRoot;
+
   bool get isNullElement;
 }

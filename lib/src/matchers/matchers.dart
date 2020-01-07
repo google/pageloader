@@ -18,7 +18,7 @@ import 'package:pageloader/utils.dart' as utils;
 const Matcher exists = _Exists();
 
 /// A matcher that checks if a PageLoaderElement/PageObject does not exist.
-Matcher notExists = isNot(exists);
+const Matcher notExists = _NotExists();
 
 /// A matcher that checks if a PageLoaderElement/PageObject
 /// contains given class.
@@ -62,17 +62,76 @@ Matcher isNotVisible = isNot(isVisible);
 /// A matcher that matches the given matcher against an element's inner text.
 Matcher hasInnerText(matcher) => _HasInnerText(matcher);
 
-const _item = 'PageLoaderElement/PageObject';
+const _item = 'PageLoaderElement/PageObject/PageObjectList';
+
+const _invalidTypeMessage = 'must be `PageLoaderElement` type, '
+    'a PageObject type (class with `@PageObject` annotation), or a '
+    '`PageObjectList` type';
 
 class _Exists extends Matcher {
   const _Exists();
 
   @override
-  bool matches(item, Map matchState) => utils.exists(item);
+  bool matches(item, Map<Object, Object> matchState) => utils.exists(item);
 
   @override
   Description describe(Description description) =>
       description.add('$_item exists');
+
+  @override
+  Description describeMismatch(dynamic item, Description mismatchDescription,
+      Map matchState, bool verbose) {
+    if (utils.isPageObjectList(item)) {
+      return mismatchDescription.add(
+          '$item is a `PageObjectList` and must contain at least one element '
+          'of `PageLoaderElement` type or a PageObject type'
+          '(class with `@PageObject` annotation); '
+          'currently contains zero elements');
+    }
+    try {
+      utils.rootElementOf(item);
+    } on utils.PageLoaderArgumentError {
+      return mismatchDescription.add('$item $_invalidTypeMessage');
+    }
+
+    if (utils.isPageLoaderElement(item)) {
+      return mismatchDescription
+          .add('$item is a `PageLoaderElement`, but does not exist');
+    }
+    return mismatchDescription
+        .add('${item}s root `PageLoaderElement` does not exist');
+  }
+}
+
+class _NotExists extends Matcher {
+  const _NotExists();
+
+  @override
+  bool matches(item, Map<Object, Object> matchState) => !utils.exists(item);
+
+  @override
+  Description describe(Description description) =>
+      description.add('$_item does not exist');
+
+  @override
+  Description describeMismatch(dynamic item, Description mismatchDescription,
+      Map matchState, bool verbose) {
+    if (utils.isPageObjectList(item)) {
+      return mismatchDescription.add(
+          '$item is a `PageObjectList` and must contain exactly zero elements; '
+          'currently contains ${item.length} element(s)');
+    }
+    try {
+      utils.rootElementOf(item);
+    } on utils.PageLoaderArgumentError {
+      return mismatchDescription.add('$item $_invalidTypeMessage');
+    }
+    if (utils.isPageLoaderElement(item)) {
+      return mismatchDescription
+          .add('${item}s is a `PageLoaderElement` and exists');
+    }
+    return mismatchDescription.add('${item}s root `PageLoaderElement` exists');
+  }
 }
 
 class _HasClass extends Matcher {
@@ -81,7 +140,8 @@ class _HasClass extends Matcher {
   _HasClass(this.className);
 
   @override
-  bool matches(item, Map matchState) => utils.hasClass(item, className);
+  bool matches(item, Map<Object, Object> matchState) =>
+      utils.hasClass(item, className);
 
   @override
   Description describe(Description description) =>
@@ -92,7 +152,7 @@ class _IsDisplayed extends Matcher {
   const _IsDisplayed();
 
   @override
-  bool matches(item, Map matchState) => utils.isDisplayed(item);
+  bool matches(item, Map<Object, Object> matchState) => utils.isDisplayed(item);
 
   @override
   Description describe(Description description) =>
@@ -103,7 +163,7 @@ class _IsHidden extends Matcher {
   const _IsHidden();
 
   @override
-  bool matches(item, Map matchState) => utils.isHidden(item);
+  bool matches(item, Map<Object, Object> matchState) => utils.isHidden(item);
 
   @override
   Description describe(Description description) =>
@@ -114,7 +174,7 @@ class _IsFocused extends Matcher {
   const _IsFocused();
 
   @override
-  bool matches(item, Map matchState) => utils.isFocused(item);
+  bool matches(item, Map<Object, Object> matchState) => utils.isFocused(item);
 
   @override
   Description describe(Description description) =>
@@ -125,7 +185,7 @@ class _IsVisible extends Matcher {
   const _IsVisible();
 
   @override
-  bool matches(item, Map matchState) => utils.isVisible(item);
+  bool matches(item, Map<Object, Object> matchState) => utils.isVisible(item);
 
   @override
   Description describe(Description description) =>
@@ -134,7 +194,7 @@ class _IsVisible extends Matcher {
 
 class _HasInnerText extends CustomMatcher {
   _HasInnerText(matcher)
-      : super("Has inner text that is", "inner text", matcher);
+      : super('Has inner text that is', 'inner text', matcher);
 
   @override
   dynamic featureValueOf(item) => utils.getInnerText(item);

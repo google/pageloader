@@ -16,3 +16,4 @@ export 'pageloader.dart';
 export 'src/webdriver/webdriver_mouse.dart';
 export 'src/webdriver/webdriver_page_loader_element.dart';
 export 'src/webdriver/webdriver_page_utils.dart';
+export 'src/webdriver/webdriver_pointer.dart';

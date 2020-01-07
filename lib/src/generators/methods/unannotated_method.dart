@@ -47,6 +47,8 @@ abstract class UnannotatedMethod
   List<FormalParameter> get parameters;
   Optional<TypeParameterList> get typeParameters;
 
+  bool get produceTestCreatorMethod => returnType.startsWith('Future');
+
   String generate(String pageObjectName) {
     if (returnType == 'void') {
       return 'void $_methodDeclaration($_parameterDeclarations) {' +
@@ -54,14 +56,14 @@ abstract class UnannotatedMethod
           'super.$name($_parameterNames);' +
           generateEndMethodListeners(pageObjectName, name) +
           'return;'
-          '}';
+              '}';
     } else {
       return '$returnType $_methodDeclaration($_parameterDeclarations) {' +
           generateStartMethodListeners(pageObjectName, name) +
           'final returnMe = super.$name($_parameterNames);' +
           generateEndMethodListeners(pageObjectName, name) +
           'return returnMe;'
-          '}';
+              '}';
     }
   }
 
@@ -122,7 +124,7 @@ abstract class UnannotatedMethod
     return mixedList.join(',');
   }
 
-  factory UnannotatedMethod([updates(UnannotatedMethodBuilder b)]) =
+  factory UnannotatedMethod([Function(UnannotatedMethodBuilder) updates]) =
       _$UnannotatedMethod;
   UnannotatedMethod._();
 }

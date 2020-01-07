@@ -20,7 +20,7 @@ import 'html_page_loader_element.dart';
 
 /// Iterator for [HtmlPageLoaderElement]s.
 class HtmlPageElementIterator extends Iterator<HtmlPageLoaderElement> {
-  final SyncFn _syncFn;
+  final SyncFn<dynamic> _syncFn;
 
   final List<Element> _elements;
   int _current = -1;

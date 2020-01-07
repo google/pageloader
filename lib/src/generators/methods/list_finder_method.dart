@@ -41,7 +41,8 @@ Optional<ListFinderMethod> collectListFinderGetter(
   var finder = methodInfo.finder.value;
   if (finder != null && finder.contains('ByCheckTag')) {
     finder = generateByTagNameFromByCheckTag(
-        getInnerType(node.returnType.type, methodInfo.pageObjectType));
+        getInnerType(node.returnType.type, methodInfo.pageObjectType),
+        node.toSource());
   }
 
   return Optional.of(ListFinderMethod((b) => b
@@ -60,8 +61,9 @@ abstract class ListFinderMethod extends Object
     implements
         ListFinderMethodBase,
         Built<ListFinderMethod, ListFinderMethodBuilder> {
-  factory ListFinderMethod([updates(ListFinderMethodBuilder b)]) =
+  factory ListFinderMethod([Function(ListFinderMethodBuilder) updates]) =
       _$ListFinderMethod;
+
   ListFinderMethod._();
 }
 
@@ -70,11 +72,17 @@ abstract class ListFinderMethodMixin {
   // Fields from [ListFinderMethodBase] that need to be declared in order to
   // be used in the below methods.
   String get checkerDeclarations;
+
   String get listTypeArgument;
+
   String get filterDeclarations;
+
   String get finderDeclaration;
+
   String get name;
+
   bool get isFuture;
+
   Optional<String> get genericType;
 
   String generate(String pageObjectName) =>
@@ -91,6 +99,47 @@ abstract class ListFinderMethodMixin {
       return '$pageObjectList get $name ';
     }
   }
+
+  /// Generates code that given list of [PageLoaderElement] ids called
+  /// `internalIds`, iterate over elements this [ListFinderMethodMixin]
+  /// represents, determine whether and where each element appears in the list
+  /// and what code should be further generated for this.
+  ///
+  /// There are two cases depending on [listTypeArgument]. One is
+  /// [PageLoaderElement], where generation would stopped, and return the
+  /// member name. The other one can be any page object, where we would try to
+  /// get the id via $__root__.id and if successful, call [findChain].
+  String generateFindChain() => '''
+      final ${name}Elements = this.$name;
+      for (var elementIter = 0; elementIter < ${name}Elements.length; elementIter++) {
+        try {
+          $chainIndexCreation
+          if (${name}Index >= 0 && ${name}Index < closestIndex) {
+            closestIndex = ${name}Index;
+            closestValue = $chainValueCreation;
+          }
+        } catch (_) {
+          // Ignored.
+        }
+      }''';
+
+  bool get produceFindChain => !isFuture;
+
+  String get chainIndexCreation => createChainIndex;
+
+  String get createChainIndex => listTypeArgument == 'PageLoaderElement'
+      ? 'var ${name}Index = internalIds.indexOf(${name}Elements[elementIter].id);'
+      : '''var ${name}Element = ${name}Elements[elementIter] as dynamic;
+           var ${name}Index = internalIds.indexOf(${name}Element.\$__root__.id);''';
+
+  String get chainValueCreation => createChainValue;
+
+  String get createChainValue => listTypeArgument == 'PageLoaderElement'
+      ? "(_) => '$name[\$elementIter].\${PageObject.defaultCode[action] ?? "
+          "PageObject.defaultCode['default']}'"
+      : '(ids) => '
+          "'$name[\$elementIter].\${${name}Element.findChain(ids, action)}'"
+          ".replaceAll(RegExp('\\\\.\\\$'), '')";
 
   String get constructor {
     if (listTypeArgument == 'PageLoaderElement') {
@@ -118,11 +167,16 @@ abstract class ListFinderMethodMixin {
 @BuiltValue(instantiable: false)
 abstract class ListFinderMethodBase {
   String get name;
+
   String get listTypeArgument;
+
   String get finderDeclaration;
+
   String get filterDeclarations;
+
   String get checkerDeclarations;
 
   bool get isFuture;
+
   Optional<String> get genericType;
 }

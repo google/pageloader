@@ -35,11 +35,13 @@ class DummyPageLoaderMouse implements PageLoaderMouse {
   String toString() => 'DummyMouse';
 
   @override
-  Future<Null> down(MouseButton button, {PageLoaderElement eventTarget}) =>
+  Future<Null> down(MouseButton button,
+          {PageLoaderElement eventTarget, ClickOption clickOption}) =>
       throw 'what';
 
   @override
-  Future<Null> up(MouseButton button, {PageLoaderElement eventTarget}) =>
+  Future<Null> up(MouseButton button,
+          {PageLoaderElement eventTarget, ClickOption clickOption}) =>
       throw 'no';
 
   @override
@@ -50,19 +52,45 @@ class DummyPageLoaderMouse implements PageLoaderMouse {
       throw 'can not even';
 }
 
+class DummyPageLoaderPointer implements PageLoaderPointer {
+  @override
+  String toString() => 'DummyPointer';
+
+  @override
+  Future<Null> down(MouseButton button, {PageLoaderElement eventTarget}) =>
+      throw 'not implemented';
+
+  @override
+  Future<Null> up(MouseButton button, {PageLoaderElement eventTarget}) =>
+      throw 'not implemented';
+
+  @override
+  Future<Null> moveTo(PageLoaderElement element, int xOffset, int yOffset,
+          {List<PageLoaderElement> dispatchTo,
+          int stepPixels,
+          Duration duration}) =>
+      throw 'not implemented';
+}
+
 class DummyPageLoader extends PageUtils {
   @override
   PageLoaderElement get root => throw 'not implemented';
+
+  @override
+  PageLoaderElement get focused => throw 'not implemented';
 
   @override
   PageLoaderElement byTag(String tag) => throw 'not implemented';
 
   @override
   PageLoaderMouse get mouse => DummyPageLoaderMouse();
+
+  @override
+  PageLoaderPointer get pointer => DummyPageLoaderPointer();
 }
 
 class DummyPageElementIterable extends PageElementIterable {
-  List<Finder> _finders;
+  final List<Finder> _finders;
 
   DummyPageElementIterable(this._finders);
 
@@ -81,10 +109,10 @@ class DummyPageElementIterable extends PageElementIterable {
 }
 
 class DummyPageLoaderElement implements PageLoaderElement {
-  List<Finder> _finders;
-  List<Filter> _filter;
-  List<Checker> _checkers;
-  List<PageLoaderListener> _listeners;
+  final List<Finder> _finders;
+  final List<Filter> _filter;
+  final List<Checker> _checkers;
+  final List<PageLoaderListener> _listeners;
 
   final bool _exists;
   final bool _focused;
@@ -117,7 +145,7 @@ class DummyPageLoaderElement implements PageLoaderElement {
   PageLoaderElement createElement(
       Finder finder, List<Filter> filter, List<Checker> checkers) {
     final newElement = DummyPageLoaderElement();
-    newElement._finders.addAll(this._finders);
+    newElement._finders.addAll(_finders);
     newElement._finders.add(finder);
     newElement._filter.addAll(filter);
     newElement._checkers.addAll(checkers);
@@ -138,11 +166,11 @@ class DummyPageLoaderElement implements PageLoaderElement {
   List<PageLoaderElement> createList(
       Finder finder, List<Filter> filter, List<Checker> checkers) {
     final newElement = DummyPageLoaderElement();
-    newElement._finders.addAll(this._finders);
+    newElement._finders.addAll(_finders);
     newElement._finders.add(finder);
     newElement._filter.addAll(filter);
     newElement._checkers.addAll(checkers);
-    newElement._listeners.addAll(this._listeners);
+    newElement._listeners.addAll(_listeners);
     return [newElement];
   }
 
@@ -226,10 +254,16 @@ class DummyPageLoaderElement implements PageLoaderElement {
       throw 'not implemented';
 
   @override
-  Future<Null> click() => throw 'not implemented';
+  Future<Null> click({ClickOption clickOption}) => throw 'not implemented';
 
   @override
   Future<Null> clickOutside() => throw 'not implemented';
+
+  @override
+  Future<Null> scroll({int x, int y}) => throw 'not implemented';
+
+  @override
+  Future<void> scrollIntoView() => throw 'not implemented';
 
   @override
   Future<Null> type(String keys,
@@ -247,6 +281,15 @@ class DummyPageLoaderElement implements PageLoaderElement {
 
   @override
   String toStringDeep() => 'DummyPageLoaderElement';
+
+  @override
+  String get id => '<id>';
+
+  @override
+  String testCreatorGetters() => throw 'not implemented';
+
+  @override
+  String testCreatorMethods() => throw 'not implemented';
 }
 
 class DummyPageLoaderAttributes extends DelegatingMap<String, String>

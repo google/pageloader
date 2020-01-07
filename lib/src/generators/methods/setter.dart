@@ -36,7 +36,9 @@ Optional<Setter> collectUnannotatedSetter(MethodDeclaration node) {
 /// Generates code for normal setters.
 abstract class Setter implements Built<Setter, SetterBuilder> {
   String get name;
+
   String get setterType;
+
   String get setterValueName;
 
   String generate(String pageObjectName) {
@@ -45,9 +47,13 @@ abstract class Setter implements Built<Setter, SetterBuilder> {
         'super.$name = $setterValueName; ' +
         generateEndMethodListeners(pageObjectName, name) +
         'return;'
-        '}';
+            '}';
   }
 
-  factory Setter([updates(SetterBuilder b)]) = _$Setter;
+  String generateForMixin(String pageObjectName) =>
+      'set $name($setterType $setterValueName);';
+
+  factory Setter([Function(SetterBuilder) updates]) = _$Setter;
+
   Setter._();
 }

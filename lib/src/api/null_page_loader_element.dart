@@ -16,6 +16,7 @@ import 'dart:math';
 import 'annotation_interfaces.dart';
 import 'exceptions.dart';
 import 'iterable_interfaces.dart';
+import 'page_loader_click_option.dart';
 import 'page_loader_element_interface.dart';
 import 'page_loader_keyboard.dart';
 import 'page_loader_listener.dart';
@@ -69,6 +70,9 @@ class NullPageLoaderElement implements PageLoaderElement {
   @override
   PageLoaderElement get shadowRoot =>
       throw NullPageLoaderElementAccessException('shadowRoot', this);
+
+  @override
+  String get id => '<id>';
 
   @override
   String get innerText =>
@@ -134,12 +138,20 @@ class NullPageLoaderElement implements PageLoaderElement {
       throw NullPageLoaderElementAccessException('clear', this);
 
   @override
-  Future<void> click() =>
+  Future<void> click({ClickOption clickOption}) =>
       throw NullPageLoaderElementAccessException('click', this);
 
   @override
   Future<void> clickOutside() =>
       throw NullPageLoaderElementAccessException('clickOutside', this);
+
+  @override
+  Future<void> scroll({int x, int y}) =>
+      throw NullPageLoaderElementAccessException('scroll', this);
+
+  @override
+  Future<void> scrollIntoView() =>
+      throw NullPageLoaderElementAccessException('scrollIntoView', this);
 
   @override
   Future<void> type(String keys,
@@ -156,10 +168,18 @@ class NullPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<void> blur() =>
-      throw NullPageLoaderElementAccessException('blue', this);
+      throw NullPageLoaderElementAccessException('blur', this);
 
   @override
   String toStringDeep() => 'NullPageLoaderElement';
+
+  @override
+  String testCreatorGetters() =>
+      throw NullPageLoaderElementAccessException('testCreatorGetters', this);
+
+  @override
+  String testCreatorMethods() =>
+      throw NullPageLoaderElementAccessException('testCreatorMethods', this);
 }
 
 class NullPageLoaderElementAccessException extends PageLoaderException {
@@ -167,8 +187,8 @@ class NullPageLoaderElementAccessException extends PageLoaderException {
       String callName, PageLoaderElement element)
       : super(
             "'$callName' cannot be called on a NullPageLoaderElement."
-            "To avoid this error, ensure that the PageLoaderElement or "
-            "PageObject being called (directly or indirectly) with "
+            'To avoid this error, ensure that the PageLoaderElement or '
+            'PageObject being called (directly or indirectly) with '
             "'$callName' has been checked for existence.",
             element);
 }
