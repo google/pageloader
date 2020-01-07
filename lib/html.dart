@@ -15,5 +15,5 @@
 export 'pageloader.dart';
 export 'src/html/html_mouse.dart' hide TrackedElement;
 export 'src/html/html_page_loader_element.dart';
-export 'src/html/html_page_loader_pointer.dart' hide TrackedElement;
 export 'src/html/html_page_utils.dart';
+export 'src/html/html_pointer.dart' hide TrackedElement;
