@@ -42,8 +42,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
         final ignore =
             '// ignore_for_file: private_collision_in_mixin_application\n'
             '// ignore_for_file: unused_field, non_constant_identifier_names\n'
-            '// ignore_for_file: overridden_fields, annotate_overrides\n'
-            '// ignore_for_file: unused_field\n';
+            '// ignore_for_file: overridden_fields, annotate_overrides\n';
         return '$ignore${_generateClass(annotatedNode)}';
       } catch (e, stackTrace) {
         print('Failure generating class for $library! '
