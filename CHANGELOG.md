@@ -1,3 +1,14 @@
+## 3.3.0
+
+- Expose more files within `lib/html.dart` and `lib/webdriver.dart`.
+- New `PageLoaderPointer` entity which behaves similarly to `PageLoaderMouse`. **Only supported for HTML at the moment.**
+- Add `@Pointer` annotation (similar to `@Mouse`).
+- Fix PageLoader checks when using `@CheckTag(...)` for Safari browser - which produces all upper case tag names.
+- Numerous Dart lint fixes and hiding lints within generated files.
+- Add `ClickOption` parameter to click-based events within `PageLoaderElement`.
+- Add `scroll()` and `scrollIntoView()` functionality to `PageLoaderElement`.
+- `focused` and `pointer` getters added to `PageUtils.
+
 ## 3.2.5
 
 - Use `built_value` version `7.0.0`.
