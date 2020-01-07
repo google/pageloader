@@ -24,7 +24,8 @@ class _$SingleFinderMethod extends SingleFinderMethod {
   @override
   final bool isNullElement;
 
-  factory _$SingleFinderMethod([void updates(SingleFinderMethodBuilder b)]) =>
+  factory _$SingleFinderMethod(
+          [void Function(SingleFinderMethodBuilder) updates]) =>
       (new SingleFinderMethodBuilder()..update(updates)).build();
 
   _$SingleFinderMethod._(
@@ -68,7 +69,8 @@ class _$SingleFinderMethod extends SingleFinderMethod {
   }
 
   @override
-  SingleFinderMethod rebuild(void updates(SingleFinderMethodBuilder b)) =>
+  SingleFinderMethod rebuild(
+          void Function(SingleFinderMethodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -190,7 +192,7 @@ class SingleFinderMethodBuilder
   }
 
   @override
-  void update(void updates(SingleFinderMethodBuilder b)) {
+  void update(void Function(SingleFinderMethodBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -213,7 +215,7 @@ class SingleFinderMethodBuilder
 
 abstract class SingleFinderMethodBaseBuilder {
   void replace(SingleFinderMethodBase other);
-  void update(void updates(SingleFinderMethodBaseBuilder b));
+  void update(void Function(SingleFinderMethodBaseBuilder) updates);
   String get name;
   set name(String name);
 

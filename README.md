@@ -129,6 +129,9 @@ How do I trigger the generation step?
 =====================================
 `pub run build_runner build`
 
+If you are starting with a fresh checkout or deleted your `.dart_tool` directory,
+pass the flag: `--delete-conflicting-outputs`.
+
 Lazy Loading
 ============
 Starting from version 3, all elements are lazy.

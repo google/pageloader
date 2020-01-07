@@ -7,6 +7,9 @@ part of 'null_element.dart';
 // **************************************************************************
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $ParentRoot extends ParentRoot with $$ParentRoot {
   PageLoaderElement $__root__;
   $ParentRoot.create(PageLoaderElement currentContext)
@@ -15,8 +18,8 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
   }
   factory $ParentRoot.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "ParentRoot is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "ParentRoot is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "ParentRoot". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'ParentRoot\n\n${$__root__.toStringDeep()}';
@@ -25,9 +28,7 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
 class $$ParentRoot {
   PageLoaderElement $__root__;
   PageLoaderMouse __mouse__;
-
   PageLoaderElement get $root => $__root__;
-
   PageLoaderElement get _nullElement {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ParentRoot', '_nullElement');
@@ -61,10 +62,14 @@ class $$ParentRoot {
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('ParentRoot', 'gens');
     }
+    return returnMe;
   }
 }
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $NullPO extends NullPO with $$NullPO {
   PageLoaderElement $__root__;
   $NullPO.create(PageLoaderElement currentContext)
@@ -73,8 +78,8 @@ class $NullPO extends NullPO with $$NullPO {
   }
   factory $NullPO.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "NullPO is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "NullPO is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "NullPO". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'NullPO\n\n${$__root__.toStringDeep()}';
@@ -87,6 +92,9 @@ class $$NullPO {
 }
 
 // ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $Generics<T> extends Generics<T> with $$Generics<T> {
   PageLoaderElement $__root__;
   $Generics.create(PageLoaderElement currentContext)
@@ -95,8 +103,8 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
   }
   factory $Generics.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Generics is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Generics is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Generics". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'Generics\n\n${$__root__.toStringDeep()}';

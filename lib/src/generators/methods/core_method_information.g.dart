@@ -12,7 +12,7 @@ class _$TypeInformation extends TypeInformation {
   @override
   final List<TypeInformation> typeArguments;
 
-  factory _$TypeInformation([void updates(TypeInformationBuilder b)]) =>
+  factory _$TypeInformation([void Function(TypeInformationBuilder) updates]) =>
       (new TypeInformationBuilder()..update(updates)).build();
 
   _$TypeInformation._({this.type, this.typeArguments}) : super._() {
@@ -25,7 +25,7 @@ class _$TypeInformation extends TypeInformation {
   }
 
   @override
-  TypeInformation rebuild(void updates(TypeInformationBuilder b)) =>
+  TypeInformation rebuild(void Function(TypeInformationBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -87,7 +87,7 @@ class TypeInformationBuilder
   }
 
   @override
-  void update(void updates(TypeInformationBuilder b)) {
+  void update(void Function(TypeInformationBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -133,7 +133,7 @@ class _$CoreMethodInformation extends CoreMethodInformation {
   final AstNode node;
 
   factory _$CoreMethodInformation(
-          [void updates(CoreMethodInformationBuilder b)]) =>
+          [void Function(CoreMethodInformationBuilder) updates]) =>
       (new CoreMethodInformationBuilder()..update(updates)).build();
 
   _$CoreMethodInformation._(
@@ -204,7 +204,8 @@ class _$CoreMethodInformation extends CoreMethodInformation {
   }
 
   @override
-  CoreMethodInformation rebuild(void updates(CoreMethodInformationBuilder b)) =>
+  CoreMethodInformation rebuild(
+          void Function(CoreMethodInformationBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -390,7 +391,7 @@ class CoreMethodInformationBuilder
   }
 
   @override
-  void update(void updates(CoreMethodInformationBuilder b)) {
+  void update(void Function(CoreMethodInformationBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -420,7 +421,7 @@ class CoreMethodInformationBuilder
 
 abstract class CoreMethodInformationBaseBuilder {
   void replace(CoreMethodInformationBase other);
-  void update(void updates(CoreMethodInformationBaseBuilder b));
+  void update(void Function(CoreMethodInformationBaseBuilder) updates);
   String get name;
   set name(String name);
 

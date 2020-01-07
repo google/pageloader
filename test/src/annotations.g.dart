@@ -9,6 +9,7 @@ part of 'annotations.dart';
 // ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $BaseObject extends BaseObject with $$BaseObject {
   PageLoaderElement $__root__;
   $BaseObject.create(PageLoaderElement currentContext)
@@ -17,15 +18,16 @@ class $BaseObject extends BaseObject with $$BaseObject {
   }
   factory $BaseObject.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "BaseObject is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "BaseObject is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "BaseObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'BaseObject\n\n${$__root__.toStringDeep()}';
 }
 
 class $$BaseObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   TableForCheckTag get table {
     for (final __listener in $__root__.listeners) {
@@ -76,6 +78,10 @@ class $$BaseObject {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $PseudoBaseObject extends PseudoBaseObject with $$PseudoBaseObject {
   PageLoaderElement $__root__;
   $PseudoBaseObject.create(PageLoaderElement currentContext)
@@ -84,15 +90,16 @@ class $PseudoBaseObject extends PseudoBaseObject with $$PseudoBaseObject {
   }
   factory $PseudoBaseObject.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "PseudoBaseObject is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "PseudoBaseObject is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "PseudoBaseObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'PseudoBaseObject\n\n${$__root__.toStringDeep()}';
 }
 
 class $$PseudoBaseObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   TableForCheckTag get table {
     for (final __listener in $__root__.listeners) {
@@ -132,6 +139,10 @@ class $$PseudoBaseObject {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $TableForCheckTag extends TableForCheckTag with $$TableForCheckTag {
   PageLoaderElement $__root__;
   $TableForCheckTag.create(PageLoaderElement currentContext)
@@ -140,12 +151,13 @@ class $TableForCheckTag extends TableForCheckTag with $$TableForCheckTag {
   }
   factory $TableForCheckTag.lookup(PageLoaderSource source) =>
       $TableForCheckTag.create(source.byTag('table'));
-  static String get tagName => 'table';
+  static const String tagName = 'table';
+  String toStringDeep() => 'TableForCheckTag\n\n${$__root__.toStringDeep()}';
 }
 
 class $$TableForCheckTag {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -185,6 +197,10 @@ class $$TableForCheckTag {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $BaseEnsureObject extends BaseEnsureObject with $$BaseEnsureObject {
   PageLoaderElement $__root__;
   $BaseEnsureObject.create(PageLoaderElement currentContext)
@@ -193,15 +209,16 @@ class $BaseEnsureObject extends BaseEnsureObject with $$BaseEnsureObject {
   }
   factory $BaseEnsureObject.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "BaseEnsureObject is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "BaseEnsureObject is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "BaseEnsureObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'BaseEnsureObject\n\n${$__root__.toStringDeep()}';
 }
 
 class $$BaseEnsureObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   TableForEnsureTag get table {
     for (final __listener in $__root__.listeners) {
@@ -228,6 +245,10 @@ class $$BaseEnsureObject {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $TableForEnsureTag extends TableForEnsureTag with $$TableForEnsureTag {
   PageLoaderElement $__root__;
   $TableForEnsureTag.create(PageLoaderElement currentContext)
@@ -236,12 +257,13 @@ class $TableForEnsureTag extends TableForEnsureTag with $$TableForEnsureTag {
   }
   factory $TableForEnsureTag.lookup(PageLoaderSource source) =>
       $TableForEnsureTag.create(source.byTag('table'));
-  static String get tagName => 'table';
+  static const String tagName = 'table';
+  String toStringDeep() => 'TableForEnsureTag\n\n${$__root__.toStringDeep()}';
 }
 
 class $$TableForEnsureTag {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -269,6 +291,10 @@ class $$TableForEnsureTag {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $CheckTagFails extends CheckTagFails with $$CheckTagFails {
   PageLoaderElement $__root__;
   $CheckTagFails.create(PageLoaderElement currentContext)
@@ -277,12 +303,13 @@ class $CheckTagFails extends CheckTagFails with $$CheckTagFails {
   }
   factory $CheckTagFails.lookup(PageLoaderSource source) =>
       $CheckTagFails.create(source.byTag('inconceivable'));
-  static String get tagName => 'inconceivable';
+  static const String tagName = 'inconceivable';
+  String toStringDeep() => 'CheckTagFails\n\n${$__root__.toStringDeep()}';
 }
 
 class $$CheckTagFails {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -297,6 +324,10 @@ class $$CheckTagFails {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $EnsureTagFails extends EnsureTagFails with $$EnsureTagFails {
   PageLoaderElement $__root__;
   $EnsureTagFails.create(PageLoaderElement currentContext)
@@ -306,12 +337,13 @@ class $EnsureTagFails extends EnsureTagFails with $$EnsureTagFails {
   }
   factory $EnsureTagFails.lookup(PageLoaderSource source) =>
       $EnsureTagFails.create(source.byTag('inconceivable'));
-  static String get tagName => 'inconceivable';
+  static const String tagName = 'inconceivable';
+  String toStringDeep() => 'EnsureTagFails\n\n${$__root__.toStringDeep()}';
 }
 
 class $$EnsureTagFails {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get table {
     for (final __listener in $__root__.listeners) {
@@ -326,6 +358,10 @@ class $$EnsureTagFails {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $PageForWithAttributeTest extends PageForWithAttributeTest
     with $$PageForWithAttributeTest {
   PageLoaderElement $__root__;
@@ -335,15 +371,17 @@ class $PageForWithAttributeTest extends PageForWithAttributeTest
   }
   factory $PageForWithAttributeTest.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "PageForWithAttributeTest is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "PageForWithAttributeTest is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "PageForWithAttributeTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() =>
+      'PageForWithAttributeTest\n\n${$__root__.toStringDeep()}';
 }
 
 class $$PageForWithAttributeTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get element {
     for (final __listener in $__root__.listeners) {
@@ -359,6 +397,10 @@ class $$PageForWithAttributeTest {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $PageForWithClassTest extends PageForWithClassTest
     with $$PageForWithClassTest {
   PageLoaderElement $__root__;
@@ -368,15 +410,17 @@ class $PageForWithClassTest extends PageForWithClassTest
   }
   factory $PageForWithClassTest.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "PageForWithClassTest is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "PageForWithClassTest is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "PageForWithClassTest". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() =>
+      'PageForWithClassTest\n\n${$__root__.toStringDeep()}';
 }
 
 class $$PageForWithClassTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get element {
     for (final __listener in $__root__.listeners) {
@@ -392,6 +436,10 @@ class $$PageForWithClassTest {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $DebugIds extends DebugIds with $$DebugIds {
   PageLoaderElement $__root__;
   $DebugIds.create(PageLoaderElement currentContext)
@@ -400,15 +448,16 @@ class $DebugIds extends DebugIds with $$DebugIds {
   }
   factory $DebugIds.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "DebugIds is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "DebugIds is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "DebugIds". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'DebugIds\n\n${$__root__.toStringDeep()}';
 }
 
 class $$DebugIds {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get option1 {
     for (final __listener in $__root__.listeners) {
@@ -481,6 +530,42 @@ class $$DebugIds {
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('DebugIds', 'useCamelCase');
+    }
+    return returnMe;
+  }
+}
+
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
+class $TestIds extends TestIds with $$TestIds {
+  PageLoaderElement $__root__;
+  $TestIds.create(PageLoaderElement currentContext)
+      : $__root__ = currentContext {
+    $__root__.addCheckers([]);
+  }
+  factory $TestIds.lookup(PageLoaderSource source) =>
+      throw "'lookup' constructor for class "
+          "TestIds is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
+  static String get tagName =>
+      throw '"tagName" is not defined by Page Object "TestIds". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'TestIds\n\n${$__root__.toStringDeep()}';
+}
+
+class $$TestIds {
+  PageLoaderElement $__root__;
+  PageLoaderMouse __mouse__;
+  PageLoaderElement get $root => $__root__;
+  PageLoaderElement get divOne {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('TestIds', 'divOne');
+    }
+    final element = $__root__.createElement(ByTestId('one'), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('TestIds', 'divOne');
     }
     return returnMe;
   }

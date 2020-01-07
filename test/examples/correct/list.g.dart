@@ -9,6 +9,7 @@ part of 'list.dart';
 // ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $Lists extends Lists with $$Lists {
   PageLoaderElement $__root__;
   $Lists.create(PageLoaderElement currentContext) : $__root__ = currentContext {
@@ -16,15 +17,16 @@ class $Lists extends Lists with $$Lists {
   }
   factory $Lists.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Lists is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Lists is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Lists". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'Lists\n\n${$__root__.toStringDeep()}';
 }
 
 class $$Lists {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   Future<PageObjectList<PageLoaderElement>> get basics async {
     for (final __listener in $__root__.listeners) {
@@ -105,6 +107,10 @@ class $$Lists {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $InnerListObject extends InnerListObject with $$InnerListObject {
   PageLoaderElement $__root__;
   $InnerListObject.create(PageLoaderElement currentContext)
@@ -113,15 +119,16 @@ class $InnerListObject extends InnerListObject with $$InnerListObject {
   }
   factory $InnerListObject.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "InnerListObject is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "InnerListObject is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "InnerListObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'InnerListObject\n\n${$__root__.toStringDeep()}';
 }
 
 class $$InnerListObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
@@ -149,6 +156,10 @@ class $$InnerListObject {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $ListsUsingMixin extends ListsUsingMixin
     with $$ListsMixin, $$ListsUsingMixin {
   PageLoaderElement $__root__;
@@ -158,21 +169,27 @@ class $ListsUsingMixin extends ListsUsingMixin
   }
   factory $ListsUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "ListsUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "ListsUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "ListsUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'ListsUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$ListsUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
+
 class $$ListsMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   Future<PageObjectList<PageLoaderElement>> get basics async {
     for (final __listener in $__root__.listeners) {
@@ -253,6 +270,10 @@ class $$ListsMixin {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
 class $InnerListObjectUsingMixin extends InnerListObjectUsingMixin
     with $$InnerListObjectMixin, $$InnerListObjectUsingMixin {
   PageLoaderElement $__root__;
@@ -262,21 +283,28 @@ class $InnerListObjectUsingMixin extends InnerListObjectUsingMixin
   }
   factory $InnerListObjectUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "InnerListObjectUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "InnerListObjectUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "InnerListObjectUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() =>
+      'InnerListObjectUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
 class $$InnerListObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: unused_field
+
 class $$InnerListObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
   PageLoaderElement get $root => $__root__;
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
