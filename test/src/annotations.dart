@@ -18,7 +18,7 @@ import 'shared_page_objects.dart';
 
 part 'annotations.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('annotations', () {
