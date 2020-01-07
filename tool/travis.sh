@@ -38,7 +38,7 @@ do
 done
 
 # Run test creator tests
-test_creator_tests = ("test/test_creator_getters_test.dart" "test/test_creator_invoke_method_test.dart" "test/test_creator_methods_test.dart")
+test_creator_tests=("test/test_creator_getters_test.dart" "test/test_creator_invoke_method_test.dart" "test/test_creator_methods_test.dart")
 for test in ${test_creator_tests[@]}
 do
   pub run test -r expanded "$test"
