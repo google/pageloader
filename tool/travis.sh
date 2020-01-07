@@ -21,6 +21,7 @@ dartanalyzer .
 ANALYSIS_STATUS=$?
 if [[ $ANALYSIS_STATUS -ne 0 ]]; then
   STATUS=$ANALYSIS_STATUS
+  echo "Analysis step ended with non-zero status: $STATUS"
 fi
 
 # Run non-html and non-webdriver tests
@@ -32,6 +33,7 @@ do
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
+    echo "Test($test) ended with non-zero status: $STATUS"
   fi
 done
 
@@ -44,6 +46,7 @@ do
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
+    echo "Test($test) ended with non-zero status: $STATUS"
   fi
 done
 
@@ -61,6 +64,7 @@ do
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
+    echo "Test($test) ended with non-zero status: $STATUS"
   fi
 done
 
