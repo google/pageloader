@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 import 'shared_list_page_objects.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 class TestListener extends PageLoaderListener {
   final String name;

@@ -24,7 +24,7 @@ part 'core_method_information.g.dart';
 
 abstract class TypeInformation
     implements Built<TypeInformation, TypeInformationBuilder> {
-  factory TypeInformation([updates(TypeInformationBuilder b)]) =
+  factory TypeInformation([Function(TypeInformationBuilder) updates]) =
       _$TypeInformation;
   TypeInformation._();
 
@@ -89,6 +89,7 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
   final methodAnnotations = node.metadata;
   final isMouse = methodAnnotations.any(isPageloaderMouse);
   final isRoot = methodAnnotations.any(isPageloaderRoot);
+  final isPointer = methodAnnotations.any(isPageloaderPointer);
   final isNullElement = methodAnnotations.any(isPageloaderNullElement);
 
   final finders = methodAnnotations
@@ -168,6 +169,7 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
     ..filters = filters
     ..checkers = checkers
     ..isMouse = isMouse
+    ..isPointer = isPointer
     ..isRoot = isRoot
     ..isNullElement = isNullElement
     ..node = node
@@ -179,7 +181,8 @@ abstract class CoreMethodInformation extends Object
     implements
         CoreMethodInformationBase,
         Built<CoreMethodInformation, CoreMethodInformationBuilder> {
-  factory CoreMethodInformation([updates(CoreMethodInformationBuilder b)]) =
+  factory CoreMethodInformation(
+          [Function(CoreMethodInformationBuilder) updates]) =
       _$CoreMethodInformation;
   CoreMethodInformation._();
 }
@@ -197,6 +200,7 @@ abstract class CoreMethodInformationBase {
   bool get isFuture;
   bool get isList;
   bool get isMouse;
+  bool get isPointer;
 
   // Annotations.
   Optional<String> get finder;

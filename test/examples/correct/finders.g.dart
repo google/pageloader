@@ -9,7 +9,7 @@ part of 'finders.dart';
 // ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
-// ignore_for_file: unused_field
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $Finders extends Finders with $$Finders {
   PageLoaderElement $__root__;
   $Finders.create(PageLoaderElement currentContext)
@@ -20,6 +20,64 @@ class $Finders extends Finders with $$Finders {
       throw "'lookup' constructor for class "
           "Finders is not generated and can only be used on Page Object "
           "classes that have @CheckTag annotation.";
+  String testCreatorGetters() {
+    final getters = <String, String>{};
+    getters.addAll(testCreatorGettersInFinders());
+    return json.encode(getters);
+  }
+
+  String testCreatorMethods() {
+    final methods = <String, List<Map<String, String>>>{};
+    methods.addAll(testCreatorMethodsInFinders());
+    return json.encode(methods);
+  }
+
+  dynamic testCreatorInvokeMethod(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    try {
+      return testCreatorInvokeMethodInFinders(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+    final internalIds = rawInternalIds.cast<String>();
+    final code = <String, String>{};
+
+    final actionCode = code[action];
+    if (actionCode != null) {
+      return actionCode;
+    }
+
+    final thisElementIndex = internalIds.indexOf($__root__.id);
+    final rootNotFound = thisElementIndex < 0;
+
+    if (thisElementIndex >= 0) {
+      internalIds.removeRange(thisElementIndex, internalIds.length);
+    }
+
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    MapEntry<int, String Function(List<String>)> chain;
+    chain = findChainInFinders(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    if (closestIndex < internalIds.length) {
+      final value = closestValue(internalIds);
+      return code[value] ?? value;
+    }
+
+    return rootNotFound
+        ? null
+        : PageObject.defaultCode[action] ?? PageObject.defaultCode['default'];
+  }
+
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Finders". Requires @CheckTag annotation in order for "tagName" to be generated.';
   PageLoaderElement get secret {
@@ -36,10 +94,96 @@ class $Finders extends Finders with $$Finders {
   String toStringDeep() => 'Finders\n\n${$__root__.toStringDeep()}';
 }
 
-class $$Finders {
+mixin $$Finders on Finders {
   PageLoaderElement $__root__;
   PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInFinders() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>> testCreatorMethodsInFinders() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInFinders(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    if (methodName == 'element') {
+      return element;
+    }
+    if (methodName == 'filtered') {
+      return filtered;
+    }
+    if (methodName == 'checkTagPO') {
+      return checkTagPO;
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInFinders(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    try {
+      var secretIndex = internalIds.indexOf(this.secret.id);
+      if (secretIndex >= 0 && secretIndex < closestIndex) {
+        closestIndex = secretIndex;
+        closestValue = (_) =>
+            'secret.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    try {
+      var checkTagPOElement = this.checkTagPO as dynamic;
+      var checkTagPOIndex = internalIds.indexOf(checkTagPOElement.$__root__.id);
+      if (checkTagPOIndex >= 0 && checkTagPOIndex < closestIndex) {
+        closestIndex = checkTagPOIndex;
+        closestValue = (ids) =>
+            'checkTagPO.${checkTagPOElement.findChain(ids, action)}'
+                .replaceAll(RegExp('\\.\$'), '');
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    try {
+      var _secretIndex = internalIds.indexOf(this._secret.id);
+      if (_secretIndex >= 0 && _secretIndex < closestIndex) {
+        closestIndex = _secretIndex;
+        closestValue = (_) =>
+            '_secret.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    try {
+      var elementIndex = internalIds.indexOf(this.element.id);
+      if (elementIndex >= 0 && elementIndex < closestIndex) {
+        closestIndex = elementIndex;
+        closestValue = (_) =>
+            'element.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    try {
+      var filteredIndex = internalIds.indexOf(this.filtered.id);
+      if (filteredIndex >= 0 && filteredIndex < closestIndex) {
+        closestIndex = filteredIndex;
+        closestValue = (_) =>
+            'filtered.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    return {closestIndex: closestValue};
+  }
+
+  PageLoaderElement get secret;
   PageLoaderElement get _secret {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Finders', '_secret');
@@ -93,7 +237,7 @@ class $$Finders {
 // ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
-// ignore_for_file: unused_field
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
   PageLoaderElement $__root__;
   $CheckTagPO.create(PageLoaderElement currentContext)
@@ -102,6 +246,64 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
   }
   factory $CheckTagPO.lookup(PageLoaderSource source) =>
       $CheckTagPO.create(source.byTag('check-tag-po'));
+  String testCreatorGetters() {
+    final getters = <String, String>{};
+    getters.addAll(testCreatorGettersInCheckTagPO());
+    return json.encode(getters);
+  }
+
+  String testCreatorMethods() {
+    final methods = <String, List<Map<String, String>>>{};
+    methods.addAll(testCreatorMethodsInCheckTagPO());
+    return json.encode(methods);
+  }
+
+  dynamic testCreatorInvokeMethod(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    try {
+      return testCreatorInvokeMethodInCheckTagPO(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+    final internalIds = rawInternalIds.cast<String>();
+    final code = <String, String>{};
+
+    final actionCode = code[action];
+    if (actionCode != null) {
+      return actionCode;
+    }
+
+    final thisElementIndex = internalIds.indexOf($__root__.id);
+    final rootNotFound = thisElementIndex < 0;
+
+    if (thisElementIndex >= 0) {
+      internalIds.removeRange(thisElementIndex, internalIds.length);
+    }
+
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    MapEntry<int, String Function(List<String>)> chain;
+    chain = findChainInCheckTagPO(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    if (closestIndex < internalIds.length) {
+      final value = closestValue(internalIds);
+      return code[value] ?? value;
+    }
+
+    return rootNotFound
+        ? null
+        : PageObject.defaultCode[action] ?? PageObject.defaultCode['default'];
+  }
+
   static const String tagName = 'check-tag-po';
   String toString() {
     for (final __listener in $__root__.listeners) {
@@ -117,10 +319,47 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
   String toStringDeep() => 'CheckTagPO\n\n${$__root__.toStringDeep()}';
 }
 
-class $$CheckTagPO {
+mixin $$CheckTagPO on CheckTagPO {
   PageLoaderElement $__root__;
   PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInCheckTagPO() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>> testCreatorMethodsInCheckTagPO() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInCheckTagPO(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    if (methodName == 'toString') {
+      return Function.apply(toString, positionalArguments, namedArguments);
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInCheckTagPO(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    try {
+      var _rootIndex = internalIds.indexOf(this._root.id);
+      if (_rootIndex >= 0 && _rootIndex < closestIndex) {
+        closestIndex = _rootIndex;
+        closestValue = (_) =>
+            '_root.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    return {closestIndex: closestValue};
+  }
+
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CheckTagPO', '_root');
@@ -137,7 +376,7 @@ class $$CheckTagPO {
 // ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
-// ignore_for_file: unused_field
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $FindersUsingMixin extends FindersUsingMixin
     with $$FindersMixin, $$FindersUsingMixin {
   PageLoaderElement $__root__;
@@ -149,26 +388,206 @@ class $FindersUsingMixin extends FindersUsingMixin
       throw "'lookup' constructor for class "
           "FindersUsingMixin is not generated and can only be used on Page Object "
           "classes that have @CheckTag annotation.";
+  String testCreatorGetters() {
+    final getters = <String, String>{};
+    getters.addAll(testCreatorGettersInFindersMixin());
+    getters.addAll(testCreatorGettersInFindersUsingMixin());
+    return json.encode(getters);
+  }
+
+  String testCreatorMethods() {
+    final methods = <String, List<Map<String, String>>>{};
+    methods.addAll(testCreatorMethodsInFindersMixin());
+    methods.addAll(testCreatorMethodsInFindersUsingMixin());
+    return json.encode(methods);
+  }
+
+  dynamic testCreatorInvokeMethod(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    try {
+      return testCreatorInvokeMethodInFindersUsingMixin(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    try {
+      return testCreatorInvokeMethodInFindersMixin(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+    final internalIds = rawInternalIds.cast<String>();
+    final code = <String, String>{};
+
+    final actionCode = code[action];
+    if (actionCode != null) {
+      return actionCode;
+    }
+
+    final thisElementIndex = internalIds.indexOf($__root__.id);
+    final rootNotFound = thisElementIndex < 0;
+
+    if (thisElementIndex >= 0) {
+      internalIds.removeRange(thisElementIndex, internalIds.length);
+    }
+
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    MapEntry<int, String Function(List<String>)> chain;
+    chain = findChainInFindersUsingMixin(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    chain = findChainInFindersMixin(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    if (closestIndex < internalIds.length) {
+      final value = closestValue(internalIds);
+      return code[value] ?? value;
+    }
+
+    return rootNotFound
+        ? null
+        : PageObject.defaultCode[action] ?? PageObject.defaultCode['default'];
+  }
+
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "FindersUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
   String toStringDeep() => 'FindersUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
-class $$FindersUsingMixin {
+mixin $$FindersUsingMixin on FindersUsingMixin {
   PageLoaderElement $__root__;
   PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInFindersUsingMixin() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>>
+      testCreatorMethodsInFindersUsingMixin() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInFindersUsingMixin(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInFindersUsingMixin(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    return {closestIndex: closestValue};
+  }
 }
 
 // ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
-// ignore_for_file: unused_field
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
-class $$FindersMixin {
+mixin $$FindersMixin on FindersMixin {
   PageLoaderElement $__root__;
   PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInFindersMixin() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>> testCreatorMethodsInFindersMixin() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInFindersMixin(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    if (methodName == 'element') {
+      return element;
+    }
+    if (methodName == 'filtered') {
+      return filtered;
+    }
+    if (methodName == 'checkTagPO') {
+      return checkTagPO;
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInFindersMixin(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    try {
+      var secretIndex = internalIds.indexOf(this.secret.id);
+      if (secretIndex >= 0 && secretIndex < closestIndex) {
+        closestIndex = secretIndex;
+        closestValue = (_) =>
+            'secret.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    try {
+      var checkTagPOElement = this.checkTagPO as dynamic;
+      var checkTagPOIndex = internalIds.indexOf(checkTagPOElement.$__root__.id);
+      if (checkTagPOIndex >= 0 && checkTagPOIndex < closestIndex) {
+        closestIndex = checkTagPOIndex;
+        closestValue = (ids) =>
+            'checkTagPO.${checkTagPOElement.findChain(ids, action)}'
+                .replaceAll(RegExp('\\.\$'), '');
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    try {
+      var _secretIndex = internalIds.indexOf(this._secret.id);
+      if (_secretIndex >= 0 && _secretIndex < closestIndex) {
+        closestIndex = _secretIndex;
+        closestValue = (_) =>
+            '_secret.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    try {
+      var elementIndex = internalIds.indexOf(this.element.id);
+      if (elementIndex >= 0 && elementIndex < closestIndex) {
+        closestIndex = elementIndex;
+        closestValue = (_) =>
+            'element.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    try {
+      var filteredIndex = internalIds.indexOf(this.filtered.id);
+      if (filteredIndex >= 0 && filteredIndex < closestIndex) {
+        closestIndex = filteredIndex;
+        closestValue = (_) =>
+            'filtered.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    return {closestIndex: closestValue};
+  }
+
+  PageLoaderElement get secret;
   PageLoaderElement get _secret {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('FindersMixin', '_secret');

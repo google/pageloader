@@ -15,6 +15,7 @@ import 'dart:async';
 
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
+
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -37,13 +38,15 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     final resolvedLibrary =
         await library.session.getResolvedLibraryByElement(library);
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
-    if (annotatedNode is ClassDeclaration) {
+    final poAnnotation = getPageObjectAnnotation(annotation);
+    if (annotatedNode is ClassOrMixinDeclaration) {
       try {
         final ignore =
             '// ignore_for_file: private_collision_in_mixin_application\n'
             '// ignore_for_file: unused_field, non_constant_identifier_names\n'
-            '// ignore_for_file: overridden_fields, annotate_overrides\n';
-        return '$ignore${_generateClass(annotatedNode)}';
+            '// ignore_for_file: overridden_fields, annotate_overrides\n'
+            '// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package\n';
+        return '$ignore${_generateClass(annotatedNode, poAnnotation)}';
       } catch (e, stackTrace) {
         print('Failure generating class for $library! '
             '\n $e \n $stackTrace');
@@ -55,7 +58,8 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     }
   }
 
-  String _generateClass(ClassDeclaration declaration) {
+  String _generateClass(
+      ClassOrMixinDeclaration declaration, PageObject poAnnotation) {
     final collectorVisitor = CollectorVisitor(declaration);
     declaration.visitChildren(collectorVisitor);
 
@@ -75,18 +79,29 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           "PageObject class '${declaration.name.name}' is extending another "
-          "PageObject class. PageObjects may not extend other PageObjects; "
-          "Use mixins instead."
+          'PageObject class. PageObjects may not extend other PageObjects; '
+          'Use mixins instead.'
+          '\n\n******************');
+    }
+
+    // Run check to make sure if PO has any factory constructor, it must has
+    // a default constructor as well.
+    if (hasFactoryConstructor(declaration.declaredElement) &&
+        !hasDefaultConstructor(declaration.declaredElement)) {
+      throw Exception('******************\n\n'
+          'Errors detected during code generation:\n\n'
+          "PageObject class '${declaration.name.name}' has a factory constructor"
+          ', but there is no default constructor.'
           '\n\n******************');
     }
 
     // If PageObject has constructor, define constructor class with root
     // and start constructor.
     if (hasPoConstructors(declaration.declaredElement)) {
-      final withClause =
-          generateWithClause(declaration.declaredElement, signatureArgs);
+      final withs = getMixins(declaration.declaredElement, signatureArgs);
       constructorBuffer.write('''
-      class \$$signature extends $signatureArgs $withClause {
+      class \$$signature extends $signatureArgs
+          with ${withs.map((w) => '\$\$$w').join(', ')} {
         PageLoaderElement ${core.root};
       \$$className.create(PageLoaderElement currentContext) : ''');
 
@@ -134,7 +149,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
       // Constructor class gets the methods/getters/setters.
       collectorVisitor.writeToConstructorBuffer(
-          constructorBuffer, className, defaultTag);
+          constructorBuffer, className, defaultTag, withs, poAnnotation);
 
       constructorBuffer.writeln('String toStringDeep() => '
           ''''$className\\n\\n\${${core.root}.toStringDeep()}';''');
@@ -145,9 +160,10 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // Define annotation-generated mixin class.
     mixinBuffer.write('''
-      class \$\$$signature {
+      mixin \$\$$signature on $signatureArgs {
         PageLoaderElement ${core.root};
         PageLoaderMouse ${core.mouse};
+        PageLoaderPointer ${core.pointer};
     ''');
 
     // Add generated root accessor to be used in internal code.
@@ -164,13 +180,13 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   }
 
   // Given <T extends Blah, R extends Foo, Z>, returns this exactly.
-  String _generateTypeParameters(ClassDeclaration declaration) =>
+  String _generateTypeParameters(ClassOrMixinDeclaration declaration) =>
       declaration.typeParameters != null
           ? declaration.typeParameters.toSource()
           : '';
 
   // Given <T extends Blah, R extends Foo, Z>, returns <T, R, Z>.
-  String _generateTypeArguments(ClassDeclaration declaration) {
+  String _generateTypeArguments(ClassOrMixinDeclaration declaration) {
     if (declaration.typeParameters == null) {
       return '';
     }
@@ -200,8 +216,15 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   }
 }
 
+PageObject getPageObjectAnnotation(ConstantReader annotation) {
+  final code = annotation.peek('code');
+  return PageObject(
+      code: code?.mapValue
+          ?.map((k, v) => MapEntry(k.toStringValue(), v.toStringValue())));
+}
+
 /// Generates the with clause for the generated constructor code.
-String generateWithClause(ClassElement mainPo, String mainSignature) {
+List<String> getMixins(ClassElement mainPo, String mainSignature) {
   final withs = <String>[];
   final supertype = mainPo.supertype;
   final mixins = mainPo.mixins;
@@ -210,7 +233,7 @@ String generateWithClause(ClassElement mainPo, String mainSignature) {
   // class, we add its mixin-component to the list.
   if (supertype != null && !supertype.isObject) {
     if (isPageObject(supertype.element)) {
-      withs.add('\$\$${supertype.displayName}');
+      withs.add(supertype.displayName);
     }
   }
 
@@ -222,14 +245,14 @@ String generateWithClause(ClassElement mainPo, String mainSignature) {
   for (final mixin in mixins) {
     final name = mixin.displayName;
     if (isPageObject(mixin.element)) {
-      withs.add('\$\$$name');
+      withs.add(name);
     }
   }
 
   // Main mixin ($$MyPO from above example) must be added last to ensure it
   // takes highest priority.
-  withs.add('\$\$$mainSignature');
-  return 'with ${withs.join(', ')}';
+  withs.add(mainSignature);
+  return withs;
 }
 
 /// Gets the single argument within an [Annotation].
@@ -244,14 +267,31 @@ String getAnnotationSingleArg(Annotation annotation) =>
 ///     factory MyPo.create(...) = ...;
 ///   }
 bool hasPoConstructors(ClassElement element) {
+  return hasFactoryConstructor(element) && hasDefaultConstructor(element);
+}
+
+/// Checks if the PageObject has the default constructor:
+///   abstract class MyPO {
+///     MyPO();
+///   }
+bool hasDefaultConstructor(ClassElement element) {
   final constructors = element.constructors;
   if (constructors.isNotEmpty) {
-    final hasDefaultConstructor =
-        constructors.any((c) => c.isDefaultConstructor);
-    final hasFactoryCreateOrLookup = constructors.any((c) =>
+    return constructors.any((c) => c.isDefaultConstructor);
+  }
+  return false;
+}
+
+/// Checks if the PageObject has factory constructor:
+///   abstract class MyPO {
+///     factory MyPo.create(...) = ...;
+///   }
+bool hasFactoryConstructor(ClassElement element) {
+  final constructors = element.constructors;
+  if (constructors.isNotEmpty) {
+    return constructors.any((c) =>
         c.isFactory &&
         (c.displayName == 'create' || c.displayName == 'lookup'));
-    return hasDefaultConstructor && hasFactoryCreateOrLookup;
   }
   return false;
 }

@@ -16,9 +16,9 @@ import 'package:test/test.dart';
 
 part 'webdriver_only.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
-typedef void DoRefresh();
+typedef DoRefresh = void Function();
 
 // Tests that are specific to WebDriver.
 void runTests(GetNewContext contextGenerator) {

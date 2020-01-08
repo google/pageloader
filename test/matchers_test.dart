@@ -27,12 +27,100 @@ void main() {
     expect(po, exists);
   });
 
+  group('exists violation - ', () {
+    test('invalid type', () {
+      final description = exists
+          .describeMismatch('foo', StringDescription(), null, null)
+          .toString();
+      expect(
+          description,
+          contains('must be `PageLoaderElement` type, a PageObject type '
+              '(class with `@PageObject` annotation), '
+              'or a `PageObjectList` type'));
+    });
+
+    test('PageObjectList contains zero elements', () {
+      final list = PageObjectList<PageLoaderElement>(
+          <PageLoaderElement>[], (PageLoaderElement e) => e);
+      final description = exists
+          .describeMismatch(list, StringDescription(), null, null)
+          .toString();
+      expect(
+          description,
+          contains(
+              'is a `PageObjectList` and must contain at least one element '
+              'of `PageLoaderElement` type or a PageObject type'
+              '(class with `@PageObject` annotation); '
+              'currently contains zero elements'));
+    });
+
+    test('non-existing PageLoaderElement', () {
+      final ple = DummyPageLoaderElement(exists: false);
+      final description = exists
+          .describeMismatch(ple, StringDescription(), null, null)
+          .toString();
+      expect(description,
+          contains('is a `PageLoaderElement`, but does not exist'));
+    });
+
+    test('non-existing PageObject', () {
+      final po = DummyPO(DummyPageLoaderElement(exists: false));
+      final description = exists
+          .describeMismatch(po, StringDescription(), null, null)
+          .toString();
+      expect(description, contains('root `PageLoaderElement` does not exist'));
+    });
+  });
+
   test('notExists', () {
     final context = DummyPageLoaderElement(exists: false);
     final po = DummyPO(context);
 
     expect(context, notExists);
     expect(po, notExists);
+  });
+
+  group('notExists violation - ', () {
+    test('invalid type', () {
+      final description = notExists
+          .describeMismatch('foo', StringDescription(), null, null)
+          .toString();
+      expect(
+          description,
+          contains('must be `PageLoaderElement` type, a PageObject type '
+              '(class with `@PageObject` annotation), '
+              'or a `PageObjectList` type'));
+    });
+
+    test('PageObjectList contains non-zero elements', () {
+      final list = PageObjectList<PageLoaderElement>(
+          <PageLoaderElement>[DummyPageLoaderElement(exists: true)],
+          (PageLoaderElement e) => e);
+      final description = notExists
+          .describeMismatch(list, StringDescription(), null, null)
+          .toString();
+      expect(
+          description,
+          contains(
+              'is a `PageObjectList` and must contain exactly zero elements; '
+              'currently contains 1 element(s)'));
+    });
+
+    test('existing PageLoaderElement', () {
+      final ple = DummyPageLoaderElement(exists: true);
+      final description = notExists
+          .describeMismatch(ple, StringDescription(), null, null)
+          .toString();
+      expect(description, contains('is a `PageLoaderElement` and exists'));
+    });
+
+    test('non-existing PageObject', () {
+      final po = DummyPO(DummyPageLoaderElement(exists: true));
+      final description = notExists
+          .describeMismatch(po, StringDescription(), null, null)
+          .toString();
+      expect(description, contains('root `PageLoaderElement` exists'));
+    });
   });
 
   test('hasClass', () {
@@ -136,7 +224,7 @@ void main() {
 
 class DummyPO {
   // ignore: non_constant_identifier_names
-  PageLoaderElement __root__;
+  final PageLoaderElement __root__;
 
   PageLoaderElement get $root => __root__;
 

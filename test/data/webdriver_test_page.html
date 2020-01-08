@@ -20,7 +20,13 @@ limitations under the License.
   <title>test_page</title>
   <style>
       .class1 { background-color: #00FF00; }
-
+      #scroll-box {
+        border: 1px solid black;
+        width: 200px;
+        height: 100px;
+        overflow: scroll;
+        font: 24px/36px sans-serif;
+      }
   </style>
   <script>
       function mouseProcessor(event) {
@@ -32,6 +38,30 @@ limitations under the License.
         }
         if (event.type == 'mousemove') {
           event.target.innerText = event.target.innerText + ' MouseMove';
+        }
+      }
+
+      function pointerProcessor(event) {
+        if (event.type == 'pointerdown') {
+          event.target.innerText = event.target.innerText + ' PointerDown';
+        }
+        if (event.type == 'pointerup') {
+          event.target.innerText = event.target.innerText + ' PointerUp';
+        }
+        if (event.type == 'pointermove') {
+          event.target.innerText = event.target.innerText + ' PointerMove';
+        }
+      }
+
+      function typeProcessor(event) {
+        if (event.type == 'keydown') {
+          event.target.innerText = event.target.innerText + ' enter keydown;';
+        }
+        if (event.type == 'keyup') {
+          event.target.innerText = event.target.innerText + ' enter keyup;';
+        }
+        if (event.type == 'keypress') {
+          event.target.innerText = event.target.innerText + ' enter keypress;';
         }
       }
 
@@ -70,6 +100,11 @@ limitations under the License.
      onmouseup='mouseProcessor(event);'
      onmousemove='mouseProcessor(event);'>area for mouse events
 </div>
+<div id='pointer'
+     onpointerdown='pointerProcessor(event);'
+     onpointerup='pointerProcessor(event);'
+     onpointermove='pointerProcessor(event);'>area for pointer events
+</div>
 <input type='text' id='text'/>
 <div>
   <input type='text' id="text-with-focus-and-blur" onfocus="onFocusForText()" onblur="onBlurForText()"/>
@@ -89,6 +124,7 @@ limitations under the License.
 </select>
 <div data-test-id="one">data-test-id</div>
 <textarea id='textarea'></textarea>
+<div tabindex='0' id='keyboard-listener' onkeydown='typeProcessor(event)' onkeyup='typeProcessor(event)' onkeypress='typeProcessor(event)'>Listening:</div>
 <div class="outer-div">
   outer div 1
   <a-custom-tag></a-custom-tag>
@@ -101,6 +137,9 @@ limitations under the License.
   <div class="inner-div special">
     inner div 2
   </div>
+  <div class="inner-div">
+    inner div 3
+  </div>
 </div>
 <div class="outer-nested">
   outer nested
@@ -108,12 +147,12 @@ limitations under the License.
     inner nested
   </div>
 </div>
-<a-custom-tag id="button-1">
-  button 1
-</a-custom-tag>
-<a-custom-tag id="button-2">
-  button 2
-</a-custom-tag>
+<button id="button-1">
+  some button 1
+</button>
+<button id="button-2">
+  some button 2
+</button>
 <b-custom-tag>
   <c-custom-tag>C tag inner text</c-custom-tag>
 </b-custom-tag>
@@ -124,15 +163,28 @@ limitations under the License.
     <content></content>
   </button>
 </template>
+<div id='scroll-box'>
+  loremipsumloremipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+  <br><br>
+  loremipsumloremipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+  <p id="scroll-bottom">bottom text</p>
+</div>
+<p>Scroll box scrollLeft: <span id="scroll-left">0</span></p>
+<p>Scroll box scrollTop: <span id="scroll-top">0</span></p>
+<div id="mixin-div">mixin div</div>
 <script>
-      var tags = document.getElementsByTagName('a-custom-tag');
-      var template = document.getElementById('button-template');
-      for (var i = 0; i < tags.length; i++) {
-        tags[i].createShadowRoot()
-            .appendChild(template.content.cloneNode(true));
-      }
-      template.remove();
+  var scrollBox = document.getElementById('scroll-box');
+  var scrollLeft = document.getElementById('scroll-left');
+  var scrollTop = document.getElementById('scroll-top');
+  scrollBox.onscroll = function () {
+    scrollLeft.innerHTML = scrollBox.scrollLeft.toString();
+    scrollTop.innerHTML = scrollBox.scrollTop.toString();
+  };
 
+  var template = document.getElementById('button-template');
+  template.remove();
 </script>
 </body>
 </html>

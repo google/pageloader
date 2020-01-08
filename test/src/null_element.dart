@@ -18,7 +18,7 @@ import 'package:test/test.dart';
 
 part 'null_element.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('nullElement works', () {

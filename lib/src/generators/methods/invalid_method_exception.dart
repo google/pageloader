@@ -38,7 +38,7 @@ class InvalidMethodException implements Exception {
 
   /// Returns the [CompilationUnitElement] of [node].
   CompilationUnitElement _getCompilationUnitElement(AstNode node) {
-    AstNode _node = node;
+    var _node = node;
     while (_node is! CompilationUnit) {
       _node = _node.parent;
     }

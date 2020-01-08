@@ -17,13 +17,14 @@ import 'package:pageloader/pageloader.dart';
 
 import 'html_mouse.dart';
 import 'html_page_loader_element.dart';
+import 'html_pointer.dart';
 
 /// Support for [PageUtils] in HTML context.
 class HtmlPageUtils extends PageUtils {
-  final SyncFn syncFn;
+  final SyncFn<dynamic> syncFn;
   HtmlPageLoaderElement _cachedRoot;
 
-  HtmlPageUtils({SyncFn externalSyncFn = noOpExecuteSyncedFn})
+  HtmlPageUtils({SyncFn<dynamic> externalSyncFn = noOpExecuteSyncedFn})
       : syncFn = externalSyncFn;
 
   /// Gets the body for the current page.
@@ -33,8 +34,15 @@ class HtmlPageUtils extends PageUtils {
   @override
   HtmlPageLoaderElement get root {
     _cachedRoot ??= HtmlPageLoaderElement.createFromElement(document.body,
-        externalSyncFn: this.syncFn);
+        externalSyncFn: syncFn);
     return _cachedRoot;
+  }
+
+  /// Gets the element on the DOM that currently has focus.
+  @override
+  HtmlPageLoaderElement get focused {
+    return HtmlPageLoaderElement.createFromElement(document.activeElement,
+        externalSyncFn: syncFn);
   }
 
   /// Gets the current root element for the DOM.
@@ -43,11 +51,15 @@ class HtmlPageUtils extends PageUtils {
   @override
   PageLoaderElement byTag(String tag) =>
       HtmlPageLoaderElement.createFromElement(document.body,
-              externalSyncFn: this.syncFn)
+              externalSyncFn: syncFn)
           .getElementsByCss(tag)
           .single;
 
   /// Gets the mouse.
   @override
-  PageLoaderMouse get mouse => globalMouse(this.syncFn);
+  PageLoaderMouse get mouse => globalMouse(syncFn);
+
+  /// Gets the pointer.
+  @override
+  PageLoaderPointer get pointer => globalPointer(syncFn);
 }

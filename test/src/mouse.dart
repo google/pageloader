@@ -17,7 +17,7 @@ import 'package:webdriver/support/async.dart';
 
 part 'mouse.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('mouse support', () {
@@ -74,4 +74,10 @@ abstract class PageForMouseTest {
 
   @ById('mouse-bottom')
   PageLoaderElement get bottomElement;
+
+  @ById('svg-element')
+  PageLoaderElement get svgElement;
+
+  @ById('svg-output')
+  PageLoaderElement get svgOutputElement;
 }

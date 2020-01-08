@@ -14,10 +14,12 @@
 library pageloader.api.page_loader_element_interface;
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'annotation_interfaces.dart';
 import 'iterable_interfaces.dart';
+import 'page_loader_click_option.dart';
 import 'page_loader_keyboard.dart';
 import 'page_loader_listener.dart';
 import 'page_loader_source_interface.dart';
@@ -73,6 +75,11 @@ abstract class PageLoaderElement extends PageLoaderSource {
 
   /// The shadow root hosted by this element.
   PageLoaderElement get shadowRoot;
+
+  /// Unique ID to identify the element.
+  ///
+  /// This is not related to the HTML id attribute.
+  String get id;
 
   /// The inner content of this element.
   ///
@@ -145,13 +152,23 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// [blurAfter] indicates whether to blur this element after clearing.
   Future<void> clear({bool focusBefore = true, bool blurAfter = true});
 
-  /// Clicks on the element.
-  Future<void> click();
+  /// Clicks on the element with [clickOption].
+  /// [clickOption] is only used for HTML.
+  Future<void> click({ClickOption clickOption});
 
   /// Clicks outside of the current element.
   ///
   /// If the current element does not exist or is not displayed, do nothing.
   Future<void> clickOutside();
+
+  /// Scrolls this element in x and/or y direction by pixels.
+  ///
+  /// ScrollOptions is currently not supported.
+  /// https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
+  Future<void> scroll({int x, int y});
+
+  /// Scrolls this element into view.
+  Future<void> scrollIntoView();
 
   /// Types [keys] into this element, if possible (e.g. for an input element).
   ///
@@ -163,7 +180,9 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// Types sequence of keyboard [keys] into element, if possible.
   ///
   /// Provides finer control on sequence of keyboard events being sent. This
-  /// does NOT automatically focus before and after.
+  /// does NOT automatically focus before and after. HTML and Webdriver
+  /// implementation are not identical; refer to their individual doc comments
+  /// for more details.
   Future<void> typeSequence(PageLoaderKeyboard keys);
 
   /// Focuses the element.
@@ -174,10 +193,31 @@ abstract class PageLoaderElement extends PageLoaderSource {
 
   /// Gives a full description of the element for debugger.
   String toStringDeep();
+
+  /// Gives all getters that can be used by Test Creator.
+  String testCreatorGetters();
+
+  /// Gives all unannotated methods that can be used by Test Creator.
+  String testCreatorMethods();
 }
 
 /// Generic attributes interface, allowing bracket notation referencing.
 abstract class PageLoaderAttributes {
   /// Returns the value of attribute '[name]'.
   String operator [](String name);
+}
+
+// Ensures that the length of the element's 'outerHTML' is not too large;
+// limit is ~50 KB in utf-16.
+String getOuterHtml(PageLoaderElement element) {
+  if (element == null) {
+    return 'null';
+  }
+  final elementString = element.properties['outerHTML'];
+  final bytes = utf8.encode(elementString);
+  if (bytes.length > 50000) {
+    return "(Length of Element's HTML DOM (${bytes.length}) is too "
+        'long (>50 KB) to display)';
+  }
+  return elementString;
 }

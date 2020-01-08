@@ -26,8 +26,8 @@ import 'page_loader_element_interface.dart';
 /// This is a wrapper to construct page objects based on an underlying
 /// list of [PageLoaderElement]s.
 class PageObjectList<E> extends ListBase<E> {
-  List<PageLoaderElement> _elementList;
-  PageObjectConstructor<E> _pageObjectConstructor;
+  final List<PageLoaderElement> _elementList;
+  final PageObjectConstructor<E> _pageObjectConstructor;
 
   PageObjectList(this._elementList, this._pageObjectConstructor);
 

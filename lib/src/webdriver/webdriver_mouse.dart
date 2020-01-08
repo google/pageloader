@@ -28,8 +28,15 @@ class WebDriverMouse implements PageLoaderMouse {
 
   WebDriverMouse(this._driver);
 
+  // WebDriver does not use [clickOption] at the moment
   @override
-  Future down(MouseButton button, {PageLoaderElement eventTarget}) async {
+  Future down(MouseButton button,
+      {PageLoaderElement eventTarget, ClickOption clickOption}) async {
+    if (clickOption != null) {
+      throw UnsupportedError(
+          'WebDriver PageLoaderMouse does not support `clickOption` '
+          'parameter.');
+    }
     if (eventTarget is WebDriverPageLoaderElement) {
       return _fireEvent(eventTarget, 'mousedown', button);
     } else {
@@ -47,8 +54,15 @@ class WebDriverMouse implements PageLoaderMouse {
           xOffset: xOffset,
           yOffset: yOffset);
 
+  // WebDriver does not use [clickOption] at the moment
   @override
-  Future up(MouseButton button, {PageLoaderElement eventTarget}) async {
+  Future up(MouseButton button,
+      {PageLoaderElement eventTarget, ClickOption clickOption}) async {
+    if (clickOption != null) {
+      throw UnsupportedError(
+          'WebDriver PageLoaderMouse does not support `clickOption` '
+          'parameter.');
+    }
     if (eventTarget is WebDriverPageLoaderElement) {
       return _fireEvent(eventTarget, 'mouseup', button);
     } else {
@@ -59,7 +73,7 @@ class WebDriverMouse implements PageLoaderMouse {
   Future _fireEvent(WebDriverPageLoaderElement eventTarget, String type,
           [MouseButton button]) async =>
       _driver.execute(
-          "arguments[0].dispatchEvent(new MouseEvent(arguments[1], "
+          'arguments[0].dispatchEvent(new MouseEvent(arguments[1], '
           "{'button' : arguments[2]}));",
           [eventTarget.contextSync, type, button?.value]);
 }

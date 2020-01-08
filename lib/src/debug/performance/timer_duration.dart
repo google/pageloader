@@ -15,7 +15,7 @@ import 'event.dart';
 
 final _defaultTimerConfiguration = CollectingTimerConfiguration();
 
-typedef void Collector(List<DurationEvent> events);
+typedef Collector = void Function(List<DurationEvent> events);
 
 /// A factory that creates [CollectingTimer], collects the events and serializes
 /// them on demand.

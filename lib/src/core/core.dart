@@ -44,13 +44,13 @@ List<PageLoaderElement> applyFiltersAndChecks(List<PageLoaderElement> elements,
 }
 
 /// Method to retry.
-typedef T MethodToRetry<T>();
+typedef MethodToRetry<T> = T Function();
 
 /// Method for clearing the cache.
-typedef void ClearCacheMethod();
+typedef ClearCacheMethod = void Function();
 
 /// Returns true if the exception indicates a stale element was found.
-typedef bool IsStaleException(Object exception);
+typedef IsStaleException = bool Function(Object exception);
 
 /// Retries [method] if an exception is thrown and [isStaleException] is true
 /// for said exception.

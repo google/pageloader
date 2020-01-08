@@ -27,7 +27,8 @@ final String pageLoaderAnnotations = 'pageloader.annotations';
 final String pageLoaderAnnotationInterface =
     'pageloader.api.annotation_interfaces';
 
-/// Returns set of AnnotationKinds that match '@root', '@Mouse', '@nullElement'.
+/// Returns set of AnnotationKinds that match '@root', '@Mouse', '@nullElement'
+/// and '@Pointer'.
 Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
   final returnSet = <AnnotationKind>{};
   if (element is PropertyAccessorElement &&
@@ -84,6 +85,7 @@ enum AnnotationKind {
   legacyPageObject,
   mouse,
   optional,
+  pointer,
   root,
   nullElement,
 }
@@ -104,6 +106,8 @@ AnnotationKind classNameToAnnotationKind(String className, {bool isAtomic}) {
         return AnnotationKind.disableDisplayedCheck;
       case 'Mouse':
         return AnnotationKind.mouse;
+      case 'Pointer':
+        return AnnotationKind.pointer;
       default:
         return null;
     }

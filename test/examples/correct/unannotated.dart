@@ -15,7 +15,7 @@ import 'package:pageloader/pageloader.dart';
 
 part 'unannotated.g.dart';
 
-typedef String MyTypeDef(String item);
+typedef MyTypeDef = String Function(String item);
 
 @PageObject()
 abstract class Unannotated {

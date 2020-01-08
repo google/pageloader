@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'generics.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('generics', () {
@@ -42,7 +42,7 @@ void runTests(GetNewContext contextGenerator) {
   });
 }
 
-typedef String MyGenericTypeDef<T>(T item);
+typedef MyGenericTypeDef<T> = String Function(T item);
 
 @PageObject()
 abstract class Generics<T> {

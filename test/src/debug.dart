@@ -19,7 +19,7 @@ import 'package:test/test.dart';
 
 import 'shared_page_objects.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   PageLoaderElement root;

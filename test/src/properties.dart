@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'properties.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('properties', () {

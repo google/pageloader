@@ -16,10 +16,8 @@ import 'package:test/test.dart';
 
 part 'typing.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
-// TODO(maxkim): remove 'isHtmlTest' once 'typeSequence' is implemented
-// in webdriver.
 void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
   group('typing', () {
     test('Type into textarea', () async {
@@ -55,118 +53,8 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
       await page.textArea.type('FOO BAR BAZ');
       expect(page.textArea.properties['value'], 'FOO BAR BAZ');
     });
-  });
 
-  if (!isHtmlTest) {
-    group('typing with focus and blur', () {
-      PageForTypingTestsWithFocusAndBlur page;
-
-      setUp(() {
-        page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
-        expect(page.text.properties['value'], '');
-        expect(page.focusCount, 0);
-        expect(page.blurCount, 0);
-      });
-
-      test('with default type API', () async {
-        await page.text.type('soMe text');
-        expect(page.text.properties['value'], 'soMe text');
-        expect(page.focusCount, 1);
-        expect(page.blurCount, 1);
-      });
-
-      test('without focusBefore and blurAfter', () async {
-        await page.text.focus();
-        expect(page.focusCount, 1);
-        expect(page.blurCount, 0);
-
-        await page.text.type('soMe text', focusBefore: false, blurAfter: false);
-        expect(page.text.properties['value'], 'soMe text');
-        expect(page.focusCount, 1);
-        expect(page.blurCount, 0);
-      });
-
-      // WebDriver sendKey API will scroll to the element (e.g. a focus event)
-      // even when it is not focused.
-      // https://www.w3.org/TR/webdriver/#dfn-element-send-keys
-      test('without focusBefore when not focused', () async {
-        await page.text.type('soMe text', focusBefore: false);
-        expect(page.text.properties['value'], 'soMe text');
-        expect(page.focusCount, 1);
-        expect(page.blurCount, 1);
-      });
-    });
-
-    group('clear with focus and blur', () {
-      PageForTypingTestsWithFocusAndBlur page;
-      int focusCount;
-      int blurCount;
-
-      setUp(() {
-        page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
-        focusCount = 0;
-        blurCount = 0;
-      });
-
-      group('with empty text', () {
-        setUp(() async {
-          focusCount = 0;
-          blurCount = 0;
-        });
-
-        test('with default clear API', () async {
-          await page.text.clear();
-          expect(page.text.properties['value'], '');
-          expect(page.focusCount, ++focusCount);
-          expect(page.blurCount, ++blurCount);
-        });
-
-        test('without focusBefore and blurAfter', () async {
-          await page.text.focus();
-          expect(page.focusCount, ++focusCount);
-          expect(page.blurCount, blurCount);
-
-          await page.text.clear(focusBefore: false, blurAfter: false);
-          expect(page.text.properties['value'], '');
-          expect(page.focusCount, focusCount);
-          expect(page.blurCount, blurCount);
-        });
-      });
-
-      group('with non-empty text', () {
-        setUp(() async {
-          await page.text.type('soMe very long text');
-          expect(page.text.properties['value'], 'soMe very long text');
-          expect(page.focusCount, 1);
-          expect(page.blurCount, 1);
-
-          focusCount = 1;
-          blurCount = 1;
-        });
-
-        test('with default clear API', () async {
-          await page.text.clear();
-          expect(page.text.properties['value'], '');
-          expect(page.focusCount, ++focusCount);
-          expect(page.blurCount, ++blurCount);
-        });
-
-        test('without focusBefore and blurAfter', () async {
-          await page.text.focus();
-          expect(page.focusCount, ++focusCount);
-          expect(page.blurCount, blurCount);
-
-          await page.text.clear(focusBefore: false, blurAfter: false);
-          expect(page.text.properties['value'], '');
-          expect(page.focusCount, focusCount);
-          expect(page.blurCount, blurCount);
-        });
-      });
-    });
-  }
-
-  if (isHtmlTest) {
-    group('Special keyboard events are sent', () {
+    group('HTML/Webdriver: Special keyboard events are sent', () {
       PageLoaderKeyboard kb;
       PageLoaderElement listener;
 
@@ -181,21 +69,143 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
         expect(listener.visibleText,
             equals('Listening: enter keydown; enter keypress; enter keyup;'));
       });
+    });
+  });
 
-      test('enter only keydown and keypress sent', () async {
-        kb.typeSpecialKey(PageLoaderSpecialKey.enter, keyUp: false);
-        await listener.typeSequence(kb);
-        expect(listener.visibleText,
-            equals('Listening: enter keydown; enter keypress;'));
+  group('typing with focus and blur', () {
+    PageForTypingTestsWithFocusAndBlur page;
+
+    setUp(() {
+      page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
+      expect(page.text.properties['value'], '');
+      expect(page.focusCount, 0);
+      expect(page.blurCount, 0);
+    });
+
+    test('with default type API', () async {
+      await page.text.type('soMe text');
+      expect(page.text.properties['value'], 'soMe text');
+      expect(page.focusCount, 1);
+      expect(page.blurCount, 1);
+    });
+
+    test('without focusBefore and blurAfter', () async {
+      await page.text.focus();
+      expect(page.focusCount, 1);
+      expect(page.blurCount, 0);
+
+      await page.text.type('soMe text', focusBefore: false, blurAfter: false);
+      expect(page.text.properties['value'], 'soMe text');
+      expect(page.focusCount, 1);
+      expect(page.blurCount, 0);
+    });
+
+    // WebDriver sendKey API will scroll to the element (e.g. a focus event)
+    // even when it is not focused.
+    // https://www.w3.org/TR/webdriver/#dfn-element-send-keys
+    test('without focusBefore when not focused', () async {
+      await page.text.type('soMe text', focusBefore: false);
+      expect(page.text.properties['value'], 'soMe text');
+      expect(page.focusCount, isHtmlTest ? 0 : 1);
+      // If HTML test, this will be 0 since the focus event never happened.
+      expect(page.blurCount, isHtmlTest ? 0 : 1);
+    });
+  });
+
+  group('clear with focus and blur', () {
+    PageForTypingTestsWithFocusAndBlur page;
+    int focusCount;
+    int blurCount;
+
+    setUp(() {
+      page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
+      focusCount = 0;
+      blurCount = 0;
+    });
+
+    group('with empty text', () {
+      setUp(() async {
+        focusCount = 0;
+        blurCount = 0;
       });
 
-      test('enter only keyup sent', () async {
-        kb.typeSpecialKey(PageLoaderSpecialKey.enter, keyDown: false);
-        await listener.typeSequence(kb);
-        expect(listener.visibleText, equals('Listening: enter keyup;'));
+      test('with default clear API', () async {
+        await page.text.clear();
+        expect(page.text.properties['value'], '');
+        expect(page.focusCount, ++focusCount);
+        expect(page.blurCount, ++blurCount);
+      });
+
+      test('without focusBefore and blurAfter', () async {
+        await page.text.focus();
+        expect(page.focusCount, ++focusCount);
+        expect(page.blurCount, blurCount);
+
+        await page.text.clear(focusBefore: false, blurAfter: false);
+        expect(page.text.properties['value'], '');
+        expect(page.focusCount, focusCount);
+        expect(page.blurCount, blurCount);
       });
     });
-  }
+
+    group('with non-empty text', () {
+      setUp(() async {
+        await page.text.type('soMe very long text');
+        expect(page.text.properties['value'], 'soMe very long text');
+        expect(page.focusCount, 1);
+        expect(page.blurCount, 1);
+
+        focusCount = 1;
+        blurCount = 1;
+      });
+
+      test('with default clear API', () async {
+        await page.text.clear();
+        expect(page.text.properties['value'], '');
+        expect(page.focusCount, ++focusCount);
+        expect(page.blurCount, ++blurCount);
+      });
+
+      test('without focusBefore and blurAfter', () async {
+        await page.text.focus();
+        expect(page.focusCount, ++focusCount);
+        expect(page.blurCount, blurCount);
+
+        await page.text.clear(focusBefore: false, blurAfter: false);
+        expect(page.text.properties['value'], '');
+        expect(page.focusCount, focusCount);
+        expect(page.blurCount, blurCount);
+      });
+    });
+  });
+
+  group('Special keyboard events are sent', () {
+    PageLoaderKeyboard kb;
+    PageLoaderElement listener;
+
+    setUp(() {
+      kb = PageLoaderKeyboard();
+      listener = KeyboardListenerPO.create(contextGenerator()).listener;
+    });
+
+    test('enter only keydown and keypress sent', () async {
+      final result = isHtmlTest
+          ? 'Listening: enter keydown; enter keypress;'
+          : 'Listening: enter keydown; enter keypress; enter keyup;';
+      kb.typeSpecialKey(PageLoaderSpecialKey.enter, keyUp: false);
+      await listener.typeSequence(kb);
+      expect(listener.visibleText, equals(result));
+    });
+
+    test('enter only keyup sent', () async {
+      final result = isHtmlTest
+          ? 'Listening: enter keyup;'
+          : 'Listening: enter keydown; enter keypress; enter keyup;';
+      kb.typeSpecialKey(PageLoaderSpecialKey.enter, keyDown: false);
+      await listener.typeSequence(kb);
+      expect(listener.visibleText, equals(result));
+    });
+  });
 }
 
 @PageObject()

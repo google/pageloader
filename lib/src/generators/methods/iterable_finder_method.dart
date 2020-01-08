@@ -65,7 +65,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
   // Convert 'ByCheckTag' to 'ByTagName' if necessary.
   if (finder != null && finder.contains('ByCheckTag')) {
     finder = generateByTagNameFromByCheckTag(
-        getInnerType(node.returnType.type, typeArguments[0]));
+        getInnerType(node.returnType.type, typeArguments[0]), node.toSource());
   }
 
   if (finder == null) {
@@ -120,7 +120,7 @@ abstract class IterableFinderMethod
     }
   }
 
-  factory IterableFinderMethod([updates(IterableFinderMethodBuilder b)]) =
-      _$IterableFinderMethod;
+  factory IterableFinderMethod(
+      [Function(IterableFinderMethodBuilder) updates]) = _$IterableFinderMethod;
   IterableFinderMethod._();
 }

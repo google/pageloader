@@ -17,7 +17,7 @@ import 'package:test/test.dart';
 
 part 'list.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 String _removeWhiteSpace(String s) =>
     s.replaceAll(' ', '').replaceAll('\n', '');

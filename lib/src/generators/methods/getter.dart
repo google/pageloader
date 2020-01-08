@@ -17,6 +17,7 @@ library pageloader.getter;
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
+
 import 'listeners.dart';
 
 part 'getter.g.dart';
@@ -33,7 +34,31 @@ Optional<Getter> collectUnannotatedGetter(MethodDeclaration node) {
 
 /// Generates source for getter.
 abstract class Getter implements Built<Getter, GetterBuilder> {
+  static const ignoredTypes = [
+    'int',
+    'double',
+    'String',
+    'bool',
+    'List',
+    'Map',
+    'Set',
+    'Future',
+    'Runes',
+    'Symbol'
+  ];
+
+  static const valueTypes = [
+    'int',
+    'double',
+    'String',
+    'bool',
+    'List',
+    'Map',
+    'Set'
+  ];
+
   String get name;
+
   String get returnType;
 
   String generate(String pageObjectName) {
@@ -44,6 +69,51 @@ abstract class Getter implements Built<Getter, GetterBuilder> {
         'return returnMe; }';
   }
 
-  factory Getter([updates(GetterBuilder b)]) = _$Getter;
+  String generateForMixin(String pageObjectName) => '$returnType get $name;';
+
+  /// Generates code that given list of [PageLoaderElement] ids called
+  /// `internalIds`, determine whether and where this getter appears in the list
+  /// and what code should be further generated for this.
+  ///
+  /// There are two cases. One is [PageLoaderElement], which would be the same
+  /// as in [SingleFinderMethodMixin.generateFineChain]. The other one can be
+  /// any page object or something completely unrelated, where we would assume
+  /// it to be page object and try to get the id via $__root__.id and if
+  /// successful, call [findChain].
+  String generateFindChain() => returnType == 'PageLoaderElement'
+      ? '''
+      try {
+        var ${name}Index = internalIds.indexOf(this.$name.id);
+        if (${name}Index >= 0 && ${name}Index < closestIndex) {
+          closestIndex = ${name}Index;
+          closestValue = (_) => '$name.\${PageObject.defaultCode[action] ??
+                             PageObject.defaultCode['default']}';
+        }
+      } catch (_) {
+        // Ignored.
+      }'''
+      : '''
+      try {
+        // Do not know the type. Try it out and ignore if not successful.
+        var ${name}Element = this.$name as dynamic;
+        var ${name}Index = internalIds.indexOf(${name}Element.\$__root__.id);
+        if (${name}Index >= 0 && ${name}Index < closestIndex) {
+          closestIndex = ${name}Index;
+          closestValue = (ids) =>
+              '$name.\${${name}Element.findChain(ids, action)}'
+              .replaceAll(RegExp('\\\\.\\\$'), '');
+        }
+      } catch (_) {
+        // Ignored.
+      }''';
+
+  bool get produceFindChain =>
+      !returnType.endsWith('>') && !ignoredTypes.contains(returnType);
+
+  bool get produceTestCreatorGetter =>
+      valueTypes.contains(returnType.split('<').first);
+
+  factory Getter([Function(GetterBuilder) updates]) = _$Getter;
+
   Getter._();
 }

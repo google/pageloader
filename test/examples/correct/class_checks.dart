@@ -25,7 +25,7 @@ abstract class ClassChecks {
   PageLoaderElement get myRoot;
 }
 
-@EnsureTag('some-other-tag')
+@EnsureTag('some-other-tag') // ignore: deprecated_member_use_from_same_package
 @PageObject()
 abstract class EnsureTagChecks {
   EnsureTagChecks();
@@ -39,13 +39,21 @@ abstract class EnsureTagChecks {
 // Mixin implementation
 @CheckTag('some-tag')
 @PageObject()
+abstract class ClassChecksUsingClassMixin extends Object with ChecksClassMixin {
+  ClassChecksUsingClassMixin();
+  factory ClassChecksUsingClassMixin.create(PageLoaderElement context) =
+      $ClassChecksUsingClassMixin.create;
+}
+
+@CheckTag('some-tag')
+@PageObject()
 abstract class ClassChecksUsingMixin extends Object with ChecksMixin {
   ClassChecksUsingMixin();
   factory ClassChecksUsingMixin.create(PageLoaderElement context) =
       $ClassChecksUsingMixin.create;
 }
 
-@EnsureTag('some-other-tag')
+@EnsureTag('some-other-tag') // ignore: deprecated_member_use_from_same_package
 @PageObject()
 abstract class EnsureTagChecksUsingMixin extends Object with ChecksMixin {
   EnsureTagChecksUsingMixin();
@@ -54,7 +62,13 @@ abstract class EnsureTagChecksUsingMixin extends Object with ChecksMixin {
 }
 
 @PageObject()
-abstract class ChecksMixin {
+abstract class ChecksClassMixin {
+  @root
+  PageLoaderElement get myRoot;
+}
+
+@PageObject()
+mixin ChecksMixin {
   @root
   PageLoaderElement get myRoot;
 }

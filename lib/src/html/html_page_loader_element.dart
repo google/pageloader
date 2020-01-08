@@ -12,6 +12,7 @@
 // limitations under the License.
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:html';
 import 'dart:js' as js;
 import 'dart:math';
@@ -24,28 +25,32 @@ import 'html_iterators.dart';
 import 'html_page_utils.dart';
 
 /// Function used for synchronizing execution.
-typedef Future<T> SyncFn<T>(Future<T> fn());
+typedef SyncFn<T> = Future<T> Function(Future<T> Function() fn);
 
 /// Default 'do nothing' sync function.
-Future noOpExecuteSyncedFn(Future fn()) => fn().then<Null>((_) => null);
+Future<Null> noOpExecuteSyncedFn(Future<Object> Function() fn) =>
+    fn().then((_) => null);
 
 /// Base class for HTML elements.
 class HtmlPageLoaderElement implements PageLoaderElement {
-  final SyncFn syncFn;
+  final SyncFn<dynamic> syncFn;
 
   Element _cachedElement;
   HtmlPageLoaderElement _parentElement;
+
+  @override
+  String get id => _xpath;
 
   Finder _finder;
   List<Filter> _filters;
   List<Checker> _checkers;
   List<PageLoaderListener> _listeners;
 
-  HtmlPageLoaderElement({SyncFn externalSyncFn = noOpExecuteSyncedFn})
+  HtmlPageLoaderElement({SyncFn<dynamic> externalSyncFn = noOpExecuteSyncedFn})
       : syncFn = externalSyncFn;
 
   HtmlPageLoaderElement.createFromElement(this._cachedElement,
-      {SyncFn externalSyncFn = noOpExecuteSyncedFn})
+      {SyncFn<dynamic> externalSyncFn = noOpExecuteSyncedFn})
       : _parentElement = null,
         _finder = null,
         _filters = [],
@@ -56,22 +61,22 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   HtmlPageLoaderElement createElement(
       Finder finder, List<Filter> filters, List<Checker> checkers) {
-    return HtmlPageLoaderElement(externalSyncFn: this.syncFn)
+    return HtmlPageLoaderElement(externalSyncFn: syncFn)
       .._finder = finder
       .._filters = filters
       .._checkers = checkers
-      .._listeners = this._listeners
+      .._listeners = _listeners
       .._parentElement = this;
   }
 
   @override
   HtmlPageElementIterable createIterable(
           Finder finder, List<Filter> filters, List<Checker> checkers) =>
-      HtmlPageElementIterable(HtmlPageLoaderElement(externalSyncFn: this.syncFn)
+      HtmlPageElementIterable(HtmlPageLoaderElement(externalSyncFn: syncFn)
         .._finder = finder
         .._filters = filters
         .._checkers = checkers
-        .._listeners = this._listeners
+        .._listeners = _listeners
         .._parentElement = this);
 
   /// Create a new list using the current element as the parent context.
@@ -124,6 +129,26 @@ class HtmlPageLoaderElement implements PageLoaderElement {
     return _cachedElement;
   }
 
+  /// A simple xpath that consists of /Node[index]/Child_Node[index]/...
+  String get _xpath {
+    Node element = _single;
+
+    final paths = <String>[];
+    while (element != null && element.nodeType == Node.ELEMENT_NODE) {
+      var i = 1;
+      for (var sibling = element.previousNode;
+          sibling != null;
+          sibling = sibling.previousNode) {
+        if (sibling.nodeName == element.nodeName) {
+          i++;
+        }
+      }
+      paths.add('/${element.nodeName}[$i]');
+      element = element.parentNode;
+    }
+    return paths.reversed.join('');
+  }
+
   List<Element> get elements {
     Element base;
     if (_parentElement == null) {
@@ -137,7 +162,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       elements = [_cachedElement ?? base];
     } else if (_finder is ContextFinder) {
       elements = (_finder as ContextFinder)
-          .findElements(this._parentElement)
+          .findElements(_parentElement)
           .map((p) => p.context);
     } else if (_finder is CssFinder) {
       elements = base.querySelectorAll((_finder as CssFinder).cssSelector);
@@ -147,7 +172,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
     // Filter/Checker API is based on PageLoaderElements; casting for this.
     final tempElements = elements
-        .map((e) => HtmlPageLoaderElement._castFromElement(this.syncFn, e))
+        .map((e) => HtmlPageLoaderElement._castFromElement(syncFn, e))
         .toList();
     final filteredElements =
         core.applyFiltersAndChecks(tempElements, _filters, _checkers);
@@ -157,7 +182,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   void _clearCache() {
-    HtmlPageLoaderElement elem = this;
+    var elem = this;
     while (elem != null) {
       elem._cachedElement = null;
       elem = elem._parentElement;
@@ -173,7 +198,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       : 'Element selected by $_finder,' +
           (_filters.isNotEmpty ? ' filtered by $_filters,' : '') +
           (_checkers.isNotEmpty ? ' checked with $_checkers,' : '') +
-          ' in:\n${(_parentElement ?? utils.root).properties['outerHTML']}';
+          ' in:\n${getOuterHtml(_parentElement ?? utils.root)}';
 
   @override
   String toStringDeep() =>
@@ -221,9 +246,11 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   bool get exists {
     final count = elements.length;
-    if (count == 1)
+    if (count == 1) {
       return true;
-    else if (count == 0) return false;
+    } else if (count == 0) {
+      return false;
+    }
     throw PageLoaderException('Found $count elements on call to exists', this);
   }
 
@@ -266,29 +293,65 @@ class HtmlPageLoaderElement implements PageLoaderElement {
           }));
 
   @override
-  Future<Null> click() async => syncFn(() async => _retryWhenStale(() async {
-        final element = _single;
-        if (element is OptionElement) {
-          return _clickOptionElement();
-        }
+  Future<Null> click({ClickOption clickOption}) async =>
+      syncFn(() async => _retryWhenStale(() async {
+            final element = _single;
+            if (element is OptionElement) {
+              return _clickOptionElement();
+            }
 
-        await _microtask(() =>
-            element.dispatchEvent(Event.eventType('MouseEvent', 'mousedown')));
-        await _microtask(() =>
-            element.dispatchEvent(Event.eventType('MouseEvent', 'mouseup')));
+            await _microtask(() =>
+                element.dispatchEvent(MouseEvent('mousedown', detail: 1)));
+            await _microtask(
+                () => element.dispatchEvent(MouseEvent('mouseup', detail: 1)));
 
-        if (element is SvgElement) {
-          return _microtask(() =>
-              element.dispatchEvent(Event.eventType('MouseEvent', 'click')));
-        }
+            if (element is SvgElement) {
+              final event = MouseEvent('click',
+                  button: MouseButton.primary.value,
+                  detail: 1,
+                  clientX: clickOption?.clientX,
+                  clientY: clickOption?.clientY,
+                  screenX: clickOption?.screenX,
+                  screenY: clickOption?.screenY);
 
-        return _microtask(element.click);
-      }));
+              return _microtask(() => element.dispatchEvent(event));
+            }
+
+            return _microtask(element.click);
+          }));
 
   @override
   Future<void> clickOutside() async {
     if (!exists || !displayed || utils.root == this) return;
     await utils.root.click();
+  }
+
+  @override
+  Future<void> scroll({int x, int y}) {
+    return syncFn(() => _retryWhenStale(() {
+          final element = _single;
+
+          // Note: element.scroll(...) from dart:html does not work.
+          return _microtask(() {
+            element.scrollLeft += x ?? 0;
+            element.scrollTop += y ?? 0;
+            // In practice, 'scroll' events are sent rapidly but we only send
+            // it once here.
+            element.dispatchEvent(Event('scroll'));
+          });
+        }));
+  }
+
+  @override
+  Future<void> scrollIntoView() {
+    return syncFn(() => _retryWhenStale(() {
+          final element = _single;
+
+          return _microtask(() {
+            element.scrollIntoView();
+            element.dispatchEvent(Event('scroll'));
+          });
+        }));
   }
 
   Future<Null> _clickOptionElement() async => _retryWhenStale(() async {
@@ -322,6 +385,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
     return kb;
   }
 
+  /// Sends all events defined by [keys] in the exact order they are configured.
   @override
   Future<void> typeSequence(PageLoaderKeyboard keys) async =>
       syncFn(() async => _retryWhenStale(() async => _typeSequence(keys)));
@@ -437,6 +501,115 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   /// Dispatches an html [event] from [_single].
   bool dispatchEvent(Event event) => _single.dispatchEvent(event);
+
+  @override
+  String testCreatorGetters() => json.encode({
+        'innerText': 'String',
+        'visibleText': 'String',
+        'displayed': 'bool',
+        'isFocused': 'bool',
+        'exists': 'bool',
+        'classes': 'List<String>'
+      });
+
+  @override
+  String testCreatorMethods() => json.encode({
+        'clear': [
+          {'name': 'focusBefore', 'kind': 'named', 'type': 'bool'},
+          {'name': 'blurAfter', 'kind': 'named', 'type': 'bool'}
+        ],
+        'click': [
+          {'name': 'clickOption', 'kind': 'named', 'type': 'ClickOption'}
+        ],
+        'clickOutside': [],
+        'scroll': [
+          {'name': 'x', 'kind': 'named', 'type': 'int'},
+          {'name': 'y', 'kind': 'named', 'type': 'int'}
+        ],
+        'scrollIntoView': [],
+        'type': [
+          {'name': 'keys', 'kind': 'required', 'type': 'String'},
+          {'name': 'focusBefore', 'kind': 'named', 'type': 'bool'},
+          {'name': 'blurAfter', 'kind': 'named', 'type': 'bool'}
+        ],
+        'focus': [],
+        'blur': [],
+      });
+
+  /// (HTML only) Invoke a getter or a method.
+  dynamic testCreatorInvokeMethod(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    if (methodName == 'id') {
+      return id;
+    }
+    if (methodName == 'innerText') {
+      return innerText;
+    }
+    if (methodName == 'visibleText') {
+      return visibleText;
+    }
+    if (methodName == 'name') {
+      return name;
+    }
+    if (methodName == 'displayed') {
+      return displayed;
+    }
+    if (methodName == 'classes') {
+      return classes;
+    }
+    if (methodName == 'isFocused') {
+      return isFocused;
+    }
+    if (methodName == 'exists') {
+      return exists;
+    }
+    if (methodName == 'offset') {
+      return offset;
+    }
+    if (methodName == 'shadowRoot') {
+      return shadowRoot;
+    }
+    if (methodName == 'getElementsByCss') {
+      return Function.apply(
+          getElementsByCss, positionalArguments, namedArguments);
+    }
+    if (methodName == 'byTag') {
+      return Function.apply(byTag, positionalArguments, namedArguments);
+    }
+    if (methodName == 'clear') {
+      return Function.apply(clear, positionalArguments, namedArguments);
+    }
+    if (methodName == 'click') {
+      return Function.apply(click, positionalArguments, namedArguments);
+    }
+    if (methodName == 'clickOutside') {
+      return Function.apply(clickOutside, positionalArguments, namedArguments);
+    }
+    if (methodName == 'scroll') {
+      return Function.apply(scroll, positionalArguments, namedArguments);
+    }
+    if (methodName == 'scrollIntoView') {
+      return Function.apply(
+          scrollIntoView, positionalArguments, namedArguments);
+    }
+    if (methodName == 'type') {
+      return Function.apply(type, positionalArguments, namedArguments);
+    }
+    if (methodName == 'typeSequence') {
+      return Function.apply(typeSequence, positionalArguments, namedArguments);
+    }
+    if (methodName == 'focus') {
+      return Function.apply(focus, positionalArguments, namedArguments);
+    }
+    if (methodName == 'blur') {
+      return Function.apply(blur, positionalArguments, namedArguments);
+    }
+    if (methodName == 'toString') {
+      return Function.apply(toString, positionalArguments, namedArguments);
+    }
+    throw 'METHOD NOT FOUND';
+  }
 }
 
 bool _isStaleElementException(Object e) =>
@@ -524,7 +697,7 @@ bool _isContentEditable(Element element) {
 
 // execute [fn] as a separate microtask and return a [Future] that completes
 // normally when that [Future] completes (normally or with an error).
-Future<Null> _microtask(fn()) {
+Future<Null> _microtask(Function() fn) {
   return Future<Null>.microtask(() {
     fn();
   }).whenComplete(() {});
@@ -543,7 +716,7 @@ String _elementText(List<Node> elements) {
   }
   if (elem is ContentElement) {
     return _elementText(
-        elem.getDistributedNodes().where((e) => e is Element).toList());
+        elem.getDistributedNodes().whereType<Element>().toList());
   }
   if (elem.nodes == null || elem.nodes.isEmpty) {
     return elem.text;
@@ -557,7 +730,7 @@ String _normalize(String string) {
   var skipWS = true;
   var addWS = false;
   final buffer = StringBuffer();
-  for (int i = 0; i < string.length; i++) {
+  for (var i = 0; i < string.length; i++) {
     final char = string[i];
     if (char.contains(_nonBreaking)) {
       if (addWS) {
@@ -644,6 +817,7 @@ const _specialToKeyCode = {
   PageLoaderSpecialKey.right: KeyCode.RIGHT,
   PageLoaderSpecialKey.down: KeyCode.DOWN,
   PageLoaderSpecialKey.insert: KeyCode.INSERT,
+  PageLoaderSpecialKey.delete: KeyCode.DELETE,
   PageLoaderSpecialKey.f1: KeyCode.F1,
   PageLoaderSpecialKey.f2: KeyCode.F2,
   PageLoaderSpecialKey.f3: KeyCode.F3,
