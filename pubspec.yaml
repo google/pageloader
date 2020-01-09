@@ -1,9 +1,9 @@
 name: pageloader
 
-version: 3.3.0
+version: 3.3.1
 
 authors:
-  - Marc Fisher II (emeritus) <fisherii@google.com>
+  - Marc Fisher II (emeritus)
   - Max Kim <maxkim@google.com>
   - Matt Staats <staats@google.com>
 
