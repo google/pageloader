@@ -55,6 +55,8 @@ abstract class Unannotated {
   }
 
   int operator [](int x) => x;
+
+  List<T> generateTypedList<T>() => <T>[];
 }
 
 // Mixin implementation
@@ -100,4 +102,6 @@ abstract class UnannotatedMixin {
   }
 
   int operator [](int x) => x;
+
+  List<T> generateTypedList<T>() => <T>[];
 }

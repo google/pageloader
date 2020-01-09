@@ -154,6 +154,9 @@ void main() {
       expect(unannotated.isFieldSet, false);
       unannotated.myField = true;
       expect(unannotated.isFieldSet, true);
+
+      // Should not throw runtime Type error:
+      unannotated.generateTypedList<String>();
     });
 
     test('generic classes and functions work', () {
@@ -308,6 +311,9 @@ void main() {
       expect(unannotated.isFieldSet, false);
       unannotated.myField = true;
       expect(unannotated.isFieldSet, true);
+
+      // Should now throw runtime Type error:
+      unannotated.generateTypedList<String>();
     });
 
     test('generic classes and functions work', () {

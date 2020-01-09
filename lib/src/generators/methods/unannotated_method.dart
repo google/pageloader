@@ -53,14 +53,14 @@ abstract class UnannotatedMethod
     if (returnType == 'void') {
       return 'void $_methodDeclaration($_parameterDeclarations) {' +
           generateStartMethodListeners(pageObjectName, name) +
-          'super.$name($_parameterNames);' +
+          'super.$name$_typeArguments($_parameterNames);' +
           generateEndMethodListeners(pageObjectName, name) +
           'return;'
               '}';
     } else {
       return '$returnType $_methodDeclaration($_parameterDeclarations) {' +
           generateStartMethodListeners(pageObjectName, name) +
-          'final returnMe = super.$name($_parameterNames);' +
+          'final returnMe = super.$name$_typeArguments($_parameterNames);' +
           generateEndMethodListeners(pageObjectName, name) +
           'return returnMe;'
               '}';
@@ -71,6 +71,16 @@ abstract class UnannotatedMethod
 
   String get _typeParameters =>
       typeParameters.isPresent ? typeParameters.value.toSource() : '';
+
+  String get _typeArguments {
+    if (!typeParameters.isPresent) {
+      return '';
+    }
+    final arguments = typeParameters.value.typeParameters
+        .map((param) => param.name.toSource())
+        .join(', ');
+    return '<$arguments>';
+  }
 
   String get _parameterDeclarations {
     final required = parameters
