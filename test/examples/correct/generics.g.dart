@@ -95,7 +95,7 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Generics', 'exampleMethod');
     }
-    final returnMe = super.exampleMethod(s);
+    final returnMe = super.exampleMethod<S>(s);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('Generics', 'exampleMethod');
     }
@@ -337,7 +337,7 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('GenericPair', 'exampleMethodMap');
     }
-    final returnMe = super.exampleMethodMap(r, s);
+    final returnMe = super.exampleMethodMap<R, S>(r, s);
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('GenericPair', 'exampleMethodMap');
     }

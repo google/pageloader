@@ -1,3 +1,8 @@
+## 3.3.1
+
+- Fix bug where type parameters were not being passed as args into generated
+  unannotated methods.
+
 ## 3.3.0
 
 - Expose more files within `lib/html.dart` and `lib/webdriver.dart`.

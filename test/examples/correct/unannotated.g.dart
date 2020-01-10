@@ -168,6 +168,17 @@ class $Unannotated extends Unannotated with $$Unannotated {
     return;
   }
 
+  List<T> generateTypedList<T>() {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('Unannotated', 'generateTypedList');
+    }
+    final returnMe = super.generateTypedList<T>();
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('Unannotated', 'generateTypedList');
+    }
+    return returnMe;
+  }
+
   String toStringDeep() => 'Unannotated\n\n${$__root__.toStringDeep()}';
 }
 
@@ -207,6 +218,10 @@ mixin $$Unannotated on Unannotated {
     }
     if (methodName == 'noReturnType') {
       return Function.apply(noReturnType, positionalArguments, namedArguments);
+    }
+    if (methodName == 'generateTypedList') {
+      return Function.apply(
+          generateTypedList, positionalArguments, namedArguments);
     }
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
@@ -387,6 +402,10 @@ mixin $$UnannotatedMixin on UnannotatedMixin {
     }
     if (methodName == 'noReturnType') {
       return Function.apply(noReturnType, positionalArguments, namedArguments);
+    }
+    if (methodName == 'generateTypedList') {
+      return Function.apply(
+          generateTypedList, positionalArguments, namedArguments);
     }
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
