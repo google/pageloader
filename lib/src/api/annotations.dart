@@ -95,15 +95,26 @@ class _Pointer {
 /// Finds elements by the page object's @CheckTag contents.
 ///
 /// Example, given:
+///
+/// ```dart
 ///   @CheckTag('example-tag')
 ///   @PageObject()
 ///   abstract class ExampleTagPO { ... }
+/// ```
+///
 /// Then:
+///
+/// ```dart
 ///   @ByCheckTag()
 ///   ExampleTagPO get exampleTag;
+/// ```
+///
 /// is equivalent to:
+///
+/// ```dart
 ///   @ByTagName('example-tag')
 ///   ExampleTagPO get exampleTag;
+/// ```
 class ByCheckTag implements Finder {
   const ByCheckTag();
 }
