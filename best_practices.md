@@ -7,7 +7,7 @@ types from non-PageObject types.
 
 BAD:
 
-```dart
+```dart {.bad}
 @PageObject()
 @CheckTag('special-tag')
 abstract class SpecialTag {
@@ -17,7 +17,7 @@ abstract class SpecialTag {
 
 GOOD:
 
-```dart
+```dart {.good}
 @PageObject()
 @CheckTag('special-tag')
 abstract class SpecialTagPO {
@@ -36,7 +36,7 @@ variable tag names.**
 
 BAD:
 
-```dart
+```dart {.bad}
 @PageObject()
 abstract class MyTagPO {
   // This PageObject can bind to any tag.
@@ -46,12 +46,52 @@ abstract class MyTagPO {
 
 GOOD:
 
-```dart
+```dart {.good}
 @PageObject()
 @CheckTag('my-tag')
 abstract class MyTagPO {
   // This PageObject can only bind to 'my-tag'.
   // ...
+}
+```
+
+## DO check for existence on entities that conditionally exist
+
+If any annotated PageLoader entity may not exist (not rendered in the
+HTML document), users should explicitly check for their existence
+before they are accessed (either directly in test or within another method).
+
+BAD:
+
+```dart {.bad}
+@PageObject()
+abstract class MyPO {
+  // ...constructors...
+
+  @ByTagName('may-exist-tag')
+  PageLoaderElement get _mayExist;
+
+  void doSomethingWithMayExist() {
+    // use `_mayExist`
+  }
+}
+```
+
+GOOD:
+
+```dart {.good}
+@PageObject()
+abstract class MyPO {
+  // ...constructors...
+
+  @ByTagName('may-exist-tag')
+  PageLoaderElement get _mayExist;
+
+  void doSomethingWithMayExist() {
+    if (_mayExist.exists) {
+      // use `_mayExist`
+    }
+  }
 }
 ```
 
@@ -65,7 +105,7 @@ verbosity and allows for changing of tag name in a single location.
 
 BAD:
 
-```dart
+```dart {.bad}
 @PageObject()
 @CheckTag('child-tag')
 abstract class ChildPO { // .... }
@@ -83,7 +123,7 @@ abstract class ParentPO {
 
 GOOD:
 
-```dart
+```dart {.good}
 @PageObject()
 @CheckTag('child-tag')
 abstract class ChildPO { // .... }
@@ -137,7 +177,7 @@ This can be achieved by following these guidelines:
 
 BAD:
 
-```dart
+```dart {.bad}
 @PageObject()
 @CheckTag('my-menu-box')
 abstract class MenuBoxPO {
@@ -174,7 +214,7 @@ await menuPO.selectMenuItem(1);
 
 GOOD:
 
-```dart
+```dart {.good}
 @PageObject()
 @CheckTag('my-menu-box')
 abstract class MenuBoxPO {
@@ -303,7 +343,7 @@ PageUtils.
 
 BAD:
 
-```dart
+```dart {.bad}
 @PageObject()
 @CheckTag('my-tag')
 abstract class MyPO {
@@ -318,7 +358,7 @@ abstract class MyPO {
 
 GOOD:
 
-```dart
+```dart {.good}
 @PageObject()
 @CheckTag('my-tag')
 abstract class MyPO {
@@ -341,7 +381,7 @@ or PageObject. Users should use these API whenever possible.
 
 BAD:
 
-```dart
+```dart {.bad}
 import 'package:pageloader/pageloader.dart';
 
 @PageObject()
@@ -359,7 +399,7 @@ final poExists = somePO.rootElement.exists;
 
 GOOD:
 
-```dart
+```dart {.good}
 import 'package:pageloader/pageloader.dart';
 import 'package:pageloader/utils.dart';
 
@@ -378,13 +418,13 @@ final poExists = exists(somePO);
 
 BAD:
 
-```dart
+```dart {.bad}
 expect(somePO.rootElement.exists, isTrue);
 ```
 
 GOOD:
 
-```dart
+```dart {.good}
 import 'package:pageloader/testing.dart';
 
 expect(somePO, exists);
@@ -399,7 +439,7 @@ instead unless the method can be re-used by other tests.
 
 BAD:
 
-```dart
+```dart {.bad}
 @PageObject()
 @CheckTag('search-menu')
 abstract class SearchMenuPO {
@@ -426,7 +466,7 @@ expect(await searchMenuPO.typeTextAndCheckResult('foo', 'foobar'), isTrue);
 
 GOOD:
 
-```dart
+```dart {.good}
 @PageObject()
 @CheckTag('search-menu')
 abstract class SearchMenuPO {
@@ -458,4 +498,94 @@ Future<bool> typeTextAndCheckResult(String searchText, String expectedText) {
 }
 
 expect(await typeTextAndCheckResult('foo', 'foobar'), isTrue);
+```
+
+## AVOID exposing `PageLoaderElement` directly in PO
+
+Instead expose the more granular API you expect in tests.
+
+The reason is that if people start depending on this and using methods inside
+`PageLoaderElement` it will be very hard to refactor the component's HTML, as
+you will need to provide an element that support all the same interactions. If
+on the other hand you just provide method, then it is easy to route old stuff to
+new dom elements. It also makes the test code more readable.
+
+BAD:
+
+```dart {.bad}
+@PageObject()
+@CheckTag('animated-menu')
+abstract class AnimatedMenuPO {
+  // ... constructors ...
+  @ByClass('button')
+  PageLoaderElement get button;
+}
+
+// TEST:
+final animatedMenuPO = // ...
+expect(await animatedMenuPO.button.innerText, 'Open');
+```
+
+GOOD:
+
+```dart {.good}
+@PageObject()
+@CheckTag('animated-menu')
+abstract class AnimatedMenuPO {
+  // ... constructors ...
+  @ByClass('button')
+  PageLoaderElement get _button;
+  String get buttonLabel => _button.innerText;
+
+// TEST:
+final animatedMenuPO = // ...
+expect(await animatedMenuPO.buttonLabel, 'Open');
+```
+
+## DO return `NullPageLoaderElement` instead of `null`
+
+If any method signature has a potential to return a `null` value,
+return a `NullPageLoaderElement` instance or a
+`NullPageLoaderElement`-wrapped PageObject using `@nullElement`:
+
+```dart {.bad}
+@PageObject()
+abstract class MyPO {
+  // ...constructors...
+
+  PageLoaderElement potentialNullElement() {
+    // ...logic...
+    return null;
+  }
+
+  AnotherPO potentialNullPO() {
+    // ...logic...
+    return null;
+  }
+}
+```
+
+Instead:
+
+```dart {.good}
+@PageObject()
+abstract class MyPO {
+  // ...constructors...
+
+  @nullElement
+  PageLoaderElement get _nullElement;
+
+  @nullElement
+  AnotherPO get _nullPO;
+
+  PageLoaderElement potentialNullElement() {
+    // ...logic...
+    return _nullElement;
+  }
+
+  AnotherPO potentialNullPO() {
+    // ...logic...
+    return _nullPO;
+  }
+}
 ```
