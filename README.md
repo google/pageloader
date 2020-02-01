@@ -5,8 +5,7 @@ PageLoader
 
 A framework for creating page objects for in-browser tests or Webdriver tests.
 
-For a beginner's guide, refer to our
-[quickstart guide](https://github.com/google/pageloader/blob/master/quickstart_guide.md).
+For a beginner's guide, refer to our [quickstart guide](quickstart_guide.md).
 
 For in-depth explanation of PageLoader's anatomy and features, refer
 to our [anatomy section](anatomy.md).
