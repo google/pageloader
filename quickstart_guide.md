@@ -119,8 +119,8 @@ We're assuming that the `<shopping-cart-item>` has `<description>`
 and `<price-box>` elements. We can wrap these elements under the
 generic [`PageLoaderElement`] type and bind them to their tag names via
 `@ByTagName(...)`. This means that `_descriptionElement` and 
-`_priceBoxElement` wrap around `<shopping-cart-item>` and
-`<description>` respectively.
+`_priceBoxElement` wrap around `<description>` and
+`<price-box>` elements respectively.
 
 This allows Dart code to access information about these HTML elements
 or interact with these elements via [`PageLoaderElement API`]. Refer to this API page for more information.
@@ -338,10 +338,11 @@ this package's source code labeled as `webdriver_?_test.dart`.
 
 Let's go back to our example and write some tests! For this example,
 we will be using `dart:html` since it requires no additional
-packages and we can directly a library found in its SDK.
+packages.
 
-Users should have multiple layers of unit tests (ex: one fore each of the `<shopping-cart-menu>`, `<shopping-cart>`, and `<shopping-cart-item>`), but for brevity we will focus only on
-the top-most `<shopping-cart-menu>` here.
+Users should have multiple layers of unit tests (ex: one fore each of the
+`<shopping-cart-menu>`, `<shopping-cart>`, and `<shopping-cart-item>`),
+but for brevity we will focus only on the top-most `<shopping-cart-menu>` here.
 
 ```dart
 // FILE: shopping_cart/test/shopping_cart_menu_test.dart
@@ -364,7 +365,7 @@ void main() {
         Element shoppingCartMenu = ...;
         final context = 
             HtmlPageLoaderElement.createFromElement(shoppingCartMenu);
-        menu = MyPO.create(context);
+        menu = ShoppingCartMenuPO.create(context);
     });
 
     group('shopping cart menu', () async {
@@ -374,7 +375,7 @@ void main() {
 
         test('clicking clear cart should drop count to 0', () async {
             await menu.clickClearCart();
-            expect()
+            expect(menu.shoppingCart.itemCount, equals(0));
         });
     });
 }
@@ -402,7 +403,7 @@ void main() {
         Element shoppingCartMenu = ...;
         final context = 
             HtmlPageLoaderElement.createFromElement(shoppingCartMenu);
-        menu = MyPO.create(context);
+        menu = ShoppingCartMenuPO.create(context);
     });
 
     //...
@@ -454,12 +455,15 @@ void main() {
         Element rootDocument = document;
         final context = 
             HtmlPageLoaderElement.createFromElement(rootDocument);
-        menu = MyPO.lookup(context);
+        menu = ShoppingCartMenuPO.lookup(context);
     });
 
     //...
 }
 ```
+
+In this example, the PageLoader will attempt to find `<shopping-cart-menu>`
+directly from the passed root node and construct `ShoppingCartMenuPO` with it.
 
 This, however assumes that `<shopping-cart-menu>` is unique underneath
 the root HTML document node. If more than one `<shopping-cart-menu>`

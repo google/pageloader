@@ -542,7 +542,7 @@ final animatedMenuPO = // ...
 expect(await animatedMenuPO.buttonLabel, 'Open');
 ```
 
-## DO return `NullPageLoaderElement` instead of `null`
+## DO return `NullPageLoaderElement` instead of `null` if the expected type is a PageLoader entity
 
 If any method signature has a potential to return a `null` value,
 return a `NullPageLoaderElement` instance or a
@@ -559,6 +559,11 @@ abstract class MyPO {
   }
 
   AnotherPO potentialNullPO() {
+    // ...logic...
+    return null;
+  }
+
+  String getSomeString() {
     // ...logic...
     return null;
   }
@@ -586,6 +591,12 @@ abstract class MyPO {
   AnotherPO potentialNullPO() {
     // ...logic...
     return _nullPO;
+  }
+
+  // Note: this method is unchanged since `String` is not a PageLoader entity.
+  String getSomeString() {
+    // ...logic...
+    return null;
   }
 }
 ```
