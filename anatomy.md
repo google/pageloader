@@ -428,7 +428,7 @@ Direct inheritance is not possible with PageLoader since every
 For example: `class $MyPO extends MyPO {...}` with `$MyPO` being the
 generated version of `MyPO` (user-written).
 
-However, we can use [Dart mixins](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3) to provide shared functionality
+However, we can use [Dart mixins](https://dart.dev/guides/language/language-tour#adding-features-to-a-class-mixins) to provide shared functionality
 between `PageObjects`.
 
 Example:
