@@ -373,8 +373,7 @@ abstract class MyShoppingListPO {
 ```
 
 The above is **not** recommended since it returns a `null` value when
-the method signature expects a `ShoppingListItemPO` that may not
-exist.
+the method signature expects a `ShoppingListItemPO`.
 
 This means the user must do a null check in their test while also
 doing an existence check:
