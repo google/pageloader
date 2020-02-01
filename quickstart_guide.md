@@ -419,7 +419,7 @@ Instead of manually finding your target element, there is the
 automatically looks up its the tag found in `@CheckTag(...)`
 once provided with any element above `<shopping-cart-menu>`.
 
-In `ShoppingCartMenuPO`, add another factory constructor:
+In `ShoppingCartMenuPO`, add `lookup` factory constructor:
 
 ```dart
 // FILE: shopping_cart/test/shopping_cart_menu_po.dart

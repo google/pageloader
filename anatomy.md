@@ -5,7 +5,7 @@ This section will not go over how to build and use a PageObject.
 For a beginner's guide, refer to our [quick guide](quick_guide.md).
 This page will assume that the reader has gone through the quick guide.
 
-PageLoader is built based on the [PageObject Design Pattern](https://martinfowler.com/bliki/PageObject.html)
+PageLoader is based on the [PageObject Design Pattern](https://martinfowler.com/bliki/PageObject.html)
 and is built using Dart codegen. Users write the abstract `PageObject` class and code generation implements this abstract `PageObject`.
 
 For example:
@@ -99,8 +99,8 @@ When a user writes their own `PageObject`, they are creating an
 implements this.
 
 `@PageObject()` is used as the starting point for code generation step.
-`package:build` will identify all abstract classes annotated with this and begin looking into its contents for more annotations within the
-class to propagate the implemented, non-abstract version of this class.
+`package:build` will identify all abstract classes annotated with this and
+generate the implemented, non-abstract version of this class.
 
 **3. `@CheckTag('my-special-tag')`**
 
@@ -123,7 +123,8 @@ The order of operations on `myPo.clickBlueButton()` is:
 3. Execute `clickBlueButton()` using this element.
 
 `@CheckTag(...)` annotation is responsible for step 2; without this,
-even if some other tag was passed, the test would not complain. (But lead to hard-to-debug issues.)
+even if some other tag was passed, the test would not complain.
+However, you may end up with hard to debug issues.
 
 Let's consider a more realistic example as to why using 
 `@CheckTag(...)` is a good idea. Suppose you have another `PageObject`
@@ -304,7 +305,7 @@ Finally, these annotations may only be used on abstract getter methods that retu
 
 1. [`PageLoaderElement`]
 2. `PageObject` (class with `@PageObject()` annotation)
-3. List<T> where T is the above 2.
+3. `List<T>` where T is the above 2.
 
 **6. Lazy loading, existence, and the `NullPageLoaderElement`**
 
