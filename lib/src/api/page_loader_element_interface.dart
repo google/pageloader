@@ -13,7 +13,6 @@
 
 library pageloader.api.page_loader_element_interface;
 
-import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
