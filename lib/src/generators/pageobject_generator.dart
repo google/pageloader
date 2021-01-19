@@ -231,7 +231,7 @@ List<String> getMixins(ClassElement mainPo, String mainSignature) {
 
   // If the direct extension is not 'Object' and is a @PageObject annotated
   // class, we add its mixin-component to the list.
-  if (supertype != null && !supertype.isObject) {
+  if (supertype != null && !supertype.isDartCoreObject) {
     if (isPageObject(supertype.element)) {
       withs.add(supertype.displayName);
     }

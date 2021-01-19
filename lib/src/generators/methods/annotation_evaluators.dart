@@ -51,10 +51,10 @@ Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
     type = element.variable.type as InterfaceType;
   } else if (element is ConstructorElement) {
     // Annotation is an named constructor.
-    type = element.enclosingElement.type;
+    type = element.enclosingElement.thisType;
   } else if (element is ClassElement) {
     // Annotation is no-name constructor.
-    type = element.type;
+    type = element.thisType;
   }
 
   if (type != null) {
