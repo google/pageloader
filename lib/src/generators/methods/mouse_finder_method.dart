@@ -33,20 +33,20 @@ Optional<MouseFinderMethod> collectMouseFinderGetter(
   }
 
   if (!methodInfo.isAbstract || !methodInfo.isGetter) {
-    throw InvalidMethodException(methodInfo.nodeSource,
-        '@Mouse annotation must be used with abstract getter');
+    throw InvalidMethodException(
+        methodInfo.node, '@Mouse annotation must be used with abstract getter');
   }
   if (methodInfo.finder.isPresent) {
     throw InvalidMethodException(
-        methodInfo.nodeSource, 'cannot use Finder with Mouse annotation');
+        methodInfo.node, 'cannot use Finder with Mouse annotation');
   }
   if (methodInfo.filters.isNotEmpty) {
     throw InvalidMethodException(
-        methodInfo.nodeSource, 'cannot use Filter with Mouse annotation');
+        methodInfo.node, 'cannot use Filter with Mouse annotation');
   }
   if (methodInfo.checkers.isNotEmpty) {
     throw InvalidMethodException(
-        methodInfo.nodeSource, 'cannot use Checker with Mouse annotation');
+        methodInfo.node, 'cannot use Checker with Mouse annotation');
   }
 
   return Optional.of(MouseFinderMethod((b) => b..name = methodInfo.name));
@@ -65,7 +65,7 @@ abstract class MouseFinderMethod
       generateEndMethodListeners(pageObjectName, name) +
       'return returnMe; }';
 
-  factory MouseFinderMethod([updates(MouseFinderMethodBuilder b)]) =
+  factory MouseFinderMethod([Function(MouseFinderMethodBuilder) updates]) =
       _$MouseFinderMethod;
   MouseFinderMethod._();
 }

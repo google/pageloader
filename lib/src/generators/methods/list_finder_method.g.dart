@@ -6,16 +6,6 @@ part of pageloader.list_finder_method;
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-
 class _$ListFinderMethod extends ListFinderMethod {
   @override
   final String name;
@@ -32,7 +22,8 @@ class _$ListFinderMethod extends ListFinderMethod {
   @override
   final Optional<String> genericType;
 
-  factory _$ListFinderMethod([void updates(ListFinderMethodBuilder b)]) =>
+  factory _$ListFinderMethod(
+          [void Function(ListFinderMethodBuilder) updates]) =>
       (new ListFinderMethodBuilder()..update(updates)).build();
 
   _$ListFinderMethod._(
@@ -44,28 +35,35 @@ class _$ListFinderMethod extends ListFinderMethod {
       this.isFuture,
       this.genericType})
       : super._() {
-    if (name == null)
+    if (name == null) {
       throw new BuiltValueNullFieldError('ListFinderMethod', 'name');
-    if (listTypeArgument == null)
+    }
+    if (listTypeArgument == null) {
       throw new BuiltValueNullFieldError(
           'ListFinderMethod', 'listTypeArgument');
-    if (finderDeclaration == null)
+    }
+    if (finderDeclaration == null) {
       throw new BuiltValueNullFieldError(
           'ListFinderMethod', 'finderDeclaration');
-    if (filterDeclarations == null)
+    }
+    if (filterDeclarations == null) {
       throw new BuiltValueNullFieldError(
           'ListFinderMethod', 'filterDeclarations');
-    if (checkerDeclarations == null)
+    }
+    if (checkerDeclarations == null) {
       throw new BuiltValueNullFieldError(
           'ListFinderMethod', 'checkerDeclarations');
-    if (isFuture == null)
+    }
+    if (isFuture == null) {
       throw new BuiltValueNullFieldError('ListFinderMethod', 'isFuture');
-    if (genericType == null)
+    }
+    if (genericType == null) {
       throw new BuiltValueNullFieldError('ListFinderMethod', 'genericType');
+    }
   }
 
   @override
-  ListFinderMethod rebuild(void updates(ListFinderMethodBuilder b)) =>
+  ListFinderMethod rebuild(void Function(ListFinderMethodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -73,10 +71,10 @@ class _$ListFinderMethod extends ListFinderMethod {
       new ListFinderMethodBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ListFinderMethod) return false;
-    return name == other.name &&
+    return other is ListFinderMethod &&
+        name == other.name &&
         listTypeArgument == other.listTypeArgument &&
         finderDeclaration == other.finderDeclaration &&
         filterDeclarations == other.filterDeclarations &&
@@ -170,12 +168,14 @@ class ListFinderMethodBuilder
 
   @override
   void replace(covariant ListFinderMethod other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ListFinderMethod;
   }
 
   @override
-  void update(void updates(ListFinderMethodBuilder b)) {
+  void update(void Function(ListFinderMethodBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -197,7 +197,7 @@ class ListFinderMethodBuilder
 
 abstract class ListFinderMethodBaseBuilder {
   void replace(ListFinderMethodBase other);
-  void update(void updates(ListFinderMethodBaseBuilder b));
+  void update(void Function(ListFinderMethodBaseBuilder) updates);
   String get name;
   set name(String name);
 
@@ -219,3 +219,5 @@ abstract class ListFinderMethodBaseBuilder {
   Optional<String> get genericType;
   set genericType(Optional<String> genericType);
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

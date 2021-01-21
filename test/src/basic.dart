@@ -21,7 +21,7 @@ import 'shared_page_objects.dart';
 
 part 'basic.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('basic', () {
@@ -81,9 +81,10 @@ void runTests(GetNewContext contextGenerator) {
     test('computedStyle', () async {
       final page = PageForSimpleTest.create(contextGenerator());
 
-      expect(page.table.table.computedStyle['color'], 'rgb(128, 0, 128)');
-      expect(
-          page.table.table.computedStyle['background-color'], 'rgb(0, 255, 0)');
+      expect(page.table.table.computedStyle['color'],
+          anyOf('rgb(128, 0, 128)', 'rgba(128, 0, 128, 1)'));
+      expect(page.table.table.computedStyle['background-color'],
+          anyOf('rgb(0, 255, 0)', 'rgba(0, 255, 0, 1)'));
     });
 
     test('exists', () async {
@@ -118,7 +119,7 @@ void runTests(GetNewContext contextGenerator) {
         fail('Expected to throw on clicking non-existant element');
       } catch (e) {
         expect(e.toString(),
-            contains('PageLoaderException: Found 0 elements in _single'));
+            contains('Expected to find exactly 1 match, but found 0 for:'));
       }
     });
 
@@ -151,6 +152,20 @@ void runTests(GetNewContext contextGenerator) {
     test('getElementsByCss works', () async {
       final element = contextGenerator(); // Top element.
       expect((element.getElementsByCss('td')).length, 4);
+    });
+
+    test("mixin works with 'abstract class' mixin", () {
+      final po = POWithClassMixinPO.create(contextGenerator());
+      expect(po.mixinDivText, 'ClassMixinPO: mixin div');
+      expect(po.getterMessage, 'getter text from ClassMixinPO');
+      expect(po.methodMessage(), 'method text from ClassMixinPO');
+    });
+
+    test("mixin works with 'mixin' mixin", () {
+      final po = POWithMixinPO.create(contextGenerator());
+      expect(po.mixinDivText, 'MixinPO: mixin div');
+      expect(po.getterMessage, 'getter text from MixinPO');
+      expect(po.methodMessage(), 'method text from MixinPO');
     });
   });
 }
@@ -260,4 +275,42 @@ abstract class Display {
 
   @ById('div')
   PageLoaderElement get notDisplayed;
+}
+
+@PageObject()
+abstract class ClassMixinPO {
+  @ById('mixin-div')
+  PageLoaderElement get _mixinDiv;
+
+  String get mixinDivText => 'ClassMixinPO: ${_mixinDiv.innerText}';
+
+  String get getterMessage => 'getter text from ClassMixinPO';
+
+  String methodMessage() => 'method text from ClassMixinPO';
+}
+
+@PageObject()
+mixin MixinPO {
+  @ById('mixin-div')
+  PageLoaderElement get _mixinDiv;
+
+  String get mixinDivText => 'MixinPO: ${_mixinDiv.innerText}';
+
+  String get getterMessage => 'getter text from MixinPO';
+
+  String methodMessage() => 'method text from MixinPO';
+}
+
+@PageObject()
+abstract class POWithClassMixinPO with ClassMixinPO {
+  POWithClassMixinPO();
+  factory POWithClassMixinPO.create(PageLoaderElement context) =
+      $POWithClassMixinPO.create;
+}
+
+@PageObject()
+abstract class POWithMixinPO with MixinPO {
+  POWithMixinPO();
+  factory POWithMixinPO.create(PageLoaderElement context) =
+      $POWithMixinPO.create;
 }

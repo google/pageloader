@@ -19,5 +19,5 @@ import 'data/html_setup.dart' as html_setup;
 import 'src/typing.dart' as typing;
 
 void main() {
-  typing.runTests(() => html_setup.getRoot());
+  typing.runTests(() => html_setup.getRoot(), isHtmlTest: true);
 }

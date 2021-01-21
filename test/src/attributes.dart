@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'attributes.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('attributes ', () {
@@ -41,7 +41,7 @@ void runTests(GetNewContext contextGenerator) {
 
     test('disabled', () async {
       final page = PageForAttributesTests.create(contextGenerator());
-      expect(page.readOnly.attributes['disabled'], '');
+      expect(page.readOnly.attributes['disabled'], isNotNull);
       expect(page.text.attributes['disabled'], isNull);
     });
 
@@ -100,8 +100,8 @@ void runTests(GetNewContext contextGenerator) {
 
     test('readonly/readOnly', () async {
       final page = PageForAttributesTests.create(contextGenerator());
-      expect(page.readOnly.attributes['readonly'], '');
-      expect(page.readOnly.attributes['readOnly'], '');
+      expect(page.readOnly.attributes['readonly'], isNotNull);
+      expect(page.readOnly.attributes['readOnly'], isNotNull);
       expect(page.text.attributes['readonly'], isNull);
       expect(page.text.attributes['readOnly'], isNull);
     });

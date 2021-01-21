@@ -9,6 +9,7 @@ part of 'iterables.dart';
 // ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $Iterables extends Iterables with $$Iterables {
   PageLoaderElement $__root__;
   $Iterables.create(PageLoaderElement currentContext)
@@ -17,16 +18,108 @@ class $Iterables extends Iterables with $$Iterables {
   }
   factory $Iterables.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "Iterables is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "Iterables is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
+  String testCreatorGetters() {
+    final getters = <String, String>{};
+    getters.addAll(testCreatorGettersInIterables());
+    return json.encode(getters);
+  }
+
+  String testCreatorMethods() {
+    final methods = <String, List<Map<String, String>>>{};
+    methods.addAll(testCreatorMethodsInIterables());
+    return json.encode(methods);
+  }
+
+  dynamic testCreatorInvokeMethod(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    try {
+      return testCreatorInvokeMethodInIterables(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+    final internalIds = rawInternalIds.cast<String>();
+    final code = <String, String>{};
+
+    final actionCode = code[action];
+    if (actionCode != null) {
+      return actionCode;
+    }
+
+    final thisElementIndex = internalIds.indexOf($__root__.id);
+    final rootNotFound = thisElementIndex < 0;
+
+    if (thisElementIndex >= 0) {
+      internalIds.removeRange(thisElementIndex, internalIds.length);
+    }
+
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    MapEntry<int, String Function(List<String>)> chain;
+    chain = findChainInIterables(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    if (closestIndex < internalIds.length) {
+      final value = closestValue(internalIds);
+      return code[value] ?? value;
+    }
+
+    return rootNotFound
+        ? null
+        : PageObject.defaultCode[action] ?? PageObject.defaultCode['default'];
+  }
+
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "Iterables". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'Iterables\n\n${$__root__.toStringDeep()}';
 }
 
-class $$Iterables {
+mixin $$Iterables on Iterables {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInIterables() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>> testCreatorMethodsInIterables() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInIterables(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    if (methodName == 'basics') {
+      return basics;
+    }
+    if (methodName == 'nested') {
+      return nested;
+    }
+    if (methodName == 'checkTagPO') {
+      return checkTagPO;
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInIterables(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    return {closestIndex: closestValue};
+  }
+
   PageObjectIterable<PageLoaderElement> get basics {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Iterables', 'basics');
@@ -67,6 +160,10 @@ class $$Iterables {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $InnerObject extends InnerObject with $$InnerObject {
   PageLoaderElement $__root__;
   $InnerObject.create(PageLoaderElement currentContext)
@@ -75,16 +172,118 @@ class $InnerObject extends InnerObject with $$InnerObject {
   }
   factory $InnerObject.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "InnerObject is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "InnerObject is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
+  String testCreatorGetters() {
+    final getters = <String, String>{};
+    getters.addAll(testCreatorGettersInInnerObject());
+    return json.encode(getters);
+  }
+
+  String testCreatorMethods() {
+    final methods = <String, List<Map<String, String>>>{};
+    methods.addAll(testCreatorMethodsInInnerObject());
+    return json.encode(methods);
+  }
+
+  dynamic testCreatorInvokeMethod(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    try {
+      return testCreatorInvokeMethodInInnerObject(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+    final internalIds = rawInternalIds.cast<String>();
+    final code = <String, String>{};
+
+    final actionCode = code[action];
+    if (actionCode != null) {
+      return actionCode;
+    }
+
+    final thisElementIndex = internalIds.indexOf($__root__.id);
+    final rootNotFound = thisElementIndex < 0;
+
+    if (thisElementIndex >= 0) {
+      internalIds.removeRange(thisElementIndex, internalIds.length);
+    }
+
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    MapEntry<int, String Function(List<String>)> chain;
+    chain = findChainInInnerObject(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    if (closestIndex < internalIds.length) {
+      final value = closestValue(internalIds);
+      return code[value] ?? value;
+    }
+
+    return rootNotFound
+        ? null
+        : PageObject.defaultCode[action] ?? PageObject.defaultCode['default'];
+  }
+
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "InnerObject". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'InnerObject\n\n${$__root__.toStringDeep()}';
 }
 
-class $$InnerObject {
+mixin $$InnerObject on InnerObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInInnerObject() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>> testCreatorMethodsInInnerObject() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInInnerObject(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    if (methodName == 'single') {
+      return single;
+    }
+    if (methodName == 'innerIterable') {
+      return innerIterable;
+    }
+    if (methodName == 'innerCheckTagPO') {
+      return innerCheckTagPO;
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInInnerObject(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    try {
+      var singleIndex = internalIds.indexOf(this.single.id);
+      if (singleIndex >= 0 && singleIndex < closestIndex) {
+        closestIndex = singleIndex;
+        closestValue = (_) =>
+            'single.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    return {closestIndex: closestValue};
+  }
+
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerObject', 'single');
@@ -124,6 +323,10 @@ class $$InnerObject {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $IterablesUsingMixin extends IterablesUsingMixin
     with $$IterablesMixin, $$IterablesUsingMixin {
   PageLoaderElement $__root__;
@@ -133,22 +336,155 @@ class $IterablesUsingMixin extends IterablesUsingMixin
   }
   factory $IterablesUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "IterablesUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "IterablesUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
+  String testCreatorGetters() {
+    final getters = <String, String>{};
+    getters.addAll(testCreatorGettersInIterablesMixin());
+    getters.addAll(testCreatorGettersInIterablesUsingMixin());
+    return json.encode(getters);
+  }
+
+  String testCreatorMethods() {
+    final methods = <String, List<Map<String, String>>>{};
+    methods.addAll(testCreatorMethodsInIterablesMixin());
+    methods.addAll(testCreatorMethodsInIterablesUsingMixin());
+    return json.encode(methods);
+  }
+
+  dynamic testCreatorInvokeMethod(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    try {
+      return testCreatorInvokeMethodInIterablesUsingMixin(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    try {
+      return testCreatorInvokeMethodInIterablesMixin(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+    final internalIds = rawInternalIds.cast<String>();
+    final code = <String, String>{};
+
+    final actionCode = code[action];
+    if (actionCode != null) {
+      return actionCode;
+    }
+
+    final thisElementIndex = internalIds.indexOf($__root__.id);
+    final rootNotFound = thisElementIndex < 0;
+
+    if (thisElementIndex >= 0) {
+      internalIds.removeRange(thisElementIndex, internalIds.length);
+    }
+
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    MapEntry<int, String Function(List<String>)> chain;
+    chain = findChainInIterablesUsingMixin(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    chain = findChainInIterablesMixin(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    if (closestIndex < internalIds.length) {
+      final value = closestValue(internalIds);
+      return code[value] ?? value;
+    }
+
+    return rootNotFound
+        ? null
+        : PageObject.defaultCode[action] ?? PageObject.defaultCode['default'];
+  }
+
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "IterablesUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() => 'IterablesUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
-class $$IterablesUsingMixin {
+mixin $$IterablesUsingMixin on IterablesUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInIterablesUsingMixin() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>>
+      testCreatorMethodsInIterablesUsingMixin() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInIterablesUsingMixin(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInIterablesUsingMixin(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    return {closestIndex: closestValue};
+  }
 }
 
-class $$IterablesMixin {
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
+
+mixin $$IterablesMixin on IterablesMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInIterablesMixin() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>> testCreatorMethodsInIterablesMixin() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInIterablesMixin(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    if (methodName == 'basics') {
+      return basics;
+    }
+    if (methodName == 'nested') {
+      return nested;
+    }
+    if (methodName == 'checkTagPO') {
+      return checkTagPO;
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInIterablesMixin(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    return {closestIndex: closestValue};
+  }
+
   PageObjectIterable<PageLoaderElement> get basics {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('IterablesMixin', 'basics');
@@ -189,6 +525,10 @@ class $$IterablesMixin {
   }
 }
 
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $InnerObjectUsingMixin extends InnerObjectUsingMixin
     with $$InnerObjectMixin, $$InnerObjectUsingMixin {
   PageLoaderElement $__root__;
@@ -198,22 +538,167 @@ class $InnerObjectUsingMixin extends InnerObjectUsingMixin
   }
   factory $InnerObjectUsingMixin.lookup(PageLoaderSource source) =>
       throw "'lookup' constructor for class "
-      "InnerObjectUsingMixin is not generated and can only be used on Page Object "
-      "classes that have @CheckTag annotation.";
+          "InnerObjectUsingMixin is not generated and can only be used on Page Object "
+          "classes that have @CheckTag annotation.";
+  String testCreatorGetters() {
+    final getters = <String, String>{};
+    getters.addAll(testCreatorGettersInInnerObjectMixin());
+    getters.addAll(testCreatorGettersInInnerObjectUsingMixin());
+    return json.encode(getters);
+  }
+
+  String testCreatorMethods() {
+    final methods = <String, List<Map<String, String>>>{};
+    methods.addAll(testCreatorMethodsInInnerObjectMixin());
+    methods.addAll(testCreatorMethodsInInnerObjectUsingMixin());
+    return json.encode(methods);
+  }
+
+  dynamic testCreatorInvokeMethod(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    try {
+      return testCreatorInvokeMethodInInnerObjectUsingMixin(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    try {
+      return testCreatorInvokeMethodInInnerObjectMixin(
+          methodName, positionalArguments, namedArguments);
+    } catch (_) {}
+
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+    final internalIds = rawInternalIds.cast<String>();
+    final code = <String, String>{};
+
+    final actionCode = code[action];
+    if (actionCode != null) {
+      return actionCode;
+    }
+
+    final thisElementIndex = internalIds.indexOf($__root__.id);
+    final rootNotFound = thisElementIndex < 0;
+
+    if (thisElementIndex >= 0) {
+      internalIds.removeRange(thisElementIndex, internalIds.length);
+    }
+
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    MapEntry<int, String Function(List<String>)> chain;
+    chain = findChainInInnerObjectUsingMixin(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    chain = findChainInInnerObjectMixin(internalIds, action).entries.first;
+    if (chain.key < closestIndex) {
+      closestIndex = chain.key;
+      closestValue = chain.value;
+    }
+    if (closestIndex < internalIds.length) {
+      final value = closestValue(internalIds);
+      return code[value] ?? value;
+    }
+
+    return rootNotFound
+        ? null
+        : PageObject.defaultCode[action] ?? PageObject.defaultCode['default'];
+  }
+
   static String get tagName =>
       throw '"tagName" is not defined by Page Object "InnerObjectUsingMixin". Requires @CheckTag annotation in order for "tagName" to be generated.';
+  String toStringDeep() =>
+      'InnerObjectUsingMixin\n\n${$__root__.toStringDeep()}';
 }
 
-class $$InnerObjectUsingMixin {
+mixin $$InnerObjectUsingMixin on InnerObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInInnerObjectUsingMixin() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>>
+      testCreatorMethodsInInnerObjectUsingMixin() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInInnerObjectUsingMixin(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInInnerObjectUsingMixin(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    return {closestIndex: closestValue};
+  }
 }
 
-class $$InnerObjectMixin {
+// ignore_for_file: private_collision_in_mixin_application
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
+
+mixin $$InnerObjectMixin on InnerObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__; // ignore: unused_field
+  PageLoaderMouse __mouse__;
+  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInInnerObjectMixin() {
+    return {};
+  }
+
+  Map<String, List<Map<String, String>>>
+      testCreatorMethodsInInnerObjectMixin() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInInnerObjectMixin(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> namedArguments]) {
+    if (methodName == 'single') {
+      return single;
+    }
+    if (methodName == 'innerIterable') {
+      return innerIterable;
+    }
+    if (methodName == 'innerCheckTagPO') {
+      return innerCheckTagPO;
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)> findChainInInnerObjectMixin(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) closestValue;
+    try {
+      var singleIndex = internalIds.indexOf(this.single.id);
+      if (singleIndex >= 0 && singleIndex < closestIndex) {
+        closestIndex = singleIndex;
+        closestValue = (_) =>
+            'single.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    return {closestIndex: closestValue};
+  }
+
   PageLoaderElement get single {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('InnerObjectMixin', 'single');

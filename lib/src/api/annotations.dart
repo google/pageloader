@@ -16,6 +16,7 @@ library pageloader.annotations;
 import 'annotation_interfaces.dart';
 import 'page_loader_element_interface.dart';
 import 'page_loader_mouse_interface.dart';
+import 'page_loader_pointer_interface.dart';
 
 export 'page_object_annotation.dart';
 
@@ -34,6 +35,35 @@ class _Root {
   String toString() => '@root';
 }
 
+/// Labels a PageLoaderElement or PageObject as an empty entity.
+/// Calling 'exists' on a PageLoaderElement or PageObject annotated with
+/// '@nullElement' will always return false. An empty PageLoaderElement or
+/// PageObject should be used in place of returning a null value.
+///
+/// PageLoaderElement or PageObjects annotated with this should not
+/// have any other annotations. In addition, this annotation should
+/// not be used on 'PageLoaderIterable' or on a List.
+///
+/// For example:
+///   abstract class MyPO {
+///     @ByTagName('item')
+///     List<ItemPO> get _items;
+///
+///     @nullElement
+///     ItemPO get _nullItem;
+///
+///     ItemPO getItemByName(String name) => _items.firstWhere(
+///         (ItemPO item) => item.name == name, orElse: () => _nullItem);
+///   }
+const nullElement = _NullElement();
+
+class _NullElement {
+  const _NullElement();
+
+  @override
+  String toString() => '@nullElement';
+}
+
 /// Convenience annotation for using [PageLoaderMouse] within a page object.
 ///
 /// Must be applied to a [PageLoaderMouse] getter. No other annotations may be
@@ -47,20 +77,44 @@ class _Mouse {
   String toString() => '@Mouse';
 }
 
+/// Convenience annotation for using [PageLoaderPointer] within a page object.
+///
+/// Must be applied to a [PageLoaderPointer] getter. No other annotations may be
+/// used.
+const Pointer = _Pointer();
+
+class _Pointer {
+  const _Pointer();
+
+  @override
+  String toString() => '@Pointer';
+}
+
 /// Finder annotations. See [CssFinder] for usage details.
 
 /// Finds elements by the page object's @CheckTag contents.
 ///
 /// Example, given:
+///
+/// ```dart
 ///   @CheckTag('example-tag')
 ///   @PageObject()
 ///   abstract class ExampleTagPO { ... }
+/// ```
+///
 /// Then:
+///
+/// ```dart
 ///   @ByCheckTag()
 ///   ExampleTagPO get exampleTag;
+/// ```
+///
 /// is equivalent to:
+///
+/// ```dart
 ///   @ByTagName('example-tag')
 ///   ExampleTagPO get exampleTag;
+/// ```
 class ByCheckTag implements Finder {
   const ByCheckTag();
 }
@@ -142,6 +196,43 @@ class ByDebugId implements CssFinder {
   String toString() => '@ByDebugId("$_debugId")';
 }
 
+/// Finds element by 'data-test-id' attribute.
+///
+/// To use this annotation, add a 'data-test-id' HTML attribute to the element
+/// you wish to select. This assigns a test-only ID to the element so this
+/// annotation can target select that element.
+///
+/// For more detailed explaination and rationales,
+/// please see go/change-resilient-ui-testing-dd or
+/// https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change
+///
+/// Example:
+///
+/// ```html
+/// <button data-test-id="cancel-button">
+/// <button data-test-id="submit-button">
+/// ```
+///
+/// Then these button can be selected as follow:
+/// ```dart
+/// @ByTestId("cancel-button")
+/// MaterialButtonPO get cancelButton;
+///
+/// @ByTestId("submit-button")
+/// MaterialButtonPO get submitButton;
+/// ```
+class ByTestId implements CssFinder {
+  final String _testId;
+
+  const ByTestId(this._testId);
+
+  @override
+  String get cssSelector => '[data-test-id="$_testId"]';
+
+  @override
+  String toString() => '@ByTestId("$_testId")';
+}
+
 /// Finds element by ID.
 class ById implements CssFinder {
   final String _id;
@@ -211,7 +302,8 @@ class CheckTag implements Checker {
   const CheckTag(this._expectedTagName);
 
   @override
-  bool check(PageLoaderElement element) => element.name == _expectedTagName;
+  bool check(PageLoaderElement element) =>
+      element.name.toLowerCase() == _expectedTagName;
 
   @override
   String toString() => '@CheckTag("$_expectedTagName")';
@@ -228,7 +320,8 @@ class CheckTags implements Checker {
   const CheckTags(this._tagNames);
 
   @override
-  bool check(PageLoaderElement element) => _tagNames.contains(element.name);
+  bool check(PageLoaderElement element) =>
+      _tagNames.contains(element.name.toLowerCase());
 
   @override
   String toString() => '@CheckTags("$_tagNames")';
@@ -240,14 +333,15 @@ class CheckTags implements Checker {
 /// e.g. from a test. Otherwise you'll be chaining Finders, which is at best
 /// a performance hit and at worse a cause of tricky bugs.
 @Deprecated("Use '@CheckTag' instead. '@EnsureTag' is only kept to make "
-    "migration easier. Will be removed in a future version.")
+    'migration easier. Will be removed in a future version.')
 class EnsureTag implements Checker, ContextFinder {
   final String _expectedTagName;
 
   const EnsureTag(this._expectedTagName);
 
   @override
-  bool check(PageLoaderElement element) => element.name == _expectedTagName;
+  bool check(PageLoaderElement element) =>
+      element.name.toLowerCase() == _expectedTagName;
 
   @override
   List<PageLoaderElement> findElements(PageLoaderElement context) {
@@ -261,21 +355,11 @@ class EnsureTag implements Checker, ContextFinder {
   String toString() => '@EnsureTag("$_expectedTagName")';
 }
 
-/// Filter annotations. See [Filter] for usage details.
-class DisplayedOnly extends Filter {
-  const DisplayedOnly();
-
-  @override
-  bool keep(PageLoaderElement element) => element.displayed;
-
-  @override
-  String toString() => '@DisplayedOnly()';
-}
-
-/// Similar to [DisplayedOnly], but adjustable to filter non-displayed.
+/// Keeps [PageLoaderElement] that are displayed or non-displayed based
+/// on 'display' style.
 ///
-/// `IsDisplayed()` and `IsDisplayed(true)` is identical to
-/// [DisplayedOnly].
+/// '@IsDisplayed()' to only show displayed elements and '@IsDisplayed(false)'
+/// to only show non-displayed.
 class IsDisplayed extends Filter {
   final bool _displayed;
 
@@ -295,7 +379,7 @@ class IsTag extends Filter {
   const IsTag(this._name);
 
   @override
-  bool keep(PageLoaderElement element) => element.name == _name;
+  bool keep(PageLoaderElement element) => element.name.toLowerCase() == _name;
 
   @override
   String toString() => '@IsTag("$_name")';

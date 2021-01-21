@@ -6,16 +6,6 @@ part of pageloader.iterable_finder_method;
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-
 class _$IterableFinderMethod extends IterableFinderMethod {
   @override
   final String name;
@@ -29,7 +19,7 @@ class _$IterableFinderMethod extends IterableFinderMethod {
   final String checkerDeclarations;
 
   factory _$IterableFinderMethod(
-          [void updates(IterableFinderMethodBuilder b)]) =>
+          [void Function(IterableFinderMethodBuilder) updates]) =>
       (new IterableFinderMethodBuilder()..update(updates)).build();
 
   _$IterableFinderMethod._(
@@ -39,24 +29,30 @@ class _$IterableFinderMethod extends IterableFinderMethod {
       this.filterDeclarations,
       this.checkerDeclarations})
       : super._() {
-    if (name == null)
+    if (name == null) {
       throw new BuiltValueNullFieldError('IterableFinderMethod', 'name');
-    if (iterableTypeArgument == null)
+    }
+    if (iterableTypeArgument == null) {
       throw new BuiltValueNullFieldError(
           'IterableFinderMethod', 'iterableTypeArgument');
-    if (finderDeclaration == null)
+    }
+    if (finderDeclaration == null) {
       throw new BuiltValueNullFieldError(
           'IterableFinderMethod', 'finderDeclaration');
-    if (filterDeclarations == null)
+    }
+    if (filterDeclarations == null) {
       throw new BuiltValueNullFieldError(
           'IterableFinderMethod', 'filterDeclarations');
-    if (checkerDeclarations == null)
+    }
+    if (checkerDeclarations == null) {
       throw new BuiltValueNullFieldError(
           'IterableFinderMethod', 'checkerDeclarations');
+    }
   }
 
   @override
-  IterableFinderMethod rebuild(void updates(IterableFinderMethodBuilder b)) =>
+  IterableFinderMethod rebuild(
+          void Function(IterableFinderMethodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -64,10 +60,10 @@ class _$IterableFinderMethod extends IterableFinderMethod {
       new IterableFinderMethodBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! IterableFinderMethod) return false;
-    return name == other.name &&
+    return other is IterableFinderMethod &&
+        name == other.name &&
         iterableTypeArgument == other.iterableTypeArgument &&
         finderDeclaration == other.finderDeclaration &&
         filterDeclarations == other.filterDeclarations &&
@@ -140,12 +136,14 @@ class IterableFinderMethodBuilder
 
   @override
   void replace(IterableFinderMethod other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$IterableFinderMethod;
   }
 
   @override
-  void update(void updates(IterableFinderMethodBuilder b)) {
+  void update(void Function(IterableFinderMethodBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -162,3 +160,5 @@ class IterableFinderMethodBuilder
     return _$result;
   }
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

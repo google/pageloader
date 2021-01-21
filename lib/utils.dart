@@ -34,7 +34,7 @@ import 'src/api/page_object_list_interface.dart';
 /// If used on a List annotated by a Pageloader annotation, checks to see
 /// if not empty.
 bool exists(item) {
-  if (item is PageObjectList) {
+  if (item is PageObjectList<Object>) {
     return item.isNotEmpty;
   }
   return _rootElementOfAndRethrow(item, 'exists/notExists').exists;
@@ -58,18 +58,36 @@ bool isNotDisplayed(item) => !isDisplayed(item);
 
 const _hidden = ['hidden', 'collapse'];
 
+bool _isHidden(PageLoaderElement root) =>
+    _hidden.contains(root.computedStyle['visibility']);
+
 /// Checks if a PageLoaderElement/PageObject is hidden based on "visibility"
 /// style.
 ///
 /// A PageLoaderElement/PageObject is considered hidden if its `visibility`
 /// style is either `hidden` or `collapse`.
 bool isHidden(item) =>
-    _hidden.contains(_rootElementOfAndRethrow(item, 'isHidden/isNotHidden')
-        .computedStyle['visibility']);
+    _isHidden(_rootElementOfAndRethrow(item, 'isHidden/isNotHidden'));
 
 /// Checks if PageLoaderElement/PageObject is not hidden based on "visibility"
 /// style.
 bool isNotHidden(item) => !isHidden(item);
+
+/// Checks if a PageLoaderElement/PageObject is visible.
+///
+/// A PageLoaderElement/PageObject is considered visible if it:
+/// *   exists
+/// *   isDisplayed
+/// *   isNotHidden
+///
+/// Does NOT check whether the element is on screen and unobscured.
+bool isVisible(item) {
+  final root = _rootElementOfAndRethrow(item, 'isVisible/isNotVisible');
+  return root.exists && root.displayed && !_isHidden(root);
+}
+
+/// Checks if a PageLoaderElement/PageObject is not visible.
+bool isNotVisible(item) => !isVisible(item);
 
 /// Checks if PageLoaderElement/PageObject is focused.
 bool isFocused(item) =>
@@ -84,7 +102,7 @@ String getInnerText(item) =>
 
 /// Function for PageObject constructor. Typically in form:
 ///   (c) => SomePO.create(c)
-typedef T POFactory<T>(PageLoaderElement context);
+typedef POFactory<T> = T Function(PageLoaderElement context);
 
 /// Generates PO of type T using [source] as context. If [finder] is provided,
 /// creates a new PO using context plus [finder].
@@ -102,16 +120,21 @@ T createPO<T>(PageLoaderElement source, POFactory<T> poFactory,
 /// Grabs the root element of a PageObject. Same as getting a '@root' annotated
 /// getter within the PageObject. If a PageLoaderElement is passed, returns it
 /// back.
-PageLoaderElement rootElementOf(item) {
+PageLoaderElement rootElementOf(dynamic item) {
   if (item is PageLoaderElement) {
     return item;
   }
   try {
     return item.$root;
   } on NoSuchMethodError {
-    throw PageLoaderArgumentError.onWrongType('rootElementOf');
+    throw PageLoaderArgumentError.onWrongType(
+        'rootElementOf', item.runtimeType);
   }
 }
+
+bool isPageObjectList(dynamic item) => item is PageObjectList<Object>;
+
+bool isPageLoaderElement(dynamic item) => item is PageLoaderElement;
 
 /// Grabs root element of a PageLoaderElement or PageObject. If the `item` is
 /// neither, rethrows the error with the utility function used instead of
@@ -121,7 +144,7 @@ PageLoaderElement _rootElementOfAndRethrow(item, String f) {
   try {
     _root = rootElementOf(item);
   } on PageLoaderArgumentError {
-    throw PageLoaderArgumentError.onWrongType(f);
+    throw PageLoaderArgumentError.onWrongType(f, item.runtimeType);
   }
   return _root;
 }
@@ -129,7 +152,8 @@ PageLoaderElement _rootElementOfAndRethrow(item, String f) {
 class PageLoaderArgumentError extends ArgumentError {
   PageLoaderArgumentError._(String message) : super(message);
 
-  factory PageLoaderArgumentError.onWrongType(String f) =>
-      PageLoaderArgumentError._("'$f' may only be called on PageObjects "
-          "or PageLoaderElements");
+  factory PageLoaderArgumentError.onWrongType(String f, Type actualType) =>
+      PageLoaderArgumentError._(
+          "'$f' must be called on PageObjects or 'PageLoaderElement' type. "
+          "Currently being called on type '$actualType'.");
 }

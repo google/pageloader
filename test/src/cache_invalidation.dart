@@ -16,9 +16,9 @@ import 'package:test/test.dart';
 
 part 'cache_invalidation.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
-typedef void DoRefresh();
+typedef DoRefresh = void Function();
 
 // Tests that require a refresh.
 void runTests(GetNewContext contextGenerator, DoRefresh refresh) {

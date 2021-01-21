@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'constructors.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('lookup constructor', () {
@@ -46,8 +46,8 @@ void runTests(GetNewContext contextGenerator) {
         expect(
             e.toString(),
             contains("'lookup' constructor for class NoLookupPO"
-                " is not generated and can only be used on Page Object classes"
-                " that have @CheckTag annotation."));
+                ' is not generated and can only be used on Page Object classes'
+                ' that have @CheckTag annotation.'));
       }
     });
   });

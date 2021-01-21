@@ -27,12 +27,100 @@ void main() {
     expect(po, exists);
   });
 
+  group('exists violation - ', () {
+    test('invalid type', () {
+      final description = exists
+          .describeMismatch('foo', StringDescription(), null, null)
+          .toString();
+      expect(
+          description,
+          contains('must be `PageLoaderElement` type, a PageObject type '
+              '(class with `@PageObject` annotation), '
+              'or a `PageObjectList` type'));
+    });
+
+    test('PageObjectList contains zero elements', () {
+      final list = PageObjectList<PageLoaderElement>(
+          <PageLoaderElement>[], (PageLoaderElement e) => e);
+      final description = exists
+          .describeMismatch(list, StringDescription(), null, null)
+          .toString();
+      expect(
+          description,
+          contains(
+              'is a `PageObjectList` and must contain at least one element '
+              'of `PageLoaderElement` type or a PageObject type'
+              '(class with `@PageObject` annotation); '
+              'currently contains zero elements'));
+    });
+
+    test('non-existing PageLoaderElement', () {
+      final ple = DummyPageLoaderElement(exists: false);
+      final description = exists
+          .describeMismatch(ple, StringDescription(), null, null)
+          .toString();
+      expect(description,
+          contains('is a `PageLoaderElement`, but does not exist'));
+    });
+
+    test('non-existing PageObject', () {
+      final po = DummyPO(DummyPageLoaderElement(exists: false));
+      final description = exists
+          .describeMismatch(po, StringDescription(), null, null)
+          .toString();
+      expect(description, contains('root `PageLoaderElement` does not exist'));
+    });
+  });
+
   test('notExists', () {
     final context = DummyPageLoaderElement(exists: false);
     final po = DummyPO(context);
 
     expect(context, notExists);
     expect(po, notExists);
+  });
+
+  group('notExists violation - ', () {
+    test('invalid type', () {
+      final description = notExists
+          .describeMismatch('foo', StringDescription(), null, null)
+          .toString();
+      expect(
+          description,
+          contains('must be `PageLoaderElement` type, a PageObject type '
+              '(class with `@PageObject` annotation), '
+              'or a `PageObjectList` type'));
+    });
+
+    test('PageObjectList contains non-zero elements', () {
+      final list = PageObjectList<PageLoaderElement>(
+          <PageLoaderElement>[DummyPageLoaderElement(exists: true)],
+          (PageLoaderElement e) => e);
+      final description = notExists
+          .describeMismatch(list, StringDescription(), null, null)
+          .toString();
+      expect(
+          description,
+          contains(
+              'is a `PageObjectList` and must contain exactly zero elements; '
+              'currently contains 1 element(s)'));
+    });
+
+    test('existing PageLoaderElement', () {
+      final ple = DummyPageLoaderElement(exists: true);
+      final description = notExists
+          .describeMismatch(ple, StringDescription(), null, null)
+          .toString();
+      expect(description, contains('is a `PageLoaderElement` and exists'));
+    });
+
+    test('non-existing PageObject', () {
+      final po = DummyPO(DummyPageLoaderElement(exists: true));
+      final description = notExists
+          .describeMismatch(po, StringDescription(), null, null)
+          .toString();
+      expect(description, contains('root `PageLoaderElement` exists'));
+    });
   });
 
   test('hasClass', () {
@@ -99,11 +187,44 @@ void main() {
     expect(context, isNotFocused);
     expect(po, isNotFocused);
   });
+
+  test('isVisible', () {
+    final context = DummyPageLoaderElement();
+    final po = DummyPO(context);
+
+    expect(context, isVisible);
+    expect(po, isVisible);
+  });
+
+  test('isNotVisible', () {
+    final context1 = DummyPageLoaderElement();
+    (context1.computedStyle as DummyPageLoaderAttributes)['visibility'] =
+        'hidden';
+    final context2 = DummyPageLoaderElement();
+    (context2.computedStyle as DummyPageLoaderAttributes)['visibility'] =
+        'collapse';
+    final context3 = DummyPageLoaderElement(exists: false);
+    final context4 = DummyPageLoaderElement(displayed: false);
+
+    final po1 = DummyPO(context1);
+    final po2 = DummyPO(context2);
+    final po3 = DummyPO(context3);
+    final po4 = DummyPO(context4);
+
+    expect(context1, isNotVisible);
+    expect(context2, isNotVisible);
+    expect(context3, isNotVisible);
+    expect(context4, isNotVisible);
+    expect(po1, isNotVisible);
+    expect(po2, isNotVisible);
+    expect(po3, isNotVisible);
+    expect(po4, isNotVisible);
+  });
 }
 
 class DummyPO {
   // ignore: non_constant_identifier_names
-  PageLoaderElement __root__;
+  final PageLoaderElement __root__;
 
   PageLoaderElement get $root => __root__;
 

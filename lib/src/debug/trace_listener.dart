@@ -13,14 +13,14 @@
 
 import 'package:pageloader/pageloader.dart';
 
-typedef void PrintLine(String s);
+typedef PrintLine = void Function(String s);
 void standardPrint(String s) => print(s);
 
 class TraceListener extends PageLoaderListener {
   final PrintLine printLine;
   int _currentIndent = 0;
 
-  TraceListener({PrintLine printLine: standardPrint}) : printLine = printLine;
+  TraceListener({PrintLine printLine = standardPrint}) : printLine = printLine;
 
   @override
   void startPageObjectMethod(String pageObjectName, String methodName) {

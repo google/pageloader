@@ -14,7 +14,7 @@
 /// Core generation functions.
 library pageloader.core;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:quiver/core.dart';
@@ -28,6 +28,8 @@ final String root = '\$__root__';
 
 final String mouse = '__mouse__';
 
+final String pointer = '__pointer__';
+
 /// Type for iterables.
 final String pageObjectIterable = 'PageObjectIterable';
 
@@ -39,11 +41,13 @@ String generateAnnotationDeclaration(Annotation annotation) =>
     '${annotation.name}(${annotation.arguments.arguments.join(", ")})';
 
 /// Returns a 'ByTagName' declaration from the 'ByCheckTag' annotation.
-String generateByTagNameFromByCheckTag(InterfaceType node) {
+String generateByTagNameFromByCheckTag(
+    InterfaceType node, String methodSource) {
   final defaultTagName = _extractTagName(node.element);
   if (defaultTagName.isEmpty) {
     throw "'@ByCheckTag' can only be used on getters that return a "
-        "PageObject type with the'@CheckTag' annotation.";
+        "PageObject type with the'@CheckTag' annotation.\n\nCheck the type on "
+        "the following declaration:\n'$methodSource'.\n";
   }
   return "ByTagName('$defaultTagName')";
 }
@@ -95,7 +99,7 @@ bool isPageloaderAnnotation(Annotation annotation) =>
 
 /// Returns set of all Pageloader annotation the current annotation satisfies.
 Set<AnnotationKind> getAnnotationKind(Annotation annotation) {
-  final returnSet = Set<AnnotationKind>();
+  final returnSet = <AnnotationKind>{};
   final element = annotation.element;
   if (element != null) {
     returnSet
@@ -124,6 +128,14 @@ bool isPageloaderChecker(Annotation annotation) =>
 /// True if annotation is a [Mouse].
 bool isPageloaderMouse(Annotation annotation) =>
     getAnnotationKind(annotation).contains(AnnotationKind.mouse);
+
+/// True if annotation is a [Pointer].
+bool isPageloaderPointer(Annotation annotation) =>
+    getAnnotationKind(annotation).contains(AnnotationKind.pointer);
+
+/// True if annotation is [nullElement].
+bool isPageloaderNullElement(Annotation annotation) =>
+    getAnnotationKind(annotation).contains(AnnotationKind.nullElement);
 
 /// True if annotation is a [root].
 bool isPageloaderRoot(Annotation annotation) =>

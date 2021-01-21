@@ -1,3 +1,71 @@
+## 3.3.1
+
+- Fix bug where type parameters were not being passed as args into generated
+  unannotated methods.
+
+## 3.3.0
+
+- Expose more files within `lib/html.dart` and `lib/webdriver.dart`.
+- New `PageLoaderPointer` entity which behaves similarly to `PageLoaderMouse`. **Only supported for HTML at the moment.**
+- Add `@Pointer` annotation (similar to `@Mouse`).
+- Fix PageLoader checks when using `@CheckTag(...)` for Safari browser - which produces all upper case tag names.
+- Numerous Dart lint fixes and hiding lints within generated files.
+- Add `ClickOption` parameter to click-based events within `PageLoaderElement`.
+- Add `scroll()` and `scrollIntoView()` functionality to `PageLoaderElement`.
+- `focused` and `pointer` getters added to `PageUtils.
+
+## 3.2.5
+
+- Use `built_value` version `7.0.0`.
+- Re-add lint ignores in generated files.
+
+## 3.2.4
+- Bump SDK minimum version to 2.3.
+
+## 3.2.3
+- Bump `analyzer` version to up to `0.40.0`.
+
+## 3.2.2
+
+- `build_config` bumped to 1.6.0.
+- Allow `analyzer` version `0.37.x`.
+
+## 3.2.1
+
+- `build_config` dependency now uses version range.
+
+## 3.2.0
+
+- Allow `analyzer` version `0.36.x`.
+- Require Dart SDK `>=2.2.0`.
+
+## 3.1.1
+
+- Generated `tagName` getter is now const if valid, getter if not valid.
+- HtmlPageLoaderElement's `typeSequence` now calls `syncFn`.
+
+## 3.1.0
+
+- Added `@nullElement` annotation to create a non-existent PageLoaderElement object. 
+  Null elements should be returned instead of `null` for better compatibility with
+  utils and matcher.
+- (`HtmlPageLoaderElement` only) `type(...)` better emulates individual keystrokes and sends
+  `keyUp`, `keyPress` and `keyDown` more accurately.
+- (`HtmlPageLoaderElement` only) `typeSequence(...)` added to better emulate sequence of
+  individual keystrokes.
+- `isVisible` utility function and matcher to determine whether an element exists,
+  isDisplayed, and isNotHidden.
+- Removed `@DisplayedOnly`. Use only `@IsDisplayed` instead.
+- (`HtmlPageLoaderElement` only) Supports keyboard input into elements with 
+  `contenteditable` attribute.
+- More descriptive error messages.
+- Lint and deprecated artifact clean up.
+
+## 3.0.3
+
+- Support the latest release of `package:built_value_generator`
+  and `package:analyzer`.
+
 ## 3.0.2
 
 - Support the latest release of `package:built_value`,

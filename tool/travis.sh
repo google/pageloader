@@ -21,6 +21,7 @@ dartanalyzer .
 ANALYSIS_STATUS=$?
 if [[ $ANALYSIS_STATUS -ne 0 ]]; then
   STATUS=$ANALYSIS_STATUS
+  echo "Analysis step ended with non-zero status: $STATUS"
 fi
 
 # Run non-html and non-webdriver tests
@@ -32,6 +33,19 @@ do
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
+    echo "Test($test) ended with non-zero status: $STATUS"
+  fi
+done
+
+# Run test creator tests
+test_creator_tests=("test/test_creator_getters_test.dart" "test/test_creator_invoke_method_test.dart" "test/test_creator_methods_test.dart")
+for test in ${test_creator_tests[@]}
+do
+  pub run test -r expanded "$test"
+  TEST_STATUS=$?
+  if [[ $TEST_STATUS -ne 0 ]]; then
+    STATUS=$TEST_STATUS
+    echo "Test($test) ended with non-zero status: $STATUS"
   fi
 done
 
@@ -44,6 +58,7 @@ do
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
+    echo "Test($test) ended with non-zero status: $STATUS"
   fi
 done
 
@@ -61,6 +76,7 @@ do
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
+    echo "Test($test) ended with non-zero status: $STATUS"
   fi
 done
 

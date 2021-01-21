@@ -13,7 +13,8 @@
 
 import 'dart:async';
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/file_system.dart';
@@ -25,18 +26,18 @@ import 'package:analyzer/src/dart/analysis/performance_logger.dart';
 import 'package:analyzer/src/generated/engine.dart';
 import 'package:analyzer/src/generated/resolver.dart';
 import 'package:analyzer/src/generated/source.dart';
+import 'package:analyzer/src/test_utilities/mock_sdk.dart';
 import 'package:path/path.dart' as pather;
 
 import '../mocks/annotation_interfaces.dart';
 import '../mocks/annotations.dart';
-import '../mocks/sdk.dart';
 
 /// Declare pageloader annotated method.
 ///
 /// [preamble] should be used for custom annotations.
 Future<MethodDeclaration> getMethodDeclaration(
     String methodDeclaration, String methodName,
-    {String preamble: ''}) async {
+    {String preamble = ''}) async {
   final classToParse = '''
 import 'dart:async';
 import '/test/root/path/annotations.dart';
@@ -99,7 +100,7 @@ class TestDriver {
 
     final logger = PerformanceLog(StringBuffer());
     final scheduler = AnalysisDriverScheduler(logger)..start();
-    final allResolvers = <UriResolver>[DartUriResolver(sdk)]..addAll(resolvers);
+    final allResolvers = <UriResolver>[DartUriResolver(sdk), ...resolvers];
     final sourceFactory = SourceFactory(allResolvers);
 
     driver = AnalysisDriver(
@@ -110,7 +111,7 @@ class TestDriver {
       FileContentOverlay(),
       null, // ContextRoot
       sourceFactory,
-      AnalysisOptionsImpl()..strongMode = true,
+      AnalysisOptionsImpl(),
     );
     session = driver.currentSession;
 
@@ -128,7 +129,7 @@ class TestDriver {
   Future<CompilationUnit> resultForFile(String path, String contents) async {
     newSource(path, contents);
     session = driver.currentSession;
-    return (await session.getResolvedAst(pather.join(root, path))).unit;
+    return (await session.getResolvedUnit(pather.join(root, path))).unit;
   }
 
   /// Adds a new source and contents to the driver's scope.

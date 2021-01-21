@@ -14,7 +14,8 @@
 /// Generation for page object getters.
 library pageloader.single_finder_method;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 
@@ -30,6 +31,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
     MethodDeclaration node, List<Annotation> methodAnnotations) {
   if (!node.isGetter ||
       !node.isAbstract ||
+      node.isStatic ||
       node.returnType.toString().startsWith(pageObjectIterable) ||
       node.returnType.toString().startsWith('Future<List<') ||
       node.returnType.toString().startsWith('List<') ||
@@ -43,8 +45,9 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
       .toList();
   if (finders.length > 1) {
     throw InvalidMethodException(
-        node.toSource(), 'multiple Finders cannot be used for single method');
+        node, 'multiple Finders cannot be used for single method');
   }
+
   var finder = finders.length == 1 ? finders.single : null;
   final filters = methodAnnotations
       .where(isPageloaderFilter)
@@ -56,9 +59,10 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
       .toList();
 
   final isRoot = methodAnnotations.any(isPageloaderRoot);
+  final isNullElement = methodAnnotations.any(isPageloaderNullElement);
 
   // Get initial type information.
-  String typeArgument = node.returnType.toString();
+  var typeArgument = node.returnType.toString();
 
   // Get template, if it exists.
   String templateType;
@@ -66,45 +70,71 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
     final typeArguments = getReturnTypeArguments(typeArgument);
     if (typeArguments.length != 1) {
       throw InvalidMethodException(
-          node.toSource(), 'only single template arguments are supported');
+          node, 'only single template arguments are supported');
     }
     templateType = typeArguments[0];
     typeArgument = typeArgument.substring(0, typeArgument.indexOf('<'));
   }
 
+  // If 'NullPageLoaderElement' is used, throw error and signal user to use
+  // 'PageLoaderElement'.
+  if (typeArgument == 'NullPageLoaderElement') {
+    throw InvalidMethodException(
+        node, "use 'PageLoaderElement' instead of 'NullPageLoaderElement'");
+  }
+
   // Convert 'ByCheckTag' to 'ByTagName' if necessary.
   if (finder != null && finder.contains('ByCheckTag')) {
-    finder = generateByTagNameFromByCheckTag(node.returnType.type);
+    // Check to see if return type is expected [InterfaceType]. If not, then
+    // this means there is an error in the original Dart file but we don't
+    // throw an error here since it hides underlying Dart error.
+    if (node.returnType.type is InterfaceType) {
+      finder = generateByTagNameFromByCheckTag(
+          node.returnType.type, node.toSource());
+    }
   }
 
   if (finder == null) {
     if (filters.isNotEmpty) {
-      throw InvalidMethodException(
-          node.toSource(), 'found Filters but no Finder');
+      throw InvalidMethodException(node, 'found Filters but no Finder');
     }
     if (checkers.isNotEmpty) {
-      throw InvalidMethodException(
-          node.toSource(), 'found Checkers but no Finder');
+      throw InvalidMethodException(node, 'found Checkers but no Finder');
     }
+  }
+
+  if (isRoot && isNullElement) {
+    throw InvalidMethodException(
+        node, 'cannot use @root and @nullElement together');
   }
 
   if (isRoot) {
     if (filters.isNotEmpty) {
+      throw InvalidMethodException(node, 'cannot use Filters with @root');
+    }
+    if (checkers.isNotEmpty) {
+      throw InvalidMethodException(node, 'cannot use Checkers with @root');
+    }
+    if (finder != null) {
+      throw InvalidMethodException(node, 'cannot use finder with @root');
+    }
+  }
+
+  if (isNullElement) {
+    if (filters.isNotEmpty) {
       throw InvalidMethodException(
-          node.toSource(), 'cannot use Filters with @root');
+          node, 'cannot use Filters with @nullElement');
     }
     if (checkers.isNotEmpty) {
       throw InvalidMethodException(
-          node.toSource(), 'cannot use Checkers with @root');
+          node, 'cannot use Checkers with @nullElement');
+    }
+    if (finder != null) {
+      throw InvalidMethodException(node, 'cannot use finder with @nullElement');
     }
   }
 
-  if (finder != null && isRoot) {
-    throw InvalidMethodException(
-        node.toSource(), 'cannot use finder with @root');
-  }
-
-  if (finder == null && !isRoot) {
+  if (finder == null && (!isRoot && !isNullElement)) {
     return Optional.absent();
   }
 
@@ -115,7 +145,8 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
     ..filterDeclarations = '[${filters.join(', ')}]'
     ..checkerDeclarations = '[${checkers.join(', ')}]'
     ..templateType = Optional.fromNullable(templateType)
-    ..isRoot = isRoot));
+    ..isRoot = isRoot
+    ..isNullElement = isNullElement));
 }
 
 /// Generation for finder method for single page objects.
@@ -124,8 +155,9 @@ abstract class SingleFinderMethod extends Object
     implements
         SingleFinderMethodBase,
         Built<SingleFinderMethod, SingleFinderMethodBuilder> {
-  factory SingleFinderMethod([updates(SingleFinderMethodBuilder b)]) =
+  factory SingleFinderMethod([Function(SingleFinderMethodBuilder) updates]) =
       _$SingleFinderMethod;
+
   SingleFinderMethod._();
 }
 
@@ -135,12 +167,20 @@ abstract class SingleFinderMethodMixin {
   // Getters from [SingleFinderMethodBase] that need to be declared in this
   // mixin to be used in the methods below.
   String get name;
+
   String get pageObjectType;
+
   Optional<String> get finderDeclaration;
+
   Optional<String> get templateType;
+
   String get filterDeclarations;
+
   String get checkerDeclarations;
+
   bool get isRoot;
+
+  bool get isNullElement;
 
   String generate(String pageObjectName) =>
       '$methodSignature { ' +
@@ -149,6 +189,42 @@ abstract class SingleFinderMethodMixin {
       'final returnMe = $elementCreation;' +
       generateEndMethodListeners(pageObjectName, name) +
       ' return returnMe;}';
+
+  /// Generates code that given list of [PageLoaderElement] ids called
+  /// `internalIds`, determine whether and where this element appears in the
+  /// list and what code should be further generated for this.
+  ///
+  /// There are two cases depending on [pageObjectType]. One is
+  /// [PageLoaderElement], where generation would stopped, and return the
+  /// member name. The other one can be any page object, where we would try to
+  /// get the id via $__root__.id and if successful, call [findChain].
+  String generateFindChain() => '''
+      try {
+        $chainIndexCreation
+        if (${name}Index >= 0 && ${name}Index < closestIndex) {
+          closestIndex = ${name}Index;
+          closestValue = $chainValueCreation;
+        }
+      } catch (_) {
+        // Ignored.
+      }''';
+
+  bool get produceFindChain => true;
+
+  String get chainIndexCreation => createChainIndex;
+
+  String get createChainIndex => pageObjectType == 'PageLoaderElement'
+      ? 'var ${name}Index = internalIds.indexOf(this.$name.id);'
+      : '''var ${name}Element = this.$name as dynamic;
+           var ${name}Index = internalIds.indexOf(${name}Element.\$__root__.id);''';
+
+  String get chainValueCreation => createChainValue;
+
+  String get createChainValue => pageObjectType == 'PageLoaderElement'
+      ? "(_) => '$name.\${PageObject.defaultCode[action] ?? "
+          "PageObject.defaultCode['default']}'"
+      : "(ids) => '$name.\${${name}Element.findChain(ids, action)}'"
+          ".replaceAll(RegExp('\\\\.\\\$'), '')";
 
   String get methodSignature => '$pageObjectType$template get $name';
 
@@ -159,6 +235,8 @@ abstract class SingleFinderMethodMixin {
       return _contextWithFinder;
     } else if (isRoot) {
       return _contextWithRoot;
+    } else if (isNullElement) {
+      return _contextWithNullElement;
     } else {
       // Should already by caught, but let's be sure.
       throw 'No finder or @root element? (this is a PageLoader bug).';
@@ -168,6 +246,8 @@ abstract class SingleFinderMethodMixin {
   String get _contextWithFinder =>
       '$root.createElement(${finderDeclaration.value}, '
       '$filterDeclarations, $checkerDeclarations)';
+
+  String get _contextWithNullElement => 'NullPageLoaderElement()';
 
   String get _contextWithRoot => root;
 
@@ -188,11 +268,18 @@ abstract class SingleFinderMethodMixin {
 @BuiltValue(instantiable: false)
 abstract class SingleFinderMethodBase {
   String get name;
+
   String get pageObjectType;
+
   Optional<String> get finderDeclaration;
+
   String get filterDeclarations;
+
   String get checkerDeclarations;
+
   Optional<String> get templateType;
 
   bool get isRoot;
+
+  bool get isNullElement;
 }

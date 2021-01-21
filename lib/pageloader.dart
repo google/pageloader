@@ -11,14 +11,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// Following is useful only for WebDriver Test Creator.
+export 'dart:convert' show json;
+
 /// The basics of all PageLoader implementations.
 export 'src/api/annotation_interfaces.dart';
 export 'src/api/annotations.dart';
 export 'src/api/exceptions.dart';
 export 'src/api/iterable_interfaces.dart';
+export 'src/api/null_page_loader_element.dart';
+export 'src/api/page_loader_click_option.dart';
 export 'src/api/page_loader_element_interface.dart';
+export 'src/api/page_loader_keyboard.dart';
 export 'src/api/page_loader_listener.dart';
 export 'src/api/page_loader_mouse_interface.dart';
+export 'src/api/page_loader_pointer_interface.dart';
 export 'src/api/page_loader_source_interface.dart';
 export 'src/api/page_object_list_interface.dart';
 export 'src/api/page_utils_interface.dart';

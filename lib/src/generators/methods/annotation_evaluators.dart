@@ -27,9 +27,10 @@ final String pageLoaderAnnotations = 'pageloader.annotations';
 final String pageLoaderAnnotationInterface =
     'pageloader.api.annotation_interfaces';
 
-/// Returns set of AnnotationKinds that match '@root', '@Mouse'.
+/// Returns set of AnnotationKinds that match '@root', '@Mouse', '@nullElement'
+/// and '@Pointer'.
 Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
-  final returnSet = Set<AnnotationKind>();
+  final returnSet = <AnnotationKind>{};
   if (element is PropertyAccessorElement &&
       element.library.name == pageLoaderAnnotations) {
     final result = classNameToAnnotationKind(element.name, isAtomic: true);
@@ -43,7 +44,7 @@ Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
 /// Returns set of AnnotationKinds if the annotation is a subclass of
 /// Finder, Checker, and/or Filter.
 Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
-  final returnSet = Set<AnnotationKind>();
+  final returnSet = <AnnotationKind>{};
   InterfaceType type;
   if (element is PropertyAccessorElement) {
     // Annotation is a top-level variable.
@@ -58,7 +59,7 @@ Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
 
   if (type != null) {
     final types = Queue<InterfaceType>()..add(type);
-    final seenValidAnnotations = Set<AnnotationKind>();
+    final seenValidAnnotations = <AnnotationKind>{};
     do {
       type = types.removeFirst();
       if (type.element.library.name == pageLoaderAnnotationInterface) {
@@ -84,7 +85,9 @@ enum AnnotationKind {
   legacyPageObject,
   mouse,
   optional,
+  pointer,
   root,
+  nullElement,
 }
 
 /// Maps library and className to proper AnnotationKind.
@@ -95,12 +98,16 @@ AnnotationKind classNameToAnnotationKind(String className, {bool isAtomic}) {
         return AnnotationKind.legacyPageObject;
       case 'root':
         return AnnotationKind.root;
+      case 'nullElement':
+        return AnnotationKind.nullElement;
       case 'optional':
         return AnnotationKind.optional;
       case 'disableDisplayedCheck':
         return AnnotationKind.disableDisplayedCheck;
       case 'Mouse':
         return AnnotationKind.mouse;
+      case 'Pointer':
+        return AnnotationKind.pointer;
       default:
         return null;
     }

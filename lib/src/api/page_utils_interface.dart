@@ -15,6 +15,7 @@ library pageloader.api.page_loader_interface;
 
 import 'page_loader_element_interface.dart';
 import 'page_loader_mouse_interface.dart';
+import 'page_loader_pointer_interface.dart';
 import 'page_loader_source_interface.dart';
 
 /// Convenience methods that vary based on environment.
@@ -22,6 +23,12 @@ abstract class PageUtils extends PageLoaderSource {
   /// Gets the current root element for the DOM. Used to create page objects.
   PageLoaderElement get root;
 
+  /// Gets the element on the DOM that currently has focus.
+  PageLoaderElement get focused;
+
   /// Gets the mouse.
   PageLoaderMouse get mouse;
+
+  /// Gets the pointer.
+  PageLoaderPointer get pointer;
 }

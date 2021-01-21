@@ -16,16 +16,16 @@ import 'package:test/test.dart';
 
 part 'typing.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
-void runTests(GetNewContext contextGenerator) {
+void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
   group('typing', () {
     test('Type into textarea', () async {
       final page = PageForTextAreaTypingText.create(contextGenerator());
-      await page.textArea.type('some');
-      expect(page.textArea.properties['value'], 'some');
+      await page.textArea.type('Some');
+      expect(page.textArea.properties['value'], 'Some');
       await page.textArea.type(' string');
-      expect(page.textArea.properties['value'], 'some string');
+      expect(page.textArea.properties['value'], 'Some string');
       await page.textArea.clear();
       expect(page.textArea.properties['value'], '');
     });
@@ -33,19 +33,177 @@ void runTests(GetNewContext contextGenerator) {
     test('typing should append', () async {
       final page = PageForTypingTests.create(contextGenerator());
       expect(page.text.properties['value'], '');
-      await page.text.type('some text');
-      expect(page.text.properties['value'], 'some text');
-      await page.text.type(' and more text');
-      expect(page.text.properties['value'], 'some text and more text');
+      await page.text.type('some Text');
+      expect(page.text.properties['value'], 'some Text');
+      await page.text.type(' and more Text');
+      expect(page.text.properties['value'], 'some Text and more Text');
     });
 
     test('value after clear', () async {
       final page = PageForTypingTests.create(contextGenerator());
       expect(page.text.properties['value'], '');
-      await page.text.type('some text');
-      expect(page.text.properties['value'], 'some text');
+      await page.text.type('soMe text');
+      expect(page.text.properties['value'], 'soMe text');
       await page.text.clear();
       expect(page.text.properties['value'], '');
+    });
+
+    test('repeated caps does not blow up', () async {
+      final page = PageForTextAreaTypingText.create(contextGenerator());
+      await page.textArea.type('FOO BAR BAZ');
+      expect(page.textArea.properties['value'], 'FOO BAR BAZ');
+    });
+
+    group('HTML/Webdriver: Special keyboard events are sent', () {
+      PageLoaderKeyboard kb;
+      PageLoaderElement listener;
+
+      setUp(() {
+        kb = PageLoaderKeyboard();
+        listener = KeyboardListenerPO.create(contextGenerator()).listener;
+      });
+
+      test('enter all sent', () async {
+        kb.typeSpecialKey(PageLoaderSpecialKey.enter);
+        await listener.typeSequence(kb);
+        expect(listener.visibleText,
+            equals('Listening: enter keydown; enter keypress; enter keyup;'));
+      });
+    });
+  });
+
+  group('typing with focus and blur', () {
+    PageForTypingTestsWithFocusAndBlur page;
+
+    setUp(() {
+      page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
+      expect(page.text.properties['value'], '');
+      expect(page.focusCount, 0);
+      expect(page.blurCount, 0);
+    });
+
+    test('with default type API', () async {
+      await page.text.type('soMe text');
+      expect(page.text.properties['value'], 'soMe text');
+      expect(page.focusCount, 1);
+      expect(page.blurCount, 1);
+    });
+
+    test('without focusBefore and blurAfter', () async {
+      await page.text.focus();
+      expect(page.focusCount, 1);
+      expect(page.blurCount, 0);
+
+      await page.text.type('soMe text', focusBefore: false, blurAfter: false);
+      expect(page.text.properties['value'], 'soMe text');
+      expect(page.focusCount, 1);
+      expect(page.blurCount, 0);
+    });
+
+    // WebDriver sendKey API will scroll to the element (e.g. a focus event)
+    // even when it is not focused.
+    // https://www.w3.org/TR/webdriver/#dfn-element-send-keys
+    test('without focusBefore when not focused', () async {
+      await page.text.type('soMe text', focusBefore: false);
+      expect(page.text.properties['value'], 'soMe text');
+      expect(page.focusCount, isHtmlTest ? 0 : 1);
+      // If HTML test, this will be 0 since the focus event never happened.
+      expect(page.blurCount, isHtmlTest ? 0 : 1);
+    });
+  });
+
+  group('clear with focus and blur', () {
+    PageForTypingTestsWithFocusAndBlur page;
+    int focusCount;
+    int blurCount;
+
+    setUp(() {
+      page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
+      focusCount = 0;
+      blurCount = 0;
+    });
+
+    group('with empty text', () {
+      setUp(() async {
+        focusCount = 0;
+        blurCount = 0;
+      });
+
+      test('with default clear API', () async {
+        await page.text.clear();
+        expect(page.text.properties['value'], '');
+        expect(page.focusCount, ++focusCount);
+        expect(page.blurCount, ++blurCount);
+      });
+
+      test('without focusBefore and blurAfter', () async {
+        await page.text.focus();
+        expect(page.focusCount, ++focusCount);
+        expect(page.blurCount, blurCount);
+
+        await page.text.clear(focusBefore: false, blurAfter: false);
+        expect(page.text.properties['value'], '');
+        expect(page.focusCount, focusCount);
+        expect(page.blurCount, blurCount);
+      });
+    });
+
+    group('with non-empty text', () {
+      setUp(() async {
+        await page.text.type('soMe very long text');
+        expect(page.text.properties['value'], 'soMe very long text');
+        expect(page.focusCount, 1);
+        expect(page.blurCount, 1);
+
+        focusCount = 1;
+        blurCount = 1;
+      });
+
+      test('with default clear API', () async {
+        await page.text.clear();
+        expect(page.text.properties['value'], '');
+        expect(page.focusCount, ++focusCount);
+        expect(page.blurCount, ++blurCount);
+      });
+
+      test('without focusBefore and blurAfter', () async {
+        await page.text.focus();
+        expect(page.focusCount, ++focusCount);
+        expect(page.blurCount, blurCount);
+
+        await page.text.clear(focusBefore: false, blurAfter: false);
+        expect(page.text.properties['value'], '');
+        expect(page.focusCount, focusCount);
+        expect(page.blurCount, blurCount);
+      });
+    });
+  });
+
+  group('Special keyboard events are sent', () {
+    PageLoaderKeyboard kb;
+    PageLoaderElement listener;
+
+    setUp(() {
+      kb = PageLoaderKeyboard();
+      listener = KeyboardListenerPO.create(contextGenerator()).listener;
+    });
+
+    test('enter only keydown and keypress sent', () async {
+      final result = isHtmlTest
+          ? 'Listening: enter keydown; enter keypress;'
+          : 'Listening: enter keydown; enter keypress; enter keyup;';
+      kb.typeSpecialKey(PageLoaderSpecialKey.enter, keyUp: false);
+      await listener.typeSequence(kb);
+      expect(listener.visibleText, equals(result));
+    });
+
+    test('enter only keyup sent', () async {
+      final result = isHtmlTest
+          ? 'Listening: enter keyup;'
+          : 'Listening: enter keydown; enter keypress; enter keyup;';
+      kb.typeSpecialKey(PageLoaderSpecialKey.enter, keyDown: false);
+      await listener.typeSequence(kb);
+      expect(listener.visibleText, equals(result));
     });
   });
 }
@@ -68,4 +226,34 @@ abstract class PageForTypingTests {
 
   @ById('text')
   PageLoaderElement get text;
+}
+
+@PageObject()
+abstract class PageForTypingTestsWithFocusAndBlur {
+  PageForTypingTestsWithFocusAndBlur();
+  factory PageForTypingTestsWithFocusAndBlur.create(PageLoaderElement context) =
+      $PageForTypingTestsWithFocusAndBlur.create;
+
+  @ById('text-with-focus-and-blur')
+  PageLoaderElement get text;
+
+  @ById('text-with-focus-and-blur-focus-count')
+  PageLoaderElement get _focusCount;
+
+  @ById('text-with-focus-and-blur-blur-count')
+  PageLoaderElement get _blurCount;
+
+  int get focusCount => int.parse(_focusCount.innerText);
+
+  int get blurCount => int.parse(_blurCount.innerText);
+}
+
+@PageObject()
+abstract class KeyboardListenerPO {
+  KeyboardListenerPO();
+  factory KeyboardListenerPO.create(PageLoaderElement context) =
+      $KeyboardListenerPO.create;
+
+  @ById('keyboard-listener')
+  PageLoaderElement get listener;
 }

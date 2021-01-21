@@ -32,7 +32,7 @@ WebDriver createTestDriver({Map<String, dynamic> additionalCapabilities}) {
   }
 
   if (chromeOptions.isNotEmpty) {
-    capabilities['chromeOptions'] = chromeOptions;
+    capabilities[Capabilities.chromeOptions] = chromeOptions;
   }
 
   if (additionalCapabilities != null) {
@@ -42,9 +42,9 @@ WebDriver createTestDriver({Map<String, dynamic> additionalCapabilities}) {
   return createDriver(desired: capabilities);
 }
 
-String testPagePath() {
-  final testPagePath =
-      path.absolute('test', 'data', 'webdriver_test_page.html');
+String testPagePath({bool useLong = false}) {
+  final testPagePath = path.absolute('test', 'data',
+      useLong ? 'long_webdriver_test_page.html' : 'webdriver_test_page.html');
   if (!FileSystemEntity.isFileSync(testPagePath)) {
     throw Exception('Could not find the test file at "$testPagePath".'
         ' Make sure you are running tests from the root of the project.');

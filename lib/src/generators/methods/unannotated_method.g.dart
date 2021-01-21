@@ -6,16 +6,6 @@ part of pageloader.unannotated_method;
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-
 class _$UnannotatedMethod extends UnannotatedMethod {
   @override
   final String name;
@@ -26,24 +16,29 @@ class _$UnannotatedMethod extends UnannotatedMethod {
   @override
   final Optional<TypeParameterList> typeParameters;
 
-  factory _$UnannotatedMethod([void updates(UnannotatedMethodBuilder b)]) =>
+  factory _$UnannotatedMethod(
+          [void Function(UnannotatedMethodBuilder) updates]) =>
       (new UnannotatedMethodBuilder()..update(updates)).build();
 
   _$UnannotatedMethod._(
       {this.name, this.returnType, this.parameters, this.typeParameters})
       : super._() {
-    if (name == null)
+    if (name == null) {
       throw new BuiltValueNullFieldError('UnannotatedMethod', 'name');
-    if (returnType == null)
+    }
+    if (returnType == null) {
       throw new BuiltValueNullFieldError('UnannotatedMethod', 'returnType');
-    if (parameters == null)
+    }
+    if (parameters == null) {
       throw new BuiltValueNullFieldError('UnannotatedMethod', 'parameters');
-    if (typeParameters == null)
+    }
+    if (typeParameters == null) {
       throw new BuiltValueNullFieldError('UnannotatedMethod', 'typeParameters');
+    }
   }
 
   @override
-  UnannotatedMethod rebuild(void updates(UnannotatedMethodBuilder b)) =>
+  UnannotatedMethod rebuild(void Function(UnannotatedMethodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -51,10 +46,10 @@ class _$UnannotatedMethod extends UnannotatedMethod {
       new UnannotatedMethodBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! UnannotatedMethod) return false;
-    return name == other.name &&
+    return other is UnannotatedMethod &&
+        name == other.name &&
         returnType == other.returnType &&
         parameters == other.parameters &&
         typeParameters == other.typeParameters;
@@ -116,12 +111,14 @@ class UnannotatedMethodBuilder
 
   @override
   void replace(UnannotatedMethod other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$UnannotatedMethod;
   }
 
   @override
-  void update(void updates(UnannotatedMethodBuilder b)) {
+  void update(void Function(UnannotatedMethodBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -137,3 +134,5 @@ class UnannotatedMethodBuilder
     return _$result;
   }
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

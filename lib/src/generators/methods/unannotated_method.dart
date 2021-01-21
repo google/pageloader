@@ -13,7 +13,7 @@
 
 library pageloader.unannotated_method;
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 
@@ -24,7 +24,11 @@ part 'unannotated_method.g.dart';
 /// Generation for unannotated methods that are not getters or setters.
 /// Currently just a pass through.
 Optional<UnannotatedMethod> collectUnannotatedMethod(MethodDeclaration node) {
-  if (node.isAbstract || node.isGetter || node.isSetter || node.isOperator) {
+  if (node.isAbstract ||
+      node.isGetter ||
+      node.isSetter ||
+      node.isOperator ||
+      node.isStatic) {
     return Optional.absent();
   }
 
@@ -43,21 +47,23 @@ abstract class UnannotatedMethod
   List<FormalParameter> get parameters;
   Optional<TypeParameterList> get typeParameters;
 
+  bool get produceTestCreatorMethod => returnType.startsWith('Future');
+
   String generate(String pageObjectName) {
     if (returnType == 'void') {
       return 'void $_methodDeclaration($_parameterDeclarations) {' +
           generateStartMethodListeners(pageObjectName, name) +
-          'super.$name($_parameterNames);' +
+          'super.$name$_typeArguments($_parameterNames);' +
           generateEndMethodListeners(pageObjectName, name) +
           'return;'
-          '}';
+              '}';
     } else {
       return '$returnType $_methodDeclaration($_parameterDeclarations) {' +
           generateStartMethodListeners(pageObjectName, name) +
-          'final returnMe = super.$name($_parameterNames);' +
+          'final returnMe = super.$name$_typeArguments($_parameterNames);' +
           generateEndMethodListeners(pageObjectName, name) +
           'return returnMe;'
-          '}';
+              '}';
     }
   }
 
@@ -65,6 +71,16 @@ abstract class UnannotatedMethod
 
   String get _typeParameters =>
       typeParameters.isPresent ? typeParameters.value.toSource() : '';
+
+  String get _typeArguments {
+    if (!typeParameters.isPresent) {
+      return '';
+    }
+    final arguments = typeParameters.value.typeParameters
+        .map((param) => param.name.toSource())
+        .join(', ');
+    return '<$arguments>';
+  }
 
   String get _parameterDeclarations {
     final required = parameters
@@ -88,17 +104,17 @@ abstract class UnannotatedMethod
   String get _parameterNames {
     final required = parameters
         .where((p) => p.isRequired)
-        .map((p) => p.element.name)
+        .map((p) => p.declaredElement.name)
         .join(', ');
 
     final named = parameters
         .where((p) => p.isNamed)
-        .map((p) => '${p.element.name}:${p.element.name}')
+        .map((p) => '${p.declaredElement.name}:${p.declaredElement.name}')
         .join(', ');
 
     final positional = parameters
         .where((p) => p.isOptionalPositional)
-        .map((p) => p.element.name)
+        .map((p) => p.declaredElement.name)
         .join(', ');
 
     return _combineParameters(required, named, positional);
@@ -118,7 +134,7 @@ abstract class UnannotatedMethod
     return mixedList.join(',');
   }
 
-  factory UnannotatedMethod([updates(UnannotatedMethodBuilder b)]) =
+  factory UnannotatedMethod([Function(UnannotatedMethodBuilder) updates]) =
       _$UnannotatedMethod;
   UnannotatedMethod._();
 }

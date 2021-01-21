@@ -18,7 +18,7 @@ import 'shared_page_objects.dart';
 
 part 'annotations.g.dart';
 
-typedef PageLoaderElement GetNewContext();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('annotations', () {
@@ -52,7 +52,8 @@ void runTests(GetNewContext contextGenerator) {
         base.badTable.table.name;
         fail('Expected to throw on bad @EnsureTag');
       } catch (e) {
-        expect(e.toString(), contains('Found 0 elements in _single'));
+        expect(e.toString(),
+            contains('Expected to find exactly 1 match, but found 0 for:'));
       }
     });
 
@@ -86,6 +87,11 @@ void runTests(GetNewContext contextGenerator) {
       expect(page.usePlain.innerText, 'option 1');
       expect(page.useDash.innerText, 'option 2');
       expect(page.useCamelCase.innerText, 'option 3');
+    });
+
+    test('TestId', () async {
+      final page = TestIds.create(contextGenerator());
+      expect(page.divOne.innerText, 'data-test-id');
     });
   });
 
@@ -122,6 +128,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class BaseObject {
   BaseObject();
+
   factory BaseObject.create(PageLoaderElement context) = $BaseObject.create;
 
   @ByTagName('table')
@@ -140,6 +147,7 @@ abstract class BaseObject {
 @PageObject()
 abstract class PseudoBaseObject {
   PseudoBaseObject();
+
   factory PseudoBaseObject.create(PageLoaderElement context) =
       $PseudoBaseObject.create;
 
@@ -157,6 +165,7 @@ abstract class PseudoBaseObject {
 @PageObject()
 abstract class TableForCheckTag {
   TableForCheckTag();
+
   factory TableForCheckTag.create(PageLoaderElement context) =
       $TableForCheckTag.create;
 
@@ -173,6 +182,7 @@ abstract class TableForCheckTag {
 @PageObject()
 abstract class BaseEnsureObject {
   BaseEnsureObject();
+
   factory BaseEnsureObject.create(PageLoaderElement context) =
       $BaseEnsureObject.create;
 
@@ -183,10 +193,11 @@ abstract class BaseEnsureObject {
   EnsureTagFails get badTable;
 }
 
-@EnsureTag('table')
+@EnsureTag('table') // ignore: deprecated_member_use_from_same_package
 @PageObject()
 abstract class TableForEnsureTag {
   TableForEnsureTag();
+
   factory TableForEnsureTag.create(PageLoaderElement context) =
       $TableForEnsureTag.create;
 
@@ -201,6 +212,7 @@ abstract class TableForEnsureTag {
 @PageObject()
 abstract class CheckTagFails {
   CheckTagFails();
+
   factory CheckTagFails.create(PageLoaderElement context) =
       $CheckTagFails.create;
 
@@ -208,10 +220,11 @@ abstract class CheckTagFails {
   PageLoaderElement get table;
 }
 
-@EnsureTag('inconceivable')
+@EnsureTag('inconceivable') // ignore: deprecated_member_use_from_same_package
 @PageObject()
 abstract class EnsureTagFails {
   EnsureTagFails();
+
   factory EnsureTagFails.create(PageLoaderElement context) =
       $EnsureTagFails.create;
 
@@ -222,6 +235,7 @@ abstract class EnsureTagFails {
 @PageObject()
 abstract class PageForWithAttributeTest {
   PageForWithAttributeTest();
+
   factory PageForWithAttributeTest.create(PageLoaderElement context) =
       $PageForWithAttributeTest.create;
 
@@ -233,6 +247,7 @@ abstract class PageForWithAttributeTest {
 @PageObject()
 abstract class PageForWithClassTest {
   PageForWithClassTest();
+
   factory PageForWithClassTest.create(PageLoaderElement context) =
       $PageForWithClassTest.create;
 
@@ -244,6 +259,7 @@ abstract class PageForWithClassTest {
 @PageObject()
 abstract class DebugIds {
   DebugIds();
+
   factory DebugIds.create(PageLoaderElement context) = $DebugIds.create;
 
   @ByDebugId('option1')
@@ -263,6 +279,16 @@ abstract class DebugIds {
 
   @ByDebugId('option3', useCamelCase: true)
   PageLoaderElement get useCamelCase;
+}
+
+@PageObject()
+abstract class TestIds {
+  TestIds();
+
+  factory TestIds.create(PageLoaderElement context) = $TestIds.create;
+
+  @ByTestId('one')
+  PageLoaderElement get divOne;
 }
 
 class PseudoByTagName implements CssFinder {
