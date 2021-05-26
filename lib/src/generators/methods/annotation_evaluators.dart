@@ -53,7 +53,7 @@ Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
 
   if (type is InterfaceType) {
     final seenValidAnnotations = <AnnotationKind>{};
-    final interfaces = [type, ...type.allSupertypes];
+    final interfaces = [type as InterfaceType, ...type.allSupertypes];
     for (var interface in interfaces) {
       final interfaceElement = interface.element;
       if (interfaceElement.library.name == pageLoaderAnnotationInterface) {
