@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
 import 'dart:html' as html;
 import 'dart:math';
 
@@ -216,7 +215,8 @@ class HtmlPointer implements PageLoaderPointer {
   /// Sends 'pointerenter' to elements in [_trackedElements] if needed.
   ///
   /// Returns a list of [TrackedElement] that had 'pointerenter' sent to them.
-  Future<List<TrackedElement>> _dispatchPointerEnters(Point nextPos) async {
+  Future<List<TrackedElement>> _dispatchPointerEnters(
+      Point<int> nextPos) async {
     final elementsThatEntered = <TrackedElement>[];
     for (final element in _trackedElements) {
       if (element.containsPoint(nextPos) && !element.pointerIsInside) {
@@ -230,7 +230,8 @@ class HtmlPointer implements PageLoaderPointer {
   /// Sends 'pointerleave' to elements in [_trackedElements] if needed.
   ///
   /// Returns a list of [TrackedElement] that had 'pointerleave' sent to them.
-  Future<List<TrackedElement>> _dispatchPointerLeaves(Point nextPos) async {
+  Future<List<TrackedElement>> _dispatchPointerLeaves(
+      Point<int> nextPos) async {
     final elementsThatLeft = <TrackedElement>[];
     for (final element in _trackedElements) {
       if (!element.containsPoint(nextPos) && element.pointerIsInside) {
@@ -242,7 +243,7 @@ class HtmlPointer implements PageLoaderPointer {
   }
 
   /// Sends 'pointermove' to elements in [_trackedElements] if needed.
-  Future<void> _dispatchPointerMoves(Point nextPos) async {
+  Future<void> _dispatchPointerMoves(Point<int> nextPos) async {
     for (final element in _trackedElements) {
       if (element.pointerIsInside) {
         await element.dispatchPointerMove(nextPos.x, nextPos.y);
@@ -251,16 +252,19 @@ class HtmlPointer implements PageLoaderPointer {
   }
 
   /// Sends 'pointerout' to elements in [_trackedElements] if needed.
-  Future<void> _dispatchPointerOuts(Point nextPos) => _dispatchBubblingEvents(
-      (TrackedElement element) => element._isLeaving(nextPos),
-      (TrackedElement element) async =>
-          await element.dispatchPointerOut(nextPos.x, nextPos.y));
+  Future<void> _dispatchPointerOuts(Point<int> nextPos) =>
+      _dispatchBubblingEvents(
+          (TrackedElement element) => element._isLeaving(nextPos),
+          (TrackedElement element) async =>
+              await element.dispatchPointerOut(nextPos.x, nextPos.y));
 
   /// Sends 'pointerover' to elements in [_trackedElements] if needed.
-  Future<void> _dispatchPointerOvers(Point nextPos) => _dispatchBubblingEvents(
-      (TrackedElement element) => element._isEntering(nextPos),
-      (TrackedElement element) async =>
-          await element.dispatchPointerOver(nextPos.x, nextPos.y));
+  Future<void> _dispatchPointerOvers(
+          Point<int> nextPos) =>
+      _dispatchBubblingEvents(
+          (TrackedElement element) => element._isEntering(nextPos),
+          (TrackedElement element) async =>
+              await element.dispatchPointerOver(nextPos.x, nextPos.y));
 
   /// Traverses each tree in the forest [_trackedElements] and calls
   /// [dispatcher] on the lowest element in the tree satisfying [test], exactly
@@ -327,14 +331,14 @@ class TrackedElement {
   TrackedElement(this.element);
 
   /// Returns true if point is inside element.
-  bool containsPoint(Point p) {
+  bool containsPoint(Point<int> p) {
     bounds ??= element.getBoundingClientRect();
     return bounds.containsPoint(p);
   }
 
-  bool _isEntering(Point p) => containsPoint(p) && !pointerIsInside;
+  bool _isEntering(Point<int> p) => containsPoint(p) && !pointerIsInside;
 
-  bool _isLeaving(Point p) => !containsPoint(p) && pointerIsInside;
+  bool _isLeaving(Point<int> p) => !containsPoint(p) && pointerIsInside;
 
   /// Sends pointer enter event to element.
   Future dispatchPointerEnter(int x, int y) =>

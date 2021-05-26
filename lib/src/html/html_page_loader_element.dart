@@ -11,13 +11,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
 import 'dart:js' as js;
 import 'dart:math';
 import 'dart:svg' show SvgElement;
 
+import 'package:js/js_util.dart' as js_util;
 import 'package:pageloader/core.dart' as core;
 import 'package:pageloader/pageloader.dart';
 
@@ -28,7 +28,7 @@ import 'html_page_utils.dart';
 typedef SyncFn<T> = Future<T> Function(Future<T> Function() fn);
 
 /// Default 'do nothing' sync function.
-Future<Null> noOpExecuteSyncedFn(Future<Object> Function() fn) =>
+Future<Null> noOpExecuteSyncedFn(Future<dynamic> Function() fn) =>
     fn().then((_) => null);
 
 /// Base class for HTML elements.
@@ -38,13 +38,13 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   Element _cachedElement;
   HtmlPageLoaderElement _parentElement;
 
+  Finder _finder;
+  var _filters = <Filter>[];
+  var _checkers = <Checker>[];
+  var _listeners = <PageLoaderListener>[];
+
   @override
   String get id => _xpath;
-
-  Finder _finder;
-  List<Filter> _filters;
-  List<Checker> _checkers;
-  List<PageLoaderListener> _listeners;
 
   HtmlPageLoaderElement({SyncFn<dynamic> externalSyncFn = noOpExecuteSyncedFn})
       : syncFn = externalSyncFn;
@@ -53,9 +53,6 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       {SyncFn<dynamic> externalSyncFn = noOpExecuteSyncedFn})
       : _parentElement = null,
         _finder = null,
-        _filters = [],
-        _checkers = [],
-        _listeners = [],
         syncFn = externalSyncFn;
 
   @override
@@ -208,6 +205,14 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   PageLoaderElement get shadowRoot => throw 'not implemented';
 
   @override
+  List<PageLoaderElement> get shadowRootChildren =>
+      _single.shadowRoot?.children
+          ?.map((el) => HtmlPageLoaderElement.createFromElement(el,
+              externalSyncFn: syncFn))
+          ?.toList() ??
+      [];
+
+  @override
   String get innerText => _retryWhenStale(() => _single.text.trim());
 
   @override
@@ -276,49 +281,50 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   PageLoaderElement byTag(String tagName) => getElementsByCss(tagName).single;
 
   @override
-  Future<Null> clear({bool focusBefore = true, bool blurAfter = true}) async =>
-      syncFn(() async => _retryWhenStale(() async {
-            final element = _single;
-            if (_hasValueProperty(element)) {
-              if (focusBefore) await focus();
-              _setValue(element, '');
-              await _microtask(() => element.dispatchEvent(TextEvent('input')));
-              await _microtask(
-                  () => element.dispatchEvent(TextEvent('change')));
-              if (blurAfter) await blur();
-            } else {
-              throw PageLoaderException(
-                  '${element.runtimeType} does not support clear.');
-            }
-          }));
+  Future<Null> clear({bool focusBefore = true, bool blurAfter = true}) async {
+    await syncFn(() async => _retryWhenStale(() async {
+          final element = _single;
+          if (_hasValueProperty(element)) {
+            if (focusBefore) await focus();
+            _setValue(element, '');
+            await _microtask(() => element.dispatchEvent(TextEvent('input')));
+            await _microtask(() => element.dispatchEvent(TextEvent('change')));
+            if (blurAfter) await blur();
+          } else {
+            throw PageLoaderException(
+                '${element.runtimeType} does not support clear.');
+          }
+        }));
+  }
 
   @override
-  Future<Null> click({ClickOption clickOption}) async =>
-      syncFn(() async => _retryWhenStale(() async {
-            final element = _single;
-            if (element is OptionElement) {
-              return _clickOptionElement();
-            }
+  Future<Null> click({ClickOption clickOption}) async {
+    await syncFn(() async => _retryWhenStale(() async {
+          final element = _single;
+          if (element is OptionElement) {
+            return _clickOptionElement();
+          }
 
-            await _microtask(() =>
-                element.dispatchEvent(MouseEvent('mousedown', detail: 1)));
-            await _microtask(
-                () => element.dispatchEvent(MouseEvent('mouseup', detail: 1)));
+          await _microtask(() => element.dispatchEvent(
+              MouseEvent('mousedown', detail: clickOption?.detail ?? 1)));
+          await _microtask(() => element.dispatchEvent(
+              MouseEvent('mouseup', detail: clickOption?.detail ?? 1)));
 
-            if (element is SvgElement) {
-              final event = MouseEvent('click',
-                  button: MouseButton.primary.value,
-                  detail: 1,
-                  clientX: clickOption?.clientX,
-                  clientY: clickOption?.clientY,
-                  screenX: clickOption?.screenX,
-                  screenY: clickOption?.screenY);
+          if (element is SvgElement) {
+            final event = MouseEvent('click',
+                button: MouseButton.primary.value,
+                detail: clickOption?.detail ?? 1,
+                clientX: clickOption?.clientX,
+                clientY: clickOption?.clientY,
+                screenX: clickOption?.screenX,
+                screenY: clickOption?.screenY);
 
-              return _microtask(() => element.dispatchEvent(event));
-            }
+            return _microtask(() => element.dispatchEvent(event));
+          }
 
-            return _microtask(element.click);
-          }));
+          return _microtask(element.click);
+        }));
+  }
 
   @override
   Future<void> clickOutside() async {
@@ -327,8 +333,8 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  Future<void> scroll({int x, int y}) {
-    return syncFn(() => _retryWhenStale(() {
+  Future<void> scroll({int x, int y}) async {
+    await syncFn(() => _retryWhenStale(() {
           final element = _single;
 
           // Note: element.scroll(...) from dart:html does not work.
@@ -343,8 +349,8 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  Future<void> scrollIntoView() {
-    return syncFn(() => _retryWhenStale(() {
+  Future<void> scrollIntoView() async {
+    await syncFn(() => _retryWhenStale(() {
           final element = _single;
 
           return _microtask(() {
@@ -354,20 +360,23 @@ class HtmlPageLoaderElement implements PageLoaderElement {
         }));
   }
 
-  Future<Null> _clickOptionElement() async => _retryWhenStale(() async {
-        final option = _single as OptionElement;
-        option.selected = true;
-        return _microtask(() => option.dispatchEvent(Event('change')));
-      });
+  Future<Null> _clickOptionElement() async {
+    await _retryWhenStale(() async {
+      final option = _single as OptionElement;
+      option.selected = true;
+      return _microtask(() => option.dispatchEvent(Event('change')));
+    });
+  }
 
   @override
   Future<Null> type(String keys,
-          {bool focusBefore = true, bool blurAfter = true}) async =>
-      syncFn(() async => _retryWhenStale(() async {
-            if (focusBefore) await focus();
-            await _typeSequence(_keysToKeyboard(keys));
-            if (blurAfter) await blur();
-          }));
+      {bool focusBefore = true, bool blurAfter = true}) async {
+    await syncFn(() async => _retryWhenStale(() async {
+          if (focusBefore) await focus();
+          await _typeSequence(_keysToKeyboard(keys));
+          if (blurAfter) await blur();
+        }));
+  }
 
   PageLoaderKeyboard _keysToKeyboard(String keys) {
     final kb = PageLoaderKeyboard();
@@ -387,8 +396,9 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   /// Sends all events defined by [keys] in the exact order they are configured.
   @override
-  Future<void> typeSequence(PageLoaderKeyboard keys) async =>
-      syncFn(() async => _retryWhenStale(() async => _typeSequence(keys)));
+  Future<void> typeSequence(PageLoaderKeyboard keys) async {
+    await syncFn(() async => _retryWhenStale(() async => _typeSequence(keys)));
+  }
 
   Future<void> _typeSequence(PageLoaderKeyboard keys) async {
     // Variables used for adjusting text input values.
@@ -452,7 +462,8 @@ class HtmlPageLoaderElement implements PageLoaderElement {
             altKey: event.altMod,
             ctrlKey: event.ctrlMod,
             metaKey: event.metaMod,
-            shiftKey: event.shiftMod);
+            shiftKey: event.shiftMod,
+            key: event.key);
       }
     }
 
@@ -474,30 +485,46 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   Future<Null> _fireKeyboardEvent(String event,
-          {int keyCode = 0,
-          int charCode = 0,
-          bool altKey = false,
-          bool ctrlKey = false,
-          bool metaKey = false,
-          bool shiftKey = false}) =>
-      _microtask(() => dispatchEvent(KeyEvent(event,
-              keyCode: keyCode,
-              charCode: charCode,
-              altKey: altKey,
-              ctrlKey: ctrlKey,
-              metaKey: metaKey,
-              shiftKey: shiftKey)
-          .wrapped));
+      {int keyCode = 0,
+      int charCode = 0,
+      bool altKey = false,
+      bool ctrlKey = false,
+      bool metaKey = false,
+      bool shiftKey = false,
+      String key = ''}) {
+    final args = <dynamic>[
+      event,
+      <String, dynamic>{
+        'key': key,
+        'keyCode': keyCode,
+        'charCode': charCode,
+        'altKey': altKey,
+        'ctrlKey': ctrlKey,
+        'metaKey': metaKey,
+        'shiftKey': shiftKey,
+        'bubbles': true,
+        'cancelable': true,
+      }
+    ];
+    final kbEvent = js_util.callConstructor(
+            js_util.getProperty(window, 'KeyboardEvent'), js_util.jsify(args))
+        as KeyboardEvent;
+    return _microtask(() => dispatchEvent(KeyEvent.wrap(kbEvent).wrapped));
+  }
 
   @override
-  Future<Null> focus() async => syncFn(() async => _retryWhenStale(() async {
-        await _microtask(_single.focus);
-      }));
+  Future<Null> focus() async {
+    await syncFn(() async => _retryWhenStale(() async {
+          await _microtask(_single.focus);
+        }));
+  }
 
   @override
-  Future<Null> blur() async => syncFn(() async => _retryWhenStale(() async {
-        await _microtask(_single.blur);
-      }));
+  Future<Null> blur() async {
+    await syncFn(() async => _retryWhenStale(() async {
+          await _microtask(_single.blur);
+        }));
+  }
 
   /// Dispatches an html [event] from [_single].
   bool dispatchEvent(Event event) => _single.dispatchEvent(event);

@@ -216,7 +216,8 @@ abstract class SingleFinderMethodMixin {
   String get createChainIndex => pageObjectType == 'PageLoaderElement'
       ? 'var ${name}Index = internalIds.indexOf(this.$name.id);'
       : '''var ${name}Element = this.$name as dynamic;
-           var ${name}Index = internalIds.indexOf(${name}Element.\$__root__.id);''';
+           var ${name}Index = internalIds
+               .indexOf(${name}Element.\$__root__.id as String);''';
 
   String get chainValueCreation => createChainValue;
 

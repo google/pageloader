@@ -19,8 +19,6 @@
 
 library pageloader.api.iterable_interfaces;
 
-import 'dart:async';
-
 import 'page_loader_element_interface.dart';
 
 /// Function for constructing a page object.

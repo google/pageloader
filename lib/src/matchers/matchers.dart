@@ -179,6 +179,33 @@ class _IsFocused extends Matcher {
   @override
   Description describe(Description description) =>
       description.add('$_item is focused');
+
+  @override
+  Description describeMismatch(dynamic item, Description mismatchDescription,
+      Map matchState, bool verbose) {
+    try {
+      final e = utils.rootElementOf(item);
+
+      // Lowercasing because it's a bit easier to read.
+      final itemId = e.id.toLowerCase();
+      final focusId = e.utils.focused.id.toLowerCase();
+
+      // Find the common prefix xpath.
+      var common = 0;
+      for (var i = 0; i < itemId.length && i < focusId.length; i++) {
+        if (itemId[i] != focusId[i]) break;
+        if (itemId[i] == '/') common = i;
+      }
+
+      final commonPrefix = itemId.substring(0, common);
+      final focusSuffix = focusId.substring(common + 1);
+      final itemSuffix = itemId.substring(common + 1);
+      return mismatchDescription.add(
+          '$focusSuffix was focused instead of $itemSuffix (in $commonPrefix)');
+    } on utils.PageLoaderArgumentError {
+      return mismatchDescription.add('$item $_invalidTypeMessage');
+    }
+  }
 }
 
 class _IsVisible extends Matcher {

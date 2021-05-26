@@ -17,6 +17,8 @@ library pageloader.setter;
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
+
+import 'core.dart';
 import 'listeners.dart';
 
 part 'setter.g.dart';
@@ -26,7 +28,7 @@ Optional<Setter> collectUnannotatedSetter(MethodDeclaration node) {
   if (!node.isAbstract && node.isSetter) {
     final param = node.parameters.parameters.first;
     return Optional.of(Setter((b) => b
-      ..name = node.name.toString()
+      ..name = typeToCode(param.declaredElement.type)
       ..setterType = param.declaredElement.type.toString()
       ..setterValueName = param.declaredElement.name));
   }
@@ -49,9 +51,6 @@ abstract class Setter implements Built<Setter, SetterBuilder> {
         'return;'
             '}';
   }
-
-  String generateForMixin(String pageObjectName) =>
-      'set $name($setterType $setterValueName);';
 
   factory Setter([Function(SetterBuilder) updates]) = _$Setter;
 

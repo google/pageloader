@@ -11,12 +11,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
-
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type_provider.dart';
 import 'package:analyzer/file_system/file_system.dart';
 import 'package:analyzer/file_system/memory_file_system.dart';
 import 'package:analyzer/src/dart/analysis/byte_store.dart';
@@ -24,7 +23,6 @@ import 'package:analyzer/src/dart/analysis/driver.dart';
 import 'package:analyzer/src/dart/analysis/file_state.dart';
 import 'package:analyzer/src/dart/analysis/performance_logger.dart';
 import 'package:analyzer/src/generated/engine.dart';
-import 'package:analyzer/src/generated/resolver.dart';
 import 'package:analyzer/src/generated/source.dart';
 import 'package:analyzer/src/test_utilities/mock_sdk.dart';
 import 'package:path/path.dart' as pather;
@@ -88,7 +86,8 @@ class TestDriver {
 
   CompilationUnit get compilationUnit => _compilationUnit;
 
-  Future<TypeProvider> get typeProvider => session.typeProvider;
+  Future<TypeProvider> get typeProvider async =>
+      compilationUnitElement.library.typeProvider;
 
   TestDriver() {
     final byteStore = MemoryByteStore();

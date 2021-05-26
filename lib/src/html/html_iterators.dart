@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
 import 'dart:html';
 
 import 'package:pageloader/pageloader.dart';
@@ -22,20 +21,17 @@ import 'html_page_loader_element.dart';
 class HtmlPageElementIterator extends Iterator<HtmlPageLoaderElement> {
   final SyncFn<dynamic> _syncFn;
 
-  final List<Element> _elements;
-  int _current = -1;
+  final Iterator<Element> _elements;
 
-  HtmlPageElementIterator(this._syncFn, this._elements);
+  HtmlPageElementIterator(this._syncFn, List<Element> elements)
+      : _elements = elements.iterator;
 
   @override
-  bool moveNext() => ++_current < _elements.length;
+  bool moveNext() => _elements.moveNext();
 
   @override
   HtmlPageLoaderElement get current {
-    if (_current == -1) {
-      return null;
-    }
-    return HtmlPageLoaderElement.createFromElement(_elements[_current],
+    return HtmlPageLoaderElement.createFromElement(_elements.current,
         externalSyncFn: _syncFn);
   }
 }

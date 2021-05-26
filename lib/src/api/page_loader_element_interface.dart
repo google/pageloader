@@ -13,7 +13,6 @@
 
 library pageloader.api.page_loader_element_interface;
 
-import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -75,6 +74,9 @@ abstract class PageLoaderElement extends PageLoaderSource {
 
   /// The shadow root hosted by this element.
   PageLoaderElement get shadowRoot;
+
+  /// The children of the shadow root hosted by this element.
+  List<PageLoaderElement> get shadowRootChildren;
 
   /// Unique ID to identify the element.
   ///

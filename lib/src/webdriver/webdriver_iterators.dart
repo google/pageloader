@@ -11,8 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
-
 import 'package:pageloader/pageloader.dart';
 import 'package:webdriver/sync_core.dart' as wd;
 
@@ -21,20 +19,17 @@ import 'webdriver_page_loader_element.dart';
 /// Iterator for [WebDriverPageLoaderElement]s.
 class WebDriverPageElementIterator
     extends Iterator<WebDriverPageLoaderElement> {
-  final List<wd.WebElement> _elements;
-  int _current = -1;
+  final Iterator<wd.WebElement> _elements;
 
-  WebDriverPageElementIterator(this._elements);
+  WebDriverPageElementIterator(List<wd.WebElement> elements)
+      : _elements = elements.iterator;
 
   @override
-  bool moveNext() => ++_current < _elements.length;
+  bool moveNext() => _elements.moveNext();
 
   @override
   WebDriverPageLoaderElement get current {
-    if (_current == -1) {
-      return null;
-    }
-    return WebDriverPageLoaderElement.createFromElement(_elements[_current]);
+    return WebDriverPageLoaderElement.createFromElement(_elements.current);
   }
 }
 

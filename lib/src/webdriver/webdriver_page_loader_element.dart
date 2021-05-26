@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
 import 'dart:math';
 
 import 'package:pageloader/core.dart' as core;
@@ -30,15 +29,15 @@ import 'webdriver_page_utils.dart';
 /// elements are cached until WebDriver indicates they are stale, at which point
 /// an attempt to re-resolve the element(s) is made.
 class WebDriverPageLoaderElement implements PageLoaderElement {
-  sync_wd.WebDriver _driver;
+  final sync_wd.WebDriver _driver;
   WebDriverPageUtils _utils;
   WebDriverPageLoaderElement _parentElement;
   sync_wd.WebElement _cachedElement;
 
   Finder _finder;
-  List<Filter> _filters;
-  List<Checker> _checkers;
-  List<PageLoaderListener> _listeners;
+  var _filters = <Filter>[];
+  var _checkers = <Checker>[];
+  var _listeners = <PageLoaderListener>[];
 
   @override
   String get id => _single.id;
@@ -49,23 +48,17 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       : _utils = WebDriverPageUtils(_driver),
         _cachedElement = null,
         _finder = null,
-        _filters = <Filter>[],
-        _checkers = <Checker>[],
-        _listeners = <PageLoaderListener>[],
         _parentElement = null {
     assert(_driver != null);
   }
 
   /// Constructs an element from a [WebElement].
-  WebDriverPageLoaderElement.createFromElement(sync_wd.WebElement element) {
-    _driver = element.driver;
+  WebDriverPageLoaderElement.createFromElement(sync_wd.WebElement element)
+      : _driver = element.driver {
     _utils = WebDriverPageUtils(_driver);
     _parentElement = null;
     _cachedElement = element;
     _finder = WebElementFinder(element);
-    _filters = [];
-    _checkers = [];
-    _listeners = [];
   }
 
   /// Creates a new element, using the current element as the parent context
@@ -209,6 +202,9 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   WebDriverPageLoaderElement get shadowRoot => throw 'not implemented';
 
+  @override
+  List<PageLoaderElement> get shadowRootChildren => throw 'not implemented';
+
   // We could incrementally clear until we find a web element that's still
   // good, but that's 50ms min for each check. Instead we clear the whole chain.
   void _clearCache() {
@@ -227,7 +223,13 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       (_driver.execute('return arguments[0].textContent;', [_single])).trim());
 
   @override
-  String get visibleText => _retryWhenStale(() => _single.text);
+  String get visibleText {
+    if (!displayed) {
+      scrollIntoViewCentered();
+    }
+
+    return _retryWhenStale(() => _single.text);
+  }
 
   @override
   String get name => _retryWhenStale(() => _single.name);
@@ -334,7 +336,21 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       throw UnsupportedError(
           'WebDriver click() does not support `clickOption` parameter.');
     }
-    return _retryWhenStale<void>(() => _single.click());
+
+    if (!displayed) {
+      await scrollIntoViewCentered();
+    }
+
+    // If the click fails because of ElementClickInterceptedException, it may be
+    // because the element is not within viewport.
+    // So we can try again after moving the element into the center of page.
+    try {
+      _retryWhenStale<void>(() => _single.click());
+    } catch (ElementClickInterceptedException) {
+      await scrollIntoViewCentered();
+      _retryWhenStale<void>(() => _single.click());
+    }
+    _retryWhenStale<void>(() => _single.click());
   }
 
   @override
@@ -392,6 +408,11 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     }
   }
 
+  Future<void> scrollIntoViewCentered() async {
+    await _retryWhenStale(() => _driver
+        .execute('arguments[0].scrollIntoView({block:"center"})', [_single]));
+  }
+
   @override
   Future<Null> type(String keys,
           {bool focusBefore = true, bool blurAfter = true}) async =>
@@ -441,6 +462,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
         'exists': 'bool',
         'classes': 'List<String>'
       });
+
   @override
   String testCreatorMethods() => json.encode({
         'clear': [

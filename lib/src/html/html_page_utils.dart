@@ -32,18 +32,15 @@ class HtmlPageUtils extends PageUtils {
   /// Caches the [HtmlPageLoaderElement] used between calls to allow listeners
   /// to persist.
   @override
-  HtmlPageLoaderElement get root {
-    _cachedRoot ??= HtmlPageLoaderElement.createFromElement(document.body,
-        externalSyncFn: syncFn);
-    return _cachedRoot;
-  }
+  HtmlPageLoaderElement get root =>
+      _cachedRoot ??= HtmlPageLoaderElement.createFromElement(document.body,
+          externalSyncFn: syncFn);
 
   /// Gets the element on the DOM that currently has focus.
   @override
-  HtmlPageLoaderElement get focused {
-    return HtmlPageLoaderElement.createFromElement(document.activeElement,
-        externalSyncFn: syncFn);
-  }
+  HtmlPageLoaderElement get focused =>
+      HtmlPageLoaderElement.createFromElement(document.activeElement,
+          externalSyncFn: syncFn);
 
   /// Gets the current root element for the DOM.
   ///

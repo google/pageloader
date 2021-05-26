@@ -11,8 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
-
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 
@@ -28,6 +26,10 @@ import 'methods/core.dart' as core;
 class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   const PageObjectGenerator();
 
+  @override
+  TypeChecker get typeChecker => TypeChecker.fromUrl(
+      'package:pageloader/src/api/page_object_annotation.dart#PageObject');
+
   /// Generates a page object, as source String, for a class annotated with
   /// '@PageObject()'.
   @override
@@ -42,7 +44,6 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     if (annotatedNode is ClassOrMixinDeclaration) {
       try {
         final ignore =
-            '// ignore_for_file: private_collision_in_mixin_application\n'
             '// ignore_for_file: unused_field, non_constant_identifier_names\n'
             '// ignore_for_file: overridden_fields, annotate_overrides\n'
             '// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package\n';
@@ -159,12 +160,14 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     }
 
     // Define annotation-generated mixin class.
-    mixinBuffer.write('''
-      mixin \$\$$signature on $signatureArgs {
-        PageLoaderElement ${core.root};
-        PageLoaderMouse ${core.mouse};
-        PageLoaderPointer ${core.pointer};
-    ''');
+    mixinBuffer.write('mixin \$\$$signature on $signatureArgs {\n');
+    mixinBuffer.write('PageLoaderElement ${core.root};\n');
+    if (collectorVisitor.mouseFinderMethods.isNotEmpty) {
+      mixinBuffer.write('PageLoaderMouse ${core.mouse};\n');
+    }
+    if (collectorVisitor.pointerFinderMethods.isNotEmpty) {
+      mixinBuffer.write('PageLoaderPointer ${core.pointer};\n');
+    }
 
     // Add generated root accessor to be used in internal code.
     mixinBuffer.write('PageLoaderElement get \$root => ${core.root};\n');
@@ -231,7 +234,7 @@ List<String> getMixins(ClassElement mainPo, String mainSignature) {
 
   // If the direct extension is not 'Object' and is a @PageObject annotated
   // class, we add its mixin-component to the list.
-  if (supertype != null && !supertype.isObject) {
+  if (supertype != null && !supertype.isDartCoreObject) {
     if (isPageObject(supertype.element)) {
       withs.add(supertype.displayName);
     }
