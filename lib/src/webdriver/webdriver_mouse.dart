@@ -49,7 +49,8 @@ class WebDriverMouse implements PageLoaderMouse {
           int stepPixels,
           Duration duration}) async =>
       _driver.mouse.moveTo(
-          element: (element as WebDriverPageLoaderElement).contextSync,
+          element: (element as WebDriverPageLoaderElement).contextSync
+              as wd.WebElement,
           xOffset: xOffset,
           yOffset: yOffset);
 
