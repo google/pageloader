@@ -6,15 +6,12 @@ part of 'class_checks.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ChecksMixin on ChecksMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInChecksMixin() {
     return {};
@@ -65,7 +62,6 @@ mixin $$ChecksMixin on ChecksMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -141,8 +137,6 @@ class $ClassChecks extends ClassChecks with $$ClassChecks {
 
 mixin $$ClassChecks on ClassChecks {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassChecks() {
     return {};
@@ -193,7 +187,6 @@ mixin $$ClassChecks on ClassChecks {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -270,8 +263,6 @@ class $EnsureTagChecks extends EnsureTagChecks with $$EnsureTagChecks {
 
 mixin $$EnsureTagChecks on EnsureTagChecks {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEnsureTagChecks() {
     return {};
@@ -322,7 +313,6 @@ mixin $$EnsureTagChecks on EnsureTagChecks {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -414,8 +404,6 @@ class $ClassChecksUsingClassMixin extends ClassChecksUsingClassMixin
 
 mixin $$ClassChecksUsingClassMixin on ClassChecksUsingClassMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassChecksUsingClassMixin() {
     return {};
@@ -442,7 +430,6 @@ mixin $$ClassChecksUsingClassMixin on ClassChecksUsingClassMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -532,8 +519,6 @@ class $ClassChecksUsingMixin extends ClassChecksUsingMixin
 
 mixin $$ClassChecksUsingMixin on ClassChecksUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassChecksUsingMixin() {
     return {};
@@ -560,7 +545,6 @@ mixin $$ClassChecksUsingMixin on ClassChecksUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -652,8 +636,6 @@ class $EnsureTagChecksUsingMixin extends EnsureTagChecksUsingMixin
 
 mixin $$EnsureTagChecksUsingMixin on EnsureTagChecksUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEnsureTagChecksUsingMixin() {
     return {};
@@ -680,15 +662,12 @@ mixin $$EnsureTagChecksUsingMixin on EnsureTagChecksUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ChecksClassMixin on ChecksClassMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInChecksClassMixin() {
     return {};

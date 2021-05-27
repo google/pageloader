@@ -6,7 +6,6 @@ part of 'iterables.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -85,8 +84,6 @@ class $Iterables extends Iterables with $$Iterables {
 
 mixin $$Iterables on Iterables {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInIterables() {
     return {};
@@ -160,7 +157,6 @@ mixin $$Iterables on Iterables {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -239,8 +235,6 @@ class $InnerObject extends InnerObject with $$InnerObject {
 
 mixin $$InnerObject on InnerObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerObject() {
     return {};
@@ -323,7 +317,6 @@ mixin $$InnerObject on InnerObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -415,8 +408,6 @@ class $IterablesUsingMixin extends IterablesUsingMixin
 
 mixin $$IterablesUsingMixin on IterablesUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInIterablesUsingMixin() {
     return {};
@@ -443,15 +434,12 @@ mixin $$IterablesUsingMixin on IterablesUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$IterablesMixin on IterablesMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInIterablesMixin() {
     return {};
@@ -525,7 +513,6 @@ mixin $$IterablesMixin on IterablesMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -618,8 +605,6 @@ class $InnerObjectUsingMixin extends InnerObjectUsingMixin
 
 mixin $$InnerObjectUsingMixin on InnerObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerObjectUsingMixin() {
     return {};
@@ -646,15 +631,12 @@ mixin $$InnerObjectUsingMixin on InnerObjectUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$InnerObjectMixin on InnerObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerObjectMixin() {
     return {};

@@ -6,7 +6,6 @@ part of 'unannotated.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -91,13 +90,13 @@ class $Unannotated extends Unannotated with $$Unannotated {
     return returnMe;
   }
 
-  set myField(bool setValue) {
+  set bool(bool setValue) {
     for (final __listener in $__root__.listeners) {
-      __listener.startPageObjectMethod('Unannotated', 'myField');
+      __listener.startPageObjectMethod('Unannotated', 'bool');
     }
-    super.myField = setValue;
+    super.bool = setValue;
     for (final __listener in $__root__.listeners) {
-      __listener.endPageObjectMethod('Unannotated', 'myField');
+      __listener.endPageObjectMethod('Unannotated', 'bool');
     }
     return;
   }
@@ -184,8 +183,6 @@ class $Unannotated extends Unannotated with $$Unannotated {
 
 mixin $$Unannotated on Unannotated {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotated() {
     return {
@@ -234,12 +231,8 @@ mixin $$Unannotated on Unannotated {
     String Function(List<String>) closestValue;
     return {closestIndex: closestValue};
   }
-
-  bool get isFieldSet;
-  set myField(bool setValue);
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -332,8 +325,6 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
 
 mixin $$UnannotatedUsingMixin on UnannotatedUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotatedUsingMixin() {
     return {};
@@ -360,15 +351,12 @@ mixin $$UnannotatedUsingMixin on UnannotatedUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$UnannotatedMixin on UnannotatedMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotatedMixin() {
     return {
@@ -418,7 +406,4 @@ mixin $$UnannotatedMixin on UnannotatedMixin {
     String Function(List<String>) closestValue;
     return {closestIndex: closestValue};
   }
-
-  bool get isFieldSet;
-  set myField(bool setValue);
 }

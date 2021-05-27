@@ -6,15 +6,12 @@ part of 'basic.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$MixinPO on MixinPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMixinPO() {
     return {
@@ -61,8 +58,6 @@ mixin $$MixinPO on MixinPO {
     return {closestIndex: closestValue};
   }
 
-  String get mixinDivText;
-  String get getterMessage;
   PageLoaderElement get _mixinDiv {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('MixinPO', '_mixinDiv');
@@ -76,7 +71,6 @@ mixin $$MixinPO on MixinPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -155,8 +149,6 @@ class $PageForExistsTest extends PageForExistsTest with $$PageForExistsTest {
 
 mixin $$PageForExistsTest on PageForExistsTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForExistsTest() {
     return {};
@@ -258,7 +250,6 @@ mixin $$PageForExistsTest on PageForExistsTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -339,8 +330,6 @@ class $PageForVisibilityTest extends PageForVisibilityTest
 
 mixin $$PageForVisibilityTest on PageForVisibilityTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForVisibilityTest() {
     return {};
@@ -418,7 +407,6 @@ mixin $$PageForVisibilityTest on PageForVisibilityTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -501,8 +489,6 @@ class $PageForClassAnnotationTest extends PageForClassAnnotationTest
 
 mixin $$PageForClassAnnotationTest on PageForClassAnnotationTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForClassAnnotationTest() {
     return {};
@@ -530,7 +516,7 @@ mixin $$PageForClassAnnotationTest on PageForClassAnnotationTest {
     String Function(List<String>) closestValue;
     try {
       var tableElement = this.table as dynamic;
-      var tableIndex = internalIds.indexOf(tableElement.$__root__.id);
+      var tableIndex = internalIds.indexOf(tableElement.$__root__.id as String);
       if (tableIndex >= 0 && tableIndex < closestIndex) {
         closestIndex = tableIndex;
         closestValue = (ids) => 'table.${tableElement.findChain(ids, action)}'
@@ -555,7 +541,6 @@ mixin $$PageForClassAnnotationTest on PageForClassAnnotationTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -648,8 +633,6 @@ class $PageForPrivateFieldsTest extends PageForPrivateFieldsTest
 
 mixin $$PageForPrivateFieldsTest on PageForPrivateFieldsTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForPrivateFieldsTest() {
     return {};
@@ -675,7 +658,7 @@ mixin $$PageForPrivateFieldsTest on PageForPrivateFieldsTest {
     try {
       // Do not know the type. Try it out and ignore if not successful.
       var tableElement = this.table as dynamic;
-      var tableIndex = internalIds.indexOf(tableElement.$__root__.id);
+      var tableIndex = internalIds.indexOf(tableElement.$__root__.id as String);
       if (tableIndex >= 0 && tableIndex < closestIndex) {
         closestIndex = tableIndex;
         closestValue = (ids) => 'table.${tableElement.findChain(ids, action)}'
@@ -687,7 +670,7 @@ mixin $$PageForPrivateFieldsTest on PageForPrivateFieldsTest {
     try {
       var _privateTableElement = this._privateTable as dynamic;
       var _privateTableIndex =
-          internalIds.indexOf(_privateTableElement.$__root__.id);
+          internalIds.indexOf(_privateTableElement.$__root__.id as String);
       if (_privateTableIndex >= 0 && _privateTableIndex < closestIndex) {
         closestIndex = _privateTableIndex;
         closestValue = (ids) =>
@@ -700,7 +683,6 @@ mixin $$PageForPrivateFieldsTest on PageForPrivateFieldsTest {
     return {closestIndex: closestValue};
   }
 
-  Table get table;
   Table get _privateTable {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod(
@@ -716,7 +698,6 @@ mixin $$PageForPrivateFieldsTest on PageForPrivateFieldsTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -795,8 +776,6 @@ class $PageForFocusTest extends PageForFocusTest with $$PageForFocusTest {
 
 mixin $$PageForFocusTest on PageForFocusTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForFocusTest() {
     return {};
@@ -848,7 +827,6 @@ mixin $$PageForFocusTest on PageForFocusTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -927,8 +905,6 @@ class $PageForNbspTest extends PageForNbspTest with $$PageForNbspTest {
 
 mixin $$PageForNbspTest on PageForNbspTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForNbspTest() {
     return {};
@@ -979,7 +955,6 @@ mixin $$PageForNbspTest on PageForNbspTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1057,8 +1032,6 @@ class $Basic extends Basic with $$Basic {
 
 mixin $$Basic on Basic {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBasic() {
     return {};
@@ -1086,7 +1059,7 @@ mixin $$Basic on Basic {
     try {
       var outerNestedElement = this.outerNested as dynamic;
       var outerNestedIndex =
-          internalIds.indexOf(outerNestedElement.$__root__.id);
+          internalIds.indexOf(outerNestedElement.$__root__.id as String);
       if (outerNestedIndex >= 0 && outerNestedIndex < closestIndex) {
         closestIndex = outerNestedIndex;
         closestValue = (ids) =>
@@ -1112,7 +1085,6 @@ mixin $$Basic on Basic {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1191,8 +1163,6 @@ class $OuterNested extends OuterNested with $$OuterNested {
 
 mixin $$OuterNested on OuterNested {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInOuterNested() {
     return {};
@@ -1243,7 +1213,6 @@ mixin $$OuterNested on OuterNested {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1322,8 +1291,6 @@ class $DebugId extends DebugId with $$DebugId {
 
 mixin $$DebugId on DebugId {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInDebugId() {
     return {};
@@ -1374,7 +1341,6 @@ mixin $$DebugId on DebugId {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1453,8 +1419,6 @@ class $Display extends Display with $$Display {
 
 mixin $$Display on Display {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInDisplay() {
     return {};
@@ -1505,15 +1469,12 @@ mixin $$Display on Display {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ClassMixinPO on ClassMixinPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassMixinPO() {
     return {
@@ -1560,8 +1521,6 @@ mixin $$ClassMixinPO on ClassMixinPO {
     return {closestIndex: closestValue};
   }
 
-  String get mixinDivText;
-  String get getterMessage;
   PageLoaderElement get _mixinDiv {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('ClassMixinPO', '_mixinDiv');
@@ -1575,7 +1534,6 @@ mixin $$ClassMixinPO on ClassMixinPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1667,8 +1625,6 @@ class $POWithClassMixinPO extends POWithClassMixinPO
 
 mixin $$POWithClassMixinPO on POWithClassMixinPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPOWithClassMixinPO() {
     return {};
@@ -1695,7 +1651,6 @@ mixin $$POWithClassMixinPO on POWithClassMixinPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1786,8 +1741,6 @@ class $POWithMixinPO extends POWithMixinPO with $$MixinPO, $$POWithMixinPO {
 
 mixin $$POWithMixinPO on POWithMixinPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPOWithMixinPO() {
     return {};

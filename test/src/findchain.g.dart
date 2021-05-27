@@ -6,7 +6,6 @@ part of 'findchain.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -98,8 +97,6 @@ class $PageForFindChainTests extends PageForFindChainTests
 
 mixin $$PageForFindChainTests on PageForFindChainTests {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForFindChainTests() {
     return {};
@@ -140,7 +137,8 @@ mixin $$PageForFindChainTests on PageForFindChainTests {
     try {
       // Do not know the type. Try it out and ignore if not successful.
       var firstOuterElement = this.firstOuter as dynamic;
-      var firstOuterIndex = internalIds.indexOf(firstOuterElement.$__root__.id);
+      var firstOuterIndex =
+          internalIds.indexOf(firstOuterElement.$__root__.id as String);
       if (firstOuterIndex >= 0 && firstOuterIndex < closestIndex) {
         closestIndex = firstOuterIndex;
         closestValue = (ids) =>
@@ -152,7 +150,8 @@ mixin $$PageForFindChainTests on PageForFindChainTests {
     }
     try {
       var customElement = this.custom as dynamic;
-      var customIndex = internalIds.indexOf(customElement.$__root__.id);
+      var customIndex =
+          internalIds.indexOf(customElement.$__root__.id as String);
       if (customIndex >= 0 && customIndex < closestIndex) {
         closestIndex = customIndex;
         closestValue = (ids) => 'custom.${customElement.findChain(ids, action)}'
@@ -163,7 +162,7 @@ mixin $$PageForFindChainTests on PageForFindChainTests {
     }
     try {
       var tableElement = this.table as dynamic;
-      var tableIndex = internalIds.indexOf(tableElement.$__root__.id);
+      var tableIndex = internalIds.indexOf(tableElement.$__root__.id as String);
       if (tableIndex >= 0 && tableIndex < closestIndex) {
         closestIndex = tableIndex;
         closestValue = (ids) => 'table.${tableElement.findChain(ids, action)}'
@@ -178,7 +177,8 @@ mixin $$PageForFindChainTests on PageForFindChainTests {
         elementIter++) {
       try {
         var outersElement = outersElements[elementIter] as dynamic;
-        var outersIndex = internalIds.indexOf(outersElement.$__root__.id);
+        var outersIndex =
+            internalIds.indexOf(outersElement.$__root__.id as String);
         if (outersIndex >= 0 && outersIndex < closestIndex) {
           closestIndex = outersIndex;
           closestValue = (ids) =>
@@ -195,7 +195,8 @@ mixin $$PageForFindChainTests on PageForFindChainTests {
         elementIter++) {
       try {
         var customPOsElement = customPOsElements[elementIter] as dynamic;
-        var customPOsIndex = internalIds.indexOf(customPOsElement.$__root__.id);
+        var customPOsIndex =
+            internalIds.indexOf(customPOsElement.$__root__.id as String);
         if (customPOsIndex >= 0 && customPOsIndex < closestIndex) {
           closestIndex = customPOsIndex;
           closestValue = (ids) =>
@@ -224,7 +225,6 @@ mixin $$PageForFindChainTests on PageForFindChainTests {
     return {closestIndex: closestValue};
   }
 
-  OuterPO get firstOuter;
   CustomPO get custom {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageForFindChainTests', 'custom');
@@ -289,7 +289,6 @@ mixin $$PageForFindChainTests on PageForFindChainTests {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -365,8 +364,6 @@ class $CustomPO extends CustomPO with $$CustomPO {
 
 mixin $$CustomPO on CustomPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCustomPO() {
     return {};
@@ -392,7 +389,6 @@ mixin $$CustomPO on CustomPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -494,8 +490,6 @@ class $OuterPO extends OuterPO with $$OuterMixin, $$OuterPO {
 
 mixin $$OuterPO on OuterPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInOuterPO() {
     return {};
@@ -556,7 +550,6 @@ mixin $$OuterPO on OuterPO {
     return {closestIndex: closestValue};
   }
 
-  PageLoaderElement get firstInner;
   PageLoaderElement get specialInner {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('OuterPO', 'specialInner');
@@ -582,15 +575,12 @@ mixin $$OuterPO on OuterPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$OuterMixin on OuterMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInOuterMixin() {
     return {};
@@ -647,7 +637,6 @@ mixin $$OuterMixin on OuterMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -726,8 +715,6 @@ class $TablePO extends TablePO with $$TablePO {
 
 mixin $$TablePO on TablePO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTablePO() {
     return {};
@@ -758,7 +745,7 @@ mixin $$TablePO on TablePO {
         elementIter++) {
       try {
         var rowsElement = rowsElements[elementIter] as dynamic;
-        var rowsIndex = internalIds.indexOf(rowsElement.$__root__.id);
+        var rowsIndex = internalIds.indexOf(rowsElement.$__root__.id as String);
         if (rowsIndex >= 0 && rowsIndex < closestIndex) {
           closestIndex = rowsIndex;
           closestValue = (ids) =>
@@ -786,7 +773,6 @@ mixin $$TablePO on TablePO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -864,8 +850,6 @@ class $RowPO extends RowPO with $$RowPO {
 
 mixin $$RowPO on RowPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRowPO() {
     return {};

@@ -6,7 +6,6 @@ part of 'test_creator_getters.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -126,8 +125,6 @@ class $PageObjectHasGettersAndActions extends PageObjectHasGettersAndActions
 
 mixin $$PageObjectHasGettersAndActions on PageObjectHasGettersAndActions {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectHasGettersAndActions() {
     return {
@@ -182,8 +179,6 @@ mixin $$PageObjectHasGettersAndActions on PageObjectHasGettersAndActions {
     return {closestIndex: closestValue};
   }
 
-  String get testContext;
-  String get name;
   PageLoaderElement get input {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod(
@@ -198,7 +193,6 @@ mixin $$PageObjectHasGettersAndActions on PageObjectHasGettersAndActions {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -327,8 +321,6 @@ class $PageObjectHasGettersThatUseDifferentReturnTypes
 mixin $$PageObjectHasGettersThatUseDifferentReturnTypes
     on PageObjectHasGettersThatUseDifferentReturnTypes {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String>
       testCreatorGettersInPageObjectHasGettersThatUseDifferentReturnTypes() {
@@ -401,9 +393,6 @@ mixin $$PageObjectHasGettersThatUseDifferentReturnTypes
     return {closestIndex: closestValue};
   }
 
-  String get testContext;
-  bool get exists;
-  int get size;
   PageLoaderElement get input {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod(
@@ -434,7 +423,6 @@ mixin $$PageObjectHasGettersThatUseDifferentReturnTypes
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -527,8 +515,6 @@ class $PageObjectHasNoGetters extends PageObjectHasNoGetters
 
 mixin $$PageObjectHasNoGetters on PageObjectHasNoGetters {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectHasNoGetters() {
     return {};
@@ -587,7 +573,6 @@ mixin $$PageObjectHasNoGetters on PageObjectHasNoGetters {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -701,8 +686,6 @@ class $PageObjectWithMixin extends PageObjectWithMixin
 
 mixin $$PageObjectWithMixin on PageObjectWithMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectWithMixin() {
     return {
@@ -750,8 +733,6 @@ mixin $$PageObjectWithMixin on PageObjectWithMixin {
     return {closestIndex: closestValue};
   }
 
-  String get testContext;
-  String get name;
   PageLoaderElement get input {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageObjectWithMixin', 'input');
@@ -765,15 +746,12 @@ mixin $$PageObjectWithMixin on PageObjectWithMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$PageObjectMixin on PageObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectMixin() {
     return {
@@ -820,8 +798,6 @@ mixin $$PageObjectMixin on PageObjectMixin {
     return {closestIndex: closestValue};
   }
 
-  String get tabContext;
-  String get tabName;
   PageLoaderElement get tab {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('PageObjectMixin', 'tab');
@@ -835,7 +811,6 @@ mixin $$PageObjectMixin on PageObjectMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -943,8 +918,6 @@ class $PageObjectWithOverridingMixins extends PageObjectWithOverridingMixins
 
 mixin $$PageObjectWithOverridingMixins on PageObjectWithOverridingMixins {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectWithOverridingMixins() {
     return {
@@ -974,6 +947,4 @@ mixin $$PageObjectWithOverridingMixins on PageObjectWithOverridingMixins {
     String Function(List<String>) closestValue;
     return {closestIndex: closestValue};
   }
-
-  String get tabContext;
 }

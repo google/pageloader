@@ -6,7 +6,6 @@ part of 'list.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -84,8 +83,6 @@ class $Lists extends Lists with $$Lists {
 
 mixin $$Lists on Lists {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInLists() {
     return {};
@@ -132,7 +129,7 @@ mixin $$Lists on Lists {
       try {
         var nestedSyncElement = nestedSyncElements[elementIter] as dynamic;
         var nestedSyncIndex =
-            internalIds.indexOf(nestedSyncElement.$__root__.id);
+            internalIds.indexOf(nestedSyncElement.$__root__.id as String);
         if (nestedSyncIndex >= 0 && nestedSyncIndex < closestIndex) {
           closestIndex = nestedSyncIndex;
           closestValue = (ids) =>
@@ -151,7 +148,7 @@ mixin $$Lists on Lists {
         var checkTagPOSyncElement =
             checkTagPOSyncElements[elementIter] as dynamic;
         var checkTagPOSyncIndex =
-            internalIds.indexOf(checkTagPOSyncElement.$__root__.id);
+            internalIds.indexOf(checkTagPOSyncElement.$__root__.id as String);
         if (checkTagPOSyncIndex >= 0 && checkTagPOSyncIndex < closestIndex) {
           closestIndex = checkTagPOSyncIndex;
           closestValue = (ids) =>
@@ -260,7 +257,6 @@ mixin $$Lists on Lists {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -339,8 +335,6 @@ class $InnerListObject extends InnerListObject with $$InnerListObject {
 
 mixin $$InnerListObject on InnerListObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerListObject() {
     return {};
@@ -407,7 +401,6 @@ mixin $$InnerListObject on InnerListObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -499,8 +492,6 @@ class $ListsUsingMixin extends ListsUsingMixin
 
 mixin $$ListsUsingMixin on ListsUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInListsUsingMixin() {
     return {};
@@ -526,15 +517,12 @@ mixin $$ListsUsingMixin on ListsUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ListsMixin on ListsMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInListsMixin() {
     return {};
@@ -581,7 +569,7 @@ mixin $$ListsMixin on ListsMixin {
       try {
         var nestedSyncElement = nestedSyncElements[elementIter] as dynamic;
         var nestedSyncIndex =
-            internalIds.indexOf(nestedSyncElement.$__root__.id);
+            internalIds.indexOf(nestedSyncElement.$__root__.id as String);
         if (nestedSyncIndex >= 0 && nestedSyncIndex < closestIndex) {
           closestIndex = nestedSyncIndex;
           closestValue = (ids) =>
@@ -600,7 +588,7 @@ mixin $$ListsMixin on ListsMixin {
         var checkTagPOSyncElement =
             checkTagPOSyncElements[elementIter] as dynamic;
         var checkTagPOSyncIndex =
-            internalIds.indexOf(checkTagPOSyncElement.$__root__.id);
+            internalIds.indexOf(checkTagPOSyncElement.$__root__.id as String);
         if (checkTagPOSyncIndex >= 0 && checkTagPOSyncIndex < closestIndex) {
           closestIndex = checkTagPOSyncIndex;
           closestValue = (ids) =>
@@ -709,7 +697,6 @@ mixin $$ListsMixin on ListsMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -803,8 +790,6 @@ class $InnerListObjectUsingMixin extends InnerListObjectUsingMixin
 
 mixin $$InnerListObjectUsingMixin on InnerListObjectUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerListObjectUsingMixin() {
     return {};
@@ -831,15 +816,12 @@ mixin $$InnerListObjectUsingMixin on InnerListObjectUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$InnerListObjectMixin on InnerListObjectMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerListObjectMixin() {
     return {};

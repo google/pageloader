@@ -6,7 +6,6 @@ part of 'constructors.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -85,8 +84,6 @@ class $BasePO extends BasePO with $$BasePO {
 
 mixin $$BasePO on BasePO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBasePO() {
     return {};
@@ -113,7 +110,8 @@ mixin $$BasePO on BasePO {
     String Function(List<String>) closestValue;
     try {
       var bTagPOElement = this.bTagPO as dynamic;
-      var bTagPOIndex = internalIds.indexOf(bTagPOElement.$__root__.id);
+      var bTagPOIndex =
+          internalIds.indexOf(bTagPOElement.$__root__.id as String);
       if (bTagPOIndex >= 0 && bTagPOIndex < closestIndex) {
         closestIndex = bTagPOIndex;
         closestValue = (ids) => 'bTagPO.${bTagPOElement.findChain(ids, action)}'
@@ -139,7 +137,6 @@ mixin $$BasePO on BasePO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -270,8 +267,6 @@ class $BCustomTagPO extends BCustomTagPO with $$BCustomTagPO {
 
 mixin $$BCustomTagPO on BCustomTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBCustomTagPO() {
     return {};
@@ -306,7 +301,8 @@ mixin $$BCustomTagPO on BCustomTagPO {
     try {
       // Do not know the type. Try it out and ignore if not successful.
       var _utilsElement = this._utils as dynamic;
-      var _utilsIndex = internalIds.indexOf(_utilsElement.$__root__.id);
+      var _utilsIndex =
+          internalIds.indexOf(_utilsElement.$__root__.id as String);
       if (_utilsIndex >= 0 && _utilsIndex < closestIndex) {
         closestIndex = _utilsIndex;
         closestValue = (ids) => '_utils.${_utilsElement.findChain(ids, action)}'
@@ -319,7 +315,7 @@ mixin $$BCustomTagPO on BCustomTagPO {
       // Do not know the type. Try it out and ignore if not successful.
       var cTagFromPLEElement = this.cTagFromPLE as dynamic;
       var cTagFromPLEIndex =
-          internalIds.indexOf(cTagFromPLEElement.$__root__.id);
+          internalIds.indexOf(cTagFromPLEElement.$__root__.id as String);
       if (cTagFromPLEIndex >= 0 && cTagFromPLEIndex < closestIndex) {
         closestIndex = cTagFromPLEIndex;
         closestValue = (ids) =>
@@ -333,7 +329,7 @@ mixin $$BCustomTagPO on BCustomTagPO {
       // Do not know the type. Try it out and ignore if not successful.
       var cTagFromUtilsElement = this.cTagFromUtils as dynamic;
       var cTagFromUtilsIndex =
-          internalIds.indexOf(cTagFromUtilsElement.$__root__.id);
+          internalIds.indexOf(cTagFromUtilsElement.$__root__.id as String);
       if (cTagFromUtilsIndex >= 0 && cTagFromUtilsIndex < closestIndex) {
         closestIndex = cTagFromUtilsIndex;
         closestValue = (ids) =>
@@ -346,7 +342,8 @@ mixin $$BCustomTagPO on BCustomTagPO {
     try {
       // Do not know the type. Try it out and ignore if not successful.
       var noLookupPOElement = this.noLookupPO as dynamic;
-      var noLookupPOIndex = internalIds.indexOf(noLookupPOElement.$__root__.id);
+      var noLookupPOIndex =
+          internalIds.indexOf(noLookupPOElement.$__root__.id as String);
       if (noLookupPOIndex >= 0 && noLookupPOIndex < closestIndex) {
         closestIndex = noLookupPOIndex;
         closestValue = (ids) =>
@@ -369,11 +366,6 @@ mixin $$BCustomTagPO on BCustomTagPO {
     return {closestIndex: closestValue};
   }
 
-  PageLoaderElement get rootElement;
-  PageUtils get _utils;
-  CCustomTagPO get cTagFromPLE;
-  CCustomTagPO get cTagFromUtils;
-  NoLookupPO get noLookupPO;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BCustomTagPO', '_root');
@@ -387,7 +379,6 @@ mixin $$BCustomTagPO on BCustomTagPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -474,8 +465,6 @@ class $CCustomTagPO extends CCustomTagPO with $$CCustomTagPO {
 
 mixin $$CCustomTagPO on CCustomTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCCustomTagPO() {
     return {
@@ -515,7 +504,6 @@ mixin $$CCustomTagPO on CCustomTagPO {
     return {closestIndex: closestValue};
   }
 
-  String get innerText;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('CCustomTagPO', '_root');
@@ -529,7 +517,6 @@ mixin $$CCustomTagPO on CCustomTagPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -608,8 +595,6 @@ class $NoLookupPO extends NoLookupPO with $$NoLookupPO {
 
 mixin $$NoLookupPO on NoLookupPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNoLookupPO() {
     return {};

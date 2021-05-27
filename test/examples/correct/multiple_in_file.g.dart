@@ -6,7 +6,6 @@ part of 'multiple_in_file.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -84,8 +83,6 @@ class $A extends A with $$A {
 
 mixin $$A on A {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInA() {
     return {};
@@ -111,7 +108,7 @@ mixin $$A on A {
     String Function(List<String>) closestValue;
     try {
       var bElement = this.b as dynamic;
-      var bIndex = internalIds.indexOf(bElement.$__root__.id);
+      var bIndex = internalIds.indexOf(bElement.$__root__.id as String);
       if (bIndex >= 0 && bIndex < closestIndex) {
         closestIndex = bIndex;
         closestValue = (ids) => 'b.${bElement.findChain(ids, action)}'
@@ -136,7 +133,6 @@ mixin $$A on A {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -214,8 +210,6 @@ class $B extends B with $$B {
 
 mixin $$B on B {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInB() {
     return {};
@@ -265,7 +259,6 @@ mixin $$B on B {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -343,8 +336,6 @@ class $C extends C with $$C {
 
 mixin $$C on C {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInC() {
     return {};
@@ -370,7 +361,7 @@ mixin $$C on C {
     String Function(List<String>) closestValue;
     try {
       var bElement = this.b as dynamic;
-      var bIndex = internalIds.indexOf(bElement.$__root__.id);
+      var bIndex = internalIds.indexOf(bElement.$__root__.id as String);
       if (bIndex >= 0 && bIndex < closestIndex) {
         closestIndex = bIndex;
         closestValue = (ids) => 'b.${bElement.findChain(ids, action)}'

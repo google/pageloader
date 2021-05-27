@@ -6,7 +6,6 @@ part of 'shared_list_page_objects.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -85,8 +84,6 @@ class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
 
 mixin $$PageForSimpleTest on PageForSimpleTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForSimpleTest() {
     return {};
@@ -117,7 +114,7 @@ mixin $$PageForSimpleTest on PageForSimpleTest {
     String Function(List<String>) closestValue;
     try {
       var tableElement = this.table as dynamic;
-      var tableIndex = internalIds.indexOf(tableElement.$__root__.id);
+      var tableIndex = internalIds.indexOf(tableElement.$__root__.id as String);
       if (tableIndex >= 0 && tableIndex < closestIndex) {
         closestIndex = tableIndex;
         closestValue = (ids) => 'table.${tableElement.findChain(ids, action)}'
@@ -164,7 +161,6 @@ mixin $$PageForSimpleTest on PageForSimpleTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -242,8 +238,6 @@ class $Table extends Table with $$Table {
 
 mixin $$Table on Table {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTable() {
     return {};
@@ -280,7 +274,8 @@ mixin $$Table on Table {
         elementIter++) {
       try {
         var rowsSyncElement = rowsSyncElements[elementIter] as dynamic;
-        var rowsSyncIndex = internalIds.indexOf(rowsSyncElement.$__root__.id);
+        var rowsSyncIndex =
+            internalIds.indexOf(rowsSyncElement.$__root__.id as String);
         if (rowsSyncIndex >= 0 && rowsSyncIndex < closestIndex) {
           closestIndex = rowsSyncIndex;
           closestValue = (ids) =>
@@ -343,7 +338,6 @@ mixin $$Table on Table {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -421,8 +415,6 @@ class $Row extends Row with $$Row {
 
 mixin $$Row on Row {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRow() {
     return {};

@@ -6,7 +6,6 @@ part of 'null_element.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -85,8 +84,6 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
 
 mixin $$ParentRoot on ParentRoot {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRoot() {
     return {};
@@ -113,7 +110,8 @@ mixin $$ParentRoot on ParentRoot {
     String Function(List<String>) closestValue;
     try {
       var _nullPOElement = this._nullPO as dynamic;
-      var _nullPOIndex = internalIds.indexOf(_nullPOElement.$__root__.id);
+      var _nullPOIndex =
+          internalIds.indexOf(_nullPOElement.$__root__.id as String);
       if (_nullPOIndex >= 0 && _nullPOIndex < closestIndex) {
         closestIndex = _nullPOIndex;
         closestValue = (ids) =>
@@ -125,7 +123,7 @@ mixin $$ParentRoot on ParentRoot {
     }
     try {
       var gensElement = this.gens as dynamic;
-      var gensIndex = internalIds.indexOf(gensElement.$__root__.id);
+      var gensIndex = internalIds.indexOf(gensElement.$__root__.id as String);
       if (gensIndex >= 0 && gensIndex < closestIndex) {
         closestIndex = gensIndex;
         closestValue = (ids) => 'gens.${gensElement.findChain(ids, action)}'
@@ -184,7 +182,6 @@ mixin $$ParentRoot on ParentRoot {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -263,8 +260,6 @@ class $NullPO extends NullPO with $$NullPO {
 
 mixin $$NullPO on NullPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNullPO() {
     return {};
@@ -290,7 +285,6 @@ mixin $$NullPO on NullPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -369,8 +363,6 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 
 mixin $$Generics<T> on Generics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenerics() {
     return {};

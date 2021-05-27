@@ -6,7 +6,6 @@ part of 'root.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -85,8 +84,6 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
 
 mixin $$ParentRoot on ParentRoot {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRoot() {
     return {};
@@ -113,7 +110,7 @@ mixin $$ParentRoot on ParentRoot {
     String Function(List<String>) closestValue;
     try {
       var rootElement = this.root as dynamic;
-      var rootIndex = internalIds.indexOf(rootElement.$__root__.id);
+      var rootIndex = internalIds.indexOf(rootElement.$__root__.id as String);
       if (rootIndex >= 0 && rootIndex < closestIndex) {
         closestIndex = rootIndex;
         closestValue = (ids) => 'root.${rootElement.findChain(ids, action)}'
@@ -138,7 +135,6 @@ mixin $$ParentRoot on ParentRoot {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -216,8 +212,6 @@ class $Root extends Root with $$Root {
 
 mixin $$Root on Root {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRoot() {
     return {};
@@ -293,7 +287,6 @@ mixin $$Root on Root {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -386,8 +379,6 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
 
 mixin $$ParentRootUsingMixin on ParentRootUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRootUsingMixin() {
     return {};
@@ -414,15 +405,12 @@ mixin $$ParentRootUsingMixin on ParentRootUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ParentRootMixin on ParentRootMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRootMixin() {
     return {};
@@ -449,7 +437,7 @@ mixin $$ParentRootMixin on ParentRootMixin {
     String Function(List<String>) closestValue;
     try {
       var rootElement = this.root as dynamic;
-      var rootIndex = internalIds.indexOf(rootElement.$__root__.id);
+      var rootIndex = internalIds.indexOf(rootElement.$__root__.id as String);
       if (rootIndex >= 0 && rootIndex < closestIndex) {
         closestIndex = rootIndex;
         closestValue = (ids) => 'root.${rootElement.findChain(ids, action)}'
@@ -474,7 +462,6 @@ mixin $$ParentRootMixin on ParentRootMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -566,8 +553,6 @@ class $RootUsingMixin extends RootUsingMixin
 
 mixin $$RootUsingMixin on RootUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootUsingMixin() {
     return {};
@@ -593,15 +578,12 @@ mixin $$RootUsingMixin on RootUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$RootMixin on RootMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootMixin() {
     return {};
