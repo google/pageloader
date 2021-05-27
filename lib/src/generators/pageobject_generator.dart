@@ -11,6 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:analyzer/dart/analysis/results.dart';
+import 'package:analyzer/dart/analysis/session.dart' show InconsistentAnalysisException;
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 
@@ -37,8 +39,15 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       Element element, ConstantReader annotation, BuildStep buildStep) async {
     final library = element.library;
     // ignore: deprecated_member_use
-    final resolvedLibrary =
-        await library.session.getResolvedLibraryByElement(library);
+    ResolvedLibraryResult resolvedLibrary;
+
+    // TODO: Remove try-catch block once sdk/analyzer is updated to null safe.
+    try {
+      resolvedLibrary =
+          await library.session.getResolvedLibraryByElement(library);
+    } on InconsistentAnalysisException {
+      // Do nothing. This is a temporary solution.
+    }
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
     final poAnnotation = getPageObjectAnnotation(annotation);
     if (annotatedNode is ClassOrMixinDeclaration) {
