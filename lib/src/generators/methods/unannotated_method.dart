@@ -84,7 +84,7 @@ abstract class UnannotatedMethod
 
   String get _parameterDeclarations {
     final required = parameters
-        .where((p) => p.isRequired)
+        .where((p) => p.isRequired && !p.isNamed)
         .map((p) => p.toSource())
         .join(', ');
 
@@ -103,7 +103,7 @@ abstract class UnannotatedMethod
 
   String get _parameterNames {
     final required = parameters
-        .where((p) => p.isRequired)
+        .where((p) => p.isRequired && !p.isNamed)
         .map((p) => p.declaredElement.name)
         .join(', ');
 

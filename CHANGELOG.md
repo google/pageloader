@@ -1,3 +1,21 @@
+## 3.3.2
+
+- Bump dependencies up until but not included null safety versions.
+- Stop using deprecated API calls from `analyzer`.
+- Remove violations of `private_collision_in_mixin_application`.
+- Fix generated code to be compatible with `implicit_casts: false`.
+- Use `<int>` type parameter with `Point`.
+- Use `Iterator` in HTML/Webdriver iterators to prevent explicit `null` returns.
+- Syntactical changes to make null safety migration easier.
+- `HtmlPageLoaderElement` sends `key` property value on keyboard usage.
+- Add support for `shadowDomChildren`. `shadowDom` is still not supported since it does not return a singular `Element`. However, users may still need to access its children elements.
+- Make errors from `@CheckTag`/`@CheckTags` more descriptive.
+- Remove usages of `dart:async` imports; they're part of `dart:core` now.
+- Improve error message on `isFocused` test matcher.
+- Respect `clickOption` in `HtmlPageLoaderElement`'s `click()` method.
+- Make `WebdriverPageLoaderElement`'s click more tolerant to changed views ports.
+- Check whether a `WebdriverPageLoaderElement` is displayed or not on `visibleText` and `click`.
+
 ## 3.3.1
 
 - Fix bug where type parameters were not being passed as args into generated

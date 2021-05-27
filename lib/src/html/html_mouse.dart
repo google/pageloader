@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
 import 'dart:html';
 import 'dart:math';
 import 'dart:svg' show SvgElement;
@@ -237,7 +236,7 @@ class HtmlMouse implements PageLoaderMouse {
   /// Sends 'mouseenter' to elements in [_trackedElements] if needed.
   ///
   /// Returns a list of [TrackedElement] that had 'mouseenter' sent to them.
-  Future<List<TrackedElement>> _dispatchMouseEnters(Point nextPos) async {
+  Future<List<TrackedElement>> _dispatchMouseEnters(Point<int> nextPos) async {
     final elementsThatEntered = <TrackedElement>[];
     for (final element in _trackedElements) {
       if (element.containsPoint(nextPos) && !element.mouseIsInside) {
@@ -251,7 +250,7 @@ class HtmlMouse implements PageLoaderMouse {
   /// Sends 'mouseleave' to elements in [_trackedElements] if needed.
   ///
   /// Returns a list of [TrackedElement] that had 'mouseleave' sent to them.
-  Future<List<TrackedElement>> _dispatchMouseLeaves(Point nextPos) async {
+  Future<List<TrackedElement>> _dispatchMouseLeaves(Point<int> nextPos) async {
     final elementsThatLeft = <TrackedElement>[];
     for (final element in _trackedElements) {
       if (!element.containsPoint(nextPos) && element.mouseIsInside) {
@@ -263,7 +262,7 @@ class HtmlMouse implements PageLoaderMouse {
   }
 
   /// Sends 'mousemove' to elements in [_trackedElements] if needed.
-  Future<void> _dispatchMouseMoves(Point nextPos) async {
+  Future<void> _dispatchMouseMoves(Point<int> nextPos) async {
     for (final element in _trackedElements) {
       if (element.mouseIsInside) {
         await element.dispatchMouseMove(nextPos.x, nextPos.y);
@@ -272,16 +271,18 @@ class HtmlMouse implements PageLoaderMouse {
   }
 
   /// Sends 'mouseout' to elements in [_trackedElements] if needed.
-  Future<void> _dispatchMouseOuts(Point nextPos) => _dispatchBubblingEvents(
-      (TrackedElement element) => element._isLeaving(nextPos),
-      (TrackedElement element) async =>
-          await element.dispatchMouseOut(nextPos.x, nextPos.y));
+  Future<void> _dispatchMouseOuts(Point<int> nextPos) =>
+      _dispatchBubblingEvents(
+          (TrackedElement element) => element._isLeaving(nextPos),
+          (TrackedElement element) async =>
+              await element.dispatchMouseOut(nextPos.x, nextPos.y));
 
   /// Sends 'mouseover' to elements in [_trackedElements] if needed.
-  Future<void> _dispatchMouseOvers(Point nextPos) => _dispatchBubblingEvents(
-      (TrackedElement element) => element._isEntering(nextPos),
-      (TrackedElement element) async =>
-          await element.dispatchMouseOver(nextPos.x, nextPos.y));
+  Future<void> _dispatchMouseOvers(Point<int> nextPos) =>
+      _dispatchBubblingEvents(
+          (TrackedElement element) => element._isEntering(nextPos),
+          (TrackedElement element) async =>
+              await element.dispatchMouseOver(nextPos.x, nextPos.y));
 
   /// Traverses each tree in the forest [_trackedElements] and calls
   /// [dispatcher] on the lowest element in the tree satisfying [test], exactly
@@ -349,14 +350,14 @@ class TrackedElement {
   TrackedElement(this.element);
 
   /// Returns true if point is inside element.
-  bool containsPoint(Point p) {
+  bool containsPoint(Point<int> p) {
     bounds ??= element.getBoundingClientRect();
     return bounds.containsPoint(p);
   }
 
-  bool _isEntering(Point p) => containsPoint(p) && !mouseIsInside;
+  bool _isEntering(Point<int> p) => containsPoint(p) && !mouseIsInside;
 
-  bool _isLeaving(Point p) => !containsPoint(p) && mouseIsInside;
+  bool _isLeaving(Point<int> p) => !containsPoint(p) && mouseIsInside;
 
   /// Sends mouse enter event to element.
   Future<dynamic> dispatchMouseEnter(int x, int y) =>

@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
 import 'dart:html' as html;
 import 'dart:svg' show SvgElement;
 
@@ -134,12 +133,13 @@ html.Element setUp() {
   }
   div.setInnerHtml(bodyHtml, validator: NoOpNodeValidator());
 
-  html.document.getElementsByTagName('a-custom-tag').forEach((element) {
-    if (element is html.Element) {
-      final shadow = element.createShadowRoot();
-      shadow.setInnerHtml(templateHtml, validator: NoOpNodeValidator());
-    }
-  });
+  // TODO: Investigate what the root cause of this issue.
+  // html.document.getElementsByTagName('a-custom-tag').forEach((element) {
+  //   if (element is html.Element) {
+  //     final shadow = element.createShadowRoot();
+  //     shadow.setInnerHtml(templateHtml, validator: NoOpNodeValidator());
+  //   }
+  // });
 
   // Get all mouseevent driven div elements and bind them
   final displayedMouseDiv = html.document.getElementById('mouse');
@@ -181,15 +181,24 @@ void bindKeyboardListener(html.Element element) {
     if (evt.keyCode == 13) {
       element.text += ' enter keydown;';
     }
+    if (evt.key == 'Enter') {
+      element.text += ' (Enter key value);';
+    }
   });
   element.onKeyPress.listen((evt) {
     if (evt.keyCode == 13) {
       element.text += ' enter keypress;';
     }
+    if (evt.key == 'Enter') {
+      element.text += ' (Enter key value);';
+    }
   });
   element.onKeyUp.listen((evt) {
     if (evt.keyCode == 13) {
       element.text += ' enter keyup;';
+    }
+    if (evt.key == 'Enter') {
+      element.text += ' (Enter key value);';
     }
   });
 }

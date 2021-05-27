@@ -6,7 +6,6 @@ part of 'finders.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -96,8 +95,6 @@ class $Finders extends Finders with $$Finders {
 
 mixin $$Finders on Finders {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInFinders() {
     return {};
@@ -140,7 +137,8 @@ mixin $$Finders on Finders {
     }
     try {
       var checkTagPOElement = this.checkTagPO as dynamic;
-      var checkTagPOIndex = internalIds.indexOf(checkTagPOElement.$__root__.id);
+      var checkTagPOIndex =
+          internalIds.indexOf(checkTagPOElement.$__root__.id as String);
       if (checkTagPOIndex >= 0 && checkTagPOIndex < closestIndex) {
         closestIndex = checkTagPOIndex;
         closestValue = (ids) =>
@@ -183,7 +181,6 @@ mixin $$Finders on Finders {
     return {closestIndex: closestValue};
   }
 
-  PageLoaderElement get secret;
   PageLoaderElement get _secret {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('Finders', '_secret');
@@ -234,7 +231,6 @@ mixin $$Finders on Finders {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -321,8 +317,6 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
 
 mixin $$CheckTagPO on CheckTagPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCheckTagPO() {
     return {};
@@ -373,7 +367,6 @@ mixin $$CheckTagPO on CheckTagPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -465,8 +458,6 @@ class $FindersUsingMixin extends FindersUsingMixin
 
 mixin $$FindersUsingMixin on FindersUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInFindersUsingMixin() {
     return {};
@@ -493,15 +484,12 @@ mixin $$FindersUsingMixin on FindersUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$FindersMixin on FindersMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInFindersMixin() {
     return {};
@@ -544,7 +532,8 @@ mixin $$FindersMixin on FindersMixin {
     }
     try {
       var checkTagPOElement = this.checkTagPO as dynamic;
-      var checkTagPOIndex = internalIds.indexOf(checkTagPOElement.$__root__.id);
+      var checkTagPOIndex =
+          internalIds.indexOf(checkTagPOElement.$__root__.id as String);
       if (checkTagPOIndex >= 0 && checkTagPOIndex < closestIndex) {
         closestIndex = checkTagPOIndex;
         closestValue = (ids) =>
@@ -587,7 +576,6 @@ mixin $$FindersMixin on FindersMixin {
     return {closestIndex: closestValue};
   }
 
-  PageLoaderElement get secret;
   PageLoaderElement get _secret {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('FindersMixin', '_secret');

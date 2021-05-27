@@ -130,7 +130,8 @@ abstract class ListFinderMethodMixin {
   String get createChainIndex => listTypeArgument == 'PageLoaderElement'
       ? 'var ${name}Index = internalIds.indexOf(${name}Elements[elementIter].id);'
       : '''var ${name}Element = ${name}Elements[elementIter] as dynamic;
-           var ${name}Index = internalIds.indexOf(${name}Element.\$__root__.id);''';
+           var ${name}Index = internalIds
+               .indexOf(${name}Element.\$__root__.id as String);''';
 
   String get chainValueCreation => createChainValue;
 

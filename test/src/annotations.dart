@@ -42,7 +42,9 @@ void runTests(GetNewContext contextGenerator) {
         fail('Expected to throw on bad @CheckTag');
       } catch (e) {
         expect(
-            e.toString(), contains('Failed check: @CheckTag("inconceivable")'));
+            e.toString(),
+            contains('Failed check: @CheckTag("inconceivable"). '
+                'Found "table" instead.'));
       }
     });
 
@@ -109,7 +111,9 @@ void runTests(GetNewContext contextGenerator) {
         fail('Expected to throw on bad @CheckTag');
       } catch (e) {
         expect(
-            e.toString(), contains('Failed check: @CheckTag("inconceivable")'));
+            e.toString(),
+            contains('Failed check: @CheckTag("inconceivable"). '
+                'Found "table" instead.'));
       }
     });
 

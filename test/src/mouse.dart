@@ -31,7 +31,7 @@ void runTests(GetNewContext contextGenerator) {
       await mouse.down(MouseButton.primary);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseDown'));
-      await mouse.moveTo(page.element, 10, 10);
+      await mouse.moveTo(page.element, 3, 3);
       await mouse.up(MouseButton.primary);
       await waitFor(() => page.element.visibleText,
           matcher: contains('MouseUp'));

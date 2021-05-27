@@ -6,7 +6,6 @@ part of 'typing.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -88,8 +87,6 @@ class $PageForTextAreaTypingText extends PageForTextAreaTypingText
 
 mixin $$PageForTextAreaTypingText on PageForTextAreaTypingText {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForTextAreaTypingText() {
     return {};
@@ -141,7 +138,6 @@ mixin $$PageForTextAreaTypingText on PageForTextAreaTypingText {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -220,8 +216,6 @@ class $PageForTypingTests extends PageForTypingTests with $$PageForTypingTests {
 
 mixin $$PageForTypingTests on PageForTypingTests {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForTypingTests() {
     return {};
@@ -273,7 +267,6 @@ mixin $$PageForTypingTests on PageForTypingTests {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -384,8 +377,6 @@ class $PageForTypingTestsWithFocusAndBlur
 mixin $$PageForTypingTestsWithFocusAndBlur
     on PageForTypingTestsWithFocusAndBlur {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForTypingTestsWithFocusAndBlur() {
     return {
@@ -453,8 +444,6 @@ mixin $$PageForTypingTestsWithFocusAndBlur
     return {closestIndex: closestValue};
   }
 
-  int get focusCount;
-  int get blurCount;
   PageLoaderElement get text {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod(
@@ -501,7 +490,6 @@ mixin $$PageForTypingTestsWithFocusAndBlur
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -580,8 +568,6 @@ class $KeyboardListenerPO extends KeyboardListenerPO with $$KeyboardListenerPO {
 
 mixin $$KeyboardListenerPO on KeyboardListenerPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInKeyboardListenerPO() {
     return {};

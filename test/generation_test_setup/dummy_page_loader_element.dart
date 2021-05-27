@@ -11,12 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
 import 'dart:core';
 import 'dart:math';
 
 import 'package:pageloader/pageloader.dart';
-import 'package:quiver/collection.dart';
 
 /// Concrete implementations for use in code generation tests, mostly via
 /// toString().
@@ -203,6 +201,9 @@ class DummyPageLoaderElement implements PageLoaderElement {
   String get innerText => throw 'not implemented';
 
   @override
+  List<PageLoaderElement> get shadowRootChildren => throw 'not implemented';
+
+  @override
   String get visibleText => throw 'not implemented';
 
   @override
@@ -292,8 +293,11 @@ class DummyPageLoaderElement implements PageLoaderElement {
   String testCreatorMethods() => throw 'not implemented';
 }
 
-class DummyPageLoaderAttributes extends DelegatingMap<String, String>
-    implements PageLoaderAttributes {
+class DummyPageLoaderAttributes implements PageLoaderAttributes {
+  final _map = <String, String>{};
+
   @override
-  final delegate = <String, String>{};
+  String operator [](String name) => _map[name];
+
+  void operator []=(String name, String value) => _map[name] = value;
 }

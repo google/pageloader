@@ -6,7 +6,6 @@ part of 'list.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -84,8 +83,6 @@ class $Lists extends Lists with $$Lists {
 
 mixin $$Lists on Lists {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInLists() {
     return {};
@@ -123,8 +120,8 @@ mixin $$Lists on Lists {
       try {
         var tableRowsSyncAsPOElement =
             tableRowsSyncAsPOElements[elementIter] as dynamic;
-        var tableRowsSyncAsPOIndex =
-            internalIds.indexOf(tableRowsSyncAsPOElement.$__root__.id);
+        var tableRowsSyncAsPOIndex = internalIds
+            .indexOf(tableRowsSyncAsPOElement.$__root__.id as String);
         if (tableRowsSyncAsPOIndex >= 0 &&
             tableRowsSyncAsPOIndex < closestIndex) {
           closestIndex = tableRowsSyncAsPOIndex;
@@ -195,7 +192,6 @@ mixin $$Lists on Lists {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -281,8 +277,6 @@ class $RowPO extends RowPO with $$RowPO {
 
 mixin $$RowPO on RowPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRowPO() {
     return {
@@ -322,7 +316,6 @@ mixin $$RowPO on RowPO {
     return {closestIndex: closestValue};
   }
 
-  bool get exists;
   PageLoaderElement get _root {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('RowPO', '_root');

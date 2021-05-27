@@ -69,8 +69,6 @@ abstract class Getter implements Built<Getter, GetterBuilder> {
         'return returnMe; }';
   }
 
-  String generateForMixin(String pageObjectName) => '$returnType get $name;';
-
   /// Generates code that given list of [PageLoaderElement] ids called
   /// `internalIds`, determine whether and where this getter appears in the list
   /// and what code should be further generated for this.
@@ -96,7 +94,8 @@ abstract class Getter implements Built<Getter, GetterBuilder> {
       try {
         // Do not know the type. Try it out and ignore if not successful.
         var ${name}Element = this.$name as dynamic;
-        var ${name}Index = internalIds.indexOf(${name}Element.\$__root__.id);
+        var ${name}Index = internalIds
+            .indexOf(${name}Element.\$__root__.id as String);
         if (${name}Index >= 0 && ${name}Index < closestIndex) {
           closestIndex = ${name}Index;
           closestValue = (ids) =>

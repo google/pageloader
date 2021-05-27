@@ -6,7 +6,6 @@ part of 'generics.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -107,8 +106,6 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 
 mixin $$Generics<T> on Generics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenerics() {
     return {};
@@ -141,7 +138,6 @@ mixin $$Generics<T> on Generics<T> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -228,8 +224,6 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
 
 mixin $$CheckedGenerics<T> on CheckedGenerics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCheckedGenerics() {
     return {};
@@ -259,7 +253,6 @@ mixin $$CheckedGenerics<T> on CheckedGenerics<T> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -349,8 +342,6 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
 
 mixin $$GenericPair<T, V> on GenericPair<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPair() {
     return {};
@@ -380,7 +371,6 @@ mixin $$GenericPair<T, V> on GenericPair<T, V> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -459,8 +449,6 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
 
 mixin $$RootPo<T> on RootPo<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPo() {
     return {};
@@ -496,7 +484,8 @@ mixin $$RootPo<T> on RootPo<T> {
     String Function(List<String>) closestValue;
     try {
       var genericsElement = this.generics as dynamic;
-      var genericsIndex = internalIds.indexOf(genericsElement.$__root__.id);
+      var genericsIndex =
+          internalIds.indexOf(genericsElement.$__root__.id as String);
       if (genericsIndex >= 0 && genericsIndex < closestIndex) {
         closestIndex = genericsIndex;
         closestValue = (ids) =>
@@ -509,7 +498,7 @@ mixin $$RootPo<T> on RootPo<T> {
     try {
       var checkedGenericsElement = this.checkedGenerics as dynamic;
       var checkedGenericsIndex =
-          internalIds.indexOf(checkedGenericsElement.$__root__.id);
+          internalIds.indexOf(checkedGenericsElement.$__root__.id as String);
       if (checkedGenericsIndex >= 0 && checkedGenericsIndex < closestIndex) {
         closestIndex = checkedGenericsIndex;
         closestValue = (ids) =>
@@ -526,7 +515,7 @@ mixin $$RootPo<T> on RootPo<T> {
       try {
         var genericsListElement = genericsListElements[elementIter] as dynamic;
         var genericsListIndex =
-            internalIds.indexOf(genericsListElement.$__root__.id);
+            internalIds.indexOf(genericsListElement.$__root__.id as String);
         if (genericsListIndex >= 0 && genericsListIndex < closestIndex) {
           closestIndex = genericsListIndex;
           closestValue = (ids) =>
@@ -544,8 +533,8 @@ mixin $$RootPo<T> on RootPo<T> {
       try {
         var checkedGenericsListElement =
             checkedGenericsListElements[elementIter] as dynamic;
-        var checkedGenericsListIndex =
-            internalIds.indexOf(checkedGenericsListElement.$__root__.id);
+        var checkedGenericsListIndex = internalIds
+            .indexOf(checkedGenericsListElement.$__root__.id as String);
         if (checkedGenericsListIndex >= 0 &&
             checkedGenericsListIndex < closestIndex) {
           closestIndex = checkedGenericsListIndex;
@@ -612,7 +601,6 @@ mixin $$RootPo<T> on RootPo<T> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -704,8 +692,6 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
 
 mixin $$GenericsUsingMixin<T> on GenericsUsingMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericsUsingMixin() {
     return {};
@@ -732,15 +718,12 @@ mixin $$GenericsUsingMixin<T> on GenericsUsingMixin<T> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$GenericsMixin<T> on GenericsMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericsMixin() {
     return {};
@@ -773,7 +756,6 @@ mixin $$GenericsMixin<T> on GenericsMixin<T> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -866,8 +848,6 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
 
 mixin $$GenericPairUsingMixin<T, V> on GenericPairUsingMixin<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPairUsingMixin() {
     return {};
@@ -894,15 +874,12 @@ mixin $$GenericPairUsingMixin<T, V> on GenericPairUsingMixin<T, V> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$GenericPairMixin<T, V> on GenericPairMixin<T, V> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPairMixin() {
     return {};
@@ -933,7 +910,6 @@ mixin $$GenericPairMixin<T, V> on GenericPairMixin<T, V> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1025,8 +1001,6 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
 
 mixin $$RootPoUsingMixin<T> on RootPoUsingMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPoUsingMixin() {
     return {};
@@ -1053,15 +1027,12 @@ mixin $$RootPoUsingMixin<T> on RootPoUsingMixin<T> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$RootPoMixin<T> on RootPoMixin<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPoMixin() {
     return {};
@@ -1097,7 +1068,8 @@ mixin $$RootPoMixin<T> on RootPoMixin<T> {
     String Function(List<String>) closestValue;
     try {
       var genericsElement = this.generics as dynamic;
-      var genericsIndex = internalIds.indexOf(genericsElement.$__root__.id);
+      var genericsIndex =
+          internalIds.indexOf(genericsElement.$__root__.id as String);
       if (genericsIndex >= 0 && genericsIndex < closestIndex) {
         closestIndex = genericsIndex;
         closestValue = (ids) =>
@@ -1110,7 +1082,7 @@ mixin $$RootPoMixin<T> on RootPoMixin<T> {
     try {
       var checkedGenericsElement = this.checkedGenerics as dynamic;
       var checkedGenericsIndex =
-          internalIds.indexOf(checkedGenericsElement.$__root__.id);
+          internalIds.indexOf(checkedGenericsElement.$__root__.id as String);
       if (checkedGenericsIndex >= 0 && checkedGenericsIndex < closestIndex) {
         closestIndex = checkedGenericsIndex;
         closestValue = (ids) =>
@@ -1127,7 +1099,7 @@ mixin $$RootPoMixin<T> on RootPoMixin<T> {
       try {
         var genericsListElement = genericsListElements[elementIter] as dynamic;
         var genericsListIndex =
-            internalIds.indexOf(genericsListElement.$__root__.id);
+            internalIds.indexOf(genericsListElement.$__root__.id as String);
         if (genericsListIndex >= 0 && genericsListIndex < closestIndex) {
           closestIndex = genericsListIndex;
           closestValue = (ids) =>
@@ -1145,8 +1117,8 @@ mixin $$RootPoMixin<T> on RootPoMixin<T> {
       try {
         var checkedGenericsListElement =
             checkedGenericsListElements[elementIter] as dynamic;
-        var checkedGenericsListIndex =
-            internalIds.indexOf(checkedGenericsListElement.$__root__.id);
+        var checkedGenericsListIndex = internalIds
+            .indexOf(checkedGenericsListElement.$__root__.id as String);
         if (checkedGenericsListIndex >= 0 &&
             checkedGenericsListIndex < closestIndex) {
           closestIndex = checkedGenericsListIndex;

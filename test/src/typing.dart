@@ -66,8 +66,12 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
       test('enter all sent', () async {
         kb.typeSpecialKey(PageLoaderSpecialKey.enter);
         await listener.typeSequence(kb);
-        expect(listener.visibleText,
-            equals('Listening: enter keydown; enter keypress; enter keyup;'));
+        final expected = isHtmlTest
+            ? 'Listening: enter keydown; (Enter key value); '
+                'enter keypress; '
+                'enter keyup; (Enter key value);'
+            : 'Listening: enter keydown; enter keypress; enter keyup;';
+        expect(listener.visibleText, equals(expected));
       });
     });
   });
@@ -190,7 +194,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
 
     test('enter only keydown and keypress sent', () async {
       final result = isHtmlTest
-          ? 'Listening: enter keydown; enter keypress;'
+          ? 'Listening: enter keydown; (Enter key value); enter keypress;'
           : 'Listening: enter keydown; enter keypress; enter keyup;';
       kb.typeSpecialKey(PageLoaderSpecialKey.enter, keyUp: false);
       await listener.typeSequence(kb);
@@ -199,7 +203,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
 
     test('enter only keyup sent', () async {
       final result = isHtmlTest
-          ? 'Listening: enter keyup;'
+          ? 'Listening: enter keyup; (Enter key value);'
           : 'Listening: enter keydown; enter keypress; enter keyup;';
       kb.typeSpecialKey(PageLoaderSpecialKey.enter, keyDown: false);
       await listener.typeSequence(kb);

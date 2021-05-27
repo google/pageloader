@@ -6,7 +6,6 @@ part of 'properties.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -88,8 +87,6 @@ class $PageForPropertiesTests extends PageForPropertiesTests
 
 mixin $$PageForPropertiesTests on PageForPropertiesTests {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForPropertiesTests() {
     return {};

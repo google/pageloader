@@ -84,10 +84,6 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
     writeFindChainInMixin(mixinBuffer, className);
     final addToMixin =
         (method) => mixinBuffer.writeln(method.generate(className));
-    getters.forEach(
-        (getter) => mixinBuffer.writeln(getter.generateForMixin(className)));
-    setters.forEach(
-        (setter) => mixinBuffer.writeln(setter.generateForMixin(className)));
     singleFinderMethods.forEach(addToMixin);
     iterableFinderMethods.forEach(addToMixin);
     listFinderMethods.forEach(addToMixin);

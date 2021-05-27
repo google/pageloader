@@ -6,7 +6,6 @@ part of 'nested.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -85,8 +84,6 @@ class $Nested extends Nested with $$Nested {
 
 mixin $$Nested on Nested {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNested() {
     return {};
@@ -114,7 +111,7 @@ mixin $$Nested on Nested {
     try {
       var findersElementElement = this.findersElement as dynamic;
       var findersElementIndex =
-          internalIds.indexOf(findersElementElement.$__root__.id);
+          internalIds.indexOf(findersElementElement.$__root__.id as String);
       if (findersElementIndex >= 0 && findersElementIndex < closestIndex) {
         closestIndex = findersElementIndex;
         closestValue = (ids) =>
@@ -140,7 +137,6 @@ mixin $$Nested on Nested {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -232,8 +228,6 @@ class $NestedUsingMixin extends NestedUsingMixin
 
 mixin $$NestedUsingMixin on NestedUsingMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNestedUsingMixin() {
     return {};
@@ -260,15 +254,12 @@ mixin $$NestedUsingMixin on NestedUsingMixin {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$NestedMixin on NestedMixin {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNestedMixin() {
     return {};
@@ -296,7 +287,7 @@ mixin $$NestedMixin on NestedMixin {
     try {
       var findersElementElement = this.findersElement as dynamic;
       var findersElementIndex =
-          internalIds.indexOf(findersElementElement.$__root__.id);
+          internalIds.indexOf(findersElementElement.$__root__.id as String);
       if (findersElementIndex >= 0 && findersElementIndex < closestIndex) {
         closestIndex = findersElementIndex;
         closestValue = (ids) =>

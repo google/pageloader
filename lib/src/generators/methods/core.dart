@@ -173,3 +173,8 @@ DartType getInnerType(DartType topType, String matchingType) {
   }
   return getInnerType(first, matchingType);
 }
+
+/// Return the Dart code the corresponds to the [type].
+String typeToCode(DartType type) {
+  return type?.getDisplayString(withNullability: false);
+}

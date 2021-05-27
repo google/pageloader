@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
 import 'dart:core';
 
 import 'package:pageloader/pageloader.dart';
@@ -50,7 +49,8 @@ class WebDriverMouse implements PageLoaderMouse {
           int stepPixels,
           Duration duration}) async =>
       _driver.mouse.moveTo(
-          element: (element as WebDriverPageLoaderElement).contextSync,
+          element: (element as WebDriverPageLoaderElement).contextSync
+              as wd.WebElement,
           xOffset: xOffset,
           yOffset: yOffset);
 

@@ -6,7 +6,6 @@ part of 'generics.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -96,8 +95,6 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 
 mixin $$Generics<T> on Generics<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenerics() {
     return {};
@@ -127,7 +124,6 @@ mixin $$Generics<T> on Generics<T> {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -206,8 +202,6 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
 
 mixin $$RootPo<T> on RootPo<T> {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPo() {
     return {};
@@ -237,7 +231,8 @@ mixin $$RootPo<T> on RootPo<T> {
     String Function(List<String>) closestValue;
     try {
       var genericsElement = this.generics as dynamic;
-      var genericsIndex = internalIds.indexOf(genericsElement.$__root__.id);
+      var genericsIndex =
+          internalIds.indexOf(genericsElement.$__root__.id as String);
       if (genericsIndex >= 0 && genericsIndex < closestIndex) {
         closestIndex = genericsIndex;
         closestValue = (ids) =>
@@ -254,7 +249,7 @@ mixin $$RootPo<T> on RootPo<T> {
       try {
         var genericsListElement = genericsListElements[elementIter] as dynamic;
         var genericsListIndex =
-            internalIds.indexOf(genericsListElement.$__root__.id);
+            internalIds.indexOf(genericsListElement.$__root__.id as String);
         if (genericsListIndex >= 0 && genericsListIndex < closestIndex) {
           closestIndex = genericsListIndex;
           closestValue = (ids) =>

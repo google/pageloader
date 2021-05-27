@@ -6,7 +6,6 @@ part of 'cache_invalidation.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -85,8 +84,6 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
 
 mixin $$CacheInvalidation on CacheInvalidation {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCacheInvalidation() {
     return {};
@@ -117,7 +114,8 @@ mixin $$CacheInvalidation on CacheInvalidation {
     String Function(List<String>) closestValue;
     try {
       var select1Element = this.select1 as dynamic;
-      var select1Index = internalIds.indexOf(select1Element.$__root__.id);
+      var select1Index =
+          internalIds.indexOf(select1Element.$__root__.id as String);
       if (select1Index >= 0 && select1Index < closestIndex) {
         closestIndex = select1Index;
         closestValue = (ids) =>
@@ -165,7 +163,6 @@ mixin $$CacheInvalidation on CacheInvalidation {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -244,8 +241,6 @@ class $_Nested extends _Nested with $$_Nested {
 
 mixin $$_Nested on _Nested {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersIn_Nested() {
     return {};

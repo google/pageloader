@@ -13,7 +13,6 @@
 
 library pageloader.api.page_loader_mouse_interface;
 
-import 'dart:async';
 import 'dart:core';
 
 import 'package:webdriver/sync_core.dart' show MouseButton;

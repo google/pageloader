@@ -6,7 +6,6 @@ part of 'annotations.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -85,8 +84,6 @@ class $BaseObject extends BaseObject with $$BaseObject {
 
 mixin $$BaseObject on BaseObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBaseObject() {
     return {};
@@ -122,7 +119,7 @@ mixin $$BaseObject on BaseObject {
     String Function(List<String>) closestValue;
     try {
       var tableElement = this.table as dynamic;
-      var tableIndex = internalIds.indexOf(tableElement.$__root__.id);
+      var tableIndex = internalIds.indexOf(tableElement.$__root__.id as String);
       if (tableIndex >= 0 && tableIndex < closestIndex) {
         closestIndex = tableIndex;
         closestValue = (ids) => 'table.${tableElement.findChain(ids, action)}'
@@ -133,8 +130,8 @@ mixin $$BaseObject on BaseObject {
     }
     try {
       var tableUsingCheckedTagElement = this.tableUsingCheckedTag as dynamic;
-      var tableUsingCheckedTagIndex =
-          internalIds.indexOf(tableUsingCheckedTagElement.$__root__.id);
+      var tableUsingCheckedTagIndex = internalIds
+          .indexOf(tableUsingCheckedTagElement.$__root__.id as String);
       if (tableUsingCheckedTagIndex >= 0 &&
           tableUsingCheckedTagIndex < closestIndex) {
         closestIndex = tableUsingCheckedTagIndex;
@@ -147,7 +144,8 @@ mixin $$BaseObject on BaseObject {
     }
     try {
       var badTableElement = this.badTable as dynamic;
-      var badTableIndex = internalIds.indexOf(badTableElement.$__root__.id);
+      var badTableIndex =
+          internalIds.indexOf(badTableElement.$__root__.id as String);
       if (badTableIndex >= 0 && badTableIndex < closestIndex) {
         closestIndex = badTableIndex;
         closestValue = (ids) =>
@@ -219,7 +217,6 @@ mixin $$BaseObject on BaseObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -298,8 +295,6 @@ class $PseudoBaseObject extends PseudoBaseObject with $$PseudoBaseObject {
 
 mixin $$PseudoBaseObject on PseudoBaseObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPseudoBaseObject() {
     return {};
@@ -333,7 +328,7 @@ mixin $$PseudoBaseObject on PseudoBaseObject {
     String Function(List<String>) closestValue;
     try {
       var tableElement = this.table as dynamic;
-      var tableIndex = internalIds.indexOf(tableElement.$__root__.id);
+      var tableIndex = internalIds.indexOf(tableElement.$__root__.id as String);
       if (tableIndex >= 0 && tableIndex < closestIndex) {
         closestIndex = tableIndex;
         closestValue = (ids) => 'table.${tableElement.findChain(ids, action)}'
@@ -344,7 +339,8 @@ mixin $$PseudoBaseObject on PseudoBaseObject {
     }
     try {
       var badTableElement = this.badTable as dynamic;
-      var badTableIndex = internalIds.indexOf(badTableElement.$__root__.id);
+      var badTableIndex =
+          internalIds.indexOf(badTableElement.$__root__.id as String);
       if (badTableIndex >= 0 && badTableIndex < closestIndex) {
         closestIndex = badTableIndex;
         closestValue = (ids) =>
@@ -405,7 +401,6 @@ mixin $$PseudoBaseObject on PseudoBaseObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -481,8 +476,6 @@ class $TableForCheckTag extends TableForCheckTag with $$TableForCheckTag {
 
 mixin $$TableForCheckTag on TableForCheckTag {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTableForCheckTag() {
     return {};
@@ -575,7 +568,6 @@ mixin $$TableForCheckTag on TableForCheckTag {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -654,8 +646,6 @@ class $BaseEnsureObject extends BaseEnsureObject with $$BaseEnsureObject {
 
 mixin $$BaseEnsureObject on BaseEnsureObject {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBaseEnsureObject() {
     return {};
@@ -686,7 +676,7 @@ mixin $$BaseEnsureObject on BaseEnsureObject {
     String Function(List<String>) closestValue;
     try {
       var tableElement = this.table as dynamic;
-      var tableIndex = internalIds.indexOf(tableElement.$__root__.id);
+      var tableIndex = internalIds.indexOf(tableElement.$__root__.id as String);
       if (tableIndex >= 0 && tableIndex < closestIndex) {
         closestIndex = tableIndex;
         closestValue = (ids) => 'table.${tableElement.findChain(ids, action)}'
@@ -697,7 +687,8 @@ mixin $$BaseEnsureObject on BaseEnsureObject {
     }
     try {
       var badTableElement = this.badTable as dynamic;
-      var badTableIndex = internalIds.indexOf(badTableElement.$__root__.id);
+      var badTableIndex =
+          internalIds.indexOf(badTableElement.$__root__.id as String);
       if (badTableIndex >= 0 && badTableIndex < closestIndex) {
         closestIndex = badTableIndex;
         closestValue = (ids) =>
@@ -735,7 +726,6 @@ mixin $$BaseEnsureObject on BaseEnsureObject {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -811,8 +801,6 @@ class $TableForEnsureTag extends TableForEnsureTag with $$TableForEnsureTag {
 
 mixin $$TableForEnsureTag on TableForEnsureTag {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTableForEnsureTag() {
     return {};
@@ -880,7 +868,6 @@ mixin $$TableForEnsureTag on TableForEnsureTag {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -956,8 +943,6 @@ class $CheckTagFails extends CheckTagFails with $$CheckTagFails {
 
 mixin $$CheckTagFails on CheckTagFails {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCheckTagFails() {
     return {};
@@ -1008,7 +993,6 @@ mixin $$CheckTagFails on CheckTagFails {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1085,8 +1069,6 @@ class $EnsureTagFails extends EnsureTagFails with $$EnsureTagFails {
 
 mixin $$EnsureTagFails on EnsureTagFails {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEnsureTagFails() {
     return {};
@@ -1137,7 +1119,6 @@ mixin $$EnsureTagFails on EnsureTagFails {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1219,8 +1200,6 @@ class $PageForWithAttributeTest extends PageForWithAttributeTest
 
 mixin $$PageForWithAttributeTest on PageForWithAttributeTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForWithAttributeTest() {
     return {};
@@ -1273,7 +1252,6 @@ mixin $$PageForWithAttributeTest on PageForWithAttributeTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1354,8 +1332,6 @@ class $PageForWithClassTest extends PageForWithClassTest
 
 mixin $$PageForWithClassTest on PageForWithClassTest {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForWithClassTest() {
     return {};
@@ -1408,7 +1384,6 @@ mixin $$PageForWithClassTest on PageForWithClassTest {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1487,8 +1462,6 @@ class $DebugIds extends DebugIds with $$DebugIds {
 
 mixin $$DebugIds on DebugIds {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInDebugIds() {
     return {};
@@ -1667,7 +1640,6 @@ mixin $$DebugIds on DebugIds {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -1746,8 +1718,6 @@ class $TestIds extends TestIds with $$TestIds {
 
 mixin $$TestIds on TestIds {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTestIds() {
     return {};

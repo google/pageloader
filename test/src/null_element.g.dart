@@ -6,7 +6,6 @@ part of 'null_element.dart';
 // PageObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -107,8 +106,6 @@ class $BasePO extends BasePO with $$BasePO {
 
 mixin $$BasePO on BasePO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBasePO() {
     return {
@@ -153,7 +150,8 @@ mixin $$BasePO on BasePO {
     String Function(List<String>) closestValue;
     try {
       var buttonPOElement = this.buttonPO as dynamic;
-      var buttonPOIndex = internalIds.indexOf(buttonPOElement.$__root__.id);
+      var buttonPOIndex =
+          internalIds.indexOf(buttonPOElement.$__root__.id as String);
       if (buttonPOIndex >= 0 && buttonPOIndex < closestIndex) {
         closestIndex = buttonPOIndex;
         closestValue = (ids) =>
@@ -166,7 +164,7 @@ mixin $$BasePO on BasePO {
     try {
       var nullButtonPOElement = this.nullButtonPO as dynamic;
       var nullButtonPOIndex =
-          internalIds.indexOf(nullButtonPOElement.$__root__.id);
+          internalIds.indexOf(nullButtonPOElement.$__root__.id as String);
       if (nullButtonPOIndex >= 0 && nullButtonPOIndex < closestIndex) {
         closestIndex = nullButtonPOIndex;
         closestValue = (ids) =>
@@ -178,7 +176,8 @@ mixin $$BasePO on BasePO {
     }
     try {
       var _nullRowPOElement = this._nullRowPO as dynamic;
-      var _nullRowPOIndex = internalIds.indexOf(_nullRowPOElement.$__root__.id);
+      var _nullRowPOIndex =
+          internalIds.indexOf(_nullRowPOElement.$__root__.id as String);
       if (_nullRowPOIndex >= 0 && _nullRowPOIndex < closestIndex) {
         closestIndex = _nullRowPOIndex;
         closestValue = (ids) =>
@@ -194,7 +193,8 @@ mixin $$BasePO on BasePO {
         elementIter++) {
       try {
         var _rowPOsElement = _rowPOsElements[elementIter] as dynamic;
-        var _rowPOsIndex = internalIds.indexOf(_rowPOsElement.$__root__.id);
+        var _rowPOsIndex =
+            internalIds.indexOf(_rowPOsElement.$__root__.id as String);
         if (_rowPOsIndex >= 0 && _rowPOsIndex < closestIndex) {
           closestIndex = _rowPOsIndex;
           closestValue = (ids) =>
@@ -254,8 +254,6 @@ mixin $$BasePO on BasePO {
     return {closestIndex: closestValue};
   }
 
-  List<PageLoaderElement> get allRows;
-  List<RowPO> get allRowPOs;
   PageLoaderElement get button {
     for (final __listener in $__root__.listeners) {
       __listener.startPageObjectMethod('BasePO', 'button');
@@ -355,7 +353,6 @@ mixin $$BasePO on BasePO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -434,8 +431,6 @@ class $ButtonPO extends ButtonPO with $$ButtonPO {
 
 mixin $$ButtonPO on ButtonPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInButtonPO() {
     return {};
@@ -461,7 +456,6 @@ mixin $$ButtonPO on ButtonPO {
   }
 }
 
-// ignore_for_file: private_collision_in_mixin_application
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
@@ -539,8 +533,6 @@ class $RowPO extends RowPO with $$RowPO {
 
 mixin $$RowPO on RowPO {
   PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
-  PageLoaderPointer __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRowPO() {
     return {};
