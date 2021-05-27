@@ -37,14 +37,19 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       Element element, ConstantReader annotation, BuildStep buildStep) async {
     final library = element.library;
     // ignore: deprecated_member_use
-    // final resolvedLibrary =
-    //     await library.session.getResolvedLibraryByElement2(library);
+    // Begin workaround
     final resolver = buildStep.resolver;
     final tempResolvedLibrary =
         await resolver.libraryFor(await resolver.assetIdForElement(library));
     final session = tempResolvedLibrary.session;
     final resolvedLibrary =
         await session.getResolvedLibraryByElement(tempResolvedLibrary);
+    // End workaround
+
+    // TODO: Once SDK & analyzer is bumped, revert workaround to below.
+    // final resolvedLibrary =
+    //     await library.session.getResolvedLibraryByElement2(library);
+
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
     final poAnnotation = getPageObjectAnnotation(annotation);
     if (annotatedNode is ClassOrMixinDeclaration) {
