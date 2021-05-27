@@ -37,7 +37,6 @@ Future<MethodDeclaration> getMethodDeclaration(
     String methodDeclaration, String methodName,
     {String preamble = ''}) async {
   final classToParse = '''
-import 'dart:async';
 import '/test/root/path/annotations.dart';
 import '/test/root/path/annotation_interfaces.dart';
 
