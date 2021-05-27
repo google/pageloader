@@ -46,7 +46,9 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       resolvedLibrary =
           await library.session.getResolvedLibraryByElement(library);
     } on InconsistentAnalysisException {
-      // Do nothing. This is a temporary solution.
+      // Try again.
+      resolvedLibrary =
+          await library.session.getResolvedLibraryByElement(library);
     }
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
     final poAnnotation = getPageObjectAnnotation(annotation);
