@@ -350,7 +350,6 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       await scrollIntoViewCentered();
       _retryWhenStale<void>(() => _single.click());
     }
-    _retryWhenStale<void>(() => _single.click());
   }
 
   @override
