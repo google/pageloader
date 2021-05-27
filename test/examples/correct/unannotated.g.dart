@@ -90,13 +90,13 @@ class $Unannotated extends Unannotated with $$Unannotated {
     return returnMe;
   }
 
-  set bool(bool setValue) {
+  set myField(bool setValue) {
     for (final __listener in $__root__.listeners) {
-      __listener.startPageObjectMethod('Unannotated', 'bool');
+      __listener.startPageObjectMethod('Unannotated', 'myField');
     }
-    super.bool = setValue;
+    super.myField = setValue;
     for (final __listener in $__root__.listeners) {
-      __listener.endPageObjectMethod('Unannotated', 'bool');
+      __listener.endPageObjectMethod('Unannotated', 'myField');
     }
     return;
   }
