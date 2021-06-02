@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'long_exception.dart';
 
@@ -26,14 +27,14 @@ class $MyPageObject extends MyPageObject with $$MyPageObject {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInMyPageObject());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInMyPageObject(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $MyPageObject extends MyPageObject with $$MyPageObject {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $MyPageObject extends MyPageObject with $$MyPageObject {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInMyPageObject(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,19 +85,20 @@ class $MyPageObject extends MyPageObject with $$MyPageObject {
 }
 
 mixin $$MyPageObject on MyPageObject {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMyPageObject() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInMyPageObject() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInMyPageObject() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInMyPageObject(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'ele') {
       return ele;
     }
@@ -103,11 +106,11 @@ mixin $$MyPageObject on MyPageObject {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInMyPageObject(
+  Map<int, String Function(List<String>) /*?*/ > findChainInMyPageObject(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var eleIndex = internalIds.indexOf(this.ele.id);
       if (eleIndex >= 0 && eleIndex < closestIndex) {

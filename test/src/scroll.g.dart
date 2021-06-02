@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'scroll.dart';
 
@@ -26,14 +27,14 @@ class $ScrollPO extends ScrollPO with $$ScrollPO {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInScrollPO());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInScrollPO(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $ScrollPO extends ScrollPO with $$ScrollPO {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $ScrollPO extends ScrollPO with $$ScrollPO {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInScrollPO(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -116,7 +118,7 @@ class $ScrollPO extends ScrollPO with $$ScrollPO {
 }
 
 mixin $$ScrollPO on ScrollPO {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInScrollPO() {
     return {
@@ -125,7 +127,7 @@ mixin $$ScrollPO on ScrollPO {
     };
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInScrollPO() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInScrollPO() {
     return {
       'scroll': [
         {'name': 'x', 'kind': 'named', 'type': 'int', 'default': null},
@@ -136,7 +138,7 @@ mixin $$ScrollPO on ScrollPO {
 
   dynamic testCreatorInvokeMethodInScrollPO(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'scrollLeft') {
       return scrollLeft;
     }
@@ -153,11 +155,11 @@ mixin $$ScrollPO on ScrollPO {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInScrollPO(
+  Map<int, String Function(List<String>) /*?*/ > findChainInScrollPO(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var _scrollBoxIndex = internalIds.indexOf(this._scrollBox.id);
       if (_scrollBoxIndex >= 0 && _scrollBoxIndex < closestIndex) {

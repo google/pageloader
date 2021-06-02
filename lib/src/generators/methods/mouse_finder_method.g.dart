@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of pageloader.mouse_finder_method;
 
@@ -8,16 +9,18 @@ part of pageloader.mouse_finder_method;
 
 class _$MouseFinderMethod extends MouseFinderMethod {
   @override
+  final NullSafety nullSafety;
+  @override
   final String name;
 
   factory _$MouseFinderMethod(
           [void Function(MouseFinderMethodBuilder) updates]) =>
       (new MouseFinderMethodBuilder()..update(updates)).build();
 
-  _$MouseFinderMethod._({this.name}) : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('MouseFinderMethod', 'name');
-    }
+  _$MouseFinderMethod._({this.nullSafety, this.name}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        nullSafety, 'MouseFinderMethod', 'nullSafety');
+    BuiltValueNullFieldError.checkNotNull(name, 'MouseFinderMethod', 'name');
   }
 
   @override
@@ -31,17 +34,21 @@ class _$MouseFinderMethod extends MouseFinderMethod {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is MouseFinderMethod && name == other.name;
+    return other is MouseFinderMethod &&
+        nullSafety == other.nullSafety &&
+        name == other.name;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, name.hashCode));
+    return $jf($jc($jc(0, nullSafety.hashCode), name.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('MouseFinderMethod')..add('name', name))
+    return (newBuiltValueToStringHelper('MouseFinderMethod')
+          ..add('nullSafety', nullSafety)
+          ..add('name', name))
         .toString();
   }
 }
@@ -50,6 +57,12 @@ class MouseFinderMethodBuilder
     implements Builder<MouseFinderMethod, MouseFinderMethodBuilder> {
   _$MouseFinderMethod _$v;
 
+  NullSafetyBuilder _nullSafety;
+  NullSafetyBuilder get nullSafety =>
+      _$this._nullSafety ??= new NullSafetyBuilder();
+  set nullSafety(NullSafetyBuilder nullSafety) =>
+      _$this._nullSafety = nullSafety;
+
   String _name;
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
@@ -57,8 +70,10 @@ class MouseFinderMethodBuilder
   MouseFinderMethodBuilder();
 
   MouseFinderMethodBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
+    final $v = _$v;
+    if ($v != null) {
+      _nullSafety = $v.nullSafety.toBuilder();
+      _name = $v.name;
       _$v = null;
     }
     return this;
@@ -66,9 +81,7 @@ class MouseFinderMethodBuilder
 
   @override
   void replace(MouseFinderMethod other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$MouseFinderMethod;
   }
 
@@ -79,7 +92,24 @@ class MouseFinderMethodBuilder
 
   @override
   _$MouseFinderMethod build() {
-    final _$result = _$v ?? new _$MouseFinderMethod._(name: name);
+    _$MouseFinderMethod _$result;
+    try {
+      _$result = _$v ??
+          new _$MouseFinderMethod._(
+              nullSafety: nullSafety.build(),
+              name: BuiltValueNullFieldError.checkNotNull(
+                  name, 'MouseFinderMethod', 'name'));
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'nullSafety';
+        nullSafety.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'MouseFinderMethod', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

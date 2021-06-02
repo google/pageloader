@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of pageloader.iterable_finder_method;
 
@@ -29,25 +30,15 @@ class _$IterableFinderMethod extends IterableFinderMethod {
       this.filterDeclarations,
       this.checkerDeclarations})
       : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('IterableFinderMethod', 'name');
-    }
-    if (iterableTypeArgument == null) {
-      throw new BuiltValueNullFieldError(
-          'IterableFinderMethod', 'iterableTypeArgument');
-    }
-    if (finderDeclaration == null) {
-      throw new BuiltValueNullFieldError(
-          'IterableFinderMethod', 'finderDeclaration');
-    }
-    if (filterDeclarations == null) {
-      throw new BuiltValueNullFieldError(
-          'IterableFinderMethod', 'filterDeclarations');
-    }
-    if (checkerDeclarations == null) {
-      throw new BuiltValueNullFieldError(
-          'IterableFinderMethod', 'checkerDeclarations');
-    }
+    BuiltValueNullFieldError.checkNotNull(name, 'IterableFinderMethod', 'name');
+    BuiltValueNullFieldError.checkNotNull(
+        iterableTypeArgument, 'IterableFinderMethod', 'iterableTypeArgument');
+    BuiltValueNullFieldError.checkNotNull(
+        finderDeclaration, 'IterableFinderMethod', 'finderDeclaration');
+    BuiltValueNullFieldError.checkNotNull(
+        filterDeclarations, 'IterableFinderMethod', 'filterDeclarations');
+    BuiltValueNullFieldError.checkNotNull(
+        checkerDeclarations, 'IterableFinderMethod', 'checkerDeclarations');
   }
 
   @override
@@ -123,12 +114,13 @@ class IterableFinderMethodBuilder
   IterableFinderMethodBuilder();
 
   IterableFinderMethodBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
-      _iterableTypeArgument = _$v.iterableTypeArgument;
-      _finderDeclaration = _$v.finderDeclaration;
-      _filterDeclarations = _$v.filterDeclarations;
-      _checkerDeclarations = _$v.checkerDeclarations;
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _iterableTypeArgument = $v.iterableTypeArgument;
+      _finderDeclaration = $v.finderDeclaration;
+      _filterDeclarations = $v.filterDeclarations;
+      _checkerDeclarations = $v.checkerDeclarations;
       _$v = null;
     }
     return this;
@@ -136,9 +128,7 @@ class IterableFinderMethodBuilder
 
   @override
   void replace(IterableFinderMethod other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$IterableFinderMethod;
   }
 
@@ -151,11 +141,22 @@ class IterableFinderMethodBuilder
   _$IterableFinderMethod build() {
     final _$result = _$v ??
         new _$IterableFinderMethod._(
-            name: name,
-            iterableTypeArgument: iterableTypeArgument,
-            finderDeclaration: finderDeclaration,
-            filterDeclarations: filterDeclarations,
-            checkerDeclarations: checkerDeclarations);
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, 'IterableFinderMethod', 'name'),
+            iterableTypeArgument: BuiltValueNullFieldError.checkNotNull(
+                iterableTypeArgument,
+                'IterableFinderMethod',
+                'iterableTypeArgument'),
+            finderDeclaration: BuiltValueNullFieldError.checkNotNull(
+                finderDeclaration, 'IterableFinderMethod', 'finderDeclaration'),
+            filterDeclarations: BuiltValueNullFieldError.checkNotNull(
+                filterDeclarations,
+                'IterableFinderMethod',
+                'filterDeclarations'),
+            checkerDeclarations: BuiltValueNullFieldError.checkNotNull(
+                checkerDeclarations,
+                'IterableFinderMethod',
+                'checkerDeclarations'));
     replace(_$result);
     return _$result;
   }

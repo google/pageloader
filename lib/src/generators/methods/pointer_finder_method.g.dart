@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of pageloader.pointer_finder_method;
 
@@ -8,16 +9,18 @@ part of pageloader.pointer_finder_method;
 
 class _$PointerFinderMethod extends PointerFinderMethod {
   @override
+  final NullSafety nullSafety;
+  @override
   final String name;
 
   factory _$PointerFinderMethod(
           [void Function(PointerFinderMethodBuilder) updates]) =>
       (new PointerFinderMethodBuilder()..update(updates)).build();
 
-  _$PointerFinderMethod._({this.name}) : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('PointerFinderMethod', 'name');
-    }
+  _$PointerFinderMethod._({this.nullSafety, this.name}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        nullSafety, 'PointerFinderMethod', 'nullSafety');
+    BuiltValueNullFieldError.checkNotNull(name, 'PointerFinderMethod', 'name');
   }
 
   @override
@@ -32,17 +35,20 @@ class _$PointerFinderMethod extends PointerFinderMethod {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is PointerFinderMethod && name == other.name;
+    return other is PointerFinderMethod &&
+        nullSafety == other.nullSafety &&
+        name == other.name;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, name.hashCode));
+    return $jf($jc($jc(0, nullSafety.hashCode), name.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('PointerFinderMethod')
+          ..add('nullSafety', nullSafety)
           ..add('name', name))
         .toString();
   }
@@ -52,6 +58,12 @@ class PointerFinderMethodBuilder
     implements Builder<PointerFinderMethod, PointerFinderMethodBuilder> {
   _$PointerFinderMethod _$v;
 
+  NullSafetyBuilder _nullSafety;
+  NullSafetyBuilder get nullSafety =>
+      _$this._nullSafety ??= new NullSafetyBuilder();
+  set nullSafety(NullSafetyBuilder nullSafety) =>
+      _$this._nullSafety = nullSafety;
+
   String _name;
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
@@ -59,8 +71,10 @@ class PointerFinderMethodBuilder
   PointerFinderMethodBuilder();
 
   PointerFinderMethodBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
+    final $v = _$v;
+    if ($v != null) {
+      _nullSafety = $v.nullSafety.toBuilder();
+      _name = $v.name;
       _$v = null;
     }
     return this;
@@ -68,9 +82,7 @@ class PointerFinderMethodBuilder
 
   @override
   void replace(PointerFinderMethod other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PointerFinderMethod;
   }
 
@@ -81,7 +93,24 @@ class PointerFinderMethodBuilder
 
   @override
   _$PointerFinderMethod build() {
-    final _$result = _$v ?? new _$PointerFinderMethod._(name: name);
+    _$PointerFinderMethod _$result;
+    try {
+      _$result = _$v ??
+          new _$PointerFinderMethod._(
+              nullSafety: nullSafety.build(),
+              name: BuiltValueNullFieldError.checkNotNull(
+                  name, 'PointerFinderMethod', 'name'));
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'nullSafety';
+        nullSafety.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'PointerFinderMethod', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

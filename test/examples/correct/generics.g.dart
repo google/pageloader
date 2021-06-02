@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'generics.dart';
 
@@ -26,14 +27,14 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInGenerics());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInGenerics(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInGenerics(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -105,19 +107,19 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 }
 
 mixin $$Generics<T> on Generics<T> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenerics() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInGenerics() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInGenerics() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInGenerics(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'typeDefParameter') {
       return Function.apply(
           typeDefParameter, positionalArguments, namedArguments);
@@ -129,11 +131,11 @@ mixin $$Generics<T> on Generics<T> {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInGenerics(
+  Map<int, String Function(List<String>) /*?*/ > findChainInGenerics(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -156,14 +158,14 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInCheckedGenerics());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInCheckedGenerics(
           methodName, positionalArguments, namedArguments);
@@ -173,7 +175,8 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -190,15 +193,15 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInCheckedGenerics(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -223,19 +226,20 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
 }
 
 mixin $$CheckedGenerics<T> on CheckedGenerics<T> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCheckedGenerics() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInCheckedGenerics() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInCheckedGenerics() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInCheckedGenerics(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'typeDefParameter') {
       return Function.apply(
           typeDefParameter, positionalArguments, namedArguments);
@@ -244,11 +248,11 @@ mixin $$CheckedGenerics<T> on CheckedGenerics<T> {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInCheckedGenerics(
+  Map<int, String Function(List<String>) /*?*/ > findChainInCheckedGenerics(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -273,14 +277,14 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInGenericPair());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInGenericPair(
           methodName, positionalArguments, namedArguments);
@@ -290,7 +294,8 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -307,15 +312,15 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInGenericPair(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -341,19 +346,20 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
 }
 
 mixin $$GenericPair<T, V> on GenericPair<T, V> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPair() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInGenericPair() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInGenericPair() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInGenericPair(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'exampleMethodMap') {
       return Function.apply(
           exampleMethodMap, positionalArguments, namedArguments);
@@ -362,11 +368,11 @@ mixin $$GenericPair<T, V> on GenericPair<T, V> {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInGenericPair(
+  Map<int, String Function(List<String>) /*?*/ > findChainInGenericPair(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -391,14 +397,14 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInRootPo());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInRootPo(
           methodName, positionalArguments, namedArguments);
@@ -408,7 +414,8 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -425,15 +432,15 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInRootPo(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -448,19 +455,19 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
 }
 
 mixin $$RootPo<T> on RootPo<T> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPo() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInRootPo() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInRootPo() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInRootPo(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'generics') {
       return generics;
     }
@@ -477,11 +484,11 @@ mixin $$RootPo<T> on RootPo<T> {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInRootPo(
+  Map<int, String Function(List<String>) /*?*/ > findChainInRootPo(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var genericsElement = this.generics as dynamic;
       var genericsIndex =
@@ -623,7 +630,7 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInGenericsMixin());
     methods.addAll(testCreatorMethodsInGenericsUsingMixin());
     return json.encode(methods);
@@ -631,7 +638,7 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInGenericsUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -646,7 +653,8 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -663,8 +671,8 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInGenericsUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -676,7 +684,7 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -691,29 +699,29 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
 }
 
 mixin $$GenericsUsingMixin<T> on GenericsUsingMixin<T> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericsUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInGenericsUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInGenericsUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInGenericsUsingMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInGenericsUsingMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -723,19 +731,20 @@ mixin $$GenericsUsingMixin<T> on GenericsUsingMixin<T> {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$GenericsMixin<T> on GenericsMixin<T> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericsMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInGenericsMixin() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInGenericsMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInGenericsMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'typeDefParameter') {
       return Function.apply(
           typeDefParameter, positionalArguments, namedArguments);
@@ -747,11 +756,11 @@ mixin $$GenericsMixin<T> on GenericsMixin<T> {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInGenericsMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInGenericsMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -778,7 +787,7 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInGenericPairMixin());
     methods.addAll(testCreatorMethodsInGenericPairUsingMixin());
     return json.encode(methods);
@@ -786,7 +795,7 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInGenericPairUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -801,7 +810,8 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -818,8 +828,8 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInGenericPairUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -831,7 +841,7 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -847,29 +857,29 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
 }
 
 mixin $$GenericPairUsingMixin<T, V> on GenericPairUsingMixin<T, V> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPairUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInGenericPairUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInGenericPairUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInGenericPairUsingMixin(
-      List<String> internalIds,
-      [String action = 'default']) {
+  Map<int, String Function(List<String>) /*?*/ >
+      findChainInGenericPairUsingMixin(List<String> internalIds,
+          [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -879,20 +889,20 @@ mixin $$GenericPairUsingMixin<T, V> on GenericPairUsingMixin<T, V> {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$GenericPairMixin<T, V> on GenericPairMixin<T, V> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPairMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInGenericPairMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInGenericPairMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'exampleMethodMap') {
       return Function.apply(
           exampleMethodMap, positionalArguments, namedArguments);
@@ -901,11 +911,11 @@ mixin $$GenericPairMixin<T, V> on GenericPairMixin<T, V> {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInGenericPairMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInGenericPairMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -932,7 +942,7 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInRootPoMixin());
     methods.addAll(testCreatorMethodsInRootPoUsingMixin());
     return json.encode(methods);
@@ -940,7 +950,7 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInRootPoUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -955,7 +965,8 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -972,8 +983,8 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInRootPoUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -985,7 +996,7 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -1000,29 +1011,29 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
 }
 
 mixin $$RootPoUsingMixin<T> on RootPoUsingMixin<T> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPoUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInRootPoUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInRootPoUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInRootPoUsingMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInRootPoUsingMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -1032,19 +1043,20 @@ mixin $$RootPoUsingMixin<T> on RootPoUsingMixin<T> {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$RootPoMixin<T> on RootPoMixin<T> {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPoMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInRootPoMixin() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInRootPoMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInRootPoMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'generics') {
       return generics;
     }
@@ -1061,11 +1073,11 @@ mixin $$RootPoMixin<T> on RootPoMixin<T> {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInRootPoMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInRootPoMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var genericsElement = this.generics as dynamic;
       var genericsIndex =

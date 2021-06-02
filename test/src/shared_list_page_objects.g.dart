@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'shared_list_page_objects.dart';
 
@@ -26,14 +27,14 @@ class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInPageForSimpleTest());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInPageForSimpleTest(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInPageForSimpleTest(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,20 +85,20 @@ class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
 }
 
 mixin $$PageForSimpleTest on PageForSimpleTest {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForSimpleTest() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInPageForSimpleTest() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInPageForSimpleTest(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'rootElement') {
       return rootElement;
     }
@@ -107,11 +109,11 @@ mixin $$PageForSimpleTest on PageForSimpleTest {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInPageForSimpleTest(
+  Map<int, String Function(List<String>) /*?*/ > findChainInPageForSimpleTest(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var tableElement = this.table as dynamic;
       var tableIndex = internalIds.indexOf(tableElement.$__root__.id as String);
@@ -180,14 +182,14 @@ class $Table extends Table with $$Table {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInTable());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInTable(
           methodName, positionalArguments, namedArguments);
@@ -197,7 +199,8 @@ class $Table extends Table with $$Table {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -214,15 +217,15 @@ class $Table extends Table with $$Table {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInTable(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -237,19 +240,19 @@ class $Table extends Table with $$Table {
 }
 
 mixin $$Table on Table {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTable() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInTable() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInTable() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInTable(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'table') {
       return table;
     }
@@ -263,11 +266,11 @@ mixin $$Table on Table {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInTable(
+  Map<int, String Function(List<String>) /*?*/ > findChainInTable(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     final rowsSyncElements = this.rowsSync;
     for (var elementIter = 0;
         elementIter < rowsSyncElements.length;
@@ -357,14 +360,14 @@ class $Row extends Row with $$Row {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInRow());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInRow(
           methodName, positionalArguments, namedArguments);
@@ -374,7 +377,8 @@ class $Row extends Row with $$Row {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -391,15 +395,15 @@ class $Row extends Row with $$Row {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInRow(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -414,19 +418,19 @@ class $Row extends Row with $$Row {
 }
 
 mixin $$Row on Row {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRow() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInRow() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInRow() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInRow(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'rootElement') {
       return rootElement;
     }
@@ -437,11 +441,11 @@ mixin $$Row on Row {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInRow(
+  Map<int, String Function(List<String>) /*?*/ > findChainInRow(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var rootElementIndex = internalIds.indexOf(this.rootElement.id);
       if (rootElementIndex >= 0 && rootElementIndex < closestIndex) {

@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'root.dart';
 
@@ -26,14 +27,14 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInParentRoot());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInParentRoot(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInParentRoot(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,19 +85,20 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
 }
 
 mixin $$ParentRoot on ParentRoot {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRoot() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInParentRoot() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInParentRoot() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInParentRoot(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'root') {
       return root;
     }
@@ -103,11 +106,11 @@ mixin $$ParentRoot on ParentRoot {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInParentRoot(
+  Map<int, String Function(List<String>) /*?*/ > findChainInParentRoot(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var rootElement = this.root as dynamic;
       var rootIndex = internalIds.indexOf(rootElement.$__root__.id as String);
@@ -154,14 +157,14 @@ class $Root extends Root with $$Root {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInRoot());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInRoot(
           methodName, positionalArguments, namedArguments);
@@ -171,7 +174,8 @@ class $Root extends Root with $$Root {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -188,15 +192,15 @@ class $Root extends Root with $$Root {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInRoot(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -211,19 +215,19 @@ class $Root extends Root with $$Root {
 }
 
 mixin $$Root on Root {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRoot() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInRoot() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInRoot() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInRoot(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'myRoot') {
       return myRoot;
     }
@@ -234,11 +238,11 @@ mixin $$Root on Root {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInRoot(
+  Map<int, String Function(List<String>) /*?*/ > findChainInRoot(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var myRootIndex = internalIds.indexOf(this.myRoot.id);
       if (myRootIndex >= 0 && myRootIndex < closestIndex) {
@@ -309,7 +313,7 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInParentRootMixin());
     methods.addAll(testCreatorMethodsInParentRootUsingMixin());
     return json.encode(methods);
@@ -317,7 +321,7 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInParentRootUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -332,7 +336,8 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -349,8 +354,8 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInParentRootUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -362,7 +367,7 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -378,29 +383,29 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
 }
 
 mixin $$ParentRootUsingMixin on ParentRootUsingMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRootUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInParentRootUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInParentRootUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInParentRootUsingMixin(
-      List<String> internalIds,
-      [String action = 'default']) {
+  Map<int, String Function(List<String>) /*?*/ >
+      findChainInParentRootUsingMixin(List<String> internalIds,
+          [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -410,19 +415,20 @@ mixin $$ParentRootUsingMixin on ParentRootUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ParentRootMixin on ParentRootMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRootMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInParentRootMixin() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInParentRootMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInParentRootMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'root') {
       return root;
     }
@@ -430,11 +436,11 @@ mixin $$ParentRootMixin on ParentRootMixin {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInParentRootMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInParentRootMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var rootElement = this.root as dynamic;
       var rootIndex = internalIds.indexOf(rootElement.$__root__.id as String);
@@ -484,7 +490,7 @@ class $RootUsingMixin extends RootUsingMixin
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInRootMixin());
     methods.addAll(testCreatorMethodsInRootUsingMixin());
     return json.encode(methods);
@@ -492,7 +498,7 @@ class $RootUsingMixin extends RootUsingMixin
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInRootUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -507,7 +513,8 @@ class $RootUsingMixin extends RootUsingMixin
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -524,8 +531,8 @@ class $RootUsingMixin extends RootUsingMixin
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInRootUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -537,7 +544,7 @@ class $RootUsingMixin extends RootUsingMixin
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -552,28 +559,29 @@ class $RootUsingMixin extends RootUsingMixin
 }
 
 mixin $$RootUsingMixin on RootUsingMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInRootUsingMixin() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInRootUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInRootUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInRootUsingMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInRootUsingMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -583,19 +591,20 @@ mixin $$RootUsingMixin on RootUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$RootMixin on RootMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInRootMixin() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInRootMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInRootMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'myRoot') {
       return myRoot;
     }
@@ -606,11 +615,11 @@ mixin $$RootMixin on RootMixin {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInRootMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInRootMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var myRootIndex = internalIds.indexOf(this.myRoot.id);
       if (myRootIndex >= 0 && myRootIndex < closestIndex) {

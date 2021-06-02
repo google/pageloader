@@ -17,7 +17,7 @@ Refer to our [what changed section](what_changed.md) for more information.
 
 How do I trigger the generation step?
 =====================================
-`pub run build_runner build`
+`dart run build_runner build`
 
 If you are starting with a fresh checkout or deleted your `.dart_tool` directory,
 pass the flag: `--delete-conflicting-outputs`.

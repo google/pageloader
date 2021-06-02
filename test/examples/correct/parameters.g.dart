@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'parameters.dart';
 
@@ -26,14 +27,14 @@ class $Parameters extends Parameters with $$Parameters {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInParameters());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInParameters(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $Parameters extends Parameters with $$Parameters {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $Parameters extends Parameters with $$Parameters {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInParameters(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -137,19 +139,20 @@ class $Parameters extends Parameters with $$Parameters {
 }
 
 mixin $$Parameters on Parameters {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParameters() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInParameters() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInParameters() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInParameters(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'testOptionalPositionalParam') {
       return Function.apply(
           testOptionalPositionalParam, positionalArguments, namedArguments);
@@ -170,11 +173,11 @@ mixin $$Parameters on Parameters {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInParameters(
+  Map<int, String Function(List<String>) /*?*/ > findChainInParameters(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -201,7 +204,7 @@ class $ParametersUsingMixin extends ParametersUsingMixin
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInParametersMixin());
     methods.addAll(testCreatorMethodsInParametersUsingMixin());
     return json.encode(methods);
@@ -209,7 +212,7 @@ class $ParametersUsingMixin extends ParametersUsingMixin
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInParametersUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -224,7 +227,8 @@ class $ParametersUsingMixin extends ParametersUsingMixin
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -241,8 +245,8 @@ class $ParametersUsingMixin extends ParametersUsingMixin
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInParametersUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -254,7 +258,7 @@ class $ParametersUsingMixin extends ParametersUsingMixin
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -270,29 +274,29 @@ class $ParametersUsingMixin extends ParametersUsingMixin
 }
 
 mixin $$ParametersUsingMixin on ParametersUsingMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParametersUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInParametersUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInParametersUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInParametersUsingMixin(
-      List<String> internalIds,
-      [String action = 'default']) {
+  Map<int, String Function(List<String>) /*?*/ >
+      findChainInParametersUsingMixin(List<String> internalIds,
+          [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -302,19 +306,20 @@ mixin $$ParametersUsingMixin on ParametersUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ParametersMixin on ParametersMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParametersMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInParametersMixin() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInParametersMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInParametersMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'testOptionalPositionalParam') {
       return Function.apply(
           testOptionalPositionalParam, positionalArguments, namedArguments);
@@ -335,11 +340,11 @@ mixin $$ParametersMixin on ParametersMixin {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInParametersMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInParametersMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }

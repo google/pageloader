@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'empty.dart';
 
@@ -25,14 +26,14 @@ class $Empty extends Empty with $$Empty {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInEmpty());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInEmpty(
           methodName, positionalArguments, namedArguments);
@@ -42,7 +43,8 @@ class $Empty extends Empty with $$Empty {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -59,15 +61,15 @@ class $Empty extends Empty with $$Empty {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInEmpty(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -82,28 +84,28 @@ class $Empty extends Empty with $$Empty {
 }
 
 mixin $$Empty on Empty {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEmpty() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInEmpty() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInEmpty() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInEmpty(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInEmpty(
+  Map<int, String Function(List<String>) /*?*/ > findChainInEmpty(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -113,28 +115,29 @@ mixin $$Empty on Empty {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$EmptyMixin on EmptyMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEmptyMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInEmptyMixin() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInEmptyMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInEmptyMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInEmptyMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInEmptyMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }

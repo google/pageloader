@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'cache_invalidation.dart';
 
@@ -26,14 +27,14 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInCacheInvalidation());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInCacheInvalidation(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInCacheInvalidation(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,20 +85,20 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
 }
 
 mixin $$CacheInvalidation on CacheInvalidation {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCacheInvalidation() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInCacheInvalidation() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInCacheInvalidation(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'button1') {
       return button1;
     }
@@ -107,11 +109,11 @@ mixin $$CacheInvalidation on CacheInvalidation {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInCacheInvalidation(
+  Map<int, String Function(List<String>) /*?*/ > findChainInCacheInvalidation(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var select1Element = this.select1 as dynamic;
       var select1Index =
@@ -183,14 +185,14 @@ class $_Nested extends _Nested with $$_Nested {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsIn_Nested());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodIn_Nested(
           methodName, positionalArguments, namedArguments);
@@ -200,7 +202,8 @@ class $_Nested extends _Nested with $$_Nested {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -217,15 +220,15 @@ class $_Nested extends _Nested with $$_Nested {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainIn_Nested(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -240,19 +243,19 @@ class $_Nested extends _Nested with $$_Nested {
 }
 
 mixin $$_Nested on _Nested {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersIn_Nested() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsIn_Nested() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsIn_Nested() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodIn_Nested(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'option1') {
       return option1;
     }
@@ -263,11 +266,11 @@ mixin $$_Nested on _Nested {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainIn_Nested(
+  Map<int, String Function(List<String>) /*?*/ > findChainIn_Nested(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var option1Index = internalIds.indexOf(this.option1.id);
       if (option1Index >= 0 && option1Index < closestIndex) {

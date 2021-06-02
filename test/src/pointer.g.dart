@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'pointer.dart';
 
@@ -26,14 +27,14 @@ class $PageForPointerTest extends PageForPointerTest with $$PageForPointerTest {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInPageForPointerTest());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInPageForPointerTest(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $PageForPointerTest extends PageForPointerTest with $$PageForPointerTest {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $PageForPointerTest extends PageForPointerTest with $$PageForPointerTest {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInPageForPointerTest(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,21 +85,21 @@ class $PageForPointerTest extends PageForPointerTest with $$PageForPointerTest {
 }
 
 mixin $$PageForPointerTest on PageForPointerTest {
-  PageLoaderElement $__root__;
-  PageLoaderPointer __pointer__;
+/*late*/ PageLoaderElement $__root__;
+  PageLoaderPointer /*?*/ __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForPointerTest() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInPageForPointerTest() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInPageForPointerTest(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'element') {
       return element;
     }
@@ -114,11 +116,11 @@ mixin $$PageForPointerTest on PageForPointerTest {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInPageForPointerTest(
+  Map<int, String Function(List<String>) /*?*/ > findChainInPageForPointerTest(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var elementIndex = internalIds.indexOf(this.element.id);
       if (elementIndex >= 0 && elementIndex < closestIndex) {
@@ -215,7 +217,7 @@ mixin $$PageForPointerTest on PageForPointerTest {
       __listener.startPageObjectMethod('PageForPointerTest', 'pointer');
     }
     __pointer__ ??= $__root__.utils.pointer;
-    final returnMe = __pointer__;
+    final returnMe = __pointer__ /*!*/;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForPointerTest', 'pointer');
     }
