@@ -46,34 +46,34 @@ void runTests(GetNewContext contextGenerator) {
     test('x right', () async {
       expect(scrollPO.scrollLeft, 0);
       expect(scrollPO.scrollTop, 0);
-      await scrollPO.scroll(x: 50);
-      expect(scrollPO.scrollLeft, 50);
+      await scrollPO.scroll(x: 40);
+      expect(scrollPO.scrollLeft, 40);
       expect(scrollPO.scrollTop, 0);
     });
 
     test('x right then left', () async {
       expect(scrollPO.scrollLeft, 0);
       expect(scrollPO.scrollTop, 0);
-      await scrollPO.scroll(x: 50);
+      await scrollPO.scroll(x: 40);
       await scrollPO.scroll(x: -30);
-      expect(scrollPO.scrollLeft, 20);
+      expect(scrollPO.scrollLeft, 10);
       expect(scrollPO.scrollTop, 0);
     });
 
     test('x and y', () async {
       expect(scrollPO.scrollLeft, 0);
       expect(scrollPO.scrollTop, 0);
-      await scrollPO.scroll(x: 50, y: 500);
-      expect(scrollPO.scrollLeft, 50);
+      await scrollPO.scroll(x: 40, y: 500);
+      expect(scrollPO.scrollLeft, 40);
       expect(scrollPO.scrollTop, 500);
     });
 
     test('x and y reverse', () async {
       expect(scrollPO.scrollLeft, 0);
       expect(scrollPO.scrollTop, 0);
-      await scrollPO.scroll(x: 50, y: 500);
+      await scrollPO.scroll(x: 40, y: 500);
       await scrollPO.scroll(x: -30, y: -300);
-      expect(scrollPO.scrollLeft, 20);
+      expect(scrollPO.scrollLeft, 10);
       expect(scrollPO.scrollTop, 200);
     });
 
