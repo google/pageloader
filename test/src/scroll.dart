@@ -82,6 +82,7 @@ void runTests(GetNewContext contextGenerator) {
     test('to element', () async {
       expect(scrollPO.scrollTop, 0);
       await scrollPO.scrollBottom.scrollIntoView();
+      await Future.delayed(Duration(seconds: 3));
       expect(scrollPO.scrollTop, greaterThan(0));
     });
   });
