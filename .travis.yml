@@ -9,7 +9,7 @@ addons:
   chrome: stable
 
 dart:
-  - "2.9.3"
+  - "latest"
 
 before_install:
   - export CHROMEDRIVER_BINARY=/usr/bin/google-chrome
