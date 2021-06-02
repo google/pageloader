@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,29 +21,29 @@ import 'package:analyzer/dart/element/element.dart';
 /// Thrown when a method defined in a page object is invalid in some way.
 class InvalidMethodException implements Exception {
   final String _message;
-  final AstNode? _methodNode;
+  final AstNode _methodNode;
 
   InvalidMethodException(this._methodNode, this._message);
 
   String get message => _message;
-  String get methodSource => _nodeMessage(_methodNode!);
+  String get methodSource => _nodeMessage(_methodNode);
 
   /// Generates a detailed message on the [node] throwing the error
   /// that includes file and location.
   String _nodeMessage(AstNode node) {
-    final compUnitElement = _getCompilationUnitElement(node)!;
+    final compUnitElement = _getCompilationUnitElement(node);
     final uri = compUnitElement.source.uri;
 
-    final exactLineInfo = compUnitElement.lineInfo!.getLocation(node.offset);
+    final exactLineInfo = compUnitElement.lineInfo.getLocation(node.offset);
     return '$uri $exactLineInfo\t\t ${node.toSource()}';
   }
 
   /// Returns the [CompilationUnitElement] of [node].
-  CompilationUnitElement? _getCompilationUnitElement(AstNode node) {
-    AstNode? _node = node;
+  CompilationUnitElement _getCompilationUnitElement(AstNode node) {
+    var _node = node;
     while (_node is! CompilationUnit) {
-      _node = _node!.parent;
+      _node = _node.parent;
     }
-    return _node.declaredElement;
+    return (_node as CompilationUnit).declaredElement;
   }
 }

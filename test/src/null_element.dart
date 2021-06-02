@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2018 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,11 +20,11 @@ import 'package:test/test.dart';
 
 part 'null_element.g.dart';
 
-typedef GetNewContext = PageLoaderElement? Function();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('nullElement works', () {
-    late BasePO po;
+    BasePO po;
 
     setUp(() {
       po = BasePO.create(contextGenerator());
@@ -63,7 +65,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class BasePO {
   BasePO();
-  factory BasePO.create(PageLoaderElement? context) = $BasePO.create;
+  factory BasePO.create(PageLoaderElement context) = $BasePO.create;
 
   @ById('button-1')
   PageLoaderElement get button;

@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,7 +38,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
     return Optional.absent();
   }
 
-  String? finder;
+  String finder;
   final filters = <String>[];
   final checkers = <String>[];
   for (final annotation in methodAnnotations) {
@@ -65,8 +67,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
   // Convert 'ByCheckTag' to 'ByTagName' if necessary.
   if (finder != null && finder.contains('ByCheckTag')) {
     finder = generateByTagNameFromByCheckTag(
-        getInnerType(node.returnType!.type!, typeArguments[0]) as InterfaceType,
-        node.toSource());
+        getInnerType(node.returnType.type, typeArguments[0]), node.toSource());
   }
 
   if (finder == null) {
@@ -90,11 +91,11 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
 /// Generates source for iterable page objects getters.
 abstract class IterableFinderMethod
     implements Built<IterableFinderMethod, IterableFinderMethodBuilder> {
-  String? get name;
-  String? get iterableTypeArgument;
-  String? get finderDeclaration;
-  String? get filterDeclarations;
-  String? get checkerDeclarations;
+  String get name;
+  String get iterableTypeArgument;
+  String get finderDeclaration;
+  String get filterDeclarations;
+  String get checkerDeclarations;
 
   String generate(String pageObjectName) =>
       '$_methodSignature { ' +
@@ -122,7 +123,6 @@ abstract class IterableFinderMethod
   }
 
   factory IterableFinderMethod(
-          [Function(IterableFinderMethodBuilder)? updates]) =
-      _$IterableFinderMethod;
+      [Function(IterableFinderMethodBuilder) updates]) = _$IterableFinderMethod;
   IterableFinderMethod._();
 }

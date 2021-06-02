@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +18,7 @@ import 'package:test/test.dart';
 
 part 'typing.g.dart';
 
-typedef GetNewContext = PageLoaderElement? Function();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
   group('typing', () {
@@ -55,8 +57,8 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
     });
 
     group('HTML/Webdriver: Special keyboard events are sent', () {
-      late PageLoaderKeyboard kb;
-      late PageLoaderElement listener;
+      PageLoaderKeyboard kb;
+      PageLoaderElement listener;
 
       setUp(() {
         kb = PageLoaderKeyboard();
@@ -77,7 +79,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
   });
 
   group('typing with focus and blur', () {
-    late PageForTypingTestsWithFocusAndBlur page;
+    PageForTypingTestsWithFocusAndBlur page;
 
     setUp(() {
       page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
@@ -117,9 +119,9 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
   });
 
   group('clear with focus and blur', () {
-    late PageForTypingTestsWithFocusAndBlur page;
-    late int focusCount;
-    late int blurCount;
+    PageForTypingTestsWithFocusAndBlur page;
+    int focusCount;
+    int blurCount;
 
     setUp(() {
       page = PageForTypingTestsWithFocusAndBlur.create(contextGenerator());
@@ -184,8 +186,8 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
   });
 
   group('Special keyboard events are sent', () {
-    late PageLoaderKeyboard kb;
-    late PageLoaderElement listener;
+    PageLoaderKeyboard kb;
+    PageLoaderElement listener;
 
     setUp(() {
       kb = PageLoaderKeyboard();
@@ -215,7 +217,7 @@ void runTests(GetNewContext contextGenerator, {isHtmlTest = false}) {
 @PageObject()
 abstract class PageForTextAreaTypingText {
   PageForTextAreaTypingText();
-  factory PageForTextAreaTypingText.create(PageLoaderElement? context) =
+  factory PageForTextAreaTypingText.create(PageLoaderElement context) =
       $PageForTextAreaTypingText.create;
 
   @ById('textarea')
@@ -225,7 +227,7 @@ abstract class PageForTextAreaTypingText {
 @PageObject()
 abstract class PageForTypingTests {
   PageForTypingTests();
-  factory PageForTypingTests.create(PageLoaderElement? context) =
+  factory PageForTypingTests.create(PageLoaderElement context) =
       $PageForTypingTests.create;
 
   @ById('text')
@@ -235,8 +237,8 @@ abstract class PageForTypingTests {
 @PageObject()
 abstract class PageForTypingTestsWithFocusAndBlur {
   PageForTypingTestsWithFocusAndBlur();
-  factory PageForTypingTestsWithFocusAndBlur.create(
-      PageLoaderElement? context) = $PageForTypingTestsWithFocusAndBlur.create;
+  factory PageForTypingTestsWithFocusAndBlur.create(PageLoaderElement context) =
+      $PageForTypingTestsWithFocusAndBlur.create;
 
   @ById('text-with-focus-and-blur')
   PageLoaderElement get text;
@@ -247,15 +249,15 @@ abstract class PageForTypingTestsWithFocusAndBlur {
   @ById('text-with-focus-and-blur-blur-count')
   PageLoaderElement get _blurCount;
 
-  int get focusCount => int.parse(_focusCount.innerText!);
+  int get focusCount => int.parse(_focusCount.innerText);
 
-  int get blurCount => int.parse(_blurCount.innerText!);
+  int get blurCount => int.parse(_blurCount.innerText);
 }
 
 @PageObject()
 abstract class KeyboardListenerPO {
   KeyboardListenerPO();
-  factory KeyboardListenerPO.create(PageLoaderElement? context) =
+  factory KeyboardListenerPO.create(PageLoaderElement context) =
       $KeyboardListenerPO.create;
 
   @ById('keyboard-listener')

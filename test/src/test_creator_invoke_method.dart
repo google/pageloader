@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +22,7 @@ typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('testCreatorInvokeMethod', () {
-    late dynamic page;
+    dynamic page;
 
     group('without mixin', () {
       setUp(() {

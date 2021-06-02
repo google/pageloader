@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +32,7 @@ abstract class Root {
   factory Root.create(PageLoaderElement context) = $Root.create;
 
   @root
-  PageLoaderElement? get myRoot;
+  PageLoaderElement get myRoot;
 
   @ById('some-id')
   PageLoaderElement get myId;
@@ -60,7 +62,7 @@ abstract class RootUsingMixin extends Object with RootMixin {
 @PageObject()
 abstract class RootMixin {
   @root
-  PageLoaderElement? get myRoot;
+  PageLoaderElement get myRoot;
 
   @ById('some-id')
   PageLoaderElement get myId;

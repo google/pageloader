@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +22,7 @@ import 'methods/core.dart' as core;
 String _generateCheck(Annotation annotation) {
   if (annotation.arguments == null) throw 'bad';
   return '${annotation.name.toString()}'
-      '(${annotation.arguments!.arguments.join(', ')})';
+      '(${annotation.arguments.arguments.join(', ')})';
 }
 
 /// Generates a comma separated list of class check declarations for the given

@@ -28,7 +28,7 @@ abstract class CssFinder extends Finder {
 
 /// Finder based on page loader context.
 abstract class ContextFinder extends Finder {
-  List<PageLoaderElement?> findElements(PageLoaderElement? context);
+  List<PageLoaderElement> findElements(PageLoaderElement context);
 }
 
 /// Checks some property of annotated element. Fails if this property does not

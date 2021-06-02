@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +18,7 @@ import 'package:test/test.dart';
 
 import 'shared_list_page_objects.dart';
 
-typedef GetNewContext = PageLoaderElement? Function();
+typedef GetNewContext = PageLoaderElement Function();
 
 class TestListener extends PageLoaderListener {
   final String name;
@@ -24,7 +26,7 @@ class TestListener extends PageLoaderListener {
 }
 
 void runTests(GetNewContext contextGenerator) {
-  PageLoaderElement? root;
+  PageLoaderElement root;
 
   group('listeners', () {
     setUp(() async {
@@ -32,31 +34,31 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('are shared with root element', () async {
-      root!.addListeners([TestListener('A')]);
+      root.addListeners([TestListener('A')]);
 
       final page = PageForSimpleTest.create(root);
 
-      expect(root!.listeners, hasLength(1));
-      expect(page.rootElement!.listeners, hasLength(1));
+      expect(root.listeners, hasLength(1));
+      expect(page.rootElement.listeners, hasLength(1));
     });
 
     test('are shared with created page object', () async {
-      root!.addListeners([TestListener('A')]);
+      root.addListeners([TestListener('A')]);
 
       final page = PageForSimpleTest.create(root);
 
-      expect(root!.listeners, hasLength(1));
-      expect(page.table.table!.listeners, hasLength(1));
+      expect(root.listeners, hasLength(1));
+      expect(page.table.table.listeners, hasLength(1));
     });
 
     test('are shared with created list', () async {
-      root!.addListeners([TestListener('A')]);
+      root.addListeners([TestListener('A')]);
 
       final page = PageForSimpleTest.create(root);
 
-      expect(root!.listeners, hasLength(1));
-      expect((await page.table.rows)[0].rootElement!.listeners, hasLength(1));
-      expect(page.table.rowsSync[0].rootElement!.listeners, hasLength(1));
+      expect(root.listeners, hasLength(1));
+      expect((await page.table.rows)[0].rootElement.listeners, hasLength(1));
+      expect(page.table.rowsSync[0].rootElement.listeners, hasLength(1));
     });
   });
 }

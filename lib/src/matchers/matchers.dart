@@ -185,11 +185,11 @@ class _IsFocused extends Matcher {
   Description describeMismatch(dynamic item, Description mismatchDescription,
       Map matchState, bool verbose) {
     try {
-      final e = utils.rootElementOf(item)!;
+      final e = utils.rootElementOf(item);
 
       // Lowercasing because it's a bit easier to read.
       final itemId = e.id.toLowerCase();
-      final focusId = e.utils!.focused.id.toLowerCase();
+      final focusId = e.utils.focused.id.toLowerCase();
 
       // Find the common prefix xpath.
       var common = 0;

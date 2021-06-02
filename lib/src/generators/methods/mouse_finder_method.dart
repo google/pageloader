@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,30 +23,31 @@ import 'core.dart';
 import 'core_method_information.dart';
 import 'invalid_method_exception.dart';
 import 'listeners.dart';
+import 'null_safety.dart';
 
 part 'mouse_finder_method.g.dart';
 
 /// Returns a [MouseFinderMethod] if a valid @Mouse getter is present, and
 /// [absent()] otherwise.
 Optional<MouseFinderMethod> collectMouseFinderGetter(
-    CoreMethodInformationBase methodInfo) {
-  if (!methodInfo.isMouse!) {
+    NullSafety nullSafety, CoreMethodInformationBase methodInfo) {
+  if (!methodInfo.isMouse) {
     return Optional.absent();
   }
 
-  if (!methodInfo.isAbstract! || !methodInfo.isGetter!) {
+  if (!methodInfo.isAbstract || !methodInfo.isGetter) {
     throw InvalidMethodException(
         methodInfo.node, '@Mouse annotation must be used with abstract getter');
   }
-  if (methodInfo.finder!.isPresent) {
+  if (methodInfo.finder.isPresent) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Finder with Mouse annotation');
   }
-  if (methodInfo.filters!.isNotEmpty) {
+  if (methodInfo.filters.isNotEmpty) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Filter with Mouse annotation');
   }
-  if (methodInfo.checkers!.isNotEmpty) {
+  if (methodInfo.checkers.isNotEmpty) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Checker with Mouse annotation');
   }
@@ -55,17 +58,18 @@ Optional<MouseFinderMethod> collectMouseFinderGetter(
 /// Generation for @Mouse getters.
 abstract class MouseFinderMethod
     implements Built<MouseFinderMethod, MouseFinderMethodBuilder> {
-  String? get name;
+  NullSafety get nullSafety;
+  String get name;
 
   String generate(String pageObjectName) =>
       'PageLoaderMouse get $name { ' +
       generateStartMethodListeners(pageObjectName, name) +
       '$mouse ??= $root.utils.mouse;' +
-      'final returnMe = $mouse;' +
+      'final returnMe = $mouse${nullSafety.notNull};' +
       generateEndMethodListeners(pageObjectName, name) +
       'return returnMe; }';
 
-  factory MouseFinderMethod([Function(MouseFinderMethodBuilder)? updates]) =
+  factory MouseFinderMethod([Function(MouseFinderMethodBuilder) updates]) =
       _$MouseFinderMethod;
   MouseFinderMethod._();
 }

@@ -70,7 +70,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// Returns an instance of [PageUtils].
   ///
   /// Note the instances returned may not be object equal across invocations.
-  PageUtils? get utils;
+  PageUtils get utils;
 
   /// The shadow root hosted by this element.
   PageLoaderElement get shadowRoot;
@@ -88,7 +88,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// This should return the value of [`<element>.innerText`](
   /// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText),
   /// but behaviour may vary for the different pageloader implementations.
-  String? get innerText;
+  String get innerText;
 
   /// Visible text within this element.
   ///
@@ -192,6 +192,11 @@ abstract class PageLoaderElement extends PageLoaderSource {
 
   /// Blurs the element (= lose focus).
   Future<void> blur();
+
+  /// Dispatches the [eventName] custom event on this element.
+  ///
+  /// If provided, [detail] is copied into the event.
+  Future<void> dispatchCustomEvent(String eventName, {Object? detail});
 
   /// Gives a full description of the element for debugger.
   String toStringDeep();

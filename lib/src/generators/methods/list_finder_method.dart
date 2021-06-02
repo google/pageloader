@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,20 +31,19 @@ part 'list_finder_method.g.dart';
 /// and [absent()] otherwise.
 Optional<ListFinderMethod> collectListFinderGetter(
     CoreMethodInformationBase methodInfo, MethodDeclaration node) {
-  if (!methodInfo.isAbstract! ||
-      !methodInfo.isGetter! ||
+  if (!methodInfo.isAbstract ||
+      !methodInfo.isGetter ||
       node.isStatic ||
-      !methodInfo.finder!.isPresent ||
-      !methodInfo.isList!) {
+      !methodInfo.finder.isPresent ||
+      !methodInfo.isList) {
     return Optional.absent();
   }
 
   // Convert 'ByCheckTag' to 'ByTagName' if necessary.
-  var finder = methodInfo.finder!.value;
+  var finder = methodInfo.finder.value;
   if (finder != null && finder.contains('ByCheckTag')) {
     finder = generateByTagNameFromByCheckTag(
-        getInnerType(node.returnType!.type!, methodInfo.pageObjectType!)
-            as InterfaceType,
+        getInnerType(node.returnType.type, methodInfo.pageObjectType),
         node.toSource());
   }
 
@@ -50,8 +51,8 @@ Optional<ListFinderMethod> collectListFinderGetter(
     ..name = methodInfo.name
     ..listTypeArgument = methodInfo.pageObjectType
     ..finderDeclaration = finder
-    ..filterDeclarations = '[${methodInfo.filters!.join(', ')}]'
-    ..checkerDeclarations = '[${methodInfo.checkers!.join(', ')}]'
+    ..filterDeclarations = '[${methodInfo.filters.join(', ')}]'
+    ..checkerDeclarations = '[${methodInfo.checkers.join(', ')}]'
     ..isFuture = methodInfo.isFuture
     ..genericType = methodInfo.pageObjectTemplate));
 }
@@ -62,7 +63,7 @@ abstract class ListFinderMethod extends Object
     implements
         ListFinderMethodBase,
         Built<ListFinderMethod, ListFinderMethodBuilder> {
-  factory ListFinderMethod([Function(ListFinderMethodBuilder)? updates]) =
+  factory ListFinderMethod([Function(ListFinderMethodBuilder) updates]) =
       _$ListFinderMethod;
 
   ListFinderMethod._();
@@ -72,19 +73,19 @@ abstract class ListFinderMethod extends Object
 abstract class ListFinderMethodMixin {
   // Fields from [ListFinderMethodBase] that need to be declared in order to
   // be used in the below methods.
-  String? get checkerDeclarations;
+  String get checkerDeclarations;
 
-  String? get listTypeArgument;
+  String get listTypeArgument;
 
-  String? get filterDeclarations;
+  String get filterDeclarations;
 
-  String? get finderDeclaration;
+  String get finderDeclaration;
 
-  String? get name;
+  String get name;
 
-  bool? get isFuture;
+  bool get isFuture;
 
-  Optional<String>? get genericType;
+  Optional<String> get genericType;
 
   String generate(String pageObjectName) =>
       '$methodSignature { ' +
@@ -94,7 +95,7 @@ abstract class ListFinderMethodMixin {
       'return returnMe; }';
 
   String get methodSignature {
-    if (isFuture!) {
+    if (isFuture) {
       return 'Future<$pageObjectList> get $name async ';
     } else {
       return '$pageObjectList get $name ';
@@ -124,7 +125,7 @@ abstract class ListFinderMethodMixin {
         }
       }''';
 
-  bool get produceFindChain => !isFuture!;
+  bool get produceFindChain => !isFuture;
 
   String get chainIndexCreation => createChainIndex;
 
@@ -152,7 +153,7 @@ abstract class ListFinderMethodMixin {
     }
   }
 
-  String get generic => genericType!.isPresent ? '<${genericType!.value}>' : '';
+  String get generic => genericType.isPresent ? '<${genericType.value}>' : '';
 
   // Note: although redundant, keep this as is.
   String get getReturnValue => createObjectIterable;

@@ -65,7 +65,7 @@ class CollectingTimer {
   final Stopwatch _stopwatch = Stopwatch();
   final Collector _collector;
   bool _isRunning = false;
-  DateTime? _startDuration;
+  late DateTime _startDuration;
 
   CollectingTimer(this._collector, this.configuration);
 
@@ -94,7 +94,7 @@ class CollectingTimer {
       ..pid = configuration.pid
       ..tid = configuration.tid
       ..phase = DurationEventPhase.end
-      ..ts = _startDuration!
+      ..ts = _startDuration
           .add(Duration(microseconds: _stopwatch.elapsedMicroseconds));
 
     _collector([startEvent, endEvent]);

@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@ import 'shared_page_objects.dart';
 
 part 'basic.g.dart';
 
-typedef GetNewContext = PageLoaderElement? Function();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('basic', () {
@@ -65,7 +67,7 @@ void runTests(GetNewContext contextGenerator) {
     test('classes', () async {
       final page = PageForSimpleTest.create(contextGenerator());
 
-      expect(page.table.table!.classes,
+      expect(page.table.table.classes,
           orderedEquals(['class1', 'class2', 'class3']));
       expect((await (await page.table.rows.first).cells.first).classes,
           hasLength(0));
@@ -74,16 +76,16 @@ void runTests(GetNewContext contextGenerator) {
     test('style', () async {
       final page = PageForSimpleTest.create(contextGenerator());
 
-      expect(page.table.table!.style['color'], 'rgb(128, 0, 128)');
-      expect(page.table.table!.style['backgroundColor'], '');
+      expect(page.table.table.style['color'], 'rgb(128, 0, 128)');
+      expect(page.table.table.style['backgroundColor'], '');
     });
 
     test('computedStyle', () async {
       final page = PageForSimpleTest.create(contextGenerator());
 
-      expect(page.table.table!.computedStyle['color'],
+      expect(page.table.table.computedStyle['color'],
           anyOf('rgb(128, 0, 128)', 'rgba(128, 0, 128, 1)'));
-      expect(page.table.table!.computedStyle['background-color'],
+      expect(page.table.table.computedStyle['background-color'],
           anyOf('rgb(0, 255, 0)', 'rgba(0, 255, 0, 1)'));
     });
 
@@ -150,7 +152,7 @@ void runTests(GetNewContext contextGenerator) {
     });
 
     test('getElementsByCss works', () async {
-      final element = contextGenerator()!; // Top element.
+      final element = contextGenerator(); // Top element.
       expect((element.getElementsByCss('td')).length, 4);
     });
 
@@ -173,7 +175,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class PageForExistsTest {
   PageForExistsTest();
-  factory PageForExistsTest.create(PageLoaderElement? context) =
+  factory PageForExistsTest.create(PageLoaderElement context) =
       $PageForExistsTest.create;
 
   @ByTagName('non-existant')
@@ -189,7 +191,7 @@ abstract class PageForExistsTest {
 @PageObject()
 abstract class PageForVisibilityTest {
   PageForVisibilityTest();
-  factory PageForVisibilityTest.create(PageLoaderElement? context) =
+  factory PageForVisibilityTest.create(PageLoaderElement context) =
       $PageForVisibilityTest.create;
 
   @ById('invisible-div')
@@ -202,7 +204,7 @@ abstract class PageForVisibilityTest {
 @PageObject()
 abstract class PageForClassAnnotationTest {
   PageForClassAnnotationTest();
-  factory PageForClassAnnotationTest.create(PageLoaderElement? context) =
+  factory PageForClassAnnotationTest.create(PageLoaderElement context) =
       $PageForClassAnnotationTest.create;
 
   @root
@@ -212,7 +214,7 @@ abstract class PageForClassAnnotationTest {
 @PageObject()
 abstract class PageForPrivateFieldsTest {
   PageForPrivateFieldsTest();
-  factory PageForPrivateFieldsTest.create(PageLoaderElement? context) =
+  factory PageForPrivateFieldsTest.create(PageLoaderElement context) =
       $PageForPrivateFieldsTest.create;
 
   @ByTagName('table')
@@ -224,7 +226,7 @@ abstract class PageForPrivateFieldsTest {
 @PageObject()
 abstract class PageForFocusTest {
   PageForFocusTest();
-  factory PageForFocusTest.create(PageLoaderElement? context) =
+  factory PageForFocusTest.create(PageLoaderElement context) =
       $PageForFocusTest.create;
 
   @ById('text')
@@ -234,7 +236,7 @@ abstract class PageForFocusTest {
 @PageObject()
 abstract class PageForNbspTest {
   PageForNbspTest();
-  factory PageForNbspTest.create(PageLoaderElement? context) =
+  factory PageForNbspTest.create(PageLoaderElement context) =
       $PageForNbspTest.create;
 
   @ById('nbsp')
@@ -244,7 +246,7 @@ abstract class PageForNbspTest {
 @PageObject()
 abstract class Basic {
   Basic();
-  factory Basic.create(PageLoaderElement? context) = $Basic.create;
+  factory Basic.create(PageLoaderElement context) = $Basic.create;
 
   @ByClass('outer-nested')
   OuterNested get outerNested;
@@ -262,7 +264,7 @@ abstract class OuterNested {
 @PageObject()
 abstract class DebugId {
   DebugId();
-  factory DebugId.create(PageLoaderElement? context) = $DebugId.create;
+  factory DebugId.create(PageLoaderElement context) = $DebugId.create;
 
   @ByDebugId('debugId')
   PageLoaderElement get debug;
@@ -271,7 +273,7 @@ abstract class DebugId {
 @PageObject()
 abstract class Display {
   Display();
-  factory Display.create(PageLoaderElement? context) = $Display.create;
+  factory Display.create(PageLoaderElement context) = $Display.create;
 
   @ById('div')
   PageLoaderElement get notDisplayed;
@@ -304,13 +306,13 @@ mixin MixinPO {
 @PageObject()
 abstract class POWithClassMixinPO with ClassMixinPO {
   POWithClassMixinPO();
-  factory POWithClassMixinPO.create(PageLoaderElement? context) =
+  factory POWithClassMixinPO.create(PageLoaderElement context) =
       $POWithClassMixinPO.create;
 }
 
 @PageObject()
 abstract class POWithMixinPO with MixinPO {
   POWithMixinPO();
-  factory POWithMixinPO.create(PageLoaderElement? context) =
+  factory POWithMixinPO.create(PageLoaderElement context) =
       $POWithMixinPO.create;
 }

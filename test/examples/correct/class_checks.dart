@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +24,7 @@ abstract class ClassChecks {
   factory ClassChecks.create(PageLoaderElement context) = $ClassChecks.create;
 
   @root
-  PageLoaderElement? get myRoot;
+  PageLoaderElement get myRoot;
 }
 
 @EnsureTag('some-other-tag') // ignore: deprecated_member_use_from_same_package
@@ -33,7 +35,7 @@ abstract class EnsureTagChecks {
       $EnsureTagChecks.create;
 
   @root
-  PageLoaderElement? get myRoot;
+  PageLoaderElement get myRoot;
 }
 
 // Mixin implementation
@@ -64,11 +66,11 @@ abstract class EnsureTagChecksUsingMixin extends Object with ChecksMixin {
 @PageObject()
 abstract class ChecksClassMixin {
   @root
-  PageLoaderElement? get myRoot;
+  PageLoaderElement get myRoot;
 }
 
 @PageObject()
 mixin ChecksMixin {
   @root
-  PageLoaderElement? get myRoot;
+  PageLoaderElement get myRoot;
 }

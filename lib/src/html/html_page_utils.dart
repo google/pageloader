@@ -54,9 +54,9 @@ class HtmlPageUtils extends PageUtils {
 
   /// Gets the mouse.
   @override
-  PageLoaderMouse? get mouse => globalMouse(syncFn);
+  PageLoaderMouse get mouse => globalMouse(syncFn);
 
   /// Gets the pointer.
   @override
-  PageLoaderPointer? get pointer => globalPointer(syncFn);
+  PageLoaderPointer get pointer => globalPointer(syncFn);
 }

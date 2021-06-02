@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,51 +23,55 @@ import 'core.dart';
 import 'core_method_information.dart';
 import 'invalid_method_exception.dart';
 import 'listeners.dart';
+import 'null_safety.dart';
 
 part 'pointer_finder_method.g.dart';
 
 /// Returns a [PointerFinderMethod] if a valid @Pointer getter is present, and
 /// [absent()] otherwise.
 Optional<PointerFinderMethod> collectPointerFinderGetter(
-    CoreMethodInformationBase methodInfo) {
-  if (!methodInfo.isPointer!) {
+    NullSafety nullSafety, CoreMethodInformationBase methodInfo) {
+  if (!methodInfo.isPointer) {
     return Optional.absent();
   }
 
-  if (!methodInfo.isAbstract! || !methodInfo.isGetter!) {
+  if (!methodInfo.isAbstract || !methodInfo.isGetter) {
     throw InvalidMethodException(methodInfo.node,
         '@Pointer annotation must be used with abstract getter');
   }
-  if (methodInfo.finder!.isPresent) {
+  if (methodInfo.finder.isPresent) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Finder with Pointer annotation');
   }
-  if (methodInfo.filters!.isNotEmpty) {
+  if (methodInfo.filters.isNotEmpty) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Filter with Pointer annotation');
   }
-  if (methodInfo.checkers!.isNotEmpty) {
+  if (methodInfo.checkers.isNotEmpty) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Checker with Pointer annotation');
   }
 
-  return Optional.of(PointerFinderMethod((b) => b..name = methodInfo.name));
+  return Optional.of(PointerFinderMethod((b) => b
+    ..nullSafety = nullSafety.toBuilder()
+    ..name = methodInfo.name));
 }
 
 /// Generation for @Pointer getters.
 abstract class PointerFinderMethod
     implements Built<PointerFinderMethod, PointerFinderMethodBuilder> {
-  String? get name;
+  NullSafety get nullSafety;
+  String get name;
 
   String generate(String pageObjectName) =>
       'PageLoaderPointer get $name { ' +
       generateStartMethodListeners(pageObjectName, name) +
       '$pointer ??= $root.utils.pointer;' +
-      'final returnMe = $pointer;' +
+      'final returnMe = $pointer${nullSafety.notNull};' +
       generateEndMethodListeners(pageObjectName, name) +
       'return returnMe; }';
 
-  factory PointerFinderMethod([Function(PointerFinderMethodBuilder)? updates]) =
+  factory PointerFinderMethod([Function(PointerFinderMethodBuilder) updates]) =
       _$PointerFinderMethod;
   PointerFinderMethod._();
 }

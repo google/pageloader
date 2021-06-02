@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,9 +59,9 @@ abstract class Getter implements Built<Getter, GetterBuilder> {
     'Set'
   ];
 
-  String? get name;
+  String get name;
 
-  String? get returnType;
+  String get returnType;
 
   String generate(String pageObjectName) {
     return '$returnType get $name { ' +
@@ -107,12 +109,12 @@ abstract class Getter implements Built<Getter, GetterBuilder> {
       }''';
 
   bool get produceFindChain =>
-      !returnType!.endsWith('>') && !ignoredTypes.contains(returnType);
+      !returnType.endsWith('>') && !ignoredTypes.contains(returnType);
 
   bool get produceTestCreatorGetter =>
-      valueTypes.contains(returnType!.split('<').first);
+      valueTypes.contains(returnType.split('<').first);
 
-  factory Getter([Function(GetterBuilder)? updates]) = _$Getter;
+  factory Getter([Function(GetterBuilder) updates]) = _$Getter;
 
   Getter._();
 }

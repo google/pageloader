@@ -198,10 +198,10 @@ class DummyPageLoaderElement implements PageLoaderElement {
   DummyPageLoaderElement get shadowRoot => throw 'not implemented';
 
   @override
-  String get innerText => throw 'not implemented';
+  List<PageLoaderElement> get shadowRootChildren => throw 'not implemented';
 
   @override
-  List<PageLoaderElement> get shadowRootChildren => throw 'not implemented';
+  String get innerText => throw 'not implemented';
 
   @override
   String get visibleText => throw 'not implemented';
@@ -279,6 +279,10 @@ class DummyPageLoaderElement implements PageLoaderElement {
 
   @override
   Future<Null> blur() => throw 'not implemented';
+
+  @override
+  Future<void> dispatchCustomEvent(String name, {Object? detail}) =>
+      throw 'not implemented';
 
   @override
   String toStringDeep() => 'DummyPageLoaderElement';

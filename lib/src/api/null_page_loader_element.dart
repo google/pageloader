@@ -174,6 +174,10 @@ class NullPageLoaderElement implements PageLoaderElement {
       throw NullPageLoaderElementAccessException('blur', this);
 
   @override
+  Future<void> dispatchCustomEvent(String name, {Object? detail}) =>
+      throw NullPageLoaderElementAccessException('dispatchCustomEvent', this);
+
+  @override
   String toStringDeep() => 'NullPageLoaderElement';
 
   @override

@@ -20,7 +20,7 @@ import 'package:webdriver/sync_core.dart' as wd;
 
 /// Support for pointer in WebDriver context.
 class WebDriverPointer implements PageLoaderPointer {
-  final wd.WebDriver? _driver; // ignore: unused_field
+  final wd.WebDriver _driver; // ignore: unused_field
 
   WebDriverPointer(this._driver);
 

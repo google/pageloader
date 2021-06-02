@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,7 +21,7 @@ part 'shared_page_objects.g.dart';
 @PageObject()
 abstract class PageForSimpleTest {
   PageForSimpleTest();
-  factory PageForSimpleTest.create(PageLoaderElement? context) =
+  factory PageForSimpleTest.create(PageLoaderElement context) =
       $PageForSimpleTest.create;
 
   @ByTagName('table')
@@ -29,10 +31,10 @@ abstract class PageForSimpleTest {
 @PageObject()
 abstract class Table {
   Table();
-  factory Table.create(PageLoaderElement? context) = $Table.create;
+  factory Table.create(PageLoaderElement context) = $Table.create;
 
   @root
-  PageLoaderElement? get table;
+  PageLoaderElement get table;
 
   @ByTagName('tr')
   PageObjectIterable<Row> get rows;

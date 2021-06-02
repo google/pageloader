@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +18,7 @@ import 'package:test/test.dart';
 
 part 'list.g.dart';
 
-typedef GetNewContext = PageLoaderElement? Function();
+typedef GetNewContext = PageLoaderElement Function();
 
 String _removeWhiteSpace(String s) =>
     s.replaceAll(' ', '').replaceAll('\n', '');
@@ -38,8 +40,8 @@ void runTests(GetNewContext contextGenerator) {
       expect(rowsAsPO[1].exists, isTrue);
       expect(rows[0].exists, isTrue);
       expect(rows[1].exists, isTrue);
-      expect(_removeWhiteSpace(rows[0].innerText!), 'r1c1r1c2');
-      expect(_removeWhiteSpace(rows[1].innerText!), 'r2c1r2c2');
+      expect(_removeWhiteSpace(rows[0].innerText), 'r1c1r1c2');
+      expect(_removeWhiteSpace(rows[1].innerText), 'r2c1r2c2');
     });
   });
 }
@@ -47,7 +49,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class Lists {
   Lists();
-  factory Lists.create(PageLoaderElement? context) = $Lists.create;
+  factory Lists.create(PageLoaderElement context) = $Lists.create;
 
   @ByTagName('tr')
   Future<List<PageLoaderElement>> get tableRows;
@@ -66,7 +68,7 @@ abstract class RowPO {
   factory RowPO.create(PageLoaderElement context) = $RowPO.create;
 
   @root
-  PageLoaderElement? get _root;
+  PageLoaderElement get _root;
 
-  bool get exists => _root!.exists;
+  bool get exists => _root.exists;
 }

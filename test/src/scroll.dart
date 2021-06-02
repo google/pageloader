@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,10 +18,10 @@ import 'package:test/test.dart';
 
 part 'scroll.g.dart';
 
-typedef GetNewContext = PageLoaderElement? Function();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
-  late ScrollPO scrollPO;
+  ScrollPO scrollPO;
 
   setUp(() {
     scrollPO = ScrollPO.create(contextGenerator());
@@ -89,7 +91,7 @@ void runTests(GetNewContext contextGenerator) {
 abstract class ScrollPO {
   ScrollPO();
 
-  factory ScrollPO.create(PageLoaderElement? context) = $ScrollPO.create;
+  factory ScrollPO.create(PageLoaderElement context) = $ScrollPO.create;
 
   @ById('scroll-box')
   PageLoaderElement get _scrollBox;
@@ -103,9 +105,9 @@ abstract class ScrollPO {
   @ById('scroll-top')
   PageLoaderElement get _scrollTop;
 
-  Future<void> scroll({int? x, int? y}) => _scrollBox.scroll(x: x, y: y);
+  Future<void> scroll({int x, int y}) => _scrollBox.scroll(x: x, y: y);
 
-  int get scrollLeft => int.parse(_scrollLeft.innerText!);
+  int get scrollLeft => int.parse(_scrollLeft.innerText);
 
-  int get scrollTop => int.parse(_scrollTop.innerText!);
+  int get scrollTop => int.parse(_scrollTop.innerText);
 }

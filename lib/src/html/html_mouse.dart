@@ -19,11 +19,11 @@ import 'package:pageloader/pageloader.dart';
 
 import 'html_page_loader_element.dart';
 
-HtmlMouse? _globalMouse;
+late HtmlMouse _globalMouse;
 SyncFn<dynamic>? _cachedSyncFn;
 
 /// Returns the globally used [HtmlMouse] in Html based tests.
-HtmlMouse? globalMouse(SyncFn<dynamic> syncFn) {
+HtmlMouse globalMouse(SyncFn<dynamic> syncFn) {
   assert(syncFn != null);
   // [SyncFn] may change based on when this function is called.
   // If it does change, we need to create a new [HtmlMouse] since this
@@ -40,7 +40,7 @@ class HtmlMouse implements PageLoaderMouse {
   // Last known coordination and the [TrackedElement] at that point.
   var _cachedPoint = Point<int>(0, 0);
   TrackedElement? _cachedElement;
-  SyncFn<dynamic>? syncFn;
+  SyncFn<dynamic> syncFn;
 
   // Elements that are currently being tracked. This is reset whenever [moveTo]
   // is executed.
@@ -52,7 +52,7 @@ class HtmlMouse implements PageLoaderMouse {
   @override
   Future<dynamic> down(MouseButton button,
           {PageLoaderElement? eventTarget, ClickOption? clickOption}) =>
-      syncFn!(() async {
+      syncFn(() async {
         if (eventTarget != null) {
           await moveTo(eventTarget as HtmlPageLoaderElement, null, null);
         }
@@ -70,13 +70,13 @@ class HtmlMouse implements PageLoaderMouse {
           {List<PageLoaderElement>? dispatchTo = const <PageLoaderElement>[],
           int? stepPixels,
           Duration? duration = Duration.zero}) =>
-      syncFn!(() => _moveTo(element, xOffset, yOffset,
+      syncFn(() => _moveTo(element, xOffset, yOffset,
           dispatchTo: dispatchTo!, stepPixels: stepPixels, duration: duration));
 
   @override
   Future<dynamic> up(MouseButton button,
           {PageLoaderElement? eventTarget, ClickOption? clickOption}) =>
-      syncFn!(() async {
+      syncFn(() async {
         if (eventTarget != null) {
           await moveTo(eventTarget as HtmlPageLoaderElement, null, null);
         }
@@ -113,19 +113,19 @@ class HtmlMouse implements PageLoaderMouse {
     //   [_cachedElement]
     //   [dispatchTo] as [TrackedElement]s
     //   All [Elements] as [TrackedElement] at the end point
-    _trackedElements = <TrackedElement?>[];
-    _elementToTrackedElement = <Element?, TrackedElement?>{};
+    _trackedElements = <TrackedElement>[];
+    _elementToTrackedElement = <Element, TrackedElement>{};
     if (_cachedElement != null) {
       _trackedElements.add(_cachedElement);
       _elementToTrackedElement[_cachedElement!.element] = _cachedElement;
     }
     for (final dispatchTarget in dispatchTo) {
-      _track((dispatchTarget as HtmlPageLoaderElement).context as Element?,
+      _track((dispatchTarget as HtmlPageLoaderElement).context as Element,
           includeChildren: true);
     }
     final elementAtEnd = _track(
         document.elementFromPoint(_pageX(endPoint.x), _pageY(endPoint.y)) ??
-            element.context as Element?);
+            element.context as Element);
 
     // Send mouse events from start to end over [steps].
     for (var step = 0; step < steps; step++) {
@@ -225,10 +225,10 @@ class HtmlMouse implements PageLoaderMouse {
     // Update the mouse locations on those that had 'mouseleave' or 'mouseleave'
     // sent to them.
     for (final element in elementsThatLeft) {
-      element!.mouseIsInside = false;
+      element.mouseIsInside = false;
     }
     for (final element in elementsThatEntered) {
-      element!.mouseIsInside = true;
+      element.mouseIsInside = true;
     }
 
     // If this is the last step, make sure new 'mousemove' is sent to the final
@@ -241,10 +241,10 @@ class HtmlMouse implements PageLoaderMouse {
   /// Sends 'mouseenter' to elements in [_trackedElements] if needed.
   ///
   /// Returns a list of [TrackedElement] that had 'mouseenter' sent to them.
-  Future<List<TrackedElement?>> _dispatchMouseEnters(Point<int> nextPos) async {
-    final elementsThatEntered = <TrackedElement?>[];
+  Future<List<TrackedElement>> _dispatchMouseEnters(Point<int> nextPos) async {
+    final elementsThatEntered = <TrackedElement>[];
     for (final element in _trackedElements) {
-      if (element!.containsPoint(nextPos) && !element.mouseIsInside) {
+      if (element.containsPoint(nextPos) && !element.mouseIsInside) {
         await element.dispatchMouseEnter(nextPos.x, nextPos.y);
         elementsThatEntered.add(element);
       }
@@ -269,7 +269,7 @@ class HtmlMouse implements PageLoaderMouse {
   /// Sends 'mousemove' to elements in [_trackedElements] if needed.
   Future<void> _dispatchMouseMoves(Point<int> nextPos) async {
     for (final element in _trackedElements) {
-      if (element!.mouseIsInside) {
+      if (element.mouseIsInside) {
         await element.dispatchMouseMove(nextPos.x, nextPos.y);
       }
     }
@@ -278,29 +278,29 @@ class HtmlMouse implements PageLoaderMouse {
   /// Sends 'mouseout' to elements in [_trackedElements] if needed.
   Future<void> _dispatchMouseOuts(Point<int> nextPos) =>
       _dispatchBubblingEvents(
-          (TrackedElement? element) => element!._isLeaving(nextPos),
-          (TrackedElement? element) async =>
-              await element!.dispatchMouseOut(nextPos.x, nextPos.y));
+          (TrackedElement element) => element._isLeaving(nextPos),
+          (TrackedElement element) async =>
+              await element.dispatchMouseOut(nextPos.x, nextPos.y));
 
   /// Sends 'mouseover' to elements in [_trackedElements] if needed.
   Future<void> _dispatchMouseOvers(Point<int> nextPos) =>
       _dispatchBubblingEvents(
-          (TrackedElement? element) => element!._isEntering(nextPos),
-          (TrackedElement? element) async =>
-              await element!.dispatchMouseOver(nextPos.x, nextPos.y));
+          (TrackedElement element) => element._isEntering(nextPos),
+          (TrackedElement element) async =>
+              await element.dispatchMouseOver(nextPos.x, nextPos.y));
 
   /// Traverses each tree in the forest [_trackedElements] and calls
   /// [dispatcher] on the lowest element in the tree satisfying [test], exactly
   /// once.
-  Future<void> _dispatchBubblingEvents(bool Function(TrackedElement?) test,
-      Future<void> Function(TrackedElement?) dispatcher) async {
-    final _checked = <TrackedElement?>{};
-    Future<void> _dispatch(TrackedElement? target) async {
+  Future<void> _dispatchBubblingEvents(bool Function(TrackedElement) test,
+      Future<void> Function(TrackedElement) dispatcher) async {
+    final _checked = <TrackedElement>{};
+    Future<void> _dispatch(TrackedElement target) async {
       if (_checked.contains(target)) return;
       _checked.add(target);
 
       if (test(target)) {
-        for (final child in target!.element!.children) {
+        for (final child in target.element.children) {
           // It is possible that [child] was created after target was tracked.
           final trackedChild = _track(child);
           if (test(trackedChild)) {
@@ -325,14 +325,14 @@ class HtmlMouse implements PageLoaderMouse {
 
   /// Given [element], either returns an already existing [TrackedElement] for
   /// it or creates a new [TrackedElement].
-  TrackedElement _track(Element? element, {bool includeChildren = false}) {
+  TrackedElement _track(Element element, {bool includeChildren = false}) {
     final existing = _elementToTrackedElement[element];
     if (existing != null) return existing;
     final newTrackedElement = TrackedElement(element);
     _trackedElements.add(newTrackedElement);
     _elementToTrackedElement[element] = newTrackedElement;
     if (includeChildren) {
-      for (final child in element!.children) {
+      for (final child in element.children) {
         _track(child);
       }
     }
@@ -348,7 +348,7 @@ Future<T> _microtask<T>(T Function() fn) =>
 /// Wrapper class on [Element] to handle basic mouse tracking and sending
 /// events.
 class TrackedElement {
-  final Element? element;
+  final Element element;
   Rectangle? bounds;
   bool mouseIsInside = false;
 
@@ -356,7 +356,7 @@ class TrackedElement {
 
   /// Returns true if point is inside element.
   bool containsPoint(Point<int> p) {
-    bounds ??= element!.getBoundingClientRect();
+    bounds ??= element.getBoundingClientRect();
     return bounds!.containsPoint(p);
   }
 
@@ -366,7 +366,7 @@ class TrackedElement {
 
   /// Sends mouse enter event to element.
   Future<dynamic> dispatchMouseEnter(int x, int y) =>
-      _microtask(() => element!.dispatchEvent(MouseEvent('mouseenter',
+      _microtask(() => element.dispatchEvent(MouseEvent('mouseenter',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,
@@ -375,7 +375,7 @@ class TrackedElement {
 
   /// Sends mouse over event to element or the appropriate child.
   Future<dynamic> dispatchMouseOver(int x, int y) =>
-      _microtask(() => element!.dispatchEvent(MouseEvent('mouseover',
+      _microtask(() => element.dispatchEvent(MouseEvent('mouseover',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,
@@ -384,7 +384,7 @@ class TrackedElement {
 
   /// Sends mouse leave event to element.
   Future<dynamic> dispatchMouseLeave(int x, int y) =>
-      _microtask(() => element!.dispatchEvent(MouseEvent('mouseleave',
+      _microtask(() => element.dispatchEvent(MouseEvent('mouseleave',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,
@@ -393,7 +393,7 @@ class TrackedElement {
 
   /// Sends mouse out event to element or the appropriate child.
   Future<dynamic> dispatchMouseOut(int x, int y) =>
-      _microtask(() => element!.dispatchEvent(MouseEvent('mouseout',
+      _microtask(() => element.dispatchEvent(MouseEvent('mouseout',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,
@@ -402,7 +402,7 @@ class TrackedElement {
 
   /// Sends mouse leave event to element.
   Future<dynamic> dispatchMouseMove(int x, int y) =>
-      _microtask(() => element!.dispatchEvent(MouseEvent('mousemove',
+      _microtask(() => element.dispatchEvent(MouseEvent('mousemove',
           screenX: _screenX(x),
           screenY: _screenY(y),
           clientX: x,

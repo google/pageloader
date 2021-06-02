@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +18,7 @@ import 'package:test/test.dart';
 
 part 'cache_invalidation.g.dart';
 
-typedef GetNewContext = PageLoaderElement? Function();
+typedef GetNewContext = PageLoaderElement Function();
 
 typedef DoRefresh = void Function();
 
@@ -46,7 +48,7 @@ void runTests(GetNewContext contextGenerator, DoRefresh refresh) {
 @PageObject()
 abstract class CacheInvalidation {
   CacheInvalidation();
-  factory CacheInvalidation.create(PageLoaderElement? context) =
+  factory CacheInvalidation.create(PageLoaderElement context) =
       $CacheInvalidation.create;
 
   @ById('button-1')

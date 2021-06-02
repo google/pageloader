@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +18,7 @@ import 'package:test/test.dart';
 
 part 'long_exception.g.dart';
 
-void runTests(PageLoaderElement? Function() contextGenerator) {
+void runTests(PageLoaderElement Function() contextGenerator) {
   test('long exception is truncated', () {
     final po = MyPageObject.create(contextGenerator());
     try {
@@ -31,8 +33,7 @@ void runTests(PageLoaderElement? Function() contextGenerator) {
 @PageObject()
 abstract class MyPageObject {
   MyPageObject();
-  factory MyPageObject.create(PageLoaderElement? context) =
-      $MyPageObject.create;
+  factory MyPageObject.create(PageLoaderElement context) = $MyPageObject.create;
 
   @ByTagName('div')
   PageLoaderElement get ele;

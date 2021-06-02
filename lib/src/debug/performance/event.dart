@@ -20,7 +20,7 @@ abstract class JsonSerializable {
 }
 
 abstract class Event implements JsonSerializable {
-  Map<String, Object?> toMap();
+  Map<String, Object> toMap();
 }
 
 /// Trace Event, a subset of the implementation of Trace Event Format.
@@ -66,24 +66,24 @@ class DurationEvent implements Event {
   DurationEvent();
 
   @override
-  Map<String, Object?> toMap() {
-    final map = <String, Object?>{
+  Map<String, Object> toMap() {
+    final map = <String, Object>{
       constants.phase: phase == DurationEventPhase.begin
           ? constants.phaseBegin
           : constants.phaseEnd
     };
 
     if (name != null) {
-      map[constants.name] = name;
+      map[constants.name] = name!;
     }
     if (pid != null) {
-      map[constants.pid] = pid;
+      map[constants.pid] = pid!;
     }
     if (tid != null) {
-      map[constants.tid] = tid;
+      map[constants.tid] = tid!;
     }
     if (args != null) {
-      map[constants.args] = args;
+      map[constants.args] = args!;
     }
     if (ts != null) {
       map[constants.tracingTimestamp] = ts!.microsecondsSinceEpoch;

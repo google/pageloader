@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +18,7 @@ import 'package:test/test.dart';
 
 part 'attributes.g.dart';
 
-typedef GetNewContext = PageLoaderElement? Function();
+typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('attributes ', () {
@@ -118,7 +120,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class PageForAttributesTests {
   PageForAttributesTests();
-  factory PageForAttributesTests.create(PageLoaderElement? context) =
+  factory PageForAttributesTests.create(PageLoaderElement context) =
       $PageForAttributesTests.create;
 
   @ById('div')

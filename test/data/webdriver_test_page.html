@@ -186,5 +186,14 @@ limitations under the License.
   var template = document.getElementById('button-template');
   template.remove();
 </script>
+<custom-events-element></custom-events-element>
+<script>
+  var customEventsElement = document.getElementsByTagName('custom-events-element')[0];
+  customEventsElement.innerText = 'bleargh';
+  customEventsElement.addEventListener('customizedevent', function(event) {
+    customEventsElement.innerText = 'woop';
+    event.target.innerText = event.target.innerText + ' CustomizedEvent';
+  }, false);
+</script>
 </body>
 </html>

@@ -19,9 +19,9 @@ import 'webdriver_page_loader_element.dart';
 /// Iterator for [WebDriverPageLoaderElement]s.
 class WebDriverPageElementIterator
     extends Iterator<WebDriverPageLoaderElement> {
-  final Iterator<wd.WebElement?> _elements;
+  final Iterator<wd.WebElement> _elements;
 
-  WebDriverPageElementIterator(List<wd.WebElement?> elements)
+  WebDriverPageElementIterator(List<wd.WebElement> elements)
       : _elements = elements.iterator;
 
   @override
@@ -29,7 +29,7 @@ class WebDriverPageElementIterator
 
   @override
   WebDriverPageLoaderElement get current {
-    return WebDriverPageLoaderElement.createFromElement(_elements.current!);
+    return WebDriverPageLoaderElement.createFromElement(_elements.current);
   }
 }
 
@@ -45,8 +45,7 @@ class WebDriverPageElementIterable extends PageElementIterable {
 
   @override
   Future<PageLoaderElement> get first async =>
-      WebDriverPageLoaderElement.createFromElement(
-          _drivingElement.elements[0]!);
+      WebDriverPageLoaderElement.createFromElement(_drivingElement.elements[0]);
 
   @override
   Future<Iterator<PageLoaderElement>> get iterator async {
