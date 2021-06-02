@@ -1,3 +1,9 @@
+## 4.0.0
+
+- Migrate to Unsound Null Safety.
+- Stop using deprecated API.
+- Add `dispatchCustomEvents` method to `PageLoaderElement`.
+
 ## 3.3.2
 
 - Bump dependencies up until but not included null safety versions.

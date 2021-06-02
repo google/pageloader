@@ -25,7 +25,11 @@ if [[ $ANALYSIS_STATUS -ne 0 ]]; then
 fi
 
 # Run non-html and non-webdriver tests
-core_tests=("test/core_method_information_test.dart" "test/correct_gen_test.dart" "test/matchers_test.dart" "test/utils_test.dart")
+core_tests=("test/core_method_information_test.dart" \
+            "test/correct_gen_test.dart" \
+            "test/correct_gen_null_safety_test.dart" \
+            "test/matchers_test.dart" \
+            "test/utils_test.dart")
 
 for test in ${core_tests[@]}
 do
@@ -38,7 +42,12 @@ do
 done
 
 # Run test creator tests
-test_creator_tests=("test/test_creator_getters_test.dart" "test/test_creator_invoke_method_test.dart" "test/test_creator_methods_test.dart")
+test_creator_tests=("test/test_creator_getters_test.dart" \
+                    "test/test_creator_getters_null_safety_test.dart" \
+                    "test/test_creator_invoke_method_test.dart" \
+                    "test/test_creator_invoke_method_null_safety_test.dart" \
+                    "test/test_creator_methods_test.dart" \
+                    "test/test_creator_methods_null_safety_test")
 for test in ${test_creator_tests[@]}
 do
   pub run test -r expanded "$test"
