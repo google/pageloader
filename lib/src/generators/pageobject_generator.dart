@@ -41,23 +41,35 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   Future<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {
     ResolvedLibraryResult resolvedLibrary;
-    final library = element.library;
-    final nullSafety =
-        NullSafety((b) => b..enabled = library.isNonNullableByDefault);
-    try {
-      resolvedLibrary = await library.session
-          .getResolvedLibraryByElement2(library) as ResolvedLibraryResult;
-    } on InconsistentAnalysisException {
-      final resolver = buildStep.resolver;
-      final tempResolvedLibrary =
-          await resolver.libraryFor(await resolver.assetIdForElement(library));
-      final session = tempResolvedLibrary.session;
-      resolvedLibrary =
-          await session.getResolvedLibraryByElement2(tempResolvedLibrary)
-              as ResolvedLibraryResult;
+    LibraryElement library;
+
+    // Attempt to get the resolved library 10 times. If analysis
+    // state cannot be stabilized, fail.
+    // https://github.com/google/built_value.dart/issues/941
+    var attempts = 0;
+    while (true) {
+      try {
+        final resolver = buildStep.resolver;
+        library = await resolver
+            .libraryFor(await resolver.assetIdForElement(element.library));
+        final session = library.session;
+        resolvedLibrary = await session.getResolvedLibraryByElement2(library)
+            as ResolvedLibraryResult;
+        break;
+      } catch (_) {
+        ++attempts;
+        if (attempts == 10) {
+          log.severe('Analysis session failed to stablize after 10 tries.');
+          rethrow;
+        }
+      }
     }
+
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
     final poAnnotation = getPageObjectAnnotation(annotation);
+    final nullSafety =
+        NullSafety((b) => b..enabled = library.isNonNullableByDefault);
+
     if (annotatedNode is ClassOrMixinDeclaration) {
       try {
         final ignore =
