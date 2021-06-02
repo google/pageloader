@@ -14,6 +14,7 @@
 // limitations under the License.
 
 import 'package:analyzer/dart/analysis/results.dart';
+import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 
@@ -39,11 +40,22 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   @override
   Future<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {
+    ResolvedLibraryResult resolvedLibrary;
     final library = element.library;
     final nullSafety =
         NullSafety((b) => b..enabled = library.isNonNullableByDefault);
-    final resolvedLibrary = await library.session
-        .getResolvedLibraryByElement2(library) as ResolvedLibraryResult;
+    try {
+      resolvedLibrary = await library.session
+          .getResolvedLibraryByElement2(library) as ResolvedLibraryResult;
+    } on InconsistentAnalysisException {
+      final resolver = buildStep.resolver;
+      final tempResolvedLibrary =
+          await resolver.libraryFor(await resolver.assetIdForElement(library));
+      final session = tempResolvedLibrary.session;
+      resolvedLibrary =
+          await session.getResolvedLibraryByElement2(tempResolvedLibrary)
+              as ResolvedLibraryResult;
+    }
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
     final poAnnotation = getPageObjectAnnotation(annotation);
     if (annotatedNode is ClassOrMixinDeclaration) {
