@@ -52,7 +52,9 @@ Optional<MouseFinderMethod> collectMouseFinderGetter(
         methodInfo.node, 'cannot use Checker with Mouse annotation');
   }
 
-  return Optional.of(MouseFinderMethod((b) => b..name = methodInfo.name));
+  return Optional.of(MouseFinderMethod((b) => b
+    ..nullSafety = nullSafety.toBuilder()
+    ..name = methodInfo.name));
 }
 
 /// Generation for @Mouse getters.

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 
@@ -65,7 +66,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
   String _generateClass(NullSafety nullSafety,
       ClassOrMixinDeclaration declaration, PageObject poAnnotation) {
-    final collectorVisitor = CollectorVisitor(declaration);
+    final collectorVisitor = CollectorVisitor(nullSafety, declaration);
     declaration.visitChildren(collectorVisitor);
 
     _doErrorHandling(collectorVisitor);

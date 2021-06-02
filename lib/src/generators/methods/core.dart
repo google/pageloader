@@ -58,7 +58,7 @@ String generateByTagNameFromByCheckTag(
 /// If there is no tag name associated with the Page Object,
 /// returns and empty string.
 String _extractTagName(ClassElement poTypeElement) {
-  String expectedTag = '';
+  var expectedTag = '';
   for (final annotation in poTypeElement.metadata) {
     final annotationElement = annotation.element;
     if (annotationElement is ConstructorElement) {
@@ -176,7 +176,7 @@ DartType getInnerType(DartType topType, String matchingType) {
   return getInnerType(first, matchingType);
 }
 
-/// Return the Dart code the corresponds to the [type].
+/// Return the Dart code that corresponds to the [type].
 String typeToCode(DartType type) {
   // TODO: This should be replaced with actual code generation.
   return type?.getDisplayString(withNullability: false);

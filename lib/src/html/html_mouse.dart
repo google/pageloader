@@ -30,7 +30,7 @@ HtmlMouse globalMouse(SyncFn<dynamic> syncFn) {
   // indicates the scope of the [HtmlMouse] is outdated.
   if (_cachedSyncFn == null || _cachedSyncFn != syncFn) {
     _cachedSyncFn = syncFn;
-    _globalMouse = HtmlMouse(_cachedSyncFn);
+    _globalMouse = HtmlMouse(_cachedSyncFn!);
   }
   return _globalMouse;
 }
@@ -44,8 +44,8 @@ class HtmlMouse implements PageLoaderMouse {
 
   // Elements that are currently being tracked. This is reset whenever [moveTo]
   // is executed.
-  var _trackedElements = <TrackedElement?>[];
-  var _elementToTrackedElement = <Element?, TrackedElement?>{};
+  var _trackedElements = <TrackedElement>[];
+  var _elementToTrackedElement = <Element, TrackedElement>{};
 
   HtmlMouse(this.syncFn);
 
@@ -116,8 +116,8 @@ class HtmlMouse implements PageLoaderMouse {
     _trackedElements = <TrackedElement>[];
     _elementToTrackedElement = <Element, TrackedElement>{};
     if (_cachedElement != null) {
-      _trackedElements.add(_cachedElement);
-      _elementToTrackedElement[_cachedElement!.element] = _cachedElement;
+      _trackedElements.add(_cachedElement!);
+      _elementToTrackedElement[_cachedElement!.element] = _cachedElement!;
     }
     for (final dispatchTarget in dispatchTo) {
       _track((dispatchTarget as HtmlPageLoaderElement).context as Element,
@@ -255,10 +255,10 @@ class HtmlMouse implements PageLoaderMouse {
   /// Sends 'mouseleave' to elements in [_trackedElements] if needed.
   ///
   /// Returns a list of [TrackedElement] that had 'mouseleave' sent to them.
-  Future<List<TrackedElement?>> _dispatchMouseLeaves(Point<int> nextPos) async {
-    final elementsThatLeft = <TrackedElement?>[];
+  Future<List<TrackedElement>> _dispatchMouseLeaves(Point<int> nextPos) async {
+    final elementsThatLeft = <TrackedElement>[];
     for (final element in _trackedElements) {
-      if (!element!.containsPoint(nextPos) && element.mouseIsInside) {
+      if (!element.containsPoint(nextPos) && element.mouseIsInside) {
         await element.dispatchMouseLeave(nextPos.x, nextPos.y);
         elementsThatLeft.add(element);
       }

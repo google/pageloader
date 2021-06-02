@@ -491,7 +491,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       bool ctrlKey = false,
       bool metaKey = false,
       bool shiftKey = false,
-      String? key = ''}) {
+      String key = ''}) {
     final args = <dynamic>[
       event,
       <String, dynamic>{
@@ -716,7 +716,7 @@ String? _getValue(Element element) {
       'Cannot find value for type: ${element.runtimeType}');
 }
 
-void _setValue(Element? element, String value) {
+void _setValue(Element element, String value) {
   if (element is InputElementBase) {
     element.value = value;
     return;

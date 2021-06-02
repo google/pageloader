@@ -163,8 +163,8 @@ html.Element setUp() {
 
   // Bind typing tests driven by focus/blur events.
   final typingFocusBlurElement =
-      html.document.getElementById('text-with-focus-and-blur')!;
-  bindTextFocus(typingFocusBlurElement);
+      html.document.getElementById('text-with-focus-and-blur');
+  bindTextFocus(typingFocusBlurElement!);
   bindTextBlur(typingFocusBlurElement);
 
   // Bind scroll element and counter.

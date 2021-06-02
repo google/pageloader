@@ -97,7 +97,7 @@ bool isFocused(item) =>
 bool isNotFocused(item) => !isFocused(item);
 
 /// Gets the innerText of a PageLoaderElement/PageObject.
-String? getInnerText(item) =>
+String getInnerText(item) =>
     _rootElementOfAndRethrow(item, 'getInnerText').innerText;
 
 /// Function for PageObject constructor. Typically in form:

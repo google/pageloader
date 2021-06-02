@@ -16,8 +16,8 @@
 import 'package:test/test.dart';
 
 import 'data/html_setup.dart' as html_setup;
-import 'src_null_safety/attributes.dart' as attributes;
+import 'src_null_safety/basic.dart' as basic;
 
 void main() {
-  attributes.runTests(() => html_setup.getRoot());
+  basic.runTests(() => html_setup.getRoot());
 }

@@ -1,5 +1,3 @@
-// @dart = 2.9
-
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,56 +12,62 @@
 // limitations under the License.
 
 import 'package:pageloader/pageloader.dart';
+
 import 'package:test/test.dart';
 
-part 'generics.g.dart';
+part 'list.g.dart';
 
 typedef GetNewContext = PageLoaderElement Function();
 
+String _removeWhiteSpace(String s) =>
+    s.replaceAll(' ', '').replaceAll('\n', '');
+
 void runTests(GetNewContext contextGenerator) {
-  group('generics', () {
-    test('works for functions', () async {
-      final generics = Generics<int>.create(contextGenerator());
-      expect(generics.typeDefParameter(42, (int x) => x.toString()), '42');
+  group('list works', () {
+    test('asynchronously', () async {
+      final list = Lists.create(contextGenerator());
+      expect(await list.tableRows, hasLength(2));
     });
 
-    test('works for parameterized getters', () {
-      final rootPo = RootPo<String>.create(contextGenerator());
-      expect(rootPo.generics.typeDefParameter(' 42 ', (String x) => x.trim()),
-          '42');
-    });
-
-    test('words for parameterized getter lists', () {
-      final rootPo = RootPo<String>.create(contextGenerator());
-      expect(rootPo.genericsList, hasLength(4));
-      expect(
-          rootPo.genericsList[0]
-              .typeDefParameter(' 42 ', (String x) => x.trim()),
-          '42');
+    test('synchronously', () async {
+      final list = Lists.create(contextGenerator());
+      final rows = list.tableRowsSync;
+      final rowsAsPO = list.tableRowsSyncAsPO;
+      expect(rows, hasLength(2));
+      expect(rowsAsPO, hasLength(2));
+      expect(rowsAsPO[0].exists, isTrue);
+      expect(rowsAsPO[1].exists, isTrue);
+      expect(rows[0].exists, isTrue);
+      expect(rows[1].exists, isTrue);
+      expect(_removeWhiteSpace(rows[0].innerText), 'r1c1r1c2');
+      expect(_removeWhiteSpace(rows[1].innerText), 'r2c1r2c2');
     });
   });
 }
 
-typedef MyGenericTypeDef<T> = String Function(T item);
-
 @PageObject()
-abstract class Generics<T> {
-  Generics();
-  factory Generics.create(PageLoaderElement context) = $Generics<T>.create;
+abstract class Lists {
+  Lists();
+  factory Lists.create(PageLoaderElement context) = $Lists.create;
 
-  String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
-    return typeDef(thing);
-  }
+  @ByTagName('tr')
+  Future<List<PageLoaderElement>> get tableRows;
+
+  @ByTagName('tr')
+  List<PageLoaderElement> get tableRowsSync;
+
+  @ByTagName('tr')
+  List<RowPO> get tableRowsSyncAsPO;
 }
 
+@CheckTag('tr')
 @PageObject()
-abstract class RootPo<T> {
-  RootPo();
-  factory RootPo.create(PageLoaderElement context) = $RootPo<T>.create;
+abstract class RowPO {
+  RowPO();
+  factory RowPO.create(PageLoaderElement context) = $RowPO.create;
 
-  @ById('button-1')
-  Generics<T> get generics;
+  @root
+  PageLoaderElement get _root;
 
-  @ByTagName('td')
-  List<Generics<T>> get genericsList;
+  bool get exists => _root.exists;
 }
