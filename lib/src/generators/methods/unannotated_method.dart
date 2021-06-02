@@ -35,19 +35,19 @@ Optional<UnannotatedMethod> collectUnannotatedMethod(MethodDeclaration node) {
   return Optional.of(UnannotatedMethod((b) => b
     ..name = node.name.toString()
     ..returnType = node.returnType.toString()
-    ..parameters = node.parameters.parameters
+    ..parameters = node.parameters!.parameters
     ..typeParameters = Optional.fromNullable(node.typeParameters)));
 }
 
 /// Generation for unannotated method.
 abstract class UnannotatedMethod
     implements Built<UnannotatedMethod, UnannotatedMethodBuilder> {
-  String get name;
-  String get returnType;
-  List<FormalParameter> get parameters;
-  Optional<TypeParameterList> get typeParameters;
+  String? get name;
+  String? get returnType;
+  List<FormalParameter>? get parameters;
+  Optional<TypeParameterList>? get typeParameters;
 
-  bool get produceTestCreatorMethod => returnType.startsWith('Future');
+  bool get produceTestCreatorMethod => returnType!.startsWith('Future');
 
   String generate(String pageObjectName) {
     if (returnType == 'void') {
@@ -70,29 +70,29 @@ abstract class UnannotatedMethod
   String get _methodDeclaration => '$name$_typeParameters';
 
   String get _typeParameters =>
-      typeParameters.isPresent ? typeParameters.value.toSource() : '';
+      typeParameters!.isPresent ? typeParameters!.value.toSource() : '';
 
   String get _typeArguments {
-    if (!typeParameters.isPresent) {
+    if (!typeParameters!.isPresent) {
       return '';
     }
-    final arguments = typeParameters.value.typeParameters
+    final arguments = typeParameters!.value.typeParameters
         .map((param) => param.name.toSource())
         .join(', ');
     return '<$arguments>';
   }
 
   String get _parameterDeclarations {
-    final required = parameters
+    final required = parameters!
         .where((p) => p.isRequired && !p.isNamed)
         .map((p) => p.toSource())
         .join(', ');
 
     final namedParams =
-        parameters.where((p) => p.isNamed).map((p) => p.toSource()).join(', ');
+        parameters!.where((p) => p.isNamed).map((p) => p.toSource()).join(', ');
     final named = namedParams.isNotEmpty ? '{$namedParams}' : '';
 
-    final positionalParams = parameters
+    final positionalParams = parameters!
         .where((p) => p.isOptionalPositional)
         .map((p) => p.toSource())
         .join(', ');
@@ -102,19 +102,19 @@ abstract class UnannotatedMethod
   }
 
   String get _parameterNames {
-    final required = parameters
+    final required = parameters!
         .where((p) => p.isRequired && !p.isNamed)
-        .map((p) => p.declaredElement.name)
+        .map((p) => p.declaredElement!.name)
         .join(', ');
 
-    final named = parameters
+    final named = parameters!
         .where((p) => p.isNamed)
-        .map((p) => '${p.declaredElement.name}:${p.declaredElement.name}')
+        .map((p) => '${p.declaredElement!.name}:${p.declaredElement!.name}')
         .join(', ');
 
-    final positional = parameters
+    final positional = parameters!
         .where((p) => p.isOptionalPositional)
-        .map((p) => p.declaredElement.name)
+        .map((p) => p.declaredElement!.name)
         .join(', ');
 
     return _combineParameters(required, named, positional);
@@ -134,7 +134,7 @@ abstract class UnannotatedMethod
     return mixedList.join(',');
   }
 
-  factory UnannotatedMethod([Function(UnannotatedMethodBuilder) updates]) =
+  factory UnannotatedMethod([Function(UnannotatedMethodBuilder)? updates]) =
       _$UnannotatedMethod;
   UnannotatedMethod._();
 }

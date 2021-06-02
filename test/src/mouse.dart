@@ -17,13 +17,13 @@ import 'package:webdriver/support/async.dart';
 
 part 'mouse.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('mouse support', () {
     test('basically works', () async {
       final page = PageForMouseTest.create(contextGenerator());
-      final mouse = page.mouse;
+      final mouse = page.mouse!;
 
       await mouse.moveTo(page.element, 2, 2);
       await waitFor(() => page.element.visibleText,
@@ -39,7 +39,7 @@ void runTests(GetNewContext contextGenerator) {
 
     test('works with event target', () async {
       final page = PageForMouseTest.create(contextGenerator());
-      final mouse = page.mouse;
+      final mouse = page.mouse!;
 
       // make sure mouse is not on element;
       await mouse.moveTo(page.element, -10, -10);
@@ -57,11 +57,11 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class PageForMouseTest {
   PageForMouseTest();
-  factory PageForMouseTest.create(PageLoaderElement context) =
+  factory PageForMouseTest.create(PageLoaderElement? context) =
       $PageForMouseTest.create;
 
   @Mouse
-  PageLoaderMouse get mouse;
+  PageLoaderMouse? get mouse;
 
   @ById('mouse')
   PageLoaderElement get element;

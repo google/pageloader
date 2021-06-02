@@ -266,8 +266,8 @@ class Global implements ContextFinder {
   const Global(this._finder);
 
   @override
-  List<PageLoaderElement> findElements(PageLoaderElement context) {
-    return context.utils.root.getElementsByCss(_finder.cssSelector);
+  List<PageLoaderElement> findElements(PageLoaderElement? context) {
+    return context!.utils!.root!.getElementsByCss(_finder.cssSelector);
   }
 
   @override
@@ -281,8 +281,8 @@ class First implements ContextFinder {
   const First(this._finder);
 
   @override
-  List<PageLoaderElement> findElements(PageLoaderElement context) {
-    final results = context.getElementsByCss(_finder.cssSelector);
+  List<PageLoaderElement> findElements(PageLoaderElement? context) {
+    final results = context!.getElementsByCss(_finder.cssSelector);
     return results.isEmpty ? [] : [results.first];
   }
 
@@ -344,8 +344,8 @@ class EnsureTag implements Checker, ContextFinder {
       element.name.toLowerCase() == _expectedTagName;
 
   @override
-  List<PageLoaderElement> findElements(PageLoaderElement context) {
-    if (context.name == _expectedTagName) {
+  List<PageLoaderElement?> findElements(PageLoaderElement? context) {
+    if (context!.name == _expectedTagName) {
       return [context];
     }
     return context.getElementsByCss(_expectedTagName);
@@ -420,7 +420,7 @@ class WithInnerText extends Filter {
   const WithInnerText(this._text);
 
   @override
-  bool keep(PageLoaderElement element) => element.innerText.contains(_text);
+  bool keep(PageLoaderElement element) => element.innerText!.contains(_text);
 
   @override
   String toString() => '@WithInnerText("$_text")';

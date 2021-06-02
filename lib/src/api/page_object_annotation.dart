@@ -55,7 +55,7 @@ class PageObject {
   ///     '_submit.click': 'submit',
   ///     '_cancel.click': 'cancel'
   /// })
-  final Map<String, String> code;
+  final Map<String?, String?>? code;
 
   const PageObject({this.code});
 

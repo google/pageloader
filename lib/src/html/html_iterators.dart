@@ -21,9 +21,9 @@ import 'html_page_loader_element.dart';
 class HtmlPageElementIterator extends Iterator<HtmlPageLoaderElement> {
   final SyncFn<dynamic> _syncFn;
 
-  final Iterator<Element> _elements;
+  final Iterator<Element?> _elements;
 
-  HtmlPageElementIterator(this._syncFn, List<Element> elements)
+  HtmlPageElementIterator(this._syncFn, List<Element?> elements)
       : _elements = elements.iterator;
 
   @override

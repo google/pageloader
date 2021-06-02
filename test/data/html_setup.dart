@@ -142,32 +142,33 @@ html.Element setUp() {
   // });
 
   // Get all mouseevent driven div elements and bind them
-  final displayedMouseDiv = html.document.getElementById('mouse');
-  final centerMouseDiv = html.document.getElementById('mouse-center');
-  final svgElement = html.document.getElementById('svg-element');
+  final displayedMouseDiv = html.document.getElementById('mouse')!;
+  final centerMouseDiv = html.document.getElementById('mouse-center')!;
+  final svgElement = html.document.getElementById('svg-element')!;
   final svgOutputDiv = html.document.getElementById('svg-output');
   bindMouseEvents(displayedMouseDiv);
   bindMouseEvents(centerMouseDiv);
-  bindMouseEventsWithSvg(svgElement, svgOutputDiv);
+  bindMouseEventsWithSvg(svgElement as SvgElement, svgOutputDiv);
 
   // Get all pointerevent driven div elements and bind them
-  final displayedPointerDiv = html.document.getElementById('pointer');
-  final centerPointerDiv = html.document.getElementById('pointer-center');
+  final displayedPointerDiv = html.document.getElementById('pointer')!;
+  final centerPointerDiv = html.document.getElementById('pointer-center')!;
   bindPointerEvents(displayedPointerDiv);
   bindPointerEvents(centerPointerDiv);
 
   // Bind KeyboardEvent driven div element.
-  final keyboardListenerDiv = html.document.getElementById('keyboard-listener');
+  final keyboardListenerDiv =
+      html.document.getElementById('keyboard-listener')!;
   bindKeyboardListener(keyboardListenerDiv);
 
   // Bind typing tests driven by focus/blur events.
   final typingFocusBlurElement =
-      html.document.getElementById('text-with-focus-and-blur');
+      html.document.getElementById('text-with-focus-and-blur')!;
   bindTextFocus(typingFocusBlurElement);
   bindTextBlur(typingFocusBlurElement);
 
   // Bind scroll element and counter.
-  final scrollBox = html.document.getElementById('scroll-box');
+  final scrollBox = html.document.getElementById('scroll-box')!;
   final scrollLeft = html.document.getElementById('scroll-left');
   final scrollTop = html.document.getElementById('scroll-top');
   bindScrollEvents(scrollBox, scrollLeft, scrollTop);
@@ -206,7 +207,7 @@ void bindKeyboardListener(html.Element element) {
 void bindTextFocus(html.Element element) {
   element.onFocus.listen((evt) {
     final countDiv =
-        html.document.getElementById('text-with-focus-and-blur-focus-count');
+        html.document.getElementById('text-with-focus-and-blur-focus-count')!;
     final count = int.parse(countDiv.innerText) + 1;
     countDiv.innerText = count.toString();
   });
@@ -215,7 +216,7 @@ void bindTextFocus(html.Element element) {
 void bindTextBlur(html.Element element) {
   element.onBlur.listen((evt) {
     final countDiv =
-        html.document.getElementById('text-with-focus-and-blur-blur-count');
+        html.document.getElementById('text-with-focus-and-blur-blur-count')!;
     final count = int.parse(countDiv.innerText) + 1;
     countDiv.innerText = count.toString();
   });
@@ -223,45 +224,45 @@ void bindTextBlur(html.Element element) {
 
 void bindMouseEvents(html.Element element) {
   element.onMouseDown.listen((evt) {
-    element.text = element.text +
+    element.text = element.text! +
         '  MouseDown: ${evt.client.x}, ${evt.client.y}; '
             '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseUp.listen((evt) {
-    element.text = element.text +
+    element.text = element.text! +
         '  MouseUp: ${evt.client.x}, ${evt.client.y}; '
             '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseMove.listen((evt) {
-    element.text = element.text +
+    element.text = element.text! +
         '  MouseMove: ${evt.client.x}, ${evt.client.y}; '
             '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseLeave.listen((evt) {
-    element.text = element.text +
+    element.text = element.text! +
         '  MouseLeave: ${evt.client.x}, ${evt.client.y}; '
             '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseOut.listen((evt) {
-    element.text = element.text +
+    element.text = element.text! +
         '  MouseOut: ${evt.client.x}, ${evt.client.y}; '
             '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseEnter.listen((evt) {
-    element.text = element.text +
+    element.text = element.text! +
         '  MouseEnter: ${evt.client.x}, ${evt.client.y}; '
             '${evt.screen.x}, ${evt.screen.y}';
   });
   element.onMouseOver.listen((evt) {
-    element.text = element.text +
+    element.text = element.text! +
         '  MouseOver: ${evt.client.x}, ${evt.client.y}; '
             '${evt.screen.x}, ${evt.screen.y}';
   });
 }
 
-void bindMouseEventsWithSvg(SvgElement element, html.Element outputElement) {
+void bindMouseEventsWithSvg(SvgElement element, html.Element? outputElement) {
   element.onClick.listen((evt) {
-    outputElement.text = outputElement.text +
+    outputElement!.text = outputElement.text! +
         '  Click: ${evt.client.x}, ${evt.client.y}; '
             '${evt.screen.x}, ${evt.screen.y}';
   });
@@ -270,49 +271,49 @@ void bindMouseEventsWithSvg(SvgElement element, html.Element outputElement) {
 void bindPointerEvents(html.Element element) {
   element.on['pointerdown'].listen((evt) {
     if (evt is html.PointerEvent) {
-      element.text = element.text +
+      element.text = element.text! +
           '  PointerDown: ${evt.client.x}, ${evt.client.y}; '
               '${evt.screen.x}, ${evt.screen.y}';
     }
   });
   element.on['pointerup'].listen((evt) {
     if (evt is html.PointerEvent) {
-      element.text = element.text +
+      element.text = element.text! +
           '  PointerUp: ${evt.client.x}, ${evt.client.y}; '
               '${evt.screen.x}, ${evt.screen.y}';
     }
   });
   element.on['pointermove'].listen((evt) {
     if (evt is html.PointerEvent) {
-      element.text = element.text +
+      element.text = element.text! +
           '  PointerMove: ${evt.client.x}, ${evt.client.y}; '
               '${evt.screen.x}, ${evt.screen.y}';
     }
   });
   element.on['pointerleave'].listen((evt) {
     if (evt is html.PointerEvent) {
-      element.text = element.text +
+      element.text = element.text! +
           ' PointerLeave: ${evt.client.x}, ${evt.client.y}; '
               '${evt.screen.x}, ${evt.screen.y}';
     }
   });
   element.on['pointerout'].listen((evt) {
     if (evt is html.PointerEvent) {
-      element.text = element.text +
+      element.text = element.text! +
           '  PointerOut: ${evt.client.x}, ${evt.client.y}; '
               '${evt.screen.x}, ${evt.screen.y}';
     }
   });
   element.on['pointerenter'].listen((evt) {
     if (evt is html.PointerEvent) {
-      element.text = element.text +
+      element.text = element.text! +
           '  PointerEnter: ${evt.client.x}, ${evt.client.y}; '
               '${evt.screen.x}, ${evt.screen.y}';
     }
   });
   element.on['pointerover'].listen((evt) {
     if (evt is html.PointerEvent) {
-      element.text = element.text +
+      element.text = element.text! +
           '  PointerOver: ${evt.client.x}, ${evt.client.y}; '
               '${evt.screen.x}, ${evt.screen.y}';
     }
@@ -320,10 +321,10 @@ void bindPointerEvents(html.Element element) {
 }
 
 void bindScrollEvents(
-    html.Element scrollBox, html.Element scrollLeft, html.Element scrollTop) {
+    html.Element scrollBox, html.Element? scrollLeft, html.Element? scrollTop) {
   scrollBox.onScroll.listen((evt) {
-    scrollLeft.innerHtml = scrollBox.scrollLeft.toString();
-    scrollTop.innerHtml = scrollBox.scrollTop.toString();
+    scrollLeft!.innerHtml = scrollBox.scrollLeft.toString();
+    scrollTop!.innerHtml = scrollBox.scrollTop.toString();
   });
 }
 

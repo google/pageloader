@@ -26,22 +26,22 @@ part 'setter.g.dart';
 /// Returns a [Setter] for concrete setters, and [absent()] otherwise.
 Optional<Setter> collectUnannotatedSetter(MethodDeclaration node) {
   if (!node.isAbstract && node.isSetter) {
-    final param = node.parameters.parameters.first;
+    final param = node.parameters!.parameters.first;
     return Optional.of(Setter((b) => b
       ..name = node.name.toString()
-      ..setterType = typeToCode(param.declaredElement.type)
-      ..setterValueName = param.declaredElement.name));
+      ..setterType = typeToCode(param.declaredElement!.type)
+      ..setterValueName = param.declaredElement!.name));
   }
   return Optional.absent();
 }
 
 /// Generates code for normal setters.
 abstract class Setter implements Built<Setter, SetterBuilder> {
-  String get name;
+  String? get name;
 
-  String get setterType;
+  String? get setterType;
 
-  String get setterValueName;
+  String? get setterValueName;
 
   String generate(String pageObjectName) {
     return 'set $name($setterType $setterValueName) { ' +
@@ -52,7 +52,7 @@ abstract class Setter implements Built<Setter, SetterBuilder> {
             '}';
   }
 
-  factory Setter([Function(SetterBuilder) updates]) = _$Setter;
+  factory Setter([Function(SetterBuilder)? updates]) = _$Setter;
 
   Setter._();
 }

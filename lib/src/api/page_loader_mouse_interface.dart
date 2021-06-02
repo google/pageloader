@@ -30,7 +30,7 @@ abstract class PageLoaderMouse {
   /// events on the target that is under the current mouse location.
   /// [clickOption] is only used for Html.
   Future<void> down(MouseButton button,
-      {PageLoaderElement eventTarget, ClickOption clickOption});
+      {PageLoaderElement? eventTarget, ClickOption? clickOption});
 
   /// Release [button] on the mouse at its current location with [clickOption].
   /// If [eventTarget] is specified, PageLoader will attempt to fire the
@@ -38,7 +38,7 @@ abstract class PageLoaderMouse {
   /// events on the target that is under the current mouse location.
   /// [clickOption] is only used for Html.
   Future<void> up(MouseButton button,
-      {PageLoaderElement eventTarget, ClickOption clickOption});
+      {PageLoaderElement? eventTarget, ClickOption? clickOption});
 
   /// Move the mouse from previous location to a location relative to [element],
   /// offset by [xOffset] and [yOffset].
@@ -59,6 +59,8 @@ abstract class PageLoaderMouse {
   // TODO(maxkim): Determine consistent behavior when element is null and
   // how off-screen events should be handled.
   Future<void> moveTo(
-      covariant PageLoaderElement element, int xOffset, int yOffset,
-      {List<PageLoaderElement> dispatchTo, int stepPixels, Duration duration});
+      covariant PageLoaderElement element, int? xOffset, int? yOffset,
+      {List<PageLoaderElement>? dispatchTo,
+      int? stepPixels,
+      Duration? duration});
 }

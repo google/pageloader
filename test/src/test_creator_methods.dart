@@ -160,7 +160,7 @@ abstract class PageObjectHasMethodsWithDifferentParameters {
 
   Future<void> click() => Future.value(null);
 
-  Future<void> type(int index, {String text}) => Future.value(null);
+  Future<void> type(int index, {String? text}) => Future.value(null);
 
   Future<void> cut(int start, [int end = 12]) => Future.value(null);
 

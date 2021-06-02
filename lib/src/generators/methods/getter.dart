@@ -57,9 +57,9 @@ abstract class Getter implements Built<Getter, GetterBuilder> {
     'Set'
   ];
 
-  String get name;
+  String? get name;
 
-  String get returnType;
+  String? get returnType;
 
   String generate(String pageObjectName) {
     return '$returnType get $name { ' +
@@ -107,12 +107,12 @@ abstract class Getter implements Built<Getter, GetterBuilder> {
       }''';
 
   bool get produceFindChain =>
-      !returnType.endsWith('>') && !ignoredTypes.contains(returnType);
+      !returnType!.endsWith('>') && !ignoredTypes.contains(returnType);
 
   bool get produceTestCreatorGetter =>
-      valueTypes.contains(returnType.split('<').first);
+      valueTypes.contains(returnType!.split('<').first);
 
-  factory Getter([Function(GetterBuilder) updates]) = _$Getter;
+  factory Getter([Function(GetterBuilder)? updates]) = _$Getter;
 
   Getter._();
 }

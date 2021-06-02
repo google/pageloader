@@ -19,11 +19,11 @@ part 'shared_list_page_objects.g.dart';
 @PageObject()
 abstract class PageForSimpleTest {
   PageForSimpleTest();
-  factory PageForSimpleTest.create(PageLoaderElement context) =
+  factory PageForSimpleTest.create(PageLoaderElement? context) =
       $PageForSimpleTest.create;
 
   @root
-  PageLoaderElement get rootElement;
+  PageLoaderElement? get rootElement;
 
   @ByTagName('table')
   Table get table;
@@ -35,7 +35,7 @@ abstract class Table {
   factory Table.create(PageLoaderElement context) = $Table.create;
 
   @root
-  PageLoaderElement get table;
+  PageLoaderElement? get table;
 
   @ByTagName('tr')
   Future<List<Row>> get rows;
@@ -50,7 +50,7 @@ abstract class Row {
   factory Row.create(PageLoaderElement context) = $Row.create;
 
   @root
-  PageLoaderElement get rootElement;
+  PageLoaderElement? get rootElement;
 
   @ByTagName('td')
   Future<List<PageLoaderElement>> get cells;

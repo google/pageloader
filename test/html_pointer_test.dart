@@ -23,8 +23,8 @@ void main() {
   runTests(() => html_setup.getRoot());
 
   group('HTML-only pointer tests', () {
-    PageForPointerTest page;
-    PageLoaderPointer pointer;
+    late PageForPointerTest page;
+    PageLoaderPointer? pointer;
 
     setUp(() {
       page = PageForPointerTest.create(html_setup.getRoot());
@@ -33,11 +33,11 @@ void main() {
 
     test('additional events are fired on moveTo', () async {
       // make sure pointer is not on element;
-      await pointer.moveTo(page.element, -10, -10);
+      await pointer!.moveTo(page.element, -10, -10);
       expect(page.element.visibleText, equals('area for pointer events'));
 
       // move to element...
-      await pointer.moveTo(page.element, 0, 0);
+      await pointer!.moveTo(page.element, 0, 0);
       expect(page.element.visibleText, isNot(contains('PointerLeave')));
       expect(page.element.visibleText, isNot(contains('PointerOut')));
       expect(page.element.visibleText, contains('PointerMove'));
@@ -45,36 +45,36 @@ void main() {
       expect(page.element.visibleText, contains('PointerOver'));
 
       // then move out
-      await pointer.moveTo(page.element, -10, -10);
+      await pointer!.moveTo(page.element, -10, -10);
       expect(page.element.visibleText, contains('PointerLeave'));
       expect(page.element.visibleText, contains('PointerOut'));
     });
 
     group('moves to center on', () {
-      int expectedXCenter;
-      int expectedYCenter;
+      late int expectedXCenter;
+      late int expectedYCenter;
 
       setUp(() {
         final rect =
             (page.element as HtmlPageLoaderElement).getBoundingClientRect();
-        expectedXCenter = rect.left + (rect.width * 0.5).ceil();
-        expectedYCenter = rect.top + (rect.height * 0.5).ceil();
+        expectedXCenter = rect.left + (rect.width * 0.5).ceil() as int;
+        expectedYCenter = rect.top + (rect.height * 0.5).ceil() as int;
       });
 
       test('moveTo with null,null coords', () async {
-        await pointer.moveTo(page.element, null, null);
+        await pointer!.moveTo(page.element, null, null);
         expect(page.element.visibleText,
             contains('PointerMove: $expectedXCenter, $expectedYCenter'));
       });
 
       test('down with eventTarget', () async {
-        await pointer.down(MouseButton.primary, eventTarget: page.element);
+        await pointer!.down(MouseButton.primary, eventTarget: page.element);
         expect(page.element.visibleText,
             contains('PointerMove: $expectedXCenter, $expectedYCenter'));
       });
 
       test('up with eventTarget', () async {
-        await pointer.up(MouseButton.primary, eventTarget: page.element);
+        await pointer!.up(MouseButton.primary, eventTarget: page.element);
         expect(page.element.visibleText,
             contains('PointerMove: $expectedXCenter, $expectedYCenter'));
       });
@@ -88,10 +88,10 @@ void main() {
       // Make sure center element has no events registered initially
       expect(center.visibleText, equals('center area for pointer events'));
 
-      await pointer.moveTo(page.topElement, 0, null);
+      await pointer!.moveTo(page.topElement, 0, null);
       // Track the center element and move at 2 pixel at a time
       // between every movement.
-      await pointer.moveTo(page.bottomElement, 0, null,
+      await pointer!.moveTo(page.bottomElement, 0, null,
           dispatchTo: [center], stepPixels: 2);
 
       expect(center.visibleText, contains('PointerLeave'));

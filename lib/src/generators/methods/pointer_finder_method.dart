@@ -28,23 +28,23 @@ part 'pointer_finder_method.g.dart';
 /// [absent()] otherwise.
 Optional<PointerFinderMethod> collectPointerFinderGetter(
     CoreMethodInformationBase methodInfo) {
-  if (!methodInfo.isPointer) {
+  if (!methodInfo.isPointer!) {
     return Optional.absent();
   }
 
-  if (!methodInfo.isAbstract || !methodInfo.isGetter) {
+  if (!methodInfo.isAbstract! || !methodInfo.isGetter!) {
     throw InvalidMethodException(methodInfo.node,
         '@Pointer annotation must be used with abstract getter');
   }
-  if (methodInfo.finder.isPresent) {
+  if (methodInfo.finder!.isPresent) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Finder with Pointer annotation');
   }
-  if (methodInfo.filters.isNotEmpty) {
+  if (methodInfo.filters!.isNotEmpty) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Filter with Pointer annotation');
   }
-  if (methodInfo.checkers.isNotEmpty) {
+  if (methodInfo.checkers!.isNotEmpty) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Checker with Pointer annotation');
   }
@@ -55,7 +55,7 @@ Optional<PointerFinderMethod> collectPointerFinderGetter(
 /// Generation for @Pointer getters.
 abstract class PointerFinderMethod
     implements Built<PointerFinderMethod, PointerFinderMethodBuilder> {
-  String get name;
+  String? get name;
 
   String generate(String pageObjectName) =>
       'PageLoaderPointer get $name { ' +
@@ -65,7 +65,7 @@ abstract class PointerFinderMethod
       generateEndMethodListeners(pageObjectName, name) +
       'return returnMe; }';
 
-  factory PointerFinderMethod([Function(PointerFinderMethodBuilder) updates]) =
+  factory PointerFinderMethod([Function(PointerFinderMethodBuilder)? updates]) =
       _$PointerFinderMethod;
   PointerFinderMethod._();
 }

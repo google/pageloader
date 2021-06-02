@@ -17,7 +17,7 @@ import 'package:path/path.dart' as path;
 import 'package:webdriver/sync_core.dart' show Capabilities, WebDriver;
 import 'package:webdriver/sync_io.dart' show createDriver;
 
-WebDriver createTestDriver({Map<String, dynamic> additionalCapabilities}) {
+WebDriver createTestDriver({Map<String, dynamic>? additionalCapabilities}) {
   final capabilities = Capabilities.chrome;
   final env = Platform.environment;
 
@@ -28,7 +28,7 @@ WebDriver createTestDriver({Map<String, dynamic> additionalCapabilities}) {
   }
 
   if (env['CHROMEDRIVER_ARGS'] != null) {
-    chromeOptions['args'] = env['CHROMEDRIVER_ARGS'].split(' ');
+    chromeOptions['args'] = env['CHROMEDRIVER_ARGS']!.split(' ');
   }
 
   if (chromeOptions.isNotEmpty) {

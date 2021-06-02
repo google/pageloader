@@ -34,7 +34,7 @@ class ProfilerListener implements PageLoaderListener {
   @override
   void endPageObjectMethod(String pageObjectName, String methodName) {
     final timerName = '$pageObjectName.$methodName';
-    final timer = _runningTimers[timerName].removeLast();
+    final timer = _runningTimers[timerName]!.removeLast();
     timer.stop();
   }
 }

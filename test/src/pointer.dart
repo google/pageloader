@@ -23,7 +23,7 @@ void runTests(GetNewContext contextGenerator) {
   group('pointer support', () {
     test('basically works', () async {
       final page = PageForPointerTest.create(contextGenerator());
-      final pointer = page.pointer;
+      final pointer = page.pointer!;
 
       await pointer.moveTo(page.element, 2, 2);
       await waitFor(() => page.element.visibleText,
@@ -39,7 +39,7 @@ void runTests(GetNewContext contextGenerator) {
 
     test('works with event target', () async {
       final page = PageForPointerTest.create(contextGenerator());
-      final pointer = page.pointer;
+      final pointer = page.pointer!;
 
       // make sure pointer is not on element;
       await pointer.moveTo(page.element, -10, -10);
@@ -61,7 +61,7 @@ abstract class PageForPointerTest {
       $PageForPointerTest.create;
 
   @Pointer
-  PageLoaderPointer get pointer;
+  PageLoaderPointer? get pointer;
 
   @ById('pointer')
   PageLoaderElement get element;

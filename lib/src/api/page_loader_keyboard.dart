@@ -64,12 +64,12 @@ class PageLoaderKeyboard {
           key.codeUnitAt(0) <= 'Z'.codeUnitAt(0));
 
   void _addEvent(
-      PageLoaderSpecialKey specialKey, String key, KeyboardEventType type) {
+      PageLoaderSpecialKey? specialKey, String? key, KeyboardEventType type) {
     events.add(
         _Key(specialKey, key, type, _altMod, _ctrlMod, _metaMod, _shiftMod));
   }
 
-  void _addUniqueEvent(PageLoaderSpecialKey specialKey, String key) {
+  void _addUniqueEvent(PageLoaderSpecialKey? specialKey, String? key) {
     // using keyPress as placeholder
     uniqueEvents.add(_Key(specialKey, key, KeyboardEventType.keyPress, _altMod,
         _ctrlMod, _metaMod, _shiftMod));
@@ -171,8 +171,8 @@ class PageLoaderKeyboard {
 
 /// Wrapper for individual key event within [PageLoaderKeyboard].
 class _Key {
-  final PageLoaderSpecialKey specialKey;
-  final String key;
+  final PageLoaderSpecialKey? specialKey;
+  final String? key;
   final KeyboardEventType type;
 
   final bool altMod;

@@ -70,7 +70,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// Returns an instance of [PageUtils].
   ///
   /// Note the instances returned may not be object equal across invocations.
-  PageUtils get utils;
+  PageUtils? get utils;
 
   /// The shadow root hosted by this element.
   PageLoaderElement get shadowRoot;
@@ -88,7 +88,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// This should return the value of [`<element>.innerText`](
   /// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText),
   /// but behaviour may vary for the different pageloader implementations.
-  String get innerText;
+  String? get innerText;
 
   /// Visible text within this element.
   ///
@@ -156,7 +156,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
 
   /// Clicks on the element with [clickOption].
   /// [clickOption] is only used for HTML.
-  Future<void> click({ClickOption clickOption});
+  Future<void> click({ClickOption? clickOption});
 
   /// Clicks outside of the current element.
   ///
@@ -167,7 +167,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   ///
   /// ScrollOptions is currently not supported.
   /// https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
-  Future<void> scroll({int x, int y});
+  Future<void> scroll({int? x, int? y});
 
   /// Scrolls this element into view.
   Future<void> scrollIntoView();
@@ -206,16 +206,16 @@ abstract class PageLoaderElement extends PageLoaderSource {
 /// Generic attributes interface, allowing bracket notation referencing.
 abstract class PageLoaderAttributes {
   /// Returns the value of attribute '[name]'.
-  String operator [](String name);
+  String? operator [](String name);
 }
 
 // Ensures that the length of the element's 'outerHTML' is not too large;
 // limit is ~50 KB in utf-16.
-String getOuterHtml(PageLoaderElement element) {
+String getOuterHtml(PageLoaderElement? element) {
   if (element == null) {
     return 'null';
   }
-  final elementString = element.properties['outerHTML'];
+  final elementString = element.properties['outerHTML']!;
   final bytes = utf8.encode(elementString);
   if (bytes.length > 50000) {
     return "(Length of Element's HTML DOM (${bytes.length}) is too "

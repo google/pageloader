@@ -22,7 +22,7 @@ import 'html_pointer.dart';
 /// Support for [PageUtils] in HTML context.
 class HtmlPageUtils extends PageUtils {
   final SyncFn<dynamic> syncFn;
-  HtmlPageLoaderElement _cachedRoot;
+  HtmlPageLoaderElement? _cachedRoot;
 
   HtmlPageUtils({SyncFn<dynamic> externalSyncFn = noOpExecuteSyncedFn})
       : syncFn = externalSyncFn;
@@ -54,9 +54,9 @@ class HtmlPageUtils extends PageUtils {
 
   /// Gets the mouse.
   @override
-  PageLoaderMouse get mouse => globalMouse(syncFn);
+  PageLoaderMouse? get mouse => globalMouse(syncFn);
 
   /// Gets the pointer.
   @override
-  PageLoaderPointer get pointer => globalPointer(syncFn);
+  PageLoaderPointer? get pointer => globalPointer(syncFn);
 }

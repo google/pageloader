@@ -21,7 +21,7 @@ abstract class MouseObject {
   factory MouseObject.create(PageLoaderElement context) = $MouseObject.create;
 
   @Mouse
-  PageLoaderMouse get mouse;
+  PageLoaderMouse? get mouse;
 }
 
 // Mixin implementation
@@ -35,5 +35,5 @@ abstract class MouseObjectUsingMixin extends Object with MouseObjectMixin {
 @PageObject()
 abstract class MouseObjectMixin {
   @Mouse
-  PageLoaderMouse get mouse;
+  PageLoaderMouse? get mouse;
 }

@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'attributes.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('attributes ', () {
@@ -118,7 +118,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class PageForAttributesTests {
   PageForAttributesTests();
-  factory PageForAttributesTests.create(PageLoaderElement context) =
+  factory PageForAttributesTests.create(PageLoaderElement? context) =
       $PageForAttributesTests.create;
 
   @ById('div')

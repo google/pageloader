@@ -20,7 +20,7 @@ import 'methods/core.dart' as core;
 String _generateCheck(Annotation annotation) {
   if (annotation.arguments == null) throw 'bad';
   return '${annotation.name.toString()}'
-      '(${annotation.arguments.arguments.join(', ')})';
+      '(${annotation.arguments!.arguments.join(', ')})';
 }
 
 /// Generates a comma separated list of class check declarations for the given

@@ -38,12 +38,12 @@ final String pageObjectList = 'PageObjectList';
 
 /// Returns a declaration of a annotation.
 String generateAnnotationDeclaration(Annotation annotation) =>
-    '${annotation.name}(${annotation.arguments.arguments.join(", ")})';
+    '${annotation.name}(${annotation.arguments!.arguments.join(", ")})';
 
 /// Returns a 'ByTagName' declaration from the 'ByCheckTag' annotation.
 String generateByTagNameFromByCheckTag(
     InterfaceType node, String methodSource) {
-  final defaultTagName = _extractTagName(node.element);
+  final defaultTagName = _extractTagName(node.element)!;
   if (defaultTagName.isEmpty) {
     throw "'@ByCheckTag' can only be used on getters that return a "
         "PageObject type with the'@CheckTag' annotation.\n\nCheck the type on "
@@ -55,15 +55,15 @@ String generateByTagNameFromByCheckTag(
 /// Extracts the tag name from a PageLoader2 class based on `@CheckTag`.
 /// If there is no tag name associated with the Page Object,
 /// returns and empty string.
-String _extractTagName(ClassElement poTypeElement) {
-  var expectedTag = '';
+String? _extractTagName(ClassElement poTypeElement) {
+  String? expectedTag = '';
   for (final annotation in poTypeElement.metadata) {
     final annotationElement = annotation.element;
     if (annotationElement is ConstructorElement) {
       final annotationName = annotationElement.enclosingElement.displayName;
       final annotationValue = annotation.computeConstantValue();
       if (annotationName == 'CheckTag') {
-        final inner = annotationValue.getField('_expectedTagName');
+        final inner = annotationValue!.getField('_expectedTagName')!;
         expectedTag = inner.toStringValue();
       }
     }
@@ -98,8 +98,8 @@ bool isPageloaderAnnotation(Annotation annotation) =>
     getAnnotationKind(annotation).isNotEmpty;
 
 /// Returns set of all Pageloader annotation the current annotation satisfies.
-Set<AnnotationKind> getAnnotationKind(Annotation annotation) {
-  final returnSet = <AnnotationKind>{};
+Set<AnnotationKind?> getAnnotationKind(Annotation annotation) {
+  final returnSet = <AnnotationKind?>{};
   final element = annotation.element;
   if (element != null) {
     returnSet
@@ -176,5 +176,5 @@ DartType getInnerType(DartType topType, String matchingType) {
 
 /// Return the Dart code the corresponds to the [type].
 String typeToCode(DartType type) {
-  return type?.getDisplayString(withNullability: false);
+  return type.getDisplayString(withNullability: false);
 }

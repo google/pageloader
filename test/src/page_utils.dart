@@ -16,20 +16,20 @@ import 'package:test/test.dart';
 
 part 'page_utils.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('page_utils', () {
     group('focused', () {
       test('returns body initially', () {
         final page = PageForPageUtilsTests.create(contextGenerator());
-        expect(page.rootElement.utils.focused.name, equals('body'));
+        expect(page.rootElement!.utils!.focused.name, equals('body'));
       });
 
       test('returns element that has focus', () async {
         final page = PageForPageUtilsTests.create(contextGenerator());
         await page.textInput.focus();
-        expect(page.rootElement.utils.focused.id, equals(page.textInput.id));
+        expect(page.rootElement!.utils!.focused.id, equals(page.textInput.id));
       });
     });
   });
@@ -38,11 +38,11 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class PageForPageUtilsTests {
   PageForPageUtilsTests();
-  factory PageForPageUtilsTests.create(PageLoaderElement context) =
+  factory PageForPageUtilsTests.create(PageLoaderElement? context) =
       $PageForPageUtilsTests.create;
 
   @root
-  PageLoaderElement get rootElement;
+  PageLoaderElement? get rootElement;
 
   @ById('text')
   PageLoaderElement get textInput;

@@ -16,12 +16,12 @@ import 'package:test/test.dart';
 
 part 'constructors.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('lookup constructor', () {
     BasePO base;
-    BCustomTagPO bTag;
+    late BCustomTagPO bTag;
 
     setUp(() {
       base = BasePO.create(contextGenerator());
@@ -75,7 +75,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class BasePO {
   BasePO();
-  factory BasePO.create(PageLoaderElement context) = $BasePO.create;
+  factory BasePO.create(PageLoaderElement? context) = $BasePO.create;
 
   @ByTagName(BCustomTagPO.tagName)
   BCustomTagPO get bTagPO;
@@ -90,14 +90,14 @@ abstract class BCustomTagPO {
   static const tagName = 'b-custom-tag';
 
   @root
-  PageLoaderElement get _root;
+  PageLoaderElement? get _root;
 
-  PageLoaderElement get rootElement => _root;
+  PageLoaderElement? get rootElement => _root;
 
-  PageUtils get _utils => _root.utils;
+  PageUtils? get _utils => _root!.utils;
 
-  CCustomTagPO get cTagFromPLE => CCustomTagPO.lookup(_root);
-  CCustomTagPO get cTagFromUtils => CCustomTagPO.lookup(_utils);
+  CCustomTagPO get cTagFromPLE => CCustomTagPO.lookup(_root!);
+  CCustomTagPO get cTagFromUtils => CCustomTagPO.lookup(_utils!);
 
   NoLookupPO get noLookupPO => NoLookupPO.lookup(_root);
 }
@@ -112,14 +112,14 @@ abstract class CCustomTagPO {
   static const tagName = 'c-custom-tag';
 
   @root
-  PageLoaderElement get _root;
+  PageLoaderElement? get _root;
 
-  String get innerText => _root.innerText;
+  String? get innerText => _root!.innerText;
 }
 
 @PageObject()
 abstract class NoLookupPO {
   NoLookupPO();
   factory NoLookupPO.create(PageLoaderElement context) = $NoLookupPO.create;
-  factory NoLookupPO.lookup(PageLoaderSource source) = $NoLookupPO.lookup;
+  factory NoLookupPO.lookup(PageLoaderSource? source) = $NoLookupPO.lookup;
 }

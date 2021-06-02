@@ -35,10 +35,10 @@ Future<Null> noOpExecuteSyncedFn(Future<dynamic> Function() fn) =>
 class HtmlPageLoaderElement implements PageLoaderElement {
   final SyncFn<dynamic> syncFn;
 
-  Element _cachedElement;
-  HtmlPageLoaderElement _parentElement;
+  Element? _cachedElement;
+  HtmlPageLoaderElement? _parentElement;
 
-  Finder _finder;
+  Finder? _finder;
   var _filters = <Filter>[];
   var _checkers = <Checker>[];
   var _listeners = <PageLoaderListener>[];
@@ -113,7 +113,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   @override
   dynamic get contextSync => _single;
 
-  Element get _single {
+  Element? get _single {
     if (_cachedElement != null) {
       return _cachedElement;
     }
@@ -128,7 +128,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   /// A simple xpath that consists of /Node[index]/Child_Node[index]/...
   String get _xpath {
-    Node element = _single;
+    Node? element = _single;
 
     final paths = <String>[];
     while (element != null && element.nodeType == Node.ELEMENT_NODE) {
@@ -146,23 +146,23 @@ class HtmlPageLoaderElement implements PageLoaderElement {
     return paths.reversed.join('');
   }
 
-  List<Element> get elements {
-    Element base;
+  List<Element?> get elements {
+    Element? base;
     if (_parentElement == null) {
       base = document.body;
     } else {
-      base = _parentElement._single;
+      base = _parentElement!._single;
     }
 
-    Iterable<Element> elements;
+    Iterable<Element?> elements;
     if (_finder == null) {
       elements = [_cachedElement ?? base];
     } else if (_finder is ContextFinder) {
       elements = (_finder as ContextFinder)
           .findElements(_parentElement)
-          .map((p) => p.context);
+          .map((p) => p!.context);
     } else if (_finder is CssFinder) {
-      elements = base.querySelectorAll((_finder as CssFinder).cssSelector);
+      elements = base!.querySelectorAll((_finder as CssFinder).cssSelector);
     } else {
       throw 'Unknown Finder type, ${_finder.runtimeType}';
     }
@@ -179,7 +179,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   void _clearCache() {
-    var elem = this;
+    HtmlPageLoaderElement? elem = this;
     while (elem != null) {
       elem._cachedElement = null;
       elem = elem._parentElement;
@@ -206,21 +206,21 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   @override
   List<PageLoaderElement> get shadowRootChildren =>
-      _single.shadowRoot?.children
+      _single!.shadowRoot?.children
           ?.map((el) => HtmlPageLoaderElement.createFromElement(el,
               externalSyncFn: syncFn))
           ?.toList() ??
       [];
 
   @override
-  String get innerText => _retryWhenStale(() => _single.text.trim());
+  String get innerText => _retryWhenStale(() => _single!.text!.trim());
 
   @override
   String get visibleText =>
-      _retryWhenStale(() => _normalize(_elementText([_single])));
+      _retryWhenStale(() => _normalize(_elementText([_single])!));
 
   @override
-  String get name => _retryWhenStale(() => _single.tagName.toLowerCase());
+  String get name => _retryWhenStale(() => _single!.tagName.toLowerCase());
 
   @override
   PageLoaderAttributes get attributes => _ElementAttributes(this);
@@ -239,10 +239,10 @@ class HtmlPageLoaderElement implements PageLoaderElement {
 
   @override
   bool get displayed =>
-      _retryWhenStale(() => _single.getComputedStyle().display != 'none');
+      _retryWhenStale(() => _single!.getComputedStyle().display != 'none');
 
   @override
-  List<String> get classes => _retryWhenStale(() => _single.classes.toList());
+  List<String> get classes => _retryWhenStale(() => _single!.classes.toList());
 
   @override
   bool get isFocused =>
@@ -260,16 +260,16 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  Rectangle get offset => _retryWhenStale(() => _single.offset);
+  Rectangle get offset => _retryWhenStale(() => _single!.offset);
 
   @override
   Rectangle getBoundingClientRect() =>
-      _retryWhenStale(() => _single.getBoundingClientRect());
+      _retryWhenStale(() => _single!.getBoundingClientRect());
 
   @override
   List<PageLoaderElement> getElementsByCss(String selector) =>
       _retryWhenStale(() {
-        final element = _single;
+        final element = _single!;
         return element
             .querySelectorAll(selector)
             .map((elem) => HtmlPageLoaderElement.createFromElement(elem,
@@ -287,8 +287,8 @@ class HtmlPageLoaderElement implements PageLoaderElement {
           if (_hasValueProperty(element)) {
             if (focusBefore) await focus();
             _setValue(element, '');
-            await _microtask(() => element.dispatchEvent(TextEvent('input')));
-            await _microtask(() => element.dispatchEvent(TextEvent('change')));
+            await _microtask(() => element!.dispatchEvent(TextEvent('input')));
+            await _microtask(() => element!.dispatchEvent(TextEvent('change')));
             if (blurAfter) await blur();
           } else {
             throw PageLoaderException(
@@ -298,48 +298,48 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  Future<Null> click({ClickOption clickOption}) async {
+  Future<Null> click({ClickOption? clickOption}) async {
     await syncFn(() async => _retryWhenStale(() async {
           final element = _single;
           if (element is OptionElement) {
             return _clickOptionElement();
           }
 
-          await _microtask(() => element.dispatchEvent(
+          await _microtask(() => element!.dispatchEvent(
               MouseEvent('mousedown', detail: clickOption?.detail ?? 1)));
-          await _microtask(() => element.dispatchEvent(
+          await _microtask(() => element!.dispatchEvent(
               MouseEvent('mouseup', detail: clickOption?.detail ?? 1)));
 
           if (element is SvgElement) {
             final event = MouseEvent('click',
                 button: MouseButton.primary.value,
                 detail: clickOption?.detail ?? 1,
-                clientX: clickOption?.clientX,
-                clientY: clickOption?.clientY,
-                screenX: clickOption?.screenX,
-                screenY: clickOption?.screenY);
+                clientX: clickOption?.clientX!,
+                clientY: clickOption?.clientY!,
+                screenX: clickOption?.screenX!,
+                screenY: clickOption?.screenY!);
 
             return _microtask(() => element.dispatchEvent(event));
           }
 
-          return _microtask(element.click);
+          return _microtask(element!.click);
         }));
   }
 
   @override
   Future<void> clickOutside() async {
     if (!exists || !displayed || utils.root == this) return;
-    await utils.root.click();
+    await utils.root!.click();
   }
 
   @override
-  Future<void> scroll({int x, int y}) async {
+  Future<void> scroll({int? x, int? y}) async {
     await syncFn(() => _retryWhenStale(() {
           final element = _single;
 
           // Note: element.scroll(...) from dart:html does not work.
           return _microtask(() {
-            element.scrollLeft += x ?? 0;
+            element!.scrollLeft += x ?? 0;
             element.scrollTop += y ?? 0;
             // In practice, 'scroll' events are sent rapidly but we only send
             // it once here.
@@ -354,7 +354,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
           final element = _single;
 
           return _microtask(() {
-            element.scrollIntoView();
+            element!.scrollIntoView();
             element.dispatchEvent(Event('scroll'));
           });
         }));
@@ -403,7 +403,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   Future<void> _typeSequence(PageLoaderKeyboard keys) async {
     // Variables used for adjusting text input values.
     final keypressCharCodes = <int>[];
-    String initialValue;
+    String? initialValue;
 
     if (_hasValueProperty(_single)) {
       initialValue = _getValue(_single) ?? '';
@@ -415,16 +415,16 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       if (event.type == KeyboardEventType.keyPress) {
         var charCode = 0;
         if (!event.isSpecial) {
-          charCode = event.key.codeUnitAt(0);
+          charCode = event.key!.codeUnitAt(0);
         } else if (event.specialKey == PageLoaderSpecialKey.enter) {
           charCode = KeyCode.ENTER;
         }
 
         // Dispatch associated events on contenteditable elements.
-        if (_isContentEditable(_single)) {
+        if (_isContentEditable(_single!)) {
           final keyValue = String.fromCharCode(charCode);
-          _single.text += keyValue;
-          await _microtask(() => _single.dispatchEvent(TextEvent('input')));
+          _single!.text += keyValue;
+          await _microtask(() => _single!.dispatchEvent(TextEvent('input')));
         }
 
         await _fireKeyboardEvent('keypress',
@@ -437,11 +437,11 @@ class HtmlPageLoaderElement implements PageLoaderElement {
         keypressCharCodes.add(charCode);
       } else {
         // 'keydown' or 'keyup' events
-        var keyCode = 0;
+        int? keyCode = 0;
         if (event.isSpecial) {
-          keyCode = _specialToKeyCode[event.specialKey];
+          keyCode = _specialToKeyCode[event.specialKey!];
         } else {
-          final charCode = event.key.codeUnitAt(0);
+          final charCode = event.key!.codeUnitAt(0);
           if (charCode >= _charCodeSmallA && charCode <= _charCodeSmallZ) {
             keyCode = KeyCode.A + (charCode - _charCodeSmallA);
           } else if (charCode >= _charCodeA && charCode <= _charCodeZ) {
@@ -449,7 +449,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
           } else if (charCode >= _charCode0 && charCode <= _charCode9) {
             keyCode = KeyCode.ZERO + (charCode - _charCode0);
           } else {
-            keyCode = _charToKeyCodes[event.key];
+            keyCode = _charToKeyCodes[event.key!];
           }
         }
         // If 'keyCode' could not be determined to a value (ex: '\n'), keep
@@ -457,7 +457,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
         final type =
             event.type == KeyboardEventType.keyDown ? 'keydown' : 'keyup';
         await _fireKeyboardEvent(type,
-            keyCode: keyCode,
+            keyCode: keyCode!,
             charCode: 0, // Always 0 in 'keydown' or 'keyup'
             altKey: event.altMod,
             ctrlKey: event.ctrlMod,
@@ -477,10 +477,10 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       // that the keypress events updated the values and we do not have to
       // manually update.
       if (initialValue == _getValue(_single)) {
-        _setValue(_single, _getValue(_single) + toAppend);
+        _setValue(_single, _getValue(_single)! + toAppend);
       }
-      await _microtask(() => _single.dispatchEvent(TextEvent('input')));
-      await _microtask(() => _single.dispatchEvent(TextEvent('change')));
+      await _microtask(() => _single!.dispatchEvent(TextEvent('input')));
+      await _microtask(() => _single!.dispatchEvent(TextEvent('change')));
     }
   }
 
@@ -491,7 +491,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
       bool ctrlKey = false,
       bool metaKey = false,
       bool shiftKey = false,
-      String key = ''}) {
+      String? key = ''}) {
     final args = <dynamic>[
       event,
       <String, dynamic>{
@@ -508,26 +508,26 @@ class HtmlPageLoaderElement implements PageLoaderElement {
     ];
     final kbEvent = js_util.callConstructor(
             js_util.getProperty(window, 'KeyboardEvent'), js_util.jsify(args))
-        as KeyboardEvent;
-    return _microtask(() => dispatchEvent(KeyEvent.wrap(kbEvent).wrapped));
+        as KeyboardEvent?;
+    return _microtask(() => dispatchEvent(KeyEvent.wrap(kbEvent!).wrapped));
   }
 
   @override
   Future<Null> focus() async {
     await syncFn(() async => _retryWhenStale(() async {
-          await _microtask(_single.focus);
+          await _microtask(_single!.focus);
         }));
   }
 
   @override
   Future<Null> blur() async {
     await syncFn(() async => _retryWhenStale(() async {
-          await _microtask(_single.blur);
+          await _microtask(_single!.blur);
         }));
   }
 
   /// Dispatches an html [event] from [_single].
-  bool dispatchEvent(Event event) => _single.dispatchEvent(event);
+  bool dispatchEvent(Event event) => _single!.dispatchEvent(event);
 
   @override
   String testCreatorGetters() => json.encode({
@@ -566,7 +566,7 @@ class HtmlPageLoaderElement implements PageLoaderElement {
   /// (HTML only) Invoke a getter or a method.
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic>? namedArguments]) {
     if (methodName == 'id') {
       return id;
     }
@@ -650,7 +650,7 @@ class _ElementAttributes extends PageLoaderAttributes {
   /// Based on algorithm from:
   /// https://dvcs.w3.org/hg/webdriver/raw-file/a9916dddac01/webdriver-spec.html#get-id-attribute
   @override
-  String operator [](String name) => _node._single.attributes[name];
+  String? operator [](String name) => _node._single!.attributes[name];
 }
 
 class _ElementComputedStyle extends PageLoaderAttributes {
@@ -660,7 +660,7 @@ class _ElementComputedStyle extends PageLoaderAttributes {
 
   @override
   String operator [](String name) => core.staleElementWrapper(
-      () => _node._single.getComputedStyle().getPropertyValue(name),
+      () => _node._single!.getComputedStyle().getPropertyValue(name),
       _node._clearCache,
       _isStaleElementException);
 }
@@ -671,8 +671,8 @@ class _ElementProperties extends PageLoaderAttributes {
   _ElementProperties(this._node);
 
   @override
-  String operator [](String name) => core.staleElementWrapper(() {
-        final object = js.JsObject.fromBrowserObject(_node._single);
+  String? operator [](String name) => core.staleElementWrapper(() {
+        final object = js.JsObject.fromBrowserObject(_node._single!);
         if (object.hasProperty(name)) {
           return object[name].toString();
         }
@@ -687,24 +687,24 @@ class _ElementStyle extends PageLoaderAttributes {
 
   @override
   String operator [](String name) => core.staleElementWrapper(
-      () => (_node._single).style.getPropertyValue(name),
+      () => _node._single!.style.getPropertyValue(name),
       _node._clearCache,
       _isStaleElementException);
 }
 
 // Dart has a complex hierarchy for DOM elements with multiple interfaces
 // implementing the same functions. These functions help us ignore this.
-bool _hasValueProperty(Element element) =>
+bool _hasValueProperty(Element? element) =>
     element is InputElementBase || element is TextAreaElement;
 
-String _getValue(Element element) {
+String? _getValue(Element? element) {
   if (element is InputElementBase) return element.value;
   if (element is TextAreaElement) return element.value;
   throw PageLoaderException(
       'Cannot find value for type: ${element.runtimeType}');
 }
 
-void _setValue(Element element, String value) {
+void _setValue(Element? element, String value) {
   if (element is InputElementBase) {
     element.value = value;
     return;
@@ -732,7 +732,7 @@ Future<Null> _microtask(Function() fn) {
 
 // Note: this is not exactly like PageLoader2's implementation, and I'm not 100%
 // sure this if functionally equivalent. (But at least it has types.)
-String _elementText(List<Node> elements) {
+String? _elementText(List<Node?> elements) {
   if (elements.length > 1) {
     return elements.map((e) => _elementText([e])).join('');
   }
@@ -745,7 +745,7 @@ String _elementText(List<Node> elements) {
     return _elementText(
         elem.getDistributedNodes().whereType<Element>().toList());
   }
-  if (elem.nodes == null || elem.nodes.isEmpty) {
+  if (elem!.nodes == null || elem.nodes.isEmpty) {
     return elem.text;
   }
   return _elementText(elem.nodes);

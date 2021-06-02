@@ -30,7 +30,7 @@ abstract class Root {
   factory Root.create(PageLoaderElement context) = $Root.create;
 
   @root
-  PageLoaderElement get myRoot;
+  PageLoaderElement? get myRoot;
 
   @ById('some-id')
   PageLoaderElement get myId;
@@ -60,7 +60,7 @@ abstract class RootUsingMixin extends Object with RootMixin {
 @PageObject()
 abstract class RootMixin {
   @root
-  PageLoaderElement get myRoot;
+  PageLoaderElement? get myRoot;
 
   @ById('some-id')
   PageLoaderElement get myId;

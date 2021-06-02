@@ -13,6 +13,7 @@
 
 import 'dart:math';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:pageloader/core.dart' as core;
 import 'package:pageloader/pageloader.dart';
 import 'package:webdriver/async_core.dart' as async_wd;
@@ -29,18 +30,18 @@ import 'webdriver_page_utils.dart';
 /// elements are cached until WebDriver indicates they are stale, at which point
 /// an attempt to re-resolve the element(s) is made.
 class WebDriverPageLoaderElement implements PageLoaderElement {
-  final sync_wd.WebDriver _driver;
-  WebDriverPageUtils _utils;
-  WebDriverPageLoaderElement _parentElement;
-  sync_wd.WebElement _cachedElement;
+  final sync_wd.WebDriver? _driver;
+  WebDriverPageUtils? _utils;
+  WebDriverPageLoaderElement? _parentElement;
+  sync_wd.WebElement? _cachedElement;
 
-  Finder _finder;
+  Finder? _finder;
   var _filters = <Filter>[];
   var _checkers = <Checker>[];
   var _listeners = <PageLoaderListener>[];
 
   @override
-  String get id => _single.id;
+  String get id => _single!.id;
 
   /// Constructs an element without context. Corresponds to the global context,
   /// i.e. the root HTML node.
@@ -92,7 +93,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       Finder finder, List<Filter> filter, List<Checker> checkers) {
     final rootElement = createElement(finder, filter, checkers);
     final createdList = (rootElement.elements)
-        .map((elem) => WebDriverPageLoaderElement.createFromElement(elem))
+        .map((elem) => WebDriverPageLoaderElement.createFromElement(elem!))
         .toList();
     createdList.forEach((elem) => elem.addListeners(_listeners));
     return createdList;
@@ -117,19 +118,19 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  WebDriverPageUtils get utils => _utils;
+  WebDriverPageUtils? get utils => _utils;
 
-  sync_wd.WebDriver get driver => _driver;
+  sync_wd.WebDriver? get driver => _driver;
 
   @override
-  async_wd.SearchContext get context => contextSync.asyncContext;
+  async_wd.SearchContext get context => contextSync!.asyncContext;
 
   /// Needed to power mouse actions.
   @override
-  sync_wd.SearchContext get contextSync => _single;
+  sync_wd.SearchContext? get contextSync => _single;
 
   /// Resolves the elements, throwing an exception if the # elements != 1.
-  sync_wd.WebElement get _single {
+  sync_wd.WebElement? get _single {
     if (_cachedElement != null) {
       return _cachedElement;
     }
@@ -143,10 +144,10 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   }
 
   /// Returns all elements resolved.
-  List<sync_wd.WebElement> get elements {
-    sync_wd.WebElement base;
+  List<sync_wd.WebElement?> get elements {
+    sync_wd.WebElement? base;
     if (_parentElement == null) {
-      final root = _driver.findElements(sync_wd.By.tagName('html')).toList();
+      final root = _driver!.findElements(sync_wd.By.tagName('html')).toList();
       if (root.isEmpty) {
         throw PageLoaderException('Could not find HTML tag at root');
       }
@@ -155,20 +156,20 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       }
       base = root[0];
     } else {
-      base = _parentElement._single;
+      base = _parentElement!._single;
     }
 
-    Iterable<sync_wd.WebElement> elements;
+    Iterable<sync_wd.WebElement?> elements;
     if (_finder == null) {
       elements = [_cachedElement ?? base];
     } else if (_finder is ContextFinder) {
       elements = (_finder as ContextFinder)
           .findElements(_parentElement)
-          .map((p) => p.contextSync);
+          .map((p) => p!.contextSync);
     } else if (_finder is WebElementFinder) {
       elements = [(_finder as WebElementFinder).element];
     } else if (_finder is CssFinder) {
-      elements = base
+      elements = base!
           .findElements(
               sync_wd.By.cssSelector((_finder as CssFinder).cssSelector))
           .toList();
@@ -178,7 +179,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
     // Filter/Checker API is based on PageLoaderElements; casting for this.
     final tempElements = elements
-        .map((e) => WebDriverPageLoaderElement._castFromElement(e))
+        .map((e) => WebDriverPageLoaderElement._castFromElement(e!))
         .toList();
     final filteredElements =
         core.applyFiltersAndChecks(tempElements, _filters, _checkers);
@@ -193,7 +194,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       : 'Element selected by $_finder,' +
           (_filters.isNotEmpty ? ' filtered by $_filters,' : '') +
           (_checkers.isNotEmpty ? ' checked with $_checkers,' : '') +
-          ' in:\n${getOuterHtml(_parentElement ?? utils.root)}';
+          ' in:\n${getOuterHtml(_parentElement ?? utils!.root)}';
 
   @override
   String toStringDeep() =>
@@ -208,7 +209,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   // We could incrementally clear until we find a web element that's still
   // good, but that's 50ms min for each check. Instead we clear the whole chain.
   void _clearCache() {
-    var elem = this;
+    WebDriverPageLoaderElement? elem = this;
     while (elem != null) {
       elem._cachedElement = null;
       elem = elem._parentElement;
@@ -219,8 +220,8 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       core.staleElementWrapper(method, _clearCache, _isStaleElementException);
 
   @override
-  String get innerText => _retryWhenStale(() =>
-      (_driver.execute('return arguments[0].textContent;', [_single])).trim());
+  String? get innerText => _retryWhenStale(() =>
+      (_driver!.execute('return arguments[0].textContent;', [_single])).trim());
 
   @override
   String get visibleText {
@@ -228,11 +229,11 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       scrollIntoViewCentered();
     }
 
-    return _retryWhenStale(() => _single.text);
+    return _retryWhenStale(() => _single!.text);
   }
 
   @override
-  String get name => _retryWhenStale(() => _single.name);
+  String get name => _retryWhenStale(() => _single!.name);
 
   @override
   PageLoaderAttributes get attributes =>
@@ -253,7 +254,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   PageLoaderAttributes get style => _ElementStyle(this);
 
   @override
-  bool get displayed => _retryWhenStale(() => _single.displayed);
+  bool get displayed => _retryWhenStale(() => _single!.displayed);
 
   @override
   List<String> get classes {
@@ -265,7 +266,8 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  bool get isFocused => _retryWhenStale(() => _single == _driver.activeElement);
+  bool get isFocused =>
+      _retryWhenStale(() => _single == _driver!.activeElement);
 
   @override
   bool get exists {
@@ -280,27 +282,27 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   Rectangle get offset {
-    final rect = _retryWhenStale<Map>(() => _driver.execute('''return {
+    final rect = _retryWhenStale<Map?>(() => _driver!.execute('''return {
           left: arguments[0].offsetLeft,
           top: arguments[0].offsetTop,
           width: arguments[0].offsetWidth,
           height: arguments[0].offsetHeight
-        }''', [_single]));
+        }''', [_single]))!;
     return Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
   @override
   Rectangle getBoundingClientRect() {
-    final rect = _retryWhenStale<Map>(() => _driver
-        .execute('return arguments[0].getBoundingClientRect();', [_single]));
+    final rect = _retryWhenStale<Map?>(() => _driver!
+        .execute('return arguments[0].getBoundingClientRect();', [_single]))!;
     return Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
   @override
   List<WebDriverPageLoaderElement> getElementsByCss(String selector) =>
-      _retryWhenStale(() => _single
+      _retryWhenStale(() => _single!
           .findElements(sync_wd.By.cssSelector(selector))
           .map((elem) => WebDriverPageLoaderElement.createFromElement(elem))
           .map((elem) => elem..addListeners(listeners))
@@ -318,20 +320,20 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   Future<Null> clear({bool focusBefore = true, bool blurAfter = true}) async =>
       _retryWhenStale(() async {
         if (focusBefore) await focus();
-        _single.driver.keyboard.sendChord([sync_wd.Keyboard.control, 'a']);
-        _single.driver.keyboard.sendChord([sync_wd.Keyboard.backSpace]);
+        _single!.driver.keyboard.sendChord([sync_wd.Keyboard.control, 'a']);
+        _single!.driver.keyboard.sendChord([sync_wd.Keyboard.backSpace]);
 
         // Some elements do not support `back space`, and some elements'
         // [innerText] is detached from themselves, so we send an empty string
         // in case the above method does not work.
-        _single.driver.keyboard.sendChord([sync_wd.Keyboard.control, 'a']);
-        _single.sendKeys('');
+        _single!.driver.keyboard.sendChord([sync_wd.Keyboard.control, 'a']);
+        _single!.sendKeys('');
         if (blurAfter) await blur();
       });
 
   // WebDriver does not use [clickOption] at the moment
   @override
-  Future<Null> click({ClickOption clickOption}) async {
+  Future<Null> click({ClickOption? clickOption}) async {
     if (clickOption != null) {
       throw UnsupportedError(
           'WebDriver click() does not support `clickOption` parameter.');
@@ -345,10 +347,10 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     // because the element is not within viewport.
     // So we can try again after moving the element into the center of page.
     try {
-      _retryWhenStale<void>(() => _single.click());
+      _retryWhenStale<void>(() => _single!.click());
     } catch (ElementClickInterceptedException) {
       await scrollIntoViewCentered();
-      _retryWhenStale<void>(() => _single.click());
+      _retryWhenStale<void>(() => _single!.click());
     }
   }
 
@@ -358,7 +360,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
     final rect = getBoundingClientRect();
     _retryWhenStale<void>(() {
-      final bodyElement = _utils.byTag('body');
+      final bodyElement = _utils!.byTag('body');
       final bodyRect = bodyElement.getBoundingClientRect();
       if (!rect.intersects(bodyRect)) {
         // No intersection. Just click the body which is outside of [_single].
@@ -372,14 +374,14 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
         bodyRect.topRight,
         bodyRect.bottomLeft,
         bodyRect.bottomRight
-      ].firstWhere((p) => !rect.containsPoint(p), orElse: () => null);
+      ].firstWhereOrNull((p) => !rect.containsPoint(p));
 
       if (point != null) {
-        _utils.driver.mouse.moveTo(
-            element: bodyElement.contextSync,
-            xOffset: point.x.toInt() - bodyRect.left,
-            yOffset: point.y.toInt() - bodyRect.top);
-        _utils.driver.mouse.click();
+        _utils!.driver!.mouse.moveTo(
+            element: bodyElement.contextSync as WebElement?,
+            xOffset: point.x.toInt() - (bodyRect.left as int),
+            yOffset: point.y.toInt() - (bodyRect.top as int));
+        _utils!.driver!.mouse.click();
       } else {
         throw PageLoaderException(
             'Could not click outside of the current element [$this].'
@@ -389,8 +391,8 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  Future<void> scroll({int x, int y}) async =>
-      _retryWhenStale(() => _driver.execute(
+  Future<void> scroll({int? x, int? y}) async =>
+      _retryWhenStale(() => _driver!.execute(
           'arguments[0].scrollLeft += ${x ?? 0};'
           'arguments[0].scrollTop += ${y ?? 0};'
           'arguments[0].dispatchEvent(new Event("scroll"));',
@@ -400,15 +402,15 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   Future<void> scrollIntoView() async {
     try {
       await _retryWhenStale(() =>
-          _driver.execute('arguments[0].scrollIntoViewIfNeeded()', [_single]));
+          _driver!.execute('arguments[0].scrollIntoViewIfNeeded()', [_single]));
     } on sync_wd.JavaScriptException {
       await _retryWhenStale(
-          () => _driver.execute('arguments[0].scrollIntoView()', [_single]));
+          () => _driver!.execute('arguments[0].scrollIntoView()', [_single]));
     }
   }
 
   Future<void> scrollIntoViewCentered() async {
-    await _retryWhenStale(() => _driver
+    await _retryWhenStale(() => _driver!
         .execute('arguments[0].scrollIntoView({block:"center"})', [_single]));
   }
 
@@ -417,7 +419,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
           {bool focusBefore = true, bool blurAfter = true}) async =>
       _retryWhenStale(() async {
         if (focusBefore) await focus();
-        _single.sendKeys(keys);
+        _single!.sendKeys(keys);
         if (blurAfter) await blur();
       });
 
@@ -436,21 +438,21 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     var text = '';
     for (var event in keys.uniqueEvents) {
       if (event.isSpecial) {
-        text += _specialKeyToString[event.specialKey];
+        text += _specialKeyToString[event.specialKey!]!;
       } else {
-        text += event.key;
+        text += event.key!;
       }
     }
-    _single.sendKeys(text);
+    _single!.sendKeys(text);
   }
 
   @override
   Future<Null> focus() async => _retryWhenStale(
-      () => _driver.execute('arguments[0].focus();', [_single]));
+      () => _driver!.execute('arguments[0].focus();', [_single]));
 
   @override
-  Future<Null> blur() async =>
-      _retryWhenStale(() => _driver.execute('arguments[0].blur();', [_single]));
+  Future<Null> blur() async => _retryWhenStale(
+      () => _driver!.execute('arguments[0].blur();', [_single]));
 
   @override
   String testCreatorGetters() => json.encode({
@@ -492,31 +494,31 @@ bool _isStaleElementException(Object e) =>
     e.toString().contains('StaleElementReferenceException');
 
 class _ElementAttributes extends PageLoaderAttributes {
-  final sync_wd.WebElement _node;
+  final sync_wd.WebElement? _node;
 
   _ElementAttributes(this._node);
 
   @override
-  String operator [](String name) => _node.attributes[name];
+  String? operator [](String name) => _node!.attributes[name];
 }
 
 class _ElementComputedStyle extends PageLoaderAttributes {
-  final sync_wd.WebElement _node;
+  final sync_wd.WebElement? _node;
 
   _ElementComputedStyle(this._node);
 
   @override
-  String operator [](String name) => _node.cssProperties[name];
+  String? operator [](String name) => _node!.cssProperties[name];
 }
 
 // Retrieves properties via Javascript.
 class _ElementProperties extends PageLoaderAttributes {
-  final sync_wd.WebElement _node;
+  final sync_wd.WebElement? _node;
 
   _ElementProperties(this._node);
 
   @override
-  String operator [](String name) => _node.properties[name];
+  String? operator [](String name) => _node!.properties[name];
 }
 
 // Retrieves style via JavaScript '.style'.
@@ -526,8 +528,8 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  String operator [](String name) => core.staleElementWrapper(
-      () => _node._driver.execute(
+  String? operator [](String name) => core.staleElementWrapper(
+      () => _node._driver!.execute(
           'return arguments[0].style.${_cssPropName(name)};', [_node._single]),
       _node._clearCache,
       _isStaleElementException);
@@ -535,7 +537,7 @@ class _ElementStyle extends PageLoaderAttributes {
 
 /// Convert hyphenated-properties to camelCase.
 String _cssPropName(String name) => name.splitMapJoin(RegExp(r'-(\w)'),
-    onMatch: (m) => m.group(1).toUpperCase(), onNonMatch: (m) => m);
+    onMatch: (m) => m.group(1)!.toUpperCase(), onNonMatch: (m) => m);
 
 const _specialKeyToString = {
   PageLoaderSpecialKey.backSpace: sync_wd.Keyboard.backSpace,

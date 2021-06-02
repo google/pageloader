@@ -23,14 +23,14 @@ import 'webdriver_page_loader_element.dart';
 
 /// Support for mouse in WebDriver context.
 class WebDriverMouse implements PageLoaderMouse {
-  final wd.WebDriver _driver;
+  final wd.WebDriver? _driver;
 
   WebDriverMouse(this._driver);
 
   // WebDriver does not use [clickOption] at the moment
   @override
   Future down(MouseButton button,
-      {PageLoaderElement eventTarget, ClickOption clickOption}) async {
+      {PageLoaderElement? eventTarget, ClickOption? clickOption}) async {
     if (clickOption != null) {
       throw UnsupportedError(
           'WebDriver PageLoaderMouse does not support `clickOption` '
@@ -39,25 +39,25 @@ class WebDriverMouse implements PageLoaderMouse {
     if (eventTarget is WebDriverPageLoaderElement) {
       return _fireEvent(eventTarget, 'mousedown', button);
     } else {
-      _driver.mouse.down(button);
+      _driver!.mouse.down(button);
     }
   }
 
   @override
-  Future moveTo(PageLoaderElement element, int xOffset, int yOffset,
-          {List<PageLoaderElement> dispatchTo,
-          int stepPixels,
-          Duration duration}) async =>
-      _driver.mouse.moveTo(
+  Future moveTo(PageLoaderElement element, int? xOffset, int? yOffset,
+          {List<PageLoaderElement>? dispatchTo,
+          int? stepPixels,
+          Duration? duration}) async =>
+      _driver!.mouse.moveTo(
           element: (element as WebDriverPageLoaderElement).contextSync
-              as wd.WebElement,
+              as wd.WebElement?,
           xOffset: xOffset,
           yOffset: yOffset);
 
   // WebDriver does not use [clickOption] at the moment
   @override
   Future up(MouseButton button,
-      {PageLoaderElement eventTarget, ClickOption clickOption}) async {
+      {PageLoaderElement? eventTarget, ClickOption? clickOption}) async {
     if (clickOption != null) {
       throw UnsupportedError(
           'WebDriver PageLoaderMouse does not support `clickOption` '
@@ -66,13 +66,13 @@ class WebDriverMouse implements PageLoaderMouse {
     if (eventTarget is WebDriverPageLoaderElement) {
       return _fireEvent(eventTarget, 'mouseup', button);
     } else {
-      _driver.mouse.up(button);
+      _driver!.mouse.up(button);
     }
   }
 
   Future _fireEvent(WebDriverPageLoaderElement eventTarget, String type,
-          [MouseButton button]) async =>
-      _driver.execute(
+          [MouseButton? button]) async =>
+      _driver!.execute(
           'arguments[0].dispatchEvent(new MouseEvent(arguments[1], '
           "{'button' : arguments[2]}));",
           [eventTarget.contextSync, type, button?.value]);

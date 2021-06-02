@@ -65,7 +65,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
   var typeArgument = node.returnType.toString();
 
   // Get template, if it exists.
-  String templateType;
+  String? templateType;
   if (typeArgument.contains('<')) {
     final typeArguments = getReturnTypeArguments(typeArgument);
     if (typeArguments.length != 1) {
@@ -88,9 +88,9 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
     // Check to see if return type is expected [InterfaceType]. If not, then
     // this means there is an error in the original Dart file but we don't
     // throw an error here since it hides underlying Dart error.
-    if (node.returnType.type is InterfaceType) {
+    if (node.returnType!.type is InterfaceType) {
       finder = generateByTagNameFromByCheckTag(
-          node.returnType.type, node.toSource());
+          node.returnType!.type as InterfaceType, node.toSource());
     }
   }
 
@@ -155,7 +155,7 @@ abstract class SingleFinderMethod extends Object
     implements
         SingleFinderMethodBase,
         Built<SingleFinderMethod, SingleFinderMethodBuilder> {
-  factory SingleFinderMethod([Function(SingleFinderMethodBuilder) updates]) =
+  factory SingleFinderMethod([Function(SingleFinderMethodBuilder)? updates]) =
       _$SingleFinderMethod;
 
   SingleFinderMethod._();
@@ -166,21 +166,21 @@ abstract class SingleFinderMethod extends Object
 abstract class SingleFinderMethodMixin {
   // Getters from [SingleFinderMethodBase] that need to be declared in this
   // mixin to be used in the methods below.
-  String get name;
+  String? get name;
 
-  String get pageObjectType;
+  String? get pageObjectType;
 
-  Optional<String> get finderDeclaration;
+  Optional<String>? get finderDeclaration;
 
-  Optional<String> get templateType;
+  Optional<String>? get templateType;
 
-  String get filterDeclarations;
+  String? get filterDeclarations;
 
-  String get checkerDeclarations;
+  String? get checkerDeclarations;
 
-  bool get isRoot;
+  bool? get isRoot;
 
-  bool get isNullElement;
+  bool? get isNullElement;
 
   String generate(String pageObjectName) =>
       '$methodSignature { ' +
@@ -232,11 +232,11 @@ abstract class SingleFinderMethodMixin {
   String get elementCreation => createElement;
 
   String get _context {
-    if (finderDeclaration.isPresent) {
+    if (finderDeclaration!.isPresent) {
       return _contextWithFinder;
-    } else if (isRoot) {
+    } else if (isRoot!) {
       return _contextWithRoot;
-    } else if (isNullElement) {
+    } else if (isNullElement!) {
       return _contextWithNullElement;
     } else {
       // Should already by caught, but let's be sure.
@@ -245,7 +245,7 @@ abstract class SingleFinderMethodMixin {
   }
 
   String get _contextWithFinder =>
-      '$root.createElement(${finderDeclaration.value}, '
+      '$root.createElement(${finderDeclaration!.value}, '
       '$filterDeclarations, $checkerDeclarations)';
 
   String get _contextWithNullElement => 'NullPageLoaderElement()';
@@ -261,7 +261,7 @@ abstract class SingleFinderMethodMixin {
   }
 
   String get template =>
-      templateType.isPresent ? '<${templateType.value}>' : '';
+      templateType!.isPresent ? '<${templateType!.value}>' : '';
 }
 
 /// Base class for finder method.

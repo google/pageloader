@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'generics.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('generics', () {
@@ -47,7 +47,7 @@ typedef MyGenericTypeDef<T> = String Function(T item);
 @PageObject()
 abstract class Generics<T> {
   Generics();
-  factory Generics.create(PageLoaderElement context) = $Generics<T>.create;
+  factory Generics.create(PageLoaderElement? context) = $Generics<T>.create;
 
   String typeDefParameter(T thing, MyGenericTypeDef<T> typeDef) {
     return typeDef(thing);
@@ -57,7 +57,7 @@ abstract class Generics<T> {
 @PageObject()
 abstract class RootPo<T> {
   RootPo();
-  factory RootPo.create(PageLoaderElement context) = $RootPo<T>.create;
+  factory RootPo.create(PageLoaderElement? context) = $RootPo<T>.create;
 
   @ById('button-1')
   Generics<T> get generics;

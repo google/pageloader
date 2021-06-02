@@ -28,23 +28,23 @@ part 'mouse_finder_method.g.dart';
 /// [absent()] otherwise.
 Optional<MouseFinderMethod> collectMouseFinderGetter(
     CoreMethodInformationBase methodInfo) {
-  if (!methodInfo.isMouse) {
+  if (!methodInfo.isMouse!) {
     return Optional.absent();
   }
 
-  if (!methodInfo.isAbstract || !methodInfo.isGetter) {
+  if (!methodInfo.isAbstract! || !methodInfo.isGetter!) {
     throw InvalidMethodException(
         methodInfo.node, '@Mouse annotation must be used with abstract getter');
   }
-  if (methodInfo.finder.isPresent) {
+  if (methodInfo.finder!.isPresent) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Finder with Mouse annotation');
   }
-  if (methodInfo.filters.isNotEmpty) {
+  if (methodInfo.filters!.isNotEmpty) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Filter with Mouse annotation');
   }
-  if (methodInfo.checkers.isNotEmpty) {
+  if (methodInfo.checkers!.isNotEmpty) {
     throw InvalidMethodException(
         methodInfo.node, 'cannot use Checker with Mouse annotation');
   }
@@ -55,7 +55,7 @@ Optional<MouseFinderMethod> collectMouseFinderGetter(
 /// Generation for @Mouse getters.
 abstract class MouseFinderMethod
     implements Built<MouseFinderMethod, MouseFinderMethodBuilder> {
-  String get name;
+  String? get name;
 
   String generate(String pageObjectName) =>
       'PageLoaderMouse get $name { ' +
@@ -65,7 +65,7 @@ abstract class MouseFinderMethod
       generateEndMethodListeners(pageObjectName, name) +
       'return returnMe; }';
 
-  factory MouseFinderMethod([Function(MouseFinderMethodBuilder) updates]) =
+  factory MouseFinderMethod([Function(MouseFinderMethodBuilder)? updates]) =
       _$MouseFinderMethod;
   MouseFinderMethod._();
 }

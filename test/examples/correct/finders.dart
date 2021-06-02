@@ -43,7 +43,7 @@ abstract class CheckTagPO {
   factory CheckTagPO.create(PageLoaderElement context) = $CheckTagPO.create;
 
   @root
-  PageLoaderElement get _root;
+  PageLoaderElement? get _root;
 
   @override
   String toString() => _root.toString();

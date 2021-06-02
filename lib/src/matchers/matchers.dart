@@ -72,7 +72,7 @@ class _Exists extends Matcher {
   const _Exists();
 
   @override
-  bool matches(item, Map<Object, Object> matchState) => utils.exists(item);
+  bool matches(item, Map<Object?, Object?> matchState) => utils.exists(item);
 
   @override
   Description describe(Description description) =>
@@ -107,7 +107,7 @@ class _NotExists extends Matcher {
   const _NotExists();
 
   @override
-  bool matches(item, Map<Object, Object> matchState) => !utils.exists(item);
+  bool matches(item, Map<Object?, Object?> matchState) => !utils.exists(item);
 
   @override
   Description describe(Description description) =>
@@ -140,7 +140,7 @@ class _HasClass extends Matcher {
   _HasClass(this.className);
 
   @override
-  bool matches(item, Map<Object, Object> matchState) =>
+  bool matches(item, Map<Object?, Object?> matchState) =>
       utils.hasClass(item, className);
 
   @override
@@ -152,7 +152,8 @@ class _IsDisplayed extends Matcher {
   const _IsDisplayed();
 
   @override
-  bool matches(item, Map<Object, Object> matchState) => utils.isDisplayed(item);
+  bool matches(item, Map<Object?, Object?> matchState) =>
+      utils.isDisplayed(item);
 
   @override
   Description describe(Description description) =>
@@ -163,7 +164,7 @@ class _IsHidden extends Matcher {
   const _IsHidden();
 
   @override
-  bool matches(item, Map<Object, Object> matchState) => utils.isHidden(item);
+  bool matches(item, Map<Object?, Object?> matchState) => utils.isHidden(item);
 
   @override
   Description describe(Description description) =>
@@ -174,7 +175,7 @@ class _IsFocused extends Matcher {
   const _IsFocused();
 
   @override
-  bool matches(item, Map<Object, Object> matchState) => utils.isFocused(item);
+  bool matches(item, Map<Object?, Object?> matchState) => utils.isFocused(item);
 
   @override
   Description describe(Description description) =>
@@ -184,11 +185,11 @@ class _IsFocused extends Matcher {
   Description describeMismatch(dynamic item, Description mismatchDescription,
       Map matchState, bool verbose) {
     try {
-      final e = utils.rootElementOf(item);
+      final e = utils.rootElementOf(item)!;
 
       // Lowercasing because it's a bit easier to read.
       final itemId = e.id.toLowerCase();
-      final focusId = e.utils.focused.id.toLowerCase();
+      final focusId = e.utils!.focused.id.toLowerCase();
 
       // Find the common prefix xpath.
       var common = 0;
@@ -212,7 +213,7 @@ class _IsVisible extends Matcher {
   const _IsVisible();
 
   @override
-  bool matches(item, Map<Object, Object> matchState) => utils.isVisible(item);
+  bool matches(item, Map<Object?, Object?> matchState) => utils.isVisible(item);
 
   @override
   Description describe(Description description) =>

@@ -20,14 +20,14 @@ abstract class JsonSerializable {
 }
 
 abstract class Event implements JsonSerializable {
-  Map<String, Object> toMap();
+  Map<String, Object?> toMap();
 }
 
 /// Trace Event, a subset of the implementation of Trace Event Format.
 ///
 /// https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU
 class TraceEvent implements JsonSerializable {
-  List<Event> traceEvents;
+  late List<Event> traceEvents;
 
   @override
   String toJson() {
@@ -46,28 +46,28 @@ enum DurationEventPhase {
 /// An event that has start and end times.
 class DurationEvent implements Event {
   /// The phase of this event, either Begin or End.
-  DurationEventPhase phase;
+  DurationEventPhase? phase;
 
   /// The name of the Event.
-  String name;
+  String? name;
 
   /// Process ID.
-  String pid;
+  String? pid;
 
   /// Thread ID.
-  String tid;
+  String? tid;
 
   /// Any arguments to this event.
-  List<String> args;
+  List<String>? args;
 
   /// The tracing clock timestamp.
-  DateTime ts;
+  DateTime? ts;
 
   DurationEvent();
 
   @override
-  Map<String, Object> toMap() {
-    final map = <String, Object>{
+  Map<String, Object?> toMap() {
+    final map = <String, Object?>{
       constants.phase: phase == DurationEventPhase.begin
           ? constants.phaseBegin
           : constants.phaseEnd
@@ -86,7 +86,7 @@ class DurationEvent implements Event {
       map[constants.args] = args;
     }
     if (ts != null) {
-      map[constants.tracingTimestamp] = ts.microsecondsSinceEpoch;
+      map[constants.tracingTimestamp] = ts!.microsecondsSinceEpoch;
     }
     return map;
   }

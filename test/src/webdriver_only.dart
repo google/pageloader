@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'webdriver_only.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 typedef DoRefresh = void Function();
 
@@ -45,7 +45,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class WebDriverOnly {
   WebDriverOnly();
-  factory WebDriverOnly.create(PageLoaderElement context) =
+  factory WebDriverOnly.create(PageLoaderElement? context) =
       $WebDriverOnly.create;
 
   @ById('button-1')

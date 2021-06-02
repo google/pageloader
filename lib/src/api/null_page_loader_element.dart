@@ -141,7 +141,7 @@ class NullPageLoaderElement implements PageLoaderElement {
       throw NullPageLoaderElementAccessException('clear', this);
 
   @override
-  Future<void> click({ClickOption clickOption}) =>
+  Future<void> click({ClickOption? clickOption}) =>
       throw NullPageLoaderElementAccessException('click', this);
 
   @override
@@ -149,7 +149,7 @@ class NullPageLoaderElement implements PageLoaderElement {
       throw NullPageLoaderElementAccessException('clickOutside', this);
 
   @override
-  Future<void> scroll({int x, int y}) =>
+  Future<void> scroll({int? x, int? y}) =>
       throw NullPageLoaderElementAccessException('scroll', this);
 
   @override

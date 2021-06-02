@@ -22,7 +22,7 @@ import 'shared_page_objects.dart';
 typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
-  PageLoaderElement root;
+  PageLoaderElement? root;
 
   group('debug', () {
     setUp(() async {
@@ -31,11 +31,11 @@ void runTests(GetNewContext contextGenerator) {
 
     test('trace listener', () async {
       var printedLines = <String>[];
-      root.addListeners(
+      root!.addListeners(
           [TraceListener(printLine: (String s) => printedLines.add(s))]);
 
       final page = PageForSimpleTest.create(root);
-      expect(page.table.table.exists, true); // Do something.
+      expect(page.table.table!.exists, true); // Do something.
       printedLines =
           printedLines.map((s) => s.trim()).toList(); // Drop the whitespace.
       expect(
@@ -46,11 +46,11 @@ void runTests(GetNewContext contextGenerator) {
 
     test('profiler listener', () async {
       final timerFactory = CollectingTimerFactory();
-      root.addListeners([ProfilerListener(timerFactory)]);
+      root!.addListeners([ProfilerListener(timerFactory)]);
 
       final page = PageForSimpleTest.create(root);
 
-      await page.table.table.click();
+      await page.table.table!.click();
       await page.table.doSlowAction(); // Do something.
 
       final json = timerFactory.serialize().toJson();

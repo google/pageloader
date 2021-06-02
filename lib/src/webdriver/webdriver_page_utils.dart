@@ -21,13 +21,13 @@ import 'webdriver_pointer.dart';
 /// Support for [PageUtils] in WebDriver context.
 class WebDriverPageUtils extends PageUtils {
   /// The underlying instance of [WebDriver].
-  final wd.WebDriver driver;
+  final wd.WebDriver? driver;
 
   final WebDriverMouse _mouse;
 
   final WebDriverPointer _pointer;
 
-  WebDriverPageLoaderElement _cachedRoot;
+  WebDriverPageLoaderElement? _cachedRoot;
 
   WebDriverPageUtils(this.driver)
       : _mouse = WebDriverMouse(driver),
@@ -38,7 +38,7 @@ class WebDriverPageUtils extends PageUtils {
   /// Caches the [WebDriverPageLoaderElement] used between calls to allow
   /// listeners to persist.
   @override
-  WebDriverPageLoaderElement get root {
+  WebDriverPageLoaderElement? get root {
     _cachedRoot ??= WebDriverPageLoaderElement(driver);
     return _cachedRoot;
   }
@@ -46,12 +46,12 @@ class WebDriverPageUtils extends PageUtils {
   /// Gets the element that currently has focus on the given page.
   @override
   WebDriverPageLoaderElement get focused {
-    return WebDriverPageLoaderElement.createFromElement(driver.activeElement);
+    return WebDriverPageLoaderElement.createFromElement(driver!.activeElement!);
   }
 
   @override
   WebDriverPageLoaderElement byTag(String tag) =>
-      root.getElementsByCss(tag).single;
+      root!.getElementsByCss(tag).single;
 
   /// Gets the mouse.
   @override

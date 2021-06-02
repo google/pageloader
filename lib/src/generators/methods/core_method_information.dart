@@ -24,12 +24,12 @@ part 'core_method_information.g.dart';
 
 abstract class TypeInformation
     implements Built<TypeInformation, TypeInformationBuilder> {
-  factory TypeInformation([Function(TypeInformationBuilder) updates]) =
+  factory TypeInformation([Function(TypeInformationBuilder)? updates]) =
       _$TypeInformation;
   TypeInformation._();
 
-  String get type;
-  List<TypeInformation> get typeArguments;
+  String? get type;
+  List<TypeInformation>? get typeArguments;
 }
 
 TypeInformation getTypeInformation(String type) {
@@ -55,14 +55,14 @@ TypeInformation getTypeInformation(String type) {
 
 TypeInformation extractPageObjectInfo(
     TypeInformation typeInfo, AstNode source) {
-  if (typeInfo.typeArguments.length != 1) {
+  if (typeInfo.typeArguments!.length != 1) {
     throw InvalidMethodException(
         source,
         'Expected exactly one type argument for ${typeInfo.type}'
         ' in return type. Check the return type, and if needed file a bug.'
         ' Original source: \n\n$source');
   }
-  final nestedInfo = typeInfo.typeArguments.single;
+  final nestedInfo = typeInfo.typeArguments!.single;
   if (nestedInfo.type == 'List') {
     return extractPageObjectInfo(nestedInfo, source);
   }
@@ -71,12 +71,12 @@ TypeInformation extractPageObjectInfo(
 
 CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
   // Extract type info.
-  final typeInfo = getTypeInformation(node.returnType.toSource());
+  final typeInfo = getTypeInformation(node.returnType!.toSource());
 
   final isFuture = typeInfo.type == 'Future';
   final isList = typeInfo.type == 'List' ||
-      (typeInfo.typeArguments.length == 1 &&
-          typeInfo.typeArguments[0].type == 'List');
+      (typeInfo.typeArguments!.length == 1 &&
+          typeInfo.typeArguments![0].type == 'List');
 
   TypeInformation pageObjectInfo;
   if (isFuture || isList) {
@@ -160,8 +160,8 @@ CoreMethodInformation collectCoreMethodInformation(MethodDeclaration node) {
     ..isAbstract = node.isAbstract
     ..pageObjectType = pageObjectInfo.type
     ..pageObjectTemplate = Optional<String>.fromNullable(
-        pageObjectInfo.typeArguments.length == 1
-            ? pageObjectInfo.typeArguments.single.type
+        pageObjectInfo.typeArguments!.length == 1
+            ? pageObjectInfo.typeArguments!.single.type
             : null)
     ..isFuture = isFuture
     ..isList = isList
@@ -182,7 +182,7 @@ abstract class CoreMethodInformation extends Object
         CoreMethodInformationBase,
         Built<CoreMethodInformation, CoreMethodInformationBuilder> {
   factory CoreMethodInformation(
-          [Function(CoreMethodInformationBuilder) updates]) =
+          [Function(CoreMethodInformationBuilder)? updates]) =
       _$CoreMethodInformation;
   CoreMethodInformation._();
 }
@@ -190,25 +190,25 @@ abstract class CoreMethodInformation extends Object
 /// All PL3 relevant information as getters.
 @BuiltValue(instantiable: false)
 abstract class CoreMethodInformationBase {
-  String get name;
-  bool get isGetter;
-  bool get isAbstract;
+  String? get name;
+  bool? get isGetter;
+  bool? get isAbstract;
 
   // Extracted type information.
-  String get pageObjectType;
-  Optional<String> get pageObjectTemplate;
-  bool get isFuture;
-  bool get isList;
-  bool get isMouse;
-  bool get isPointer;
+  String? get pageObjectType;
+  Optional<String>? get pageObjectTemplate;
+  bool? get isFuture;
+  bool? get isList;
+  bool? get isMouse;
+  bool? get isPointer;
 
   // Annotations.
-  Optional<String> get finder;
-  List<String> get filters;
-  List<String> get checkers;
-  bool get isRoot;
-  bool get isNullElement;
+  Optional<String>? get finder;
+  List<String>? get filters;
+  List<String>? get checkers;
+  bool? get isRoot;
+  bool? get isNullElement;
 
-  String get nodeSource;
-  AstNode get node;
+  String? get nodeSource;
+  AstNode? get node;
 }

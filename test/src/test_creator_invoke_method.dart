@@ -20,7 +20,7 @@ typedef GetNewContext = PageLoaderElement Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('testCreatorInvokeMethod', () {
-    dynamic page;
+    late dynamic page;
 
     group('without mixin', () {
       setUp(() {

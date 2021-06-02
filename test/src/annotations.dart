@@ -18,27 +18,27 @@ import 'shared_page_objects.dart';
 
 part 'annotations.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('annotations', () {
     test('CheckTag annotation', () async {
       final base = BaseObject.create(contextGenerator());
-      expect(base.table.table.name, 'table');
-      expect(base.tableUsingCheckedTag.table.name, base.table.table.name);
+      expect(base.table.table!.name, 'table');
+      expect(base.tableUsingCheckedTag.table!.name, base.table.table!.name);
       await verifyRows(base.table.rows);
     });
 
     test('EnsureTag annotation', () async {
       final base = BaseEnsureObject.create(contextGenerator());
-      expect(base.table.table.name, 'table');
+      expect(base.table.table!.name, 'table');
       await verifyRows(base.table.rows);
     });
 
     test('CheckTag annotation fails as expected', () async {
       final base = BaseObject.create(contextGenerator());
       try {
-        base.badTable.table.name;
+        base.badTable.table!.name;
         fail('Expected to throw on bad @CheckTag');
       } catch (e) {
         expect(
@@ -51,7 +51,7 @@ void runTests(GetNewContext contextGenerator) {
     test('EnsureTag annotation fails as expected', () async {
       final base = BaseEnsureObject.create(contextGenerator());
       try {
-        base.badTable.table.name;
+        base.badTable.table!.name;
         fail('Expected to throw on bad @EnsureTag');
       } catch (e) {
         expect(e.toString(),
@@ -100,14 +100,14 @@ void runTests(GetNewContext contextGenerator) {
   group('custom annotations', () {
     test('CheckTag annotation', () async {
       final base = PseudoBaseObject.create(contextGenerator());
-      expect(base.table.table.name, 'table');
+      expect(base.table.table!.name, 'table');
       await verifyRows(base.table.rows);
     });
 
     test('CheckTag annotation fails as expected', () async {
       final base = PseudoBaseObject.create(contextGenerator());
       try {
-        base.badTable.table.name;
+        base.badTable.table!.name;
         fail('Expected to throw on bad @CheckTag');
       } catch (e) {
         expect(
@@ -133,7 +133,7 @@ void runTests(GetNewContext contextGenerator) {
 abstract class BaseObject {
   BaseObject();
 
-  factory BaseObject.create(PageLoaderElement context) = $BaseObject.create;
+  factory BaseObject.create(PageLoaderElement? context) = $BaseObject.create;
 
   @ByTagName('table')
   TableForCheckTag get table;
@@ -152,7 +152,7 @@ abstract class BaseObject {
 abstract class PseudoBaseObject {
   PseudoBaseObject();
 
-  factory PseudoBaseObject.create(PageLoaderElement context) =
+  factory PseudoBaseObject.create(PageLoaderElement? context) =
       $PseudoBaseObject.create;
 
   @PseudoByTagName('table')
@@ -174,7 +174,7 @@ abstract class TableForCheckTag {
       $TableForCheckTag.create;
 
   @root
-  PageLoaderElement get table;
+  PageLoaderElement? get table;
 
   @Global(ByTagName('table'))
   PageLoaderElement get globalTable;
@@ -187,7 +187,7 @@ abstract class TableForCheckTag {
 abstract class BaseEnsureObject {
   BaseEnsureObject();
 
-  factory BaseEnsureObject.create(PageLoaderElement context) =
+  factory BaseEnsureObject.create(PageLoaderElement? context) =
       $BaseEnsureObject.create;
 
   @ByTagName('table')
@@ -206,7 +206,7 @@ abstract class TableForEnsureTag {
       $TableForEnsureTag.create;
 
   @root
-  PageLoaderElement get table;
+  PageLoaderElement? get table;
 
   @ByTagName('tr')
   PageObjectIterable<Row> get rows;
@@ -221,7 +221,7 @@ abstract class CheckTagFails {
       $CheckTagFails.create;
 
   @root
-  PageLoaderElement get table;
+  PageLoaderElement? get table;
 }
 
 @EnsureTag('inconceivable') // ignore: deprecated_member_use_from_same_package
@@ -233,14 +233,14 @@ abstract class EnsureTagFails {
       $EnsureTagFails.create;
 
   @root
-  PageLoaderElement get table;
+  PageLoaderElement? get table;
 }
 
 @PageObject()
 abstract class PageForWithAttributeTest {
   PageForWithAttributeTest();
 
-  factory PageForWithAttributeTest.create(PageLoaderElement context) =
+  factory PageForWithAttributeTest.create(PageLoaderElement? context) =
       $PageForWithAttributeTest.create;
 
   @ByTagName('input')
@@ -252,7 +252,7 @@ abstract class PageForWithAttributeTest {
 abstract class PageForWithClassTest {
   PageForWithClassTest();
 
-  factory PageForWithClassTest.create(PageLoaderElement context) =
+  factory PageForWithClassTest.create(PageLoaderElement? context) =
       $PageForWithClassTest.create;
 
   @ByTagName('input')
@@ -264,7 +264,7 @@ abstract class PageForWithClassTest {
 abstract class DebugIds {
   DebugIds();
 
-  factory DebugIds.create(PageLoaderElement context) = $DebugIds.create;
+  factory DebugIds.create(PageLoaderElement? context) = $DebugIds.create;
 
   @ByDebugId('option1')
   PageLoaderElement get option1;
@@ -289,7 +289,7 @@ abstract class DebugIds {
 abstract class TestIds {
   TestIds();
 
-  factory TestIds.create(PageLoaderElement context) = $TestIds.create;
+  factory TestIds.create(PageLoaderElement? context) = $TestIds.create;
 
   @ByTestId('one')
   PageLoaderElement get divOne;

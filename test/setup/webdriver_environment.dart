@@ -18,8 +18,8 @@ import 'io_config.dart' as webtest;
 
 /// Simple environment management for WebDriver tests.
 class WebDriverEnvironment {
-  WebDriver driver;
-  WebDriverPageUtils _loader;
+  late WebDriver driver;
+  WebDriverPageUtils? _loader;
   bool useLong;
 
   WebDriverEnvironment({this.useLong = false});
@@ -35,8 +35,8 @@ class WebDriverEnvironment {
     driver.quit();
   }
 
-  WebDriverPageLoaderElement getBaseElement() => _loader.root;
-  WebDriverMouse get mouse => _loader.mouse;
+  WebDriverPageLoaderElement getBaseElement() => _loader!.root;
+  WebDriverMouse get mouse => _loader!.mouse;
 
   void doRefresh() => driver.get(webtest.testPagePath(useLong: useLong));
 }

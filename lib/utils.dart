@@ -37,7 +37,7 @@ bool exists(item) {
   if (item is PageObjectList<Object>) {
     return item.isNotEmpty;
   }
-  return _rootElementOfAndRethrow(item, 'exists/notExists').exists;
+  return _rootElementOfAndRethrow(item, 'exists/notExists')!.exists;
 }
 
 /// A matcher that checks if a PageLoaderElement/PageObject does not exist.
@@ -45,12 +45,12 @@ bool notExists(item) => !exists(item);
 
 /// Checks if a PageLoaderElement/PageObject contains given class.
 bool hasClass(item, String className) =>
-    _rootElementOfAndRethrow(item, 'hasClass').classes.contains(className);
+    _rootElementOfAndRethrow(item, 'hasClass')!.classes.contains(className);
 
 /// Checks if a PageLoaderElement/PageObject is displayed based on "display"
 /// style.
 bool isDisplayed(item) =>
-    _rootElementOfAndRethrow(item, 'isDisplayed/isNotDisplayed').displayed;
+    _rootElementOfAndRethrow(item, 'isDisplayed/isNotDisplayed')!.displayed;
 
 /// Checks if a PageLoaderElement/PageObject is not displayed based on
 /// "display" style.
@@ -67,7 +67,7 @@ bool _isHidden(PageLoaderElement root) =>
 /// A PageLoaderElement/PageObject is considered hidden if its `visibility`
 /// style is either `hidden` or `collapse`.
 bool isHidden(item) =>
-    _isHidden(_rootElementOfAndRethrow(item, 'isHidden/isNotHidden'));
+    _isHidden(_rootElementOfAndRethrow(item, 'isHidden/isNotHidden')!);
 
 /// Checks if PageLoaderElement/PageObject is not hidden based on "visibility"
 /// style.
@@ -82,7 +82,7 @@ bool isNotHidden(item) => !isHidden(item);
 ///
 /// Does NOT check whether the element is on screen and unobscured.
 bool isVisible(item) {
-  final root = _rootElementOfAndRethrow(item, 'isVisible/isNotVisible');
+  final root = _rootElementOfAndRethrow(item, 'isVisible/isNotVisible')!;
   return root.exists && root.displayed && !_isHidden(root);
 }
 
@@ -91,14 +91,14 @@ bool isNotVisible(item) => !isVisible(item);
 
 /// Checks if PageLoaderElement/PageObject is focused.
 bool isFocused(item) =>
-    _rootElementOfAndRethrow(item, 'isFocused/isNotFocused').isFocused;
+    _rootElementOfAndRethrow(item, 'isFocused/isNotFocused')!.isFocused;
 
 /// Checks if PageLoaderElement/PageObject is not focused.
 bool isNotFocused(item) => !isFocused(item);
 
 /// Gets the innerText of a PageLoaderElement/PageObject.
-String getInnerText(item) =>
-    _rootElementOfAndRethrow(item, 'getInnerText').innerText;
+String? getInnerText(item) =>
+    _rootElementOfAndRethrow(item, 'getInnerText')!.innerText;
 
 /// Function for PageObject constructor. Typically in form:
 ///   (c) => SomePO.create(c)
@@ -111,7 +111,7 @@ typedef POFactory<T> = T Function(PageLoaderElement context);
 ///   final myPO = createPO<MyPO>(someElement, (c) => MyPO.create(c),
 ///       finder: ByCss('some-tag'));
 T createPO<T>(PageLoaderElement source, POFactory<T> poFactory,
-    {Finder finder}) {
+    {Finder? finder}) {
   final element =
       finder == null ? source : source.createElement(finder, [], []);
   return poFactory(element);
@@ -120,7 +120,7 @@ T createPO<T>(PageLoaderElement source, POFactory<T> poFactory,
 /// Grabs the root element of a PageObject. Same as getting a '@root' annotated
 /// getter within the PageObject. If a PageLoaderElement is passed, returns it
 /// back.
-PageLoaderElement rootElementOf(dynamic item) {
+PageLoaderElement? rootElementOf(dynamic item) {
   if (item is PageLoaderElement) {
     return item;
   }
@@ -139,8 +139,8 @@ bool isPageLoaderElement(dynamic item) => item is PageLoaderElement;
 /// Grabs root element of a PageLoaderElement or PageObject. If the `item` is
 /// neither, rethrows the error with the utility function used instead of
 /// 'rootElementOf'.
-PageLoaderElement _rootElementOfAndRethrow(item, String f) {
-  PageLoaderElement _root;
+PageLoaderElement? _rootElementOfAndRethrow(item, String f) {
+  PageLoaderElement? _root;
   try {
     _root = rootElementOf(item);
   } on PageLoaderArgumentError {

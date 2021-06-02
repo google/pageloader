@@ -33,7 +33,7 @@ import '../mocks/annotations.dart';
 /// Declare pageloader annotated method.
 ///
 /// [preamble] should be used for custom annotations.
-Future<MethodDeclaration> getMethodDeclaration(
+Future<MethodDeclaration?> getMethodDeclaration(
     String methodDeclaration, String methodName,
     {String preamble = ''}) async {
   final classToParse = '''
@@ -48,7 +48,8 @@ class _SomePageObject_ { $methodDeclaration }
 class DemoCheckedPO {}
 ''';
   final driver = TestDriver();
-  final unit = await driver.resultForFile('test_mock.dart', classToParse);
+  final unit = await (driver.resultForFile('test_mock.dart', classToParse)
+      as FutureOr<CompilationUnit>);
   final finder = MethodFinder(methodName);
   unit.accept(finder);
 
@@ -57,9 +58,9 @@ class DemoCheckedPO {}
 
 class MethodFinder extends GeneralizingAstVisitor<void> {
   final String _methodName;
-  MethodDeclaration _method;
+  MethodDeclaration? _method;
 
-  MethodDeclaration get method => _method;
+  MethodDeclaration? get method => _method;
 
   MethodFinder(this._methodName);
 
@@ -73,24 +74,25 @@ class MethodFinder extends GeneralizingAstVisitor<void> {
 
 /// Analyzer Driver for scanning elements/asts on memory-based files.
 class TestDriver {
-  CompilationUnit _compilationUnit;
-  CompilationUnitElement compilationUnitElement;
-  AnalysisDriver driver;
-  AnalysisSession session;
+  CompilationUnit? _compilationUnit;
+  late CompilationUnitElement compilationUnitElement;
+  late AnalysisDriver driver;
+  late AnalysisSession session;
 
   /// Root path on all scoped files.
   final String root = '/test/root/path';
 
   final ResourceProvider resourceProvider = MemoryResourceProvider();
 
-  CompilationUnit get compilationUnit => _compilationUnit;
+  CompilationUnit? get compilationUnit => _compilationUnit;
 
   Future<TypeProvider> get typeProvider async =>
       compilationUnitElement.library.typeProvider;
 
   TestDriver() {
     final byteStore = MemoryByteStore();
-    final sdk = MockSdk(resourceProvider: resourceProvider);
+    final sdk =
+        MockSdk(resourceProvider: resourceProvider as MemoryResourceProvider);
     final resolvers = [
       DartUriResolver(sdk),
       ResourceUriResolver(resourceProvider),
@@ -124,7 +126,7 @@ class TestDriver {
 
   /// Loads given file and file contents. Analyzes then returns its
   /// CompilationUnit.
-  Future<CompilationUnit> resultForFile(String path, String contents) async {
+  Future<CompilationUnit?> resultForFile(String path, String contents) async {
     newSource(path, contents);
     session = driver.currentSession;
     return (await session.getResolvedUnit(pather.join(root, path))).unit;

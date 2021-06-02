@@ -54,7 +54,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
   void writeToConstructorBuffer(
       StringBuffer constructorBuffer,
       String className,
-      String defaultTag,
+      String? defaultTag,
       List<String> withs,
       PageObject poAnnotation) {
     writeTestCreatorGettersInConstructor(constructorBuffer, withs);
@@ -285,27 +285,27 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
     for (final method in unannotatedMethods) {
       if (method.produceTestCreatorMethod) {
         buffer.writeln("'${method.name}' : [");
-        if (method.typeParameters.isPresent) {
+        if (method.typeParameters!.isPresent) {
           for (final typeParameter
-              in method.typeParameters.value.typeParameters) {
+              in method.typeParameters!.value.typeParameters) {
             buffer.writeln('''{
                'name': '${typeParameter.name}',
                'kind': 'type'
              },''');
           }
         }
-        for (final parameter in method.parameters) {
+        for (final parameter in method.parameters!) {
           final declaration = (parameter is DefaultFormalParameter)
               ? parameter.parameter
               : parameter;
           final type =
               (declaration is SimpleFormalParameter && declaration.type != null)
-                  ? declaration.type.toSource()
+                  ? declaration.type!.toSource()
                   : 'var';
 
           var defaultValue = (parameter is DefaultFormalParameter &&
                   parameter.defaultValue != null)
-              ? parameter.defaultValue.toSource()
+              ? parameter.defaultValue!.toSource()
               : null;
 
           if (defaultValue == 'null') {
@@ -318,20 +318,20 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
 
           if (parameter.isRequired) {
             buffer.writeln('''{
-                'name': '${parameter.declaredElement.name}',
+                'name': '${parameter.declaredElement!.name}',
                 'kind': 'required',
                 'type': '$type'
                },''');
           } else if (parameter.isNamed) {
             buffer.writeln('''{
-                'name': '${parameter.declaredElement.name}',
+                'name': '${parameter.declaredElement!.name}',
                 'kind': 'named',
                 'type': '$type',
                 'default': $defaultValue
                },''');
           } else if (parameter.isOptionalPositional) {
             buffer.writeln('''{
-                'name': '${parameter.declaredElement.name}',
+                'name': '${parameter.declaredElement!.name}',
                 'kind': 'positional',
                 'type': '$type',
                 'default': $defaultValue
@@ -412,7 +412,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
     }
 
     for (final iterableFinderMethod in iterableFinderMethods) {
-      if (!iterableFinderMethod.name.startsWith('_')) {
+      if (!iterableFinderMethod.name!.startsWith('_')) {
         buffer.writeln('''
           if (methodName == '${iterableFinderMethod.name}') {
             return ${iterableFinderMethod.name};
@@ -431,7 +431,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
 
     // TODO(liuming): Support generic type.
     for (final unannotatedMethod in unannotatedMethods) {
-      if (!unannotatedMethod.name.startsWith('_')) {
+      if (!unannotatedMethod.name!.startsWith('_')) {
         buffer.writeln('''
             if (methodName == '${unannotatedMethod.name}') {
               return Function.apply(

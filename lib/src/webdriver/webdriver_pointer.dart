@@ -20,25 +20,26 @@ import 'package:webdriver/sync_core.dart' as wd;
 
 /// Support for pointer in WebDriver context.
 class WebDriverPointer implements PageLoaderPointer {
-  final wd.WebDriver _driver; // ignore: unused_field
+  final wd.WebDriver? _driver; // ignore: unused_field
 
   WebDriverPointer(this._driver);
 
   @override
-  Future<void> down(MouseButton button, {PageLoaderElement eventTarget}) async {
+  Future<void> down(MouseButton button,
+      {PageLoaderElement? eventTarget}) async {
     throw 'Not yet implemented';
   }
 
   @override
-  Future<void> moveTo(PageLoaderElement element, int xOffset, int yOffset,
-      {List<PageLoaderElement> dispatchTo,
-      int stepPixels,
-      Duration duration}) async {
+  Future<void> moveTo(PageLoaderElement element, int? xOffset, int? yOffset,
+      {List<PageLoaderElement>? dispatchTo,
+      int? stepPixels,
+      Duration? duration}) async {
     throw 'Not yet implemented';
   }
 
   @override
-  Future<void> up(MouseButton button, {PageLoaderElement eventTarget}) async {
+  Future<void> up(MouseButton button, {PageLoaderElement? eventTarget}) async {
     throw 'Not yet implemented';
   }
 }

@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'long_exception.g.dart';
 
-void runTests(PageLoaderElement Function() contextGenerator) {
+void runTests(PageLoaderElement? Function() contextGenerator) {
   test('long exception is truncated', () {
     final po = MyPageObject.create(contextGenerator());
     try {
@@ -31,7 +31,8 @@ void runTests(PageLoaderElement Function() contextGenerator) {
 @PageObject()
 abstract class MyPageObject {
   MyPageObject();
-  factory MyPageObject.create(PageLoaderElement context) = $MyPageObject.create;
+  factory MyPageObject.create(PageLoaderElement? context) =
+      $MyPageObject.create;
 
   @ByTagName('div')
   PageLoaderElement get ele;

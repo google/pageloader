@@ -16,7 +16,7 @@ import 'package:test/test.dart';
 
 part 'cache_invalidation.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 typedef DoRefresh = void Function();
 
@@ -46,7 +46,7 @@ void runTests(GetNewContext contextGenerator, DoRefresh refresh) {
 @PageObject()
 abstract class CacheInvalidation {
   CacheInvalidation();
-  factory CacheInvalidation.create(PageLoaderElement context) =
+  factory CacheInvalidation.create(PageLoaderElement? context) =
       $CacheInvalidation.create;
 
   @ById('button-1')

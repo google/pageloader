@@ -18,14 +18,15 @@ import 'core.dart';
 
 final String listeners = '__listeners__';
 
-String generateStartMethodListeners(String pageObjectName, String methodName) =>
+String generateStartMethodListeners(
+        String pageObjectName, String? methodName) =>
     _generateListeners(pageObjectName, methodName, 'startPageObjectMethod');
 
-String generateEndMethodListeners(String pageObjectName, String methodName) =>
+String generateEndMethodListeners(String pageObjectName, String? methodName) =>
     _generateListeners(pageObjectName, methodName, 'endPageObjectMethod');
 
 String _generateListeners(
-        String pageObjectName, String methodName, String listenerMethod) =>
+        String pageObjectName, String? methodName, String listenerMethod) =>
     '''
   for (final __listener in $root.listeners) {
     __listener.$listenerMethod('$pageObjectName', '$methodName');

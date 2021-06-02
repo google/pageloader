@@ -22,7 +22,7 @@ abstract class ClassChecks {
   factory ClassChecks.create(PageLoaderElement context) = $ClassChecks.create;
 
   @root
-  PageLoaderElement get myRoot;
+  PageLoaderElement? get myRoot;
 }
 
 @EnsureTag('some-other-tag') // ignore: deprecated_member_use_from_same_package
@@ -33,7 +33,7 @@ abstract class EnsureTagChecks {
       $EnsureTagChecks.create;
 
   @root
-  PageLoaderElement get myRoot;
+  PageLoaderElement? get myRoot;
 }
 
 // Mixin implementation
@@ -64,11 +64,11 @@ abstract class EnsureTagChecksUsingMixin extends Object with ChecksMixin {
 @PageObject()
 abstract class ChecksClassMixin {
   @root
-  PageLoaderElement get myRoot;
+  PageLoaderElement? get myRoot;
 }
 
 @PageObject()
 mixin ChecksMixin {
   @root
-  PageLoaderElement get myRoot;
+  PageLoaderElement? get myRoot;
 }

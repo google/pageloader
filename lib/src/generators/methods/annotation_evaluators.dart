@@ -43,34 +43,27 @@ Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
 
 /// Returns set of AnnotationKinds if the annotation is a subclass of
 /// Finder, Checker, and/or Filter.
-Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
-  final returnSet = <AnnotationKind>{};
-  InterfaceType type;
-  if (element is PropertyAccessorElement) {
-    // Annotation is a top-level variable.
-    type = element.variable.type as InterfaceType;
+Set<AnnotationKind?> evaluateAsInterfaceAnnotation(Element element) {
+  final returnSet = <AnnotationKind?>{};
+
+  DartType? type;
+  if (element is PropertyAccessorElement && element.isGetter) {
+    type = element.returnType;
   } else if (element is ConstructorElement) {
-    // Annotation is an named constructor.
-    type = element.enclosingElement.type;
-  } else if (element is ClassElement) {
-    // Annotation is no-name constructor.
-    type = element.type;
+    type = element.returnType;
   }
 
-  if (type != null) {
-    final types = Queue<InterfaceType>()..add(type);
-    final seenValidAnnotations = <AnnotationKind>{};
-    do {
-      type = types.removeFirst();
-      if (type.element.library.name == pageLoaderAnnotationInterface) {
-        seenValidAnnotations
-            .add(classNameToAnnotationKind(type.element.name, isAtomic: false));
+  if (type is InterfaceType) {
+    final seenValidAnnotations = <AnnotationKind?>{};
+    final interfaces = [type, ...type.allSupertypes];
+    for (var interface in interfaces) {
+      final interfaceElement = interface.element;
+      if (interfaceElement.library.name == pageLoaderAnnotationInterface) {
+        seenValidAnnotations.add(
+          classNameToAnnotationKind(interfaceElement.name, isAtomic: false),
+        );
       }
-      types..addAll(type.interfaces)..addAll(type.mixins);
-      if (type.superclass != null) {
-        types.add(type.superclass);
-      }
-    } while (types.isNotEmpty);
+    }
     returnSet.addAll(seenValidAnnotations.where((ak) => ak != null));
   }
   return returnSet;
@@ -91,7 +84,8 @@ enum AnnotationKind {
 }
 
 /// Maps library and className to proper AnnotationKind.
-AnnotationKind classNameToAnnotationKind(String className, {bool isAtomic}) {
+AnnotationKind? classNameToAnnotationKind(String className,
+    {required bool isAtomic}) {
   if (isAtomic) {
     switch (className) {
       case 'LegacyPageObject':

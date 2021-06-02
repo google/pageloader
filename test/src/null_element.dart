@@ -18,11 +18,11 @@ import 'package:test/test.dart';
 
 part 'null_element.g.dart';
 
-typedef GetNewContext = PageLoaderElement Function();
+typedef GetNewContext = PageLoaderElement? Function();
 
 void runTests(GetNewContext contextGenerator) {
   group('nullElement works', () {
-    BasePO po;
+    late BasePO po;
 
     setUp(() {
       po = BasePO.create(contextGenerator());
@@ -63,7 +63,7 @@ void runTests(GetNewContext contextGenerator) {
 @PageObject()
 abstract class BasePO {
   BasePO();
-  factory BasePO.create(PageLoaderElement context) = $BasePO.create;
+  factory BasePO.create(PageLoaderElement? context) = $BasePO.create;
 
   @ById('button-1')
   PageLoaderElement get button;

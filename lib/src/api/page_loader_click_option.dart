@@ -14,9 +14,9 @@
 /// Additional options used in PageLoaderElement's `click()` or Mouse's `up()`,
 /// `down()` method.
 class ClickOption {
-  int clientX;
-  int clientY;
-  int screenX;
-  int screenY;
-  int detail;
+  int? clientX;
+  int? clientY;
+  int? screenX;
+  int? screenY;
+  int? detail;
 }

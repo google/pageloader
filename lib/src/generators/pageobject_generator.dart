@@ -35,7 +35,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   @override
   Future<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {
-    final library = element.library;
+    final library = element.library!;
     // ignore: deprecated_member_use
     // Begin workaround
     final resolver = buildStep.resolver;
@@ -50,7 +50,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     // final resolvedLibrary =
     //     await library.session.getResolvedLibraryByElement2(library);
 
-    final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
+    final annotatedNode = resolvedLibrary.getElementDeclaration(element)!.node;
     final poAnnotation = getPageObjectAnnotation(annotation);
     if (annotatedNode is ClassOrMixinDeclaration) {
       try {
@@ -87,7 +87,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // Run check to make sure PO is not extending another PO.
     // Only mixins are allowed.
-    if (poExtendsAnotherPo(declaration.declaredElement)) {
+    if (poExtendsAnotherPo(declaration.declaredElement!)) {
       throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           "PageObject class '${declaration.name.name}' is extending another "
@@ -98,8 +98,8 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // Run check to make sure if PO has any factory constructor, it must has
     // a default constructor as well.
-    if (hasFactoryConstructor(declaration.declaredElement) &&
-        !hasDefaultConstructor(declaration.declaredElement)) {
+    if (hasFactoryConstructor(declaration.declaredElement!) &&
+        !hasDefaultConstructor(declaration.declaredElement!)) {
       throw Exception('******************\n\n'
           'Errors detected during code generation:\n\n'
           "PageObject class '${declaration.name.name}' has a factory constructor"
@@ -109,8 +109,8 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // If PageObject has constructor, define constructor class with root
     // and start constructor.
-    if (hasPoConstructors(declaration.declaredElement)) {
-      final withs = getMixins(declaration.declaredElement, signatureArgs);
+    if (hasPoConstructors(declaration.declaredElement!)) {
+      final withs = getMixins(declaration.declaredElement!, signatureArgs);
       constructorBuffer.write('''
       class \$$signature extends $signatureArgs
           with ${withs.map((w) => '\$\$$w').join(', ')} {
@@ -119,13 +119,13 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
       // Default tag associated with this PO if @CheckTag or @EnsureTag is
       // present.
-      String defaultTag;
+      String? defaultTag;
 
       // Generate the 'create' constructor.
 
       // If @EnsureTag used, we add finder to constructor. Otherwise
       // set current root as the passed 'currentContext'.
-      final ensureTag = core.getEnsureTag(declaration);
+      final ensureTag = core.getEnsureTag(declaration as ClassDeclaration);
       if (ensureTag.isPresent) {
         constructorBuffer.write('${core.root} = currentContext.createElement'
             '(${core.generateAnnotationDeclaration(ensureTag.value)}, '
@@ -196,7 +196,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   // Given <T extends Blah, R extends Foo, Z>, returns this exactly.
   String _generateTypeParameters(ClassOrMixinDeclaration declaration) =>
       declaration.typeParameters != null
-          ? declaration.typeParameters.toSource()
+          ? declaration.typeParameters!.toSource()
           : '';
 
   // Given <T extends Blah, R extends Foo, Z>, returns <T, R, Z>.
@@ -205,7 +205,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
       return '';
     }
     final typeArguments =
-        declaration.typeParameters.typeParameters.map((tp) => tp.name.name);
+        declaration.typeParameters!.typeParameters.map((tp) => tp.name.name);
     return '<${typeArguments.join(', ')}>';
   }
 
@@ -234,7 +234,7 @@ PageObject getPageObjectAnnotation(ConstantReader annotation) {
   final code = annotation.peek('code');
   return PageObject(
       code: code?.mapValue
-          ?.map((k, v) => MapEntry(k.toStringValue(), v.toStringValue())));
+          ?.map((k, v) => MapEntry(k!.toStringValue(), v!.toStringValue())));
 }
 
 /// Generates the with clause for the generated constructor code.
@@ -273,7 +273,7 @@ List<String> getMixins(ClassElement mainPo, String mainSignature) {
 ///
 /// Assumes that the annotation has exactly one argument.
 String getAnnotationSingleArg(Annotation annotation) =>
-    annotation.arguments.arguments.single.toSource();
+    annotation.arguments!.arguments.single.toSource();
 
 /// Checks if the PageObject has the standard constructors:
 ///   abstract class MyPO {

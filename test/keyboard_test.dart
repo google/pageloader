@@ -15,7 +15,7 @@ import 'package:pageloader/pageloader.dart';
 import 'package:test/test.dart';
 
 void main() {
-  PageLoaderKeyboard kb;
+  late PageLoaderKeyboard kb;
 
   setUp(() {
     kb = PageLoaderKeyboard();
