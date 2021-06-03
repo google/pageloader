@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,6 +26,7 @@ import 'methods/invalid_method_exception.dart';
 import 'methods/iterable_finder_method.dart';
 import 'methods/list_finder_method.dart';
 import 'methods/mouse_finder_method.dart';
+import 'methods/null_safety.dart';
 import 'methods/oversupported_method.dart';
 import 'methods/pointer_finder_method.dart';
 import 'methods/setter.dart';
@@ -33,6 +36,7 @@ import 'methods/unannotated_method.dart';
 /// Collects relevant information from a page object's source for use
 /// in generation.
 class CollectorVisitor extends GeneralizingAstVisitor<void> {
+  final NullSafety _nullSafety;
   final AstNode _parentClass;
 
   List<Getter> getters = [];
@@ -48,7 +52,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
   List<OverSupportedMethod> oversupportedMethods = [];
   List<String> unsupportedMethods = [];
 
-  CollectorVisitor(this._parentClass);
+  CollectorVisitor(this._nullSafety, this._parentClass);
 
   /// Write constructor-based contents into string buffer.
   void writeToConstructorBuffer(
@@ -101,7 +105,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
     // When calling `findChain` from javascript, `rawInternalIds` will not be
     // interpreted as a list of String, but a list of dynamics.
     buffer.writeln('''
-        String findChain(List<dynamic> rawInternalIds,
+        String$orNull findChain(List<dynamic> rawInternalIds,
             [String action = 'default']) {
           final internalIds = rawInternalIds.cast<String>();
           $codeCreation;
@@ -119,9 +123,10 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
           }
 
           var closestIndex = internalIds.length;
-          String Function(List<String>) closestValue;''');
+          String Function(List<String>)$orNull closestValue;''');
 
-    buffer.writeln('MapEntry<int, String Function(List<String>)> chain;');
+    buffer
+        .writeln('MapEntry<int, String Function(List<String>)$orNull> chain;');
 
     for (var w in withs.reversed) {
       final genericIndex = w.indexOf('<');
@@ -136,7 +141,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
 
     buffer.writeln('''
           if (closestIndex < internalIds.length) {
-            final value = closestValue(internalIds);
+            final value = closestValue$notNull(internalIds);
             return code[value] ?? value;
           }
 
@@ -147,11 +152,11 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
 
   void writeFindChainInMixin(StringBuffer buffer, String className) {
     buffer.writeln('''
-        Map<int, String Function(List<String>)> findChainIn$className(
+        Map<int, String Function(List<String>)$orNull> findChainIn$className(
             List<String> internalIds, [String action = 'default']) {
 
           var closestIndex = internalIds.length;
-          String Function(List<String>) closestValue;''');
+          String Function(List<String>)$orNull closestValue;''');
 
     // The order is based on preferred types of objects:
     //    single > list
@@ -255,7 +260,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
       StringBuffer buffer, List<String> withs) {
     buffer.writeln('''
         String testCreatorMethods() {
-          final methods = <String, List<Map<String, String>>>{};''');
+          final methods = <String, List<Map<String, String$orNull>>>{};''');
 
     for (var w in withs) {
       final genericIndex = w.indexOf('<');
@@ -279,7 +284,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
   /// where no type is given.
   void writeTestCreatorMethodsInMixin(StringBuffer buffer, String className) {
     buffer.writeln('''
-      Map<String, List<Map<String, String>>> testCreatorMethodsIn$className() {
+      Map<String, List<Map<String, String$orNull>>> testCreatorMethodsIn$className() {
         return {''');
 
     for (final method in unannotatedMethods) {
@@ -360,7 +365,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
         dynamic testCreatorInvokeMethod(
             String methodName,
             List<dynamic> positionalArguments,
-            [Map<Symbol, dynamic> namedArguments]) {''');
+            [Map<Symbol, dynamic>$orNull namedArguments]) {''');
     for (var w in withs.reversed) {
       final genericIndex = w.indexOf('<');
       final withName = genericIndex >= 0 ? w.substring(0, genericIndex) : w;
@@ -384,7 +389,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
         dynamic testCreatorInvokeMethodIn$className(
             String methodName,
             List<dynamic> positionalArguments,
-            [Map<Symbol, dynamic> namedArguments]) {''');
+            [Map<Symbol, dynamic>$orNull namedArguments]) {''');
     _writeTestCreatorInvokeMethodContent(buffer);
     buffer.writeln('''
           throw 'METHOD NOT FOUND. This method'
@@ -497,7 +502,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
   void handleMouseFinderGetters(
       MethodDeclaration node, List<String> collected) {
     final methodInfo = collectCoreMethodInformation(node);
-    final mouseFinderGetter = collectMouseFinderGetter(methodInfo);
+    final mouseFinderGetter = collectMouseFinderGetter(_nullSafety, methodInfo);
     if (mouseFinderGetter.isPresent) {
       collected.add('mouse finder');
       mouseFinderMethods.add(mouseFinderGetter.value);
@@ -507,7 +512,8 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
   void handlePointerFinderGetters(
       MethodDeclaration node, List<String> collected) {
     final methodInfo = collectCoreMethodInformation(node);
-    final pointerFinderGetter = collectPointerFinderGetter(methodInfo);
+    final pointerFinderGetter =
+        collectPointerFinderGetter(_nullSafety, methodInfo);
     if (pointerFinderGetter.isPresent) {
       collected.add('pointer finder');
       pointerFinderMethods.add(pointerFinderGetter.value);
@@ -564,4 +570,7 @@ class CollectorVisitor extends GeneralizingAstVisitor<void> {
       setters.add(setter.value);
     }
   }
+
+  String get orNull => _nullSafety.orNull;
+  String get notNull => _nullSafety.notNull;
 }

@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'unannotated.dart';
 
@@ -26,14 +27,14 @@ class $Unannotated extends Unannotated with $$Unannotated {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInUnannotated());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInUnannotated(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $Unannotated extends Unannotated with $$Unannotated {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $Unannotated extends Unannotated with $$Unannotated {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInUnannotated(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -182,7 +184,7 @@ class $Unannotated extends Unannotated with $$Unannotated {
 }
 
 mixin $$Unannotated on Unannotated {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotated() {
     return {
@@ -190,13 +192,14 @@ mixin $$Unannotated on Unannotated {
     };
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInUnannotated() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInUnannotated() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInUnannotated(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'isFieldSet') {
       return isFieldSet;
     }
@@ -224,11 +227,11 @@ mixin $$Unannotated on Unannotated {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInUnannotated(
+  Map<int, String Function(List<String>) /*?*/ > findChainInUnannotated(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -255,7 +258,7 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInUnannotatedMixin());
     methods.addAll(testCreatorMethodsInUnannotatedUsingMixin());
     return json.encode(methods);
@@ -263,7 +266,7 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInUnannotatedUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -278,7 +281,8 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -295,8 +299,8 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInUnannotatedUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -308,7 +312,7 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -324,29 +328,29 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
 }
 
 mixin $$UnannotatedUsingMixin on UnannotatedUsingMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotatedUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInUnannotatedUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInUnannotatedUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInUnannotatedUsingMixin(
-      List<String> internalIds,
-      [String action = 'default']) {
+  Map<int, String Function(List<String>) /*?*/ >
+      findChainInUnannotatedUsingMixin(List<String> internalIds,
+          [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -356,7 +360,7 @@ mixin $$UnannotatedUsingMixin on UnannotatedUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$UnannotatedMixin on UnannotatedMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotatedMixin() {
     return {
@@ -364,14 +368,14 @@ mixin $$UnannotatedMixin on UnannotatedMixin {
     };
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInUnannotatedMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInUnannotatedMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'isFieldSet') {
       return isFieldSet;
     }
@@ -399,11 +403,11 @@ mixin $$UnannotatedMixin on UnannotatedMixin {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInUnannotatedMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInUnannotatedMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }

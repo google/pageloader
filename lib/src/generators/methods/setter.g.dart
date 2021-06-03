@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of pageloader.setter;
 
@@ -18,15 +19,10 @@ class _$Setter extends Setter {
       (new SetterBuilder()..update(updates)).build();
 
   _$Setter._({this.name, this.setterType, this.setterValueName}) : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('Setter', 'name');
-    }
-    if (setterType == null) {
-      throw new BuiltValueNullFieldError('Setter', 'setterType');
-    }
-    if (setterValueName == null) {
-      throw new BuiltValueNullFieldError('Setter', 'setterValueName');
-    }
+    BuiltValueNullFieldError.checkNotNull(name, 'Setter', 'name');
+    BuiltValueNullFieldError.checkNotNull(setterType, 'Setter', 'setterType');
+    BuiltValueNullFieldError.checkNotNull(
+        setterValueName, 'Setter', 'setterValueName');
   }
 
   @override
@@ -80,10 +76,11 @@ class SetterBuilder implements Builder<Setter, SetterBuilder> {
   SetterBuilder();
 
   SetterBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
-      _setterType = _$v.setterType;
-      _setterValueName = _$v.setterValueName;
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _setterType = $v.setterType;
+      _setterValueName = $v.setterValueName;
       _$v = null;
     }
     return this;
@@ -91,9 +88,7 @@ class SetterBuilder implements Builder<Setter, SetterBuilder> {
 
   @override
   void replace(Setter other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Setter;
   }
 
@@ -106,9 +101,11 @@ class SetterBuilder implements Builder<Setter, SetterBuilder> {
   _$Setter build() {
     final _$result = _$v ??
         new _$Setter._(
-            name: name,
-            setterType: setterType,
-            setterValueName: setterValueName);
+            name: BuiltValueNullFieldError.checkNotNull(name, 'Setter', 'name'),
+            setterType: BuiltValueNullFieldError.checkNotNull(
+                setterType, 'Setter', 'setterType'),
+            setterValueName: BuiltValueNullFieldError.checkNotNull(
+                setterValueName, 'Setter', 'setterValueName'));
     replace(_$result);
     return _$result;
   }

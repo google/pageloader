@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'test_creator_invoke_method.dart';
 
@@ -27,14 +28,14 @@ class $PageObjectHasGettersAndMethods extends PageObjectHasGettersAndMethods
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInPageObjectHasGettersAndMethods());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInPageObjectHasGettersAndMethods(
           methodName, positionalArguments, namedArguments);
@@ -44,7 +45,8 @@ class $PageObjectHasGettersAndMethods extends PageObjectHasGettersAndMethods
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -61,8 +63,8 @@ class $PageObjectHasGettersAndMethods extends PageObjectHasGettersAndMethods
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInPageObjectHasGettersAndMethods(internalIds, action)
         .entries
         .first;
@@ -71,7 +73,7 @@ class $PageObjectHasGettersAndMethods extends PageObjectHasGettersAndMethods
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -126,7 +128,7 @@ class $PageObjectHasGettersAndMethods extends PageObjectHasGettersAndMethods
 }
 
 mixin $$PageObjectHasGettersAndMethods on PageObjectHasGettersAndMethods {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectHasGettersAndMethods() {
     return {
@@ -134,7 +136,7 @@ mixin $$PageObjectHasGettersAndMethods on PageObjectHasGettersAndMethods {
     };
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInPageObjectHasGettersAndMethods() {
     return {
       'complexFn': [
@@ -148,7 +150,7 @@ mixin $$PageObjectHasGettersAndMethods on PageObjectHasGettersAndMethods {
 
   dynamic testCreatorInvokeMethodInPageObjectHasGettersAndMethods(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'getter') {
       return getter;
     }
@@ -168,11 +170,11 @@ mixin $$PageObjectHasGettersAndMethods on PageObjectHasGettersAndMethods {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)>
+  Map<int, String Function(List<String>) /*?*/ >
       findChainInPageObjectHasGettersAndMethods(List<String> internalIds,
           [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var poIndex = internalIds.indexOf(this.po.id);
       if (poIndex >= 0 && poIndex < closestIndex) {
@@ -259,7 +261,7 @@ class $PageObjectHasGettersAndMethodsWithMixin
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInPageObjectMixinHasGettersAndMethods());
     methods.addAll(testCreatorMethodsInRightMostPageObjectMixin());
     methods
@@ -269,7 +271,7 @@ class $PageObjectHasGettersAndMethodsWithMixin
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInPageObjectHasGettersAndMethodsWithMixin(
           methodName, positionalArguments, namedArguments);
@@ -289,7 +291,8 @@ class $PageObjectHasGettersAndMethodsWithMixin
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -306,8 +309,8 @@ class $PageObjectHasGettersAndMethodsWithMixin
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain =
         findChainInPageObjectHasGettersAndMethodsWithMixin(internalIds, action)
             .entries
@@ -330,7 +333,7 @@ class $PageObjectHasGettersAndMethodsWithMixin
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -386,7 +389,7 @@ class $PageObjectHasGettersAndMethodsWithMixin
 
 mixin $$PageObjectHasGettersAndMethodsWithMixin
     on PageObjectHasGettersAndMethodsWithMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String>
       testCreatorGettersInPageObjectHasGettersAndMethodsWithMixin() {
@@ -395,7 +398,7 @@ mixin $$PageObjectHasGettersAndMethodsWithMixin
     };
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInPageObjectHasGettersAndMethodsWithMixin() {
     return {
       'complexFn': [
@@ -409,7 +412,7 @@ mixin $$PageObjectHasGettersAndMethodsWithMixin
 
   dynamic testCreatorInvokeMethodInPageObjectHasGettersAndMethodsWithMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'getter') {
       return getter;
     }
@@ -429,12 +432,12 @@ mixin $$PageObjectHasGettersAndMethodsWithMixin
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)>
+  Map<int, String Function(List<String>) /*?*/ >
       findChainInPageObjectHasGettersAndMethodsWithMixin(
           List<String> internalIds,
           [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var poIndex = internalIds.indexOf(this.po.id);
       if (poIndex >= 0 && poIndex < closestIndex) {
@@ -499,7 +502,7 @@ mixin $$PageObjectHasGettersAndMethodsWithMixin
 
 mixin $$PageObjectMixinHasGettersAndMethods
     on PageObjectMixinHasGettersAndMethods {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String>
       testCreatorGettersInPageObjectMixinHasGettersAndMethods() {
@@ -508,7 +511,7 @@ mixin $$PageObjectMixinHasGettersAndMethods
     };
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInPageObjectMixinHasGettersAndMethods() {
     return {
       'complexFn': [
@@ -522,7 +525,7 @@ mixin $$PageObjectMixinHasGettersAndMethods
 
   dynamic testCreatorInvokeMethodInPageObjectMixinHasGettersAndMethods(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'getter') {
       return getter;
     }
@@ -545,11 +548,11 @@ mixin $$PageObjectMixinHasGettersAndMethods
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)>
+  Map<int, String Function(List<String>) /*?*/ >
       findChainInPageObjectMixinHasGettersAndMethods(List<String> internalIds,
           [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var po2Index = internalIds.indexOf(this.po2.id);
       if (po2Index >= 0 && po2Index < closestIndex) {
@@ -613,20 +616,20 @@ mixin $$PageObjectMixinHasGettersAndMethods
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$RightMostPageObjectMixin on RightMostPageObjectMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRightMostPageObjectMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInRightMostPageObjectMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInRightMostPageObjectMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'intFn') {
       return Function.apply(intFn, positionalArguments, namedArguments);
     }
@@ -634,11 +637,11 @@ mixin $$RightMostPageObjectMixin on RightMostPageObjectMixin {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInRightMostPageObjectMixin(
-      List<String> internalIds,
-      [String action = 'default']) {
+  Map<int, String Function(List<String>) /*?*/ >
+      findChainInRightMostPageObjectMixin(List<String> internalIds,
+          [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }

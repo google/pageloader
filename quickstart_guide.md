@@ -483,6 +483,4 @@ library should be used **within test files**.
 
 [`dart:html`]: https://api.dart.dev/stable/2.7.1/dart-html/dart-html-library.html
 
-[`package:webdriver`]: https://github.com/google/webdriver.dart 
-
-[`PageLoaderElement API`]: https://pub.dev/documentation/pageloader/latest/webdriver/PageLoaderElement-class.html
+[`package:webdriver`]: https://github.com/google/webdriver.dart

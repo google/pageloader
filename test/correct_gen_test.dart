@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -312,7 +314,7 @@ void main() {
       unannotated.myField = true;
       expect(unannotated.isFieldSet, true);
 
-      // Should now throw runtime Type error:
+      // Should not throw runtime Type error:
       unannotated.generateTypedList<String>();
     });
 

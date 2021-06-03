@@ -22,7 +22,7 @@ import 'html_pointer.dart';
 /// Support for [PageUtils] in HTML context.
 class HtmlPageUtils extends PageUtils {
   final SyncFn<dynamic> syncFn;
-  HtmlPageLoaderElement _cachedRoot;
+  HtmlPageLoaderElement? _cachedRoot;
 
   HtmlPageUtils({SyncFn<dynamic> externalSyncFn = noOpExecuteSyncedFn})
       : syncFn = externalSyncFn;

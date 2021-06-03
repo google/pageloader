@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,13 +23,14 @@ import 'core.dart';
 import 'core_method_information.dart';
 import 'invalid_method_exception.dart';
 import 'listeners.dart';
+import 'null_safety.dart';
 
 part 'mouse_finder_method.g.dart';
 
 /// Returns a [MouseFinderMethod] if a valid @Mouse getter is present, and
 /// [absent()] otherwise.
 Optional<MouseFinderMethod> collectMouseFinderGetter(
-    CoreMethodInformationBase methodInfo) {
+    NullSafety nullSafety, CoreMethodInformationBase methodInfo) {
   if (!methodInfo.isMouse) {
     return Optional.absent();
   }
@@ -49,19 +52,22 @@ Optional<MouseFinderMethod> collectMouseFinderGetter(
         methodInfo.node, 'cannot use Checker with Mouse annotation');
   }
 
-  return Optional.of(MouseFinderMethod((b) => b..name = methodInfo.name));
+  return Optional.of(MouseFinderMethod((b) => b
+    ..nullSafety = nullSafety.toBuilder()
+    ..name = methodInfo.name));
 }
 
 /// Generation for @Mouse getters.
 abstract class MouseFinderMethod
     implements Built<MouseFinderMethod, MouseFinderMethodBuilder> {
+  NullSafety get nullSafety;
   String get name;
 
   String generate(String pageObjectName) =>
       'PageLoaderMouse get $name { ' +
       generateStartMethodListeners(pageObjectName, name) +
       '$mouse ??= $root.utils.mouse;' +
-      'final returnMe = $mouse;' +
+      'final returnMe = $mouse${nullSafety.notNull};' +
       generateEndMethodListeners(pageObjectName, name) +
       'return returnMe; }';
 

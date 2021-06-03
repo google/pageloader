@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'mouse.dart';
 
@@ -26,14 +27,14 @@ class $MouseObject extends MouseObject with $$MouseObject {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInMouseObject());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInMouseObject(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $MouseObject extends MouseObject with $$MouseObject {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $MouseObject extends MouseObject with $$MouseObject {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInMouseObject(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,29 +85,30 @@ class $MouseObject extends MouseObject with $$MouseObject {
 }
 
 mixin $$MouseObject on MouseObject {
-  PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+/*late*/ PageLoaderElement $__root__;
+  PageLoaderMouse /*?*/ __mouse__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMouseObject() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInMouseObject() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInMouseObject() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInMouseObject(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInMouseObject(
+  Map<int, String Function(List<String>) /*?*/ > findChainInMouseObject(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 
@@ -114,7 +117,7 @@ mixin $$MouseObject on MouseObject {
       __listener.startPageObjectMethod('MouseObject', 'mouse');
     }
     __mouse__ ??= $__root__.utils.mouse;
-    final returnMe = __mouse__;
+    final returnMe = __mouse__ /*!*/;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('MouseObject', 'mouse');
     }
@@ -144,7 +147,7 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInMouseObjectMixin());
     methods.addAll(testCreatorMethodsInMouseObjectUsingMixin());
     return json.encode(methods);
@@ -152,7 +155,7 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInMouseObjectUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -167,7 +170,8 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -184,8 +188,8 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInMouseObjectUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -197,7 +201,7 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -213,29 +217,29 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
 }
 
 mixin $$MouseObjectUsingMixin on MouseObjectUsingMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMouseObjectUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInMouseObjectUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInMouseObjectUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInMouseObjectUsingMixin(
-      List<String> internalIds,
-      [String action = 'default']) {
+  Map<int, String Function(List<String>) /*?*/ >
+      findChainInMouseObjectUsingMixin(List<String> internalIds,
+          [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -245,30 +249,30 @@ mixin $$MouseObjectUsingMixin on MouseObjectUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$MouseObjectMixin on MouseObjectMixin {
-  PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+/*late*/ PageLoaderElement $__root__;
+  PageLoaderMouse /*?*/ __mouse__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMouseObjectMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInMouseObjectMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInMouseObjectMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInMouseObjectMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInMouseObjectMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 
@@ -277,7 +281,7 @@ mixin $$MouseObjectMixin on MouseObjectMixin {
       __listener.startPageObjectMethod('MouseObjectMixin', 'mouse');
     }
     __mouse__ ??= $__root__.utils.mouse;
-    final returnMe = __mouse__;
+    final returnMe = __mouse__ /*!*/;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('MouseObjectMixin', 'mouse');
     }

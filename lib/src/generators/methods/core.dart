@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -174,7 +176,8 @@ DartType getInnerType(DartType topType, String matchingType) {
   return getInnerType(first, matchingType);
 }
 
-/// Return the Dart code the corresponds to the [type].
+/// Return the Dart code that corresponds to the [type].
 String typeToCode(DartType type) {
+  // TODO: This should be replaced with actual code generation.
   return type?.getDisplayString(withNullability: false);
 }

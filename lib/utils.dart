@@ -111,7 +111,7 @@ typedef POFactory<T> = T Function(PageLoaderElement context);
 ///   final myPO = createPO<MyPO>(someElement, (c) => MyPO.create(c),
 ///       finder: ByCss('some-tag'));
 T createPO<T>(PageLoaderElement source, POFactory<T> poFactory,
-    {Finder finder}) {
+    {Finder? finder}) {
   final element =
       finder == null ? source : source.createElement(finder, [], []);
   return poFactory(element);

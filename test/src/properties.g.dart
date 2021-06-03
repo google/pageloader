@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'properties.dart';
 
@@ -27,14 +28,14 @@ class $PageForPropertiesTests extends PageForPropertiesTests
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInPageForPropertiesTests());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInPageForPropertiesTests(
           methodName, positionalArguments, namedArguments);
@@ -44,7 +45,8 @@ class $PageForPropertiesTests extends PageForPropertiesTests
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -61,8 +63,8 @@ class $PageForPropertiesTests extends PageForPropertiesTests
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain =
         findChainInPageForPropertiesTests(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
@@ -70,7 +72,7 @@ class $PageForPropertiesTests extends PageForPropertiesTests
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -86,20 +88,20 @@ class $PageForPropertiesTests extends PageForPropertiesTests
 }
 
 mixin $$PageForPropertiesTests on PageForPropertiesTests {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForPropertiesTests() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInPageForPropertiesTests() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInPageForPropertiesTests(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'divWithStyle') {
       return divWithStyle;
     }
@@ -137,11 +139,11 @@ mixin $$PageForPropertiesTests on PageForPropertiesTests {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInPageForPropertiesTests(
-      List<String> internalIds,
-      [String action = 'default']) {
+  Map<int, String Function(List<String>) /*?*/ >
+      findChainInPageForPropertiesTests(List<String> internalIds,
+          [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var divWithStyleIndex = internalIds.indexOf(this.divWithStyle.id);
       if (divWithStyleIndex >= 0 && divWithStyleIndex < closestIndex) {

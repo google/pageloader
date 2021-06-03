@@ -34,19 +34,19 @@ class DummyPageLoaderMouse implements PageLoaderMouse {
 
   @override
   Future<Null> down(MouseButton button,
-          {PageLoaderElement eventTarget, ClickOption clickOption}) =>
+          {PageLoaderElement? eventTarget, ClickOption? clickOption}) =>
       throw 'what';
 
   @override
   Future<Null> up(MouseButton button,
-          {PageLoaderElement eventTarget, ClickOption clickOption}) =>
+          {PageLoaderElement? eventTarget, ClickOption? clickOption}) =>
       throw 'no';
 
   @override
-  Future<Null> moveTo(PageLoaderElement element, int xOffset, int yOffset,
-          {List<PageLoaderElement> dispatchTo,
-          int stepPixels,
-          Duration duration}) =>
+  Future<Null> moveTo(PageLoaderElement element, int? xOffset, int? yOffset,
+          {List<PageLoaderElement>? dispatchTo,
+          int? stepPixels,
+          Duration? duration}) =>
       throw 'can not even';
 }
 
@@ -55,18 +55,18 @@ class DummyPageLoaderPointer implements PageLoaderPointer {
   String toString() => 'DummyPointer';
 
   @override
-  Future<Null> down(MouseButton button, {PageLoaderElement eventTarget}) =>
+  Future<Null> down(MouseButton button, {PageLoaderElement? eventTarget}) =>
       throw 'not implemented';
 
   @override
-  Future<Null> up(MouseButton button, {PageLoaderElement eventTarget}) =>
+  Future<Null> up(MouseButton button, {PageLoaderElement? eventTarget}) =>
       throw 'not implemented';
 
   @override
-  Future<Null> moveTo(PageLoaderElement element, int xOffset, int yOffset,
-          {List<PageLoaderElement> dispatchTo,
-          int stepPixels,
-          Duration duration}) =>
+  Future<Null> moveTo(PageLoaderElement element, int? xOffset, int? yOffset,
+          {List<PageLoaderElement>? dispatchTo,
+          int? stepPixels,
+          Duration? duration}) =>
       throw 'not implemented';
 }
 
@@ -198,10 +198,10 @@ class DummyPageLoaderElement implements PageLoaderElement {
   DummyPageLoaderElement get shadowRoot => throw 'not implemented';
 
   @override
-  String get innerText => throw 'not implemented';
+  List<PageLoaderElement> get shadowRootChildren => throw 'not implemented';
 
   @override
-  List<PageLoaderElement> get shadowRootChildren => throw 'not implemented';
+  String get innerText => throw 'not implemented';
 
   @override
   String get visibleText => throw 'not implemented';
@@ -255,13 +255,13 @@ class DummyPageLoaderElement implements PageLoaderElement {
       throw 'not implemented';
 
   @override
-  Future<Null> click({ClickOption clickOption}) => throw 'not implemented';
+  Future<Null> click({ClickOption? clickOption}) => throw 'not implemented';
 
   @override
   Future<Null> clickOutside() => throw 'not implemented';
 
   @override
-  Future<Null> scroll({int x, int y}) => throw 'not implemented';
+  Future<Null> scroll({int? x, int? y}) => throw 'not implemented';
 
   @override
   Future<void> scrollIntoView() => throw 'not implemented';
@@ -281,6 +281,10 @@ class DummyPageLoaderElement implements PageLoaderElement {
   Future<Null> blur() => throw 'not implemented';
 
   @override
+  Future<void> dispatchCustomEvent(String name, {Object? detail}) =>
+      throw 'not implemented';
+
+  @override
   String toStringDeep() => 'DummyPageLoaderElement';
 
   @override
@@ -297,7 +301,7 @@ class DummyPageLoaderAttributes implements PageLoaderAttributes {
   final _map = <String, String>{};
 
   @override
-  String operator [](String name) => _map[name];
+  String? operator [](String name) => _map[name];
 
   void operator []=(String name, String value) => _map[name] = value;
 }

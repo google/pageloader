@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,13 +23,14 @@ import 'core.dart';
 import 'core_method_information.dart';
 import 'invalid_method_exception.dart';
 import 'listeners.dart';
+import 'null_safety.dart';
 
 part 'pointer_finder_method.g.dart';
 
 /// Returns a [PointerFinderMethod] if a valid @Pointer getter is present, and
 /// [absent()] otherwise.
 Optional<PointerFinderMethod> collectPointerFinderGetter(
-    CoreMethodInformationBase methodInfo) {
+    NullSafety nullSafety, CoreMethodInformationBase methodInfo) {
   if (!methodInfo.isPointer) {
     return Optional.absent();
   }
@@ -49,19 +52,22 @@ Optional<PointerFinderMethod> collectPointerFinderGetter(
         methodInfo.node, 'cannot use Checker with Pointer annotation');
   }
 
-  return Optional.of(PointerFinderMethod((b) => b..name = methodInfo.name));
+  return Optional.of(PointerFinderMethod((b) => b
+    ..nullSafety = nullSafety.toBuilder()
+    ..name = methodInfo.name));
 }
 
 /// Generation for @Pointer getters.
 abstract class PointerFinderMethod
     implements Built<PointerFinderMethod, PointerFinderMethodBuilder> {
+  NullSafety get nullSafety;
   String get name;
 
   String generate(String pageObjectName) =>
       'PageLoaderPointer get $name { ' +
       generateStartMethodListeners(pageObjectName, name) +
       '$pointer ??= $root.utils.pointer;' +
-      'final returnMe = $pointer;' +
+      'final returnMe = $pointer${nullSafety.notNull};' +
       generateEndMethodListeners(pageObjectName, name) +
       'return returnMe; }';
 

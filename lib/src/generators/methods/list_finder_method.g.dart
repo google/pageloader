@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of pageloader.list_finder_method;
 
@@ -35,31 +36,19 @@ class _$ListFinderMethod extends ListFinderMethod {
       this.isFuture,
       this.genericType})
       : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('ListFinderMethod', 'name');
-    }
-    if (listTypeArgument == null) {
-      throw new BuiltValueNullFieldError(
-          'ListFinderMethod', 'listTypeArgument');
-    }
-    if (finderDeclaration == null) {
-      throw new BuiltValueNullFieldError(
-          'ListFinderMethod', 'finderDeclaration');
-    }
-    if (filterDeclarations == null) {
-      throw new BuiltValueNullFieldError(
-          'ListFinderMethod', 'filterDeclarations');
-    }
-    if (checkerDeclarations == null) {
-      throw new BuiltValueNullFieldError(
-          'ListFinderMethod', 'checkerDeclarations');
-    }
-    if (isFuture == null) {
-      throw new BuiltValueNullFieldError('ListFinderMethod', 'isFuture');
-    }
-    if (genericType == null) {
-      throw new BuiltValueNullFieldError('ListFinderMethod', 'genericType');
-    }
+    BuiltValueNullFieldError.checkNotNull(name, 'ListFinderMethod', 'name');
+    BuiltValueNullFieldError.checkNotNull(
+        listTypeArgument, 'ListFinderMethod', 'listTypeArgument');
+    BuiltValueNullFieldError.checkNotNull(
+        finderDeclaration, 'ListFinderMethod', 'finderDeclaration');
+    BuiltValueNullFieldError.checkNotNull(
+        filterDeclarations, 'ListFinderMethod', 'filterDeclarations');
+    BuiltValueNullFieldError.checkNotNull(
+        checkerDeclarations, 'ListFinderMethod', 'checkerDeclarations');
+    BuiltValueNullFieldError.checkNotNull(
+        isFuture, 'ListFinderMethod', 'isFuture');
+    BuiltValueNullFieldError.checkNotNull(
+        genericType, 'ListFinderMethod', 'genericType');
   }
 
   @override
@@ -119,48 +108,49 @@ class ListFinderMethodBuilder
 
   String _name;
   String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  set name(covariant String name) => _$this._name = name;
 
   String _listTypeArgument;
   String get listTypeArgument => _$this._listTypeArgument;
-  set listTypeArgument(String listTypeArgument) =>
+  set listTypeArgument(covariant String listTypeArgument) =>
       _$this._listTypeArgument = listTypeArgument;
 
   String _finderDeclaration;
   String get finderDeclaration => _$this._finderDeclaration;
-  set finderDeclaration(String finderDeclaration) =>
+  set finderDeclaration(covariant String finderDeclaration) =>
       _$this._finderDeclaration = finderDeclaration;
 
   String _filterDeclarations;
   String get filterDeclarations => _$this._filterDeclarations;
-  set filterDeclarations(String filterDeclarations) =>
+  set filterDeclarations(covariant String filterDeclarations) =>
       _$this._filterDeclarations = filterDeclarations;
 
   String _checkerDeclarations;
   String get checkerDeclarations => _$this._checkerDeclarations;
-  set checkerDeclarations(String checkerDeclarations) =>
+  set checkerDeclarations(covariant String checkerDeclarations) =>
       _$this._checkerDeclarations = checkerDeclarations;
 
   bool _isFuture;
   bool get isFuture => _$this._isFuture;
-  set isFuture(bool isFuture) => _$this._isFuture = isFuture;
+  set isFuture(covariant bool isFuture) => _$this._isFuture = isFuture;
 
   Optional<String> _genericType;
   Optional<String> get genericType => _$this._genericType;
-  set genericType(Optional<String> genericType) =>
+  set genericType(covariant Optional<String> genericType) =>
       _$this._genericType = genericType;
 
   ListFinderMethodBuilder();
 
   ListFinderMethodBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
-      _listTypeArgument = _$v.listTypeArgument;
-      _finderDeclaration = _$v.finderDeclaration;
-      _filterDeclarations = _$v.filterDeclarations;
-      _checkerDeclarations = _$v.checkerDeclarations;
-      _isFuture = _$v.isFuture;
-      _genericType = _$v.genericType;
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _listTypeArgument = $v.listTypeArgument;
+      _finderDeclaration = $v.finderDeclaration;
+      _filterDeclarations = $v.filterDeclarations;
+      _checkerDeclarations = $v.checkerDeclarations;
+      _isFuture = $v.isFuture;
+      _genericType = $v.genericType;
       _$v = null;
     }
     return this;
@@ -168,9 +158,7 @@ class ListFinderMethodBuilder
 
   @override
   void replace(covariant ListFinderMethod other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ListFinderMethod;
   }
 
@@ -183,13 +171,20 @@ class ListFinderMethodBuilder
   _$ListFinderMethod build() {
     final _$result = _$v ??
         new _$ListFinderMethod._(
-            name: name,
-            listTypeArgument: listTypeArgument,
-            finderDeclaration: finderDeclaration,
-            filterDeclarations: filterDeclarations,
-            checkerDeclarations: checkerDeclarations,
-            isFuture: isFuture,
-            genericType: genericType);
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, 'ListFinderMethod', 'name'),
+            listTypeArgument: BuiltValueNullFieldError.checkNotNull(
+                listTypeArgument, 'ListFinderMethod', 'listTypeArgument'),
+            finderDeclaration: BuiltValueNullFieldError.checkNotNull(
+                finderDeclaration, 'ListFinderMethod', 'finderDeclaration'),
+            filterDeclarations: BuiltValueNullFieldError.checkNotNull(
+                filterDeclarations, 'ListFinderMethod', 'filterDeclarations'),
+            checkerDeclarations: BuiltValueNullFieldError.checkNotNull(
+                checkerDeclarations, 'ListFinderMethod', 'checkerDeclarations'),
+            isFuture: BuiltValueNullFieldError.checkNotNull(
+                isFuture, 'ListFinderMethod', 'isFuture'),
+            genericType: BuiltValueNullFieldError.checkNotNull(
+                genericType, 'ListFinderMethod', 'genericType'));
     replace(_$result);
     return _$result;
   }

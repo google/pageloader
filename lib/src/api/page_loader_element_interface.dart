@@ -156,7 +156,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
 
   /// Clicks on the element with [clickOption].
   /// [clickOption] is only used for HTML.
-  Future<void> click({ClickOption clickOption});
+  Future<void> click({ClickOption? clickOption});
 
   /// Clicks outside of the current element.
   ///
@@ -167,7 +167,7 @@ abstract class PageLoaderElement extends PageLoaderSource {
   ///
   /// ScrollOptions is currently not supported.
   /// https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
-  Future<void> scroll({int x, int y});
+  Future<void> scroll({int? x, int? y});
 
   /// Scrolls this element into view.
   Future<void> scrollIntoView();
@@ -193,6 +193,11 @@ abstract class PageLoaderElement extends PageLoaderSource {
   /// Blurs the element (= lose focus).
   Future<void> blur();
 
+  /// Dispatches the [eventName] custom event on this element.
+  ///
+  /// If provided, [detail] is copied into the event.
+  Future<void> dispatchCustomEvent(String eventName, {Object? detail});
+
   /// Gives a full description of the element for debugger.
   String toStringDeep();
 
@@ -206,16 +211,16 @@ abstract class PageLoaderElement extends PageLoaderSource {
 /// Generic attributes interface, allowing bracket notation referencing.
 abstract class PageLoaderAttributes {
   /// Returns the value of attribute '[name]'.
-  String operator [](String name);
+  String? operator [](String name);
 }
 
 // Ensures that the length of the element's 'outerHTML' is not too large;
 // limit is ~50 KB in utf-16.
-String getOuterHtml(PageLoaderElement element) {
+String getOuterHtml(PageLoaderElement? element) {
   if (element == null) {
     return 'null';
   }
-  final elementString = element.properties['outerHTML'];
+  final elementString = element.properties['outerHTML']!;
   final bytes = utf8.encode(elementString);
   if (bytes.length > 50000) {
     return "(Length of Element's HTML DOM (${bytes.length}) is too "

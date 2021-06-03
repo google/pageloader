@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'mouse.dart';
 
@@ -26,14 +27,14 @@ class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInPageForMouseTest());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInPageForMouseTest(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInPageForMouseTest(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,21 +85,21 @@ class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
 }
 
 mixin $$PageForMouseTest on PageForMouseTest {
-  PageLoaderElement $__root__;
-  PageLoaderMouse __mouse__;
+/*late*/ PageLoaderElement $__root__;
+  PageLoaderMouse /*?*/ __mouse__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForMouseTest() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInPageForMouseTest() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInPageForMouseTest(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'element') {
       return element;
     }
@@ -120,11 +122,11 @@ mixin $$PageForMouseTest on PageForMouseTest {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInPageForMouseTest(
+  Map<int, String Function(List<String>) /*?*/ > findChainInPageForMouseTest(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var elementIndex = internalIds.indexOf(this.element.id);
       if (elementIndex >= 0 && elementIndex < closestIndex) {
@@ -265,7 +267,7 @@ mixin $$PageForMouseTest on PageForMouseTest {
       __listener.startPageObjectMethod('PageForMouseTest', 'mouse');
     }
     __mouse__ ??= $__root__.utils.mouse;
-    final returnMe = __mouse__;
+    final returnMe = __mouse__ /*!*/;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('PageForMouseTest', 'mouse');
     }

@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'nested.dart';
 
@@ -26,14 +27,14 @@ class $Nested extends Nested with $$Nested {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInNested());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInNested(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $Nested extends Nested with $$Nested {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $Nested extends Nested with $$Nested {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInNested(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,19 +85,19 @@ class $Nested extends Nested with $$Nested {
 }
 
 mixin $$Nested on Nested {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNested() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInNested() {
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInNested() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInNested(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'findersElement') {
       return findersElement;
     }
@@ -103,11 +105,11 @@ mixin $$Nested on Nested {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInNested(
+  Map<int, String Function(List<String>) /*?*/ > findChainInNested(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var findersElementElement = this.findersElement as dynamic;
       var findersElementIndex =
@@ -159,7 +161,7 @@ class $NestedUsingMixin extends NestedUsingMixin
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInNestedMixin());
     methods.addAll(testCreatorMethodsInNestedUsingMixin());
     return json.encode(methods);
@@ -167,7 +169,7 @@ class $NestedUsingMixin extends NestedUsingMixin
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInNestedUsingMixin(
           methodName, positionalArguments, namedArguments);
@@ -182,7 +184,8 @@ class $NestedUsingMixin extends NestedUsingMixin
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -199,8 +202,8 @@ class $NestedUsingMixin extends NestedUsingMixin
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInNestedUsingMixin(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
@@ -212,7 +215,7 @@ class $NestedUsingMixin extends NestedUsingMixin
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -227,29 +230,29 @@ class $NestedUsingMixin extends NestedUsingMixin
 }
 
 mixin $$NestedUsingMixin on NestedUsingMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNestedUsingMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>>
+  Map<String, List<Map<String, String /*?*/ >>>
       testCreatorMethodsInNestedUsingMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInNestedUsingMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     throw 'METHOD NOT FOUND. This method'
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInNestedUsingMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInNestedUsingMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
   }
 }
@@ -259,19 +262,20 @@ mixin $$NestedUsingMixin on NestedUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$NestedMixin on NestedMixin {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNestedMixin() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInNestedMixin() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInNestedMixin() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInNestedMixin(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'findersElement') {
       return findersElement;
     }
@@ -279,11 +283,11 @@ mixin $$NestedMixin on NestedMixin {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInNestedMixin(
+  Map<int, String Function(List<String>) /*?*/ > findChainInNestedMixin(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var findersElementElement = this.findersElement as dynamic;
       var findersElementIndex =

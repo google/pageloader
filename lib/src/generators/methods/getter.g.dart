@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of pageloader.getter;
 
@@ -16,12 +17,8 @@ class _$Getter extends Getter {
       (new GetterBuilder()..update(updates)).build();
 
   _$Getter._({this.name, this.returnType}) : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('Getter', 'name');
-    }
-    if (returnType == null) {
-      throw new BuiltValueNullFieldError('Getter', 'returnType');
-    }
+    BuiltValueNullFieldError.checkNotNull(name, 'Getter', 'name');
+    BuiltValueNullFieldError.checkNotNull(returnType, 'Getter', 'returnType');
   }
 
   @override
@@ -67,9 +64,10 @@ class GetterBuilder implements Builder<Getter, GetterBuilder> {
   GetterBuilder();
 
   GetterBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
-      _returnType = _$v.returnType;
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _returnType = $v.returnType;
       _$v = null;
     }
     return this;
@@ -77,9 +75,7 @@ class GetterBuilder implements Builder<Getter, GetterBuilder> {
 
   @override
   void replace(Getter other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Getter;
   }
 
@@ -90,7 +86,11 @@ class GetterBuilder implements Builder<Getter, GetterBuilder> {
 
   @override
   _$Getter build() {
-    final _$result = _$v ?? new _$Getter._(name: name, returnType: returnType);
+    final _$result = _$v ??
+        new _$Getter._(
+            name: BuiltValueNullFieldError.checkNotNull(name, 'Getter', 'name'),
+            returnType: BuiltValueNullFieldError.checkNotNull(
+                returnType, 'Getter', 'returnType'));
     replace(_$result);
     return _$result;
   }

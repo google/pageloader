@@ -18,8 +18,8 @@ import 'package:pageloader/pageloader.dart';
 
 import 'html_page_loader_element.dart';
 
-HtmlPointer _globalPointer;
-SyncFn _cachedSyncFn;
+late HtmlPointer _globalPointer;
+SyncFn? _cachedSyncFn;
 
 /// Returns the globally used [HtmlPointer] in Html based tests.
 HtmlPointer globalPointer(SyncFn syncFn) {
@@ -29,7 +29,7 @@ HtmlPointer globalPointer(SyncFn syncFn) {
   // indicates the scope of the [HtmlPointer] is outdated.
   if (_cachedSyncFn == null || _cachedSyncFn != syncFn) {
     _cachedSyncFn = syncFn;
-    _globalPointer = HtmlPointer(_cachedSyncFn);
+    _globalPointer = HtmlPointer(_cachedSyncFn!);
   }
   return _globalPointer;
 }
@@ -38,7 +38,7 @@ HtmlPointer globalPointer(SyncFn syncFn) {
 class HtmlPointer implements PageLoaderPointer {
   // Last known coordination and the [TrackedElement] at that point.
   var _cachedPoint = Point<int>(0, 0);
-  TrackedElement _cachedElement;
+  TrackedElement? _cachedElement;
   SyncFn syncFn;
 
   // Elements that are currently being tracked. This is reset whenever [moveTo]
@@ -49,35 +49,37 @@ class HtmlPointer implements PageLoaderPointer {
   HtmlPointer(this.syncFn);
 
   @override
-  Future down(MouseButton button, {PageLoaderElement eventTarget}) =>
+  Future down(MouseButton button, {PageLoaderElement? eventTarget}) =>
       syncFn(() async {
         if (eventTarget != null) {
-          await moveTo(eventTarget, null, null);
+          await moveTo(eventTarget as HtmlPageLoaderElement, null, null);
         }
-        return _dispatchEvent('pointerdown', eventTarget, button);
+        return _dispatchEvent(
+            'pointerdown', eventTarget as HtmlPageLoaderElement?, button);
       });
 
   @override
-  Future moveTo(HtmlPageLoaderElement element, int xOffset, int yOffset,
-          {List<PageLoaderElement> dispatchTo = const <PageLoaderElement>[],
-          int stepPixels,
-          Duration duration = Duration.zero}) =>
+  Future moveTo(HtmlPageLoaderElement element, int? xOffset, int? yOffset,
+          {List<PageLoaderElement>? dispatchTo = const <PageLoaderElement>[],
+          int? stepPixels,
+          Duration? duration = Duration.zero}) =>
       syncFn(() => _moveTo(element, xOffset, yOffset,
-          dispatchTo: dispatchTo, stepPixels: stepPixels, duration: duration));
+          dispatchTo: dispatchTo!, stepPixels: stepPixels, duration: duration));
 
   @override
-  Future up(MouseButton button, {PageLoaderElement eventTarget}) =>
+  Future up(MouseButton button, {PageLoaderElement? eventTarget}) =>
       syncFn(() async {
         if (eventTarget != null) {
-          await moveTo(eventTarget, null, null);
+          await moveTo(eventTarget as HtmlPageLoaderElement, null, null);
         }
-        return _dispatchEvent('pointerup', eventTarget, button);
+        return _dispatchEvent(
+            'pointerup', eventTarget as HtmlPageLoaderElement?, button);
       });
 
-  Future _moveTo(HtmlPageLoaderElement element, int xOffset, int yOffset,
+  Future _moveTo(HtmlPageLoaderElement element, int? xOffset, int? yOffset,
       {List<PageLoaderElement> dispatchTo = const <PageLoaderElement>[],
-      int stepPixels,
-      Duration duration = Duration.zero}) async {
+      int? stepPixels,
+      Duration? duration = Duration.zero}) async {
     if (stepPixels != null) {
       assert(stepPixels > 0);
     }
@@ -105,8 +107,8 @@ class HtmlPointer implements PageLoaderPointer {
     _trackedElements = <TrackedElement>[];
     _elementToTrackedElement = <html.Element, TrackedElement>{};
     if (_cachedElement != null) {
-      _trackedElements.add(_cachedElement);
-      _elementToTrackedElement[_cachedElement.element] = _cachedElement;
+      _trackedElements.add(_cachedElement!);
+      _elementToTrackedElement[_cachedElement!.element] = _cachedElement!;
     }
     for (final dispatchTarget in dispatchTo) {
       _track((dispatchTarget as HtmlPageLoaderElement).context as html.Element,
@@ -127,7 +129,7 @@ class HtmlPointer implements PageLoaderPointer {
 
       await _sendPointerEvents(nextPoint, isLastStep: lastStep);
       if (duration != Duration.zero) {
-        await _sleep(duration ~/ steps);
+        await _sleep(duration! ~/ steps);
       }
     }
 
@@ -155,12 +157,12 @@ class HtmlPointer implements PageLoaderPointer {
 
   // Gets the current, top-most [Element] under pointer. If no element can be
   // found, returns the document's body [Element].
-  html.Element get _currentElement =>
+  html.Element? get _currentElement =>
       html.document
           .elementFromPoint(_pageX(_cachedPoint.x), _pageY(_cachedPoint.y)) ??
       html.document.body;
 
-  Future _dispatchEvent(String type, HtmlPageLoaderElement eventTarget,
+  Future _dispatchEvent(String type, HtmlPageLoaderElement? eventTarget,
       [MouseButton button = MouseButton.primary]) async {
     final event = html.PointerEvent(type, {
       'button': button.value,
@@ -173,7 +175,7 @@ class HtmlPointer implements PageLoaderPointer {
     if (eventTarget != null) {
       await _microtask(() => eventTarget.dispatchEvent(event));
     } else {
-      await _microtask(() => _currentElement.dispatchEvent(event));
+      await _microtask(() => _currentElement!.dispatchEvent(event));
     }
   }
 
@@ -184,7 +186,8 @@ class HtmlPointer implements PageLoaderPointer {
   ///   pointerenter
   ///   pointermove
   ///   pointerover
-  Future<void> _sendPointerEvents(Point<int> nextPos, {bool isLastStep}) async {
+  Future<void> _sendPointerEvents(Point<int> nextPos,
+      {required bool isLastStep}) async {
     // Send 'pointerleave' and 'pointerout' events before 'pointerenter'.
     final elementsThatLeft = await _dispatchPointerLeaves(nextPos);
     await _dispatchPointerOuts(nextPos);
@@ -325,7 +328,7 @@ Future _microtask(Function() fn) => Future.microtask(fn).whenComplete(() {});
 /// events.
 class TrackedElement {
   final html.Element element;
-  Rectangle bounds;
+  Rectangle? bounds;
   bool pointerIsInside = false;
 
   TrackedElement(this.element);
@@ -333,7 +336,7 @@ class TrackedElement {
   /// Returns true if point is inside element.
   bool containsPoint(Point<int> p) {
     bounds ??= element.getBoundingClientRect();
-    return bounds.containsPoint(p);
+    return bounds!.containsPoint(p);
   }
 
   bool _isEntering(Point<int> p) => containsPoint(p) && !pointerIsInside;
@@ -394,11 +397,11 @@ class TrackedElement {
 /// Methods to calculate offsets.
 int _pageX(int clientX) => html.window.pageXOffset + clientX;
 int _pageY(int clientY) => html.window.pageYOffset + clientY;
-int get _borderWidth => (html.window.outerWidth - html.window.innerWidth) ~/ 2;
-int _screenX(int clientX) => html.window.screenLeft + _borderWidth + clientX;
+int get _borderWidth => (html.window.outerWidth - html.window.innerWidth!) ~/ 2;
+int _screenX(int clientX) => html.window.screenLeft! + _borderWidth + clientX;
 int _screenY(int clientY) =>
-    html.window.screenTop +
+    html.window.screenTop! +
     html.window.outerHeight -
-    html.window.innerHeight -
+    html.window.innerHeight! -
     _borderWidth +
     clientY;

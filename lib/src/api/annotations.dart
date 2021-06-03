@@ -214,6 +214,7 @@ class ByDebugId implements CssFinder {
 /// ```
 ///
 /// Then these button can be selected as follow:
+///
 /// ```dart
 /// @ByTestId("cancel-button")
 /// MaterialButtonPO get cancelButton;

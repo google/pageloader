@@ -29,13 +29,13 @@ abstract class PageLoaderPointer {
   /// PageLoader will attempt to fire the corresponding pointer events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current location.
-  Future<void> down(MouseButton button, {PageLoaderElement eventTarget});
+  Future<void> down(MouseButton button, {PageLoaderElement? eventTarget});
 
   /// Release at current location. If [eventTarget] is specified,
   /// PageLoader will attempt to fire the corresponding pointer events
   /// on that target, otherwise it will fire the events on the target that is
   /// under the current location.
-  Future<void> up(MouseButton button, {PageLoaderElement eventTarget});
+  Future<void> up(MouseButton button, {PageLoaderElement? eventTarget});
 
   /// Move the pointer from previous location to a location relative
   /// to [element] offset by [xOffset] and [yOffset].
@@ -54,6 +54,8 @@ abstract class PageLoaderPointer {
   /// with no intermediate steps. If provided, [stepPixels] must be a value
   /// greater than zero.
   Future<void> moveTo(
-      covariant PageLoaderElement element, int xOffset, int yOffset,
-      {List<PageLoaderElement> dispatchTo, int stepPixels, Duration duration});
+      covariant PageLoaderElement element, int? xOffset, int? yOffset,
+      {List<PageLoaderElement>? dispatchTo,
+      int? stepPixels,
+      Duration? duration});
 }

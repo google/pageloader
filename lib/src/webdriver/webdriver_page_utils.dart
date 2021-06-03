@@ -27,7 +27,7 @@ class WebDriverPageUtils extends PageUtils {
 
   final WebDriverPointer _pointer;
 
-  WebDriverPageLoaderElement _cachedRoot;
+  WebDriverPageLoaderElement? _cachedRoot;
 
   WebDriverPageUtils(this.driver)
       : _mouse = WebDriverMouse(driver),
@@ -40,13 +40,13 @@ class WebDriverPageUtils extends PageUtils {
   @override
   WebDriverPageLoaderElement get root {
     _cachedRoot ??= WebDriverPageLoaderElement(driver);
-    return _cachedRoot;
+    return _cachedRoot!;
   }
 
   /// Gets the element that currently has focus on the given page.
   @override
   WebDriverPageLoaderElement get focused {
-    return WebDriverPageLoaderElement.createFromElement(driver.activeElement);
+    return WebDriverPageLoaderElement.createFromElement(driver.activeElement!);
   }
 
   @override

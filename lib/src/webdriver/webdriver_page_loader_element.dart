@@ -30,11 +30,11 @@ import 'webdriver_page_utils.dart';
 /// an attempt to re-resolve the element(s) is made.
 class WebDriverPageLoaderElement implements PageLoaderElement {
   final sync_wd.WebDriver _driver;
-  WebDriverPageUtils _utils;
-  WebDriverPageLoaderElement _parentElement;
-  sync_wd.WebElement _cachedElement;
+  late WebDriverPageUtils _utils;
+  WebDriverPageLoaderElement? _parentElement;
+  sync_wd.WebElement? _cachedElement;
 
-  Finder _finder;
+  Finder? _finder;
   var _filters = <Filter>[];
   var _checkers = <Checker>[];
   var _listeners = <PageLoaderListener>[];
@@ -131,7 +131,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   /// Resolves the elements, throwing an exception if the # elements != 1.
   sync_wd.WebElement get _single {
     if (_cachedElement != null) {
-      return _cachedElement;
+      return _cachedElement!;
     }
 
     final elems = elements;
@@ -139,7 +139,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       throw SinglePageObjectException(this, elems.length);
     }
     _cachedElement = elems[0];
-    return _cachedElement;
+    return _cachedElement!;
   }
 
   /// Returns all elements resolved.
@@ -155,7 +155,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       }
       base = root[0];
     } else {
-      base = _parentElement._single;
+      base = _parentElement!._single;
     }
 
     Iterable<sync_wd.WebElement> elements;
@@ -163,7 +163,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       elements = [_cachedElement ?? base];
     } else if (_finder is ContextFinder) {
       elements = (_finder as ContextFinder)
-          .findElements(_parentElement)
+          .findElements(_parentElement!)
           .map((p) => p.contextSync);
     } else if (_finder is WebElementFinder) {
       elements = [(_finder as WebElementFinder).element];
@@ -183,7 +183,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     final filteredElements =
         core.applyFiltersAndChecks(tempElements, _filters, _checkers);
     return filteredElements
-        .map((e) => (e as WebDriverPageLoaderElement)._cachedElement)
+        .map((e) => (e as WebDriverPageLoaderElement)._cachedElement!)
         .toList();
   }
 
@@ -208,7 +208,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   // We could incrementally clear until we find a web element that's still
   // good, but that's 50ms min for each check. Instead we clear the whole chain.
   void _clearCache() {
-    var elem = this;
+    WebDriverPageLoaderElement? elem = this;
     while (elem != null) {
       elem._cachedElement = null;
       elem = elem._parentElement;
@@ -220,7 +220,8 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   String get innerText => _retryWhenStale(() =>
-      (_driver.execute('return arguments[0].textContent;', [_single])).trim());
+      (_driver.execute('return arguments[0].textContent;', [_single]) as String)
+          .trim());
 
   @override
   String get visibleText {
@@ -280,20 +281,20 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   @override
   Rectangle get offset {
-    final rect = _retryWhenStale<Map>(() => _driver.execute('''return {
+    final rect = _retryWhenStale<Map?>(() => _driver.execute('''return {
           left: arguments[0].offsetLeft,
           top: arguments[0].offsetTop,
           width: arguments[0].offsetWidth,
           height: arguments[0].offsetHeight
-        }''', [_single]));
+        }''', [_single]))!;
     return Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
 
   @override
   Rectangle getBoundingClientRect() {
-    final rect = _retryWhenStale<Map>(() => _driver
-        .execute('return arguments[0].getBoundingClientRect();', [_single]));
+    final rect = _retryWhenStale<Map?>(() => _driver
+        .execute('return arguments[0].getBoundingClientRect();', [_single]))!;
     return Rectangle<num>(
         rect['left'], rect['top'], rect['width'], rect['height']);
   }
@@ -331,7 +332,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
 
   // WebDriver does not use [clickOption] at the moment
   @override
-  Future<Null> click({ClickOption clickOption}) async {
+  Future<Null> click({ClickOption? clickOption}) async {
     if (clickOption != null) {
       throw UnsupportedError(
           'WebDriver click() does not support `clickOption` parameter.');
@@ -367,18 +368,18 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
       }
 
       // Find a [Point] that is not in the current element.
-      final point = [
+      final point = <Point<num>?>[
         bodyRect.topLeft,
         bodyRect.topRight,
         bodyRect.bottomLeft,
         bodyRect.bottomRight
-      ].firstWhere((p) => !rect.containsPoint(p), orElse: () => null);
+      ].firstWhere((p) => !rect.containsPoint(p!), orElse: (() => null));
 
       if (point != null) {
         _utils.driver.mouse.moveTo(
-            element: bodyElement.contextSync,
-            xOffset: point.x.toInt() - bodyRect.left,
-            yOffset: point.y.toInt() - bodyRect.top);
+            element: bodyElement.contextSync as sync_wd.WebElement?,
+            xOffset: point.x.toInt() - (bodyRect.left as int),
+            yOffset: point.y.toInt() - (bodyRect.top as int));
         _utils.driver.mouse.click();
       } else {
         throw PageLoaderException(
@@ -389,7 +390,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   }
 
   @override
-  Future<void> scroll({int x, int y}) async =>
+  Future<void> scroll({int? x, int? y}) async =>
       _retryWhenStale(() => _driver.execute(
           'arguments[0].scrollLeft += ${x ?? 0};'
           'arguments[0].scrollTop += ${y ?? 0};'
@@ -436,7 +437,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     var text = '';
     for (var event in keys.uniqueEvents) {
       if (event.isSpecial) {
-        text += _specialKeyToString[event.specialKey];
+        text += _specialKeyToString[event.specialKey]!;
       } else {
         text += event.key;
       }
@@ -451,6 +452,12 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
   @override
   Future<Null> blur() async =>
       _retryWhenStale(() => _driver.execute('arguments[0].blur();', [_single]));
+
+  @override
+  Future<void> dispatchCustomEvent(String name, {Object? detail}) async =>
+      _retryWhenStale(() => _driver.execute('''arguments[0].dispatchEvent(
+            new CustomEvent(arguments[1], { detail: JSON.parse(arguments[2]) }));''',
+          [_single, name, json.encode(detail)]));
 
   @override
   String testCreatorGetters() => json.encode({
@@ -484,6 +491,10 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
         ],
         'focus': [],
         'blur': [],
+        'dispatchCustomEvent': [
+          {'name': 'name', 'kind': 'required', 'type': 'String'},
+          {'name': 'detail', 'kind': 'named', 'type': 'Object'},
+        ],
       });
 }
 
@@ -497,7 +508,7 @@ class _ElementAttributes extends PageLoaderAttributes {
   _ElementAttributes(this._node);
 
   @override
-  String operator [](String name) => _node.attributes[name];
+  String? operator [](String name) => _node.attributes[name];
 }
 
 class _ElementComputedStyle extends PageLoaderAttributes {
@@ -506,7 +517,7 @@ class _ElementComputedStyle extends PageLoaderAttributes {
   _ElementComputedStyle(this._node);
 
   @override
-  String operator [](String name) => _node.cssProperties[name];
+  String? operator [](String name) => _node.cssProperties[name];
 }
 
 // Retrieves properties via Javascript.
@@ -516,7 +527,7 @@ class _ElementProperties extends PageLoaderAttributes {
   _ElementProperties(this._node);
 
   @override
-  String operator [](String name) => _node.properties[name];
+  String? operator [](String name) => _node.properties[name];
 }
 
 // Retrieves style via JavaScript '.style'.
@@ -526,7 +537,7 @@ class _ElementStyle extends PageLoaderAttributes {
   _ElementStyle(this._node);
 
   @override
-  String operator [](String name) => core.staleElementWrapper(
+  String? operator [](String name) => core.staleElementWrapper(
       () => _node._driver.execute(
           'return arguments[0].style.${_cssPropName(name)};', [_node._single]),
       _node._clearCache,
@@ -535,7 +546,7 @@ class _ElementStyle extends PageLoaderAttributes {
 
 /// Convert hyphenated-properties to camelCase.
 String _cssPropName(String name) => name.splitMapJoin(RegExp(r'-(\w)'),
-    onMatch: (m) => m.group(1).toUpperCase(), onNonMatch: (m) => m);
+    onMatch: (m) => m.group(1)!.toUpperCase(), onNonMatch: (m) => m);
 
 const _specialKeyToString = {
   PageLoaderSpecialKey.backSpace: sync_wd.Keyboard.backSpace,

@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of 'webdriver_only.dart';
 
@@ -26,14 +27,14 @@ class $WebDriverOnly extends WebDriverOnly with $$WebDriverOnly {
   }
 
   String testCreatorMethods() {
-    final methods = <String, List<Map<String, String>>>{};
+    final methods = <String, List<Map<String, String /*?*/ >>>{};
     methods.addAll(testCreatorMethodsInWebDriverOnly());
     return json.encode(methods);
   }
 
   dynamic testCreatorInvokeMethod(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     try {
       return testCreatorInvokeMethodInWebDriverOnly(
           methodName, positionalArguments, namedArguments);
@@ -43,7 +44,8 @@ class $WebDriverOnly extends WebDriverOnly with $$WebDriverOnly {
         ' failed to be generated during test creator codegen.';
   }
 
-  String findChain(List<dynamic> rawInternalIds, [String action = 'default']) {
+  String /*?*/ findChain(List<dynamic> rawInternalIds,
+      [String action = 'default']) {
     final internalIds = rawInternalIds.cast<String>();
     final code = <String, String>{};
 
@@ -60,15 +62,15 @@ class $WebDriverOnly extends WebDriverOnly with $$WebDriverOnly {
     }
 
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
-    MapEntry<int, String Function(List<String>)> chain;
+    String Function(List<String>) /*?*/ closestValue;
+    MapEntry<int, String Function(List<String>) /*?*/ > chain;
     chain = findChainInWebDriverOnly(internalIds, action).entries.first;
     if (chain.key < closestIndex) {
       closestIndex = chain.key;
       closestValue = chain.value;
     }
     if (closestIndex < internalIds.length) {
-      final value = closestValue(internalIds);
+      final value = closestValue /*!*/ (internalIds);
       return code[value] ?? value;
     }
 
@@ -83,19 +85,20 @@ class $WebDriverOnly extends WebDriverOnly with $$WebDriverOnly {
 }
 
 mixin $$WebDriverOnly on WebDriverOnly {
-  PageLoaderElement $__root__;
+/*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInWebDriverOnly() {
     return {};
   }
 
-  Map<String, List<Map<String, String>>> testCreatorMethodsInWebDriverOnly() {
+  Map<String, List<Map<String, String /*?*/ >>>
+      testCreatorMethodsInWebDriverOnly() {
     return {};
   }
 
   dynamic testCreatorInvokeMethodInWebDriverOnly(
       String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> namedArguments]) {
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
     if (methodName == 'button1') {
       return button1;
     }
@@ -103,11 +106,11 @@ mixin $$WebDriverOnly on WebDriverOnly {
         ' failed to be generated during test creator codegen.';
   }
 
-  Map<int, String Function(List<String>)> findChainInWebDriverOnly(
+  Map<int, String Function(List<String>) /*?*/ > findChainInWebDriverOnly(
       List<String> internalIds,
       [String action = 'default']) {
     var closestIndex = internalIds.length;
-    String Function(List<String>) closestValue;
+    String Function(List<String>) /*?*/ closestValue;
     try {
       var button1Index = internalIds.indexOf(this.button1.id);
       if (button1Index >= 0 && button1Index < closestIndex) {

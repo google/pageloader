@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.9
 
 part of pageloader.core_method_information;
 
@@ -16,12 +17,9 @@ class _$TypeInformation extends TypeInformation {
       (new TypeInformationBuilder()..update(updates)).build();
 
   _$TypeInformation._({this.type, this.typeArguments}) : super._() {
-    if (type == null) {
-      throw new BuiltValueNullFieldError('TypeInformation', 'type');
-    }
-    if (typeArguments == null) {
-      throw new BuiltValueNullFieldError('TypeInformation', 'typeArguments');
-    }
+    BuiltValueNullFieldError.checkNotNull(type, 'TypeInformation', 'type');
+    BuiltValueNullFieldError.checkNotNull(
+        typeArguments, 'TypeInformation', 'typeArguments');
   }
 
   @override
@@ -70,9 +68,10 @@ class TypeInformationBuilder
   TypeInformationBuilder();
 
   TypeInformationBuilder get _$this {
-    if (_$v != null) {
-      _type = _$v.type;
-      _typeArguments = _$v.typeArguments;
+    final $v = _$v;
+    if ($v != null) {
+      _type = $v.type;
+      _typeArguments = $v.typeArguments;
       _$v = null;
     }
     return this;
@@ -80,9 +79,7 @@ class TypeInformationBuilder
 
   @override
   void replace(TypeInformation other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$TypeInformation;
   }
 
@@ -94,7 +91,11 @@ class TypeInformationBuilder
   @override
   _$TypeInformation build() {
     final _$result = _$v ??
-        new _$TypeInformation._(type: type, typeArguments: typeArguments);
+        new _$TypeInformation._(
+            type: BuiltValueNullFieldError.checkNotNull(
+                type, 'TypeInformation', 'type'),
+            typeArguments: BuiltValueNullFieldError.checkNotNull(
+                typeArguments, 'TypeInformation', 'typeArguments'));
     replace(_$result);
     return _$result;
   }
@@ -156,57 +157,38 @@ class _$CoreMethodInformation extends CoreMethodInformation {
       this.nodeSource,
       this.node})
       : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'name');
-    }
-    if (isGetter == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'isGetter');
-    }
-    if (isAbstract == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'isAbstract');
-    }
-    if (pageObjectType == null) {
-      throw new BuiltValueNullFieldError(
-          'CoreMethodInformation', 'pageObjectType');
-    }
-    if (pageObjectTemplate == null) {
-      throw new BuiltValueNullFieldError(
-          'CoreMethodInformation', 'pageObjectTemplate');
-    }
-    if (isFuture == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'isFuture');
-    }
-    if (isList == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'isList');
-    }
-    if (isMouse == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'isMouse');
-    }
-    if (isPointer == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'isPointer');
-    }
-    if (finder == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'finder');
-    }
-    if (filters == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'filters');
-    }
-    if (checkers == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'checkers');
-    }
-    if (isRoot == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'isRoot');
-    }
-    if (isNullElement == null) {
-      throw new BuiltValueNullFieldError(
-          'CoreMethodInformation', 'isNullElement');
-    }
-    if (nodeSource == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'nodeSource');
-    }
-    if (node == null) {
-      throw new BuiltValueNullFieldError('CoreMethodInformation', 'node');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        name, 'CoreMethodInformation', 'name');
+    BuiltValueNullFieldError.checkNotNull(
+        isGetter, 'CoreMethodInformation', 'isGetter');
+    BuiltValueNullFieldError.checkNotNull(
+        isAbstract, 'CoreMethodInformation', 'isAbstract');
+    BuiltValueNullFieldError.checkNotNull(
+        pageObjectType, 'CoreMethodInformation', 'pageObjectType');
+    BuiltValueNullFieldError.checkNotNull(
+        pageObjectTemplate, 'CoreMethodInformation', 'pageObjectTemplate');
+    BuiltValueNullFieldError.checkNotNull(
+        isFuture, 'CoreMethodInformation', 'isFuture');
+    BuiltValueNullFieldError.checkNotNull(
+        isList, 'CoreMethodInformation', 'isList');
+    BuiltValueNullFieldError.checkNotNull(
+        isMouse, 'CoreMethodInformation', 'isMouse');
+    BuiltValueNullFieldError.checkNotNull(
+        isPointer, 'CoreMethodInformation', 'isPointer');
+    BuiltValueNullFieldError.checkNotNull(
+        finder, 'CoreMethodInformation', 'finder');
+    BuiltValueNullFieldError.checkNotNull(
+        filters, 'CoreMethodInformation', 'filters');
+    BuiltValueNullFieldError.checkNotNull(
+        checkers, 'CoreMethodInformation', 'checkers');
+    BuiltValueNullFieldError.checkNotNull(
+        isRoot, 'CoreMethodInformation', 'isRoot');
+    BuiltValueNullFieldError.checkNotNull(
+        isNullElement, 'CoreMethodInformation', 'isNullElement');
+    BuiltValueNullFieldError.checkNotNull(
+        nodeSource, 'CoreMethodInformation', 'nodeSource');
+    BuiltValueNullFieldError.checkNotNull(
+        node, 'CoreMethodInformation', 'node');
   }
 
   @override
@@ -313,91 +295,93 @@ class CoreMethodInformationBuilder
 
   String _name;
   String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  set name(covariant String name) => _$this._name = name;
 
   bool _isGetter;
   bool get isGetter => _$this._isGetter;
-  set isGetter(bool isGetter) => _$this._isGetter = isGetter;
+  set isGetter(covariant bool isGetter) => _$this._isGetter = isGetter;
 
   bool _isAbstract;
   bool get isAbstract => _$this._isAbstract;
-  set isAbstract(bool isAbstract) => _$this._isAbstract = isAbstract;
+  set isAbstract(covariant bool isAbstract) => _$this._isAbstract = isAbstract;
 
   String _pageObjectType;
   String get pageObjectType => _$this._pageObjectType;
-  set pageObjectType(String pageObjectType) =>
+  set pageObjectType(covariant String pageObjectType) =>
       _$this._pageObjectType = pageObjectType;
 
   Optional<String> _pageObjectTemplate;
   Optional<String> get pageObjectTemplate => _$this._pageObjectTemplate;
-  set pageObjectTemplate(Optional<String> pageObjectTemplate) =>
+  set pageObjectTemplate(covariant Optional<String> pageObjectTemplate) =>
       _$this._pageObjectTemplate = pageObjectTemplate;
 
   bool _isFuture;
   bool get isFuture => _$this._isFuture;
-  set isFuture(bool isFuture) => _$this._isFuture = isFuture;
+  set isFuture(covariant bool isFuture) => _$this._isFuture = isFuture;
 
   bool _isList;
   bool get isList => _$this._isList;
-  set isList(bool isList) => _$this._isList = isList;
+  set isList(covariant bool isList) => _$this._isList = isList;
 
   bool _isMouse;
   bool get isMouse => _$this._isMouse;
-  set isMouse(bool isMouse) => _$this._isMouse = isMouse;
+  set isMouse(covariant bool isMouse) => _$this._isMouse = isMouse;
 
   bool _isPointer;
   bool get isPointer => _$this._isPointer;
-  set isPointer(bool isPointer) => _$this._isPointer = isPointer;
+  set isPointer(covariant bool isPointer) => _$this._isPointer = isPointer;
 
   Optional<String> _finder;
   Optional<String> get finder => _$this._finder;
-  set finder(Optional<String> finder) => _$this._finder = finder;
+  set finder(covariant Optional<String> finder) => _$this._finder = finder;
 
   List<String> _filters;
   List<String> get filters => _$this._filters;
-  set filters(List<String> filters) => _$this._filters = filters;
+  set filters(covariant List<String> filters) => _$this._filters = filters;
 
   List<String> _checkers;
   List<String> get checkers => _$this._checkers;
-  set checkers(List<String> checkers) => _$this._checkers = checkers;
+  set checkers(covariant List<String> checkers) => _$this._checkers = checkers;
 
   bool _isRoot;
   bool get isRoot => _$this._isRoot;
-  set isRoot(bool isRoot) => _$this._isRoot = isRoot;
+  set isRoot(covariant bool isRoot) => _$this._isRoot = isRoot;
 
   bool _isNullElement;
   bool get isNullElement => _$this._isNullElement;
-  set isNullElement(bool isNullElement) =>
+  set isNullElement(covariant bool isNullElement) =>
       _$this._isNullElement = isNullElement;
 
   String _nodeSource;
   String get nodeSource => _$this._nodeSource;
-  set nodeSource(String nodeSource) => _$this._nodeSource = nodeSource;
+  set nodeSource(covariant String nodeSource) =>
+      _$this._nodeSource = nodeSource;
 
   AstNode _node;
   AstNode get node => _$this._node;
-  set node(AstNode node) => _$this._node = node;
+  set node(covariant AstNode node) => _$this._node = node;
 
   CoreMethodInformationBuilder();
 
   CoreMethodInformationBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
-      _isGetter = _$v.isGetter;
-      _isAbstract = _$v.isAbstract;
-      _pageObjectType = _$v.pageObjectType;
-      _pageObjectTemplate = _$v.pageObjectTemplate;
-      _isFuture = _$v.isFuture;
-      _isList = _$v.isList;
-      _isMouse = _$v.isMouse;
-      _isPointer = _$v.isPointer;
-      _finder = _$v.finder;
-      _filters = _$v.filters;
-      _checkers = _$v.checkers;
-      _isRoot = _$v.isRoot;
-      _isNullElement = _$v.isNullElement;
-      _nodeSource = _$v.nodeSource;
-      _node = _$v.node;
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _isGetter = $v.isGetter;
+      _isAbstract = $v.isAbstract;
+      _pageObjectType = $v.pageObjectType;
+      _pageObjectTemplate = $v.pageObjectTemplate;
+      _isFuture = $v.isFuture;
+      _isList = $v.isList;
+      _isMouse = $v.isMouse;
+      _isPointer = $v.isPointer;
+      _finder = $v.finder;
+      _filters = $v.filters;
+      _checkers = $v.checkers;
+      _isRoot = $v.isRoot;
+      _isNullElement = $v.isNullElement;
+      _nodeSource = $v.nodeSource;
+      _node = $v.node;
       _$v = null;
     }
     return this;
@@ -405,9 +389,7 @@ class CoreMethodInformationBuilder
 
   @override
   void replace(covariant CoreMethodInformation other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CoreMethodInformation;
   }
 
@@ -420,22 +402,30 @@ class CoreMethodInformationBuilder
   _$CoreMethodInformation build() {
     final _$result = _$v ??
         new _$CoreMethodInformation._(
-            name: name,
-            isGetter: isGetter,
-            isAbstract: isAbstract,
-            pageObjectType: pageObjectType,
-            pageObjectTemplate: pageObjectTemplate,
-            isFuture: isFuture,
-            isList: isList,
-            isMouse: isMouse,
-            isPointer: isPointer,
-            finder: finder,
-            filters: filters,
-            checkers: checkers,
-            isRoot: isRoot,
-            isNullElement: isNullElement,
-            nodeSource: nodeSource,
-            node: node);
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, 'CoreMethodInformation', 'name'),
+            isGetter: BuiltValueNullFieldError.checkNotNull(
+                isGetter, 'CoreMethodInformation', 'isGetter'),
+            isAbstract: BuiltValueNullFieldError.checkNotNull(
+                isAbstract, 'CoreMethodInformation', 'isAbstract'),
+            pageObjectType: BuiltValueNullFieldError.checkNotNull(
+                pageObjectType, 'CoreMethodInformation', 'pageObjectType'),
+            pageObjectTemplate: BuiltValueNullFieldError.checkNotNull(
+                pageObjectTemplate, 'CoreMethodInformation', 'pageObjectTemplate'),
+            isFuture: BuiltValueNullFieldError.checkNotNull(
+                isFuture, 'CoreMethodInformation', 'isFuture'),
+            isList: BuiltValueNullFieldError.checkNotNull(
+                isList, 'CoreMethodInformation', 'isList'),
+            isMouse: BuiltValueNullFieldError.checkNotNull(
+                isMouse, 'CoreMethodInformation', 'isMouse'),
+            isPointer: BuiltValueNullFieldError.checkNotNull(isPointer, 'CoreMethodInformation', 'isPointer'),
+            finder: BuiltValueNullFieldError.checkNotNull(finder, 'CoreMethodInformation', 'finder'),
+            filters: BuiltValueNullFieldError.checkNotNull(filters, 'CoreMethodInformation', 'filters'),
+            checkers: BuiltValueNullFieldError.checkNotNull(checkers, 'CoreMethodInformation', 'checkers'),
+            isRoot: BuiltValueNullFieldError.checkNotNull(isRoot, 'CoreMethodInformation', 'isRoot'),
+            isNullElement: BuiltValueNullFieldError.checkNotNull(isNullElement, 'CoreMethodInformation', 'isNullElement'),
+            nodeSource: BuiltValueNullFieldError.checkNotNull(nodeSource, 'CoreMethodInformation', 'nodeSource'),
+            node: BuiltValueNullFieldError.checkNotNull(node, 'CoreMethodInformation', 'node'));
     replace(_$result);
     return _$result;
   }

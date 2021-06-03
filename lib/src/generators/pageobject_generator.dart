@@ -1,3 +1,5 @@
+// @dart = 2.9
+
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:analyzer/dart/analysis/results.dart';
+import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 
@@ -21,6 +25,7 @@ import '../api/page_object_annotation.dart';
 import 'class_checks_collector.dart' show generateClassChecks;
 import 'collector_visitor.dart';
 import 'methods/core.dart' as core;
+import 'methods/null_safety.dart';
 
 /// Page object generator. Generates the source code for a given page object.
 class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
@@ -35,30 +40,43 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
   @override
   Future<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {
-    final library = element.library;
-    // ignore: deprecated_member_use
-    // Begin workaround
-    final resolver = buildStep.resolver;
-    final tempResolvedLibrary =
-        await resolver.libraryFor(await resolver.assetIdForElement(library));
-    final session = tempResolvedLibrary.session;
-    final resolvedLibrary =
-        await session.getResolvedLibraryByElement(tempResolvedLibrary);
-    // End workaround
+    ResolvedLibraryResult resolvedLibrary;
+    LibraryElement library;
 
-    // TODO: Once SDK & analyzer is bumped, revert workaround to below.
-    // final resolvedLibrary =
-    //     await library.session.getResolvedLibraryByElement2(library);
+    // Attempt to get the resolved library 10 times. If analysis
+    // state cannot be stabilized, fail.
+    // https://github.com/google/built_value.dart/issues/941
+    var attempts = 0;
+    while (true) {
+      try {
+        final resolver = buildStep.resolver;
+        library = await resolver
+            .libraryFor(await resolver.assetIdForElement(element.library));
+        final session = library.session;
+        resolvedLibrary = await session.getResolvedLibraryByElement2(library)
+            as ResolvedLibraryResult;
+        break;
+      } catch (_) {
+        ++attempts;
+        if (attempts == 10) {
+          log.severe('Analysis session failed to stablize after 10 tries.');
+          rethrow;
+        }
+      }
+    }
 
     final annotatedNode = resolvedLibrary.getElementDeclaration(element).node;
     final poAnnotation = getPageObjectAnnotation(annotation);
+    final nullSafety =
+        NullSafety((b) => b..enabled = library.isNonNullableByDefault);
+
     if (annotatedNode is ClassOrMixinDeclaration) {
       try {
         final ignore =
             '// ignore_for_file: unused_field, non_constant_identifier_names\n'
             '// ignore_for_file: overridden_fields, annotate_overrides\n'
             '// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package\n';
-        return '$ignore${_generateClass(annotatedNode, poAnnotation)}';
+        return '$ignore${_generateClass(nullSafety, annotatedNode, poAnnotation)}';
       } catch (e, stackTrace) {
         print('Failure generating class for $library! '
             '\n $e \n $stackTrace');
@@ -70,9 +88,9 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
     }
   }
 
-  String _generateClass(
+  String _generateClass(NullSafety nullSafety,
       ClassOrMixinDeclaration declaration, PageObject poAnnotation) {
-    final collectorVisitor = CollectorVisitor(declaration);
+    final collectorVisitor = CollectorVisitor(nullSafety, declaration);
     declaration.visitChildren(collectorVisitor);
 
     _doErrorHandling(collectorVisitor);
@@ -172,12 +190,13 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
 
     // Define annotation-generated mixin class.
     mixinBuffer.write('mixin \$\$$signature on $signatureArgs {\n');
-    mixinBuffer.write('PageLoaderElement ${core.root};\n');
+    mixinBuffer.write('${nullSafety.isLate} PageLoaderElement ${core.root};\n');
     if (collectorVisitor.mouseFinderMethods.isNotEmpty) {
-      mixinBuffer.write('PageLoaderMouse ${core.mouse};\n');
+      mixinBuffer.write('PageLoaderMouse${nullSafety.orNull} ${core.mouse};\n');
     }
     if (collectorVisitor.pointerFinderMethods.isNotEmpty) {
-      mixinBuffer.write('PageLoaderPointer ${core.pointer};\n');
+      mixinBuffer
+          .write('PageLoaderPointer${nullSafety.orNull} ${core.pointer};\n');
     }
 
     // Add generated root accessor to be used in internal code.

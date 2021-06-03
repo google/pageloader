@@ -25,7 +25,7 @@ class SinglePageObjectException extends PageLoaderException {
 
 class PageLoaderException {
   final String message;
-  final PageLoaderElement element;
+  final PageLoaderElement? element;
 
   const PageLoaderException(this.message, [this.element]);
 

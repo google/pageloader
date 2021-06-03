@@ -25,20 +25,21 @@ class WebDriverPointer implements PageLoaderPointer {
   WebDriverPointer(this._driver);
 
   @override
-  Future<void> down(MouseButton button, {PageLoaderElement eventTarget}) async {
+  Future<void> down(MouseButton button,
+      {PageLoaderElement? eventTarget}) async {
     throw 'Not yet implemented';
   }
 
   @override
-  Future<void> moveTo(PageLoaderElement element, int xOffset, int yOffset,
-      {List<PageLoaderElement> dispatchTo,
-      int stepPixels,
-      Duration duration}) async {
+  Future<void> moveTo(PageLoaderElement element, int? xOffset, int? yOffset,
+      {List<PageLoaderElement>? dispatchTo,
+      int? stepPixels,
+      Duration? duration}) async {
     throw 'Not yet implemented';
   }
 
   @override
-  Future<void> up(MouseButton button, {PageLoaderElement eventTarget}) async {
+  Future<void> up(MouseButton button, {PageLoaderElement? eventTarget}) async {
     throw 'Not yet implemented';
   }
 }

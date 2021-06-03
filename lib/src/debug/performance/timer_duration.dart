@@ -23,7 +23,7 @@ class CollectingTimerFactory {
   final List<DurationEvent> _collectedEvents = [];
 
   CollectingTimer create(String timerName,
-      {CollectingTimerConfiguration timerConfiguration}) {
+      {CollectingTimerConfiguration? timerConfiguration}) {
     final configuration = CollectingTimerConfiguration.from(
         timerConfiguration ?? _defaultTimerConfiguration)
       ..timerName = timerName;
@@ -42,7 +42,7 @@ class CollectingTimerFactory {
 /// By default uses the same pid and thread id since page objects execute in
 /// the same execution context.
 class CollectingTimerConfiguration {
-  String timerName;
+  String? timerName;
   String pid = 'base';
   String tid = 'base';
 
@@ -65,7 +65,7 @@ class CollectingTimer {
   final Stopwatch _stopwatch = Stopwatch();
   final Collector _collector;
   bool _isRunning = false;
-  DateTime _startDuration;
+  late DateTime _startDuration;
 
   CollectingTimer(this._collector, this.configuration);
 
