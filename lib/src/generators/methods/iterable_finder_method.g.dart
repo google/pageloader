@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of pageloader.iterable_finder_method;
 
@@ -20,15 +19,15 @@ class _$IterableFinderMethod extends IterableFinderMethod {
   final String checkerDeclarations;
 
   factory _$IterableFinderMethod(
-          [void Function(IterableFinderMethodBuilder) updates]) =>
+          [void Function(IterableFinderMethodBuilder)? updates]) =>
       (new IterableFinderMethodBuilder()..update(updates)).build();
 
   _$IterableFinderMethod._(
-      {this.name,
-      this.iterableTypeArgument,
-      this.finderDeclaration,
-      this.filterDeclarations,
-      this.checkerDeclarations})
+      {required this.name,
+      required this.iterableTypeArgument,
+      required this.finderDeclaration,
+      required this.filterDeclarations,
+      required this.checkerDeclarations})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'IterableFinderMethod', 'name');
     BuiltValueNullFieldError.checkNotNull(
@@ -85,30 +84,30 @@ class _$IterableFinderMethod extends IterableFinderMethod {
 
 class IterableFinderMethodBuilder
     implements Builder<IterableFinderMethod, IterableFinderMethodBuilder> {
-  _$IterableFinderMethod _$v;
+  _$IterableFinderMethod? _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String _iterableTypeArgument;
-  String get iterableTypeArgument => _$this._iterableTypeArgument;
-  set iterableTypeArgument(String iterableTypeArgument) =>
+  String? _iterableTypeArgument;
+  String? get iterableTypeArgument => _$this._iterableTypeArgument;
+  set iterableTypeArgument(String? iterableTypeArgument) =>
       _$this._iterableTypeArgument = iterableTypeArgument;
 
-  String _finderDeclaration;
-  String get finderDeclaration => _$this._finderDeclaration;
-  set finderDeclaration(String finderDeclaration) =>
+  String? _finderDeclaration;
+  String? get finderDeclaration => _$this._finderDeclaration;
+  set finderDeclaration(String? finderDeclaration) =>
       _$this._finderDeclaration = finderDeclaration;
 
-  String _filterDeclarations;
-  String get filterDeclarations => _$this._filterDeclarations;
-  set filterDeclarations(String filterDeclarations) =>
+  String? _filterDeclarations;
+  String? get filterDeclarations => _$this._filterDeclarations;
+  set filterDeclarations(String? filterDeclarations) =>
       _$this._filterDeclarations = filterDeclarations;
 
-  String _checkerDeclarations;
-  String get checkerDeclarations => _$this._checkerDeclarations;
-  set checkerDeclarations(String checkerDeclarations) =>
+  String? _checkerDeclarations;
+  String? get checkerDeclarations => _$this._checkerDeclarations;
+  set checkerDeclarations(String? checkerDeclarations) =>
       _$this._checkerDeclarations = checkerDeclarations;
 
   IterableFinderMethodBuilder();
@@ -133,7 +132,7 @@ class IterableFinderMethodBuilder
   }
 
   @override
-  void update(void Function(IterableFinderMethodBuilder) updates) {
+  void update(void Function(IterableFinderMethodBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

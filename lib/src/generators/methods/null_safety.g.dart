@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of 'null_safety.dart';
 
@@ -11,10 +10,10 @@ class _$NullSafety extends NullSafety {
   @override
   final bool enabled;
 
-  factory _$NullSafety([void Function(NullSafetyBuilder) updates]) =>
+  factory _$NullSafety([void Function(NullSafetyBuilder)? updates]) =>
       (new NullSafetyBuilder()..update(updates)).build();
 
-  _$NullSafety._({this.enabled}) : super._() {
+  _$NullSafety._({required this.enabled}) : super._() {
     BuiltValueNullFieldError.checkNotNull(enabled, 'NullSafety', 'enabled');
   }
 
@@ -44,11 +43,11 @@ class _$NullSafety extends NullSafety {
 }
 
 class NullSafetyBuilder implements Builder<NullSafety, NullSafetyBuilder> {
-  _$NullSafety _$v;
+  _$NullSafety? _$v;
 
-  bool _enabled;
-  bool get enabled => _$this._enabled;
-  set enabled(bool enabled) => _$this._enabled = enabled;
+  bool? _enabled;
+  bool? get enabled => _$this._enabled;
+  set enabled(bool? enabled) => _$this._enabled = enabled;
 
   NullSafetyBuilder();
 
@@ -68,7 +67,7 @@ class NullSafetyBuilder implements Builder<NullSafety, NullSafetyBuilder> {
   }
 
   @override
-  void update(void Function(NullSafetyBuilder) updates) {
+  void update(void Function(NullSafetyBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

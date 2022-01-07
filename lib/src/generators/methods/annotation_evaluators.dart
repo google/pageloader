@@ -1,5 +1,3 @@
-// @dart = 2.9
-
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +27,8 @@ final String pageLoaderAnnotationInterface =
 
 /// Returns set of AnnotationKinds that match '@root', '@Mouse', '@nullElement'
 /// and '@Pointer'.
-Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
+/// TODO(null-safety): argument null-optional might be unnecessary
+Set<AnnotationKind> evaluateAsAtomicAnnotation(Element? element) {
   final returnSet = <AnnotationKind>{};
   if (element is PropertyAccessorElement &&
       element.library.name == pageLoaderAnnotations) {
@@ -43,10 +42,10 @@ Set<AnnotationKind> evaluateAsAtomicAnnotation(Element element) {
 
 /// Returns set of AnnotationKinds if the annotation is a subclass of
 /// Finder, Checker, and/or Filter.
-Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
-  final returnSet = <AnnotationKind>{};
+Set<AnnotationKind?> evaluateAsInterfaceAnnotation(Element element) {
+  final returnSet = <AnnotationKind?>{};
 
-  DartType type;
+  DartType? type;
   if (element is PropertyAccessorElement && element.isGetter) {
     type = element.returnType;
   } else if (element is ConstructorElement) {
@@ -54,7 +53,7 @@ Set<AnnotationKind> evaluateAsInterfaceAnnotation(Element element) {
   }
 
   if (type is InterfaceType) {
-    final seenValidAnnotations = <AnnotationKind>{};
+    final seenValidAnnotations = <AnnotationKind?>{};
     final interfaces = [type, ...type.allSupertypes];
     for (var interface in interfaces) {
       final interfaceElement = interface.element;
@@ -84,7 +83,7 @@ enum AnnotationKind {
 }
 
 /// Maps library and className to proper AnnotationKind.
-AnnotationKind classNameToAnnotationKind(String className, {bool isAtomic}) {
+AnnotationKind? classNameToAnnotationKind(String className, {required bool isAtomic}) {
   if (isAtomic) {
     switch (className) {
       case 'LegacyPageObject':

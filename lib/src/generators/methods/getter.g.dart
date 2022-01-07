@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of pageloader.getter;
 
@@ -13,10 +12,10 @@ class _$Getter extends Getter {
   @override
   final String returnType;
 
-  factory _$Getter([void Function(GetterBuilder) updates]) =>
+  factory _$Getter([void Function(GetterBuilder)? updates]) =>
       (new GetterBuilder()..update(updates)).build();
 
-  _$Getter._({this.name, this.returnType}) : super._() {
+  _$Getter._({required this.name, required this.returnType}) : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'Getter', 'name');
     BuiltValueNullFieldError.checkNotNull(returnType, 'Getter', 'returnType');
   }
@@ -51,15 +50,15 @@ class _$Getter extends Getter {
 }
 
 class GetterBuilder implements Builder<Getter, GetterBuilder> {
-  _$Getter _$v;
+  _$Getter? _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String _returnType;
-  String get returnType => _$this._returnType;
-  set returnType(String returnType) => _$this._returnType = returnType;
+  String? _returnType;
+  String? get returnType => _$this._returnType;
+  set returnType(String? returnType) => _$this._returnType = returnType;
 
   GetterBuilder();
 
@@ -80,7 +79,7 @@ class GetterBuilder implements Builder<Getter, GetterBuilder> {
   }
 
   @override
-  void update(void Function(GetterBuilder) updates) {
+  void update(void Function(GetterBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

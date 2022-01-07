@@ -2,6 +2,8 @@ analyzer:
   exclude:
     - lib/**/*.g.dart
     - test/**/*.g.dart
+  errors:
+    uri_has_not_been_generated: ignore
 
 linter:
   rules:

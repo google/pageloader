@@ -1,5 +1,3 @@
-// @dart = 2.9
-
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,12 +38,14 @@ final String pageObjectList = 'PageObjectList';
 
 /// Returns a declaration of a annotation.
 String generateAnnotationDeclaration(Annotation annotation) =>
-    '${annotation.name}(${annotation.arguments.arguments.join(", ")})';
+    '${annotation.name}(${annotation.arguments?.arguments.join(", ")})';
 
 /// Returns a 'ByTagName' declaration from the 'ByCheckTag' annotation.
 String generateByTagNameFromByCheckTag(
-    InterfaceType node, String methodSource) {
-  final defaultTagName = _extractTagName(node.element);
+    DartType? node, String methodSource) {
+	// Original(null-safety): node is InterfaceType and no "?"
+	// Also no cast below.
+  final defaultTagName = _extractTagName(node?.element as ClassElement);
   if (defaultTagName.isEmpty) {
     throw "'@ByCheckTag' can only be used on getters that return a "
         "PageObject type with the'@CheckTag' annotation.\n\nCheck the type on "
@@ -58,15 +58,15 @@ String generateByTagNameFromByCheckTag(
 /// If there is no tag name associated with the Page Object,
 /// returns and empty string.
 String _extractTagName(ClassElement poTypeElement) {
-  var expectedTag = '';
+  late String expectedTag;
   for (final annotation in poTypeElement.metadata) {
     final annotationElement = annotation.element;
     if (annotationElement is ConstructorElement) {
       final annotationName = annotationElement.enclosingElement.displayName;
       final annotationValue = annotation.computeConstantValue();
       if (annotationName == 'CheckTag') {
-        final inner = annotationValue.getField('_expectedTagName');
-        expectedTag = inner.toStringValue();
+        final inner = annotationValue?.getField('_expectedTagName');
+        expectedTag = inner?.toStringValue() ?? '';
       }
     }
   }
@@ -100,8 +100,8 @@ bool isPageloaderAnnotation(Annotation annotation) =>
     getAnnotationKind(annotation).isNotEmpty;
 
 /// Returns set of all Pageloader annotation the current annotation satisfies.
-Set<AnnotationKind> getAnnotationKind(Annotation annotation) {
-  final returnSet = <AnnotationKind>{};
+Set<AnnotationKind?> getAnnotationKind(Annotation annotation) {
+  final returnSet = <AnnotationKind?>{};
   final element = annotation.element;
   if (element != null) {
     returnSet
@@ -164,20 +164,21 @@ List<String> getReturnTypeArguments(String returnStr) {
 /// matching name [matchingType].
 ///
 /// Assumes that the inner-type has a single type (ex: not Foo<A, B>).
-DartType getInnerType(DartType topType, String matchingType) {
+DartType getInnerType(DartType? topType, String matchingType) {
   // Filter out type name incase prefixes exist on the type.
   matchingType =
       matchingType.contains('.') ? matchingType.split('.')[1] : matchingType;
   final typeArgs = (topType as ParameterizedType).typeArguments;
   final first = typeArgs.first;
-  if (first.name == matchingType) {
+	// TODO(null-safety): nullability: true or false?
+  if (first.getDisplayString(withNullability: true) == matchingType) {
     return first;
   }
   return getInnerType(first, matchingType);
 }
 
 /// Return the Dart code that corresponds to the [type].
-String typeToCode(DartType type) {
+String? typeToCode(DartType? type) {
   // TODO: This should be replaced with actual code generation.
-  return type?.getDisplayString(withNullability: false);
+  return type?.getDisplayString(withNullability: true);
 }

@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of pageloader.mouse_finder_method;
 
@@ -14,10 +13,11 @@ class _$MouseFinderMethod extends MouseFinderMethod {
   final String name;
 
   factory _$MouseFinderMethod(
-          [void Function(MouseFinderMethodBuilder) updates]) =>
+          [void Function(MouseFinderMethodBuilder)? updates]) =>
       (new MouseFinderMethodBuilder()..update(updates)).build();
 
-  _$MouseFinderMethod._({this.nullSafety, this.name}) : super._() {
+  _$MouseFinderMethod._({required this.nullSafety, required this.name})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
         nullSafety, 'MouseFinderMethod', 'nullSafety');
     BuiltValueNullFieldError.checkNotNull(name, 'MouseFinderMethod', 'name');
@@ -55,17 +55,17 @@ class _$MouseFinderMethod extends MouseFinderMethod {
 
 class MouseFinderMethodBuilder
     implements Builder<MouseFinderMethod, MouseFinderMethodBuilder> {
-  _$MouseFinderMethod _$v;
+  _$MouseFinderMethod? _$v;
 
-  NullSafetyBuilder _nullSafety;
+  NullSafetyBuilder? _nullSafety;
   NullSafetyBuilder get nullSafety =>
       _$this._nullSafety ??= new NullSafetyBuilder();
-  set nullSafety(NullSafetyBuilder nullSafety) =>
+  set nullSafety(NullSafetyBuilder? nullSafety) =>
       _$this._nullSafety = nullSafety;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
   MouseFinderMethodBuilder();
 
@@ -86,7 +86,7 @@ class MouseFinderMethodBuilder
   }
 
   @override
-  void update(void Function(MouseFinderMethodBuilder) updates) {
+  void update(void Function(MouseFinderMethodBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -100,7 +100,7 @@ class MouseFinderMethodBuilder
               name: BuiltValueNullFieldError.checkNotNull(
                   name, 'MouseFinderMethod', 'name'));
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'nullSafety';
         nullSafety.build();

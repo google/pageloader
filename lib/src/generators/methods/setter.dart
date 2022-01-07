@@ -1,5 +1,3 @@
-// @dart = 2.9
-
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,11 +26,11 @@ part 'setter.g.dart';
 /// Returns a [Setter] for concrete setters, and [absent()] otherwise.
 Optional<Setter> collectUnannotatedSetter(MethodDeclaration node) {
   if (!node.isAbstract && node.isSetter) {
-    final param = node.parameters.parameters.first;
+    final param = node.parameters?.parameters.first;
     return Optional.of(Setter((b) => b
       ..name = node.name.toString()
-      ..setterType = typeToCode(param.declaredElement.type)
-      ..setterValueName = param.declaredElement.name));
+      ..setterType = typeToCode(param?.declaredElement?.type)
+      ..setterValueName = param?.declaredElement?.name));
   }
   return Optional.absent();
 }

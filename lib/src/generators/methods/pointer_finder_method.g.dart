@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of pageloader.pointer_finder_method;
 
@@ -14,10 +13,11 @@ class _$PointerFinderMethod extends PointerFinderMethod {
   final String name;
 
   factory _$PointerFinderMethod(
-          [void Function(PointerFinderMethodBuilder) updates]) =>
+          [void Function(PointerFinderMethodBuilder)? updates]) =>
       (new PointerFinderMethodBuilder()..update(updates)).build();
 
-  _$PointerFinderMethod._({this.nullSafety, this.name}) : super._() {
+  _$PointerFinderMethod._({required this.nullSafety, required this.name})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
         nullSafety, 'PointerFinderMethod', 'nullSafety');
     BuiltValueNullFieldError.checkNotNull(name, 'PointerFinderMethod', 'name');
@@ -56,17 +56,17 @@ class _$PointerFinderMethod extends PointerFinderMethod {
 
 class PointerFinderMethodBuilder
     implements Builder<PointerFinderMethod, PointerFinderMethodBuilder> {
-  _$PointerFinderMethod _$v;
+  _$PointerFinderMethod? _$v;
 
-  NullSafetyBuilder _nullSafety;
+  NullSafetyBuilder? _nullSafety;
   NullSafetyBuilder get nullSafety =>
       _$this._nullSafety ??= new NullSafetyBuilder();
-  set nullSafety(NullSafetyBuilder nullSafety) =>
+  set nullSafety(NullSafetyBuilder? nullSafety) =>
       _$this._nullSafety = nullSafety;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
   PointerFinderMethodBuilder();
 
@@ -87,7 +87,7 @@ class PointerFinderMethodBuilder
   }
 
   @override
-  void update(void Function(PointerFinderMethodBuilder) updates) {
+  void update(void Function(PointerFinderMethodBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -101,7 +101,7 @@ class PointerFinderMethodBuilder
               name: BuiltValueNullFieldError.checkNotNull(
                   name, 'PointerFinderMethod', 'name'));
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'nullSafety';
         nullSafety.build();

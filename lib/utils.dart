@@ -157,3 +157,5 @@ class PageLoaderArgumentError extends ArgumentError {
           "'$f' must be called on PageObjects or 'PageLoaderElement' type. "
           "Currently being called on type '$actualType'.");
 }
+
+set() {}

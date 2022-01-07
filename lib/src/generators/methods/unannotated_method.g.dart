@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of pageloader.unannotated_method;
 
@@ -18,11 +17,14 @@ class _$UnannotatedMethod extends UnannotatedMethod {
   final Optional<TypeParameterList> typeParameters;
 
   factory _$UnannotatedMethod(
-          [void Function(UnannotatedMethodBuilder) updates]) =>
+          [void Function(UnannotatedMethodBuilder)? updates]) =>
       (new UnannotatedMethodBuilder()..update(updates)).build();
 
   _$UnannotatedMethod._(
-      {this.name, this.returnType, this.parameters, this.typeParameters})
+      {required this.name,
+      required this.returnType,
+      required this.parameters,
+      required this.typeParameters})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'UnannotatedMethod', 'name');
     BuiltValueNullFieldError.checkNotNull(
@@ -72,24 +74,24 @@ class _$UnannotatedMethod extends UnannotatedMethod {
 
 class UnannotatedMethodBuilder
     implements Builder<UnannotatedMethod, UnannotatedMethodBuilder> {
-  _$UnannotatedMethod _$v;
+  _$UnannotatedMethod? _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String _returnType;
-  String get returnType => _$this._returnType;
-  set returnType(String returnType) => _$this._returnType = returnType;
+  String? _returnType;
+  String? get returnType => _$this._returnType;
+  set returnType(String? returnType) => _$this._returnType = returnType;
 
-  List<FormalParameter> _parameters;
-  List<FormalParameter> get parameters => _$this._parameters;
-  set parameters(List<FormalParameter> parameters) =>
+  List<FormalParameter>? _parameters;
+  List<FormalParameter>? get parameters => _$this._parameters;
+  set parameters(List<FormalParameter>? parameters) =>
       _$this._parameters = parameters;
 
-  Optional<TypeParameterList> _typeParameters;
-  Optional<TypeParameterList> get typeParameters => _$this._typeParameters;
-  set typeParameters(Optional<TypeParameterList> typeParameters) =>
+  Optional<TypeParameterList>? _typeParameters;
+  Optional<TypeParameterList>? get typeParameters => _$this._typeParameters;
+  set typeParameters(Optional<TypeParameterList>? typeParameters) =>
       _$this._typeParameters = typeParameters;
 
   UnannotatedMethodBuilder();
@@ -113,7 +115,7 @@ class UnannotatedMethodBuilder
   }
 
   @override
-  void update(void Function(UnannotatedMethodBuilder) updates) {
+  void update(void Function(UnannotatedMethodBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

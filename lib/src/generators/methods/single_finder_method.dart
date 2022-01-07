@@ -1,5 +1,3 @@
-// @dart = 2.9
-
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -67,7 +65,7 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
   var typeArgument = node.returnType.toString();
 
   // Get template, if it exists.
-  String templateType;
+  String? templateType;
   if (typeArgument.contains('<')) {
     final typeArguments = getReturnTypeArguments(typeArgument);
     if (typeArguments.length != 1) {
@@ -90,9 +88,9 @@ Optional<SingleFinderMethod> collectSingleFinderGetter(
     // Check to see if return type is expected [InterfaceType]. If not, then
     // this means there is an error in the original Dart file but we don't
     // throw an error here since it hides underlying Dart error.
-    if (node.returnType.type is InterfaceType) {
+    if (node.returnType?.type is InterfaceType) {
       finder = generateByTagNameFromByCheckTag(
-          node.returnType.type, node.toSource());
+          node.returnType?.type, node.toSource());
     }
   }
 

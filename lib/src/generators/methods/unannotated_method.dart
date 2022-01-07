@@ -1,5 +1,3 @@
-// @dart = 2.9
-
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,7 +35,7 @@ Optional<UnannotatedMethod> collectUnannotatedMethod(MethodDeclaration node) {
   return Optional.of(UnannotatedMethod((b) => b
     ..name = node.name.toString()
     ..returnType = node.returnType.toString()
-    ..parameters = node.parameters.parameters
+    ..parameters = node.parameters?.parameters
     ..typeParameters = Optional.fromNullable(node.typeParameters)));
 }
 
@@ -106,17 +104,17 @@ abstract class UnannotatedMethod
   String get _parameterNames {
     final required = parameters
         .where((p) => p.isRequired && !p.isNamed)
-        .map((p) => p.declaredElement.name)
+        .map((p) => p.declaredElement?.name)
         .join(', ');
 
     final named = parameters
         .where((p) => p.isNamed)
-        .map((p) => '${p.declaredElement.name}:${p.declaredElement.name}')
+        .map((p) => '${p.declaredElement?.name}:${p.declaredElement?.name}')
         .join(', ');
 
     final positional = parameters
         .where((p) => p.isOptionalPositional)
-        .map((p) => p.declaredElement.name)
+        .map((p) => p.declaredElement?.name)
         .join(', ');
 
     return _combineParameters(required, named, positional);

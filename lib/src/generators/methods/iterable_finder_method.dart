@@ -1,5 +1,3 @@
-// @dart = 2.9
-
 // Copyright 2017 Google Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,6 +15,7 @@
 library pageloader.iterable_finder_method;
 
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/core.dart';
 
@@ -38,7 +37,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
     return Optional.absent();
   }
 
-  String finder;
+  String? finder;
   final filters = <String>[];
   final checkers = <String>[];
   for (final annotation in methodAnnotations) {
@@ -66,8 +65,9 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
 
   // Convert 'ByCheckTag' to 'ByTagName' if necessary.
   if (finder != null && finder.contains('ByCheckTag')) {
+		// TODO(null-safety): does casting from `DartType` to `InterfaceType` work?
     finder = generateByTagNameFromByCheckTag(
-        getInnerType(node.returnType.type, typeArguments[0]), node.toSource());
+        getInnerType(node.returnType?.type, typeArguments[0]) as InterfaceType, node.toSource());
   }
 
   if (finder == null) {
@@ -82,7 +82,7 @@ Optional<IterableFinderMethod> collectIterableFinderGetter(
     return Optional.of(IterableFinderMethod((b) => b
       ..name = node.name.toString()
       ..iterableTypeArgument = typeArguments[0]
-      ..finderDeclaration = finder
+      ..finderDeclaration = finder // Should be resolved by built_value
       ..filterDeclarations = '[${filters.join(', ')}]'
       ..checkerDeclarations = '[${checkers.join(', ')}]'));
   }

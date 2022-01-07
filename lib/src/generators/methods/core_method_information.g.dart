@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of pageloader.core_method_information;
 
@@ -13,10 +12,11 @@ class _$TypeInformation extends TypeInformation {
   @override
   final List<TypeInformation> typeArguments;
 
-  factory _$TypeInformation([void Function(TypeInformationBuilder) updates]) =>
+  factory _$TypeInformation([void Function(TypeInformationBuilder)? updates]) =>
       (new TypeInformationBuilder()..update(updates)).build();
 
-  _$TypeInformation._({this.type, this.typeArguments}) : super._() {
+  _$TypeInformation._({required this.type, required this.typeArguments})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(type, 'TypeInformation', 'type');
     BuiltValueNullFieldError.checkNotNull(
         typeArguments, 'TypeInformation', 'typeArguments');
@@ -54,15 +54,15 @@ class _$TypeInformation extends TypeInformation {
 
 class TypeInformationBuilder
     implements Builder<TypeInformation, TypeInformationBuilder> {
-  _$TypeInformation _$v;
+  _$TypeInformation? _$v;
 
-  String _type;
-  String get type => _$this._type;
-  set type(String type) => _$this._type = type;
+  String? _type;
+  String? get type => _$this._type;
+  set type(String? type) => _$this._type = type;
 
-  List<TypeInformation> _typeArguments;
-  List<TypeInformation> get typeArguments => _$this._typeArguments;
-  set typeArguments(List<TypeInformation> typeArguments) =>
+  List<TypeInformation>? _typeArguments;
+  List<TypeInformation>? get typeArguments => _$this._typeArguments;
+  set typeArguments(List<TypeInformation>? typeArguments) =>
       _$this._typeArguments = typeArguments;
 
   TypeInformationBuilder();
@@ -84,7 +84,7 @@ class TypeInformationBuilder
   }
 
   @override
-  void update(void Function(TypeInformationBuilder) updates) {
+  void update(void Function(TypeInformationBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -136,26 +136,26 @@ class _$CoreMethodInformation extends CoreMethodInformation {
   final AstNode node;
 
   factory _$CoreMethodInformation(
-          [void Function(CoreMethodInformationBuilder) updates]) =>
+          [void Function(CoreMethodInformationBuilder)? updates]) =>
       (new CoreMethodInformationBuilder()..update(updates)).build();
 
   _$CoreMethodInformation._(
-      {this.name,
-      this.isGetter,
-      this.isAbstract,
-      this.pageObjectType,
-      this.pageObjectTemplate,
-      this.isFuture,
-      this.isList,
-      this.isMouse,
-      this.isPointer,
-      this.finder,
-      this.filters,
-      this.checkers,
-      this.isRoot,
-      this.isNullElement,
-      this.nodeSource,
-      this.node})
+      {required this.name,
+      required this.isGetter,
+      required this.isAbstract,
+      required this.pageObjectType,
+      required this.pageObjectTemplate,
+      required this.isFuture,
+      required this.isList,
+      required this.isMouse,
+      required this.isPointer,
+      required this.finder,
+      required this.filters,
+      required this.checkers,
+      required this.isRoot,
+      required this.isNullElement,
+      required this.nodeSource,
+      required this.node})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         name, 'CoreMethodInformation', 'name');
@@ -291,75 +291,75 @@ class CoreMethodInformationBuilder
     implements
         Builder<CoreMethodInformation, CoreMethodInformationBuilder>,
         CoreMethodInformationBaseBuilder {
-  _$CoreMethodInformation _$v;
+  _$CoreMethodInformation? _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(covariant String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(covariant String? name) => _$this._name = name;
 
-  bool _isGetter;
-  bool get isGetter => _$this._isGetter;
-  set isGetter(covariant bool isGetter) => _$this._isGetter = isGetter;
+  bool? _isGetter;
+  bool? get isGetter => _$this._isGetter;
+  set isGetter(covariant bool? isGetter) => _$this._isGetter = isGetter;
 
-  bool _isAbstract;
-  bool get isAbstract => _$this._isAbstract;
-  set isAbstract(covariant bool isAbstract) => _$this._isAbstract = isAbstract;
+  bool? _isAbstract;
+  bool? get isAbstract => _$this._isAbstract;
+  set isAbstract(covariant bool? isAbstract) => _$this._isAbstract = isAbstract;
 
-  String _pageObjectType;
-  String get pageObjectType => _$this._pageObjectType;
-  set pageObjectType(covariant String pageObjectType) =>
+  String? _pageObjectType;
+  String? get pageObjectType => _$this._pageObjectType;
+  set pageObjectType(covariant String? pageObjectType) =>
       _$this._pageObjectType = pageObjectType;
 
-  Optional<String> _pageObjectTemplate;
-  Optional<String> get pageObjectTemplate => _$this._pageObjectTemplate;
-  set pageObjectTemplate(covariant Optional<String> pageObjectTemplate) =>
+  Optional<String>? _pageObjectTemplate;
+  Optional<String>? get pageObjectTemplate => _$this._pageObjectTemplate;
+  set pageObjectTemplate(covariant Optional<String>? pageObjectTemplate) =>
       _$this._pageObjectTemplate = pageObjectTemplate;
 
-  bool _isFuture;
-  bool get isFuture => _$this._isFuture;
-  set isFuture(covariant bool isFuture) => _$this._isFuture = isFuture;
+  bool? _isFuture;
+  bool? get isFuture => _$this._isFuture;
+  set isFuture(covariant bool? isFuture) => _$this._isFuture = isFuture;
 
-  bool _isList;
-  bool get isList => _$this._isList;
-  set isList(covariant bool isList) => _$this._isList = isList;
+  bool? _isList;
+  bool? get isList => _$this._isList;
+  set isList(covariant bool? isList) => _$this._isList = isList;
 
-  bool _isMouse;
-  bool get isMouse => _$this._isMouse;
-  set isMouse(covariant bool isMouse) => _$this._isMouse = isMouse;
+  bool? _isMouse;
+  bool? get isMouse => _$this._isMouse;
+  set isMouse(covariant bool? isMouse) => _$this._isMouse = isMouse;
 
-  bool _isPointer;
-  bool get isPointer => _$this._isPointer;
-  set isPointer(covariant bool isPointer) => _$this._isPointer = isPointer;
+  bool? _isPointer;
+  bool? get isPointer => _$this._isPointer;
+  set isPointer(covariant bool? isPointer) => _$this._isPointer = isPointer;
 
-  Optional<String> _finder;
-  Optional<String> get finder => _$this._finder;
-  set finder(covariant Optional<String> finder) => _$this._finder = finder;
+  Optional<String>? _finder;
+  Optional<String>? get finder => _$this._finder;
+  set finder(covariant Optional<String>? finder) => _$this._finder = finder;
 
-  List<String> _filters;
-  List<String> get filters => _$this._filters;
-  set filters(covariant List<String> filters) => _$this._filters = filters;
+  List<String>? _filters;
+  List<String>? get filters => _$this._filters;
+  set filters(covariant List<String>? filters) => _$this._filters = filters;
 
-  List<String> _checkers;
-  List<String> get checkers => _$this._checkers;
-  set checkers(covariant List<String> checkers) => _$this._checkers = checkers;
+  List<String>? _checkers;
+  List<String>? get checkers => _$this._checkers;
+  set checkers(covariant List<String>? checkers) => _$this._checkers = checkers;
 
-  bool _isRoot;
-  bool get isRoot => _$this._isRoot;
-  set isRoot(covariant bool isRoot) => _$this._isRoot = isRoot;
+  bool? _isRoot;
+  bool? get isRoot => _$this._isRoot;
+  set isRoot(covariant bool? isRoot) => _$this._isRoot = isRoot;
 
-  bool _isNullElement;
-  bool get isNullElement => _$this._isNullElement;
-  set isNullElement(covariant bool isNullElement) =>
+  bool? _isNullElement;
+  bool? get isNullElement => _$this._isNullElement;
+  set isNullElement(covariant bool? isNullElement) =>
       _$this._isNullElement = isNullElement;
 
-  String _nodeSource;
-  String get nodeSource => _$this._nodeSource;
-  set nodeSource(covariant String nodeSource) =>
+  String? _nodeSource;
+  String? get nodeSource => _$this._nodeSource;
+  set nodeSource(covariant String? nodeSource) =>
       _$this._nodeSource = nodeSource;
 
-  AstNode _node;
-  AstNode get node => _$this._node;
-  set node(covariant AstNode node) => _$this._node = node;
+  AstNode? _node;
+  AstNode? get node => _$this._node;
+  set node(covariant AstNode? node) => _$this._node = node;
 
   CoreMethodInformationBuilder();
 
@@ -394,7 +394,7 @@ class CoreMethodInformationBuilder
   }
 
   @override
-  void update(void Function(CoreMethodInformationBuilder) updates) {
+  void update(void Function(CoreMethodInformationBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -434,53 +434,53 @@ class CoreMethodInformationBuilder
 abstract class CoreMethodInformationBaseBuilder {
   void replace(CoreMethodInformationBase other);
   void update(void Function(CoreMethodInformationBaseBuilder) updates);
-  String get name;
-  set name(String name);
+  String? get name;
+  set name(String? name);
 
-  bool get isGetter;
-  set isGetter(bool isGetter);
+  bool? get isGetter;
+  set isGetter(bool? isGetter);
 
-  bool get isAbstract;
-  set isAbstract(bool isAbstract);
+  bool? get isAbstract;
+  set isAbstract(bool? isAbstract);
 
-  String get pageObjectType;
-  set pageObjectType(String pageObjectType);
+  String? get pageObjectType;
+  set pageObjectType(String? pageObjectType);
 
-  Optional<String> get pageObjectTemplate;
-  set pageObjectTemplate(Optional<String> pageObjectTemplate);
+  Optional<String>? get pageObjectTemplate;
+  set pageObjectTemplate(Optional<String>? pageObjectTemplate);
 
-  bool get isFuture;
-  set isFuture(bool isFuture);
+  bool? get isFuture;
+  set isFuture(bool? isFuture);
 
-  bool get isList;
-  set isList(bool isList);
+  bool? get isList;
+  set isList(bool? isList);
 
-  bool get isMouse;
-  set isMouse(bool isMouse);
+  bool? get isMouse;
+  set isMouse(bool? isMouse);
 
-  bool get isPointer;
-  set isPointer(bool isPointer);
+  bool? get isPointer;
+  set isPointer(bool? isPointer);
 
-  Optional<String> get finder;
-  set finder(Optional<String> finder);
+  Optional<String>? get finder;
+  set finder(Optional<String>? finder);
 
-  List<String> get filters;
-  set filters(List<String> filters);
+  List<String>? get filters;
+  set filters(List<String>? filters);
 
-  List<String> get checkers;
-  set checkers(List<String> checkers);
+  List<String>? get checkers;
+  set checkers(List<String>? checkers);
 
-  bool get isRoot;
-  set isRoot(bool isRoot);
+  bool? get isRoot;
+  set isRoot(bool? isRoot);
 
-  bool get isNullElement;
-  set isNullElement(bool isNullElement);
+  bool? get isNullElement;
+  set isNullElement(bool? isNullElement);
 
-  String get nodeSource;
-  set nodeSource(String nodeSource);
+  String? get nodeSource;
+  set nodeSource(String? nodeSource);
 
-  AstNode get node;
-  set node(AstNode node);
+  AstNode? get node;
+  set node(AstNode? node);
 }
 
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

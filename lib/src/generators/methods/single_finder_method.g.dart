@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of pageloader.single_finder_method;
 
@@ -26,18 +25,18 @@ class _$SingleFinderMethod extends SingleFinderMethod {
   final bool isNullElement;
 
   factory _$SingleFinderMethod(
-          [void Function(SingleFinderMethodBuilder) updates]) =>
+          [void Function(SingleFinderMethodBuilder)? updates]) =>
       (new SingleFinderMethodBuilder()..update(updates)).build();
 
   _$SingleFinderMethod._(
-      {this.name,
-      this.pageObjectType,
-      this.finderDeclaration,
-      this.filterDeclarations,
-      this.checkerDeclarations,
-      this.templateType,
-      this.isRoot,
-      this.isNullElement})
+      {required this.name,
+      required this.pageObjectType,
+      required this.finderDeclaration,
+      required this.filterDeclarations,
+      required this.checkerDeclarations,
+      required this.templateType,
+      required this.isRoot,
+      required this.isNullElement})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'SingleFinderMethod', 'name');
     BuiltValueNullFieldError.checkNotNull(
@@ -114,44 +113,44 @@ class SingleFinderMethodBuilder
     implements
         Builder<SingleFinderMethod, SingleFinderMethodBuilder>,
         SingleFinderMethodBaseBuilder {
-  _$SingleFinderMethod _$v;
+  _$SingleFinderMethod? _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(covariant String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(covariant String? name) => _$this._name = name;
 
-  String _pageObjectType;
-  String get pageObjectType => _$this._pageObjectType;
-  set pageObjectType(covariant String pageObjectType) =>
+  String? _pageObjectType;
+  String? get pageObjectType => _$this._pageObjectType;
+  set pageObjectType(covariant String? pageObjectType) =>
       _$this._pageObjectType = pageObjectType;
 
-  Optional<String> _finderDeclaration;
-  Optional<String> get finderDeclaration => _$this._finderDeclaration;
-  set finderDeclaration(covariant Optional<String> finderDeclaration) =>
+  Optional<String>? _finderDeclaration;
+  Optional<String>? get finderDeclaration => _$this._finderDeclaration;
+  set finderDeclaration(covariant Optional<String>? finderDeclaration) =>
       _$this._finderDeclaration = finderDeclaration;
 
-  String _filterDeclarations;
-  String get filterDeclarations => _$this._filterDeclarations;
-  set filterDeclarations(covariant String filterDeclarations) =>
+  String? _filterDeclarations;
+  String? get filterDeclarations => _$this._filterDeclarations;
+  set filterDeclarations(covariant String? filterDeclarations) =>
       _$this._filterDeclarations = filterDeclarations;
 
-  String _checkerDeclarations;
-  String get checkerDeclarations => _$this._checkerDeclarations;
-  set checkerDeclarations(covariant String checkerDeclarations) =>
+  String? _checkerDeclarations;
+  String? get checkerDeclarations => _$this._checkerDeclarations;
+  set checkerDeclarations(covariant String? checkerDeclarations) =>
       _$this._checkerDeclarations = checkerDeclarations;
 
-  Optional<String> _templateType;
-  Optional<String> get templateType => _$this._templateType;
-  set templateType(covariant Optional<String> templateType) =>
+  Optional<String>? _templateType;
+  Optional<String>? get templateType => _$this._templateType;
+  set templateType(covariant Optional<String>? templateType) =>
       _$this._templateType = templateType;
 
-  bool _isRoot;
-  bool get isRoot => _$this._isRoot;
-  set isRoot(covariant bool isRoot) => _$this._isRoot = isRoot;
+  bool? _isRoot;
+  bool? get isRoot => _$this._isRoot;
+  set isRoot(covariant bool? isRoot) => _$this._isRoot = isRoot;
 
-  bool _isNullElement;
-  bool get isNullElement => _$this._isNullElement;
-  set isNullElement(covariant bool isNullElement) =>
+  bool? _isNullElement;
+  bool? get isNullElement => _$this._isNullElement;
+  set isNullElement(covariant bool? isNullElement) =>
       _$this._isNullElement = isNullElement;
 
   SingleFinderMethodBuilder();
@@ -179,7 +178,7 @@ class SingleFinderMethodBuilder
   }
 
   @override
-  void update(void Function(SingleFinderMethodBuilder) updates) {
+  void update(void Function(SingleFinderMethodBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -211,29 +210,29 @@ class SingleFinderMethodBuilder
 abstract class SingleFinderMethodBaseBuilder {
   void replace(SingleFinderMethodBase other);
   void update(void Function(SingleFinderMethodBaseBuilder) updates);
-  String get name;
-  set name(String name);
+  String? get name;
+  set name(String? name);
 
-  String get pageObjectType;
-  set pageObjectType(String pageObjectType);
+  String? get pageObjectType;
+  set pageObjectType(String? pageObjectType);
 
-  Optional<String> get finderDeclaration;
-  set finderDeclaration(Optional<String> finderDeclaration);
+  Optional<String>? get finderDeclaration;
+  set finderDeclaration(Optional<String>? finderDeclaration);
 
-  String get filterDeclarations;
-  set filterDeclarations(String filterDeclarations);
+  String? get filterDeclarations;
+  set filterDeclarations(String? filterDeclarations);
 
-  String get checkerDeclarations;
-  set checkerDeclarations(String checkerDeclarations);
+  String? get checkerDeclarations;
+  set checkerDeclarations(String? checkerDeclarations);
 
-  Optional<String> get templateType;
-  set templateType(Optional<String> templateType);
+  Optional<String>? get templateType;
+  set templateType(Optional<String>? templateType);
 
-  bool get isRoot;
-  set isRoot(bool isRoot);
+  bool? get isRoot;
+  set isRoot(bool? isRoot);
 
-  bool get isNullElement;
-  set isNullElement(bool isNullElement);
+  bool? get isNullElement;
+  set isNullElement(bool? isNullElement);
 }
 
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

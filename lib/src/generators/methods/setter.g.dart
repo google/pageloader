@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
 
 part of pageloader.setter;
 
@@ -15,10 +14,14 @@ class _$Setter extends Setter {
   @override
   final String setterValueName;
 
-  factory _$Setter([void Function(SetterBuilder) updates]) =>
+  factory _$Setter([void Function(SetterBuilder)? updates]) =>
       (new SetterBuilder()..update(updates)).build();
 
-  _$Setter._({this.name, this.setterType, this.setterValueName}) : super._() {
+  _$Setter._(
+      {required this.name,
+      required this.setterType,
+      required this.setterValueName})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'Setter', 'name');
     BuiltValueNullFieldError.checkNotNull(setterType, 'Setter', 'setterType');
     BuiltValueNullFieldError.checkNotNull(
@@ -58,19 +61,19 @@ class _$Setter extends Setter {
 }
 
 class SetterBuilder implements Builder<Setter, SetterBuilder> {
-  _$Setter _$v;
+  _$Setter? _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String _setterType;
-  String get setterType => _$this._setterType;
-  set setterType(String setterType) => _$this._setterType = setterType;
+  String? _setterType;
+  String? get setterType => _$this._setterType;
+  set setterType(String? setterType) => _$this._setterType = setterType;
 
-  String _setterValueName;
-  String get setterValueName => _$this._setterValueName;
-  set setterValueName(String setterValueName) =>
+  String? _setterValueName;
+  String? get setterValueName => _$this._setterValueName;
+  set setterValueName(String? setterValueName) =>
       _$this._setterValueName = setterValueName;
 
   SetterBuilder();
@@ -93,7 +96,7 @@ class SetterBuilder implements Builder<Setter, SetterBuilder> {
   }
 
   @override
-  void update(void Function(SetterBuilder) updates) {
+  void update(void Function(SetterBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
