@@ -98,7 +98,7 @@ class $PageForFindChainTests extends PageForFindChainTests
 }
 
 mixin $$PageForFindChainTests on PageForFindChainTests {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForFindChainTests() {
     return {};
@@ -366,7 +366,7 @@ class $CustomPO extends CustomPO with $$CustomPO {
 }
 
 mixin $$CustomPO on CustomPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCustomPO() {
     return {};
@@ -493,7 +493,7 @@ class $OuterPO extends OuterPO with $$OuterMixin, $$OuterPO {
 }
 
 mixin $$OuterPO on OuterPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInOuterPO() {
     return {};
@@ -584,7 +584,7 @@ mixin $$OuterPO on OuterPO {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$OuterMixin on OuterMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInOuterMixin() {
     return {};
@@ -720,7 +720,7 @@ class $TablePO extends TablePO with $$TablePO {
 }
 
 mixin $$TablePO on TablePO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTablePO() {
     return {};
@@ -856,7 +856,7 @@ class $RowPO extends RowPO with $$RowPO {
 }
 
 mixin $$RowPO on RowPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRowPO() {
     return {};

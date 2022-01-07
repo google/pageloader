@@ -128,7 +128,7 @@ class $PageObjectHasGettersAndMethods extends PageObjectHasGettersAndMethods
 }
 
 mixin $$PageObjectHasGettersAndMethods on PageObjectHasGettersAndMethods {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectHasGettersAndMethods() {
     return {
@@ -389,7 +389,7 @@ class $PageObjectHasGettersAndMethodsWithMixin
 
 mixin $$PageObjectHasGettersAndMethodsWithMixin
     on PageObjectHasGettersAndMethodsWithMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String>
       testCreatorGettersInPageObjectHasGettersAndMethodsWithMixin() {
@@ -502,7 +502,7 @@ mixin $$PageObjectHasGettersAndMethodsWithMixin
 
 mixin $$PageObjectMixinHasGettersAndMethods
     on PageObjectMixinHasGettersAndMethods {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String>
       testCreatorGettersInPageObjectMixinHasGettersAndMethods() {
@@ -616,7 +616,7 @@ mixin $$PageObjectMixinHasGettersAndMethods
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$RightMostPageObjectMixin on RightMostPageObjectMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRightMostPageObjectMixin() {
     return {};

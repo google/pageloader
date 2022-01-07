@@ -84,7 +84,7 @@ class $Lists extends Lists with $$Lists {
 }
 
 mixin $$Lists on Lists {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInLists() {
     return {};
@@ -337,7 +337,7 @@ class $InnerListObject extends InnerListObject with $$InnerListObject {
 }
 
 mixin $$InnerListObject on InnerListObject {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerListObject() {
     return {};
@@ -496,7 +496,7 @@ class $ListsUsingMixin extends ListsUsingMixin
 }
 
 mixin $$ListsUsingMixin on ListsUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInListsUsingMixin() {
     return {};
@@ -528,7 +528,7 @@ mixin $$ListsUsingMixin on ListsUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ListsMixin on ListsMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInListsMixin() {
     return {};
@@ -797,7 +797,7 @@ class $InnerListObjectUsingMixin extends InnerListObjectUsingMixin
 }
 
 mixin $$InnerListObjectUsingMixin on InnerListObjectUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerListObjectUsingMixin() {
     return {};
@@ -829,7 +829,7 @@ mixin $$InnerListObjectUsingMixin on InnerListObjectUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$InnerListObjectMixin on InnerListObjectMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInInnerListObjectMixin() {
     return {};

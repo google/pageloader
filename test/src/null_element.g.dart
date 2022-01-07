@@ -107,7 +107,7 @@ class $BasePO extends BasePO with $$BasePO {
 }
 
 mixin $$BasePO on BasePO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBasePO() {
     return {
@@ -433,7 +433,7 @@ class $ButtonPO extends ButtonPO with $$ButtonPO {
 }
 
 mixin $$ButtonPO on ButtonPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInButtonPO() {
     return {};
@@ -536,7 +536,7 @@ class $RowPO extends RowPO with $$RowPO {
 }
 
 mixin $$RowPO on RowPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRowPO() {
     return {};

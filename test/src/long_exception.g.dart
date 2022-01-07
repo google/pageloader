@@ -85,7 +85,7 @@ class $MyPageObject extends MyPageObject with $$MyPageObject {
 }
 
 mixin $$MyPageObject on MyPageObject {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMyPageObject() {
     return {};

@@ -12,7 +12,7 @@ part of 'class_checks.dart';
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ChecksMixin on ChecksMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInChecksMixin() {
     return {};
@@ -139,7 +139,7 @@ class $ClassChecks extends ClassChecks with $$ClassChecks {
 }
 
 mixin $$ClassChecks on ClassChecks {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassChecks() {
     return {};
@@ -267,7 +267,7 @@ class $EnsureTagChecks extends EnsureTagChecks with $$EnsureTagChecks {
 }
 
 mixin $$EnsureTagChecks on EnsureTagChecks {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEnsureTagChecks() {
     return {};
@@ -410,7 +410,7 @@ class $ClassChecksUsingClassMixin extends ClassChecksUsingClassMixin
 }
 
 mixin $$ClassChecksUsingClassMixin on ClassChecksUsingClassMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassChecksUsingClassMixin() {
     return {};
@@ -526,7 +526,7 @@ class $ClassChecksUsingMixin extends ClassChecksUsingMixin
 }
 
 mixin $$ClassChecksUsingMixin on ClassChecksUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassChecksUsingMixin() {
     return {};
@@ -644,7 +644,7 @@ class $EnsureTagChecksUsingMixin extends EnsureTagChecksUsingMixin
 }
 
 mixin $$EnsureTagChecksUsingMixin on EnsureTagChecksUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEnsureTagChecksUsingMixin() {
     return {};
@@ -676,7 +676,7 @@ mixin $$EnsureTagChecksUsingMixin on EnsureTagChecksUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ChecksClassMixin on ChecksClassMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInChecksClassMixin() {
     return {};

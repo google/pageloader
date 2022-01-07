@@ -96,7 +96,7 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 }
 
 mixin $$Generics<T> on Generics<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenerics() {
     return {};
@@ -204,7 +204,7 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
 }
 
 mixin $$RootPo<T> on RootPo<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPo() {
     return {};

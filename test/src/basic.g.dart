@@ -12,7 +12,7 @@ part of 'basic.dart';
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$MixinPO on MixinPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMixinPO() {
     return {
@@ -150,7 +150,7 @@ class $PageForExistsTest extends PageForExistsTest with $$PageForExistsTest {
 }
 
 mixin $$PageForExistsTest on PageForExistsTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForExistsTest() {
     return {};
@@ -332,7 +332,7 @@ class $PageForVisibilityTest extends PageForVisibilityTest
 }
 
 mixin $$PageForVisibilityTest on PageForVisibilityTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForVisibilityTest() {
     return {};
@@ -492,7 +492,7 @@ class $PageForClassAnnotationTest extends PageForClassAnnotationTest
 }
 
 mixin $$PageForClassAnnotationTest on PageForClassAnnotationTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForClassAnnotationTest() {
     return {};
@@ -637,7 +637,7 @@ class $PageForPrivateFieldsTest extends PageForPrivateFieldsTest
 }
 
 mixin $$PageForPrivateFieldsTest on PageForPrivateFieldsTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForPrivateFieldsTest() {
     return {};
@@ -781,7 +781,7 @@ class $PageForFocusTest extends PageForFocusTest with $$PageForFocusTest {
 }
 
 mixin $$PageForFocusTest on PageForFocusTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForFocusTest() {
     return {};
@@ -911,7 +911,7 @@ class $PageForNbspTest extends PageForNbspTest with $$PageForNbspTest {
 }
 
 mixin $$PageForNbspTest on PageForNbspTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForNbspTest() {
     return {};
@@ -1040,7 +1040,7 @@ class $Basic extends Basic with $$Basic {
 }
 
 mixin $$Basic on Basic {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBasic() {
     return {};
@@ -1172,7 +1172,7 @@ class $OuterNested extends OuterNested with $$OuterNested {
 }
 
 mixin $$OuterNested on OuterNested {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInOuterNested() {
     return {};
@@ -1302,7 +1302,7 @@ class $DebugId extends DebugId with $$DebugId {
 }
 
 mixin $$DebugId on DebugId {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInDebugId() {
     return {};
@@ -1431,7 +1431,7 @@ class $Display extends Display with $$Display {
 }
 
 mixin $$Display on Display {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInDisplay() {
     return {};
@@ -1487,7 +1487,7 @@ mixin $$Display on Display {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ClassMixinPO on ClassMixinPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassMixinPO() {
     return {
@@ -1639,7 +1639,7 @@ class $POWithClassMixinPO extends POWithClassMixinPO
 }
 
 mixin $$POWithClassMixinPO on POWithClassMixinPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPOWithClassMixinPO() {
     return {};
@@ -1756,7 +1756,7 @@ class $POWithMixinPO extends POWithMixinPO with $$MixinPO, $$POWithMixinPO {
 }
 
 mixin $$POWithMixinPO on POWithMixinPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPOWithMixinPO() {
     return {};

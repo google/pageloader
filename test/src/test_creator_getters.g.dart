@@ -126,7 +126,7 @@ class $PageObjectHasGettersAndActions extends PageObjectHasGettersAndActions
 }
 
 mixin $$PageObjectHasGettersAndActions on PageObjectHasGettersAndActions {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectHasGettersAndActions() {
     return {
@@ -323,7 +323,7 @@ class $PageObjectHasGettersThatUseDifferentReturnTypes
 
 mixin $$PageObjectHasGettersThatUseDifferentReturnTypes
     on PageObjectHasGettersThatUseDifferentReturnTypes {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String>
       testCreatorGettersInPageObjectHasGettersThatUseDifferentReturnTypes() {
@@ -518,7 +518,7 @@ class $PageObjectHasNoGetters extends PageObjectHasNoGetters
 }
 
 mixin $$PageObjectHasNoGetters on PageObjectHasNoGetters {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectHasNoGetters() {
     return {};
@@ -690,7 +690,7 @@ class $PageObjectWithMixin extends PageObjectWithMixin
 }
 
 mixin $$PageObjectWithMixin on PageObjectWithMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectWithMixin() {
     return {
@@ -756,7 +756,7 @@ mixin $$PageObjectWithMixin on PageObjectWithMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$PageObjectMixin on PageObjectMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectMixin() {
     return {
@@ -924,7 +924,7 @@ class $PageObjectWithOverridingMixins extends PageObjectWithOverridingMixins
 }
 
 mixin $$PageObjectWithOverridingMixins on PageObjectWithOverridingMixins {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageObjectWithOverridingMixins() {
     return {

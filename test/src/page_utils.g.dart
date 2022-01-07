@@ -87,7 +87,7 @@ class $PageForPageUtilsTests extends PageForPageUtilsTests
 }
 
 mixin $$PageForPageUtilsTests on PageForPageUtilsTests {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForPageUtilsTests() {
     return {};

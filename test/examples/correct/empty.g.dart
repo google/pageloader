@@ -84,7 +84,7 @@ class $Empty extends Empty with $$Empty {
 }
 
 mixin $$Empty on Empty {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEmpty() {
     return {};
@@ -115,7 +115,7 @@ mixin $$Empty on Empty {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$EmptyMixin on EmptyMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEmptyMixin() {
     return {};

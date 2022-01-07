@@ -85,7 +85,7 @@ class $WebDriverOnly extends WebDriverOnly with $$WebDriverOnly {
 }
 
 mixin $$WebDriverOnly on WebDriverOnly {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInWebDriverOnly() {
     return {};

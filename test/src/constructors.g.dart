@@ -85,7 +85,7 @@ class $BasePO extends BasePO with $$BasePO {
 }
 
 mixin $$BasePO on BasePO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBasePO() {
     return {};
@@ -269,7 +269,7 @@ class $BCustomTagPO extends BCustomTagPO with $$BCustomTagPO {
 }
 
 mixin $$BCustomTagPO on BCustomTagPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBCustomTagPO() {
     return {};
@@ -469,7 +469,7 @@ class $CCustomTagPO extends CCustomTagPO with $$CCustomTagPO {
 }
 
 mixin $$CCustomTagPO on CCustomTagPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCCustomTagPO() {
     return {
@@ -601,7 +601,7 @@ class $NoLookupPO extends NoLookupPO with $$NoLookupPO {
 }
 
 mixin $$NoLookupPO on NoLookupPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNoLookupPO() {
     return {};
