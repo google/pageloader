@@ -118,7 +118,7 @@ class $ScrollPO extends ScrollPO with $$ScrollPO {
 }
 
 mixin $$ScrollPO on ScrollPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInScrollPO() {
     return {

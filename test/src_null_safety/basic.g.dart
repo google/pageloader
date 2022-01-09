@@ -9,71 +9,6 @@ part of 'basic.dart';
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
-
-mixin $$MixinPO on MixinPO {
-  late PageLoaderElement $__root__;
-  PageLoaderElement get $root => $__root__;
-  Map<String, String> testCreatorGettersInMixinPO() {
-    return {
-      'mixinDivText': 'String',
-      'getterMessage': 'String',
-    };
-  }
-
-  Map<String, List<Map<String, String?>>> testCreatorMethodsInMixinPO() {
-    return {};
-  }
-
-  dynamic testCreatorInvokeMethodInMixinPO(
-      String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic>? namedArguments]) {
-    if (methodName == 'mixinDivText') {
-      return mixinDivText;
-    }
-    if (methodName == 'getterMessage') {
-      return getterMessage;
-    }
-    if (methodName == 'methodMessage') {
-      return Function.apply(methodMessage, positionalArguments, namedArguments);
-    }
-    throw 'METHOD NOT FOUND. This method'
-        ' failed to be generated during test creator codegen.';
-  }
-
-  Map<int, String Function(List<String>)?> findChainInMixinPO(
-      List<String> internalIds,
-      [String action = 'default']) {
-    var closestIndex = internalIds.length;
-    String Function(List<String>)? closestValue;
-    try {
-      var _mixinDivIndex = internalIds.indexOf(this._mixinDiv.id);
-      if (_mixinDivIndex >= 0 && _mixinDivIndex < closestIndex) {
-        closestIndex = _mixinDivIndex;
-        closestValue = (_) =>
-            '_mixinDiv.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
-      }
-    } catch (_) {
-      // Ignored.
-    }
-    return {closestIndex: closestValue};
-  }
-
-  PageLoaderElement get _mixinDiv {
-    for (final __listener in $__root__.listeners) {
-      __listener.startPageObjectMethod('MixinPO', '_mixinDiv');
-    }
-    final element = $__root__.createElement(ById('mixin-div'), [], []);
-    final returnMe = element;
-    for (final __listener in $__root__.listeners) {
-      __listener.endPageObjectMethod('MixinPO', '_mixinDiv');
-    }
-    return returnMe;
-  }
-}
-
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $PageForExistsTest extends PageForExistsTest with $$PageForExistsTest {
   PageLoaderElement $__root__;
   $PageForExistsTest.create(PageLoaderElement currentContext)
@@ -1764,5 +1699,70 @@ mixin $$POWithMixinPO on POWithMixinPO {
     var closestIndex = internalIds.length;
     String Function(List<String>)? closestValue;
     return {closestIndex: closestValue};
+  }
+}
+
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
+
+mixin $$MixinPO on MixinPO {
+  late PageLoaderElement $__root__;
+  PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInMixinPO() {
+    return {
+      'mixinDivText': 'String',
+      'getterMessage': 'String',
+    };
+  }
+
+  Map<String, List<Map<String, String?>>> testCreatorMethodsInMixinPO() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInMixinPO(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic>? namedArguments]) {
+    if (methodName == 'mixinDivText') {
+      return mixinDivText;
+    }
+    if (methodName == 'getterMessage') {
+      return getterMessage;
+    }
+    if (methodName == 'methodMessage') {
+      return Function.apply(methodMessage, positionalArguments, namedArguments);
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>)?> findChainInMixinPO(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>)? closestValue;
+    try {
+      var _mixinDivIndex = internalIds.indexOf(this._mixinDiv.id);
+      if (_mixinDivIndex >= 0 && _mixinDivIndex < closestIndex) {
+        closestIndex = _mixinDivIndex;
+        closestValue = (_) =>
+            '_mixinDiv.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    return {closestIndex: closestValue};
+  }
+
+  PageLoaderElement get _mixinDiv {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('MixinPO', '_mixinDiv');
+    }
+    final element = $__root__.createElement(ById('mixin-div'), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('MixinPO', '_mixinDiv');
+    }
+    return returnMe;
   }
 }

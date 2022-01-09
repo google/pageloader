@@ -85,7 +85,7 @@ class $MouseObject extends MouseObject with $$MouseObject {
 }
 
 mixin $$MouseObject on MouseObject {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderMouse /*?*/ __mouse__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMouseObject() {
@@ -217,7 +217,7 @@ class $MouseObjectUsingMixin extends MouseObjectUsingMixin
 }
 
 mixin $$MouseObjectUsingMixin on MouseObjectUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMouseObjectUsingMixin() {
     return {};
@@ -249,7 +249,7 @@ mixin $$MouseObjectUsingMixin on MouseObjectUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$MouseObjectMixin on MouseObjectMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderMouse /*?*/ __mouse__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInMouseObjectMixin() {

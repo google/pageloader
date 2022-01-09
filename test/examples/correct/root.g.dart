@@ -85,7 +85,7 @@ class $ParentRoot extends ParentRoot with $$ParentRoot {
 }
 
 mixin $$ParentRoot on ParentRoot {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRoot() {
     return {};
@@ -215,7 +215,7 @@ class $Root extends Root with $$Root {
 }
 
 mixin $$Root on Root {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRoot() {
     return {};
@@ -383,7 +383,7 @@ class $ParentRootUsingMixin extends ParentRootUsingMixin
 }
 
 mixin $$ParentRootUsingMixin on ParentRootUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRootUsingMixin() {
     return {};
@@ -415,7 +415,7 @@ mixin $$ParentRootUsingMixin on ParentRootUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ParentRootMixin on ParentRootMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParentRootMixin() {
     return {};
@@ -559,7 +559,7 @@ class $RootUsingMixin extends RootUsingMixin
 }
 
 mixin $$RootUsingMixin on RootUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootUsingMixin() {
     return {};
@@ -591,7 +591,7 @@ mixin $$RootUsingMixin on RootUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$RootMixin on RootMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootMixin() {
     return {};

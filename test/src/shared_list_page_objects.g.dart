@@ -85,7 +85,7 @@ class $PageForSimpleTest extends PageForSimpleTest with $$PageForSimpleTest {
 }
 
 mixin $$PageForSimpleTest on PageForSimpleTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForSimpleTest() {
     return {};
@@ -240,7 +240,7 @@ class $Table extends Table with $$Table {
 }
 
 mixin $$Table on Table {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTable() {
     return {};
@@ -418,7 +418,7 @@ class $Row extends Row with $$Row {
 }
 
 mixin $$Row on Row {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRow() {
     return {};

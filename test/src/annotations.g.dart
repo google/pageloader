@@ -85,7 +85,7 @@ class $BaseObject extends BaseObject with $$BaseObject {
 }
 
 mixin $$BaseObject on BaseObject {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBaseObject() {
     return {};
@@ -298,7 +298,7 @@ class $PseudoBaseObject extends PseudoBaseObject with $$PseudoBaseObject {
 }
 
 mixin $$PseudoBaseObject on PseudoBaseObject {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPseudoBaseObject() {
     return {};
@@ -480,7 +480,7 @@ class $TableForCheckTag extends TableForCheckTag with $$TableForCheckTag {
 }
 
 mixin $$TableForCheckTag on TableForCheckTag {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTableForCheckTag() {
     return {};
@@ -651,7 +651,7 @@ class $BaseEnsureObject extends BaseEnsureObject with $$BaseEnsureObject {
 }
 
 mixin $$BaseEnsureObject on BaseEnsureObject {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBaseEnsureObject() {
     return {};
@@ -807,7 +807,7 @@ class $TableForEnsureTag extends TableForEnsureTag with $$TableForEnsureTag {
 }
 
 mixin $$TableForEnsureTag on TableForEnsureTag {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTableForEnsureTag() {
     return {};
@@ -950,7 +950,7 @@ class $CheckTagFails extends CheckTagFails with $$CheckTagFails {
 }
 
 mixin $$CheckTagFails on CheckTagFails {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCheckTagFails() {
     return {};
@@ -1078,7 +1078,7 @@ class $EnsureTagFails extends EnsureTagFails with $$EnsureTagFails {
 }
 
 mixin $$EnsureTagFails on EnsureTagFails {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInEnsureTagFails() {
     return {};
@@ -1211,7 +1211,7 @@ class $PageForWithAttributeTest extends PageForWithAttributeTest
 }
 
 mixin $$PageForWithAttributeTest on PageForWithAttributeTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForWithAttributeTest() {
     return {};
@@ -1344,7 +1344,7 @@ class $PageForWithClassTest extends PageForWithClassTest
 }
 
 mixin $$PageForWithClassTest on PageForWithClassTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForWithClassTest() {
     return {};
@@ -1475,7 +1475,7 @@ class $DebugIds extends DebugIds with $$DebugIds {
 }
 
 mixin $$DebugIds on DebugIds {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInDebugIds() {
     return {};
@@ -1732,7 +1732,7 @@ class $TestIds extends TestIds with $$TestIds {
 }
 
 mixin $$TestIds on TestIds {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInTestIds() {
     return {};

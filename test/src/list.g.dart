@@ -84,7 +84,7 @@ class $Lists extends Lists with $$Lists {
 }
 
 mixin $$Lists on Lists {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInLists() {
     return {};
@@ -279,7 +279,7 @@ class $RowPO extends RowPO with $$RowPO {
 }
 
 mixin $$RowPO on RowPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRowPO() {
     return {
