@@ -23,7 +23,7 @@ late HtmlMouse _globalMouse;
 SyncFn<dynamic>? _cachedSyncFn;
 
 /// Returns the globally used [HtmlMouse] in Html based tests.
-HtmlMouse globalMouse(SyncFn<dynamic> syncFn) {
+HtmlMouse globalMouse(SyncFn<dynamic>? syncFn) {
   assert(syncFn != null);
   // [SyncFn] may change based on when this function is called.
   // If it does change, we need to create a new [HtmlMouse] since this

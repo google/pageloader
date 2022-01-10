@@ -52,7 +52,7 @@ class PageObjectGenerator extends GeneratorForAnnotation<PageObject> {
         library = await resolver
             .libraryFor(await resolver.assetIdForElement(element.library));
         final session = library.session;
-        resolvedLibrary = await session.getResolvedLibraryByElement2(library)
+        resolvedLibrary = await session.getResolvedLibraryByElement(library)
             as ResolvedLibraryResult;
         break;
       } catch (_) {

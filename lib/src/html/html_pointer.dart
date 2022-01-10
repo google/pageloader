@@ -22,7 +22,7 @@ late HtmlPointer _globalPointer;
 SyncFn? _cachedSyncFn;
 
 /// Returns the globally used [HtmlPointer] in Html based tests.
-HtmlPointer globalPointer(SyncFn syncFn) {
+HtmlPointer globalPointer(SyncFn? syncFn) {
   assert(syncFn != null);
   // [SyncFn] may change based on when this function is called.
   // If it does change, we need to create a new [HtmlPointer] since this

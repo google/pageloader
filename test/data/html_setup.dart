@@ -120,7 +120,7 @@ html.Element setUp() {
       <div id="mixin-div">mixin div</div>
       <custom-events-element></custom-event-element>''';
 
-  final templateHtml = '<button id="inner">some <content></content></button>';
+  // final templateHtml = '<button id="inner">some <content></content></button>';
 
   final results =
       (body as html.Element).querySelectorAll('div[id=testdocument]');

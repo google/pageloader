@@ -33,7 +33,7 @@ core_tests=("test/core_method_information_test.dart" \
 
 for test in ${core_tests[@]}
 do
-  pub run test -r expanded "$test"
+  dart test -r expanded "$test"
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
@@ -50,7 +50,7 @@ test_creator_tests=("test/test_creator_getters_test.dart" \
                     "test/test_creator_methods_null_safety_test.dart")
 for test in ${test_creator_tests[@]}
 do
-  pub run test -r expanded "$test"
+  dart test -r expanded "$test"
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
@@ -63,7 +63,7 @@ html_tests="$(find test -type f -name "html_*_test.dart")"
 
 for test in ${html_tests[@]}
 do
-  pub run test -r expanded -p chrome "$test"
+  dart test -r expanded -p chrome "$test"
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS
@@ -81,7 +81,7 @@ wd_tests="$(find test -type f -name "webdriver_*_test.dart")"
 
 for test in ${wd_tests[@]}
 do
-  pub run test -r expanded -p vm "$test"
+  dart test -r expanded -p vm "$test"
   TEST_STATUS=$?
   if [[ $TEST_STATUS -ne 0 ]]; then
     STATUS=$TEST_STATUS

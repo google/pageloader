@@ -17,6 +17,6 @@
 # Fast fail the script on failures.
 set -e
 
-pub get
+dart pub get
 
-pub run build_runner build --delete-conflicting-outputs
+dart run build_runner build --delete-conflicting-outputs
