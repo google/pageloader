@@ -88,7 +88,7 @@ class $PageForCustomEventsTest extends PageForCustomEventsTest
 }
 
 mixin $$PageForCustomEventsTest on PageForCustomEventsTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForCustomEventsTest() {
     return {};

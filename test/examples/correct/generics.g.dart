@@ -107,7 +107,7 @@ class $Generics<T> extends Generics<T> with $$Generics<T> {
 }
 
 mixin $$Generics<T> on Generics<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenerics() {
     return {};
@@ -226,7 +226,7 @@ class $CheckedGenerics<T> extends CheckedGenerics<T> with $$CheckedGenerics<T> {
 }
 
 mixin $$CheckedGenerics<T> on CheckedGenerics<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCheckedGenerics() {
     return {};
@@ -346,7 +346,7 @@ class $GenericPair<T, V> extends GenericPair<T, V> with $$GenericPair<T, V> {
 }
 
 mixin $$GenericPair<T, V> on GenericPair<T, V> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPair() {
     return {};
@@ -455,7 +455,7 @@ class $RootPo<T> extends RootPo<T> with $$RootPo<T> {
 }
 
 mixin $$RootPo<T> on RootPo<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPo() {
     return {};
@@ -699,7 +699,7 @@ class $GenericsUsingMixin<T> extends GenericsUsingMixin<T>
 }
 
 mixin $$GenericsUsingMixin<T> on GenericsUsingMixin<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericsUsingMixin() {
     return {};
@@ -731,7 +731,7 @@ mixin $$GenericsUsingMixin<T> on GenericsUsingMixin<T> {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$GenericsMixin<T> on GenericsMixin<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericsMixin() {
     return {};
@@ -857,7 +857,7 @@ class $GenericPairUsingMixin<T, V> extends GenericPairUsingMixin<T, V>
 }
 
 mixin $$GenericPairUsingMixin<T, V> on GenericPairUsingMixin<T, V> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPairUsingMixin() {
     return {};
@@ -889,7 +889,7 @@ mixin $$GenericPairUsingMixin<T, V> on GenericPairUsingMixin<T, V> {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$GenericPairMixin<T, V> on GenericPairMixin<T, V> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInGenericPairMixin() {
     return {};
@@ -1011,7 +1011,7 @@ class $RootPoUsingMixin<T> extends RootPoUsingMixin<T>
 }
 
 mixin $$RootPoUsingMixin<T> on RootPoUsingMixin<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPoUsingMixin() {
     return {};
@@ -1043,7 +1043,7 @@ mixin $$RootPoUsingMixin<T> on RootPoUsingMixin<T> {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$RootPoMixin<T> on RootPoMixin<T> {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInRootPoMixin() {
     return {};

@@ -11,10 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:convert';
 import 'dart:html';
 import 'dart:js' as js;
-import 'dart:math';
 import 'dart:svg' show SvgElement;
 
 import 'package:js/js_util.dart' as js_util;
@@ -757,7 +755,7 @@ String? _elementText(List<Node> elements) {
     return _elementText(
         elem.getDistributedNodes().whereType<Element>().toList());
   }
-  if (elem.nodes == null || elem.nodes.isEmpty) {
+  if (elem.nodes.isEmpty) {
     return elem.text;
   }
   return _elementText(elem.nodes);

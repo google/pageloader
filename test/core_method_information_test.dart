@@ -14,6 +14,7 @@
 // limitations under the License.
 
 @TestOn('vm')
+@Tags(['core'])
 
 import 'package:pageloader/src/generators/methods/core_method_information.dart';
 import 'package:test/test.dart';

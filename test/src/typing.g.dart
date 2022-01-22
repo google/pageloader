@@ -88,7 +88,7 @@ class $PageForTextAreaTypingText extends PageForTextAreaTypingText
 }
 
 mixin $$PageForTextAreaTypingText on PageForTextAreaTypingText {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForTextAreaTypingText() {
     return {};
@@ -218,7 +218,7 @@ class $PageForTypingTests extends PageForTypingTests with $$PageForTypingTests {
 }
 
 mixin $$PageForTypingTests on PageForTypingTests {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForTypingTests() {
     return {};
@@ -380,7 +380,7 @@ class $PageForTypingTestsWithFocusAndBlur
 
 mixin $$PageForTypingTestsWithFocusAndBlur
     on PageForTypingTestsWithFocusAndBlur {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForTypingTestsWithFocusAndBlur() {
     return {
@@ -572,7 +572,7 @@ class $KeyboardListenerPO extends KeyboardListenerPO with $$KeyboardListenerPO {
 }
 
 mixin $$KeyboardListenerPO on KeyboardListenerPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInKeyboardListenerPO() {
     return {};

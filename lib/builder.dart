@@ -38,6 +38,7 @@ Builder pageloaderBuilder(BuilderOptions options) {
       SharedPartBuilder([const PageObjectGenerator()], 'pageloader');
 
   if (optionsMap.isNotEmpty) {
+    // ignore: unnecessary_null_comparison
     if (log == null) {
       throw StateError('Upgrade `build_runner` to at least 0.8.2.');
     } else {

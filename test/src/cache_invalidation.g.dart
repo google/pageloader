@@ -85,7 +85,7 @@ class $CacheInvalidation extends CacheInvalidation with $$CacheInvalidation {
 }
 
 mixin $$CacheInvalidation on CacheInvalidation {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCacheInvalidation() {
     return {};
@@ -243,7 +243,7 @@ class $_Nested extends _Nested with $$_Nested {
 }
 
 mixin $$_Nested on _Nested {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersIn_Nested() {
     return {};

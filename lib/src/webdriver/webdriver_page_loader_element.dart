@@ -49,7 +49,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
         _cachedElement = null,
         _finder = null,
         _parentElement = null {
-    assert(_driver != null);
+    // assert(_driver != null);
   }
 
   /// Constructs an element from a [WebElement].
@@ -347,7 +347,7 @@ class WebDriverPageLoaderElement implements PageLoaderElement {
     // So we can try again after moving the element into the center of page.
     try {
       _retryWhenStale<void>(() => _single.click());
-    } catch (ElementClickInterceptedException) {
+    } catch (elementClickInterceptedException) {
       await scrollIntoViewCentered();
       _retryWhenStale<void>(() => _single.click());
     }

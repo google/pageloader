@@ -139,7 +139,7 @@ class $Parameters extends Parameters with $$Parameters {
 }
 
 mixin $$Parameters on Parameters {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParameters() {
     return {};
@@ -274,7 +274,7 @@ class $ParametersUsingMixin extends ParametersUsingMixin
 }
 
 mixin $$ParametersUsingMixin on ParametersUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParametersUsingMixin() {
     return {};
@@ -306,7 +306,7 @@ mixin $$ParametersUsingMixin on ParametersUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ParametersMixin on ParametersMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInParametersMixin() {
     return {};

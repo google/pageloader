@@ -13,10 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/file_system/memory_file_system.dart';
 import 'package:analyzer/src/test_utilities/mock_sdk.dart';
 import 'package:path/path.dart' as pather;
@@ -95,8 +95,8 @@ class TestDriver {
   /// CompilationUnit.
   Future<CompilationUnit> resultForFile(String path, String contents) async {
     newSource(path, contents);
-    var session = collection.contextFor(root).currentSession;
-    var result = await session.getResolvedUnit2(pather.join(root, path));
+    final session = collection.contextFor(root).currentSession;
+    final result = await session.getResolvedUnit(pather.join(root, path));
     return (result as ResolvedUnitResult).unit;
   }
 

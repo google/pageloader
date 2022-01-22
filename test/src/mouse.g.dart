@@ -85,7 +85,7 @@ class $PageForMouseTest extends PageForMouseTest with $$PageForMouseTest {
 }
 
 mixin $$PageForMouseTest on PageForMouseTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderMouse /*?*/ __mouse__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForMouseTest() {

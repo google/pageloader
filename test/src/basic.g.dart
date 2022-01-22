@@ -10,71 +10,6 @@ part of 'basic.dart';
 // ignore_for_file: unused_field, non_constant_identifier_names
 // ignore_for_file: overridden_fields, annotate_overrides
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
-
-mixin $$MixinPO on MixinPO {
-/*late*/ PageLoaderElement $__root__;
-  PageLoaderElement get $root => $__root__;
-  Map<String, String> testCreatorGettersInMixinPO() {
-    return {
-      'mixinDivText': 'String',
-      'getterMessage': 'String',
-    };
-  }
-
-  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInMixinPO() {
-    return {};
-  }
-
-  dynamic testCreatorInvokeMethodInMixinPO(
-      String methodName, List<dynamic> positionalArguments,
-      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
-    if (methodName == 'mixinDivText') {
-      return mixinDivText;
-    }
-    if (methodName == 'getterMessage') {
-      return getterMessage;
-    }
-    if (methodName == 'methodMessage') {
-      return Function.apply(methodMessage, positionalArguments, namedArguments);
-    }
-    throw 'METHOD NOT FOUND. This method'
-        ' failed to be generated during test creator codegen.';
-  }
-
-  Map<int, String Function(List<String>) /*?*/ > findChainInMixinPO(
-      List<String> internalIds,
-      [String action = 'default']) {
-    var closestIndex = internalIds.length;
-    String Function(List<String>) /*?*/ closestValue;
-    try {
-      var _mixinDivIndex = internalIds.indexOf(this._mixinDiv.id);
-      if (_mixinDivIndex >= 0 && _mixinDivIndex < closestIndex) {
-        closestIndex = _mixinDivIndex;
-        closestValue = (_) =>
-            '_mixinDiv.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
-      }
-    } catch (_) {
-      // Ignored.
-    }
-    return {closestIndex: closestValue};
-  }
-
-  PageLoaderElement get _mixinDiv {
-    for (final __listener in $__root__.listeners) {
-      __listener.startPageObjectMethod('MixinPO', '_mixinDiv');
-    }
-    final element = $__root__.createElement(ById('mixin-div'), [], []);
-    final returnMe = element;
-    for (final __listener in $__root__.listeners) {
-      __listener.endPageObjectMethod('MixinPO', '_mixinDiv');
-    }
-    return returnMe;
-  }
-}
-
-// ignore_for_file: unused_field, non_constant_identifier_names
-// ignore_for_file: overridden_fields, annotate_overrides
-// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 class $PageForExistsTest extends PageForExistsTest with $$PageForExistsTest {
   PageLoaderElement $__root__;
   $PageForExistsTest.create(PageLoaderElement currentContext)
@@ -150,7 +85,7 @@ class $PageForExistsTest extends PageForExistsTest with $$PageForExistsTest {
 }
 
 mixin $$PageForExistsTest on PageForExistsTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForExistsTest() {
     return {};
@@ -332,7 +267,7 @@ class $PageForVisibilityTest extends PageForVisibilityTest
 }
 
 mixin $$PageForVisibilityTest on PageForVisibilityTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForVisibilityTest() {
     return {};
@@ -492,7 +427,7 @@ class $PageForClassAnnotationTest extends PageForClassAnnotationTest
 }
 
 mixin $$PageForClassAnnotationTest on PageForClassAnnotationTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForClassAnnotationTest() {
     return {};
@@ -637,7 +572,7 @@ class $PageForPrivateFieldsTest extends PageForPrivateFieldsTest
 }
 
 mixin $$PageForPrivateFieldsTest on PageForPrivateFieldsTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForPrivateFieldsTest() {
     return {};
@@ -781,7 +716,7 @@ class $PageForFocusTest extends PageForFocusTest with $$PageForFocusTest {
 }
 
 mixin $$PageForFocusTest on PageForFocusTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForFocusTest() {
     return {};
@@ -911,7 +846,7 @@ class $PageForNbspTest extends PageForNbspTest with $$PageForNbspTest {
 }
 
 mixin $$PageForNbspTest on PageForNbspTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForNbspTest() {
     return {};
@@ -1040,7 +975,7 @@ class $Basic extends Basic with $$Basic {
 }
 
 mixin $$Basic on Basic {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInBasic() {
     return {};
@@ -1172,7 +1107,7 @@ class $OuterNested extends OuterNested with $$OuterNested {
 }
 
 mixin $$OuterNested on OuterNested {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInOuterNested() {
     return {};
@@ -1302,7 +1237,7 @@ class $DebugId extends DebugId with $$DebugId {
 }
 
 mixin $$DebugId on DebugId {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInDebugId() {
     return {};
@@ -1431,7 +1366,7 @@ class $Display extends Display with $$Display {
 }
 
 mixin $$Display on Display {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInDisplay() {
     return {};
@@ -1487,7 +1422,7 @@ mixin $$Display on Display {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$ClassMixinPO on ClassMixinPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInClassMixinPO() {
     return {
@@ -1639,7 +1574,7 @@ class $POWithClassMixinPO extends POWithClassMixinPO
 }
 
 mixin $$POWithClassMixinPO on POWithClassMixinPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPOWithClassMixinPO() {
     return {};
@@ -1756,7 +1691,7 @@ class $POWithMixinPO extends POWithMixinPO with $$MixinPO, $$POWithMixinPO {
 }
 
 mixin $$POWithMixinPO on POWithMixinPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPOWithMixinPO() {
     return {};
@@ -1780,5 +1715,70 @@ mixin $$POWithMixinPO on POWithMixinPO {
     var closestIndex = internalIds.length;
     String Function(List<String>) /*?*/ closestValue;
     return {closestIndex: closestValue};
+  }
+}
+
+// ignore_for_file: unused_field, non_constant_identifier_names
+// ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
+
+mixin $$MixinPO on MixinPO {
+  /*late*/ PageLoaderElement $__root__;
+  PageLoaderElement get $root => $__root__;
+  Map<String, String> testCreatorGettersInMixinPO() {
+    return {
+      'mixinDivText': 'String',
+      'getterMessage': 'String',
+    };
+  }
+
+  Map<String, List<Map<String, String /*?*/ >>> testCreatorMethodsInMixinPO() {
+    return {};
+  }
+
+  dynamic testCreatorInvokeMethodInMixinPO(
+      String methodName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic> /*?*/ namedArguments]) {
+    if (methodName == 'mixinDivText') {
+      return mixinDivText;
+    }
+    if (methodName == 'getterMessage') {
+      return getterMessage;
+    }
+    if (methodName == 'methodMessage') {
+      return Function.apply(methodMessage, positionalArguments, namedArguments);
+    }
+    throw 'METHOD NOT FOUND. This method'
+        ' failed to be generated during test creator codegen.';
+  }
+
+  Map<int, String Function(List<String>) /*?*/ > findChainInMixinPO(
+      List<String> internalIds,
+      [String action = 'default']) {
+    var closestIndex = internalIds.length;
+    String Function(List<String>) /*?*/ closestValue;
+    try {
+      var _mixinDivIndex = internalIds.indexOf(this._mixinDiv.id);
+      if (_mixinDivIndex >= 0 && _mixinDivIndex < closestIndex) {
+        closestIndex = _mixinDivIndex;
+        closestValue = (_) =>
+            '_mixinDiv.${PageObject.defaultCode[action] ?? PageObject.defaultCode['default']}';
+      }
+    } catch (_) {
+      // Ignored.
+    }
+    return {closestIndex: closestValue};
+  }
+
+  PageLoaderElement get _mixinDiv {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('MixinPO', '_mixinDiv');
+    }
+    final element = $__root__.createElement(ById('mixin-div'), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('MixinPO', '_mixinDiv');
+    }
+    return returnMe;
   }
 }

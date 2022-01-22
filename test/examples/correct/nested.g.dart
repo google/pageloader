@@ -85,7 +85,7 @@ class $Nested extends Nested with $$Nested {
 }
 
 mixin $$Nested on Nested {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNested() {
     return {};
@@ -230,7 +230,7 @@ class $NestedUsingMixin extends NestedUsingMixin
 }
 
 mixin $$NestedUsingMixin on NestedUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNestedUsingMixin() {
     return {};
@@ -262,7 +262,7 @@ mixin $$NestedUsingMixin on NestedUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$NestedMixin on NestedMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInNestedMixin() {
     return {};

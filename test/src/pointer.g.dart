@@ -85,7 +85,7 @@ class $PageForPointerTest extends PageForPointerTest with $$PageForPointerTest {
 }
 
 mixin $$PageForPointerTest on PageForPointerTest {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderPointer /*?*/ __pointer__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInPageForPointerTest() {

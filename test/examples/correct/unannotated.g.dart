@@ -184,7 +184,7 @@ class $Unannotated extends Unannotated with $$Unannotated {
 }
 
 mixin $$Unannotated on Unannotated {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotated() {
     return {
@@ -328,7 +328,7 @@ class $UnannotatedUsingMixin extends UnannotatedUsingMixin
 }
 
 mixin $$UnannotatedUsingMixin on UnannotatedUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotatedUsingMixin() {
     return {};
@@ -360,7 +360,7 @@ mixin $$UnannotatedUsingMixin on UnannotatedUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$UnannotatedMixin on UnannotatedMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInUnannotatedMixin() {
     return {

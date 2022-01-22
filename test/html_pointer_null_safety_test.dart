@@ -12,6 +12,7 @@
 // limitations under the License.
 
 @TestOn('browser')
+@Tags(['html'])
 
 import 'package:pageloader/html.dart';
 import 'package:test/test.dart';

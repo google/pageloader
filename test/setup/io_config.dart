@@ -21,7 +21,13 @@ WebDriver createTestDriver({Map<String, dynamic>? additionalCapabilities}) {
   final capabilities = Capabilities.chrome;
   final env = Platform.environment;
 
-  final chromeOptions = {};
+  final Map<String, dynamic> chromeOptions = {
+    "args": [
+      "--headless",
+      "--disable-gpu",
+    ]
+  };
+  // final Map<String, dynamic> chromeOptions = {};
 
   if (env['CHROMEDRIVER_BINARY'] != null) {
     chromeOptions['binary'] = env['CHROMEDRIVER_BINARY'];

@@ -84,7 +84,7 @@ class $A extends A with $$A {
 }
 
 mixin $$A on A {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInA() {
     return {};
@@ -213,7 +213,7 @@ class $B extends B with $$B {
 }
 
 mixin $$B on B {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInB() {
     return {};
@@ -341,7 +341,7 @@ class $C extends C with $$C {
 }
 
 mixin $$C on C {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInC() {
     return {};

@@ -96,7 +96,7 @@ class $Finders extends Finders with $$Finders {
 }
 
 mixin $$Finders on Finders {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInFinders() {
     return {};
@@ -319,7 +319,7 @@ class $CheckTagPO extends CheckTagPO with $$CheckTagPO {
 }
 
 mixin $$CheckTagPO on CheckTagPO {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInCheckTagPO() {
     return {};
@@ -462,7 +462,7 @@ class $FindersUsingMixin extends FindersUsingMixin
 }
 
 mixin $$FindersUsingMixin on FindersUsingMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInFindersUsingMixin() {
     return {};
@@ -494,7 +494,7 @@ mixin $$FindersUsingMixin on FindersUsingMixin {
 // ignore_for_file: prefer_final_locals, deprecated_member_use_from_same_package
 
 mixin $$FindersMixin on FindersMixin {
-/*late*/ PageLoaderElement $__root__;
+  /*late*/ PageLoaderElement $__root__;
   PageLoaderElement get $root => $__root__;
   Map<String, String> testCreatorGettersInFindersMixin() {
     return {};

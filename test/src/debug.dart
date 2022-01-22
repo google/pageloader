@@ -15,8 +15,6 @@
 
 import 'package:pageloader/debug.dart';
 import 'package:pageloader/pageloader.dart';
-import 'package:pageloader/src/debug/performance/profiler_listener.dart';
-import 'package:pageloader/src/debug/performance/timer_duration.dart';
 import 'package:test/test.dart';
 
 import 'shared_page_objects.dart';

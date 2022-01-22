@@ -12,6 +12,8 @@
 // limitations under the License.
 
 @TestOn('vm')
+@Tags(['webdriver'])
+
 import 'package:test/test.dart';
 
 import 'setup/webdriver_environment.dart';

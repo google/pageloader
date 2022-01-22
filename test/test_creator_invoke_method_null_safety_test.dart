@@ -12,6 +12,7 @@
 // limitations under the License.
 
 @TestOn('vm')
+@Tags(['creator'])
 
 import 'package:test/test.dart';
 

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 @TestOn('vm')
+@Tags(['core'])
 
 import 'package:test/test.dart';
 
