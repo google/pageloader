@@ -1,0 +1,10 @@
+tags:
+  core:
+    test_on: vm
+  creator:
+    test_on: vm
+  html:
+    test_on: browser
+  webdriver:
+    test_on: vm
+    timeout: 2x

@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@Tags(['webdriver'])
+
 import 'package:test/test.dart';
 
 import 'setup/webdriver_environment.dart';
