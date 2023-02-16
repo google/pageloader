@@ -18,7 +18,13 @@ import 'package:pageloader/utils.dart' as utils;
 const Matcher exists = _Exists();
 
 /// A matcher that checks if a PageLoaderElement/PageObject does not exist.
+///
+/// Deprecated. Prefer grammatically correct doesNotExist. Kept for
+/// compatibility.
 const Matcher notExists = _NotExists();
+
+/// A matcher that checks if a PageLoaderElement/PageObject does not exist.
+const Matcher doesNotExist = _NotExists();
 
 /// A matcher that checks if a PageLoaderElement/PageObject
 /// contains given class.
